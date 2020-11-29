@@ -1,0 +1,73 @@
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+ 
+ 
+### INPUT BOOLEANS ###
+
+# THE PREFERRED WAY OF CONFIGURE AN input_boolean IS NOW VIA THE FRONT END #
+# SEE Configuration>Helpers                                                #
+
+## The input_boolean component allows for virtual switches  ##
+## which can be controlled from the frontend or can serve   ##
+## as boolean variables hidden from the UI                  ##
+
+inp_bool_inhibit_shades:
+  name: 'Inhibit shades'
+  icon: mdi:cancel
+
+inp_bool_theater_mode:
+  name: 'Theater mode'
+  icon: mdi:theater
+ 
+inp_bool_announcements:
+  name: 'Announcements'
+  icon: mdi:bullhorn
+
+inp_bool_extended_absence_mode:
+  name: 'Extended absence mode'
+  icon: mdi:airplane-takeoff
+
+inp_bool_guest_mode:
+  name: 'Guest mode'
+  icon: mdi:account-plus
+
+inp_bool_guest_in_sunroom:
+  name: 'Guest in Sunroom'
+  icon: mdi:account-plus
+
+inp_bool_vacuum_every_sunday:
+  name: 'Vacuum every Sunday'
+  icon: mdi:robot-vacuum-variant
+
+inp_bool_visitor_while_out_flag:
+  name: 'Visitor while out'
+  icon: mdi:doorbell-video
+
+inp_bool_sleeping:
+  name: 'Sleeping'
+  icon: mdi:power-sleep
+
+inp_bool_half_mi_trig_test:
+  name: 'Half mile trigger test'
+  icon: mdi:map-marker-distance
+
+inp_bool_lum_outdoor_lights_solar_trig:
+  name: 'Outdoor lights solar trig'
+  icon: mdi:lightbulb
+
+inp_bool_lum_lvrm_lights_f_solar_trig:
+  name: 'Lvrm lights f_solar trig'
+  icon: mdi:lightbulb
+
+inp_bool_lum_lvrm_lights_indoor_trig:
+  name: 'Lvrm lights indoor lux trig'
+  icon: mdi:lightbulb
+  
+inp_bool_lum_mood_lights_f_solar_trig:
+  name: 'Mood lights f_solar trig'
+  icon: mdi:lightbulb
+
+inp_bool_lum_sunrm_shades_trig:
+  name: 'Sunrm shades solar trig'
+  icon: mdi:blinds
+

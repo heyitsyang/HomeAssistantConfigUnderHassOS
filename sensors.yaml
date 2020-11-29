@@ -1,0 +1,358 @@
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+
+
+### SENSORS  ###
+
+#
+# Detect current version
+#
+- platform: version
+
+#
+# Filters are considered a type of sensor
+#
+
+- platform: statistics
+  name: "Living Rm Visible Light"
+  entity_id: sensor.raw_living_rm_visible_light    # sensor is set to update every minute
+  sampling_size: 15                                # default state value is the running average of this many samples
+  precision: 2
+
+- platform: statistics
+  name: "10m Avg Master Bedroom Temperature" 
+  entity_id: sensor.master_bedroom_temperature
+  sampling_size: 10                                # default state value is the running average of this many samples
+  precision: 1                                     # number of decimal places
+
+- platform: filter
+  name: "Filtered Solar Tube Luminosity" 
+  entity_id: sensor.raw_solar_tube_luminosity       # sensor is set to update every minute
+  filters:
+    - filter: outlier
+      radius: 500                               # default radius is 2 if unspecified
+      window_size: 10                           # num of prev states to define median (default = 1)
+    - filter: lowpass
+      time_constant: 10                         # Loosely relates to the amount of time it takes for a state to influence the output
+      precision: 0
+
+
+#
+# MQTT sensors
+#
+
+
+- platform: mqtt
+  unique_id: water_pressure
+  name: "Water Pressure"
+  state_topic: "watermain/water_pressure"
+  qos: 0
+  device_class: "pressure"
+  unit_of_measurement: "PSI"
+  
+- platform: mqtt
+  unique_id: water_temperature
+  name: "Water Temperature"
+  state_topic: "watermain/water_temperature"
+  qos: 0
+  device_class: "temperature"
+  unit_of_measurement: "ºF"
+  
+- platform: mqtt
+  unique_id: rack_exhaust_temperature
+  name: "Rack Exhaust Temperature"
+  state_topic: "labrack/BME280/Temperature"
+  qos: 0
+  unit_of_measurement: "ºF"
+
+- platform: mqtt
+  unique_id: rack_exhaust_fan_speed
+  name: "Rack Exhaust Fan Speed"
+  state_topic: "labrack/FanRPM/RPM"
+  qos: 0
+  unit_of_measurement: "RPM"
+  
+- platform: mqtt
+  unique_id: rack_exhaust_humidity
+  name: "Rack Exhaust Humidity"
+  state_topic: "labrack/BME280/Humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  unique_id: rack_exhaust_pressure
+  name: "Rack Exhaust Pressure"
+  state_topic: "labrack/BME280/Pressure"
+  qos: 0
+  unit_of_measurement: "mbar"
+
+- platform: mqtt
+  unique_id: raw_living_rm_visible_light
+  name: "Raw Living Rm Visible Light"
+  state_topic: "livingrmfan/TSL2561/Human"
+  qos: 0
+  unit_of_measurement: "Lux"
+
+- platform: mqtt
+  unique_id: raw_living_rm_full_spectrum_light
+  name: "Raw Living Rm Full Spectrum Light"
+  state_topic: "livingrmfan/TSL2561/Broadband"
+  qos: 0
+  unit_of_measurement: "Lux"
+
+- platform: mqtt
+  unique_id: raw_living_rm_infrared_light
+  name: "Raw Living Rm Infrared Light"
+  state_topic: "livingrmfan/TSL2561/Infrared"
+  qos: 0
+  unit_of_measurement: "Lux"
+
+- platform: mqtt
+  unique_id: raw_solar_tube_luminosity
+  name: "Raw Solar Tube Luminosity"
+  state_topic: "solartube/BH1750/Lux"
+  qos: 0
+  unit_of_measurement: "Lux"
+
+- platform: mqtt
+  unique_id: garage_temperature
+  name: "Garage Temperature"
+  state_topic: "garage/DS18b20/Temperature"
+  qos: 0
+  unit_of_measurement: "ºF"
+
+- platform: mqtt
+  unique_id: master_bedroom_temperature
+  name: "Master Bedroom Temperature"
+  state_topic: "masterbdrmfan/DS18b20/Temperature"
+  qos: 0
+  unit_of_measurement: "ºF"
+
+- platform: mqtt
+  unique_id: attic_temperature
+  name: "Attic Temperature"
+  state_topic: "attic/DS18b20/Temperature"
+  qos: 0
+  unit_of_measurement: "ºF"
+
+- platform: mqtt
+  unique_id: longmeadow1_temperature
+  name: "Longmeadow1 Temperature"
+  state_topic: "longmeadow/DHT22/Temperature"  
+  qos: 0  
+  unit_of_measurement: "ºF"
+
+- platform: mqtt
+  unique_id: longmeadow1_humidity
+  name: "Longmeadow1 Humidity"
+  state_topic: "longmeadow/DHT22/Humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  unique_id: longmeadow2_temperature
+  name: "Longmeadow2 Temperature"
+  state_topic: "longmeadow2/DHT22/Temperature"  
+  qos: 0  
+  unit_of_measurement: "ºF"
+
+- platform: mqtt
+  unique_id: longmeadow2_humidity
+  name: "Longmeadow2 Humidity"
+  state_topic: "longmeadow2/DHT22/Humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+#
+# Time & Date
+#
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'
+    - 'time_utc'
+    #- 'beat'
+
+#
+# System monitor
+#
+- platform: systemmonitor
+  resources:
+    - type: 'disk_free'
+      arg: '/'
+    - type: 'memory_free'
+    - type: 'processor_use'
+
+- platform: uptime
+  name: 'Uptime'
+  unit_of_measurement: hours
+
+#- platform: cert_expiry                               # now configured using GUI
+#  host: "shencentral.duckdns.org"
+
+- platform: filesize
+  file_paths:
+    - /config/home-assistant_v2.db
+
+#
+# OUTDOOR WEATHER & ENVIRONMENTAL SENSORS
+#
+
+# Ambient Weather is set up in configuration.yaml
+
+# Darksky - formerly Forecast.io 
+- platform: darksky
+  api_key: !secret darksky_key
+  scan_interval: '00:10'
+#  forecast:
+#    - 0
+#    - 1
+#    - 2
+#    - 3
+#    - 4
+#    - 5
+#    - 6
+#  hourly_forecast:
+#    - 7
+#    - 10
+#    - 14
+#    - 17
+#    - 20
+#    - 22
+#    - 31
+#    - 34
+#    - 38
+  monitored_conditions:
+    - summary
+    - icon
+#    - precip_intensity
+    - precip_probability
+    - temperature
+#    - apparent_temperature 
+#    - dew_point
+#    - wind_speed
+#    - wind_bearing
+    - cloud_cover
+    - humidity
+#    - pressure
+    - uv_index
+#    - visibility
+#    - ozone
+    - minutely_summary
+    - hourly_summary
+    - daily_summary
+
+
+
+#
+# TEMPLATE SENSORS
+#
+
+- platform: template 
+  sensors:
+    suggested_brightness:
+      friendly_name: "Suggested Brightness"
+      unit_of_measurement: '%'
+      value_template: >-
+        {% if ( ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_0_threshold') | float) ) ) %}
+          0
+        {% elif ( ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_0_threshold') | float) ) and
+              ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_med_threshold') | float) ) ) %}
+          30
+        {% elif ( ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_low_threshold') | float) ) and
+              ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_high_threshold') | float) ) ) %}
+          50
+        {% elif ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_high_threshold') | float) ) %}
+          100
+        {% else %}
+          99
+        {% endif %}
+
+# CLIMATE #
+
+    ecobee_avg_indoor_temperature:                                                    # ecobee current temp is the average
+      friendly_name: "Avg Indoor Temperature"                                         # of all ecobee sensors 
+      value_template: "{{ state_attr('climate.ecobee','current_temperature') }}"
+      unit_of_measurement: "ºF"
+
+    sensibo_sunroom_temperature:
+      friendly_name: "Sunroom Temperature"
+      value_template: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
+      unit_of_measurement: "ºF"
+
+      
+#  BATTERIES #
+#    - not all batteries need sensor attribute templates, so not all are here
+
+    front_door_lock_battery:
+      friendly_name: "Front Door Lock Batttery"
+      value_template: "{{ state_attr('lock.front_door_lock','battery_level') | int }}"
+      unit_of_measurement: "%"
+    
+    back_door_lock_battery:
+      friendly_name: "Back Door Lock Battery"
+      value_template: "{{ state_attr('lock.back_door_lock','battery_level') | int }}"
+      unit_of_measurement: "%"
+
+    living_room_motion_sensor_battery:
+      friendly_name: "Living Room Motion Battery"
+      value_template: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int }}"
+      unit_of_measurement: "%"
+            
+    sunrm_window_1_opened_battery:
+      friendly_name: "Sunroom Window 1 Battery"
+      value_template: "{{ state_attr('binary_sensor.sunrm_window_1_opened','battery_level') | int }}"
+      unit_of_measurement: "%"
+
+    sunrm_window_2_opened_battery:
+      friendly_name: "Sunroom Window 2 Battery"
+      value_template: "{{ state_attr('binary_sensor.sunrm_window_2_opened','battery_level') | int }}"
+      unit_of_measurement: "%"
+      
+    sunrm_window_3_opened_battery:
+      friendly_name: "Sunroom Window 3 Battery"
+      value_template: "{{ state_attr('binary_sensor.sunrm_window_3_opened','battery_level') | int }}"
+      unit_of_measurement: "%"
+
+    sunrm_window_4_opened_battery:
+      friendly_name: "Sunroom Window 4 Battery"
+      value_template: "{{ state_attr('binary_sensor.sunrm_window_4_opened','battery_level') | int }}"
+      unit_of_measurement: "%"
+      
+    front_door_opened_battery:
+      friendly_name: "Front Door Battery"
+      value_template: "{{ state_attr('binary_sensor.front_door_opened','battery_level') | int }}"
+      unit_of_measurement: "%"
+
+    back_door_opened_battery:
+      friendly_name: "Back Door Battery"
+      value_template: "{{ state_attr('binary_sensor.back_door_opened','battery_level') | int }}"
+      unit_of_measurement: "%"   
+
+    garagehouse_door_opened_battery:
+      friendly_name: "Garage-House Battery"
+      value_template: "{{ state_attr('binary_sensor.garagehouse_door_opened','battery_level') | int }}"
+      unit_of_measurement: "%"
+      
+    sun_room_remote_1_battery:
+      friendly_name: "Sunroom Remote 1 Battery"
+      value_template: "{{ state_attr('sensor.sun_room_remote_1','battery_level') | int }}"
+      unit_of_measurement: "%"      
+      
+    sun_room_remote_2_battery:
+      friendly_name: "Sunroom Remote 2 Battery"
+      value_template: "{{ state_attr('sensor.sun_room_remote_2','battery_level') | int }}"
+      unit_of_measurement: "%"      
+      
+    sun_room_remote_3_battery:
+      friendly_name: "Sunroom Remote 3 Battery"
+      value_template: "{{ state_attr('sensor.sun_room_remote_3','battery_level') | int }}"
+      unit_of_measurement: "%"      
+      
+    sun_room_remote_4_battery:
+      friendly_name: "Sunroom Remote 4 Battery"
+      value_template: "{{ state_attr('sensor.sun_room_remote_4','battery_level') | int }}"
+      unit_of_measurement: "%"      
+      

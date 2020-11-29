@@ -1,0 +1,125 @@
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+
+  #######################
+  ### BINARY SENSORS  ###
+  #######################
+
+#  - platform: hikvision
+#    host: video-doorbell.shencentral.net
+#    port: 80
+#    ssl: False
+#    username: !secret doorbell_user
+#    password: !secret doorbell_pwd
+#    customize:                                    # field detection in HA is same as instrusion detection in hikvision firmware
+#      motion:
+#        delay: 5                                  # debounce delay to prevent multiple quick line crossing detections
+
+#  - platform: hikvision
+#    host: video-frontporch.shencentral.net
+#    port: 80
+#    ssl: False
+#    username: !secret frontporch_user
+#    password: !secret frontporch_pwd
+#    customize:                                    # field detection in HA is same as instrusion detection in hikvision firmware
+#      line_crossing:
+#        delay: 5                                  # debounce delay to prevent multiple quick line crossing detections
+#      tamper_detection:
+#        ignored: True
+#      motion:
+#        ignored: True
+
+#
+# WASHING MACHINE
+#
+  - platform: template
+    sensors:
+      washer_on_or_off:
+        friendly_name: "Washer ON/OFF sensor"
+        delay_on:
+          seconds: 30
+        delay_off:
+          seconds: 30
+        value_template: >-
+          {{ states('sensor.washer_energy_current') | float > 0.025 }}
+
+#
+# LUMINOSITY TRIGGERS - Consolidated as binary template sensors here so trigger values are in one place for automations & scripts #
+#   These are binary sensors that are set ON/OFF in automations.yaml based on the input_number settings on the UI settings view.  #
+#   Other automations then trigger based on these binary sensors.  A roundabout way to centralize.                                #
+#
+#   Some triggers have a ON value and an offset OFF value which prevents them as being implemented directly as a binary sensor,   #
+#   hence the need to use an input_boolean                                                                                        #
+#
+  - platform: template
+    sensors:
+      lum_outdoor_lights_solar_trig:
+        device_class: light
+        friendly_name: "Outdoor lights on/off per solar sensor"                      # sync as closely with post light as possible
+        value_template: >-
+          {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
+  
+      lum_lvrm_lights_indoor_trig:
+        device_class: light
+        friendly_name: "LvRm lights on/off per indoor sensor"
+        value_template: >-
+          {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
+          
+      lum_mood_lights_f_solar_trig:
+        device_class: light
+        friendly_name: "Mood lights on/off per f_solar sensor"
+        value_template: >-
+          {{ is_state('input_boolean.inp_bool_lum_mood_lights_f_solar_trig','on') }}
+  
+      lum_sunrm_shades_trig:
+        friendly_name: "Sunroom shades open per solar sensor"
+        device_class: opening
+        value_template: >-
+          {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
+
+
+#
+# MQTT
+#
+
+  - platform: mqtt
+    unique_id: utilitycloset_airhandler
+    name: "Air Handler"
+    state_topic: "utilitycloset/airhandler/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+  
+  - platform: mqtt
+    unique_id: utilitycloset_waterheater
+    name: "Water Heater"
+    state_topic: "utilitycloset/waterheater/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - platform: mqtt
+    unique_id: utilitycloset_leakdetector
+    name: "Leak Water Heater"
+    state_topic: "utilitycloset/leakdetector/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0  
+  
+  - platform: mqtt
+    name: "Front Ent Attic uWave"
+    unique_id: front_ent_attic_uwave
+    state_topic: "frontentrance/FrontEntAtticuWave/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - platform: mqtt
+    name: "Front Ent Soffit uWave"
+    unique_id: front_ent_soffit_uwave
+    state_topic: "frontentrance/FrontEntSoffituWave/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+

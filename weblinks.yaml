@@ -1,0 +1,55 @@
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+  
+##############
+## WEBLINKS ##
+##############
+
+entities:
+  - name: NVR
+    url: http://video-nvr.shencentral.net/
+    icon: mdi:monitor-dashboard
+  - name: Router
+    url: http://10.0.0.1
+    icon: mdi:server-network
+  - name: DHCP-DNS
+    url: http://10.0.0.5
+    icon: mdi:server-network
+  - name: WLAN
+    url: http://10.0.0.3/
+    icon: mdi:router-wireless
+  - name: Junior
+    url: https://junior:3438/
+    icon: mdi:nas
+  - name: Phone
+    url: http://ys-office-phone.shencentral.net/
+    icon: mdi:phone-voip
+  - name: Rainmachine
+    url: https://my.rainmachine.com/
+    icon: mdi:flower
+  - name: PersonalWeather
+    url: https://www.wunderground.com/personal-weather-station/dashboard?ID=KFLWILDW56/
+    icon: mdi:weather-sunny
+  - name: VeraPlus
+    url: http://veraplus.shencentral.net
+    icon: mdi:home-circle
+  - name: attic
+    url: http://attic.shencentral.net/
+    icon: mdi:network
+  - name: garage
+    url: http://garage.shencentral.net/
+    icon: mdi:network
+  - name: labrack
+    url: http://labrack.shencentral.net/
+    icon: mdi:network
+  - name: solartube
+    url: http://solartube.shencentral.net/
+    icon: mdi:network
+  - name: livingrmfan
+    url: http://lvrmfan.shencentral.net/
+    icon: mdi:network
+  - name: frontentrance
+    url: http://frontentrance.shencentral.net/
+    icon: mdi:network
+
+

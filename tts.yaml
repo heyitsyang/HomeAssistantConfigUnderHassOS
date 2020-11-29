@@ -1,0 +1,11 @@
+
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+ 
+ 
+### TTS ###
+
+- platform: google_translate       # (base_url is now deprecated) google tts requires base_url external address in configuration.yaml to be correct
+  cache: true                      # or the mp3 file will be created in the tts directory, but will not be played
+  cache_dir: tts
+  time_memory: 57600               # secs voice data is held in MEMORY for quick playback - max is 57600 (16hrs)

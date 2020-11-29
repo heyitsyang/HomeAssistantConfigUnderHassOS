@@ -1,0 +1,11 @@
+#################
+##   CLIMATE   ##
+#################
+
+# ECOBEE is configured now configured in
+# configuration.yaml as its own platform
+
+# Sensibo remote for Mitsubishi Mid-Split Unit
+- platform: sensibo
+  api_key: !secret sensibo_api_key
+

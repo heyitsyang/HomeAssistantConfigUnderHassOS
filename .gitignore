@@ -1,0 +1,32 @@
+#
+# .gitignore file
+#
+
+# You can whitelist files/folders with !, these will not be ignored
+!.gitignore
+!*.md
+!*.yaml
+
+
+# Ignore folders
+.git
+.storage
+.cloud
+tts
+www
+examples
+NOTES
+
+# Ignore files
+secrets.yaml
+.uuid
+.google.token
+.google_maps*
+ip_bans.yaml
+known_devices.yaml
+google_calendars.yaml
+*.conf
+*.sh
+*.log
+*.db
+

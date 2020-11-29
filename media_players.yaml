@@ -1,0 +1,15 @@
+
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+ 
+ 
+### MEDIA PLAYERS ###
+
+
+
+# - platform: androidtv
+#   host: tv-sunroom.shencentral.net
+#   name: 'Sun Room TV'
+#
+# - platform: plex
+#   show_all_controls: true

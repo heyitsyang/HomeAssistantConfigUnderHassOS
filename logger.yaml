@@ -1,0 +1,33 @@
+#################
+## logger.yaml ##
+#################
+
+# Enable & define level of logging activities
+# Severity high to low: critical, fatal, error, warning, warn, info, debug, notset
+
+#  default:  debug
+#  default: info 
+  default: warn 
+  logs:                                 # ignore events less than levels defined below
+    zigpy.zcl: error
+    slixxmpp: error
+#    aioharmony.harmonyclient: debug
+    urllib3.connectionpool: error
+#    pubnub: critical
+    homeassistant.components.iqvia: fatal
+    homeassistant.components.cert_expiry.sensor: fatal
+    homeassistant.components.ecobee: error
+    haffmpeg.tools: error
+    homeassistant.components.weather: error                          # ecobee service outages
+    homeassistant.components.neato: error                            # neato service outages
+    homeassistant.components.locationsharinglib.Service: error
+    homeassistant.components.device_tracker: error
+    locationsharinglib.Service: error
+    homeassistant.components.light.kitchen_leds_front: error
+    homeassistant.components.light.kitchen_leds_rear: error
+    homeassistant.components.light.flux_led: error
+    homeassistant.helpers.entity: error
+    homeassistant.components.sensor: error
+    homeassistant.components.binary_sensor: error
+#    homeassistant.components.automation: info                       # enable this to help debug
+    homeassistant.core: info

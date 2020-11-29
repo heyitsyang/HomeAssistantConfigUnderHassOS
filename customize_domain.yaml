@@ -1,0 +1,12 @@
+
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+
+### CUSTOMIZE_DOMAIN ###
+# Customize all entities in a domian
+# ex: light, switch, device_tracker
+#
+
+  automation:                                         # ensure all automations are turned on since
+    initial_state: 'on'                               # sometimes HASS will turn them all off if restarted to quickly
+

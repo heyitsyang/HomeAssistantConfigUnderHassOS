@@ -1,0 +1,9 @@
+
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+
+### CUSTOMIZE_GLOB ###
+# Customize entities matching a pattern
+# ex: light.kitchen_* or scene.kitchen_*_colors
+
+

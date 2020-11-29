@@ -1,0 +1,19 @@
+
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+
+
+###  ALERTS  ###
+
+
+garage_door:
+  name: Large garage door is open
+  entity_id: cover.large_garage_door
+  state: 'open'
+  repeat: 30
+  can_acknowledge: True
+  skip_first: True
+  notifiers:
+    - garage_open
+
+

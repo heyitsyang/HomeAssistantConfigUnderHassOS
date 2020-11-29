@@ -1,0 +1,37 @@
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+ 
+ 
+### CAMERAS ###
+ 
+- platform: generic
+  still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=TBW&brand=wui&num=6&delay=15&type=N0R&frame=0&scale=0.6891304347826087&noclutter=0&showstorms=0&mapx=400&mapy=240&centerx=297.69716088328084&centery=343.75394321766555&transx=-102.30283911671916&transy=103.75394321766555&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24737804&lat=0&lon=0&label=you
+  name: Radar
+
+- platform: ffmpeg
+  name: 'GreatRoom camera'                        # DIGOO M1Ql ONVIF2.0/RTSP camera
+  input: !secret greatroom_url
+
+- platform: ffmpeg
+  name: 'Doorbell camera'                        # RCA, LaView, EZVIZ, GuardingVision all seem to be Hikvision cameras
+  input: !secret doorbell_url                    #  LaView android app works on the RCA camera - rest do not
+
+- platform: ffmpeg
+  name: 'FrontPorch camera'                      # HikVision DS-2CD2142FWD-IS 2.8mm
+  input: !secret frontporch_url                  # user & pwd are embedded in the URL, so !secret the whole thing
+
+- platform: ffmpeg
+  name: 'Driveway camera'                        # Chinese ONVIF2.1/RTSP dome camera
+  input: -rtsp_transport tcp -i rtsp://video-driveway.shencentral.net:554/11
+
+- platform: ffmpeg
+  name: 'SunRoom camera'                         # ESCAM QF605 ONVIF2.0/RTSP camera
+  input: !secret sunroom_url
+
+- platform: ffmpeg
+  name: 'Garage camera'                          # DIGOO M1Ql ONVIF2.0/RTSP camera
+  input: !secret garage_url
+
+#- platform: ffmpeg
+#  name: 'Pano camera'                            # MISECU Fisheye ONVIF/RTSP camera
+#  input: !secret pano1_url                       # user & pwd are embedded in the URL, so !secret the whole thing

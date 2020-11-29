@@ -1,0 +1,231 @@
+light.front_door_lights:
+  friendly_name: Front Door Lights
+  icon: mdi:lightbulb
+light.back_door_lights:
+  friendly_name: Back Door Lights
+  icon: mdi:lightbulb
+light.master_bedroom_fan:
+  friendly_name: Master Bedroom Fan
+  icon: mdi:fan
+light.office_fan:
+  friendly_name: Office Fan
+  icon: mdi:fan
+light.guest_room_fan:
+  friendly_name: Guest Room Fan
+  icon: mdi:fan
+light.sun_room_fan_1:
+  friendly_name: Sun Room Fan 1
+  icon: mdi:fan
+light.sun_room_fan_2:
+  friendly_name: Sun Room Fan 2
+  icon: mdi:fan
+light.living_room_fan:
+  friendly_name: Living Room Fan
+  icon: mdi:fan
+switch.candles:
+  friendly_name: Candles
+  icon: mdi:candle
+switch.above_cabinet_lights:
+  friendly_name: Above Cabinet Lights
+  icon: mdi:lightbulb
+switch.sm_garage_opener_power:
+  friendly_name: Sm Garage Door Power
+  icon: mdi:toggle-switch
+switch.lg_garage_opener_power:
+  friendly_name: Lg Garage Door Power
+  icon: mdi:toggle-switch
+cover.large_garage_door:
+  friendly_name: Large Garage Door
+  icon: mdi:garage
+cover.small_garage_door:
+  friendly_name: Small Garage Door
+  icon: mdi:garage
+cover.sun_room_shades:
+  friendly_name: All Sun Room Shades
+  icon: mdi:window-open-variant
+sensor.ssl_cert_expiry:
+  friendly_name: SSL Cert Expiry
+  icon: mdi:timer-sand
+sensor.db_size:
+  friendly_name: DB size
+  icon: mdi:database
+proximity.home_ys:
+  icon: mdi:map-marker-distance
+proximity.home_kt:
+  icon: mdi:map-marker-distance
+proximity.home_yskt:
+  icon: mdi:map-marker-multiple
+person.yang:
+  entity_picture: /local/avatars/ys.jpg
+person.karen:
+  entity_picture: /local/avatars/kt.jpg
+device_tracker.ys_phone:
+  entity_picture: /local/avatars/ys.jpg
+device_tracker.kt_phone:
+  entity_picture: /local/avatars/kt.jpg
+device_tracker.ys_cell:
+  friendly_name: ys_wifi
+device_tracker.kt_cell:
+  friendly_name: kt_wifi
+sensor.ecobee_temperature:
+  friendly_name: Thermostat Temperature
+  icon: mdi:thermometer
+sensor.ecobee_humidity:
+  friendly_name: Thermostat Humidity
+  icon: mdi:water-percent
+sensor.ecobee_eating_area_temperature:
+  friendly_name: Eating Area Temperature
+  icon: mdi:thermometer
+sensor.ecobee_guest_suite_temperature:
+  friendly_name: Guest Suite Temperature
+  icon: mdi:thermometer
+sensor.ecobee_avg_indoor_temperature:
+  friendly_name: Avg Indoor Temperature
+  icon: mdi:thermometer
+sensor.sensibo_sunroom_temperature:
+  icon: mdi:thermometer
+sensor.norcoose_outdoor_temperature:
+  friendly_name: Norcoose Temperature
+  icon: mdi:thermometer
+sensor.norcoose_outdoor_humidity:
+  friendly_name: Norcoose Humidity
+  icon: mdi:water-percent
+sensor.dark_sky_temperature:
+  friendly_name: Outdoor Temperature
+  icon: mdi:thermometer
+sensor.dark_sky_humidity:
+  friendly_name: Outdoor Humidity
+  icon: mdi:water-percent
+sensor.dark_sky_uv_index:
+  friendly_name: UV Index
+sensor.allergy_index_today:
+  friendly_name: Allergy Index
+sensor.master_bedroom_temperature:
+  friendly_name: Master Bedroom Temperature
+  icon: mdi:thermometer
+sensor.10m_avg_master_bedroom_temperature:
+  icon: mdi:format-align-middle
+  unit_of_measurement: ºF
+sensor.garage_temperature:
+  friendly_name: Garage Temperature
+  icon: mdi:thermometer
+sensor.attic_temperature:
+  friendly_name: Attic Temperature
+  icon: mdi:thermometer
+sensor.rack_exhaust_temperature:
+  friendly_name: Rack Exhaust Temperature
+  icon: mdi:thermometer
+sensor.rack_exhaust_humidity:
+  friendly_name: Rack Exhaust Humidity
+  icon: mdi:water-percent
+sensor.rack_exhaust_pressure:
+  friendly_name: Rack Exhaust Pressure
+  icon: mdi:fan
+sensor.longmeadow1_temperature:
+  friendly_name: Longmeadow1 Temperature
+  icon: mdi:thermometer
+sensor.longmeadow1_humidity:
+  friendly_name: Longmeadow1 Humidity
+  icon: mdi:water-percent
+sensor.longmeadow2_temperature:
+  friendly_name: Longmeadow2 Temperature
+  icon: mdi:thermometer
+sensor.longmeadow2_humidity:
+  friendly_name: Longmeadow2 Humidity
+  icon: mdi:water-percent
+sensor.raw_solar_tube_luminosity:
+  friendly_name: Raw Solar Tube Luminosity
+  icon: mdi:brightness-6
+sensor.filtered_solar_tube_luminosity:
+  friendly_name: Filtered Solar Tube Luminosity
+  icon: mdi:sunglasses
+sensor.suggested_brightness:
+  icon: mdi:brightness-percent
+sensor.living_rm_visible_light:
+  friendly_name: Living Rm Visible Light
+  icon: mdi:brightness-6
+sensor.raw_living_rm_visible_light:
+  friendly_name: Raw Living Rm Visible Light
+  icon: mdi:brightness-6
+sensor.raw_living_rm_infrared_light:
+  friendly_name: Raw Living Rm Infrared Light
+  icon: mdi:brightness-6
+binary_sensor.front_door_opened:
+  friendly_name: Front Door
+  icon: mdi:door
+binary_sensor.back_door_opened:
+  friendly_name: Back Door
+  icon: mdi:door
+binary_sensor.garagehouse_door_opened:
+  friendly_name: Garage-House Door
+  icon: mdi:door
+binary_sensor.sunrm_window_1_opened:
+  friendly_name: Sun Room Window 1
+  icon: mdi:window-closed
+binary_sensor.sunrm_window_2_opened:
+  friendly_name: Sun Room Window 2
+  icon: mdi:window-closed
+binary_sensor.sunrm_window_3_opened:
+  friendly_name: Sun Room Window 3
+  icon: mdi:window-closed
+binary_sensor.sunrm_window_4_opened:
+  friendly_name: Sun Room Window 4
+  icon: mdi:window-closed
+climate.sunrm_ac:
+  friendly_name: Sunroom
+climate.ecobee:
+  friendly_name: Main House
+script.scr_manual_say_time:
+  friendly_name: Say time
+  icon: mdi:clock
+script.scr_occupied_sim:
+  friendly_name: Simulate occupation
+script.scr_vacuum_start_custom_cleaning:
+  friendly_name: Start/resume cleaning
+  icon: mdi:play
+script.scr_vacuum_pause:
+  friendly_name: Pause cleaning
+  icon: mdi:pause
+script.scr_vacuum_stop:
+  friendly_name: Stop cleaning - requires manual return to base
+  icon: mdi:stop
+script.scr_vacuum_return_to_base:
+  friendly_name: Return to base
+  icon: mdi:home-map-marker
+camera.rosie_cleaning_map:
+  friendly_name: Rosie's last cleaning map
+vacuum.rosie:
+  friendly_name: Rosie status
+input_boolean.inp_bool_sleeping:
+  icon: mdi:power-sleep
+sensor.front_door_lock_battery:
+  icon: mdi:battery-unknown
+sensor.back_door_lock_battery:
+  icon: mdi:battery-unknown
+sensor.living_room_motion_sensor_battery:
+  icon: mdi:battery-unknown
+sensor.sunrm_window_1_opened_battery:
+  icon: mdi:battery-unknown
+sensor.sunrm_window_2_opened_battery:
+  icon: mdi:battery-unknown
+sensor.sunrm_window_3_opened_battery:
+  icon: mdi:battery-unknown
+sensor.sunrm_window_4_opened_battery:
+  icon: mdi:battery-unknown
+sensor.front_door_opened_battery:
+  icon: mdi:battery-unknown
+sensor.back_door_opened_battery:
+  icon: mdi:battery-unknown
+sensor.garagehouse_door_opened_battery:
+  icon: mdi:battery-unknown
+sensor.sun_room_remote_1_battery:
+  icon: mdi:battery-unknown
+sensor.sun_room_remote_2_battery:
+  icon: mdi:battery-unknown
+sensor.sun_room_remote_3_battery:
+  icon: mdi:battery-unknown
+sensor.sun_room_remote_4_battery:
+  icon: mdi:battery-unknown
+sensor.home_assistant_v2_db:
+  friendly_name: home-assistant_v2.db
+  icon: mdi:database

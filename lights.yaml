@@ -1,0 +1,25 @@
+##  Note: leading spaces in each line are critical
+##  to yaml interpretation - do not delete them
+ 
+# LED Strips using Flux LED
+- platform: flux_led
+  devices:
+    10.0.0.152:
+      name: "Kitchen LEDs Front"
+      mode: "rgb"
+    10.0.0.153:
+      name: "Kitchen LEDs  Rear"
+      mode: "rgb"
+
+
+# Change switch entities to light_switch so they act like lights
+#  A switch in Home Assistant is a wall module, but some in-wall devices
+#  appear as switches even though they should show as lights
+- platform: switch
+  name: Front Door Lights
+  entity_id: switch.front_door_lights
+
+- platform: switch
+  name: Back Door Lights
+  entity_id: switch.back_door_lights
+
