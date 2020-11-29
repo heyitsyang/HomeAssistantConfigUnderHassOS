@@ -13,11 +13,10 @@
 # Filters are considered a type of sensor
 #
 
-
 - platform: statistics
   name: "24hr Avg Water Pressure" 
   entity_id: sensor.water_pressure
-  sampling_size: 1440                             # allow for reporting every minute for 24 hours
+  sampling_size: 1440                              # allow for reporting every minute for 24 hours
   max_age:
     hours: 24
   precision: 2  
@@ -36,20 +35,25 @@
 
 - platform: filter
   name: "Filtered Solar Tube Luminosity" 
-  entity_id: sensor.raw_solar_tube_luminosity       # sensor is set to update every minute
+  entity_id: sensor.raw_solar_tube_luminosity      # sensor is set to update every minute
   filters:
     - filter: outlier
-      radius: 500                               # default radius is 2 if unspecified
-      window_size: 10                           # num of prev states to define median (default = 1)
+      radius: 500                                  # default radius is 2 if unspecified
+      window_size: 10                              # num of prev states to define median (default = 1)
     - filter: lowpass
-      time_constant: 10                         # Loosely relates to the amount of time it takes for a state to influence the output
+      time_constant: 10                            # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
-
+      
+- platform: filter
+  name: "Filtered Rack Exhaust Fan Speed"
+  entity_id: sensor.rack_exhaust_fan_speed
+  filters:
+    - filter: outlier
+      radius: 3                                    # throw out occasional anomalous single readings
 
 #
 # MQTT sensors
 #
-
 
 - platform: mqtt
   unique_id: water_pressure
