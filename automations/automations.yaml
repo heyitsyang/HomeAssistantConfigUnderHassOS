@@ -1226,6 +1226,7 @@
   initial_state: true
   trigger:
   - platform: template
+    value_template: >
       {{ (states('sensor.longmeadow1_temperature') < 50) and
          (states('sensor.longmeadow2_temperature') < 50) }}
   action:
