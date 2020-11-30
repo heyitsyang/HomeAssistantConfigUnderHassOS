@@ -49,7 +49,8 @@
   entity_id: sensor.rack_exhaust_fan_speed
   filters:
     - filter: outlier
-      radius: 3                                    # throw out occasional anomalous single readings
+      window_size: 5                               # compare against median of this many states
+      radius: 200                                  # throw out occasional anomalous single readings greater than this
 
 #
 # MQTT sensors
