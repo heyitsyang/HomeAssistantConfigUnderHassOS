@@ -1217,75 +1217,106 @@
     data_template:
       person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
 
+- id: aut_rack_exhaust_fan_fault
+  alias: 'aut rack exhaust fan fault'
+  initial_state: true
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.filtered_rack_exhaust_fan_speed
+    below: 600
+    for: "00:00:10"
+  action:
+  - service: notify.gmail_to_yang
+    data_template:
+      title: "Rack exhaust fan fault"
+      message: "Rack exhaust fan fault: Currently {{ states('sensor.filtered_rack_exhaust_fan_speed') }} RPM"
+
 - id: aut_low_battery_notification
-  alias: Low battery notification
+  alias: 'aut low battery notification'
   initial_state: true
   trigger:
   - platform: numeric_state
     entity_id: lock.front_door_lock
     value_template: "{{ state_attr('lock.front_door_lock','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: lock.back_door_lock
     value_template: "{{ state_attr('lock.back_door_lock','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.living_area_motion
     value_template: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.sunrm_window_1_opened
     value_template: "{{ state_attr('binary_sensor.sunrm_window_1_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.sunrm_window_2_opened
     value_template: "{{ state_attr('binary_sensor.sunrm_window_2_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.sunrm_window_3_opened
     value_template: "{{ state_attr('binary_sensor.sunrm_window_3_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.sunrm_window_4_opened
     value_template: "{{ state_attr('binary_sensor.sunrm_window_4_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.front_door_opened
     value_template: "{{ state_attr('binary_sensor.front_door_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.back_door_opened
     value_template: "{{ state_attr('binary_sensor.back_door_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: binary_sensor.garagehouse_door_opened
     value_template: "{{ state_attr('binary_sensor.garagehouse_door_opened','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.refrig_power           # leak detector battery
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.disw_power             # leak detector battery
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.washer_power           # leak detector battery
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.sun_room_remote_1
     value_template: "{{ state_attr('sensor.sun_room_remote_1','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.sun_room_remote_2
     value_template: "{{ state_attr('sensor.sun_room_remote_2','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.sun_room_remote_3
     value_template: "{{ state_attr('sensor.sun_room_remote_3','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.sun_room_remote_4
     value_template: "{{ state_attr('sensor.sun_room_remote_4','battery_level') | int }}"
     below: 30
+    for: "00:30:00"
   action:
   - service: notify.gmail_to_yang
     data_template:
