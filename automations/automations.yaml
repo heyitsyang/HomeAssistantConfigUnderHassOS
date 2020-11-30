@@ -1217,6 +1217,27 @@
     data_template:
       person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
 
+
+#
+# CONDITIONS REQUIRING ATTENTION
+#
+- id: aut_longmeadow_temperature_out_of_range
+  alias: 'aut longmeadow temperature out of range'
+  initial_state: true
+  trigger:
+  - platform: template
+      {{ (states('sensor.longmeadow1_temperature') < 50) and
+         (states('sensor.longmeadow2_temperature') < 50) }}
+  action:
+  - service: notify.gmail_to_yang
+    data_template:
+      title: "Longmeadow temperature out of range"
+      message: "Longmeadow temperature out of range: {{ states('sensor.longmeadow2_temperature') }}"
+  - service: notify.pushover_yang
+    data:
+      message: "Longmeadow temperature out of range: {{ states('sensor.longmeadow2_temperature') }}"
+      title: "Longmeadow temperature out of range"
+      
 - id: aut_rack_exhaust_fan_fault
   alias: 'aut rack exhaust fan fault'
   initial_state: true
