@@ -34,7 +34,7 @@
 #
   - platform: template
     sensors:
-      washer_on_or_off:
+      washer_on_or_off:                            # since this is a binary sensor, we only have to determine true/false
         friendly_name: "Washer ON/OFF sensor"
         delay_on:
           seconds: 30
