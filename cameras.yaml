@@ -35,3 +35,15 @@
 #- platform: ffmpeg
 #  name: 'Pano camera'                            # MISECU Fisheye ONVIF/RTSP camera
 #  input: !secret pano1_url                       # user & pwd are embedded in the URL, so !secret the whole thing
+
+- platform: local_file
+  name: 'Doorbell snapshot'
+  file_path: /config/www/camera_stills/doorbell.jpg
+
+- platform: local_file
+  name: 'Driveway snapshot'
+  file_path: /config/www/camera_stills/driveway.jpg
+  
+- platform: local_file
+  name: 'FrontPorch snapshot'
+  file_path: /config/www/camera_stills/frontporch.jpg
