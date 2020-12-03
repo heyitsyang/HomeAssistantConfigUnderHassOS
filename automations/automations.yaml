@@ -1124,7 +1124,7 @@
 #
 # MASTER BEDROOM FAN AUTOMATION
 #
-- id: aut_masterbdrmfan_trig_on
+- id: aut_master_bedroom_fan_trig_on
   alias: 'aut master bedroom fan trig on'
   initial_state: true
   trigger:
@@ -1137,7 +1137,7 @@
       entity_id: light.master_bedroom_fan
       brightness_pct: 30
 
-- id: aut_masterbedrmfan_trig_off
+- id: aut_master_bedroom_fan_trig_off
   alias: 'aut master bedroom fan trig off'
   initial_state: true
   trigger:
