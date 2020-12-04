@@ -176,6 +176,29 @@
   state_topic: "longmeadow2/DHT22/Humidity"
   qos: 0
   unit_of_measurement: "%"
+  
+#
+# SNMP sensors
+#
+- platform: snmp
+  name: "Junior temperature"
+  host: junior.shencentral.net
+  baseoid: 1.3.6.1.4.1.6574.1.2.0
+  accept_errors: true
+  unit_of_measurement: "ºC"
+
+- platform: snmp
+  name: "Junior system fan status"
+  host: junior.shencentral.net
+  baseoid: 1.3.6.1.4.1.6574.1.4.1.0
+  accept_errors: true
+  
+- platform: snmp
+  name: "Junior CPU fan status"
+  host: junior.shencentral.net
+  baseoid: 1.3.6.1.4.1.6574.1.4.2.0
+  accept_errors: true
+
 
 #
 # Time & Date
