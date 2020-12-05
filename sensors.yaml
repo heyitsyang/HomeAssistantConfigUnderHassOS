@@ -181,24 +181,36 @@
 # SNMP sensors
 #
 - platform: snmp
-  name: "Junior temperature"
+  name: "NAS temperature"
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.2.0
   accept_errors: true
   unit_of_measurement: "ºC"
 
 - platform: snmp
-  name: "Junior system fan status"
+  name: "NAS system fan status"
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.1.0
   accept_errors: true
+  value_template: >
+    {% if value | int == 1 %}
+     OK
+    {% else %}
+     FAULT
+    {% endif %}
   
 - platform: snmp
-  name: "Junior CPU fan status"
+  name: "NAS CPU fan status"
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.2.0
   accept_errors: true
-
+  value_template: >
+    {% if value | int == 1 %}
+     OK
+    {% else %}
+     FAULT
+    {% endif %}
+  
 
 #
 # Time & Date

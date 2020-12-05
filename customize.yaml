@@ -229,3 +229,16 @@ sensor.sun_room_remote_4_battery:
 sensor.home_assistant_v2_db:
   friendly_name: home-assistant_v2.db
   icon: mdi:database
+sensor.junior_temperature:
+  friendly_name: Junior temperature
+  icon: mdi:thermometer
+sensor.junior_system_fan_status:
+  icon: mdi:tailwind
+sensor.junior_cpu_fan_status:
+  icon: mdi:memory
+sensor.nas_temperature:
+  icon: mdi:thermometer
+sensor.nas_cpu_fan_status:
+  icon: mdi:memory
+sensor.nas_system_fan_status:
+  icon: mdi:tailwind

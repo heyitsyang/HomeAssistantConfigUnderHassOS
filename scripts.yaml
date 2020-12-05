@@ -419,9 +419,10 @@ scr_great_room_motion_lighting_off:
 #
 scr_frontporch_activity:
   sequence:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'You have a visitor at the front door'
+  - service: camera.snapshot
+    data:
+      entity_id: camera.doorbell_camera
+      filename: '/config/www/camera_stills/doorbell.jpg'
   - service: camera.snapshot
     data:
       entity_id: camera.frontporch_camera
@@ -430,12 +431,9 @@ scr_frontporch_activity:
     data:
       entity_id: camera.driveway_camera
       filename: '/config/www/camera_stills/driveway.jpg'
-  - delay:
-      seconds: 1                                             # delay to prevent capturing before target is in frame
-  - service: camera.snapshot
-    data:
-      entity_id: camera.doorbell_camera
-      filename: '/config/www/camera_stills/doorbell.jpg'
+  - service: script.scr_say_phrase
+    data_template:
+      message: 'You have a visitor at the front door'
   - condition: and                                            # continue only if both not home
     conditions:
     - condition: template                                                            # testing for not_home else doesn't work if in a known zone
