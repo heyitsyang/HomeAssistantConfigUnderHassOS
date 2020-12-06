@@ -54,26 +54,22 @@
   - platform: template
     sensors:
       lum_outdoor_lights_solar_trig:
-        device_class: light
         friendly_name: "Outdoor lights on/off per solar sensor"                      # sync as closely with post light as possible
         value_template: >-
           {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
   
       lum_lvrm_lights_indoor_trig:
-        device_class: light
         friendly_name: "LvRm lights on/off per indoor sensor"
         value_template: >-
           {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
           
       lum_mood_lights_f_solar_trig:
-        device_class: light
         friendly_name: "Mood lights on/off per f_solar sensor"
         value_template: >-
           {{ is_state('input_boolean.inp_bool_lum_mood_lights_f_solar_trig','on') }}
   
       lum_sunrm_shades_trig:
         friendly_name: "Sunroom shades open per solar sensor"
-        device_class: opening
         value_template: >-
           {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
 
