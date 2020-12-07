@@ -1131,6 +1131,10 @@
   - platform: template
     value_template: >-
       "{{ (states('sensor.10m_avg_master_bedroom_temperature') | float > states('input_number.masterbdrm_on_temp') | float ) }}"
+  condition:
+    condition: state
+    entity_id: light.master_bedroom_fan
+    state: 'off'
   action:
     service: light.turn_on
     data:
@@ -1144,10 +1148,13 @@
   - platform: template
     value_template: >-
       "{{ (states('sensor.10m_avg_master_bedroom_temperature') | float < states('input_number.masterbdrm_off_temp') | float ) }}"
+  condition:
+    condition: state
+    entity_id: light.master_bedroom_fan
+    state: 'on'
   action:
     service: light.turn_off
     entity_id: light.master_bedroom_fan
-
 
 #
 # NOBODY HOME ACTIONS
