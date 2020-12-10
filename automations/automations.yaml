@@ -1336,7 +1336,7 @@
   - service: notify.gmail_to_yang
     data_template:
       title: "Low batteries: {{ trigger.entity_id }}"
-      message: "Low batteries: {{ trigger.entity_id }}  {{ state_attr('trigger.entity_id', 'battery_level') }}%"
+      message: "Low batteries: {{ trigger.entity_id }}  {{ states(trigger.entity_id) }}%"
 
 #
 # SOFTWARE UPDATE NOTIFICATION
