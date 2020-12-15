@@ -16,10 +16,10 @@ homeassistant:
   customize_domain: !include customize_domain.yaml   # must be under the homeassistant: section
   customize_glob: !include customize_glob.yaml       # or it will not work
   
-http:
-  server_port: 61615
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
+#http:                                               # This section no longer needed for nginx reverse proxy add-on
+# server_port: 61615                                 #  default port 8123 is used for local network unencrypted http
+#  ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
+#  ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
   
 default_config:
   

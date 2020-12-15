@@ -9,3 +9,4 @@
   cache: true                      # or the mp3 file will be created in the tts directory, but will not be played
   cache_dir: tts
   time_memory: 57600               # secs voice data is held in MEMORY for quick playback - max is 57600 (16hrs)
+  base_url: https://shencentral.duckdns.org:61615         #  this is important - must be set f different than https external address in config
