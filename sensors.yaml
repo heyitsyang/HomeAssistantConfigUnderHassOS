@@ -239,7 +239,6 @@
 
 - platform: uptime
   name: 'Uptime'
-  unit_of_measurement: hours
 
 #- platform: cert_expiry                               # now configured using GUI
 #  host: "shencentral.duckdns.org"
