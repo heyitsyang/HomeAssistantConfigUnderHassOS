@@ -857,6 +857,7 @@
 - id: aut_front_door_lights_timeout
   alias: 'aut front door light timeout'
   initial_state: true
+  mode: restart
   trigger:
   - platform: state
     entity_id: binary_sensor.front_ent_attic_uwave
