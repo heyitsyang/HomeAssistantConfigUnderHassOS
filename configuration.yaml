@@ -25,8 +25,8 @@ default_config:
   
 # NEATO VACUUM
 neato:
-  username: !secret neato_user
-  password: !secret neato_pwd
+  client_id: !secret neato_client_id
+  client_secret: !secret neato_client_secret
 
 # GOOGLE CALENDAR
 google:
