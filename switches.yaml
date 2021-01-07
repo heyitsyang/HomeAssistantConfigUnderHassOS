@@ -13,7 +13,7 @@
 - platform: mqtt
   name: "Water Valve"
   unique_id: water_valve
-  state_topic: "watermain/zeroisclosed"
+  state_topic: "watermain/valve_zeroisclosed"
   command_topic: "watermain/cmd/valveState"
   payload_on: "1"
   payload_off: "0"
