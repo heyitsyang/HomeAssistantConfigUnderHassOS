@@ -555,6 +555,13 @@ scr_sonos_eval_announce:
 #  MANUAL UI REQUESTS
 #
 
+# START STATIC PRESSURE TEST
+scr_manual_spt:
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: watermain/cmd/sptStartTest
+    
 # SPEAK TIME
 scr_manual_say_time:
   mode: queued

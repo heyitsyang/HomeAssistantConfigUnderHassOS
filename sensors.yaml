@@ -66,6 +66,7 @@
   qos: 0
   device_class: "pressure"
   unit_of_measurement: "PSI"
+  expire_after: 600                                  # state becomes "unknown" after 10 minutes
   
 - platform: mqtt
   unique_id: water_temperature
@@ -74,6 +75,14 @@
   qos: 0
   device_class: "temperature"
   unit_of_measurement: "ºF"
+  expire_after: 600                                  # state becomes "unknown" after 10 minutes
+  
+- platform: mqtt
+  unique_id: water_static_pressure_test
+  name: "Water Static Pressure Test Results"
+  state_topic: "watermain/spt_result"
+  unit_of_measurement: "PSI"
+  json_attributes_topic: "watermain/spt_result/attributes"
   
 - platform: mqtt
   unique_id: rack_exhaust_temperature
