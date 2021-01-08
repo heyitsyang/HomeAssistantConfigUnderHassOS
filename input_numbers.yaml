@@ -30,9 +30,8 @@ inp_num_greatrm_announce_vol:                                    # original valu
   max: 0.32
   icon: mdi:speaker-wireless
 
-
 #
-# DELAY SETTINGS
+# DELAYS & DURATIONS
 #
 
 inp_num_front_door_lights_off_delay:                            # original value = 10 minutes
@@ -107,6 +106,15 @@ inp_num_sunrm_shades_close_low_lux_trig_delay:                 # original value 
   min: 5
   max: 15
   icon: mdi:timer-sand
+  unit_of_measurement: minutes
+  
+# STATIC PRESSURE TEST DURATION
+inp_num_spt_duration:
+  name: "SPT Duration"
+  mode: slider
+  min: 5
+  max: 30
+  icon: mdi:camera-timer
   unit_of_measurement: minutes
 
 

@@ -72,7 +72,19 @@ scr_nobody_home:
   - service: homeassistant.turn_off
     entity_id: group.all_lighting_xabove_cabinet
 
-
+#
+# PLUMBING & WATER RELATED
+#
+scr_spt_start:
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: watermain/cmd/sptDuration
+      payload_template: "{{ states('input_number.inp_num_spt_duration') }}"
+  - service: mqtt.publish
+    data:
+      topic: watermain/cmd/sptStart
+      
 #
 # PERFORM INDIV. HOME ARRIVAL ACTIONS
 #
@@ -554,13 +566,6 @@ scr_sonos_eval_announce:
 #
 #  MANUAL UI REQUESTS
 #
-
-# START STATIC PRESSURE TEST
-scr_manual_spt:
-  sequence:
-  - service: mqtt.publish
-    data:
-      topic: watermain/cmd/sptStart
     
 # SPEAK TIME
 scr_manual_say_time:
