@@ -79,6 +79,14 @@
 #
 
   - platform: mqtt
+    unique_id: water_spt_data_ready
+    name: "Static Pressure Test Data Ready"
+    state_topic: "watermain/spt_date_ready"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - platform: mqtt
     unique_id: utilitycloset_airhandler
     name: "Air Handler"
     state_topic: "utilitycloset/airhandler/State"
