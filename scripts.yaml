@@ -560,7 +560,7 @@ scr_manual_spt:
   sequence:
   - service: mqtt.publish
     data:
-      topic: watermain/cmd/sptStartTest
+      topic: watermain/cmd/sptStart
     
 # SPEAK TIME
 scr_manual_say_time:
