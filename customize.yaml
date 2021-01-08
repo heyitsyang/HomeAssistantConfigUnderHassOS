@@ -176,7 +176,7 @@ climate.sunrm_ac:
 climate.ecobee:
   friendly_name: Main House
 script.scr_manual_spt:
-  friendly_name: Start Static Pressure Test
+  friendly_name: SPT Manual Start
   icon: mdi:gesture-tap-button
 script.scr_manual_say_time:
   friendly_name: Say time
