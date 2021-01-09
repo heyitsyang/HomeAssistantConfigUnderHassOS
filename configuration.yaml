@@ -22,7 +22,10 @@ homeassistant:
 #  ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
   
 default_config:
-  
+
+frontend:                                            # Enables the frontend
+ themes: !include_dir_merge_named themes             # themes go in the themes directory
+ 
 # NEATO VACUUM
 neato:
   client_id: !secret neato_client_id
@@ -46,7 +49,6 @@ vera:
 # note the include for customize: is required
 # to be in the homeassitant: section
 
-frontend: !include frontend.yaml                       # Enables the frontend
 history: !include history.yaml                         # doesn't work, check all three
 logger: !include logger.yaml
 recorder: !include recorder.yaml                       # history graphing settings
