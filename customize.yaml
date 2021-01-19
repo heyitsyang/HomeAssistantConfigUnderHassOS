@@ -150,6 +150,8 @@ sensor.raw_living_rm_visible_light:
 sensor.raw_living_rm_infrared_light:
   friendly_name: Raw Living Rm Infrared Light
   icon: mdi:brightness-6
+binary_sensor.leak_water_heater:
+  device_class: moisture
 binary_sensor.front_door_opened:
   friendly_name: Front Door
   icon: mdi:door

@@ -1,10 +1,10 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
 
-################################ 
+################################
 ##        AUTOMATIONS         ##
-################################ 
- 
+################################
+
 # If you want to specify multiple services to be called,
 # or to include a delay, a script component must be used
 # If you want to describe the desired state of certain entities,
@@ -15,14 +15,13 @@
 #####################################
 
 - id: aut_ha_startup
-  alias: 'aut ha startup'                     # if this doesn't work, it's because it may be firing before entities have been setup
+  alias: "aut ha startup" # if this doesn't work, it's because it may be firing before entities have been setup
   initial_state: true
-  trigger:                                    # which may happen if something is slowing down the startup process such as an external
-  - platform: homeassistant                   # database connection or error
-    event: start 
+  trigger: # which may happen if something is slowing down the startup process such as an external
+    - platform: homeassistant # database connection or error
+      event: start
   action:
-  - service: script.scr_ha_startup
-
+    - service: script.scr_ha_startup
 
 #####################################
 #    Time triggered automations     #
@@ -32,178 +31,177 @@
 # PURGE RECORDER DATABASE
 #
 - id: aut_purge_recorder
-  alias: 'aut purge recorder'
+  alias: "aut purge recorder"
   initial_state: true
   trigger:
-  - platform: time
-    at: '03:45:00'
+    - platform: time
+      at: "03:45:00"
   condition:
     condition: time
     weekday:
       - sun
   action:
-  - service: recorder.purge
+    - service: recorder.purge
 
 #
 # START VACUUM
 #
 - id: aut_start_vacuum
-  alias: 'aut start vacuum'
+  alias: "aut start vacuum"
   initial_state: true
   trigger:
-  - platform: time
-    at: '09:35:00'
+    - platform: time
+      at: "09:35:00"
   condition:
-  - condition: time
-    weekday:
-    - sun
-  - condition: state
-    entity_id: input_boolean.inp_bool_vacuum_every_sunday
-    state: 'on'
-  - condition: state                                                                  # do not execute if extended absence ON
-    entity_id: input_boolean.inp_bool_extended_absence_mode
-    state: 'off'
-  - condition: state
-    entity_id: input_boolean.inp_bool_guest_mode                                      # do not execute unless Overnight Guest is OFF
-    state: 'off'                                                                      # in case we have a guest
-  - condition: template                                                               # testing for 'not_home' doesn't work if in a known zone
-    value_template: "{{ states('person.yang') != 'home' }}"
-  - condition: template                                                               # testing for 'not_home' doesn't work if in a known zone
-    value_template: "{{ states('person.karen') != 'home' }}"
+    - condition: time
+      weekday:
+        - sun
+    - condition: state
+      entity_id: input_boolean.inp_bool_vacuum_every_sunday
+      state: "on"
+    - condition: state # do not execute if extended absence ON
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      state: "off"
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
+      state: "off" # in case we have a guest
+    - condition: template # testing for 'not_home' doesn't work if in a known zone
+      value_template: "{{ states('person.yang') != 'home' }}"
+    - condition: template # testing for 'not_home' doesn't work if in a known zone
+      value_template: "{{ states('person.karen') != 'home' }}"
   action:
-  - service: script.scr_vacuum_start_custom_cleaning
+    - service: script.scr_vacuum_start_custom_cleaning
 
 #
 # SET ANNOUNCEMENT HOURS AUTOMATICALLY
 #
 # *** These times should match those in startup in scripts.yaml  ***
 #
-- id: aut_assume_awake                                                   # sleeping also set by sensors - see aut_sleeping_mode_off
-  alias: 'aut assume awake'
+- id: aut_assume_awake # sleeping also set by sensors - see aut_sleeping_mode_off
+  alias: "aut assume awake"
   initial_state: true
-  trigger:                                                               # in timestamp_custom() below, the local time flag is set to false since
-  - platform: template                                                   # the timestamp compared is already in local time so no conversion desired
-    value_template: >
-     {{ ( states('sensor.time') == (state_attr('input_datetime.assume_awake', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) }}
+  trigger: # in timestamp_custom() below, the local time flag is set to false since
+    - platform: template # the timestamp compared is already in local time so no conversion desired
+      value_template: >
+        {{ ( states('sensor.time') == (state_attr('input_datetime.assume_awake', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) }}
   action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.inp_bool_announcements
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.inp_bool_sleeping
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.inp_bool_announcements
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.inp_bool_sleeping
 
-- id: aut_assume_asleep                                                  # sleeping also set by sensors - see aut_sleeping_mode_on
-  alias: 'aut assume asleep'
+- id: aut_assume_asleep # sleeping also set by sensors - see aut_sleeping_mode_on
+  alias: "aut assume asleep"
   initial_state: true
-  trigger:                                                               # in timestamp_custom() below, the local time flag is set to false since
-  - platform: template                                                   # the timestamp compared is already in local time so no conversion desired
-    value_template: >
-     {{ ( states('sensor.time') == (state_attr('input_datetime.assume_asleep', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) }} 
+  trigger: # in timestamp_custom() below, the local time flag is set to false since
+    - platform: template # the timestamp compared is already in local time so no conversion desired
+      value_template: >
+        {{ ( states('sensor.time') == (state_attr('input_datetime.assume_asleep', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) }}
   action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.inp_bool_sleeping
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.inp_bool_sleeping
 
 - id: aut_announcements_off
-  alias: 'aut announcements off'
+  alias: "aut announcements off"
   initial_state: true
   trigger:
-  - platform: template                                      # the timestamp compared is already in local time so no further conversion desired
-    value_template: >
-      {{ ( states('sensor.time') == (state_attr('input_datetime.inhibit_announcements', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) }}
+    - platform: template # the timestamp compared is already in local time so no further conversion desired
+      value_template: >
+        {{ ( states('sensor.time') == (state_attr('input_datetime.inhibit_announcements', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) }}
   action:
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.inp_bool_announcements
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.inp_bool_announcements
 
 #
 # HOURLY TIME ANNOUNCEMENT
 #
 - id: aut_hourly_announcement
-  alias: 'aut hourly announcement'
+  alias: "aut hourly announcement"
   initial_state: true
   trigger:
-  - platform: time_pattern
-    minutes: 00                                                # Matches every hour at 00 minutes                            
+    - platform: time_pattern
+      minutes: 00 # Matches every hour at 00 minutes
   action:
-  - service: script.scr_say_phrase
-    data_template:
-      message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
 
 #
 # EXTINGUISH MOOD LIGHTS DAILY
 #
 - id: aut_mood_lights_daily_off
-  alias: 'aut mood lights daily off'
+  alias: "aut mood lights daily off"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_sleeping
-    to: 'on'
+    - platform: state
+      entity_id: input_boolean.inp_bool_sleeping
+      to: "on"
   condition:
-  - condition: state
-    entity_id: group.mood_lights
-    state: 'on'
+    - condition: state
+      entity_id: group.mood_lights
+      state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: group.mood_lights
+    - service: homeassistant.turn_off
+      entity_id: group.mood_lights
 
 #
 # FAILSAFE TO EXTINGUISH OUTDOOR LIGHTS
 #
 - id: aut_outdoor_lights_failsafe
-  alias: 'aut outdoor lights failsafe'
+  alias: "aut outdoor lights failsafe"
   initial_state: true
   trigger:
-  - platform: time
-    at: '01:05:00'
+    - platform: time
+      at: "01:05:00"
   action:
-  - service: switch.turn_off
-    entity_id: group.outdoor_lights
-   
+    - service: switch.turn_off
+      entity_id: group.outdoor_lights
+
 #
 # FAILSAFE TO EXTINGUISH INDOOR LIGHTS
 #
 - id: aut_indoor_lights_failsafe
-  alias: 'aut indoor lights failsafe'
+  alias: "aut indoor lights failsafe"
   initial_state: true
   trigger:
-  - platform: time
-    at: '02:30:00'
+    - platform: time
+      at: "02:30:00"
   action:
-  - service: homeassistant.turn_off
-    entity_id: group.indoor_lights
-   
+    - service: homeassistant.turn_off
+      entity_id: group.indoor_lights
+
 #
 # ADJUST LIVING ROOM LIGHT BRIGHTNESS IF NECESSARY
 #
 - id: auto_adj_lvrm_brightness
-  alias: 'auto adj lvrm brightness'
+  alias: "auto adj lvrm brightness"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: sensor.suggested_brightness                     # this triggers with any state change
+    - platform: state
+      entity_id: sensor.suggested_brightness # this triggers with any state change
   condition:
-  - condition: template                                        # ignore if zero (prevent turn off of light using this mechanism)
-    value_template: "{{ states('sensor.suggested_brightness') | int != 0 }}"
-  - condition: state
-    entity_id: binary_sensor.lum_lvrm_lights_indoor_trig
-    state: 'on'
-  - condition: or
-    conditions:
-    - condition: state                                         # motion has triggered them ON
-      entity_id: light.living_room_lights
-      state: 'on'
-    - condition: state                                         # in case in living room after motion timeout & lighting has changed
-      entity_id: media_player.samsung_samsung_dtv_rcr
-      state: 'on'
+    - condition: template # ignore if zero (prevent turn off of light using this mechanism)
+      value_template: "{{ states('sensor.suggested_brightness') | int != 0 }}"
+    - condition: state
+      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig
+      state: "on"
+    - condition: or
+      conditions:
+        - condition: state # motion has triggered them ON
+          entity_id: light.living_room_lights
+          state: "on"
+        - condition: state # in case in living room after motion timeout & lighting has changed
+          entity_id: media_player.samsung_samsung_dtv_rcr
+          state: "on"
   action:
-  - service: light.turn_on
-    data_template:
-      entity_id: light.living_room_lights
-      brightness_pct: "{{ states('sensor.suggested_brightness') | int }}"
-  
+    - service: light.turn_on
+      data_template:
+        entity_id: light.living_room_lights
+        brightness_pct: "{{ states('sensor.suggested_brightness') | int }}"
 
 ###########################################################
 #      Test luminosity based triggers and save states     #
@@ -211,94 +209,92 @@
 ###########################################################
 
 - id: aut_lum_outdoor_lights_solar_trig_on
-  alias: 'aut lum outdoor lights solar trig on'
+  alias: "aut lum outdoor lights solar trig on"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ (states('sensor.raw_solar_tube_luminosity') | int <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int ) }}
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.raw_solar_tube_luminosity') | int <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
 - id: aut_lum_outdoor_lights_solar_trig_off
-  alias: 'aut lum outdoor lights solar trig off'
+  alias: "aut lum outdoor lights solar trig off"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ (states('sensor.raw_solar_tube_luminosity') | int >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int ) }}
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.raw_solar_tube_luminosity') | int >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
-- id: aut_lum_lvrm_lights_indoor_trig_on                                 # Normal TV watching lights are ~14 Lux
-  alias: 'aut lum lvrm lights indoor trig on'                            # ~25 Lux if all contributing indoor lights are ON 100%
-  initial_state: true                                                    #  keep OFF trigger >> ON trigger to avoid cycling
+- id: aut_lum_lvrm_lights_indoor_trig_on # Normal TV watching lights are ~14 Lux
+  alias: "aut lum lvrm lights indoor trig on" # ~25 Lux if all contributing indoor lights are ON 100%
+  initial_state: true #  keep OFF trigger >> ON trigger to avoid cycling
   trigger:
-  - platform: template
-    value_template: >-
-      {{ ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float) ) }}
+    - platform: template
+      value_template: >-
+        {{ ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float) ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
-- id: aut_lum_lvrm_lights_indoor_trig_off                                # Normal TV watching lights are ~14 Lux
-  alias: 'aut lum lvrm lights indoor trig off'                           # ~25 Lux if all contributing indoor lights are ON 100%
-  initial_state: true                                                    #  keep OFF trigger >> ON trigger to avoid cycling
+- id: aut_lum_lvrm_lights_indoor_trig_off # Normal TV watching lights are ~14 Lux
+  alias: "aut lum lvrm lights indoor trig off" # ~25 Lux if all contributing indoor lights are ON 100%
+  initial_state: true #  keep OFF trigger >> ON trigger to avoid cycling
   trigger:
-  - platform: template
-    value_template: >-
-      {{ ( (states('sensor.living_rm_visible_light') | float) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float) ) }}
+    - platform: template
+      value_template: >-
+        {{ ( (states('sensor.living_rm_visible_light') | float) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float) ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_on
-  alias: 'aut lum mood lights f_solar trig on'
+  alias: "aut lum mood lights f_solar trig on"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ ( (states('sensor.filtered_solar_tube_luminosity') | int) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int) ) }}
+    - platform: template
+      value_template: >-
+        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int) ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_off
-  alias: 'aut lum mood lights f_solar trig off'
+  alias: "aut lum mood lights f_solar trig off"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ ( (states('sensor.filtered_solar_tube_luminosity') | int) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int) ) }}
+    - platform: template
+      value_template: >-
+        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int) ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_sunrm_shades_trig_on
-  alias: 'aut lum sunrm shades trig on'
+  alias: "aut lum sunrm shades trig on"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ ( (states('sensor.raw_solar_tube_luminosity') | int) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int) ) }}
+    - platform: template
+      value_template: >-
+        {{ ( (states('sensor.raw_solar_tube_luminosity') | int) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int) ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 - id: aut_lum_sunrm_shades_trig_off
-  alias: 'aut lum sunrm shades trig off'
+  alias: "aut lum sunrm shades trig off"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ ( (states('sensor.raw_solar_tube_luminosity') | int) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int) ) }}
+    - platform: template
+      value_template: >-
+        {{ ( (states('sensor.raw_solar_tube_luminosity') | int) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int) ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
-
-
 
 ##################################################
 #      Sensor event driven automations           #
@@ -306,19 +302,38 @@
 ##################################################
 
 #
+# WATER EXPANSION TANK FAULT
+#
+- id: aut_expansion_tank_fault
+  alias: "aut expansion tank fault"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.water_pressure
+      above: 80
+  action:
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
+        message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
+
+#
 # LEAK DETECTED
 #
 - id: aut_leak_detected
-  alias: 'aut leak detected'
+  alias: "aut leak detected"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id:
-      - binary_sensor.leak_refrig
-      - binary_sensor.leak_dishw
-      - binary_sensor.leak_washer
-      - binary_sensor.leak_water_heater
+    - platform: state
+      entity_id:
+        - binary_sensor.leak_refrig
+        - binary_sensor.leak_dishw
+        - binary_sensor.leak_washer
+        - binary_sensor.leak_water_heater
   action:
+    - service: switch.turn_off
+      entity_id: switch.water_valve
     - choose:
         - conditions:
             - condition: state
@@ -388,74 +403,76 @@
                     message: "Water leak detected at the water heater"
                 - delay:
                     minutes: 1
+    - service: script.scr_say_phrase
+      data_template:
+        message: "House water is off.  Turn on manually when leak is resolved."
 
 #
 # WASHER DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
 # only notifies for first load in X hours
 #
-
 - id: aut_washer_done_announce
-  alias: 'aut washer done'
+  alias: "aut washer done"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.washer_on_or_off
-    from: 'on'
-    to: 'off'
-    for: 00:05:00
-  condition:                                                        # only announce first load in washer
-  - condition: template
-    value_template: >-
-       {{ (as_timestamp(now()) - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered")) | int > (8 * 60 * 60))
-           or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
+    - platform: state
+      entity_id: binary_sensor.washer_on_or_off
+      from: "on"
+      to: "off"
+      for: 00:01:00
+  condition: # only announce first load in washer
+    - condition: template
+      value_template: >-
+        {{ (as_timestamp(now()) - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered")) | int > (8 * 60 * 60))
+            or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
   action:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'The washer cycle has finished'
+    - service: script.scr_say_phrase
+      data_template:
+        message: "The washer cycle has finished"
 
 #
 # TURN ON TRASH NIGHT REMINDER LIGHTS
 #
 - id: aut_trash_night_lights
-  alias: 'aut trash night lights'
+  alias: "aut trash night lights"
   initial_state: true
   trigger:
-  - platform: sun
-    event: sunset
+    - platform: sun
+      event: sunset
   condition:
     condition: time
     weekday:
       - mon
       - thu
   action:
-  - service: scene.turn_on
-    entity_id: scene.trash_night_LED_mood
+    - service: scene.turn_on
+      entity_id: scene.trash_night_LED_mood
 
 #
 #  GUEST MODE MANUALLY TURNED ON
 #
 - id: aut_guest_mode_manual_on
-  alias: 'aut guest mode manual on'
+  alias: "aut guest mode manual on"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_guest_mode 
-    from: 'off'
-    to: 'on'
+    - platform: state
+      entity_id: input_boolean.inp_bool_guest_mode
+      from: "off"
+      to: "on"
   action:
-  - service: script.scr_sonos_unjoin4announce
+    - service: script.scr_sonos_unjoin4announce
 
 #  GUEST MODE MANUALLY TURNED OFF
 - id: aut_guest_mode_manual_off
-  alias: 'aut guest mode manual off'
+  alias: "aut guest mode manual off"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_guest_mode 
-    from: 'on'
-    to: 'off'
+    - platform: state
+      entity_id: input_boolean.inp_bool_guest_mode
+      from: "on"
+      to: "off"
   action:
-  - service: script.scr_sonos_join4announce
+    - service: script.scr_sonos_join4announce
 
 #
 # PHONE ATTRIBUTE DRIVEN AUTOMATIONS
@@ -494,118 +511,113 @@
 #  condition:
 #  - condition: template                                                           # if not during assume_awake hours, then keep sleeping ON
 #    value_template: >
-#      {{ ( (states('sensor.time') > (state_attr('input_datetime.assume_asleep', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) and 
+#      {{ ( (states('sensor.time') > (state_attr('input_datetime.assume_asleep', 'timestamp') | int | timestamp_custom('%H:%M', false)) ) and
 #         (states('sensor.time') < (state_attr('input_datetime.assume_awake', 'timestamp') | int | timestamp_custom('%H:%M', false))) ) }}
 #  action:
 #  - service: input_boolean.turn_off
 #    entity_id: input_boolean.inp_bool_sleeping
 
-
 #
 # AUTO LIVING AREA LIGHTING - MOTION
 #
 - id: aut_auto_living_area_motion
-  alias: 'aut auto living area motion'
+  alias: "aut auto living area motion"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.living_area_motion
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.living_area_motion
+      to: "on"
   action:
-  - service: script.scr_motion_lighting_on
-  - service: script.scr_pathway_motion_lighting_on
-  - service: script.scr_check_if_suspicious
-
+    - service: script.scr_motion_lighting_on
+    - service: script.scr_pathway_motion_lighting_on
+    - service: script.scr_check_if_suspicious
 
 #
 # AUTO LIVING AREA LIGHTING - LUMINOSITY BASED
 #
 
 - id: aut_auto_on_living_area_luminosity
-  alias: 'aut auto on living area luminosity'
+  alias: "aut auto on living area luminosity"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.lum_lvrm_lights_indoor_trig                                     # luminosity level is set in UI (settings)
-    to: 'on'
-    for:                                                                                     # in motion activated lighting
-      minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int }}"
+    - platform: state
+      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
+      to: "on"
+      for: # in motion activated lighting
+        minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int }}"
   condition:
-  - condition: and
-    conditions:
-    - condition: template                                                                   # lvrm sensor can be zero & not broken
-      value_template: "{{ states('sensor.living_rm_visible_light') != 'unknown' }}"         # sensor broken if 'unknown'
-    - condition: or
+    - condition: and
       conditions:
-      - condition: state
-        entity_id: binary_sensor.living_area_motion
-        state: 'on'
-      - condition: state
-        entity_id: media_player.samsung_samsung_dtv_rcr
-        state: 'on'
-      - condition: state
-        entity_id: media_player.samsung_samsung_dtv_rcr
-        state: 'unknown'
+        - condition: template # lvrm sensor can be zero & not broken
+          value_template: "{{ states('sensor.living_rm_visible_light') != 'unknown' }}" # sensor broken if 'unknown'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.living_area_motion
+              state: "on"
+            - condition: state
+              entity_id: media_player.samsung_samsung_dtv_rcr
+              state: "on"
+            - condition: state
+              entity_id: media_player.samsung_samsung_dtv_rcr
+              state: "unknown"
   action:
-  - service: script.scr_motion_lighting_on
+    - service: script.scr_motion_lighting_on
 
 - id: aut_auto_off_living_area_luminosity
-  alias: 'aut auto off living area luminosity'
+  alias: "aut auto off living area luminosity"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.lum_lvrm_lights_indoor_trig                                   # luminosity level is set in UI (settings)
-    to: 'off'
-    for:
-      minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int }}"
-  condition:                                                                       # only auto-off if daylight outside
-  - condition: numeric_state                                                       #  prevent auto-off when light inside exceeds the above lux trigger
-    entity_id: sun.sun                                                             #  light turns off when motion times out (below)
-    value_template: "{{ state_attr('sun.sun', 'elevation') }}"
-    above: 14.0                                                                    # house behind blocks sun at this angle, so above it is "daylight"
+    - platform: state
+      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int }}"
+  condition: # only auto-off if daylight outside
+    - condition: numeric_state #  prevent auto-off when light inside exceeds the above lux trigger
+      entity_id: sun.sun #  light turns off when motion times out (below)
+      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+      above: 14.0 # house behind blocks sun at this angle, so above it is "daylight"
   action:
-  - service: light.turn_off
-    entity_id: light.living_room_lights
-
+    - service: light.turn_off
+      entity_id: light.living_room_lights
 
 #
 # GREAT ROOM MOTION INACTIVITY TIMEOUT
 #
 - id: aut_living_area_lights_motion_timeout
-  alias: 'aut living area lights motion timeout'
+  alias: "aut living area lights motion timeout"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.living_area_motion
-    to: 'off'
-    for:
-      minutes: 30
+    - platform: state
+      entity_id: binary_sensor.living_area_motion
+      to: "off"
+      for:
+        minutes: 30
   condition:
-  - condition: state
-    entity_id: media_player.samsung_samsung_dtv_rcr
-    state: 'off'
-  - condition: state
-    entity_id: light.eating_area_lights                                            # if the eating area lights are on, we might be dining or
-    state: 'off'                                                                   # have guests and want the great room to remain lighted
+    - condition: state
+      entity_id: media_player.samsung_samsung_dtv_rcr
+      state: "off"
+    - condition: state
+      entity_id: light.eating_area_lights # if the eating area lights are on, we might be dining or
+      state: "off" # have guests and want the great room to remain lighted
   action:
-  - service: script.scr_great_room_motion_lighting_off
-
+    - service: script.scr_great_room_motion_lighting_off
 
 #
 # LIVING AREA PATHWAY LIGHTING MOTION INACTIVE
 #
 - id: aut_living_area_pathway_motion_inactive
-  alias: 'aut living area pathway motion inactive'
+  alias: "aut living area pathway motion inactive"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.living_area_motion
-    to: 'off'
-    for:
-      minutes: 5
+    - platform: state
+      entity_id: binary_sensor.living_area_motion
+      to: "off"
+      for:
+        minutes: 5
   action:
-  - service: script.scr_pathway_motion_lighting_off
-
+    - service: script.scr_pathway_motion_lighting_off
 
 #
 # CLOSE SUN RM SHADES BASED ON SUN ANGLE, & AZMUTH IN THE AFTERNOON IF WINDOWS CLOSED & DARK ENOUGH, ETC.
@@ -613,530 +625,519 @@
 # Assumptions:  Rear neighbor roof height is 20ft, distance from roof peak to outer sunroom edge is 30ft
 #
 - id: aut_sunrm_shades_down_afternoon
-  alias: 'aut sunroom shades down afternoon'
+  alias: "aut sunroom shades down afternoon"
   initial_state: true
   trigger:
-  - platform: numeric_state
-    entity_id: sun.sun 
-    value_template: "{{ state_attr('sun.sun', 'elevation') }}"
-    above: 14.1                                                                      # house behind blocks sun
-#    below: 58.0                                                                       # sun reaches back of sunroom couch
-    below: 32.5                                                                      # sun reaches laminate flooring creating glare
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+      above: 14.1 # house behind blocks sun
+      #    below: 58.0                                                                       # sun reaches back of sunroom couch
+      below: 32.5 # sun reaches laminate flooring creating glare
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_inhibit_shades                               # do not execute if manual inhibited
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode                       # do not execute unless Extended Absence is OFF
-      state: 'off'
-    - condition: template                                                           # check if bright enough to bother
-      value_template: >
-       {{ states('sensor.filtered_solar_tube_luminosity') | int >  
-       (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int) }}
-    - condition: numeric_state
-      entity_id: sun.sun
-      value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
-      above: 199                                                                     # estimate of when sun direction penetrates
-      below: 280                                                                     # the house through the sun room most
+      - condition: state
+        entity_id: input_boolean.inp_bool_inhibit_shades # do not execute if manual inhibited
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
+        state: "off"
+      - condition: template # check if bright enough to bother
+        value_template: >
+          {{ states('sensor.filtered_solar_tube_luminosity') | int >  
+          (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int) }}
+      - condition: numeric_state
+        entity_id: sun.sun
+        value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
+        above: 199 # estimate of when sun direction penetrates
+        below: 280 # the house through the sun room most
   action:
-  - service: script.scr_check_sunrm_windows                                          # be sure no windows are open
-  - service: script.scr_partially_close_sunrm_shades
-    data_template:
-      position: '40'                                                                 # drop shades to X% open
+    - service: script.scr_check_sunrm_windows # be sure no windows are open
+    - service: script.scr_partially_close_sunrm_shades
+      data_template:
+        position: "40" # drop shades to X% open
 
 #
 # OPEN SUN RM SHADES BASED ON SUN ALTITUDE, & AZMUTH IN THE AFTERNOON
 # Calculations based on manual simulations at suncalc.com - place locator at rear neighbor roof peak
 # Assumptions:  Rear neighbor roof height is 20ft, distance from roof peak to outer sunroom edge is 30ft
-# 
+#
 - id: aut_sunrm_shades_up_afternoon
-  alias: 'aut sunroom shades up afternoon'
+  alias: "aut sunroom shades up afternoon"
   initial_state: true
   trigger:
-  - platform: numeric_state
-    entity_id: sun.sun
-    value_template: "{{ state_attr('sun.sun', 'elevation') }}"
-    above: 0
-    below: 14.0                                                                      # house behind blocks sun
-  - platform: numeric_state
-    entity_id: sun.sun
-    value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
-    above: 204                                                                       # estimate of when sun direction penetrates
-    below: 267                                                                       # the house through the sun room most
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+      above: 0
+      below: 14.0 # house behind blocks sun
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
+      above: 204 # estimate of when sun direction penetrates
+      below: 267 # the house through the sun room most
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_inhibit_shades                               # do not execute if manuall inhibited
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode                        # do not execute unless Extended Absence is OFF
-      state: 'off'
-    - condition: time                                                                # do not execute at sunrise
-      after: '12:00:00'
-    - condition: state
-      entity_id: binary_sensor.lum_sunrm_shades_trig
-      state: 'on'
+      - condition: state
+        entity_id: input_boolean.inp_bool_inhibit_shades # do not execute if manuall inhibited
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
+        state: "off"
+      - condition: time # do not execute at sunrise
+        after: "12:00:00"
+      - condition: state
+        entity_id: binary_sensor.lum_sunrm_shades_trig
+        state: "on"
   action:
-  - service: cover.open_cover
-    entity_id: cover.sun_room_shades
-
+    - service: cover.open_cover
+      entity_id: cover.sun_room_shades
 
 #
 # CLOSE SUN RM SHADES BASED ON SUNSET OR LUMINOSITY FOR THE EVENING
 #
 - id: aut_sunrm_shades_down_evening
-  alias: 'aut sunroom shades down evening'
+  alias: "aut sunroom shades down evening"
   initial_state: true
   trigger:
-  - platform: sun
-    event: sunset
-    offset: "-00:10:00"
-  - platform: state
-    entity_id: binary_sensor.lum_sunrm_shades_trig
-    to: 'off'
-    for:
-      minutes: "{{ states('input_number.inp_num_sunrm_shades_close_low_lux_trig_delay') | int }}"
+    - platform: sun
+      event: sunset
+      offset: "-00:10:00"
+    - platform: state
+      entity_id: binary_sensor.lum_sunrm_shades_trig
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_sunrm_shades_close_low_lux_trig_delay') | int }}"
   condition:
     - condition: state
-      entity_id: input_boolean.inp_bool_inhibit_shades                               # do not execute if manuall inhibited
-      state: 'off'
+      entity_id: input_boolean.inp_bool_inhibit_shades # do not execute if manuall inhibited
+      state: "off"
   action:
-  - service: script.scr_check_sunrm_windows
-  - service: script.scr_close_sunrm_shades
-
+    - service: script.scr_check_sunrm_windows
+    - service: script.scr_close_sunrm_shades
 
 #
 # OPEN SUN RM SHADES IN THE MORNING OR BRIGHT
-# 
+#
 - id: aut_sunrm_shades_up_morningorbright
-  alias: 'aut sunroom shades up morningorbright'
+  alias: "aut sunroom shades up morningorbright"
   initial_state: true
   trigger:
-  - platform: sun
-    event: sunrise
-  - platform: state
-    entity_id: binary_sensor.lum_sunrm_shades_trig
-    to: 'on'
-    for:
-      minutes: "{{ states('input_number.inp_num_sunrm_shades_open_delay') | int }}"
+    - platform: sun
+      event: sunrise
+    - platform: state
+      entity_id: binary_sensor.lum_sunrm_shades_trig
+      to: "on"
+      for:
+        minutes: "{{ states('input_number.inp_num_sunrm_shades_open_delay') | int }}"
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_inhibit_shades                                  # do not execute if manuall inhibited
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode                           # do not execute unless Extended Absence is OFF
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_in_sunroom                                # do not execute unless Overnight Guest is OFF
-      state: 'off'
+      - condition: state
+        entity_id: input_boolean.inp_bool_inhibit_shades # do not execute if manuall inhibited
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.inp_bool_guest_in_sunroom # do not execute unless Overnight Guest is OFF
+        state: "off"
   action:
-  - service: cover.open_cover
-    entity_id: cover.sun_room_shades
-
+    - service: cover.open_cover
+      entity_id: cover.sun_room_shades
 
 #
 # PROXIMITY ARRIVAL TRIGGER
 #
 - id: aut_arrival_proximity
-  alias: 'aut arrival proximity'
+  alias: "aut arrival proximity"
   initial_state: true
-  trigger:                                                                                 # trigger on each indiv in case one is home
-  - platform: numeric_state
-    entity_id: proximity.home_ys
-    value_template: "{{ states('proximity.home_ys') | float }}"
-    below: 0.7
-  - platform: numeric_state
-    entity_id: proximity.home_kt
-    value_template: "{{ states('proximity.home_kt') | float }}"
-    below: 0.7
+  trigger: # trigger on each indiv in case one is home
+    - platform: numeric_state
+      entity_id: proximity.home_ys
+      value_template: "{{ states('proximity.home_ys') | float }}"
+      below: 0.7
+    - platform: numeric_state
+      entity_id: proximity.home_kt
+      value_template: "{{ states('proximity.home_kt') | float }}"
+      below: 0.7
   condition:
-    condition: or                                                                           # if either
+    condition: or # if either
     conditions:
-    - condition: and                                                                        # ys is !=home
-      conditions:                                                                           # and moving towards
-      - condition: template                                                                 # testing for not_home doesn't work if in a known zone
-        value_template: "{{ states('person.yang') != 'home' }}"
-      - condition: template
-        value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'towards' }}"
-    - condition: and                                                                        # kt is !=home
-      conditions:                                                                           # and moving towards
-      - condition: template                                                                 # testing for not_home doesn't work if in a known zone
-        value_template: "{{ states('person.karen') != 'home' }}"
-      - condition: template
-        value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'towards' }}"
+      - condition: and # ys is !=home
+        conditions: # and moving towards
+          - condition: template # testing for not_home doesn't work if in a known zone
+            value_template: "{{ states('person.yang') != 'home' }}"
+          - condition: template
+            value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'towards' }}"
+      - condition: and # kt is !=home
+        conditions: # and moving towards
+          - condition: template # testing for not_home doesn't work if in a known zone
+            value_template: "{{ states('person.karen') != 'home' }}"
+          - condition: template
+            value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'towards' }}"
   action:
-  - service: script.scr_front_door_lights_on
-
+    - service: script.scr_front_door_lights_on
 
 #
 # GARAGE DOORS OPEN/CLOSE TRIGGERS
 #
 - id: aut_large_garage_door_opening
-  alias: 'aut large garage door opening'
+  alias: "aut large garage door opening"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: cover.large_garage_door
-    from: 'closed'
-    to: 'open'
+    - platform: state
+      entity_id: cover.large_garage_door
+      from: "closed"
+      to: "open"
   action:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'The large garage door has opened'
-  - service: script.scr_front_door_lights_on
-  - service: script.scr_check_if_suspicious
+    - service: script.scr_say_phrase
+      data_template:
+        message: "The large garage door has opened"
+    - service: script.scr_front_door_lights_on
+    - service: script.scr_check_if_suspicious
 
 - id: aut_small_garage_door_opening
-  alias: 'aut small garage door opening'
+  alias: "aut small garage door opening"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: cover.small_garage_door
-    from: 'closed'
-    to: 'open'
+    - platform: state
+      entity_id: cover.small_garage_door
+      from: "closed"
+      to: "open"
   action:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'The small garage door has opened'
-  - service: script.scr_front_door_lights_on
-  - service: script.scr_check_if_suspicious
+    - service: script.scr_say_phrase
+      data_template:
+        message: "The small garage door has opened"
+    - service: script.scr_front_door_lights_on
+    - service: script.scr_check_if_suspicious
 
 #
 # FRONT & BACK PORCH ACTIVITY TRIGGERS
 #
 - id: aut_front_door_opening
-  alias: 'aut front door opening'
+  alias: "aut front door opening"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.front_door_opened
-    from: 'off'
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.front_door_opened
+      from: "off"
+      to: "on"
   action:
-  - service: script.scr_front_door_lights_on
+    - service: script.scr_front_door_lights_on
 
 - id: aut_back_door_opening
-  alias: 'aut back door opening'
+  alias: "aut back door opening"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.back_door_opened
-    from: 'off'
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.back_door_opened
+      from: "off"
+      to: "on"
   action:
-  - service: script.scr_back_door_lights_on
-
+    - service: script.scr_back_door_lights_on
 
 #
 # FRONT PORCH INGRESS SENSORS ACTIVITY TRIGGERS
 #
 - id: aut_frontporch_activity
-  alias: 'aut frontporch activity'
+  alias: "aut frontporch activity"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      {{ (is_state('binary_sensor.front_ent_attic_uwave', 'on')) and 
-         (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
+    - platform: template
+      value_template: >-
+        {{ (is_state('binary_sensor.front_ent_attic_uwave', 'on')) and 
+           (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
   condition:
-  - condition: template                                                           # debounce
-    value_template: >
-      {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.aut_frontporch_activity', 'last_triggered') | default(0)) | int > 14) }}
+    - condition: template # debounce
+      value_template: >
+        {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.aut_frontporch_activity', 'last_triggered') | default(0)) | int > 14) }}
   action:
-  - service: script.scr_front_door_lights_on
-  - service: script.scr_frontporch_activity
-
+    - service: script.scr_front_door_lights_on
+    - service: script.scr_frontporch_activity
 
 #
 # FRONT DOOR LIGHTS INACTIVITY & ARRIVAL TIMEOUT
 #
 - id: aut_front_door_lights_timeout
-  alias: 'aut front door light timeout'
+  alias: "aut front door light timeout"
   initial_state: true
   mode: restart
   trigger:
-  - platform: state
-    entity_id: binary_sensor.front_ent_attic_uwave
-    to: 'off'
-    for:
-      minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
-  - platform: state
-    entity_id: cover.large_garage_door
-    to: 'closed'
-    for:
-      minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
-  - platform: state
-    entity_id: cover.small_garage_door
-    to: 'closed'
-    for:
-      minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
-  - platform: state
-    entity_id: lock.front_door_lock
-    to: 'locked'
-    for:
-      minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
-  - platform: state
-    entity_id: person.yang
-    to: 'home'
-    for:
-      minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int + 5) | int }}"
-  - platform: state
-    entity_id: person.karen
-    to: 'home'
-    for:
-      minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int + 5) | int }}"
+    - platform: state
+      entity_id: binary_sensor.front_ent_attic_uwave
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+    - platform: state
+      entity_id: cover.large_garage_door
+      to: "closed"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+    - platform: state
+      entity_id: cover.small_garage_door
+      to: "closed"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+    - platform: state
+      entity_id: lock.front_door_lock
+      to: "locked"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+    - platform: state
+      entity_id: person.yang
+      to: "home"
+      for:
+        minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int + 5) | int }}"
+    - platform: state
+      entity_id: person.karen
+      to: "home"
+      for:
+        minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int + 5) | int }}"
   action:
-  - service: light.turn_off
-    entity_id: light.front_door_lights
-
+    - service: light.turn_off
+      entity_id: light.front_door_lights
 
 #
 # BACK DOOR LIGHTS INACTIVITY TIMEOUT
 #
 - id: aut_back_door_lights_timeout
-  alias: 'aut back door light timeout'
+  alias: "aut back door light timeout"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: lock.back_door_lock
-    to: 'locked'
-    for:
-      minutes: "{{ states('input_number.inp_num_back_door_lights_off_delay') | int }}"
+    - platform: state
+      entity_id: lock.back_door_lock
+      to: "locked"
+      for:
+        minutes: "{{ states('input_number.inp_num_back_door_lights_off_delay') | int }}"
   action:
-  - service: light.turn_off
-    entity_id: light.back_door_lights
-
+    - service: light.turn_off
+      entity_id: light.back_door_lights
 
 #
 # OUTDOOR LIGHTS AUTO OFF
 #
 - id: aut_outdoor_lighting_auto_off
-  alias: 'aut outdoor lighting auto off'
+  alias: "aut outdoor lighting auto off"
   initial_state: true
   trigger:
-  - platform: sun
-    event: sunrise
-    offset: '+00:10:00'
-#  - platform: template
-#    value_template: "{{ states('sensor.filtered_solar_tube_luminosity') | int > 230 }}"
-  - platform: state
-    entity_id: binary_sensor.lum_outdoor_lights_solar_trig
-    to: 'off'
+    - platform: sun
+      event: sunrise
+      offset: "+00:10:00"
+    #  - platform: template
+    #    value_template: "{{ states('sensor.filtered_solar_tube_luminosity') | int > 230 }}"
+    - platform: state
+      entity_id: binary_sensor.lum_outdoor_lights_solar_trig
+      to: "off"
   action:
-  - service: switch.turn_off
-    entity_id: group.outdoor_lights
-
+    - service: switch.turn_off
+      entity_id: group.outdoor_lights
 
 #
 # MOOD LIGHTS AUTO ON BASED ON LUMINOSITY
 #
 - id: aut_mood_lights_luminosity_auto_on
-  alias: 'aut mood lights luminosity auto on'
+  alias: "aut mood lights luminosity auto on"
   initial_state: true
   trigger:
-  - platform: sun
-    event: sunset
-    offset: '-00:30:00'
-  - platform: state
-    entity_id: binary_sensor.lum_mood_lights_f_solar_trig
-    to: 'on'
-    for:
-      minutes: 10
+    - platform: sun
+      event: sunset
+      offset: "-00:30:00"
+    - platform: state
+      entity_id: binary_sensor.lum_mood_lights_f_solar_trig
+      to: "on"
+      for:
+        minutes: 10
   condition:
-  - condition: or
-    conditions:
-    - condition: and
+    - condition: or
       conditions:
-      - condition: template
-        value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}"   # we have to do template here because there is no "not" condition
-      - condition: template
-        value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}"      # sensor broken if zero
-    - condition: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode                         # do not execute unless Extended Absence is OFF
-      state: 'off'
+        - condition: and
+          conditions:
+            - condition: template
+              value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}" # we have to do template here because there is no "not" condition
+            - condition: template
+              value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}" # sensor broken if zero
+        - condition: state
+          entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
+          state: "off"
   action:
-  - service: script.scr_mood_lighting_on                                              # use a script here because LED strips are on mood_light outlet
-
+    - service: script.scr_mood_lighting_on # use a script here because LED strips are on mood_light outlet
 
 #
 # TURN OFF MOOD LIGHTS BASED ON LUMINOSITY
 #  Note pathway lighting using mood lights is handled independently - see "pathway"
 #
 - id: aut_mood_lighting_luminosity_auto_off
-  alias: 'aut mood lighting luminosity auto off'
+  alias: "aut mood lighting luminosity auto off"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.lum_mood_lights_f_solar_trig
-    to: 'off'
-    for:
-      minutes: 10
+    - platform: state
+      entity_id: binary_sensor.lum_mood_lights_f_solar_trig
+      to: "off"
+      for:
+        minutes: 10
   condition:
-  - condition: state
-    entity_id: group.mood_lights
-    state: 'on'
+    - condition: state
+      entity_id: group.mood_lights
+      state: "on"
   action:
-  - service: homeassistant.turn_off
-    entity_id: group.mood_lights
+    - service: homeassistant.turn_off
+      entity_id: group.mood_lights
 
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
 #
 - id: auto_garage_left_open_while_home
-  alias: 'aut garage door left open while home'
+  alias: "aut garage door left open while home"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: cover.large_garage_door
-    to: 'open'
-    for:
-      minutes: 120
-  - platform: state
-    entity_id: cover.small_garage_door
-    to: 'open'
-    for:
-      minutes: 120
+    - platform: state
+      entity_id: cover.large_garage_door
+      to: "open"
+      for:
+        minutes: 120
+    - platform: state
+      entity_id: cover.small_garage_door
+      to: "open"
+      for:
+        minutes: 120
   action:
-  - service: script.scr_repeat_say_garage_open
-
+    - service: script.scr_repeat_say_garage_open
 
 #
 # AUTO DOOR LOCK ON DOOR INACTIVITY
 #
 - id: aut_auto_front_door_lock
-  alias: 'aut auto front door lock'
+  alias: "aut auto front door lock"
   initial_state: true
   trigger:
-  - platform: template                                                       # calculate time since last door open activity  & check expiration
-    value_template: >
-      {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M')) | int) - 
-      (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_opened', 'last_tripped_time')) | timestamp_local) | int))/60) | int ) > 
-      (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int) }}
-  - platform: state                                                          # cover case where unlocked, but door never opened
-    entity_id: lock.front_door_lock
-    to: 'unlocked'
-    for:
-      minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int) + 30 }}"
+    - platform: template # calculate time since last door open activity  & check expiration
+      value_template: >
+        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M')) | int) - 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_opened', 'last_tripped_time')) | timestamp_local) | int))/60) | int ) > 
+        (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int) }}
+    - platform: state # cover case where unlocked, but door never opened
+      entity_id: lock.front_door_lock
+      to: "unlocked"
+      for:
+        minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int) + 30 }}"
   condition:
-  - condition: state
-    entity_id: lock.front_door_lock
-    state: 'unlocked'                                                        # May not be unlocked if using door activity trigger
-    for:                                                                     # This check prevents immediate notification from 1st trigger
-      minutes: 2                                                             #   when last activity > delay time at boot
-  - condition: state
-    entity_id: binary_sensor.front_door_opened
-    state: 'off'                                                             # be sure door is closed
+    - condition: state
+      entity_id: lock.front_door_lock
+      state: "unlocked" # May not be unlocked if using door activity trigger
+      for: # This check prevents immediate notification from 1st trigger
+        minutes: 2 #   when last activity > delay time at boot
+    - condition: state
+      entity_id: binary_sensor.front_door_opened
+      state: "off" # be sure door is closed
   action:
-  - service: lock.lock
-    entity_id: lock.front_door_lock
-  - service: notify.pushover_yang
-    data:
-      message: 'Front door automatically locked'
-      title: 'Front door automatically locked'
+    - service: lock.lock
+      entity_id: lock.front_door_lock
+    - service: notify.pushover_yang
+      data:
+        message: "Front door automatically locked"
+        title: "Front door automatically locked"
 
 - id: aut_auto_back_door_lock
-  alias: 'aut auto back door lock'
+  alias: "aut auto back door lock"
   initial_state: true
   trigger:
-  - platform: template                                                        # calculate time since last activity & check expiration
-    value_template: >
-      {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M')) | int) - 
-      (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_opened', 'last_tripped_time')) | timestamp_local) | int))/60) | int ) > 
-      (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int) }}
-  - platform: state
-    entity_id: lock.back_door_lock
-    to: 'unlocked'
-    for:
-      minutes: "{{ (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int) + 30 }}"
-  condition: 
-  - condition: state
-    entity_id: lock.back_door_lock
-    state: 'unlocked'                                                        # may not be unlocked if using first trigger
-    for:
-      minutes: 2                                                             # this check prevents immediate notification on reboot from 1st trigger
-  - condition: state
-    entity_id: binary_sensor.back_door_opened
-    state: 'off'                                                             # be sure door is closed    
+    - platform: template # calculate time since last activity & check expiration
+      value_template: >
+        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M')) | int) - 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_opened', 'last_tripped_time')) | timestamp_local) | int))/60) | int ) > 
+        (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int) }}
+    - platform: state
+      entity_id: lock.back_door_lock
+      to: "unlocked"
+      for:
+        minutes: "{{ (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int) + 30 }}"
+  condition:
+    - condition: state
+      entity_id: lock.back_door_lock
+      state: "unlocked" # may not be unlocked if using first trigger
+      for:
+        minutes: 2 # this check prevents immediate notification on reboot from 1st trigger
+    - condition: state
+      entity_id: binary_sensor.back_door_opened
+      state: "off" # be sure door is closed
   action:
-  - service: lock.lock
-    entity_id: lock.back_door_lock
-  - service: notify.pushover_yang
-    data:
-      message: 'Back door automatically locked'
-      title: 'Back door automatically locked'
+    - service: lock.lock
+      entity_id: lock.back_door_lock
+    - service: notify.pushover_yang
+      data:
+        message: "Back door automatically locked"
+        title: "Back door automatically locked"
 
 #
 # WINDOW TRIGGERED ACTIONS
 #
 - id: aut_any_window_open
-  alias: 'aut_any_window_open'
+  alias: "aut_any_window_open"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: group.window_sensors
-    to: 'on'
-    for:
-      minutes: 2
+    - platform: state
+      entity_id: group.window_sensors
+      to: "on"
+      for:
+        minutes: 2
   action:
-#  - service: input_select.select_option
-#    entity_id: input_select.inp_sel_saved_ecobee_hvac
-#    data_template:
-#      option: "{{ states('climate.ecobee') }}"
-  - service: climate.turn_off
-    entity_id: climate.ecobee
-  - service: input_select.select_option
-    entity_id: input_select.inp_sel_saved_sunroom_hvac
-    data_template:
-      option: "{{ states('climate.sunroom_ac') }}"
-  - service: climate.turn_off
-    entity_id: climate.sunroom_ac
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'A window is open. Climate control is now turned off'
+    #  - service: input_select.select_option
+    #    entity_id: input_select.inp_sel_saved_ecobee_hvac
+    #    data_template:
+    #      option: "{{ states('climate.ecobee') }}"
+    - service: climate.turn_off
+      entity_id: climate.ecobee
+    - service: input_select.select_option
+      entity_id: input_select.inp_sel_saved_sunroom_hvac
+      data_template:
+        option: "{{ states('climate.sunroom_ac') }}"
+    - service: climate.turn_off
+      entity_id: climate.sunroom_ac
+    - service: script.scr_say_phrase
+      data_template:
+        message: "A window is open. Climate control is now turned off"
 
 - id: aut_all_windows_closed
-  alias: 'aut_all_windows_closed'
+  alias: "aut_all_windows_closed"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: group.window_sensors
-    to: 'off'
-    for:
-      minutes: 2
+    - platform: state
+      entity_id: group.window_sensors
+      to: "off"
+      for:
+        minutes: 2
   action:
-#  - service: climate.set_hvac_mode
-#    entity_id: climate.ecobee
-#    data_template:
-#      hvac_mode: "{{ states('input_select.inp_sel_saved_ecobee_hvac') }}"
-  - service: climate.turn_on
-    entity_id: climate.ecobee
-  - service: climate.set_hvac_mode
-    entity_id: climate.sunroom_ac
-    data_template:
-      hvac_mode: "{{ states('input_select.inp_sel_saved_sunroom_hvac') }}"
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'Windows are all closed. Climate control is restored'
+    #  - service: climate.set_hvac_mode
+    #    entity_id: climate.ecobee
+    #    data_template:
+    #      hvac_mode: "{{ states('input_select.inp_sel_saved_ecobee_hvac') }}"
+    - service: climate.turn_on
+      entity_id: climate.ecobee
+    - service: climate.set_hvac_mode
+      entity_id: climate.sunroom_ac
+      data_template:
+        hvac_mode: "{{ states('input_select.inp_sel_saved_sunroom_hvac') }}"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "Windows are all closed. Climate control is restored"
 
 #
 # MASTER BEDROOM FAN AUTOMATION
 #
 - id: aut_master_bedroom_fan_trig_on
-  alias: 'aut master bedroom fan trig on'
+  alias: "aut master bedroom fan trig on"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      "{{ (states('sensor.10m_avg_master_bedroom_temperature') | float > states('input_number.masterbdrm_on_temp') | float ) }}"
+    - platform: template
+      value_template: >-
+        "{{ (states('sensor.10m_avg_master_bedroom_temperature') | float > states('input_number.masterbdrm_on_temp') | float ) }}"
   condition:
     condition: state
     entity_id: light.master_bedroom_fan
-    state: 'off'
+    state: "off"
   action:
     service: light.turn_on
     data:
@@ -1144,16 +1145,16 @@
       brightness_pct: 30
 
 - id: aut_master_bedroom_fan_trig_off
-  alias: 'aut master bedroom fan trig off'
+  alias: "aut master bedroom fan trig off"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >-
-      "{{ (states('sensor.10m_avg_master_bedroom_temperature') | float < states('input_number.masterbdrm_off_temp') | float ) }}"
+    - platform: template
+      value_template: >-
+        "{{ (states('sensor.10m_avg_master_bedroom_temperature') | float < states('input_number.masterbdrm_off_temp') | float ) }}"
   condition:
     condition: state
     entity_id: light.master_bedroom_fan
-    state: 'on'
+    state: "on"
   action:
     service: light.turn_off
     entity_id: light.master_bedroom_fan
@@ -1162,378 +1163,373 @@
 # NOBODY HOME ACTIONS
 #
 - id: aut_home_departure
-  alias: 'aut home departure'
+  alias: "aut home departure"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >
-      {{ (states('proximity.home_ys') | float > 0.8) and
-         (states('proximity.home_kt') | float > 0.8) }}
+    - platform: template
+      value_template: >
+        {{ (states('proximity.home_ys') | float > 0.8) and
+           (states('proximity.home_kt') | float > 0.8) }}
   condition:
     condition: or
     conditions:
-    - condition: template
-      value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
-    - condition: template
-      value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'away_from' }}"
+      - condition: template
+        value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
+      - condition: template
+        value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'away_from' }}"
   action:
-  - service: script.scr_nobody_home
-  - service: script.scr_check_garage_open
-
+    - service: script.scr_nobody_home
+    - service: script.scr_check_garage_open
 
 #
 # HOME ARRIVAL/DEPARTURE ANNOUNCEMENTS
 #
 - id: aut_arrival_announcement
-  alias: 'aut arrival announcement'
+  alias: "aut arrival announcement"
   initial_state: true
   mode: queued
-  trigger:                                                                            # either trigger will fire the automation (logical OR)
-  - platform: state
-    entity_id: person.yang
-    to: 'home'
-    for:
-      seconds: 20
-  - platform: state
-    entity_id: person.karen
-    to: 'home'
-    for:
-      seconds: 20
-  condition:                                                                          # this prevents immediate triggering after startup
+  trigger: # either trigger will fire the automation (logical OR)
+    - platform: state
+      entity_id: person.yang
+      to: "home"
+      for:
+        seconds: 20
+    - platform: state
+      entity_id: person.karen
+      to: "home"
+      for:
+        seconds: 20
+  condition: # this prevents immediate triggering after startup
     - condition: numeric_state
       entity_id: sensor.uptime
-      above: 0.10                                                                     # in hours as defined in sensors.yaml for uptime units
+      above: 0.10 # in hours as defined in sensors.yaml for uptime units
   action:
-  - service: script.scr_arrival_announcement
-    data_template:
-      person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
+    - service: script.scr_arrival_announcement
+      data_template:
+        person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
 
 - id: aut_departure_announcement
-  alias: 'aut departure announcement'
+  alias: "aut departure announcement"
   initial_state: true
   mode: queued
-  trigger:                                                                            # either trigger will fire the automation (logical OR)
-  - platform: state
-    entity_id: person.yang
-    from: home
-#    to: not_home
-  - platform: state
-    entity_id: person.karen
-    from: home
-#    to: not_home
+  trigger: # either trigger will fire the automation (logical OR)
+    - platform: state
+      entity_id: person.yang
+      from: home
+    #    to: not_home
+    - platform: state
+      entity_id: person.karen
+      from: home
+  #    to: not_home
   action:
-  - service: script.scr_departure_announcement
-    data_template:
-      person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
-
+    - service: script.scr_departure_announcement
+      data_template:
+        person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
 
 #
 # CONDITIONS REQUIRING ATTENTION
 #
 - id: aut_longmeadow_temperature_out_of_range
-  alias: 'aut longmeadow temperature out of range'
+  alias: "aut longmeadow temperature out of range"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >
-      {{ (states('sensor.longmeadow1_temperature') | float < 50.0) and
-         (states('sensor.longmeadow2_temperature') | float < 50.0) }}
+    - platform: template
+      value_template: >
+        {{ (states('sensor.longmeadow1_temperature') | float < 50.0) and
+           (states('sensor.longmeadow2_temperature') | float < 50.0) }}
   action:
-  - service: notify.gmail_to_yang
-    data_template:
-      title: "Longmeadow temperature out of range"
-      message: "Longmeadow temperature out of range: {{ states('sensor.longmeadow2_temperature') }}"
-  - service: notify.pushover_yang
-    data:
-      message: "Longmeadow temperature out of range: {{ states('sensor.longmeadow2_temperature') }}"
-      title: "Longmeadow temperature out of range"
-      
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "Longmeadow temperature out of range"
+        message: "Longmeadow temperature out of range: {{ states('sensor.longmeadow2_temperature') }}"
+    - service: notify.pushover_yang
+      data:
+        message: "Longmeadow temperature out of range: {{ states('sensor.longmeadow2_temperature') }}"
+        title: "Longmeadow temperature out of range"
+
 - id: aut_rack_exhaust_fan_fault
-  alias: 'aut rack exhaust fan fault'
+  alias: "aut rack exhaust fan fault"
   initial_state: true
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.filtered_rack_exhaust_fan_speed
-    below: 550
-    for: "00:00:10"
+    - platform: numeric_state
+      entity_id: sensor.filtered_rack_exhaust_fan_speed
+      below: 550
+      for: "00:00:10"
   action:
-  - service: notify.gmail_to_yang
-    data_template:
-      title: "Rack exhaust fan fault"
-      message: "Rack exhaust fan fault: Currently {{ states('sensor.filtered_rack_exhaust_fan_speed') }} RPM"
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "Rack exhaust fan fault"
+        message: "Rack exhaust fan fault: Currently {{ states('sensor.filtered_rack_exhaust_fan_speed') }} RPM"
 
 - id: aut_low_battery_notification
-  alias: 'aut low battery notification'
+  alias: "aut low battery notification"
   initial_state: true
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.front_door_lock_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.back_door_lock_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.living_area_motion_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sunrm_window_1_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sunrm_window_2_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sunrm_window_3_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sunrm_window_4_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.front_door_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.back_door_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.garagehouse_door_opened_battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.refrig_power           # leak detector battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.disw_power             # leak detector battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.washer_power           # leak detector battery
-    below: 30
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sun_room_remote_1_battery
-    below: 25                                # lower threshhold since battery affected by outside temp
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sun_room_remote_2_battery
-    below: 25                                # lower threshhold since battery affected by outside temp
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sun_room_remote_3_battery
-    below: 25                                # lower threshhold since battery affected by outside temp
-    for: "00:30:00"
-  - platform: numeric_state
-    entity_id: sensor.sun_room_remote_4_battery
-    below: 25                                # lower threshhold since battery affected by outside temp
-    for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.front_door_lock_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.back_door_lock_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.living_area_motion_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sunrm_window_1_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sunrm_window_2_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sunrm_window_3_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sunrm_window_4_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.front_door_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.back_door_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.garagehouse_door_opened_battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.refrig_power # leak detector battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.disw_power # leak detector battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.washer_power # leak detector battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sun_room_remote_1_battery
+      below: 25 # lower threshhold since battery affected by outside temp
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sun_room_remote_2_battery
+      below: 25 # lower threshhold since battery affected by outside temp
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sun_room_remote_3_battery
+      below: 25 # lower threshhold since battery affected by outside temp
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.sun_room_remote_4_battery
+      below: 25 # lower threshhold since battery affected by outside temp
+      for: "00:30:00"
   action:
-  - service: notify.gmail_to_yang
-    data_template:
-      title: "Low batteries: {{ trigger.entity_id }}"
-      message: "Low batteries: {{ trigger.entity_id }}  {{ states(trigger.entity_id) }}%"
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "Low batteries: {{ trigger.entity_id }}"
+        message: "Low batteries: {{ trigger.entity_id }}  {{ states(trigger.entity_id) }}%"
 
 #
 # SOFTWARE UPDATE NOTIFICATION
 #
 - id: aut_software_update_available
-  alias: 'aut software update available'
+  alias: "aut software update available"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: binary_sensor.updater
-    from: 'off'
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.updater
+      from: "off"
+      to: "on"
   action:
-  - service: notify.gmail_to_yang
-    data_template:
-      message: | 
-        'Home Assistant {{state_attr("binary_sensor.updater", "newest_version")}} is now available.
-         You are on version {{states("sensor.current_version")}}.
-         See https://github.com/home-assistant/home-assistant/releases'
-
+    - service: notify.gmail_to_yang
+      data_template:
+        message: |
+          'Home Assistant {{state_attr("binary_sensor.updater", "newest_version")}} is now available.
+           You are on version {{states("sensor.current_version")}}.
+           See https://github.com/home-assistant/home-assistant/releases'
 
 #####################################
 #        Security automations       #
 #####################################
 
 #
-# EXTENDED ABSENCE 
+# EXTENDED ABSENCE
 #
 - id: aut_extended_absence_manual_on
-  alias: 'aut extended absence manual on'
+  alias: "aut extended absence manual on"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_extended_absence_mode 
-    from: 'off'
-    to: 'on'
+    - platform: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      from: "off"
+      to: "on"
   condition:
     condition: and
     conditions:
-    - condition: state                                                                  # only bother if currently OFF
-      entity_id: input_boolean.inp_bool_extended_absence_mode
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode                                      # do not execute unless Overnight Guest is OFF
-      state: 'off'                                                                      # in case we have a guest while we are gone
+      - condition: state # only bother if currently OFF
+        entity_id: input_boolean.inp_bool_extended_absence_mode
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
+        state: "off" # in case we have a guest while we are gone
   action:
-  - service: script.scr_shared_extended_absence_on
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'Extended absence mode manually enabled'
-  - service: notify.gmail_to_yang
-    data:
-      message: 'Extended absence mode manually enabled'
+    - service: script.scr_shared_extended_absence_on
+    - service: script.scr_say_phrase
+      data_template:
+        message: "Extended absence mode manually enabled"
+    - service: notify.gmail_to_yang
+      data:
+        message: "Extended absence mode manually enabled"
 
 - id: aut_extended_absence_auto_on
-  alias: 'aut extended absence auto on'
+  alias: "aut extended absence auto on"
   initial_state: true
   trigger:
-  - platform: template                                                                  # distance is in miles - BOTH must be > this distance away
-    value_template: >
-      {{ (states('proximity.home_ys') | float > 100) and
-         (states('proximity.home_kt') | float > 100) }}
-  - platform: template                                                                  # OR....BOTH gone for > 24 hrs
-    value_template: "{{ states('group.where_are_yskt') != 'home' }}"
-    for: '23:59:00'
+    - platform: template # distance is in miles - BOTH must be > this distance away
+      value_template: >
+        {{ (states('proximity.home_ys') | float > 100) and
+           (states('proximity.home_kt') | float > 100) }}
+    - platform: template # OR....BOTH gone for > 24 hrs
+      value_template: "{{ states('group.where_are_yskt') != 'home' }}"
+      for: "23:59:00"
   condition:
     condition: and
     conditions:
-    - condition: state                                                                  # only bother if currently OFF
-      entity_id: input_boolean.inp_bool_extended_absence_mode
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode                                      # do not execute unless Overnight Guest is OFF
-      state: 'off'                                                                      # in case we have a guest while we are gone
-    - condition: template                                                               # this is in case proximity is screwed up
-      value_template: "{{ states('group.where_are_yskt') != 'home' }}"
+      - condition: state # only bother if currently OFF
+        entity_id: input_boolean.inp_bool_extended_absence_mode
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
+        state: "off" # in case we have a guest while we are gone
+      - condition: template # this is in case proximity is screwed up
+        value_template: "{{ states('group.where_are_yskt') != 'home' }}"
   action:
-  - service: script.scr_shared_extended_absence_on
-  - service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_extended_absence_mode
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'Extended absence mode automatically enabled'
-  - service: notify.pushover_yangandkaren
-    data:
-      message: 'Extended absence mode automatically enabled'
-      title: 'Home Assistant Alert'
-  - service: notify.gmail_to_yang
-    data:
-      message: 'Extended absence mode automatically enabled'
+    - service: script.scr_shared_extended_absence_on
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+    - service: script.scr_say_phrase
+      data_template:
+        message: "Extended absence mode automatically enabled"
+    - service: notify.pushover_yangandkaren
+      data:
+        message: "Extended absence mode automatically enabled"
+        title: "Home Assistant Alert"
+    - service: notify.gmail_to_yang
+      data:
+        message: "Extended absence mode automatically enabled"
 
 - id: aut_extended_absence_auto_off
-  alias: 'aut extended absence auto off'
+  alias: "aut extended absence auto off"
   initial_state: true
   trigger:
-  - platform: numeric_state
-    entity_id: proximity.home_ys
-    value_template: "{{ states('proximity.home_ys') | float }}" 
-    below: 30                                                                        # distance is in miles
-    for:
-      minutes: 10
-  - platform: numeric_state
-    entity_id: proximity.home_kt
-    value_template: "{{ states('proximity.home_kt') | float }}" 
-    below: 30                                                                        # distance is in miles
-    for:
-      minutes: 10
-  - platform: state
-    entity_id: group.whereis_kt
-    to: 'home'
-  - platform: state
-    entity_id: group.whereis_ys
-    to: 'home'
+    - platform: numeric_state
+      entity_id: proximity.home_ys
+      value_template: "{{ states('proximity.home_ys') | float }}"
+      below: 30 # distance is in miles
+      for:
+        minutes: 10
+    - platform: numeric_state
+      entity_id: proximity.home_kt
+      value_template: "{{ states('proximity.home_kt') | float }}"
+      below: 30 # distance is in miles
+      for:
+        minutes: 10
+    - platform: state
+      entity_id: group.whereis_kt
+      to: "home"
+    - platform: state
+      entity_id: group.whereis_ys
+      to: "home"
   condition:
-    - condition: state                                                               # only bother if currently ON
+    - condition: state # only bother if currently ON
       entity_id: input_boolean.inp_bool_extended_absence_mode
-      state: 'on'
+      state: "on"
   action:
-  - service: input_boolean.turn_off                                                  # This action triggers aut_extended_absence_off
-    entity_id: input_boolean.inp_bool_extended_absence_mode                          # since it is triggered by on-to-off input_boolen change
-  - service: notify.pushover_yangandkaren
-    data:
-      title: 'Extended absence mode has been disabled'
-      message: 'Home Assistant: Extended absence mode automatically disabled'
+    - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
+      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "Extended absence mode has been disabled"
+        message: "Home Assistant: Extended absence mode automatically disabled"
 
 - id: aut_extended_absence_off
-  alias: 'aut extended absence off'
+  alias: "aut extended absence off"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_extended_absence_mode 
-    from: 'on'
-    to: 'off'
+    - platform: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      from: "on"
+      to: "off"
   action:
-  - service: switch.turn_on
-    entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'Extended absence mode disabled'
-  - service: notify.gmail_to_yang
-    data:
-      title: 'Home Assistant: Extended Absence Mode disabled'
-      message: 'Extended absence mode disabled'
-  - service: notify.pushover_yangandkaren
-    data:
-      title: 'Extended absence mode has been disabled'
-      message: 'Home Assistant: Extended absence mode disabled'
-
+    - service: switch.turn_on
+      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+    - service: script.scr_say_phrase
+      data_template:
+        message: "Extended absence mode disabled"
+    - service: notify.gmail_to_yang
+      data:
+        title: "Home Assistant: Extended Absence Mode disabled"
+        message: "Extended absence mode disabled"
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "Extended absence mode has been disabled"
+        message: "Home Assistant: Extended absence mode disabled"
 
 #
 # Simulate home occupied in evening if Extended Absence Mode is ON
 #
 - id: aut_security_occupied_sim
-  alias: 'aut security occupied sim'
+  alias: "aut security occupied sim"
   initial_state: true
   trigger:
-  - platform: time
-    at: '20:00:00'
+    - platform: time
+      at: "20:00:00"
   condition:
-  - condition: state
-    entity_id: input_boolean.inp_bool_extended_absence_mode
-    state: 'on'
+    - condition: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      state: "on"
   action:
-  - service: script.scr_occupied_sim
+    - service: script.scr_occupied_sim
 
 #
 # Theater mode
 #
 - id: aut_theater_mode_on
-  alias: 'aut theater mode on'
+  alias: "aut theater mode on"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_theater_mode
-    from: 'off'
-    to: 'on'
+    - platform: state
+      entity_id: input_boolean.inp_bool_theater_mode
+      from: "off"
+      to: "on"
   action:
-  - service: scene.turn_on
-    entity_id: scene.living_room_theater_mode
+    - service: scene.turn_on
+      entity_id: scene.living_room_theater_mode
 
 - id: aut_theater_mode_off
-  alias: 'aut theater mode off'
+  alias: "aut theater mode off"
   initial_state: true
   trigger:
-  - platform: state
-    entity_id: input_boolean.inp_bool_theater_mode
-    from: 'on'
-    to: 'off'
-  - platform: state
-    entity_id: media_player.samsung_samsung_dtr_rcr
-    to: 'off'
+    - platform: state
+      entity_id: input_boolean.inp_bool_theater_mode
+      from: "on"
+      to: "off"
+    - platform: state
+      entity_id: media_player.samsung_samsung_dtr_rcr
+      to: "off"
   action:
-  - service: scene.turn_on
-    entity_id: scene.living_room_normal_mode
-
+    - service: scene.turn_on
+      entity_id: scene.living_room_normal_mode
 
 #################################
 #                               #
@@ -1545,21 +1541,20 @@
 # PROXIMITY TESTING
 #
 - id: aut_half_mile_departure
-  alias: 'aut half maile departure'
+  alias: "aut half maile departure"
   initial_state: true
   trigger:
-  - platform: template
-    value_template: >
-      {{ (states('proximity.home_ys') | float > 0.5) }}
+    - platform: template
+      value_template: >
+        {{ (states('proximity.home_ys') | float > 0.5) }}
   condition:
-  - condition: state                                                                # only notify if test switch is ON
-    entity_id: input_boolean.inp_bool_half_mi_trig_test
-    state: 'on'
-  - condition: template
-    value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
+    - condition: state # only notify if test switch is ON
+      entity_id: input_boolean.inp_bool_half_mi_trig_test
+      state: "on"
+    - condition: template
+      value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
   action:
-  - service: notify.pushover_yang
-    data:
-      title: 'Half mile trigger'
-      message: 'Half mile exceeded'
-
+    - service: notify.pushover_yang
+      data:
+        title: "Half mile trigger"
+        message: "Half mile exceeded"
