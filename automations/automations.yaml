@@ -331,6 +331,8 @@
         - binary_sensor.leak_dishw
         - binary_sensor.leak_washer
         - binary_sensor.leak_water_heater
+      from: "off"
+      to: "on"
   action:
     - service: switch.turn_off
       entity_id: switch.water_valve
@@ -406,6 +408,10 @@
     - service: script.scr_say_phrase
       data_template:
         message: "House water is off.  Turn on manually when leak is resolved."
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "House water turned OFF"
+        message: "House water is OFF.  Turn on manually when leak is resolved."
 
 #
 # WASHER DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
