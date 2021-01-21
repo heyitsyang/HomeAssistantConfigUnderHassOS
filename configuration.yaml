@@ -5,7 +5,7 @@ homeassistant:
   name: Norcoose                        # Name where Home Assistant is running
   latitude: !secret latitude            # Location for sun rises and set calc
   longitude: !secret longitude
-  elevation: 23.331024169899997         # (meters) needed for weather/sunrise functions
+  elevation: 23                         # (meters) needed for weather/sunrise functions
   unit_system: imperial                 # 'metric' for Metric, 'imperial' for Imperial
   time_zone: America/New_York           # google "List of TZ database time zones"
   external_url: !secret external_url
