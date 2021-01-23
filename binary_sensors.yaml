@@ -1,9 +1,9 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
 
-  #######################
-  ### BINARY SENSORS  ###
-  #######################
+#######################
+### BINARY SENSORS  ###
+#######################
 
 #  - platform: hikvision
 #    host: video-doorbell.shencentral.net
@@ -32,16 +32,16 @@
 #
 # WASHING MACHINE
 #
-  - platform: template
-    sensors:
-      washer_on_or_off:                            # since this is a binary sensor, we only have to determine true/false
-        friendly_name: "Washer ON/OFF sensor"
-        delay_on:
-          seconds: 30
-        delay_off:
-          seconds: 30
-        value_template: >-
-          {{ states('sensor.washer_energy_current') | float > 0.05 }}
+- platform: template
+  sensors:
+    washer_on_or_off: # since this is a binary sensor, we only have to determine true/false
+      friendly_name: "Washer ON/OFF sensor"
+      delay_on:
+        seconds: 30
+      delay_off:
+        seconds: 30
+      value_template: >-
+        {{ states('sensor.washer_energy_current') | float > 0.05 }}
 
 #
 # LUMINOSITY TRIGGERS - Consolidated as binary template sensors here so trigger values are in one place for automations & scripts #
@@ -51,79 +51,100 @@
 #   Some triggers have a ON value and an offset OFF value which prevents them as being implemented directly as a binary sensor,   #
 #   hence the need to use an input_boolean                                                                                        #
 #
-  - platform: template
-    sensors:
-      lum_outdoor_lights_solar_trig:
-        friendly_name: "Outdoor lights on/off per solar sensor"                      # sync as closely with post light as possible
-        value_template: >-
-          {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
-  
-      lum_lvrm_lights_indoor_trig:
-        friendly_name: "LvRm lights on/off per indoor sensor"
-        value_template: >-
-          {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
-          
-      lum_mood_lights_f_solar_trig:
-        friendly_name: "Mood lights on/off per f_solar sensor"
-        value_template: >-
-          {{ is_state('input_boolean.inp_bool_lum_mood_lights_f_solar_trig','on') }}
-  
-      lum_sunrm_shades_trig:
-        friendly_name: "Sunroom shades open per solar sensor"
-        value_template: >-
-          {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
+- platform: template
+  sensors:
+    lum_outdoor_lights_solar_trig:
+      friendly_name: "Outdoor lights on/off per solar sensor" # sync as closely with post light as possible
+      value_template: >-
+        {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
 
+    lum_lvrm_lights_indoor_trig:
+      friendly_name: "LvRm lights on/off per indoor sensor"
+      value_template: >-
+        {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
+
+    lum_mood_lights_f_solar_trig:
+      friendly_name: "Mood lights on/off per f_solar sensor"
+      value_template: >-
+        {{ is_state('input_boolean.inp_bool_lum_mood_lights_f_solar_trig','on') }}
+
+    lum_sunrm_shades_trig:
+      friendly_name: "Sunroom shades open per solar sensor"
+      value_template: >-
+        {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
 
 #
 # MQTT
 #
 
-  - platform: mqtt
-    unique_id: water_spt_data_ready
-    name: "SPT Data Ready"
-    state_topic: "watermain/spt_data_ready"
-    payload_on: "1"
-    payload_off: "0"
-    qos: 0
+- platform: mqtt
+  unique_id: water_spt_data_ready
+  name: "SPT Data Ready"
+  state_topic: "watermain/spt_data_ready"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
 
-  - platform: mqtt
-    unique_id: utilitycloset_airhandler
-    name: "Air Handler"
-    state_topic: "utilitycloset/airhandler/State"
-    payload_on: "1"
-    payload_off: "0"
-    qos: 0
-  
-  - platform: mqtt
-    unique_id: utilitycloset_waterheater
-    name: "Water Heater"
-    state_topic: "utilitycloset/waterheater/State"
-    payload_on: "1"
-    payload_off: "0"
-    qos: 0
+- platform: mqtt
+  unique_id: utilitycloset_airhandler
+  name: "Air Handler"
+  state_topic: "utilitycloset/airhandler/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
 
-  - platform: mqtt
-    unique_id: utilitycloset_leakdetector
-    name: "Leak Water Heater"
-    state_topic: "utilitycloset/leakdetector/State"
-    payload_on: "1"
-    payload_off: "0"
-    qos: 0  
-  
-  - platform: mqtt
-    name: "Front Ent Attic uWave"
-    unique_id: front_ent_attic_uwave
-    state_topic: "frontentrance/FrontEntAtticuWave/State"
-    payload_on: "1"
-    payload_off: "0"
-    qos: 0
+- platform: mqtt
+  unique_id: utilitycloset_waterheater
+  name: "Water Heater"
+  state_topic: "utilitycloset/waterheater/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
 
-  - platform: mqtt
-    name: "Front Ent Soffit uWave"
-    unique_id: front_ent_soffit_uwave
-    state_topic: "frontentrance/FrontEntSoffituWave/State"
-    payload_on: "1"
-    payload_off: "0"
-    qos: 0
+- platform: mqtt
+  unique_id: utilitycloset_leakdetector
+  name: "Leak Water Heater"
+  state_topic: "utilitycloset/leakdetector/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
 
+- platform: mqtt
+  unique_id: refrigerator_leak
+  name: "Leak Refrigerator"
+  state_topic: "refrigeratorleak/leakdetector/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
 
+- platform: mqtt
+  unique_id: dishwasher_leak
+  name: "Leak Dishwasher"
+  state_topic: "utilitycloset/dishwasher_leak/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
+
+- platform: mqtt
+  unique_id: kitchen_sink_leak
+  name: "Leak Kitchen Sink"
+  state_topic: "utilitycloset/kitchen_sink_leak/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
+
+- platform: mqtt
+  name: "Front Ent Attic uWave"
+  unique_id: front_ent_attic_uwave
+  state_topic: "frontentrance/FrontEntAtticuWave/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
+
+- platform: mqtt
+  name: "Front Ent Soffit uWave"
+  unique_id: front_ent_soffit_uwave
+  state_topic: "frontentrance/FrontEntSoffituWave/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
