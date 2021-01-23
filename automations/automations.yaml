@@ -327,8 +327,9 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.leak_refrig
-        - binary_sensor.leak_dishw
+        - binary_sensor.leak_refrigerator
+        - binary_sensor.leak_dishwasher
+        - binary_sensor.leak_kitchen_sink
         - binary_sensor.leak_washer
         - binary_sensor.leak_water_heater
       from: "off"
@@ -336,75 +337,18 @@
   action:
     - service: switch.turn_off
       entity_id: switch.water_valve
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.leak_refrig
-              state: "on"
-          sequence:
-            repeat:
-              count: 5
-              sequence:
-                - service: script.scr_say_phrase
-                  data_template:
-                    message: "Water Leak detected at the refrigerator"
-                - service: notify.pushover_yangandkaren
-                  data:
-                    title: "Water leak detected at the refrigerator"
-                    message: "Water leak detected at the refrigerator"
-                - delay:
-                    minutes: 1
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.leak_dishw
-              state: "on"
-          sequence:
-            repeat:
-              count: 5
-              sequence:
-                - service: script.scr_say_phrase
-                  data_template:
-                    message: "Water Leak detected at the dish washer"
-                - service: notify.pushover_yangandkaren
-                  data:
-                    title: "Water leak detected at the dish washer"
-                    message: "Water leak detected at the dish washer"
-                - delay:
-                    minutes: 1
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.leak_washer
-              state: "on"
-          sequence:
-            repeat:
-              count: 5
-              sequence:
-                - service: script.scr_say_phrase
-                  data_template:
-                    message: "Water Leak detected at the washer"
-                - service: notify.pushover_yangandkaren
-                  data:
-                    title: "Water leak detected at the washer"
-                    message: "Water leak detected at the washer"
-                - delay:
-                    minutes: 1
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.leak_water_heater
-              state: "on"
-          sequence:
-            repeat:
-              count: 5
-              sequence:
-                - service: script.scr_say_phrase
-                  data_template:
-                    message: "Water Leak detected at the water heater"
-                - service: notify.pushover_yangandkaren
-                  data:
-                    title: "Water leak detected at the water heater"
-                    message: "Water leak detected at the water heater"
-                - delay:
-                    minutes: 1
+    - repeat:
+        count: 5
+        sequence:
+          - service: script.scr_say_phrase
+            data_template:
+              message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+          - service: notify.pushover_yangandkaren
+            data:
+              title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+              message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+          - delay:
+              minutes: 1
     - service: script.scr_say_phrase
       data_template:
         message: "House water is off.  Turn on manually when leak is resolved."
@@ -1312,7 +1256,7 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.refrig_power # leak detector battery
+      entity_id: sensor.refrigerator_power # leak detector battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state
