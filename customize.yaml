@@ -152,6 +152,10 @@ sensor.raw_living_rm_infrared_light:
   icon: mdi:brightness-6
 binary_sensor.leak_water_heater:
   device_class: moisture
+binary_sensor.leak_dishwasher:
+  device_class: moisture
+binary_sensor.leak_kitchen_sink:
+  device_class: moisture
 binary_sensor.front_door_opened:
   friendly_name: Front Door
   icon: mdi:door
