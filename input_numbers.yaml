@@ -112,7 +112,7 @@ inp_num_sunrm_shades_close_low_lux_trig_delay:                 # original value 
 inp_num_spt_duration:
   name: "SPT Duration"
   mode: slider
-  min: 5
+  min: 1
   max: 30
   icon: mdi:camera-timer
   unit_of_measurement: minutes
