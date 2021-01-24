@@ -36,9 +36,11 @@ switch.lg_garage_opener_power:
   icon: mdi:toggle-switch
 cover.large_garage_door:
   friendly_name: Large Garage Door
+  device_class: garage_door
   icon: mdi:garage
 cover.small_garage_door:
   friendly_name: Small Garage Door
+  device_class: garage_door
   icon: mdi:garage
 cover.sun_room_shades:
   friendly_name: All Sun Room Shades
@@ -156,26 +158,35 @@ binary_sensor.leak_dishwasher:
   device_class: moisture
 binary_sensor.leak_kitchen_sink:
   device_class: moisture
+binary_sensor.leak_laundry:
+  device_class: moisture
 binary_sensor.front_door_opened:
   friendly_name: Front Door
+  device_class: door
   icon: mdi:door
 binary_sensor.back_door_opened:
   friendly_name: Back Door
+  device_class: door
   icon: mdi:door
 binary_sensor.garagehouse_door_opened:
   friendly_name: Garage-House Door
+  device_class: door
   icon: mdi:door
 binary_sensor.sunrm_window_1_opened:
   friendly_name: Sun Room Window 1
+  device_class: opening
   icon: mdi:window-closed
 binary_sensor.sunrm_window_2_opened:
   friendly_name: Sun Room Window 2
+  device_class: opening
   icon: mdi:window-closed
 binary_sensor.sunrm_window_3_opened:
   friendly_name: Sun Room Window 3
+  device_class: opening
   icon: mdi:window-closed
 binary_sensor.sunrm_window_4_opened:
   friendly_name: Sun Room Window 4
+  device_class: opening
   icon: mdi:window-closed
 climate.sunrm_ac:
   friendly_name: Sunroom
@@ -252,3 +263,7 @@ sensor.nas_cpu_fan_status:
   icon: mdi:memory
 sensor.nas_system_fan_status:
   icon: mdi:tailwind
+group.door_sensors:
+  device_class: door
+group.garage_door_status:
+  device_class: garage_door
