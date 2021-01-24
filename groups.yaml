@@ -108,16 +108,16 @@ graphs:
   - history_graph.announcements
   - history_graph.sleeping
 
-misc:
-  name: 'Misc Info'
-  icon: mdi:file-question
-  entities:
-  - group.system_res
-  - group.norcoose_sensors
-  - group.longmeadow_sensors
-  - group.netgear_trackers
-  - group.bt_presence
-  - group.proximity_measurements
+#  misc:
+#  name: 'Misc Info'
+#  icon: mdi:file-question
+#  entities:
+#  - group.system_res
+#  - group.norcoose_sensors
+#  - group.longmeadow_sensors
+#  - group.netgear_trackers
+#  - group.bt_presence
+#  - group.proximity_measurements
 
 developmental:
   name: "Developmental"
