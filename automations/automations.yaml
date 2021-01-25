@@ -368,6 +368,8 @@
             data:
               title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
               message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+              data:
+                priority: 1        
           - delay:
               minutes: 1
     - service: script.scr_say_phrase

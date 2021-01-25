@@ -65,7 +65,7 @@ scr_nobody_home:
     data_template:
       message: 'I feel so empty inside when my people are away.'
   - condition: state
-    entity_id: input_boolean.inp_bool_guest_mode                            # do not execute remainder unless Overnight Guest is OFF
+    entity_id: input_boolean.inp_bool_guest_mode                                # do not execute remainder unless Overnight Guest is OFF
     state: 'off' 
   - service: lock.lock
     entity_id: lock.front_door_lock, lock.back_door_lock
@@ -95,7 +95,7 @@ scr_arrival_announcement:
     data_template:
       message: 'Hi {{ person }}, welcome home.'
   - condition: state
-    entity_id: input_boolean.inp_bool_visitor_while_out_flag                          # do not execute remaining unless flag is ON 
+    entity_id: input_boolean.inp_bool_visitor_while_out_flag                    # do not execute remaining unless flag is ON 
     state: 'on'
   - service: script.scr_say_phrase
     data_template:
