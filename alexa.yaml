@@ -16,6 +16,7 @@ smart_home:
   filter:
     include_entities:
       - switch.hamstation
+      - switch.water_valve
       - input_boolean.inp_bool_theater_mode
       - input_boolean.inp_bool_guest_mode
       - input_boolean.inp_bool_sleeping
@@ -51,27 +52,35 @@ smart_home:
       name: "Guest mode"
     script.scr_reset_mood_lights_to_default:
       name: "Reset mood lights"
+      display_categories: LIGHT
     script.scr_goodnight:
       name: "Goodnight Script"
     script.scr_vacuum_start_custom_cleaning:
       name: "Rosie"
-      display_categories: "VACUUM"
+      display_categories: "VACUUM_CLEANER"
     input_boolean.inp_bool_announcements:
       name: "Announcements"
     cover.large_garage_door:
       name: "Large Garage Door"
+      display_categories: GARAGE_DOOR
     cover.small_garage_door:
       name: "Small Garage Door"
+      display_categories: GARAGE_DOOR
     cover.garage_doors:
       name: "Garage doors"
+      display_categories: GARAGE_DOOR
     cover.sun_room_shade_1:
       name: "Shade 1"
+      display_categories: INTERIOR_BLIND
     cover.sun_room_shade_2:
       name: "Shade 2"
+      display_categories: INTERIOR_BLIND
     cover.sun_room_shade_3:
       name: "Shade 3"
+      display_categories: INTERIOR_BLIND
     cover.sun_room_shade_4:
       name: "Shade 4"
+      display_categories: INTERIOR_BLIND
     cover.sun_room_shades:
       name: "Shades"
       display_categories: INTERIOR_BLIND
