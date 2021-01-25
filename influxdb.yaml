@@ -1,17 +1,17 @@
-#################################################
-##                                             ##
-## recorder.yaml - what to put in the database ##
-## if you care about:                          ##
-##     - states between reboots                ##
-##     - history data                          ##
-##                                             ##
-#################################################
+#
+# INFLUX DB
+#
 
-
-purge_keep_days: 10                    # how many days of history to keep
+host: a0d7b954-influxdb
+port: 8086
+database: homeassistant
+username: homeassistant
+password: !secret influxdb_pwd
+max_retries: 3
+default_measurement: state
 
 #
-# INCLUDES & EXCLUDES ARE SAME AS influxdb.yaml
+# INCLUDES & EXCLUDES ARE SAME AS recorder.yaml
 #
 include:
   domains:
@@ -71,4 +71,3 @@ exclude:
     - sensor.date_time
     - sensor.time_date
     - sun.sun
-
