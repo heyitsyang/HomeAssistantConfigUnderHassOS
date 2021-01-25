@@ -5,6 +5,10 @@
 
 ###  ALERTS  ###
 
+# CURRENTLY NOT USED - COMMENTED OUT IN CONFIGURATION.YAML
+# too limiting:
+# - cannot terminate after X many notiiications
+# - cannot use script (say_phrase) instead of notification
 
 garage_door:
   name: Large garage door is open
