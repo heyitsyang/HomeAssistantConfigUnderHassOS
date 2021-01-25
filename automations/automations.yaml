@@ -44,6 +44,22 @@
     - service: recorder.purge
 
 #
+# RUN PLUMBING STATIC PRESSURE TEST
+#
+- id: aut_start_spt
+  alias: "aut start spt"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: "04:00:00"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.water_heater
+      state: "off"
+  action:
+    - service: script.scr_spt_start
+
+#
 # START VACUUM
 #
 - id: aut_start_vacuum
@@ -314,6 +330,10 @@
       above: 80
   action:
     - service: notify.pushover_yangandkaren
+      data:
+        title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
+        message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
+    - service: notify.gmail_to_yang
       data:
         title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
         message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"

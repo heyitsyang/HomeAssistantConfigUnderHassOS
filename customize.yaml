@@ -174,19 +174,19 @@ binary_sensor.garagehouse_door_opened:
   icon: mdi:door
 binary_sensor.sunrm_window_1_opened:
   friendly_name: Sun Room Window 1
-  device_class: opening
+  device_class: window
   icon: mdi:window-closed
 binary_sensor.sunrm_window_2_opened:
   friendly_name: Sun Room Window 2
-  device_class: opening
+  device_class: window
   icon: mdi:window-closed
 binary_sensor.sunrm_window_3_opened:
   friendly_name: Sun Room Window 3
-  device_class: opening
+  device_class: window
   icon: mdi:window-closed
 binary_sensor.sunrm_window_4_opened:
   friendly_name: Sun Room Window 4
-  device_class: opening
+  device_class: window
   icon: mdi:window-closed
 climate.sunrm_ac:
   friendly_name: Sunroom
@@ -219,6 +219,8 @@ vacuum.rosie:
   friendly_name: Rosie status
 input_boolean.inp_bool_sleeping:
   icon: mdi:power-sleep
+sensor.last_static_pressure_test:
+  icon: mdi:calendar-clock
 sensor.front_door_lock_battery:
   icon: mdi:battery-unknown
 sensor.back_door_lock_battery:
