@@ -48,7 +48,7 @@ cover.sun_room_shades:
 sensor.ssl_cert_expiry:
   friendly_name: SSL Cert Expiry
   icon: mdi:timer-sand
-sensor.db_size:
+sensor.home_assistant_v2_db:
   friendly_name: MySQL DB size
   icon: mdi:database
 sensor.influxdb_db_size:
@@ -252,9 +252,6 @@ sensor.sun_room_remote_3_battery:
   icon: mdi:battery-unknown
 sensor.sun_room_remote_4_battery:
   icon: mdi:battery-unknown
-sensor.home_assistant_v2_db:
-  friendly_name: home-assistant_v2.db
-  icon: mdi:database
 sensor.junior_temperature:
   friendly_name: Junior temperature
   icon: mdi:thermometer
