@@ -39,6 +39,7 @@ exclude:
   domains:
     - group
   entities:   
+    - sensor.influxdb_db_size
     - device_tracker.ys_cell_on_router
     - device_tracker.ys_cell_on_router_2
     - device_tracker.kt_cell_on_router

@@ -49,7 +49,10 @@ sensor.ssl_cert_expiry:
   friendly_name: SSL Cert Expiry
   icon: mdi:timer-sand
 sensor.db_size:
-  friendly_name: DB size
+  friendly_name: MySQL DB size
+  icon: mdi:database
+sensor.influxdb_db_size:
+  friendly_name: Influx DB Size
   icon: mdi:database
 proximity.home_ys:
   icon: mdi:map-marker-distance

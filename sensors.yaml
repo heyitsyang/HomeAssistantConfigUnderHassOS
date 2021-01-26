@@ -1,7 +1,6 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
 
-
 ### SENSORS  ###
 
 #
@@ -9,51 +8,53 @@
 #
 - platform: version
 
+
 #
 # Filters are considered a type of sensor
 #
 
 - platform: statistics
-  name: "24hr Avg Water Pressure" 
+  name: "24hr Avg Water Pressure"
   entity_id: sensor.water_pressure
-  sampling_size: 1440                              # allow for reporting every minute for 24 hours
+  sampling_size: 1440 # allow for reporting every minute for 24 hours
   max_age:
     hours: 24
-  precision: 2  
-  
-- platform: statistics
-  name: "Living Rm Visible Light"
-  entity_id: sensor.raw_living_rm_visible_light    # sensor is set to update every minute
-  sampling_size: 15                                # default state value is the running average of this many samples
   precision: 2
 
 - platform: statistics
-  name: "10m Avg Master Bedroom Temperature" 
+  name: "Living Rm Visible Light"
+  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
+  sampling_size: 15 # default state value is the running average of this many samples
+  precision: 2
+
+- platform: statistics
+  name: "10m Avg Master Bedroom Temperature"
   entity_id: sensor.master_bedroom_temperature
-  sampling_size: 10                                # default state value is the running average of this many samples
-  precision: 1                                     # number of decimal places
+  sampling_size: 10 # default state value is the running average of this many samples
+  precision: 1 # number of decimal places
 
 - platform: filter
-  name: "Filtered Solar Tube Luminosity" 
-  entity_id: sensor.raw_solar_tube_luminosity      # sensor is set to update every minute
+  name: "Filtered Solar Tube Luminosity"
+  entity_id: sensor.raw_solar_tube_luminosity # sensor is set to update every minute
   filters:
     - filter: outlier
-      radius: 500                                  # default radius is 2 if unspecified
-      window_size: 10                              # num of prev states to define median (default = 1)
+      radius: 500 # default radius is 2 if unspecified
+      window_size: 10 # num of prev states to define median (default = 1)
     - filter: lowpass
-      time_constant: 10                            # Loosely relates to the amount of time it takes for a state to influence the output
+      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
-      
+
 - platform: filter
   name: "Filtered Rack Exhaust Fan Speed"
   entity_id: sensor.rack_exhaust_fan_speed
   filters:
-#    - filter: outlier
-#      window_size: 10                              # compare against median of this many states
-#      radius: 75                                   # throw out occasional anomalous single readings greater than this
-     - filter: lowpass
-       time_constant: 300                           # eliminate blips under 5 min duration
-       precision: 0
+    #    - filter: outlier
+    #      window_size: 10                              # compare against median of this many states
+    #      radius: 75                                   # throw out occasional anomalous single readings greater than this
+    - filter: lowpass
+      time_constant: 300 # eliminate blips under 5 min duration
+      precision: 0
+
 
 #
 # MQTT sensors
@@ -66,8 +67,8 @@
   qos: 0
   device_class: "pressure"
   unit_of_measurement: "PSI"
-  expire_after: 600                                  # state becomes "unknown" after 10 minutes
-  
+  expire_after: 600 # state becomes "unknown" after 10 minutes
+
 - platform: mqtt
   unique_id: water_temperature
   name: "Water Temperature"
@@ -75,15 +76,15 @@
   qos: 0
   device_class: "temperature"
   unit_of_measurement: "ºF"
-  expire_after: 600                                  # state becomes "unknown" after 10 minutes
-  
+  expire_after: 600 # state becomes "unknown" after 10 minutes
+
 - platform: mqtt
   unique_id: water_static_pressure_test
   name: "Water Static Pressure Test Results"
   state_topic: "watermain/spt_result"
   unit_of_measurement: "PSI"
   json_attributes_topic: "watermain/spt_result/attributes"
-  
+
 - platform: mqtt
   unique_id: rack_exhaust_temperature
   name: "Rack Exhaust Temperature"
@@ -97,7 +98,7 @@
   state_topic: "labrack/FanRPM/RPM"
   qos: 0
   unit_of_measurement: "RPM"
-  
+
 - platform: mqtt
   unique_id: rack_exhaust_humidity
   name: "Rack Exhaust Humidity"
@@ -164,8 +165,8 @@
 - platform: mqtt
   unique_id: longmeadow1_temperature
   name: "Longmeadow1 Temperature"
-  state_topic: "longmeadow/DHT22/Temperature"  
-  qos: 0  
+  state_topic: "longmeadow/DHT22/Temperature"
+  qos: 0
   unit_of_measurement: "ºF"
 
 - platform: mqtt
@@ -178,8 +179,8 @@
 - platform: mqtt
   unique_id: longmeadow2_temperature
   name: "Longmeadow2 Temperature"
-  state_topic: "longmeadow2/DHT22/Temperature"  
-  qos: 0  
+  state_topic: "longmeadow2/DHT22/Temperature"
+  qos: 0
   unit_of_measurement: "ºF"
 
 - platform: mqtt
@@ -188,7 +189,8 @@
   state_topic: "longmeadow2/DHT22/Humidity"
   qos: 0
   unit_of_measurement: "%"
-  
+
+
 #
 # SNMP sensors
 #
@@ -206,11 +208,11 @@
   accept_errors: true
   value_template: >
     {% if value | int == 1 %}
-     OK
+    OK
     {% else %}
-     FAULT
+    FAULT
     {% endif %}
-  
+
 - platform: snmp
   name: "NAS CPU fan status"
   host: junior.shencentral.net
@@ -218,22 +220,22 @@
   accept_errors: true
   value_template: >
     {% if value | int == 1 %}
-     OK
+    OK
     {% else %}
-     FAULT
+    FAULT
     {% endif %}
-  
+
 
 #
 # Time & Date
 #
 - platform: time_date
   display_options:
-    - 'time'
-    - 'date'
-    - 'date_time'
-    - 'time_date'
-    - 'time_utc'
+    - "time"
+    - "date"
+    - "date_time"
+    - "time_date"
+    - "time_utc"
     #- 'beat'
 
 #
@@ -241,13 +243,13 @@
 #
 - platform: systemmonitor
   resources:
-    - type: 'disk_free'
-      arg: '/'
-    - type: 'memory_free'
-    - type: 'processor_use'
+    - type: "disk_free"
+      arg: "/"
+    - type: "memory_free"
+    - type: "processor_use"
 
 - platform: uptime
-  name: 'Uptime'
+  name: "Uptime"
 
 #- platform: cert_expiry                               # now configured using GUI
 #  host: "shencentral.duckdns.org"
@@ -256,54 +258,75 @@
   file_paths:
     - /config/home-assistant_v2.db
 
+
 #
 # OUTDOOR WEATHER & ENVIRONMENTAL SENSORS
 #
 
 # Ambient Weather is set up in configuration.yaml
 
-# Darksky - formerly Forecast.io 
+# Darksky - formerly Forecast.io
 - platform: darksky
   api_key: !secret darksky_key
-  scan_interval: '00:10'
-#  forecast:
-#    - 0
-#    - 1
-#    - 2
-#    - 3
-#    - 4
-#    - 5
-#    - 6
-#  hourly_forecast:
-#    - 7
-#    - 10
-#    - 14
-#    - 17
-#    - 20
-#    - 22
-#    - 31
-#    - 34
-#    - 38
+  scan_interval: "00:10"
+  #  forecast:
+  #    - 0
+  #    - 1
+  #    - 2
+  #    - 3
+  #    - 4
+  #    - 5
+  #    - 6
+  #  hourly_forecast:
+  #    - 7
+  #    - 10
+  #    - 14
+  #    - 17
+  #    - 20
+  #    - 22
+  #    - 31
+  #    - 34
+  #    - 38
   monitored_conditions:
     - summary
     - icon
-#    - precip_intensity
+    #    - precip_intensity
     - precip_probability
     - temperature
-#    - apparent_temperature 
-#    - dew_point
-#    - wind_speed
-#    - wind_bearing
+    #    - apparent_temperature
+    #    - dew_point
+    #    - wind_speed
+    #    - wind_bearing
     - cloud_cover
     - humidity
-#    - pressure
+    #    - pressure
     - uv_index
-#    - visibility
-#    - ozone
+    #    - visibility
+    #    - ozone
     - minutely_summary
     - hourly_summary
     - daily_summary
 
+
+#
+# INFULXDB SENSORS
+#
+
+- platform: influxdb
+  host: a0d7b954-influxdb
+  port: 8086
+  username: !secret influxdb_user
+  password: !secret influxdb_pwd
+  scan_interval: 3600
+  queries:
+    - name: InfluxDB DB size
+      unit_of_measurement: MB
+      value_template: "{{ (value|float / 1024 /1024)|round(1) }}"
+      group_function: sum
+      measurement: '"monitor"."shard"'
+      database: _internal
+      where: "time > now() - 10s"
+      field: diskBytes
 
 
 #
@@ -314,29 +337,29 @@
   sensors:
     last_static_pressure_test:
       friendly_name: "Last Static Pressure Test"
-      value_template: >- 
+      value_template: >-
         {{ as_timestamp( state_attr('sensor.water_static_pressure_test', 'test_start') ) 
         | timestamp_custom ('%m/%d %H:%M') }}
 
-- platform: template 
+- platform: template
   sensors:
     min_water_pressure:
       friendly_name: "Min Water Pressure"
       unit_of_measurement: "PSI"
       value_template: "{{ state_attr('sensor.24hr_avg_water_pressure', 'min_value') }}"
-      
-- platform: template 
+
+- platform: template
   sensors:
     max_water_pressure:
       friendly_name: "Max Water Pressure"
       unit_of_measurement: "PSI"
-      value_template: "{{ state_attr('sensor.24hr_avg_water_pressure', 'max_value') }}"      
+      value_template: "{{ state_attr('sensor.24hr_avg_water_pressure', 'max_value') }}"
 
-- platform: template 
+- platform: template
   sensors:
     suggested_brightness:
       friendly_name: "Suggested Brightness"
-      unit_of_measurement: '%'
+      unit_of_measurement: "%"
       value_template: >-
         {% if ( ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_0_threshold') | float) ) ) %}
           0
@@ -352,10 +375,11 @@
           99
         {% endif %}
 
-# CLIMATE #
 
-    ecobee_avg_indoor_temperature:                                                    # ecobee current temp is the average
-      friendly_name: "Avg Indoor Temperature"                                         # of all ecobee sensors 
+    # CLIMATE #
+
+    ecobee_avg_indoor_temperature: # ecobee current temp is the average
+      friendly_name: "Avg Indoor Temperature" # of all ecobee sensors
       value_template: "{{ state_attr('climate.ecobee','current_temperature') }}"
       unit_of_measurement: "ºF"
 
@@ -364,15 +388,15 @@
       value_template: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "ºF"
 
-      
-#  BATTERIES #
-#    - not all batteries need sensor attribute templates, so not all are here
+
+    #  BATTERIES #
+    #    - not all batteries need sensor attribute templates, so not all are here
 
     front_door_lock_battery:
       friendly_name: "Front Door Lock Batttery"
       value_template: "{{ state_attr('lock.front_door_lock','battery_level') | int }}"
       unit_of_measurement: "%"
-    
+
     back_door_lock_battery:
       friendly_name: "Back Door Lock Battery"
       value_template: "{{ state_attr('lock.back_door_lock','battery_level') | int }}"
@@ -382,7 +406,7 @@
       friendly_name: "Living Room Motion Battery"
       value_template: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int }}"
       unit_of_measurement: "%"
-            
+
     sunrm_window_1_opened_battery:
       friendly_name: "Sunroom Window 1 Battery"
       value_template: "{{ state_attr('binary_sensor.sunrm_window_1_opened','battery_level') | int }}"
@@ -392,7 +416,7 @@
       friendly_name: "Sunroom Window 2 Battery"
       value_template: "{{ state_attr('binary_sensor.sunrm_window_2_opened','battery_level') | int }}"
       unit_of_measurement: "%"
-      
+
     sunrm_window_3_opened_battery:
       friendly_name: "Sunroom Window 3 Battery"
       value_template: "{{ state_attr('binary_sensor.sunrm_window_3_opened','battery_level') | int }}"
@@ -402,7 +426,7 @@
       friendly_name: "Sunroom Window 4 Battery"
       value_template: "{{ state_attr('binary_sensor.sunrm_window_4_opened','battery_level') | int }}"
       unit_of_measurement: "%"
-      
+
     front_door_opened_battery:
       friendly_name: "Front Door Battery"
       value_template: "{{ state_attr('binary_sensor.front_door_opened','battery_level') | int }}"
@@ -411,30 +435,29 @@
     back_door_opened_battery:
       friendly_name: "Back Door Battery"
       value_template: "{{ state_attr('binary_sensor.back_door_opened','battery_level') | int }}"
-      unit_of_measurement: "%"   
+      unit_of_measurement: "%"
 
     garagehouse_door_opened_battery:
       friendly_name: "Garage-House Battery"
       value_template: "{{ state_attr('binary_sensor.garagehouse_door_opened','battery_level') | int }}"
       unit_of_measurement: "%"
-      
+
     sun_room_remote_1_battery:
       friendly_name: "Sunroom Remote 1 Battery"
       value_template: "{{ state_attr('sensor.sun_room_remote_1','battery_level') | int }}"
-      unit_of_measurement: "%"      
-      
+      unit_of_measurement: "%"
+
     sun_room_remote_2_battery:
       friendly_name: "Sunroom Remote 2 Battery"
       value_template: "{{ state_attr('sensor.sun_room_remote_2','battery_level') | int }}"
-      unit_of_measurement: "%"      
-      
+      unit_of_measurement: "%"
+
     sun_room_remote_3_battery:
       friendly_name: "Sunroom Remote 3 Battery"
       value_template: "{{ state_attr('sensor.sun_room_remote_3','battery_level') | int }}"
-      unit_of_measurement: "%"      
-      
+      unit_of_measurement: "%"
+
     sun_room_remote_4_battery:
       friendly_name: "Sunroom Remote 4 Battery"
       value_template: "{{ state_attr('sensor.sun_room_remote_4','battery_level') | int }}"
-      unit_of_measurement: "%"      
-      
+      unit_of_measurement: "%"
