@@ -1105,7 +1105,7 @@
   trigger:
     - platform: template
       value_template: >-
-        "{{ ( (states('sensor.10m_avg_master_bedroom_temperature') | float) > (states('input_number.masterbdrm_on_temp') | float) ) }}"
+        {{ ( (states('sensor.10m_avg_master_bedroom_temperature') | float) > (states('input_number.masterbdrm_on_temp') | float) ) }}
   condition:
     condition: state
     entity_id: light.master_bedroom_fan
@@ -1122,7 +1122,7 @@
   trigger:
     - platform: template
       value_template: >-
-        "{{ ( (states('sensor.10m_avg_master_bedroom_temperature') | float) < (states('input_number.masterbdrm_off_temp') | float) ) }}"
+        {{ ( (states('sensor.10m_avg_master_bedroom_temperature') | float) < (states('input_number.masterbdrm_off_temp') | float) ) }}
   condition:
     condition: state
     entity_id: light.master_bedroom_fan
