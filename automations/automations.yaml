@@ -402,23 +402,6 @@
       data_template:
         message: "The washer cycle has finished"
 
-#
-# TURN ON TRASH NIGHT REMINDER LIGHTS
-#
-- id: aut_trash_night_lights
-  alias: "aut trash night lights"
-  initial_state: true
-  trigger:
-    - platform: sun
-      event: sunset
-  condition:
-    condition: time
-    weekday:
-      - mon
-      - thu
-  action:
-    - service: scene.turn_on
-      entity_id: scene.trash_night_LED_mood
 
 #
 #  GUEST MODE MANUALLY TURNED ON
@@ -604,7 +587,7 @@
       entity_id: sun.sun
       value_template: "{{ state_attr('sun.sun', 'elevation') }}"
       above: 14.1 # house behind blocks sun
-      #    below: 58.0                                                                       # sun reaches back of sunroom couch
+      #    below: 58.0  # sun reaches back of sunroom couch
       below: 32.5 # sun reaches laminate flooring creating glare
   condition:
     condition: and

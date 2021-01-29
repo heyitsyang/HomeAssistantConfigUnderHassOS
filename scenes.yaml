@@ -9,45 +9,45 @@
   name: "Default LED Mood"                      # default kitchen led light color combo
   entities:
     light.kitchen_leds_rear:
-      state: on
+      state: "on"
       xy_color: [0.562, 0.403]
       brightness: 24
     light.kitchen_leds_front:                   # for some reason preceding entities with the - character causes a
-       state: on                                # a config error in scenes
-       xy_color: [0.354, 0.239]
-       brightness: 16
- 
+      state: "on"                               # a config error in scenes
+      xy_color: [0.354, 0.239]
+      brightness: 16
+
 - id: trash_night_led_mood                      # Green
   name: "Trash Night LED Mood"                  # trash night reminder kitchen led light color combo
   entities:
     light.kitchen_leds_rear:
-      state: on
+      state: "on"
       xy_color: [0.246, 0.638]
       brightness: 24
     light.kitchen_leds_front:                   # for some reason preceding entities with the - character causes a
-       state: on                                # a config error in scenes
-       xy_color: [0.246, 0.638]
-       brightness: 16
+      state: "on"                               # a config error in scenes
+      xy_color: [0.246, 0.638]
+      brightness: 16
 
 - id: sun_room_uplight_brightness
   name: "Sun Room Uplights Brightness"
   entities:
     light.sun_room_uplights:
-      state: on
+      state: "on"
       brightness: 51
 
 - id: living_room_theater_mode
   name: "Living Room Theater Mode"
   entities:
     light.living_room_lights:
-      state: on
+      state: "on"
       brightness: 30
 
 - id: living_room_normal_mode
   name: "Living Room Normal Mode"
   entities:
     light.living_room_lights:
-      state: on
+      state: "on"
       brightness: "{{states('sensor.suggested_brightness') | int}}"
 
 

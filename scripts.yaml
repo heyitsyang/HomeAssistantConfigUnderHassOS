@@ -5,105 +5,103 @@
 # SCRIPTS
 #################################
 
-
 #
 # STARTUP ACTIONS
 #
 scr_ha_startup:
   sequence:
-  - delay: '00:00:15'                                         # short delay to be sure entities are initialized before use
-  - service: mqtt.publish
-    data:
-      topic: "tasmotas/cmnd/state"
-      payload: ""
-  - service: script.scr_sonos_eval_announce                   # evaluate how to start speakers - joined or unjoined based on guest mode
-  - service: input_boolean.turn_off                           # initialize announcements as off
-    data:
-      entity_id: input_boolean.inp_bool_announcements
-  - service: input_boolean.turn_off                           # initialize sleeping as ON
-    data:
-      entity_id: input_boolean.inp_bool_sleeping
-  - condition: template
-    value_template: >
-      {{ ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) > (states('input_datetime.assume_awake') | timestamp_local) )  and 
-         ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) < (states('input_datetime.assume_asleep') | timestamp_local) ) }} 
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.inp_bool_announcements
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.inp_bool_sleeping
+    - delay: "00:00:15" # short delay to be sure entities are initialized before use
+    - service: mqtt.publish
+      data:
+        topic: "tasmotas/cmnd/state"
+        payload: ""
+    - service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
+    - service: input_boolean.turn_off # initialize announcements as off
+      data:
+        entity_id: input_boolean.inp_bool_announcements
+    - service: input_boolean.turn_off # initialize sleeping as ON
+      data:
+        entity_id: input_boolean.inp_bool_sleeping
+    - condition: template
+      value_template: >
+        {{ ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) > (states('input_datetime.assume_awake') | timestamp_local) )  and 
+           ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) < (states('input_datetime.assume_asleep') | timestamp_local) ) }}
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.inp_bool_announcements
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.inp_bool_sleeping
 
 #
 # GOODNIGHT SCRIPT
 #
-scr_goodnight:                                      # called by Alexa as part of Goodnight Routine
+scr_goodnight: # called by Alexa as part of Goodnight Routine
   sequence:
-#  - service: homeassistant.turn_off                # faster if group created in Alexa App
-#    entity_id: group.indoor_lights                 # so group defined & turned off there instead
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.inp_bool_sleeping
-#  - service: homeassistant.turn_off 
-#   entity_id: group.mood_lights
-  - service: lock.lock
-    entity_id: lock.front_door_lock, lock.back_door_lock
-  - condition: state
-    entity_id: input_boolean.inp_bool_guest_mode    # goodnight routine ignores guest area lights if overnight guest mode is ON
-    state: 'off' 
-  - service: light.turn_off 
-    entity_id: light.office_lights
-  - service: light.turn_off 
-    entity_id: light.guest_room_lights
+    #  - service: homeassistant.turn_off                # faster if group created in Alexa App
+    #    entity_id: group.indoor_lights                 # so group defined & turned off there instead
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.inp_bool_sleeping
+    #  - service: homeassistant.turn_off
+    #   entity_id: group.mood_lights
+    - service: lock.lock
+      entity_id: lock.front_door_lock, lock.back_door_lock
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode # goodnight routine ignores guest area lights if overnight guest mode is ON
+      state: "off"
+    - service: light.turn_off
+      entity_id: light.office_lights
+    - service: light.turn_off
+      entity_id: light.guest_room_lights
 
 #
 # NOBODY HOME
 #
 scr_nobody_home:
   sequence:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'I feel so empty inside when my people are away.'
-  - condition: state
-    entity_id: input_boolean.inp_bool_guest_mode                                # do not execute remainder unless Overnight Guest is OFF
-    state: 'off' 
-  - service: lock.lock
-    entity_id: lock.front_door_lock, lock.back_door_lock
-  - service: homeassistant.turn_off
-    entity_id: group.all_lighting_xabove_cabinet
+    - service: script.scr_say_phrase
+      data_template:
+        message: "I feel so empty inside when my people are away."
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
+      state: "off"
+    - service: lock.lock
+      entity_id: lock.front_door_lock, lock.back_door_lock
+    - service: homeassistant.turn_off
+      entity_id: group.all_lighting_xabove_cabinet
 
 #
 # PLUMBING & WATER RELATED
 #
 scr_spt_start:
   sequence:
-  - service: mqtt.publish
-    data:
-      topic: watermain/cmd/sptDuration
-      payload_template: "{{ states('input_number.inp_num_spt_duration') }}"
-  - service: mqtt.publish
-    data:
-      topic: watermain/cmd/sptStart
-      
+    - service: mqtt.publish
+      data:
+        topic: watermain/cmd/sptDuration
+        payload_template: "{{ states('input_number.inp_num_spt_duration') }}"
+    - service: mqtt.publish
+      data:
+        topic: watermain/cmd/sptStart
+
 #
 # PERFORM INDIV. HOME ARRIVAL ACTIONS
 #
 scr_arrival_announcement:
   mode: queued
   sequence:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'Hi {{ person }}, welcome home.'
-  - condition: state
-    entity_id: input_boolean.inp_bool_visitor_while_out_flag                    # do not execute remaining unless flag is ON 
-    state: 'on'
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'While you where away, there was visitor at the front door'
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.inp_bool_visitor_while_out_flag
-
+    - service: script.scr_say_phrase
+      data_template:
+        message: "Hi {{ person }}, welcome home."
+    - condition: state
+      entity_id: input_boolean.inp_bool_visitor_while_out_flag # do not execute remaining unless flag is ON
+      state: "on"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "While you where away, there was visitor at the front door"
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.inp_bool_visitor_while_out_flag
 
 #
 # PERFORM INDIV. HOME DEPARTURE ACTIONS
@@ -111,380 +109,380 @@ scr_arrival_announcement:
 scr_departure_announcement:
   mode: queued
   sequence:
-  - service: script.scr_say_phrase
-    data_template:
-      message: '{{ person }} is away.'
-
+    - service: script.scr_say_phrase
+      data_template:
+        message: "{{ person }} is away."
 
 # SIMULATE AN OCCUPIED HOME
 #
 scr_occupied_sim:
   sequence:
-  - delay: '00:{{ (range(1, 59)|random|int) }}:00'
-  - service: light.turn_on
-    data:
-      entity_id: light.living_room_lights
-      brightness_pct: 100
-  - delay: '02:{{ (range(1, 59)|random|int) }}:00'
-  - service: light.turn_on
-    data:
-      entity_id: light.master_bedroom_lights
-      brightness_pct: 50
-  - delay: '00:{{ (range(1, 59)|random|int) }}:00'
-  - service: homeassistant.turn_off
-    entity_id: group.indoor_lights
-
+    - delay: "00:{{ (range(1, 59)|random|int) }}:00"
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lights
+        brightness_pct: 100
+    - delay: "02:{{ (range(1, 59)|random|int) }}:00"
+    - service: light.turn_on
+      data:
+        entity_id: light.master_bedroom_lights
+        brightness_pct: 50
+    - delay: "00:{{ (range(1, 59)|random|int) }}:00"
+    - service: homeassistant.turn_off
+      entity_id: group.indoor_lights
 
 #
 # SHARED EXTENDED ABSENCE ACTIONS
 #
 scr_shared_extended_absence_on:
   sequence:
-  - service: script.scr_check_sunrm_windows
-  - service: script.scr_close_sunrm_shades
-  - service: lock.lock
-    entity_id: lock.front_door_lock,lock.back_door_lock
-  - service: homeassistant.turn_off
-    entity_id: group.all_lighting_xabove_cabinet
-  - delay: '00:20:00'
-  - service: switch.turn_off
-    entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
-
+    - service: script.scr_check_sunrm_windows
+    - service: script.scr_close_sunrm_shades
+    - service: lock.lock
+      entity_id: lock.front_door_lock,lock.back_door_lock
+    - service: homeassistant.turn_off
+      entity_id: group.all_lighting_xabove_cabinet
+    - delay: "00:20:00"
+    - service: switch.turn_off
+      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
 #
 # CHECK IF SUN ROOM WINDOWS ARE OPEN & REPORT
 #
 scr_check_sunrm_windows:
   sequence:
-  - condition: or 
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_1_opened
-      state: 'on'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_2_opened
-      state: 'on'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_3_opened
-      state: 'on'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_4_opened
-      state: 'on'
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'You have a window open in the sun room.  The shades will not be automatically closed.'
-
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_1_opened
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_2_opened
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_3_opened
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_4_opened
+          state: "on"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "You have a window open in the sun room.  The shades will not be automatically closed."
 
 #
 # CLOSE SUN ROOM SHADES
 #
 scr_close_sunrm_shades:
   sequence:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_inhibit_shades
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_1_opened
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_2_opened
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_3_opened
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_4_opened
-      state: 'off'
-  - service: cover.close_cover
-    entity_id: cover.sun_room_shades
-
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.inp_bool_inhibit_shades
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_1_opened
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_2_opened
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_3_opened
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_4_opened
+          state: "off"
+    - service: cover.close_cover
+      entity_id: cover.sun_room_shades
 
 #
 # PARTIALLY CLOSE SUN ROOM SHADES
 #
 scr_partial_close_sunrm_shades:
   sequence:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_inhibit_shades
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_1_opened
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_2_opened
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_3_opened
-      state: 'off'
-    - condition: state
-      entity_id: binary_sensor.sunrm_window_4_opened
-      state: 'off'
-  - service: cover.set_cover_position
-    data_template:
-      entity_id: cover.sun_room_shades
-      position: '{{ position }}'
-
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.inp_bool_inhibit_shades
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_1_opened
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_2_opened
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_3_opened
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sunrm_window_4_opened
+          state: "off"
+    - service: cover.set_cover_position
+      data_template:
+        entity_id: cover.sun_room_shades
+        position: "{{ position }}"
 
 scr_partially_close_sunrm_shades:
   sequence:
-  - service: script.scr_check_sunrm_windows                                          # be sure no windows are open
-  - service: script.scr_partial_close_sunrm_shades
-    data_template:
-      position: '40'                                                                 # drop shades to X% open
+    - service: script.scr_check_sunrm_windows # be sure no windows are open
+    - service: script.scr_partial_close_sunrm_shades
+      data_template:
+        position: "40" # drop shades to X% open
 
 #
 # SUSPICIOUS ACTIVITY IF NOBODY HOME
 #
 scr_check_if_suspicious:
   sequence:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode                                   # do not execute remainder unless Overnight Guest is OFF
-      state: 'off' 
-    - condition: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode                        # do not execute remainder unless Extended Absence is ON
-      state: 'on' 
-    - condition: template                                                            # testing for not_home doesn't work if in a known zone
-      value_template: "{{ states('person.yang') != 'home' }}"
-    - condition: template                                                            # testing for not_home doesn't work if in a known zone
-      value_template: "{{ states('person.karen') != 'home' }}"
-  - service: notify.pushover_yangandkaren
-    data:
-      title: 'SUSPICIOUS ACTIVITY at Norcoose home'
-      message: 'Suspicious actvity detected in Norcoose home'
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute remainder unless Extended Absence is ON
+          state: "on"
+        - condition: template # testing for not_home doesn't work if in a known zone
+          value_template: "{{ states('person.yang') != 'home' }}"
+        - condition: template # testing for not_home doesn't work if in a known zone
+          value_template: "{{ states('person.karen') != 'home' }}"
+    - service: notify.pushover_yangandkaren
       data:
-        url: "https://shencentral.duckdns.org:61615/states/group.cameras"
-        priority: 1                                                                 # priority 1 used for urgent messages
-  - service: notify.gmail_to_yang
-    data:
-      message: 'SUSPICIOUS ACTIVITY detected in Norcoose home'
-
+        title: "SUSPICIOUS ACTIVITY at Norcoose home"
+        message: "Suspicious actvity detected in Norcoose home"
+        data:
+          url: "https://shencentral.duckdns.org:61615/states/group.cameras"
+          priority: 1 # priority 1 used for urgent messages
+    - service: notify.gmail_to_yang
+      data:
+        message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
 
 #
 # NOTIFY IF GARAGE DOOR IS OPEN
 #
 scr_check_garage_open:
   sequence:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: cover.large_garage_door
-      state: 'open' 
-    - condition: state
-      entity_id: cover.small_garage_door
-      state: 'open' 
-  - service: notify.pushover_yangandkaren
-    data:
-      title: 'GARAGE DOOR LEFT OPEN'
-      message: 'Garage door left open'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: cover.large_garage_door
+          state: "open"
+        - condition: state
+          entity_id: cover.small_garage_door
+          state: "open"
+    - service: notify.pushover_yangandkaren
       data:
-        url: "https://shencentral.duckdns.org:61615/states/group.security"
-        sound: siren
+        title: "GARAGE DOOR LEFT OPEN"
+        message: "Garage door left open"
+        data:
+          url: "https://shencentral.duckdns.org:61615/states/group.security"
+          sound: siren
 
 scr_repeat_say_garage_open:
   sequence:
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'A garage door has been left open'
-  - delay: "00:10:00"
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: cover.large_garage_door
-      state: 'open' 
-    - condition: state
-      entity_id: cover.small_garage_door
-      state: 'open' 
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'A garage door is still open'
-  - delay: "00:10:00"
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: cover.large_garage_door
-      state: 'open' 
-    - condition: state
-      entity_id: cover.small_garage_door
-      state: 'open' 
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'A garage door is still open'
-  - delay: "00:10:00"
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: cover.large_garage_door
-      state: 'open' 
-    - condition: state
-      entity_id: cover.small_garage_door
-      state: 'open' 
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'A garage door is still open'
-  - delay: "00:10:00"
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: cover.large_garage_door
-      state: 'open' 
-    - condition: state
-      entity_id: cover.small_garage_door
-      state: 'open' 
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'A garage door is still open.  This is your last reminder.'
+    - service: script.scr_say_phrase
+      data_template:
+        message: "A garage door has been left open"
+    - delay: "00:10:00"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: cover.large_garage_door
+          state: "open"
+        - condition: state
+          entity_id: cover.small_garage_door
+          state: "open"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "A garage door is still open"
+    - delay: "00:10:00"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: cover.large_garage_door
+          state: "open"
+        - condition: state
+          entity_id: cover.small_garage_door
+          state: "open"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "A garage door is still open"
+    - delay: "00:10:00"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: cover.large_garage_door
+          state: "open"
+        - condition: state
+          entity_id: cover.small_garage_door
+          state: "open"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "A garage door is still open"
+    - delay: "00:10:00"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: cover.large_garage_door
+          state: "open"
+        - condition: state
+          entity_id: cover.small_garage_door
+          state: "open"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "A garage door is still open.  This is your last reminder."
 
 #
 # MOOD LIGHTING
 #
 scr_mood_lighting_on:
   sequence:
-  - condition: state
-    entity_id: group.mood_lights
-    state: 'off'
-  - service: scene.turn_on
-    entity_id: scene.sun_room_uplights_brightness
-  - service: homeassistant.turn_on
-    entity_id: group.mood_lights
-  - service: scene.turn_on
-    entity_id: scene.default_led_mood
+    - condition: state
+      entity_id: group.mood_lights
+      state: "off"
+    - service: scene.turn_on
+      entity_id: scene.sun_room_uplights_brightness
+    - service: homeassistant.turn_on
+      entity_id: group.mood_lights
+    - choose:
+        - conditions:
+            - condition: time
+              weekday:
+                - mon # night before trash day
+                - thu # night before trash day
+          sequence:
+            - service: scene.turn_on
+              entity_id: scene.trash_night_led_mood
+      default:
+        - service: scene.turn_on
+          entity_id: scene.default_led_mood
 
 scr_reset_mood_lights_to_default:
   sequence:
-  - service: scene.turn_on
-    entity_id: scene.default_led_mood
-  
+    - service: scene.turn_on
+      entity_id: scene.default_led_mood
+
 #
 # MOTION LIGHTING - if luminosity is low and motion is detected
 #
 scr_motion_lighting_on:
   sequence:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: input_boolean.inp_bool_sleeping                                        # execute only if not sleeping
-      state: 'off'
-    - condition: template                                                               # ignore if suggested is zero to avoid conflicting sensors
-      value_template: "{{ states('sensor.suggested_brightness') | int != 0 }}"
-    - condition: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig                              # luminosity level is set in input_numbers.yaml
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.inp_bool_theater_mode                                    # avoid changing brightness if theater mode
-      state: 'off'
-  - service: light.turn_on
-    data_template:
-      entity_id: light.living_room_lights
-      brightness_pct: "{{ states('sensor.suggested_brightness') | int}}"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.inp_bool_sleeping # execute only if not sleeping
+          state: "off"
+        - condition: template # ignore if suggested is zero to avoid conflicting sensors
+          value_template: "{{ states('sensor.suggested_brightness') | int != 0 }}"
+        - condition: state
+          entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in input_numbers.yaml
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.inp_bool_theater_mode # avoid changing brightness if theater mode
+          state: "off"
+    - service: light.turn_on
+      data_template:
+        entity_id: light.living_room_lights
+        brightness_pct: "{{ states('sensor.suggested_brightness') | int}}"
 
 #
 # PATHWAY MOTION LIGHTING
 scr_pathway_motion_lighting_on:
   sequence:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.lum_mood_lights_f_solar_trig
-      state: 'on'
-    - condition: or
+    - condition: and
       conditions:
-      - condition: state
-        entity_id: input_boolean.inp_bool_sleeping                                      # if in bed or
-        state: 'on'
-      - condition: time                                                                 # after midnight (for guests if owners not home)
-        after: '00:01'
-  - service: script.scr_mood_lighting_on
+        - condition: state
+          entity_id: binary_sensor.lum_mood_lights_f_solar_trig
+          state: "on"
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_boolean.inp_bool_sleeping # if in bed or
+              state: "on"
+            - condition: time # after midnight (for guests if owners not home)
+              after: "00:01"
+    - service: script.scr_mood_lighting_on
 
 scr_pathway_motion_lighting_off:
   sequence:
-  - condition: time                                                                     # confine auto-off period due to *MOTION*
-    after: '00:09'                                                                      # to after midnight
-  - condition: sun                                                                      # and before sunrise
-    before: sunrise
-  - condition: state
-    entity_id: group.mood_lights
-    state: 'on'
-  - service: homeassistant.turn_off 
-    entity_id: group.mood_lights
-
+    - condition: time # confine auto-off period due to *MOTION*
+      after: "00:09" # to after midnight
+    - condition: sun # and before sunrise
+      before: sunrise
+    - condition: state
+      entity_id: group.mood_lights
+      state: "on"
+    - service: homeassistant.turn_off
+      entity_id: group.mood_lights
 
 #
 # GREAT ROOM LIGHTING
 #
 scr_great_room_motion_lighting_off:
   sequence:
-  - condition: state
-    entity_id: group.great_room_lights
-    state: 'on'
-  - service: light.turn_off 
-    entity_id: group.great_room_lights
-
+    - condition: state
+      entity_id: group.great_room_lights
+      state: "on"
+    - service: light.turn_off
+      entity_id: group.great_room_lights
 
 #
 # OUTDOOR LIGHTS AND NOTIFICATIONS
 #
 scr_frontporch_activity:
   sequence:
-  - service: camera.snapshot
-    data:
-      entity_id: camera.doorbell_camera
-      filename: '/config/www/camera_stills/doorbell.jpg'
-  - service: camera.snapshot
-    data:
-      entity_id: camera.frontporch_camera
-      filename: '/config/www/camera_stills/frontporch.jpg'
-  - service: camera.snapshot
-    data:
-      entity_id: camera.driveway_camera
-      filename: '/config/www/camera_stills/driveway.jpg'
-  - service: script.scr_say_phrase
-    data_template:
-      message: 'You have a visitor at the front door'
-  - condition: and                                            # continue only if both not home
-    conditions:
-    - condition: template                                                            # testing for not_home else doesn't work if in a known zone
-      value_template: "{{ states('person.yang') != 'home' }}"
-    - condition: template                                                            # testing for not_home else doesn't work if in a known zone
-      value_template: "{{ states('person.karen') != 'home' }}"
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.inp_bool_visitor_while_out_flag
-  - service: notify.gmail_to_yskt_pushover
-    data:
-      title: 'Front door activity'
-      message: 'Front door activity detected. See https://shencentral.duckdns.org:61615/states/group.cameras for live view'
+    - service: camera.snapshot
       data:
-        images:
-           - /config/www/camera_stills/doorbell.jpg
-           - /config/www/camera_stills/frontporch.jpg
-           - /config/www/camera_stills/driveway.jpg
+        entity_id: camera.doorbell_camera
+        filename: "/config/www/camera_stills/doorbell.jpg"
+    - service: camera.snapshot
+      data:
+        entity_id: camera.frontporch_camera
+        filename: "/config/www/camera_stills/frontporch.jpg"
+    - service: camera.snapshot
+      data:
+        entity_id: camera.driveway_camera
+        filename: "/config/www/camera_stills/driveway.jpg"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "You have a visitor at the front door"
+    - condition: and # continue only if both not home
+      conditions:
+        - condition: template # testing for not_home else doesn't work if in a known zone
+          value_template: "{{ states('person.yang') != 'home' }}"
+        - condition: template # testing for not_home else doesn't work if in a known zone
+          value_template: "{{ states('person.karen') != 'home' }}"
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.inp_bool_visitor_while_out_flag
+    - service: notify.gmail_to_yskt_pushover
+      data:
+        title: "Front door activity"
+        message: "Front door activity detected. See https://shencentral.duckdns.org:61615/states/group.cameras for live view"
+        data:
+          images:
+            - /config/www/camera_stills/doorbell.jpg
+            - /config/www/camera_stills/frontporch.jpg
+            - /config/www/camera_stills/driveway.jpg
 
 scr_front_door_lights_on:
   sequence:
-  - condition: state
-    entity_id: binary_sensor.lum_outdoor_lights_solar_trig
-    state: 'on'
-  - condition: template
-    value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}"       # sensor is broken if zero
-  - service: light.turn_on
-    entity_id: light.front_door_lights                       # light is auto switched off after door locked and/or delay
+    - condition: state
+      entity_id: binary_sensor.lum_outdoor_lights_solar_trig
+      state: "on"
+    - condition: template
+      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}" # sensor is broken if zero
+    - service: light.turn_on
+      entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
 
 scr_back_door_lights_on:
   sequence:
-  - condition: state
-    entity_id: binary_sensor.lum_outdoor_lights_solar_trig
-    state: 'on'
-  - condition: template
-    value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}"       # sensor is broken if zero
-  - service: light.turn_on
-    entity_id: light.back_door_lights                        # light is auto switched off door locked and/or delay
-
+    - condition: state
+      entity_id: binary_sensor.lum_outdoor_lights_solar_trig
+      state: "on"
+    - condition: template
+      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}" # sensor is broken if zero
+    - service: light.turn_on
+      entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
 
 #
 # SPEAK PHRASE
@@ -495,106 +493,104 @@ scr_back_door_lights_on:
 scr_say_phrase:
   mode: queued
   sequence:
-  - condition: state
-    entity_id: input_boolean.inp_bool_announcements           # do not execute remaining unless announce is ON 
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.inp_bool_sleeping                # do not execute remaining unless sleeping is OFF 
-    state: 'off'
-  - service: sonos.snapshot
-    data:
-      entity_id: media_player.office_speakers, media_player.main_speakers
-      with_group: true
-  - service: media_player.volume_set
-    data_template:
-      entity_id: media_player.office_speakers
-      volume_level: 0.18                                      # set normal speaking volume 
-  - service: media_player.volume_set
-    data_template:
-      entity_id: media_player.main_speakers
-      volume_level: 0.28                                      # set normal speaking volume 
-  - service: tts.google_translate_say
-    data_template:
-      entity_id: media_player.main_speakers
-      message: '{{ message }}'
-#  - delay: "00:00:10"                                         # no speech without this delay - not sure why
-  - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}"       # check for start to be sure next wait isn't too soon
-    timeout: '00:00:15'
-  - wait_template: "{{ not is_state('media_player.main_speakers', 'playing') }}"   # wait for finish
-    timeout: '00:02:00'
-  - service: sonos.restore                                            # premature restore will cut off speech potentially
-    data:                                                                          # before it has started or during play
-      entity_id: media_player.main_speakers
-      with_group: true
-
+    - condition: state
+      entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
+      state: "off"
+    - service: sonos.snapshot
+      data:
+        entity_id: media_player.office_speakers, media_player.main_speakers
+        with_group: true
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.office_speakers
+        volume_level: 0.18 # set normal speaking volume
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.main_speakers
+        volume_level: 0.28 # set normal speaking volume
+    - service: tts.google_translate_say
+      data_template:
+        entity_id: media_player.main_speakers
+        message: "{{ message }}"
+    #  - delay: "00:00:10"                                         # no speech without this delay - not sure why
+    - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
+      timeout: "00:00:15"
+    - wait_template: "{{ not is_state('media_player.main_speakers', 'playing') }}" # wait for finish
+      timeout: "00:02:00"
+    - service: sonos.restore # premature restore will cut off speech potentially
+      data: # before it has started or during play
+        entity_id: media_player.main_speakers
+        with_group: true
 
 #
 #  SONOS JOIN/UNJOIN SCRIPTS
 #
 scr_sonos_join4announce:
   sequence:
-  - condition: template
-    value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'sonos_group') }}"
-  - service: sonos.join
-    data:
-      master: media_player.main_speakers
-      entity_id: 
-        - media_player.office_speakers
-  - delay: '00:00:15'                                         # give it time to join/unjoin
+    - condition: template
+      value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'sonos_group') }}"
+    - service: sonos.join
+      data:
+        master: media_player.main_speakers
+        entity_id:
+          - media_player.office_speakers
+    - delay: "00:00:15" # give it time to join/unjoin
 
 scr_sonos_unjoin4announce:
   sequence:
-  - condition: template
-    value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'sonos_group') }}"
-  - service: sonos.unjoin
-    data:
-      entity_id:
-        - media_player.office_speakers
-  - delay: '00:00:15'                                         # give it time to join/unjoin
+    - condition: template
+      value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'sonos_group') }}"
+    - service: sonos.unjoin
+      data:
+        entity_id:
+          - media_player.office_speakers
+    - delay: "00:00:15" # give it time to join/unjoin
 
 scr_sonos_eval_announce:
   sequence:
-  - service: script.scr_sonos_join4announce                   # join as the default
-  - delay: '00:00:15'                                         # give it time to join/unjoin
-  - condition: state
-    entity_id: input_boolean.inp_bool_guest_mode              # do not execute remaining unless overnight guests 
-    state: 'on'
-  - service: script.scr_sonos_unjoin4announce                 # unjoin if guests
-  - delay: '00:00:15'                                         # give it time to join/unjoin
-
+    - service: script.scr_sonos_join4announce # join as the default
+    - delay: "00:00:15" # give it time to join/unjoin
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
+      state: "on"
+    - service: script.scr_sonos_unjoin4announce # unjoin if guests
+    - delay: "00:00:15" # give it time to join/unjoin
 
 #
 #  MANUAL UI REQUESTS
 #
-    
+
 # SPEAK TIME
 scr_manual_say_time:
   mode: queued
   sequence:
-  - service: script.scr_say_phrase
-    data_template:
-      message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
+    - service: script.scr_say_phrase
+      data_template:
+        message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
 
 # VACUUM COMMANDS
 scr_vacuum_start_custom_cleaning:
   sequence:
-  - condition: state
-    entity_id: vacuum.rosie                                   # do not execute unless docked (not already cleaning) 
-    state: 'docked'
-  - service: neato.custom_cleaning
-    entity_id: vacuum.rosie
+    - condition: state
+      entity_id: vacuum.rosie # do not execute unless docked (not already cleaning)
+      state: "docked"
+    - service: neato.custom_cleaning
+      entity_id: vacuum.rosie
 
 scr_vacuum_pause:
   sequence:
-  - service: vacuum.pause
-    entity_id: vacuum.rosie
+    - service: vacuum.pause
+      entity_id: vacuum.rosie
 
 scr_vacuum_stop:
   sequence:
-  - service: vacuum.stop
-    entity_id: vacuum.rosie
+    - service: vacuum.stop
+      entity_id: vacuum.rosie
 
 scr_vacuum_return_to_base:
   sequence:
-  - service: vacuum.return_to_base
-    entity_id: vacuum.rosie
+    - service: vacuum.return_to_base
+      entity_id: vacuum.rosie
