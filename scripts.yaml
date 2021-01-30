@@ -509,7 +509,7 @@ scr_say_phrase:
         entity_id: media_player.office_speakers, media_player.main_speakers
         with_group: true
     - choose:
-      - conditions:
+      - conditions:  # high priority
           - condition: template
             value_template: "{{ priority == 'high' }}"
         sequence:
@@ -525,7 +525,7 @@ scr_say_phrase:
           data_template:
             entity_id: media_player.main_speakers
             message: "This is a high priority message. {{ message }}"
-      default:
+      default:  # normal priority
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
           state: "on"
