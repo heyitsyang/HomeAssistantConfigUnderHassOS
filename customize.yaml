@@ -195,8 +195,8 @@ climate.sunrm_ac:
   friendly_name: Sunroom
 climate.ecobee:
   friendly_name: Main House
-script.scr_spt_start:
-  friendly_name: SPT Manual Start
+script.scr_unregistered_spt_test:
+  friendly_name: Unregistered SPT Test
   icon: mdi:gesture-tap-button
 script.scr_manual_say_time:
   friendly_name: Say time
