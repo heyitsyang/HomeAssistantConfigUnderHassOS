@@ -516,11 +516,11 @@ scr_say_phrase:
         - service: media_player.volume_set
           data_template:
             entity_id: media_player.office_speakers
-            volume_level: 0.40 # set loud speaking volume
+            volume_level: 0.40 # set high priority speaking volume
         - service: media_player.volume_set
           data_template:
             entity_id: media_player.main_speakers
-            volume_level: 0.50 # set loud speaking volume
+            volume_level: 0.50 # set high priority speaking volume
         - service: tts.google_translate_say
           data_template:
             entity_id: media_player.main_speakers
