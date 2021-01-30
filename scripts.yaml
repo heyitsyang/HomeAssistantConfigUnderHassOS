@@ -504,29 +504,46 @@ scr_back_door_lights_on:
 scr_say_phrase:
   mode: queued
   sequence:
-    - condition: state
-      entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
-      state: "on"
-    - condition: state
-      entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
-      state: "off"
     - service: sonos.snapshot
       data:
         entity_id: media_player.office_speakers, media_player.main_speakers
         with_group: true
-    - service: media_player.volume_set
-      data_template:
-        entity_id: media_player.office_speakers
-        volume_level: 0.18 # set normal speaking volume
-    - service: media_player.volume_set
-      data_template:
-        entity_id: media_player.main_speakers
-        volume_level: 0.28 # set normal speaking volume
-    - service: tts.google_translate_say
-      data_template:
-        entity_id: media_player.main_speakers
-        message: "{{ message }}"
-    #  - delay: "00:00:10"                                         # no speech without this delay - not sure why
+    - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ priority == 'high' }}"
+        sequence:
+        - service: media_player.volume_set
+          data_template:
+            entity_id: media_player.office_speakers
+            volume_level: 0.40 # set loud speaking volume
+        - service: media_player.volume_set
+          data_template:
+            entity_id: media_player.main_speakers
+            volume_level: 0.50 # set loud speaking volume
+        - service: tts.google_translate_say
+          data_template:
+            entity_id: media_player.main_speakers
+            message: "This is a high priority message. {{ message }}"
+      default:
+        - condition: state
+          entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
+          state: "off"
+        - service: media_player.volume_set
+          data_template:
+            entity_id: media_player.office_speakers
+            volume_level: 0.18 # set normal speaking volume
+        - service: media_player.volume_set
+          data_template:
+            entity_id: media_player.main_speakers
+            volume_level: 0.28 # set normal speaking volume
+        - service: tts.google_translate_say
+          data_template:
+            entity_id: media_player.main_speakers
+            message: "{{ message }}"
     - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
       timeout: "00:00:15"
     - wait_template: "{{ not is_state('media_player.main_speakers', 'playing') }}" # wait for finish
