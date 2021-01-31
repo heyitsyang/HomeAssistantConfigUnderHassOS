@@ -392,6 +392,10 @@
       data:
         title: "House water turned OFF"
         message: "House water is OFF.  Turn on manually when leak is resolved."
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "House water is OFF.  Turn on manually when leak is resolved."        
+        
 
 #
 # WASHER DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
@@ -414,6 +418,10 @@
     - service: script.scr_say_phrase
       data_template:
         message: "The washer cycle has finished"
+    - service: notify.alexa_yellow_ring
+      data_template:
+        message: "The washer cycle has finished"
+
 
 
 #

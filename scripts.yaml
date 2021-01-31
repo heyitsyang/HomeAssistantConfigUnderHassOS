@@ -110,6 +110,9 @@ scr_arrival_announcement:
     - service: script.scr_say_phrase
       data_template:
         message: "While you where away, there was visitor at the front door"
+    - service: notify.alexa_yellow_ring
+      data_template:
+        message: "While you where away, there was visitor at the front door"    
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
@@ -177,6 +180,9 @@ scr_check_sunrm_windows:
           entity_id: binary_sensor.sunrm_window_4_opened
           state: "on"
     - service: script.scr_say_phrase
+      data_template:
+        message: "You have a window open in the sun room.  The shades will not be automatically closed."
+    - service: notify.alexa_yellow_ring
       data_template:
         message: "You have a window open in the sun room.  The shades will not be automatically closed."
 
