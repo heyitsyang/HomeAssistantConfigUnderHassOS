@@ -4,64 +4,85 @@
 
 ### NOTIFICATION METHODS ###
 
- - name: gmail_to_yang
-   platform: smtp
-   server: smtp.gmail.com
-   port: 587
-   sender: "hass@shencentral.net"
-   sender_name: "My Home Assistant"
-   encryption: starttls
-   username: !secret gmail_user
-   password: !secret gmail_pwd
-   recipient: !secret gmail_to_yang_recipient
+# The following two notification methods require the NotifyMe Alexa Skill
+# for "yellow ring" notifications
+- name: alexa_yellow_ring
+  platform: rest
+  message_param_name: notification
+  resource: https://api.notifymyecho.com/v1/NotifyMe
+  data:
+  accessCode: !secret notifyme_access_code
 
- - name: gmail_to_yskt_pushover
-   platform: smtp
-   server: smtp.gmail.com
-   port: 587
-   sender: "hass@shencentral.net"
-   sender_name: "My Home Assistant"
-   encryption: starttls
-   username: !secret gmail_user
-   password: !secret gmail_pwd
-   recipient: !secret gmail_to_yskt_pushover_recipient
+- name: alexa_yellow_ring_plus_announce
+  platform: group
+  services:
+  - service: notifyme
+  - service: alexa_media_everywhere
+    data:
+      data:
+        type: announce
+        method: all
 
- - name: gmail_to_ys_pushover
-   platform: smtp
-   server: smtp.gmail.com
-   port: 587
-   sender: "hass@shencentral.net"
-   sender_name: "My Home Assistant"
-   encryption: starttls
-   username: !secret gmail_user
-   password: !secret gmail_pwd
-   recipient: !secret gmail_to_ys_pushover_recipient
+# Gmail
+- name: gmail_to_yang
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  sender: "hass@shencentral.net"
+  sender_name: "My Home Assistant"
+  encryption: starttls
+  username: !secret gmail_user
+  password: !secret gmail_pwd
+  recipient: !secret gmail_to_yang_recipient
 
- - name: pushover_yang
-   platform: pushover
-   api_key: !secret ys_pushover_api_key
-   user_key: !secret ys_pushover_user_key
+  # Pushover
+- name: gmail_to_yskt_pushover
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  sender: "hass@shencentral.net"
+  sender_name: "My Home Assistant"
+  encryption: starttls
+  username: !secret gmail_user
+  password: !secret gmail_pwd
+  recipient: !secret gmail_to_yskt_pushover_recipient
 
- - name: pushover_karen
-   platform: pushover
-   api_key: !secret kt_pushover_api_key
-   user_key: !secret kt_pushover_user_key
+- name: gmail_to_ys_pushover
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  sender: "hass@shencentral.net"
+  sender_name: "My Home Assistant"
+  encryption: starttls
+  username: !secret gmail_user
+  password: !secret gmail_pwd
+  recipient: !secret gmail_to_ys_pushover_recipient
 
- - name: pushover_yangandkaren
-   platform: pushover
-   api_key: !secret ys_pushover_api_key
-   user_key: !secret yangandkaren_group_pushover_user_key
+- name: pushover_yang
+  platform: pushover
+  api_key: !secret ys_pushover_api_key
+  user_key: !secret ys_pushover_user_key
 
- # GROUP NOTIFICATIONS #
- # required for notifiers that pass data in Alerts #
+- name: pushover_karen
+  platform: pushover
+  api_key: !secret kt_pushover_api_key
+  user_key: !secret kt_pushover_user_key
 
- - platform: group
-   name: pushover_garage_left_open
-   services:
-     - service: pushover_yang
-       data:
-         message: "Garage door left open"
-         title: "Norcoose Alert"
-         sound: alien
-         priority: 0
+- name: pushover_yangandkaren
+  platform: pushover
+  api_key: !secret ys_pushover_api_key
+  user_key: !secret yangandkaren_group_pushover_user_key
+
+# GROUP NOTIFICATIONS #
+# required for notifiers that pass data in Alerts #
+
+- platform: group
+  name: pushover_garage_left_open
+  services:
+    - service: pushover_yang
+      data:
+        message: "Garage door left open"
+        title: "Norcoose Alert"
+        sound: alien
+        priority: 0
 
