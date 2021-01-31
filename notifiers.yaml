@@ -4,24 +4,14 @@
 
 ### NOTIFICATION METHODS ###
 
-# The following two notification methods require the NotifyMe Alexa Skill
+# The following notification method require the NotifyMe Alexa Skill
 # for "yellow ring" notifications
 - name: alexa_yellow_ring
   platform: rest
   message_param_name: notification
   resource: https://api.notifymyecho.com/v1/NotifyMe
   data:
-  accessCode: !secret notifyme_access_code
-
-- name: alexa_yellow_ring_plus_announce
-  platform: group
-  services:
-  - service: notifyme
-  - service: alexa_media_everywhere
-    data:
-      data:
-        type: announce
-        method: all
+    accessCode: !secret notifyme_access_code
 
 # Gmail
 - name: gmail_to_yang
