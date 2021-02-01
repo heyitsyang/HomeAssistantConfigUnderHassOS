@@ -838,7 +838,7 @@
     - condition: template # debounce
       value_template: >-
         {{ ( ( as_timestamp(now()) - (as_timestamp(state_attr('automation.aut_frontporch_activity', 
-        'last_triggered'))) ) | int ) > 14 }}
+        'last_triggered')) | float) ) | int ) > 14 }}
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_frontporch_activity
