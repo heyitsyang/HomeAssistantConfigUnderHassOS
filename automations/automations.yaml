@@ -1382,7 +1382,7 @@
     - platform: template # distance is in miles - BOTH must be > this distance away
       value_template: >
         {{ (states('proximity.home_ys') | float > 100) and
-           (states('proximity.home_kt') | float > 100) }}
+        (states('proximity.home_kt') | float > 100) }}
     - platform: template # OR....BOTH gone for > 24 hrs
       value_template: "{{ states('group.where_are_yskt') != 'home' }}"
       for: "23:59:00"
