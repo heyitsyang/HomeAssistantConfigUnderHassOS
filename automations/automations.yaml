@@ -65,7 +65,7 @@
     # no more often than every N hours
     - condition: template
       value_template: >-
-        {{ (as_timestamp(now()) - as_timestamp(state_attr(" script.scr_spt_start", "last_triggered")) | int > (8 * 60 * 60))
+        {{ ( (as_timestamp(now()) - as_timestamp(state_attr(" script.scr_spt_start", "last_triggered")) | int > (8 * 60 * 60)) )
             or (state_attr(" script.scr_spt_start","last_triggered") == none) }}
   action:
     - service: script.scr_spt_start
@@ -412,7 +412,7 @@
   condition: # only announce first load in washer
     - condition: template
       value_template: >-
-        {{ (as_timestamp(now()) - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered")) | int > (8 * 60 * 60))
+        {{ ( (as_timestamp(now()) - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered")) | int > (8 * 60 * 60)) )
             or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
   action:
     - service: script.scr_say_phrase
@@ -827,8 +827,9 @@
         {{ (is_state('binary_sensor.front_ent_attic_uwave', 'on')) and (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
   condition:
     - condition: template # debounce
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.aut_frontporch_activity', 'last_triggered') | default(0)) | int > 14) }}
+      value_template: >-
+        {{ ( (as_timestamp(now()) - as_timestamp(state_attr('automation.aut_frontporch_activity', 'last_triggered') 
+        | default(0)) | int ) > 14) }}
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_frontporch_activity
