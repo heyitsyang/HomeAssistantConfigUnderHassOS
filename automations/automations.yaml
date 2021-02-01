@@ -1184,9 +1184,8 @@
       for:
         seconds: 20
   condition: # this prevents immediate triggering after startup
-    - condition: numeric_state
-      entity_id: sensor.uptime
-      above: 0.10 # in hours as defined in sensors.yaml for uptime units
+    - condition: template
+      value_template: "{{ ( ( as_timestamp(now()) - (as_timestamp(states('sensor.uptime'))| float) ) | int ) > 10 }}"
   action:
     - service: script.scr_arrival_announcement
       data_template:
