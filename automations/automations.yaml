@@ -58,16 +58,25 @@
       for:
         minutes: 15
   condition:
-    # water heater not ON
-    - condition: state
-      entity_id: binary_sensor.water_heater
-      state: "off"
     # no more often than every N hours
     - condition: template
       value_template: >-
         {{ ( ( as_timestamp(now()) - as_timestamp(state_attr(" script.scr_spt_start", "last_triggered") ) | int > (8 * 60 * 60)) )
             or (state_attr(" script.scr_spt_start","last_triggered") == none) }}
   action:
+    - choose:  # if water heater is ON, wait until OFF
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.water_heater
+              state: 'on'
+          sequence:
+            - wait_for_trigger:
+                - platform: state
+                  entity_id: binary_sensor.water_heater
+                  from: 'on'
+                  to: 'off'
+                  for:
+                    minutes: 5
     - service: script.scr_spt_start
 
 #
