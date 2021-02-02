@@ -25,7 +25,7 @@ scr_ha_startup:
     - condition: template
       value_template: >
         {{ ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) > (states('input_datetime.assume_awake') | timestamp_local) )  and 
-           ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) < (states('input_datetime.assume_asleep') | timestamp_local) ) }}
+          ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) < (states('input_datetime.assume_asleep') | timestamp_local) ) }}
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_announcements
@@ -447,7 +447,7 @@ scr_great_room_motion_lighting_off:
 #
 scr_frontporch_activity:
   sequence:
-    - service: script.scr_say_phrase
+    - service: script.scr_say_phrase  # do this first to minimize delay from camera actions
       data_template:
         message: "You have a visitor at the front door"
     - service: camera.snapshot
