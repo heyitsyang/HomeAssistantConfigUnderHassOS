@@ -447,9 +447,11 @@ scr_great_room_motion_lighting_off:
 #
 scr_frontporch_activity:
   sequence:
-    - service: script.scr_say_phrase  # do this first to minimize delay from camera actions
-      data_template:
-        message: "You have a visitor at the front door"
+    - service: script.turn_on  # use this method to de-serialize the speech so cameras are not delayed
+      entity_id: script.scr_say_phrase
+      data:
+        variables: 
+          message: "You have a visitor at the front door"
     - service: camera.snapshot
       data:
         entity_id: camera.doorbell_camera
