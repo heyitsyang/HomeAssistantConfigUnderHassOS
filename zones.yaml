@@ -74,7 +74,7 @@
   radius: 170                  # meters
   icon: mdi:hospital 
 
-- name: Villages Helath Creekside Care Center
+- name: Villages Health Creekside Care Center
   latitude: 28.907006
   longitude: -81.979164
   radius: 40                   # meters
