@@ -67,15 +67,32 @@
   longitude: -81.957802
   radius: 170                  # meters
   icon: mdi:hospital
- 
+
+- name: The Villages Hospital East Campus
+  latitude: 28.95211 
+  longitude: -81.95517
+  radius: 170                  # meters
+  icon: mdi:hospital 
+
+- name: Villages Helath Creekside Care Center
+  latitude: 28.907006
+  longitude: -81.979164
+  radius: 40                   # meters
+  icon: mdi:hospital
+
 - name: UF Health Emergency Care
   latitude: 28.840883
   longitude: -82.023891
   radius: 86                   # meters
   icon: mdi:hospital
 
+- name: Center for Advanced Healthcare
+  latitude: 28.845920
+  longitude: -82.032300
+  radius: 112                  # meters
+  icon: mdi:hospital
 
-#
+
 # TOWN SQUARES
 #
 - name: Spanish Springs
@@ -329,6 +346,7 @@
 - name: Aviary VRC
   latitude: 28.794182
   longitude: -81.978904
+  radius: 75                   # meters
   icon: mdi:blank
 
 
@@ -339,25 +357,25 @@
 - name: Cane Garden CC
   latitude: 28.892713
   longitude: -81.993969
-  radius: 105                 # meters
+  radius: 105                  # meters
   icon: mdi:blank
   
 - name: Glenview Champions CC
   latitude: 28.949804
   longitude: -82.005928
-  radius: 123                 # meters
+  radius: 123                  # meters
   icon: mdi:blank 
 
 - name: Hacienda Hills CC
   latitude: 28.943730
   longitude: -81.963653
-  radius: 100                 # meters
+  radius: 100                  # meters
   icon: mdi:blank 
 
 - name: Lopez Legacy CC
   latitude: 28.972338
   longitude: -82.014109
-  radius: 106                 # meters
+  radius: 106                  # meters
   icon: mdi:blank
   
 - name: Mallory Hills CC
