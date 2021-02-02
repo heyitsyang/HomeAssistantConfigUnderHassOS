@@ -326,6 +326,11 @@
   radius: 85                   # meters
   icon: mdi:blank
 
+- name: Aviary VRC
+  latitude: 28.794182
+  longitude: -81.978904
+  icon: mdi:blank
+
 
 #
 # Country Club & Practice Centers (facilities only)
@@ -342,7 +347,7 @@
   longitude: -82.005928
   radius: 123                 # meters
   icon: mdi:blank 
- 
+
 - name: Hacienda Hills CC
   latitude: 28.943730
   longitude: -81.963653
