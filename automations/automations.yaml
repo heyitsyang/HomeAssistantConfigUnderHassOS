@@ -351,7 +351,7 @@
     - platform: numeric_state
       entity_id:
         - sensor.water_pressure
-      above: 80
+      above: 85
   action:
     - service: notify.pushover_yangandkaren
       data:
