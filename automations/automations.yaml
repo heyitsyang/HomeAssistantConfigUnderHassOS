@@ -58,7 +58,11 @@
       for:
         minutes: 15
   condition:
-    # no more often than every N hours
+    # don't continue if dishwasher is ON
+    - condition: state
+      entity_id: binary_sensor.dishwasher_on_or_off
+      state: 'off'
+    # don't run more often than every N hours
     - condition: template
       value_template: >-
         {{ ( ( as_timestamp(now()) - as_timestamp(state_attr(" script.scr_spt_start", "last_triggered") ) | int > (8 * 60 * 60)) )
