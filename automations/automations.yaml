@@ -1229,7 +1229,7 @@
     - platform: template
       value_template: >
         {{ (states('sensor.longmeadow1_temperature') | float < 50.0) and
-           (states('sensor.longmeadow2_temperature') | float < 50.0) }}
+        (states('sensor.longmeadow2_temperature') | float < 50.0) }}
   action:
     - service: notify.gmail_to_yang
       data_template:

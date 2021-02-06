@@ -11,21 +11,21 @@
   home_yskt:                            # the value reported for distance_from (a.k.a. state) of a group entity
     zone: home                          #  is the logical OR of the members of the group which makes this group entity
     devices:                            #  the same state value (distance) as the individual furthest away
-      - device_tracker.ys_phone
-      - device_tracker.kt_phone
+      - person.yang
+      - person.karen
     tolerance: 50                       # ignore GPS changes less than tolerance (meters) - should be >= GPS tolerance setting
     unit_of_measurement: mi             # unit of measurement for dist_to_zone
 
   home_ys:
     zone: home
     devices:
-      - device_tracker.ys_phone
+      - person.yang
     tolerance: 50                       # ignore GPS changes less than tolerance (meters) - should be >= GPS tolerance setting
     unit_of_measurement: mi             # unit of measurement for dist_to_zone
 
   home_kt:
     zone: home
     devices:
-      - device_tracker.kt_phone
+      - person.karen
     tolerance: 50                       # ignore GPS changes less than tolerance (meters) - should be >= GPS tolerance setting
     unit_of_measurement: mi             # unit of measurement for dist_to_zone
