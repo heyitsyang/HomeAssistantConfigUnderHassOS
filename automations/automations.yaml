@@ -1201,6 +1201,9 @@
       data_template:
         person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
 
+#
+# HOME DEPARTURE ANNOUNCEMENT
+#
 - id: aut_departure_announcement
   alias: "aut departure announcement"
   initial_state: true
@@ -1215,9 +1218,9 @@
       from: home
   #    to: not_home
   action:
-    - service: script.scr_departure_announcement
+    - service: script.scr_say_phrase
       data_template:
-        person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
+        message: "{{ trigger.entity_id|replace('person.', '') | capitalize }} is away."
 
 #
 # CONDITIONS REQUIRING ATTENTION

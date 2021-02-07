@@ -117,15 +117,6 @@ scr_arrival_announcement:
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
 
-#
-# PERFORM INDIV. HOME DEPARTURE ACTIONS
-#
-scr_departure_announcement:
-  mode: queued
-  sequence:
-    - service: script.scr_say_phrase
-      data_template:
-        message: "{{ person }} is away."
 
 # SIMULATE AN OCCUPIED HOME
 #
