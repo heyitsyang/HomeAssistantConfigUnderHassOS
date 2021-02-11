@@ -282,7 +282,7 @@
   longitude: -82.011936
   radius: 60                  # meters
   icon: mdi:blank
- 
+
 - name: Hibiscus VRC
   latitude: 28.892092
   longitude: -81.993426
@@ -349,7 +349,19 @@
   radius: 75                   # meters
   icon: mdi:blank
 
+- name: Riverbend VRC
+  latitude: 28.792301
+  longitude: -81.998241
+  radius: 90                   # meters
+  icon: mdi:blank
 
+- name: Water Lily VRC
+  latitude: 28.817941
+  longitude:  -82.022452
+  radius: 88                   # meters
+  icon: mdi:blank
+
+  
 #
 # Country Club & Practice Centers (facilities only)
 #
