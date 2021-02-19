@@ -165,32 +165,18 @@
 - platform: mqtt
   unique_id: longmeadow1_temperature
   name: "Longmeadow1 Temperature"
-  state_topic: "longmeadow/DHT22/Temperature"
+  state_topic: "longmeadow1/DS18b20/Temperature"
   qos: 0
   unit_of_measurement: "ºF"
-
-- platform: mqtt
-  unique_id: longmeadow1_humidity
-  name: "Longmeadow1 Humidity"
-  state_topic: "longmeadow/DHT22/Humidity"
-  qos: 0
-  unit_of_measurement: "%"
 
 - platform: mqtt
   unique_id: longmeadow2_temperature
   name: "Longmeadow2 Temperature"
-  state_topic: "longmeadow2/DHT22/Temperature"
+  state_topic: "longmeadow2/DS18b20/Temperature"
   qos: 0
   unit_of_measurement: "ºF"
 
-- platform: mqtt
-  unique_id: longmeadow2_humidity
-  name: "Longmeadow2 Humidity"
-  state_topic: "longmeadow2/DHT22/Humidity"
-  qos: 0
-  unit_of_measurement: "%"
-
-
+  
 #
 # SNMP sensors
 #
