@@ -381,6 +381,8 @@
         - binary_sensor.leak_kitchen_sink
         - binary_sensor.leak_washer
         - binary_sensor.leak_water_heater
+        - binary_sensor.leak_karens_sink
+        - binary_sensor.leak_yangs_sink
         - binary_sensor.leak_guest_sink
       from: "off"
       to: "on"
