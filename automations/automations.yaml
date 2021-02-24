@@ -379,11 +379,13 @@
         - binary_sensor.leak_refrigerator
         - binary_sensor.leak_dishwasher
         - binary_sensor.leak_kitchen_sink
-        - binary_sensor.leak_washer
+        - binary_sensor.leak_guest_toilet
         - binary_sensor.leak_water_heater
         - binary_sensor.leak_karens_sink
         - binary_sensor.leak_yangs_sink
         - binary_sensor.leak_guest_sink
+#        - binary_sensor.leak_washer
+#        - binary_sensor.leak_laundry_sink
       from: "off"
       to: "on"
   action:
@@ -1313,7 +1315,7 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.washer_battery # leak detector battery
+      entity_id: sensor.guest_toilet_battery # leak detector battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state

@@ -107,7 +107,7 @@
   qos: 0
 
 - platform: mqtt
-  unique_id: utilitycloset_waterheater
+  unique_id: utilitycloset_waterheater  # water heater on/off
   name: "Water Heater"
   state_topic: "utilitycloset/waterheater/State"
   payload_on: "1"
@@ -123,9 +123,17 @@
   qos: 0
 
 - platform: mqtt
-  unique_id: laundry_leak
-  name: "Leak Laundry"
-  state_topic: "laundryleak/leakdetector/State"
+  unique_id: washer_leak
+  name: "Leak Washer"
+  state_topic: "laundryroomleak/washer_leak/State"
+  payload_on: "1"
+  payload_off: "0"
+  qos: 0
+
+- platform: mqtt
+  unique_id: laundry_sink_leak
+  name: "Leak Laundry Sink"
+  state_topic: "laundryroomleak/laundry_sink_leak/State"
   payload_on: "1"
   payload_off: "0"
   qos: 0

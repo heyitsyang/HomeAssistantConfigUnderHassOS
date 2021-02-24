@@ -161,7 +161,19 @@ binary_sensor.leak_dishwasher:
   device_class: moisture
 binary_sensor.leak_kitchen_sink:
   device_class: moisture
-binary_sensor.leak_laundry:
+binary_sensor.leak_refrigerator:
+  device_class: moisture
+binary_sensor.leak_karens_sink:
+  device_class: moisture
+binary_sensor.leak_yangs_sink:
+  device_class: moisture
+binary_sensor.leak_guest_sink:
+  device_class: moisture
+binary_sensor.leak_guest_toilet:
+  device_class: moisture
+binary_sensor.leak_laundry_sink:
+  device_class: moisture
+binary_sensor.leak_washer:
   device_class: moisture
 binary_sensor.front_door_opened:
   friendly_name: Front Door
