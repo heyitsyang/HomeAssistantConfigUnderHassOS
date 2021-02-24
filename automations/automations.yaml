@@ -431,6 +431,8 @@
       entity_id: binary_sensor.washer_on_or_off
       from: "on"
       to: "off"
+      for:
+        minutes: 10
   condition: # only announce first load in washer
     - condition: template
       value_template: >-
