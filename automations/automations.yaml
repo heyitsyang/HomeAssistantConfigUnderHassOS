@@ -420,7 +420,7 @@
               data:
                 priority: 1        
           - delay:
-              minutes: 1
+              seconds: 30
         
         
 
