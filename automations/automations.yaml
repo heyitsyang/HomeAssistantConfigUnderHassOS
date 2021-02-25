@@ -391,6 +391,21 @@
   action:
     - service: switch.turn_off
       entity_id: switch.water_valve
+    - service: script.scr_say_phrase
+      data_template:
+        priority: 'high'
+        message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+    - service: script.scr_say_phrase
+      data_template:
+        priority: 'high'
+        message: "House water has been turned off.  Turn on manually when leak is resolved."
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "House water turned OFF"
+        message: "House water is OFF.  Turn on manually when leak is resolved."
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "House water is OFF.  Turn on manually when leak is resolved."
     - repeat:
         count: 5
         sequence:
@@ -406,17 +421,7 @@
                 priority: 1        
           - delay:
               minutes: 1
-    - service: script.scr_say_phrase
-      data_template:
-        priority: 'high'
-        message: "House water is off.  Turn on manually when leak is resolved."
-    - service: notify.pushover_yangandkaren
-      data:
-        title: "House water turned OFF"
-        message: "House water is OFF.  Turn on manually when leak is resolved."
-    - service: notify.alexa_yellow_ring
-      data:
-        message: "House water is OFF.  Turn on manually when leak is resolved."        
+        
         
 
 #
