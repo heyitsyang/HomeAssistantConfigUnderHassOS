@@ -407,7 +407,7 @@
       data:
         message: "House water is OFF.  Turn on manually when leak is resolved."
     - repeat:
-        count: 5
+        count: 4
         sequence:
           - service: script.scr_say_phrase
             data_template:
@@ -433,11 +433,9 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.washer_on_or_off
+      entity_id: binary_sensor.washer_on_or_off   # time adjust is in binary_sensor.yaml
       from: "on"
       to: "off"
-      for:
-        minutes: 10
   condition: # only announce first load in washer
     - condition: template
       value_template: >-
