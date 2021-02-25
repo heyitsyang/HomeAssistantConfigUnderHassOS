@@ -394,7 +394,7 @@
     - service: script.scr_say_phrase
       data_template:
         priority: 'high'
-        message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+        message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
     - service: script.scr_say_phrase
       data_template:
         priority: 'high'
@@ -412,11 +412,11 @@
           - service: script.scr_say_phrase
             data_template:
               priority: 'high'
-              message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+              message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
           - service: notify.pushover_yangandkaren
             data:
-              title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
-              message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') }}"
+              title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
+              message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
               data:
                 priority: 1        
           - delay:
