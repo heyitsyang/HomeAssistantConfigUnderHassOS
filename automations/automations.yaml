@@ -384,8 +384,8 @@
         - binary_sensor.leak_karens_sink
         - binary_sensor.leak_yangs_sink
         - binary_sensor.leak_guest_sink
-#        - binary_sensor.leak_washer
-#        - binary_sensor.leak_laundry_sink
+        - binary_sensor.leak_washer
+        - binary_sensor.leak_laundry_sink
       from: "off"
       to: "on"
   action:
