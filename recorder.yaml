@@ -8,7 +8,7 @@
 #################################################
 
 
-purge_keep_days: 10                    # how many days of history to keep
+purge_keep_days: 31                    # how many days of history to keep
 
 #
 # INCLUDES & EXCLUDES ARE SAME AS influxdb.yaml

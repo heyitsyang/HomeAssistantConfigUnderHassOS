@@ -15,26 +15,26 @@ default_measurement: state
 #
 include:
   domains:
-    - automation
+#   - automation
     - binary_sensor
-    - input_boolean
-    - input_select
-    - input_number
-    - input_text
-    - camera
-    - climate
-    - cover
-    - device_tracker
-    - light
-    - lock
-    - media_player
+#    - input_boolean
+#    - input_select
+#    - input_number
+#    - input_text
+#    - camera
+#    - climate
+#    - cover
+#    - device_tracker
+#    - light
+#    - lock
+#    - media_player
     - sensor
     - filter
-    - scene
-    - script
-    - switch
-    - proximity
-    - person
+#    - scene
+#    - script
+#    - switch
+#    - proximity
+#    - person
 exclude:
   domains:
     - group
