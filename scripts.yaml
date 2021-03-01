@@ -84,17 +84,6 @@ scr_spt_start:
       data:
         topic: watermain/cmd/sptStart
 
-# the below is used for manual testing to avoid setting the last_triggered attribute in scr_spt_start
-scr_unregistered_spt_test: 
-  sequence:
-    - service: mqtt.publish
-      data:
-        topic: watermain/cmd/sptDuration
-        payload_template: "{{ states('input_number.inp_num_spt_duration') }}"
-    - service: mqtt.publish
-      data:
-        topic: watermain/cmd/sptStart
-
 #
 # PERFORM INDIV. HOME ARRIVAL ACTIONS
 #

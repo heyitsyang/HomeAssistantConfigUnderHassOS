@@ -295,7 +295,7 @@
 
 
 #
-# INFULXDB SENSORS
+# INFLUXDB SENSORS
 #
 
 - platform: influxdb
@@ -324,7 +324,7 @@
     last_static_pressure_test:
       friendly_name: "Last Static Pressure Test"
       value_template: >-
-        {{ as_timestamp( state_attr('sensor.water_static_pressure_test', 'test_start') ) 
+        {{ as_timestamp( state_attr('sensor.water_static_pressure_test', 'test_end') ) 
         | timestamp_custom ('%m/%d %H:%M') }}
 
 - platform: template
