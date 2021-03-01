@@ -71,7 +71,8 @@
     # don't run more often than every N hours
     - condition: template
       value_template: >-
-        {{ ( ( as_timestamp(now()) - as_timestamp(state_attr(" script.scr_spt_start", "last_triggered") ) | int > (8 * 60 * 60)) ) }}
+        {{ ( (as_timestamp(now()) - as_timestamp(state_attr("automation.aut_start_spt", "last_triggered"))) | int ) 
+        > (8 * 60 * 60) }}
   action:
     - choose:  # if water heater is ON, wait until OFF
         - conditions:
