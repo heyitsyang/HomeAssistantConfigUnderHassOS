@@ -60,6 +60,10 @@
       for:
         minutes: 15
   condition:
+    # don't execute if Overnight Guest is ON
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode 
+      state: "off"
     # don't execute if Extended Absence is ON (valve is OFF for duration of absence)
     - condition: state
       entity_id: input_boolean.inp_bool_extended_absence_mode 
