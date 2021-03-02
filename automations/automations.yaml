@@ -60,6 +60,10 @@
       for:
         minutes: 15
   condition:
+    # don't execute if Extended Absence is ON
+    - condition: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode 
+      state: "off"
     # don't continue if dishwasher is ON
     - condition: state
       entity_id: binary_sensor.dishwasher_on_or_off
@@ -111,9 +115,9 @@
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
       state: "off" # in case we have a guest
-    - condition: template # testing for 'not_home' doesn't work if in a known zone
+    - condition: template # testing for 'not_home' doesn't work if in a known zone so use != 'home'
       value_template: "{{ states('person.yang') != 'home' }}"
-    - condition: template # testing for 'not_home' doesn't work if in a known zone
+    - condition: template # testing for 'not_home' doesn't work if in a known zone so use != 'home'
       value_template: "{{ states('person.karen') != 'home' }}"
   action:
     - service: script.scr_vacuum_start_custom_cleaning
@@ -1482,6 +1486,8 @@
       from: "on"
       to: "off"
   action:
+    - service: switch.turn_on
+      entity_id: switch.water_valve
     - service: switch.turn_on
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
     - service: script.scr_say_phrase
