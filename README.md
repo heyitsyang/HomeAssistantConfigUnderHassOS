@@ -1,6 +1,6 @@
 # Yang's Home Assistant configuration files
 
-This repository are my Home Assistant configuration files.
+This repository contains my Home Assistant configuration files.
 
 ## My list of devices integrated with Home Assistant
 
