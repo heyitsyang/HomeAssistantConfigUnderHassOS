@@ -385,7 +385,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.leak_refrigerator
+#        - binary_sensor.leak_refrigerator
         - binary_sensor.leak_dishwasher
         - binary_sensor.leak_kitchen_sink
         - binary_sensor.leak_guest_toilet
@@ -393,8 +393,8 @@
         - binary_sensor.leak_karens_sink
         - binary_sensor.leak_yangs_sink
         - binary_sensor.leak_guest_sink
-        - binary_sensor.leak_washer
-        - binary_sensor.leak_laundry_sink
+#        - binary_sensor.leak_washer
+#        - binary_sensor.leak_laundry_sink
       from: "off"
       to: "on"
   action:
@@ -1395,20 +1395,17 @@
   condition:
     condition: and
     conditions:
-      - condition: state # only bother if currently OFF
-        entity_id: input_boolean.inp_bool_extended_absence_mode
-        state: "off"
       - condition: state
         entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
         state: "off" # in case we have a guest while we are gone
   action:
-    - service: script.scr_shared_extended_absence_on
     - service: script.scr_say_phrase
       data_template:
         message: "Extended absence mode manually enabled"
     - service: notify.gmail_to_yang
       data:
         message: "Extended absence mode manually enabled"
+    - service: script.scr_shared_extended_absence_on
 
 - id: aut_extended_absence_auto_on
   alias: "aut extended absence auto on"
