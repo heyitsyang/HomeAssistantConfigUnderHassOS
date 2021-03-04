@@ -20,6 +20,7 @@ smart_home:
       - input_boolean.inp_bool_theater_mode
       - input_boolean.inp_bool_guest_mode
       - input_boolean.inp_bool_sleeping
+      - input_boolean.inp_bool_extended_absence_mode
       - script.scr_goodnight
       - script.scr_vacuum_start_custom_cleaning
       - script.scr_reset_mood_lights_to_default
