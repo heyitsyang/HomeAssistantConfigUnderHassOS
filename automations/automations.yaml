@@ -1519,8 +1519,8 @@
   alias: "aut security occupied sim"
   initial_state: true
   trigger:
-    - platform: time
-      at: "20:00:00"
+    - platform: sun
+      event: sunset
   condition:
     - condition: state
       entity_id: input_boolean.inp_bool_extended_absence_mode
