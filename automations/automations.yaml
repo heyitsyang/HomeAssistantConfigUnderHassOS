@@ -1334,15 +1334,15 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.guest_sink_battery # leak detector battery
+      entity_id: sensor.leak_guest_sink_battery # leak detector battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.guest_toilet_battery # leak detector battery
+      entity_id: sensor.leak_guest_toilet_battery # leak detector battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.master_toilet_battery # leak detector battery
+      entity_id: sensor.leak_master_toilet_battery # leak detector battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state
