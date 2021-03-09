@@ -388,8 +388,8 @@
       value_template: "{{ state_attr('lock.back_door_lock','battery_level') | int }}"
       unit_of_measurement: "%"
 
-    living_room_motion_sensor_battery:
-      friendly_name: "Living Room Motion Battery"
+    living_area_motion_sensor_battery:
+      friendly_name: "Living Area Motion Battery"
       value_template: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int }}"
       unit_of_measurement: "%"
 
