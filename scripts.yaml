@@ -129,6 +129,7 @@ scr_occupied_sim:
 # SHARED EXTENDED ABSENCE ACTIONS
 #
 scr_shared_extended_absence_on:
+  mode: restart  # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: script.scr_check_sunrm_windows
     - service: script.scr_close_sunrm_shades
