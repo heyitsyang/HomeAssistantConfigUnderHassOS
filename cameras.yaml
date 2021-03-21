@@ -9,7 +9,7 @@
   name: Radar
 
 - platform: ffmpeg
-  name: 'GreatRoom camera'                        # DIGOO M1Ql ONVIF2.0/RTSP camera
+  name: 'GreatRoom camera'                       # DIGOO M1Ql ONVIF2.0/RTSP camera
   input: !secret greatroom_url
 
 - platform: ffmpeg
