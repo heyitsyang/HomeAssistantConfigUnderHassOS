@@ -7,9 +7,13 @@
     10.0.0.152:
       name: "Kitchen LEDs Front"
       mode: "rgb"
-    10.0.0.153:
-      name: "Kitchen LEDs  Rear"
-      mode: "rgb"
+    10.0.0.154:
+      name: "Kitchen LEDs Lower"
+      mode: "rgbw"
+    10.0.0.155:
+      name: "Kitchen LEDs Rear"
+      mode: "rgbw"
+
 
 
 # Change switch entities to light_switch so they act like lights

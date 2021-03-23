@@ -303,9 +303,7 @@ longmeadow_sensors:
   name: "Longmeadow Sensors"
   entities:
   - sensor.longmeadow1_temperature
-  - sensor.longmeadow1_humidity
   - sensor.longmeadow2_temperature
-  - sensor.longmeadow2_humidity
 
 all_lighting:                                    # This group created for frontend UI use
   name: 'All Lighting'                           # all_lights cannot be used - reserved & automatically created by HA/Wink also includes fans
@@ -326,6 +324,7 @@ all_lighting:                                    # This group created for fronte
   - switch.candles
   - light.kitchen_leds_front
   - light.kitchen_leds_rear
+  - light.kitchen_leds_lower
   - switch.entryway_lights
   - switch.mood_cats
 
@@ -348,6 +347,7 @@ all_lighting_xabove_cabinet:
 #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
   - light.kitchen_leds_front
   - light.kitchen_leds_rear
+  - light.kitchen_leds_lower
   - switch.entryway_lights
   - switch.mood_cats
 
@@ -370,6 +370,7 @@ kitchen_lights:
   entities:
   - light.island_lights
   - light.cabinet_lights
+  - light.kitchen_leds_lower
 
 ceiling_fans:
   name: 'Ceiling Fans'
@@ -408,6 +409,9 @@ indoor_lights:
   - switch.entryway_lights
 #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
   - switch.candles
+  - light.kitchen_leds_front
+  - light.kitchen_leds_rear
+  - light.kitchen_leds_lower
 
 garage_opener_power:
   name: 'Garage door power'
