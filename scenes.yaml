@@ -1,53 +1,229 @@
-##  Note: leading spaces in each line are critical
-##  to yaml interpretation - do not delete them
-  
-############
-## SCENES ##
-############
-
-- id: default_led_mood                          # Warm White
-  name: "Default LED Mood"                      # default kitchen led light color combo
+- id: default_led_mood
+  name: Default LED Mood
   entities:
     light.kitchen_leds_rear:
-      state: "on"
-      xy_color: [0.562, 0.403]
-      brightness: 24
-    light.kitchen_leds_front:                   # for some reason preceding entities with the - character causes a
-      state: "on"                               # a config error in scenes
-      xy_color: [0.354, 0.239]
-      brightness: 16
+      friendly_name: Kitchen LEDs Rear
+      icon: mdi:led-strip-variant
+      state: 'on'
+      supported_features: 151
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      brightness: 38
+      hs_color:
+      - 43.636
+      - 86.842
+      rgb_color:
+      - 255
+      - 194
+      - 33
+      xy_color:
+      - 0.518
+      - 0.445
+      white_value: 10
+    light.kitchen_leds_front:
+      friendly_name: Kitchen LEDs Front
+      icon: mdi:led-strip-variant
+      state: 'on'
+      supported_features: 21
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      brightness: 23
+      hs_color:
+      - 268
+      - 65.217
+      rgb_color:
+      - 166
+      - 88
+      - 255
+      xy_color:
+      - 0.262
+      - 0.134
 
-- id: trash_night_led_mood                      # Green
-  name: "Trash Night LED Mood"                  # trash night reminder kitchen led light color combo
+- id: trash_night_led_mood
+  name: Trash Night LED Mood
   entities:
     light.kitchen_leds_rear:
-      state: "on"
-      xy_color: [0.246, 0.638]
-      brightness: 24
-    light.kitchen_leds_front:                   # for some reason preceding entities with the - character causes a
-      state: "on"                               # a config error in scenes
-      xy_color: [0.246, 0.638]
+      friendly_name: Kitchen LEDs Rear
+      icon: mdi:led-strip-variant
+      state: 'on'
+      supported_features: 151
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      brightness: 36
+      hs_color:
+      - 120
+      - 86.111
+      rgb_color:
+      - 35
+      - 255
+      - 35
+      xy_color:
+      - 0.181
+      - 0.724
+      white_value: 10
+    light.kitchen_leds_front:
+      friendly_name: Kitchen LEDs Front
+      icon: mdi:led-strip-variant
+      state: 'on'
+      supported_features: 21
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
       brightness: 16
+      hs_color:
+      - 105
+      - 75
+      rgb_color:
+      - 111
+      - 255
+      - 63
+      xy_color:
+      - 0.242
+      - 0.648
 
 - id: sun_room_uplight_brightness
-  name: "Sun Room Uplights Brightness"
+  name: Sun Room Uplights Brightness
   entities:
     light.sun_room_uplights:
-      state: "on"
+      state: 'on'
       brightness: 51
-
 - id: living_room_theater_mode
-  name: "Living Room Theater Mode"
+  name: Living Room Theater Mode
   entities:
     light.living_room_lights:
-      state: "on"
+      state: 'on'
       brightness: 30
-
 - id: living_room_normal_mode
-  name: "Living Room Normal Mode"
+  name: Living Room Normal Mode
   entities:
     light.living_room_lights:
-      state: "on"
-      brightness: "{{states('sensor.suggested_brightness') | int}}"
-
+      state: 'on'
+      brightness: '{{states(''sensor.suggested_brightness'') | int}}'
+- id: '1616546610511'
+  name: Default Kitchen Counter
+  entities:
+    light.kitchen_leds_lower:
+      friendly_name: Kitchen Counter Lights
+      icon: mdi:led-strip-variant
+      state: 'on'
+      supported_features: 151
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      brightness: 191
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      white_value: 255
 
