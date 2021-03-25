@@ -1273,8 +1273,8 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.filtered_rack_exhaust_fan_speed
-      below: 550
-      for: "00:00:10"
+      below: 520
+      for: "00:00:15"
   action:
     - service: notify.gmail_to_yang
       data_template:
