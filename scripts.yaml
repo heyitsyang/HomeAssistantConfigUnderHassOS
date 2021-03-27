@@ -465,6 +465,16 @@ scr_frontporch_activity:
             - /config/www/camera_stills/doorbell.jpg
             - /config/www/camera_stills/frontporch.jpg
             - /config/www/camera_stills/driveway.jpg
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "Front door activity"
+        message: "Front door activity detected. See https://shencentral.duckdns.org:61615/states/group.cameras for live view"
+        data:
+          url: "https://shencentral.duckdns.org:61615/states/group.cameras"
+          attachment:
+            - "/config/www/camera_stills/doorbell.jpg"
+            - "/config/www/camera_stills/frontporch.jpg"
+            - "/config/www/camera_stills/driveway.jpg"
 
 scr_front_door_lights_on:
   sequence:
