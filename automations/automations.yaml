@@ -62,37 +62,37 @@
   condition:
     # don't execute if Overnight Guest is ON
     - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode 
+      entity_id: input_boolean.inp_bool_guest_mode
       state: "off"
     # don't execute if Extended Absence is ON (valve is OFF for duration of absence)
     - condition: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode 
+      entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "off"
     # don't continue if dishwasher is ON
     - condition: state
       entity_id: binary_sensor.dishwasher_on_or_off
-      state: 'off'
+      state: "off"
     # don't continue if washer is ON
     - condition: state
       entity_id: binary_sensor.washer_on_or_off
-      state: 'off'
+      state: "off"
     # don't run more often than every N hours from last test
     - condition: template
       value_template: >-
         {{ ( (as_timestamp(now()) - as_timestamp(state_attr('sensor.water_static_pressure_test', 'test_end'))) | int ) 
         > (8 * 60 * 60) }}
   action:
-    - choose:  # if water heater is ON, wait until OFF
+    - choose: # if water heater is ON, wait until OFF
         - conditions:
             - condition: state
               entity_id: binary_sensor.water_heater
-              state: 'on'
+              state: "on"
           sequence:
             - wait_for_trigger:
                 - platform: state
                   entity_id: binary_sensor.water_heater
-                  from: 'on'
-                  to: 'off'
+                  from: "on"
+                  to: "off"
                   for:
                     minutes: 5
     - service: script.scr_spt_start
@@ -394,7 +394,7 @@
         - binary_sensor.leak_guest_sink
         - binary_sensor.leak_master_toilet
         - binary_sensor.leak_guest_toilet
-        - binary_sensor.leak_washer
+        #        - binary_sensor.leak_washer
         - binary_sensor.leak_laundry_sink
       from: "off"
       to: "on"
@@ -403,11 +403,11 @@
       entity_id: switch.water_valve
     - service: script.scr_say_phrase
       data_template:
-        priority: 'high'
+        priority: "high"
         message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
     - service: script.scr_say_phrase
       data_template:
-        priority: 'high'
+        priority: "high"
         message: "House water has been turned off.  Turn on manually when leak is resolved."
     - service: notify.pushover_yangandkaren
       data:
@@ -421,18 +421,16 @@
         sequence:
           - service: script.scr_say_phrase
             data_template:
-              priority: 'high'
+              priority: "high"
               message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
           - service: notify.pushover_yangandkaren
             data:
               title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
               message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
               data:
-                priority: 1        
+                priority: 1
           - delay:
               seconds: 30
-        
-        
 
 #
 # WASHER DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
@@ -443,7 +441,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.washer_on_or_off   # time adjust is in binary_sensor.yaml
+      entity_id: binary_sensor.washer_on_or_off # time adjust is in binary_sensor.yaml
       from: "on"
       to: "off"
   condition: # only announce first load in washer
@@ -458,8 +456,6 @@
     - service: notify.alexa_yellow_ring
       data_template:
         message: "The washer cycle has finished"
-
-
 
 #
 #  GUEST MODE MANUALLY TURNED ON
@@ -1273,7 +1269,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.filtered_rack_exhaust_fan_speed
-      below: 520
+      below: 550
       for: "00:00:15"
   action:
     - service: notify.gmail_to_yang
