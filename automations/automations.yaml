@@ -394,7 +394,7 @@
         - binary_sensor.leak_guest_sink
         - binary_sensor.leak_master_toilet
         - binary_sensor.leak_guest_toilet
-        #        - binary_sensor.leak_washer
+        - binary_sensor.leak_washer
         - binary_sensor.leak_laundry_sink
       from: "off"
       to: "on"
