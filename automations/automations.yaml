@@ -377,8 +377,20 @@
         message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
 
 #
-# LEAK DETECTED
+# LEAK DETECTION
 #
+- id: aut_slow_leak_detected
+  alias: "aut slow leak detected"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.water_static_pressure_test
+      below: -0.99
+  action:
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "Slow water leak detected"
+        message: "Slow water leak detected!  SPT result: {{ states('sensor.water_static_pressure_test') }}"
 - id: aut_leak_detected
   alias: "aut leak detected"
   initial_state: true
@@ -1577,7 +1589,11 @@
     - condition: template
       value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
   action:
-    - service: notify.pushover_yang
+#    - service: notify.pushover_yang
+#      data:
+#        title: "Half mile trigger"
+#        message: "Half mile exceeded"
+    - service: notify.mobile_app_ys_phone
       data:
         title: "Half mile trigger"
         message: "Half mile exceeded"
