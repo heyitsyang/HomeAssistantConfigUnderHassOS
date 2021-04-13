@@ -1589,11 +1589,11 @@
     - condition: template
       value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
   action:
-#    - service: notify.pushover_yang
-#      data:
-#        title: "Half mile trigger"
-#        message: "Half mile exceeded"
-    - service: notify.mobile_app_ys_phone
+    - service: notify.pushover_yang
       data:
         title: "Half mile trigger"
         message: "Half mile exceeded"
+#    - service: notify.mobile_app_ys_phone
+#      data:
+#        title: "Half mile trigger"
+#        message: "Half mile exceeded"
