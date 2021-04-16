@@ -1354,6 +1354,10 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
+      entity_id: sensor.button_kitchen_counter_battery # button battery
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
       entity_id: sensor.sun_room_remote_1_battery
       below: 25 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
