@@ -389,8 +389,8 @@
   action:
     - service: notify.gmail_to_yang
       data_template:
-        title: "Slow water leak detected"
-        message: "Slow water leak detected!  SPT result: {{ states('sensor.water_static_pressure_test') }}"
+        title: "SPT water leak detected"
+        message: "Leak detected during Static Pressure Test!  SPT result: {{ states('sensor.water_static_pressure_test') }}"
 - id: aut_leak_detected
   alias: "aut leak detected"
   initial_state: true
