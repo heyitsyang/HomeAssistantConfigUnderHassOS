@@ -1580,7 +1580,7 @@
 # PROXIMITY TESTING
 #
 - id: aut_half_mile_departure
-  alias: "aut half maile departure"
+  alias: "aut half mile departure"
   initial_state: true
   trigger:
     - platform: template
