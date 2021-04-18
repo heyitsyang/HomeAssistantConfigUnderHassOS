@@ -4,7 +4,7 @@
 # LED Strips using Flux LED
 - platform: flux_led
   devices:
-    10.0.0.152:
+    10.0.0.153:
       name: "Kitchen LEDs Front"
       mode: "rgb"
     10.0.0.154:
