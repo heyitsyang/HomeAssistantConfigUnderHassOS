@@ -6,7 +6,7 @@
   devices:
     10.0.0.153:
       name: "Kitchen LEDs Front"
-      mode: "rgb"
+      mode: "rgbw"
     10.0.0.154:
       name: "Kitchen LEDs Lower"
       mode: "rgbw"
