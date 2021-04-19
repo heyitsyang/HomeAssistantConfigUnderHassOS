@@ -388,19 +388,11 @@ scr_motion_lighting_on:
 # PATHWAY MOTION LIGHTING
 scr_pathway_motion_lighting_on:
   sequence:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.lum_mood_lights_f_solar_trig
-          state: "on"
-        - condition: or
-          conditions:
-            - condition: state
-              entity_id: input_boolean.inp_bool_sleeping # if in bed or
-              state: "on"
-            - condition: time # after midnight (for guests if owners not home)
-              after: "00:01"
-    - service: script.scr_mood_lighting_on
+    - condition: state
+      entity_id: binary_sensor.lum_mood_lights_f_solar_trig
+      state: "on"
+    - service: homeassistant.turn_on
+      entity_id: group.pathway_lights
 
 scr_pathway_motion_lighting_off:
   sequence:
@@ -409,10 +401,10 @@ scr_pathway_motion_lighting_off:
     - condition: sun # and before sunrise
       before: sunrise
     - condition: state
-      entity_id: group.mood_lights
+      entity_id: group.pathway_lights
       state: "on"
     - service: homeassistant.turn_off
-      entity_id: group.mood_lights
+      entity_id: group.pathway_lights
 
 #
 # GREAT ROOM LIGHTING

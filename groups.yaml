@@ -207,6 +207,12 @@ mood_lights:
   - light.sun_room_uplights
   - switch.mood_cats
 
+pathway_lights:
+  name: "Pathway Lights"
+  entities:
+  - switch.candles
+  - light.kitchen_leds_rear
+
 sunrm_shades:                                               # This group is used to display all shades individually in the frontend UI
   name: "Sun Room Shades"                                   # Using cover.sun_room_shades (defined in covers.yaml)
   entities:
@@ -371,6 +377,7 @@ kitchen_lights:
   - light.island_lights
   - light.cabinet_lights
   - light.kitchen_leds_lower
+  - light.kitchen_leds_front
 
 ceiling_fans:
   name: 'Ceiling Fans'
