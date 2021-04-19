@@ -17,6 +17,7 @@ This repository contains my Home Assistant configuration files.
 - Luminosity sensors
 - Washer current sensor (SonOff S31/Tasmota)
 - Garage door monitor & controller
+- Water leak detection system w/valve, pressure sensor, moisture sensors
 
 **Other fun stuff  working with Home Assistant**
 - Amazon Echo
@@ -29,6 +30,7 @@ This repository contains my Home Assistant configuration files.
 - Misc RTSP capable network cameras
 - Monitor RaspberryPi Bluetooth Presence Detection
 - Flux LED strip controllers
+- Xiaomi/Aquara zigbee buttons
 
 
 
