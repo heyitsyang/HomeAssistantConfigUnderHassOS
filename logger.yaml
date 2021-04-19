@@ -31,3 +31,8 @@
     homeassistant.components.binary_sensor: error
 #    homeassistant.components.automation: info                       # enable this to help debug
     homeassistant.core: info
+  filters:
+    homeassistant.components.neato.vacuum:
+      - "Unable to communicate with robot"
+    homeassistant.components.neato.switch:
+      - "Unable to communicate with robot"
