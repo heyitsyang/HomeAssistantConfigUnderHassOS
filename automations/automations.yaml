@@ -549,6 +549,7 @@
       entity_id: binary_sensor.living_area_motion
       to: "on"
   action:
+    - service: script.scr_check_if_suspicious
     - choose:
       - alias: "Turn on pathway lighting if sleeping"
         conditions:
@@ -559,11 +560,12 @@
                 state: "on"
               - condition: time # after midnight (for guests if owners not home)
                 after: "00:01"
+                before: "07:00"
         sequence:
           - service: script.scr_pathway_motion_lighting_on
       default:
         - service: script.scr_motion_lighting_on  # living room only
-    - service: script.scr_check_if_suspicious
+
 
 #
 # AUTO LIVING AREA LIGHTING - LUMINOSITY BASED
