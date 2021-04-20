@@ -2,10 +2,6 @@
   name: Default LED Mood
   entities:
     light.kitchen_leds_rear:
-      friendly_name: Kitchen LEDs Rear
-      icon: mdi:led-strip-variant
-      state: 'on'
-      supported_features: 151
       min_mireds: 153
       max_mireds: 500
       effect_list:
@@ -30,23 +26,35 @@
       - yellow_fade
       - yellow_strobe
       - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
       brightness: 38
+      rgbw_color:
+      - 255
+      - 187
+      - 26
+      - 0
+      white_value: 0
       hs_color:
-      - 43.636
-      - 86.842
+      - 42.353
+      - 89.474
       rgb_color:
       - 255
-      - 194
-      - 33
+      - 187
+      - 26
       xy_color:
-      - 0.518
-      - 0.445
-      white_value: 10
-    light.kitchen_leds_front:
-      friendly_name: Kitchen LEDs Front
+      - 0.529
+      - 0.439
+      friendly_name: Kitchen LEDs Rear
+      supported_features: 151
       icon: mdi:led-strip-variant
       state: 'on'
-      supported_features: 21
+    light.kitchen_leds_front:
+      min_mireds: 153
+      max_mireds: 500
       effect_list:
       - blue_fade
       - blue_strobe
@@ -69,26 +77,36 @@
       - yellow_fade
       - yellow_strobe
       - random
-      brightness: 23
-      hs_color:
-      - 268
-      - 65.217
-      rgb_color:
-      - 166
-      - 88
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
+      brightness: 8
+      rgbw_color:
       - 255
+      - 191
+      - 31
+      - 10
+      white_value: 10
+      hs_color:
+      - 42.857
+      - 87.5
+      rgb_color:
+      - 255
+      - 191
+      - 31
       xy_color:
-      - 0.262
-      - 0.134
-
+      - 0.522
+      - 0.442
+      friendly_name: Kitchen LEDs Front
+      supported_features: 151
+      icon: mdi:led-strip-variant
+      state: 'on'
 - id: trash_night_led_mood
   name: Trash Night LED Mood
   entities:
     light.kitchen_leds_rear:
-      friendly_name: Kitchen LEDs Rear
-      icon: mdi:led-strip-variant
-      state: 'on'
-      supported_features: 151
       min_mireds: 153
       max_mireds: 500
       effect_list:
@@ -113,23 +131,35 @@
       - yellow_fade
       - yellow_strobe
       - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
       brightness: 36
-      hs_color:
-      - 120
-      - 86.111
-      rgb_color:
-      - 35
+      rgbw_color:
+      - 0
       - 255
-      - 35
-      xy_color:
-      - 0.181
-      - 0.724
+      - 56
+      - 10
       white_value: 10
-    light.kitchen_leds_front:
-      friendly_name: Kitchen LEDs Front
+      hs_color:
+      - 133.333
+      - 100
+      rgb_color:
+      - 0
+      - 255
+      - 56
+      xy_color:
+      - 0.171
+      - 0.711
+      friendly_name: Kitchen LEDs Rear
+      supported_features: 151
       icon: mdi:led-strip-variant
       state: 'on'
-      supported_features: 21
+    light.kitchen_leds_front:
+      min_mireds: 153
+      max_mireds: 500
       effect_list:
       - blue_fade
       - blue_strobe
@@ -152,18 +182,32 @@
       - yellow_fade
       - yellow_strobe
       - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
       brightness: 16
-      hs_color:
-      - 105
-      - 75
-      rgb_color:
-      - 111
+      rgbw_color:
+      - 0
       - 255
-      - 63
+      - 47
+      - 0
+      white_value: 0
+      hs_color:
+      - 131.25
+      - 100
+      rgb_color:
+      - 0
+      - 255
+      - 47
       xy_color:
-      - 0.242
-      - 0.648
-
+      - 0.171
+      - 0.721
+      friendly_name: Kitchen LEDs Front
+      supported_features: 151
+      icon: mdi:led-strip-variant
+      state: 'on'
 - id: sun_room_uplight_brightness
   name: Sun Room Uplights Brightness
   entities:
@@ -186,10 +230,6 @@
   name: Default Kitchen Counter
   entities:
     light.kitchen_leds_lower:
-      friendly_name: Kitchen Counter Lights
-      icon: mdi:led-strip-variant
-      state: 'on'
-      supported_features: 151
       min_mireds: 153
       max_mireds: 500
       effect_list:
@@ -214,7 +254,18 @@
       - yellow_fade
       - yellow_strobe
       - random
-      brightness: 191
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
+      brightness: 255
+      rgbw_color:
+      - 255
+      - 255
+      - 255
+      - 255
+      white_value: 255
       hs_color:
       - 0
       - 0
@@ -225,5 +276,112 @@
       xy_color:
       - 0.323
       - 0.329
-      white_value: 255
-
+      friendly_name: Kitchen Counter Lights
+      supported_features: 151
+      icon: mdi:led-strip-variant
+      state: 'on'
+- id: '1618884078126'
+  name: Bright LED Mood
+  entities:
+    light.kitchen_leds_front:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
+      brightness: 38
+      rgbw_color:
+      - 255
+      - 255
+      - 255
+      - 40
+      white_value: 40
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: Kitchen LEDs Front
+      supported_features: 151
+      icon: mdi:led-strip-variant
+      state: 'on'
+    light.kitchen_leds_rear:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      - rgbw
+      color_mode: rgbw
+      brightness: 38
+      rgbw_color:
+      - 255
+      - 255
+      - 255
+      - 40
+      white_value: 40
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: Kitchen LEDs Rear
+      supported_features: 151
+      icon: mdi:led-strip-variant
+      state: 'on'
