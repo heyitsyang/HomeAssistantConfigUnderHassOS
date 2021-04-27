@@ -399,7 +399,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.rackups_battery_runtime
-      below: 300 # in seconds
+      below: 600 # in seconds
   condition:  # prevent false trigger from disconnected UPS comms
     condition: template
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
