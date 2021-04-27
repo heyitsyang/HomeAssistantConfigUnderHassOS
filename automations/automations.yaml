@@ -356,6 +356,65 @@
 ##################################################
 
 #
+# UNINTERRUPTABLE POWER SUPPLY EVENTS
+#
+- id: aut_ups_on_battery_mode
+  alias: "aut ups on battery mode"
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.rackups_input_voltage') | float) <= (states('sensor.rackups_low_voltage_transfer') | float) }}
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.rackups_input_voltage') | float) >= (states('sensor.rackups_high_voltage_transfer') | float) }}
+  condition:
+    condition: template  # prevent false trigger from disconnected UPS comms
+    value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
+  action:
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "HA UPS on battery power"
+        message: "HA UPS on battery mode: {{ states('sensor.rackups_status') }}"
+
+- id: aut_ups_on_ac_mode
+  alias: "aut ups on ac mode"
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: >-
+        {{ ((states('sensor.rackups_input_voltage') | float) > (states('sensor.rackups_low_voltage_transfer') | float))
+          and ((states('sensor.rackups_input_voltage') | float) < (states('sensor.rackups_high_voltage_transfer') | float)) }}
+  condition:
+    condition: template  # prevent false trigger from disconnected UPS comms
+    value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
+  action:
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "HA grid power restored"
+        message: "HA UPS on AC mode: {{ states('sensor.rackups_status') }}"
+
+- id: aut_ups_emergency_shutdown
+  alias: "auto ups emergency shutdown"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.rackups_battery_runtime
+      below: 300 # in seconds
+  condition:  # prevent false trigger from disconnected UPS comms
+    condition: template
+    value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
+  action:
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "HA UPS emergency shutdown"
+        message: "UPS emergency shutdown at {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
+    - service: notify.pushover_yang
+      data_template:
+        title: "HA UPS emergency shutdown"
+        message: "UPS emergency shutdown at {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
+    - service: hassio.host_shutdown
+
+#
 # WATER EXPANSION TANK FAULT
 #
 - id: aut_expansion_tank_fault
@@ -551,21 +610,20 @@
   action:
     - service: script.scr_check_if_suspicious
     - choose:
-      - alias: "Turn on pathway lighting if sleeping"
-        conditions:
-          - condition: or
-            conditions:
-              - condition: state
-                entity_id: input_boolean.inp_bool_sleeping # if in bed or
-                state: "on"
-              - condition: time # after midnight (for guests if owners not home)
-                after: "00:01"
-                before: "07:00"
-        sequence:
-          - service: script.scr_pathway_motion_lighting_on
+        - alias: "Turn on pathway lighting if sleeping"
+          conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: input_boolean.inp_bool_sleeping # if in bed or
+                  state: "on"
+                - condition: time # after midnight (for guests if owners not home)
+                  after: "00:01"
+                  before: "07:00"
+          sequence:
+            - service: script.scr_pathway_motion_lighting_on
       default:
-        - service: script.scr_motion_lighting_on  # living room only
-
+        - service: script.scr_motion_lighting_on # living room only
 
 #
 # AUTO LIVING AREA LIGHTING - LUMINOSITY BASED
