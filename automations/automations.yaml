@@ -407,11 +407,11 @@
     - service: notify.gmail_to_yang
       data_template:
         title: "HA UPS emergency shutdown"
-        message: "UPS emergency shutdown at {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
+        message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
     - service: notify.pushover_yang
       data_template:
         title: "HA UPS emergency shutdown"
-        message: "UPS emergency shutdown at {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
+        message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
     - service: hassio.host_shutdown
 
 #
