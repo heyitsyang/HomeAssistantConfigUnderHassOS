@@ -369,7 +369,7 @@
       value_template: >-
         {{ (states('sensor.rackups_input_voltage') | float) >= (states('sensor.rackups_high_voltage_transfer') | float) }}
   condition:
-    condition: template  # prevent false trigger from disconnected UPS comms
+    condition: template # prevent false trigger from disconnected UPS comms
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   action:
     - service: notify.gmail_to_yang
@@ -386,7 +386,7 @@
         {{ ((states('sensor.rackups_input_voltage') | float) > (states('sensor.rackups_low_voltage_transfer') | float))
           and ((states('sensor.rackups_input_voltage') | float) < (states('sensor.rackups_high_voltage_transfer') | float)) }}
   condition:
-    condition: template  # prevent false trigger from disconnected UPS comms
+    condition: template # prevent false trigger from disconnected UPS comms
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   action:
     - service: notify.gmail_to_yang
@@ -400,7 +400,7 @@
     - platform: numeric_state
       entity_id: sensor.rackups_battery_runtime
       below: 600 # in seconds
-  condition:  # prevent false trigger from disconnected UPS comms
+  condition: # prevent false trigger from disconnected UPS comms
     condition: template
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   action:
@@ -512,14 +512,14 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.washer_on_or_off # time adjust is in binary_sensor.yaml
+      entity_id: binary_sensor.washer_on_or_off # time delay adjust is in binary_sensor.yaml
       from: "on"
       to: "off"
-  condition: # only announce first load in washer
-    - condition: template
-      value_template: >-
-        {{ ( ( as_timestamp(now()) - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered") ) | int > (8 * 60 * 60)) )
-            or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
+  #  condition: # only announce first load in washer
+  #    - condition: template
+  #      value_template: >-
+  #        {{ ( ( as_timestamp(now()) - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered") ) | int > (8 * 60 * 60)) )
+  #            or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
   action:
     - service: script.scr_say_phrase
       data_template:
