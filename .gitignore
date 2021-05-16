@@ -19,6 +19,8 @@ examples
 NOTES
 
 # Ignore files
+home-assistant_v2.db-shm
+home-assistant_v2.db-wal
 secrets.yaml
 .uuid
 .google.token
@@ -31,7 +33,7 @@ google_calendars.yaml
 *.log
 *.db
 
+
 blueprints/automation/homeassistant/motion_light.yaml
 blueprints/automation/homeassistant/notify_leaving_zone.yaml
-home-assistant_v2.db-shm
-home-assistant_v2.db-wal
+
