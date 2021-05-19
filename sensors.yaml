@@ -53,7 +53,7 @@
     #      window_size: 10                              # compare against median of this many states
     #      radius: 75                                   # throw out occasional anomalous single readings greater than this
     - filter: lowpass
-      time_constant: 300 # eliminate blips under 5 min duration
+      time_constant: 120 # eliminate blips under 5 min duration
       precision: 0
 
 
