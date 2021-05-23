@@ -505,7 +505,6 @@
 
 #
 # WASHER DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
-# only notifies for first load in X hours
 #
 - id: aut_washer_done_announce
   alias: "aut washer done"
