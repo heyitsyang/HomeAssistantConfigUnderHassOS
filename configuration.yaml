@@ -22,7 +22,7 @@ http:
   use_x_forwarded_for: true                  # required for
   trusted_proxies:                           # reverse proxy
   - 10.0.0.44                                #   home assistant address
-  - 172.30.33.0/24                           #   internal network for docker
+  - 172.0.0.0/8                              #   internal network for docker
 
 default_config:
 
