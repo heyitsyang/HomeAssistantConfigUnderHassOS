@@ -45,18 +45,6 @@
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
 
-- platform: filter
-  name: "Filtered Rack Exhaust Fan Speed"
-  entity_id: sensor.rack_exhaust_fan_speed
-  filters:
-    #    - filter: outlier
-    #      window_size: 10                              # compare against median of this many states
-    #      radius: 75                                   # throw out occasional anomalous single readings greater than this
-    - filter: lowpass
-      time_constant: 120 # eliminate blips under 5 min duration
-      precision: 0
-
-
 #
 # MQTT sensors
 #

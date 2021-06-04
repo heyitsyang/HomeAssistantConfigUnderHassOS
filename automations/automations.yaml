@@ -1351,14 +1351,14 @@
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.filtered_rack_exhaust_fan_speed
+      entity_id: sensor.rack_exhaust_fan_speed
       below: 550
       for: "00:10:00"
   action:
     - service: notify.gmail_to_yang
       data_template:
         title: "Rack exhaust fan fault"
-        message: "Rack exhaust fan fault: Currently {{ states('sensor.filtered_rack_exhaust_fan_speed') }} RPM"
+        message: "Rack exhaust fan fault: Currently {{ states('sensor.rack_exhaust_fan_speed') }} RPM"
 
 - id: aut_low_battery_notification
   alias: "aut low battery notification"
