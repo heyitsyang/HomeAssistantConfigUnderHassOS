@@ -76,9 +76,9 @@ device_tracker.ys_phone:
 device_tracker.kt_phone:
   entity_picture: /local/avatars/kt.jpg
 device_tracker.ys_cell:
-  friendly_name: ys_wifi
+  friendly_name: ys_cell_wifi
 device_tracker.kt_cell:
-  friendly_name: kt_wifi
+  friendly_name: kt_cell_wifi
 sensor.ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
