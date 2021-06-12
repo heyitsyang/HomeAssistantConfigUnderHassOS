@@ -73,12 +73,14 @@ person.karen:
   entity_picture: /local/avatars/kt.jpg
 device_tracker.ys_phone:
   entity_picture: /local/avatars/ys.jpg
+  friendly_name: YS Phone GPS
 device_tracker.kt_phone:
   entity_picture: /local/avatars/kt.jpg
+  friendly_name: KT Phone GPS
 device_tracker.ys_cell:
-  friendly_name: ys_cell_wifi
+  friendly_name: YS Cell WiFi
 device_tracker.kt_cell:
-  friendly_name: kt_cell_wifi
+  friendly_name: KT Cell WiFi
 sensor.ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
