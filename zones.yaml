@@ -483,6 +483,12 @@
   radius: 280                  # meters
   icon: mdi:blank
 
+- name: Trailwinds Village Plaza
+  latitude: 28.867582
+  longitude: -82.007642
+  radius: 420
+  icon: mdi:blank
+
 - name: Grand Traverse Plaza
   latitude: 28.845351
   longitude: -82.028638
