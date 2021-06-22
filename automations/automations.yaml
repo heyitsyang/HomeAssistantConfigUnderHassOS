@@ -199,6 +199,8 @@
       entity_id: group.mood_lights
       state: "on"
   action:
+    - service: scene.turn_on
+      entity_id: scene.default_led_mood
     - service: homeassistant.turn_off
       entity_id: group.mood_lights
 
@@ -1075,6 +1077,8 @@
       entity_id: group.mood_lights
       state: "on"
   action:
+    - service: scene.turn_on
+      entity_id: scene.default_led_mood
     - service: homeassistant.turn_off
       entity_id: group.mood_lights
 

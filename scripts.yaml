@@ -391,6 +391,8 @@ scr_pathway_motion_lighting_on:
     - condition: state
       entity_id: binary_sensor.lum_mood_lights_f_solar_trig
       state: "on"
+    - service: scene.turn_on
+      entity_id: scene.default_led_mood
     - service: homeassistant.turn_on
       entity_id: group.pathway_lights
 
