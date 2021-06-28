@@ -9,7 +9,6 @@
 - platform: version
   image: intel-nuc
 
-
 #
 # Filters are considered a type of sensor
 #
@@ -48,6 +47,12 @@
 #
 # MQTT sensors
 #
+
+- platform: mqtt
+  unique_id: water_spt_data_status
+  name: "SPT Data Status"
+  state_topic: "watermain/spt_data_status"
+  qos: 0
 
 - platform: mqtt
   unique_id: water_pressure
@@ -165,7 +170,6 @@
   qos: 0
   unit_of_measurement: "ºF"
 
-  
 #
 # SNMP sensors
 #
@@ -200,7 +204,6 @@
     FAULT
     {% endif %}
 
-
 #
 # Time & Date
 #
@@ -232,7 +235,6 @@
 - platform: filesize
   file_paths:
     - /config/home-assistant_v2.db
-
 
 #
 # OUTDOOR WEATHER & ENVIRONMENTAL SENSORS
@@ -282,7 +284,6 @@
     - hourly_summary
     - daily_summary
 
-
 #
 # INFLUXDB SENSORS
 #
@@ -302,7 +303,6 @@
       database: _internal
       where: "time > now() - 10s"
       field: diskBytes
-
 
 #
 # TEMPLATE SENSORS
@@ -350,7 +350,6 @@
           99
         {% endif %}
 
-
     # CLIMATE #
 
     ecobee_avg_indoor_temperature: # ecobee current temp is the average
@@ -362,7 +361,6 @@
       friendly_name: "Sunroom Temperature"
       value_template: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "ºF"
-
 
     #  BATTERIES #
     #    - not all batteries need sensor attribute templates, so not all are here
