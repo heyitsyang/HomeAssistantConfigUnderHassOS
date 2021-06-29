@@ -44,7 +44,7 @@
     - service: recorder.purge
 
 #
-# RUN PLUMBING STATIC PRESSURE TEST
+# PLUMBING STATIC PRESSURE TEST
 #
 - id: aut_start_spt
   alias: "aut start spt"
@@ -96,6 +96,68 @@
                   for:
                     minutes: 5
     - service: script.scr_spt_start
+
+# triggers if previous SPT was aborted
+- id: delayed_spt_leak_test
+  alias: "aut delayed spt leak test"
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.spt_data_status
+      from: "in_process"
+      to: "aborted"
+  condition:
+    # don't execute if Overnight Guest is ON
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode
+      state: "off"
+    # don't execute if Extended Absence is ON (valve is OFF for duration of absence)
+    - condition: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      state: "off"
+    # don't continue if dishwasher is ON
+    - condition: state
+      entity_id: binary_sensor.dishwasher_on_or_off
+      state: "off"
+    # don't continue if washer is ON
+    - condition: state
+      entity_id: binary_sensor.washer_on_or_off
+      state: "off"
+    # don't run more often than every N hours from last test
+    - condition: template
+      value_template: >-
+        {{ ( (as_timestamp(now()) - as_timestamp(state_attr('sensor.water_static_pressure_test', 'test_end'))) | int ) 
+        > (8 * 60 * 60) }}
+  action:
+    - delay:
+        minutes: 30
+    - choose: # if water heater is ON, wait until OFF
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.water_heater
+              state: "on"
+          sequence:
+            - wait_for_trigger:
+                - platform: state
+                  entity_id: binary_sensor.water_heater
+                  from: "on"
+                  to: "off"
+                  for:
+                    minutes: 5
+    - service: script.scr_spt_start
+
+# triggers if SPT is aborted too many times
+- id: spt_max_aborts_exceeded_error
+  alias: "aut spt max aborts exceeded error"
+  initial_state: on
+  trigger:
+    - platform: template
+      value_template: "{{ state_attr('sensor.spt_data_status', 'consec_aborts') > 3 }}"
+  action:
+    - service: notify.gmail_to_yang
+      data_template:
+        title: "SPT consecutive aborts exceeds threshold"
+        message: "SPT consecutive aborts: {{ state_attr('sensor.spt_data_status', 'consec_aborts') }}"
 
 #
 # START VACUUM
@@ -440,16 +502,19 @@
 #
 # LEAK DETECTION
 #
-- id: aut_slow_leak_detected
-  alias: "aut slow leak detected"
+
+- id: aut_spt_leak_check
+  alias: "aut spt leak check"
   initial_state: true
   trigger:
-    - platform: numeric_state
+    - platform: state
+      entity_id: sensor.spt_data_status
+      from: "in_process"
+      to: "valid"
+  condition:
+    - condition: numeric_state
       entity_id: sensor.water_static_pressure_test
       below: -0.99
-  condition:
-    - condition: template
-      value_template: "{{ (is_state('sensor.spt_data_status', 'valid')) }}"
   action:
     - service: notify.gmail_to_yang
       data_template:
