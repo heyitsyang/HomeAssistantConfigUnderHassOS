@@ -447,6 +447,9 @@
     - platform: numeric_state
       entity_id: sensor.water_static_pressure_test
       below: -0.99
+  condition: # be sure data is valid before notifying
+    condition: template
+    value_template: "{{ states('sensor.spt_data_status') == 'VALID' }}"
   action:
     - service: notify.gmail_to_yang
       data_template:
