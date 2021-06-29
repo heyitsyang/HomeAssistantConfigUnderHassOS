@@ -52,6 +52,7 @@
   unique_id: water_spt_data_status
   name: "SPT Data Status"
   state_topic: "watermain/spt_data_status"
+  json_attributes_topic: "watermain/data_status/attributes"
   qos: 0
 
 - platform: mqtt
