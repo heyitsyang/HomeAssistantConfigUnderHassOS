@@ -56,12 +56,6 @@
   qos: 0
 
 - platform: mqtt
-  unique_id: spt_data_consec_aborts
-  name: "SPT Consecutive Aborts"
-  state_topic: "watermain/spt_data_consec_aborts"
-  qos: 0
-
-- platform: mqtt
   unique_id: water_pressure
   name: "Water Pressure"
   state_topic: "watermain/water_pressure"
