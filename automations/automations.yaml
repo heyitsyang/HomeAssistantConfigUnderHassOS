@@ -151,7 +151,7 @@
   initial_state: on
   trigger:
     - platform: template
-      value_template: "{{ state_attr('sensor.spt_data_status', 'consec_aborts') > 3 }}"
+      value_template: "{{ (state_attr('sensor.spt_data_status', 'consec_aborts') | int) > 3 }}"
   action:
     - service: notify.gmail_to_yang
       data_template:
