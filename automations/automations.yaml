@@ -512,13 +512,13 @@
       to: "valid"
   condition:
     - condition: numeric_state
-      entity_id: sensor.water_static_pressure_test
-      below: -0.99
+      entity_id: sensor.validated_water_static_pressure_test_result
+      below: -0.50      # measured normal drop is .028125 PSI per minute
   action:
     - service: notify.gmail_to_yang
       data_template:
         title: "SPT water leak detected"
-        message: "Leak detected during Static Pressure Test!  SPT result: {{ states('sensor.water_static_pressure_test') }}"
+        message: "Leak detected during Static Pressure Test!  SPT result: {{ states('sensor.validated_water_static_pressure_test_result') }}"
 
 - id: aut_leak_detected
   alias: "aut leak detected"
