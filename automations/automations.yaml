@@ -50,7 +50,7 @@
   initial_state: true
   trigger:
     - platform: time
-      at: "01:00:00"
+      at: "03:00:00"
     # trigger if more than N miles away and not directly after a reboot (resets last_trigger to NONE)
     - platform: template
       value_template: >-
