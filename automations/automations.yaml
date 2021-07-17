@@ -518,7 +518,7 @@
     # measured normal drop is -0.028125 PSI per minute
     - condition: template
       value_template: >
-        {{ (states('sensor.validated_water_static_pressure_test_result') | float) >
+        {{ (states('sensor.validated_water_static_pressure_test_result') | float) <
            (-0.028125 * (states('input_number.inp_num_spt_duration') | float)) }}
   action:
     - service: notify.gmail_to_yang

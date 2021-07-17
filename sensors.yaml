@@ -333,7 +333,7 @@
       friendly_name: "Pressure Loss per Minute"
       unit_of_measurement: "PSI"
       value_template: >
-        {{ (states('validated_water_static_pressure_    test_result') | float) / 
+        {{ (states('sensor.validated_water_static_pressure_test_result') | float) / 
           (states('input_number.inp_num_spt_duration') | float) }}
 
 - platform: template
