@@ -45,8 +45,8 @@
 #
 # PLUMBING STATIC PRESSURE TEST
 #
-- id: aut_start_spt
-  alias: "aut start spt"
+- id: aut_start_spt_leak_test
+  alias: "aut start spt leak test"
   initial_state: true
   trigger:
     - platform: time
@@ -79,7 +79,7 @@
     - condition: template
       value_template: >-
         {{ ( (as_timestamp(now()) - as_timestamp(state_attr('sensor.water_static_pressure_test', 'test_end'))) | int ) 
-        > (8 * 60 * 60) }}
+        > (4 * 60 * 60) }}
   action:
     - choose: # if water heater is ON, wait until OFF
         - conditions:
@@ -502,8 +502,8 @@
 # LEAK DETECTION
 #
 
-- id: aut_spt_leak_check
-  alias: "aut spt leak check"
+- id: aut_spt_leak_notify
+  alias: "aut spt leak notify"
   initial_state: true
   trigger:
     - platform: state
