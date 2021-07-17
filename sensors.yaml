@@ -329,6 +329,15 @@
 
 - platform: template
   sensors:
+    water_static_pressure_loss_per_minute:
+      friendly_name: "Pressure Loss per Minute"
+      unit_of_measurement: "PSI"
+      value_template: >
+        {{ (states('validated_water_static_pressure_    test_result') | float) / 
+          (states('input_number.inp_num_spt_duration') | float) }}
+
+- platform: template
+  sensors:
     min_water_pressure:
       friendly_name: "Min Water Pressure"
       unit_of_measurement: "PSI"
