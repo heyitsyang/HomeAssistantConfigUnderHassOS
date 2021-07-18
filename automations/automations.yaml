@@ -78,8 +78,8 @@
     # don't run more often than every N hours from last test
     - condition: template
       value_template: >-
-        {{ ( (as_timestamp(now()) - as_timestamp(state_attr('sensor.water_static_pressure_test', 'test_end'))) | int ) 
-        > (4 * 60 * 60) }}
+        {{ (as_timestamp(now()) | int) - (as_timestamp(state_attr('automation.aut_start_spt_leak_test', 'last_triggered')) | int )
+          > (4 * 60 * 60) }}
   action:
     - choose: # if water heater is ON, wait until OFF
         - conditions:
@@ -122,11 +122,6 @@
     - condition: state
       entity_id: binary_sensor.washer_on_or_off
       state: "off"
-    # don't run more often than every N hours from last test
-#    - condition: template
-#      value_template: >-
-#        {{ ( (as_timestamp(now()) - as_timestamp(state_attr('sensor.water_static_pressure_test', 'test_end'))) | int ) 
-#        > (8 * 60 * 60) }}
   action:
     - delay:
         minutes: 15
