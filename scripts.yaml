@@ -143,6 +143,14 @@ scr_shared_extended_absence_on:
     - service: switch.turn_off
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
+scr_shared_extended_absence_off:
+  mode: restart  # start new script run after stopping previous to prevent confusion due to delay
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.water_valve
+    - service: switch.turn_on
+      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+
 #
 # CHECK IF SUN ROOM WINDOWS ARE OPEN & REPORT
 #

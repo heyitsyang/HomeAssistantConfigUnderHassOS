@@ -1581,7 +1581,7 @@
   condition:
     - condition: state # only bother if currently ON
       entity_id: input_boolean.inp_bool_guest_mode
-      state: "off"
+      state: "on"
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.inp_bool_guest_mode
@@ -1592,8 +1592,10 @@
 #
 # EXTENDED ABSENCE MODE
 #
-- id: aut_extended_absence_manual_on
-  alias: "aut extended absence manual on"
+
+# EXTENDED ABSENCE SET MANUALLY
+- id: aut_extended_absence_on
+  alias: "aut extended absence on"
   initial_state: true
   trigger:
     - platform: state
@@ -1601,20 +1603,45 @@
       from: "off"
       to: "on"
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
-        state: "off" # in case we have a guest while we are gone
+    - condition: state
+      entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
+      state: "off" # in case we have a guest while we are gone
   action:
     - service: script.scr_say_phrase
       data_template:
-        message: "Extended absence mode manually enabled"
+        message: "Extended absence mode enabled"
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "Extended absence mode has been enabled"
+        message: "Home Assistant: Extended absence mode enabled"
     - service: notify.gmail_to_yang
       data:
-        message: "Extended absence mode manually enabled"
+        message: "Extended absence mode enabled"
     - service: script.scr_shared_extended_absence_on
 
+- id: aut_extended_absence_off
+  alias: "aut extended absence off"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      from: "on"
+      to: "off"
+  action:
+    - service: script.scr_shared_extended_absence_off
+    - service: script.scr_say_phrase
+      data_template:
+        message: "Extended absence mode disabled"
+    - service: notify.gmail_to_yang
+      data:
+        title: "Home Assistant: Extended Absence Mode disabled"
+        message: "Extended absence mode disabled"
+    - service: notify.pushover_yangandkaren
+      data:
+        title: "Extended absence mode has been disabled"
+        message: "Home Assistant: Extended absence mode disabled"
+
+# EXTENDED ABSENCE DETERMINED BY DISTANCE & TIME AWAY
 - id: aut_extended_absence_auto_on
   alias: "aut extended absence auto on"
   initial_state: true
@@ -1639,19 +1666,8 @@
       - condition: template # this is in case proximity is screwed up
         value_template: "{{ states('group.where_are_yskt') != 'home' }}"
   action:
-    - service: script.scr_shared_extended_absence_on
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_extended_absence_mode
-    - service: script.scr_say_phrase
-      data_template:
-        message: "Extended absence mode automatically enabled"
-    - service: notify.pushover_yangandkaren
-      data:
-        message: "Extended absence mode automatically enabled"
-        title: "Home Assistant Alert"
-    - service: notify.gmail_to_yang
-      data:
-        message: "Extended absence mode automatically enabled"
+    - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
+      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
 
 - id: aut_extended_absence_auto_off
   alias: "aut extended absence auto off"
@@ -1681,37 +1697,9 @@
       state: "on"
   action:
     - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change
-    - service: notify.pushover_yangandkaren
-      data:
-        title: "Extended absence mode has been disabled"
-        message: "Home Assistant: Extended absence mode automatically disabled"
+      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolean change
 
-- id: aut_extended_absence_off
-  alias: "aut extended absence off"
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: input_boolean.inp_bool_extended_absence_mode
-      from: "on"
-      to: "off"
-  action:
-    - service: switch.turn_on
-      entity_id: switch.water_valve
-    - service: switch.turn_on
-      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
-    - service: script.scr_say_phrase
-      data_template:
-        message: "Extended absence mode disabled"
-    - service: notify.gmail_to_yang
-      data:
-        title: "Home Assistant: Extended Absence Mode disabled"
-        message: "Extended absence mode disabled"
-    - service: notify.pushover_yangandkaren
-      data:
-        title: "Extended absence mode has been disabled"
-        message: "Home Assistant: Extended absence mode disabled"
-
+# EXTENDED ABSENCE DETERMINED BY DATE/TIME
 - id: aut_datetime_extended_absence_on
   alias: "aut datetime extended absence on"
   initial_state: true
@@ -1723,8 +1711,8 @@
       entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "off"
   action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_extended_absence_mode
+    - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
+      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
 
 - id: aut_datetime_extended_absence_off
   alias: "aut datetime extended absence off"
@@ -1737,9 +1725,8 @@
       entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "on"
   action:
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_extended_absence_mode
-
+    - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
+      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change    - service: input_boolean.turn_off
 
 
 #
