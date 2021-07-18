@@ -606,31 +606,6 @@
       data_template:
         message: "The washer cycle has finished"
 
-#
-#  GUEST MODE MANUALLY TURNED ON
-#
-- id: aut_guest_mode_manual_on
-  alias: "aut guest mode manual on"
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: input_boolean.inp_bool_guest_mode
-      from: "off"
-      to: "on"
-  action:
-    - service: script.scr_sonos_unjoin4announce
-
-#  GUEST MODE MANUALLY TURNED OFF
-- id: aut_guest_mode_manual_off
-  alias: "aut guest mode manual off"
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: input_boolean.inp_bool_guest_mode
-      from: "on"
-      to: "off"
-  action:
-    - service: script.scr_sonos_join4announce
 
 #
 # PHONE ATTRIBUTE DRIVEN AUTOMATIONS
@@ -1550,12 +1525,72 @@
            You are on version {{states("sensor.current_version")}}.
            See https://github.com/home-assistant/home-assistant/releases'
 
+
 #####################################
-#        Security automations       #
+#    Security & House Modes         #
 #####################################
 
 #
-# EXTENDED ABSENCE
+#  GUEST MODE
+#
+- id: aut_guest_mode_on
+  alias: "aut guest mode on"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.inp_bool_guest_mode
+      from: "off"
+      to: "on"
+  action:
+    - service: script.scr_sonos_unjoin4announce
+
+- id: aut_guest_mode_off
+  alias: "aut guest mode off"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.inp_bool_guest_mode
+      from: "on"
+      to: "off"
+  action:
+    - service: script.scr_sonos_join4announce
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.inp_bool_guest_in_sunroom
+
+- id: aut_datetime_guest_mode_on
+  alias: "aut datetime guest mode on"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.guest_arrives
+  condition:
+    - condition: state # only bother if currently OFF
+      entity_id: input_boolean.inp_bool_guest_mode
+      state: "off"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.inp_bool_guest_mode
+    - service: script.scr_sonos_unjoin4announce
+
+- id: aut_datetime_guest_mode_off
+  alias: "aut datetime guest mode off"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.guest_departs
+  condition:
+    - condition: state # only bother if currently ON
+      entity_id: input_boolean.inp_bool_guest_mode
+      state: "off"
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.inp_bool_guest_mode
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.inp_bool_guest_in_sunroom
+    - service: script.scr_sonos_join4announce
+
+#
+# EXTENDED ABSENCE MODE
 #
 - id: aut_extended_absence_manual_on
   alias: "aut extended absence manual on"
@@ -1676,6 +1711,36 @@
       data:
         title: "Extended absence mode has been disabled"
         message: "Home Assistant: Extended absence mode disabled"
+
+- id: aut_datetime_extended_absence_on
+  alias: "aut datetime extended absence on"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.extended_absence_start
+  condition:
+    - condition: state # only bother if currently OFF
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      state: "off"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+
+- id: aut_datetime_extended_absence_off
+  alias: "aut datetime extended absence off"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.extended_absence_end
+  condition:
+    - condition: state # only bother if currently ON
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      state: "on"
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+
+
 
 #
 # Simulate home occupied in evening if Extended Absence Mode is ON
