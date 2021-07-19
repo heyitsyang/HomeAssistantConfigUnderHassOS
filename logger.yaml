@@ -36,3 +36,5 @@
       - "Unable to communicate with robot"
     homeassistant.components.neato.switch:
       - "Unable to communicate with robot"
+    homeassistant.components.sonos:
+      - "Failed to connect to discovered player '10.0.0.40'"
