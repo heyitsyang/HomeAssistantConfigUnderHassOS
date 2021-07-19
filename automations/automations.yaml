@@ -269,6 +269,11 @@
   trigger:
     - platform: time
       at: "01:05:00"
+    - platform: state
+      entity_id: group.outdoor_lights
+      to: "on"
+      for:
+        minutes: 120
   action:
     - service: switch.turn_off
       entity_id: group.outdoor_lights
