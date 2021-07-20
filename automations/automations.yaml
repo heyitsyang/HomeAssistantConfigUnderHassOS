@@ -527,7 +527,11 @@
     - service: notify.gmail_to_yang
       data_template:
         title: "SPT water leak detected"
-        message: "Leak detected during Static Pressure Test!  SPT result: {{ states('sensor.validated_water_static_pressure_test_result') }}"
+        message: |
+          Leak detected during Static Pressure Test!\n
+          Test ending: {{ states('sensor.last_static_pressure_test') }}\n
+          Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') }}\n
+          Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}\n
 
 - id: aut_leak_detected
   alias: "aut leak detected"
