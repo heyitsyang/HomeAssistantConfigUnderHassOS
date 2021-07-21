@@ -1354,17 +1354,19 @@
       to: "home"
       for:
         seconds: 20
-  condition: # this prevents immediate triggering after startup
+  condition: # this prevents immediate triggering after home assistant startup
     - condition: template
       value_template: "{{ ( ( as_timestamp(now()) - (as_timestamp(states('sensor.uptime'))| float) ) | int ) > 10 }}"
   action:
     - wait_for_trigger:
       - platform: state
         entity_id: binary_sensor.front_door_opened
-        to: 'on'
+        from: 'on'
+        to: 'off'
       - platform: state 
         entity_id: binary_sensor.garagehouse_door_opened
-        to: 'on'
+        from: 'on'
+        to: 'off'
       timeout:
         seconds: 120
     - service: script.scr_arrival_announcement
