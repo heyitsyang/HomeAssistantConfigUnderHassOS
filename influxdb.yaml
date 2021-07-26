@@ -1,6 +1,14 @@
-#
-# INFLUX DB
-#
+#################################################
+##                                             ##
+## influxdb.yaml - what to put in the database ##
+## if you care about:                          ##
+##     - states between reboots                ##
+##     - history data                          ##
+##                                             ##
+##    See recorder.yaml for default HA         ##
+##      database filters                       ##
+##                                             ##
+#################################################
 
 host: a0d7b954-influxdb
 port: 8086

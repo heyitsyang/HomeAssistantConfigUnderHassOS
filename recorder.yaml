@@ -5,14 +5,14 @@
 ##     - states between reboots                ##
 ##     - history data                          ##
 ##                                             ##
+##    See influxdb.yaml for influxdb filters   ##
+##                                             ##
 #################################################
 
 
+auto_purge: true
 purge_keep_days: 31                    # how many days of history to keep
 
-#
-# INCLUDES & EXCLUDES ARE SAME AS influxdb.yaml
-#
 include:
   domains:
     - automation

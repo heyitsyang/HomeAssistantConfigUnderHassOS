@@ -26,21 +26,6 @@
 #####################################
 #    Time triggered automations     #
 #####################################
-#
-# PURGE RECORDER DATABASE
-#
-- id: aut_purge_recorder
-  alias: "aut purge recorder"
-  initial_state: true
-  trigger:
-    - platform: time
-      at: "03:45:00"
-  condition:
-    condition: time
-    weekday:
-      - sun
-  action:
-    - service: recorder.purge
 
 #
 # PLUMBING STATIC PRESSURE TEST
