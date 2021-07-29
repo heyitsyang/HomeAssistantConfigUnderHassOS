@@ -916,7 +916,7 @@
     - service: script.scr_front_door_lights_on
     - service: script.scr_say_phrase
       data_template:
-        message: "Yang or Karen will be home soon"
+        message: "Someone special will be home soon"
 
 #
 # GARAGE DOORS OPEN/CLOSE TRIGGERS
@@ -1353,7 +1353,7 @@
         from: 'on'
         to: 'off'
       timeout:
-        seconds: 120
+        seconds: 60
     - service: script.scr_arrival_announcement
       data_template:
         person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
