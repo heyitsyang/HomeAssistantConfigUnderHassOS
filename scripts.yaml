@@ -464,8 +464,8 @@ scr_frontporch_activity:
         message: "Front door activity detected. See https://shencentral.duckdns.org:61615/states/group.cameras for live view"
         data:
           images:
-            - /config/www/camera_stills/doorbell.jpg
             - /config/www/camera_stills/frontporch.jpg
+            - /config/www/camera_stills/doorbell.jpg
             - /config/www/camera_stills/driveway.jpg
     - service: notify.pushover_yangandkaren
       data:
