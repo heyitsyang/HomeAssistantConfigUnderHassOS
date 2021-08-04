@@ -6,6 +6,7 @@ homeassistant:
   longitude: !secret longitude
   elevation: 23 # (meters) needed for weather/sunrise functions
   unit_system: imperial # 'metric' for Metric, 'imperial' for Imperial
+  currency: USD
   time_zone: America/New_York # google "List of TZ database time zones"
   external_url: !secret external_url
   internal_url: !secret internal_url
