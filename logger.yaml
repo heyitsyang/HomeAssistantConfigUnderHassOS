@@ -41,4 +41,4 @@
     homeassistant.components.onvif:
       - "Failed to restart ONVIF PullPoint subscription"
       - "Failed to fetch ONVIF PullPoint subscription"
-      - "The date/time on the device (UTC) is"
+      - "this could lead to authentication issues"
