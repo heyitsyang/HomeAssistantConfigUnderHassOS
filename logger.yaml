@@ -38,3 +38,7 @@
       - "Unable to communicate with robot"
     homeassistant.components.sonos:
       - "Failed to connect to discovered player '10.0.0.40'"
+    homeassistant.components.onvif:
+      - "Failed to restart ONVIF PullPoint subscription"
+      - "Failed to fetch ONVIF PullPoint subscription"
+      - "The date/time on the device (UTC) is"
