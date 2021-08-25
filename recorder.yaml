@@ -38,7 +38,7 @@ include:
 exclude:
   domains:
     - group
-  entities:   
+  entities:
     - device_tracker.ys_cell_on_router
     - device_tracker.ys_cell_on_router_2
     - device_tracker.kt_cell_on_router
@@ -55,6 +55,7 @@ exclude:
     - binary_sensor.esp01_pushbutton_s2
     - binary_sensor.esp01_pushbutton_s3
     - camera.radar
+    - sensor.coinbase_eth_wallet
     - sensor.dark_sky_daily_high_apparent_temperature
     - sensor.dark_sky_daily_high_temperatue
     - sensor.dark_sky_daily_low_apparent_temperature
