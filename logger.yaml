@@ -42,3 +42,4 @@
       - "Failed to restart ONVIF PullPoint subscription"
       - "Failed to fetch ONVIF PullPoint subscription"
       - "this could lead to authentication issues"
+      - "Couldn't connect to camera 'Doorbell', but will retry later."
