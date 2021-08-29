@@ -310,10 +310,10 @@
 #
 - platform: template
   sensors:
-    wallet_value_eth:
-      friendly_name: "ETH Wallet"
+    wallet_value_ada:
+      friendly_name: "ADA Wallet"
       value_template: >-
-        {{ ((states('sensor.coinbase_eth_wallet') | float) * (states('sensor.eth_exchange_rate') | float)) | round(2) }}
+        {{ ((states('sensor.coinbase_ada_wallet') | float) * (states('sensor.ada_exchange_rate') | float)) | round(2) }}
 
 - platform: template
   sensors:
@@ -321,6 +321,13 @@
       friendly_name: "BTC Wallet"
       value_template: >-
         {{ ((states('sensor.coinbase_btc_wallet') | float) * (states('sensor.btc_exchange_rate') | float)) | round(2) }}
+
+- platform: template
+  sensors:
+    wallet_value_eth:
+      friendly_name: "ETH Wallet"
+      value_template: >-
+        {{ ((states('sensor.coinbase_eth_wallet') | float) * (states('sensor.eth_exchange_rate') | float)) | round(2) }}
 
 - platform: template
   sensors:
