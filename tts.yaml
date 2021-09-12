@@ -1,12 +1,11 @@
-
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
- 
- 
+
 ### TTS ###
 
-- platform: google_translate       # (base_url is now deprecated) google tts requires base_url external address in configuration.yaml to be correct
-  cache: true                      # or the mp3 file will be created in the tts directory, but will not be played
+- platform: google_translate
+  cache: false
   cache_dir: tts
-  time_memory: 57600               # secs voice data is held in MEMORY for quick playback - max is 57600 (16hrs)
-  base_url: https://shencentral.duckdns.org:61615         #  this is important - must be set if different than https external address in config
+  time_memory: 57600 # secs voice data is held in MEMORY for quick playback - max is 57600 (16hrs)
+  #  base_url: https://shencentral.duckdns.org:61615         #  this is important - must be set if different than https external address in config
+  base_url: http://haha.shencentral.net:8123 #  this is important - must be set if different than https external address in config
