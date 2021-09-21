@@ -38,9 +38,9 @@
       friendly_name: "Washer ON/OFF sensor"
       unique_id: washer_on_off_sensor
       delay_on:
-        seconds: 30  # amount of time template state must be met before switching to ON
+        seconds: 30 # amount of time template state must be met before switching to ON
       delay_off:
-        seconds: 930  # amount of time template state is NOT met before switching to OFF
+        seconds: 930 # amount of time template state is NOT met before switching to OFF
       value_template: >-
         {{ states('sensor.washer_energy_current') | float > 0.05 }}
 
@@ -50,9 +50,9 @@
       friendly_name: "Dishwasher ON/OFF sensor"
       unique_id: dishwasher_on_off_sensor
       delay_on:
-        seconds: 30  # amount of time template state must be met before switching to ON
+        seconds: 30 # amount of time template state must be met before switching to ON
       delay_off:
-        seconds: 60  # amount of time template state is NOT met before switching to OFF
+        seconds: 60 # amount of time template state is NOT met before switching to OFF
       value_template: >-
         {{ states('sensor.dishwasher_energy_current') | float > 0.1 }}
 
@@ -99,7 +99,7 @@
   qos: 0
 
 - platform: mqtt
-  unique_id: utilitycloset_waterheater  # water heater on/off
+  unique_id: utilitycloset_waterheater # water heater on/off
   name: "Water Heater"
   state_topic: "utilitycloset/waterheater/State"
   payload_on: "1"
@@ -123,14 +123,6 @@
   qos: 0
 
 - platform: mqtt
-  unique_id: laundry_sink_leak
-  name: "Leak Laundry Sink"
-  state_topic: "laundryroomleak/laundry_sink_leak/State"
-  payload_on: "1"
-  payload_off: "0"
-  qos: 0
-
-- platform: mqtt
   unique_id: refigerator_leak
   name: "Leak Refrigerator"
   state_topic: "refrigeratorleak/leakdetector/State"
@@ -142,14 +134,6 @@
   unique_id: dishwasher_leak
   name: "Leak Dishwasher"
   state_topic: "kitchenislandleak/dishwasher_leak/State"
-  payload_on: "1"
-  payload_off: "0"
-  qos: 0
-
-- platform: mqtt
-  unique_id: kitchen_sink_leak
-  name: "Leak Kitchen Sink"
-  state_topic: "kitchenislandleak/kitchen_sink_leak/State"
   payload_on: "1"
   payload_off: "0"
   qos: 0

@@ -1483,6 +1483,14 @@
       below: 20
       for: "00:30:00"
     - platform: numeric_state
+      entity_id: sensor.leak_kitchen_sink_battery # leak detector battery
+      below: 20
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.leak_laundry_sink_battery # leak detector battery
+      below: 20
+      for: "00:30:00"
+    - platform: numeric_state
       entity_id: sensor.button_kitchen_counter_battery # button battery
       below: 20
       for: "00:30:00"
