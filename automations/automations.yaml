@@ -463,6 +463,27 @@
     - service: hassio.host_shutdown
 
 #
+# DIGITAL CURRENCY NOTIFICATION
+#
+- id: aut_eth_over_threshold
+  alias: "aut eth over threshold"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.eth_exchange_rate
+      above: input_number.eth_upper_bound_notify
+  action:
+    - service: notify.pushover_yang
+      data:
+        title: "E.T.H. trading at {{ states('sensor.eth_exchange_rate') }}"
+        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }}"
+    - service: notify.gmail_to_yang
+      data:
+        title: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }}"
+        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }}"
+
+#
 # WATER EXPANSION TANK FAULT
 #
 - id: aut_expansion_tank_fault
@@ -505,9 +526,9 @@
       value_template: >
         {{ (states('sensor.validated_water_static_pressure_test_result') | float) < 
           (-0.1 * (states('input_number.inp_num_spt_duration') | float)) }}
-#      value_template: >
-#        {{ (states('sensor.validated_water_static_pressure_test_result') | float) <
-#           (-0.028125 * (states('input_number.inp_num_spt_duration') | float)) }}
+  #      value_template: >
+  #        {{ (states('sensor.validated_water_static_pressure_test_result') | float) <
+  #           (-0.028125 * (states('input_number.inp_num_spt_duration') | float)) }}
   action:
     - service: notify.gmail_to_yang
       data_template:
@@ -594,7 +615,6 @@
     - service: notify.alexa_yellow_ring
       data_template:
         message: "The washer cycle has finished"
-
 
 #
 # PHONE ATTRIBUTE DRIVEN AUTOMATIONS
@@ -1344,14 +1364,14 @@
       value_template: "{{ ( ( as_timestamp(now()) - (as_timestamp(states('sensor.uptime'))| float) ) | int ) > 10 }}"
   action:
     - wait_for_trigger:
-      - platform: state
-        entity_id: binary_sensor.front_door_opened
-        from: 'on'
-        to: 'off'
-      - platform: state 
-        entity_id: binary_sensor.garagehouse_door_opened
-        from: 'on'
-        to: 'off'
+        - platform: state
+          entity_id: binary_sensor.front_door_opened
+          from: "on"
+          to: "off"
+        - platform: state
+          entity_id: binary_sensor.garagehouse_door_opened
+          from: "on"
+          to: "off"
       timeout:
         seconds: 60
     - service: script.scr_arrival_announcement
@@ -1534,7 +1554,6 @@
           'Home Assistant {{state_attr("binary_sensor.updater", "newest_version")}} is now available.
            You are on version {{states("sensor.current_version")}}.
            See https://github.com/home-assistant/home-assistant/releases'
-
 
 #####################################
 #    Security & House Modes         #
@@ -1737,7 +1756,6 @@
   action:
     - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
       entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change    - service: input_boolean.turn_off
-
 
 #
 # Simulate home occupied in evening if Extended Absence Mode is ON
