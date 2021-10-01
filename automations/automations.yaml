@@ -465,23 +465,27 @@
 #
 # DIGITAL CURRENCY NOTIFICATION
 #
-- id: aut_eth_over_threshold
+- id: aut_eth_cross_threshold
   alias: "aut eth over threshold"
   initial_state: true
   trigger:
     - platform: numeric_state
       entity_id:
         - sensor.eth_exchange_rate
-      above: input_number.eth_upper_bound_notify
+      above: input_number.eth_high_trigger
+    - platform: numeric_state
+      entity_id:
+        - sensor.eth_exchange_rate
+      below: input_number.eth_low_trigger
   action:
     - service: notify.pushover_yang
       data:
         title: "E.T.H. trading at {{ states('sensor.eth_exchange_rate') }}"
-        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }}"
+        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
     - service: notify.gmail_to_yang
       data:
-        title: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }}"
-        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }}"
+        title: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
+        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
 
 #
 # WATER EXPANSION TANK FAULT
