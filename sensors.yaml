@@ -157,20 +157,6 @@
   qos: 0
   unit_of_measurement: "ºF"
 
-- platform: mqtt
-  unique_id: longmeadow1_temperature
-  name: "Longmeadow1 Temperature"
-  state_topic: "longmeadow1/DS18b20/Temperature"
-  qos: 0
-  unit_of_measurement: "ºF"
-
-- platform: mqtt
-  unique_id: longmeadow2_temperature
-  name: "Longmeadow2 Temperature"
-  state_topic: "longmeadow2/DS18b20/Temperature"
-  qos: 0
-  unit_of_measurement: "ºF"
-
 #
 # SNMP sensors
 #
