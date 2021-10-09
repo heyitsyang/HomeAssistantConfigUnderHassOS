@@ -35,7 +35,7 @@
   initial_state: true
   trigger:
     - platform: time
-      at: "03:00:00"
+      at: input_datetime.daily_start_spt
     # trigger if more than N miles away and not directly after a reboot (resets last_trigger to NONE)
     - platform: template
       value_template: >-
