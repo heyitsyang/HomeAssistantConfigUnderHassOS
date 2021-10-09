@@ -200,6 +200,11 @@
   radius: 110                  # meters
   icon: mdi:blank
 
+- name: Ezell RRC
+  latitude: 28.791618
+  longitude: -81.968650
+  radius: 100                  # meters
+  icon: mdi:blank
 
 #
 # VILLAGES REC CENTERS

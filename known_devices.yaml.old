@@ -1,0 +1,14 @@
+
+kt_cell:
+  icon:
+  mac: 0C:CB:85:18:79:71
+  name: kt-cell
+  picture:
+  track: true
+
+ys_cell:
+  icon:
+  mac: 0C:CB:85:18:A8:C9
+  name: ys-cell
+  picture:
+  track: true

@@ -71,16 +71,12 @@ person.yang:
   entity_picture: /local/avatars/ys.jpg
 person.karen:
   entity_picture: /local/avatars/kt.jpg
-device_tracker.ys_phone:
+device_tracker.ys_cell_gps:
   entity_picture: /local/avatars/ys.jpg
-  friendly_name: YS Phone GPS
-device_tracker.kt_phone:
+  friendly_name: YS Cell GPS
+device_tracker.kt_cell_gps:
   entity_picture: /local/avatars/kt.jpg
-  friendly_name: KT Phone GPS
-device_tracker.ys_cell:
-  friendly_name: YS Cell WiFi
-device_tracker.kt_cell:
-  friendly_name: KT Cell WiFi
+  friendly_name: KT Cell GPS
 sensor.ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
@@ -135,18 +131,6 @@ sensor.rack_exhaust_humidity:
 sensor.rack_exhaust_pressure:
   friendly_name: Rack Exhaust Pressure
   icon: mdi:fan
-sensor.longmeadow1_temperature:
-  friendly_name: Longmeadow1 Temperature
-  icon: mdi:thermometer
-sensor.longmeadow1_humidity:
-  friendly_name: Longmeadow1 Humidity
-  icon: mdi:water-percent
-sensor.longmeadow2_temperature:
-  friendly_name: Longmeadow2 Temperature
-  icon: mdi:thermometer
-sensor.longmeadow2_humidity:
-  friendly_name: Longmeadow2 Humidity
-  icon: mdi:water-percent
 sensor.raw_solar_tube_luminosity:
   friendly_name: Raw Solar Tube Luminosity
   icon: mdi:brightness-6

@@ -24,8 +24,8 @@ scr_ha_startup:
         entity_id: input_boolean.inp_bool_sleeping
     - condition: template
       value_template: >
-        {{ ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) > (states('input_datetime.assume_awake') | timestamp_local) )  and 
-          ( as_timestamp(now())| timestamp_custom('%H:%M:%S', true) < (states('input_datetime.assume_asleep') | timestamp_local) ) }}
+        {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') | timestamp_local('')) )  and 
+          ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') | timestamp_local('')) ) }}
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_announcements
@@ -101,11 +101,10 @@ scr_arrival_announcement:
         message: "While you where away, there was visitor at the front door"
     - service: notify.alexa_yellow_ring
       data_template:
-        message: "While you where away, there was visitor at the front door"    
+        message: "While you where away, there was visitor at the front door"
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
-
 
 # SIMULATE AN OCCUPIED HOME
 #
@@ -129,7 +128,7 @@ scr_occupied_sim:
 # SHARED EXTENDED ABSENCE ACTIONS
 #
 scr_shared_extended_absence_on:
-  mode: restart  # start new script run after stopping previous to prevent confusion due to delay
+  mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: script.scr_check_sunrm_windows
     - service: script.scr_close_sunrm_shades
@@ -144,7 +143,7 @@ scr_shared_extended_absence_on:
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
 scr_shared_extended_absence_off:
-  mode: restart  # start new script run after stopping previous to prevent confusion due to delay
+  mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: switch.turn_on
       entity_id: switch.water_valve
@@ -432,10 +431,10 @@ scr_great_room_motion_lighting_off:
 #
 scr_frontporch_activity:
   sequence:
-    - service: script.turn_on  # use this method to de-serialize the speech so cameras are not delayed
+    - service: script.turn_on # use this method to de-serialize the speech so cameras are not delayed
       entity_id: script.scr_say_phrase
       data:
-        variables: 
+        variables:
           message: "You have a visitor at the front door"
     - service: camera.snapshot
       data:
@@ -509,26 +508,28 @@ scr_say_phrase:
   sequence:
     - service: sonos.snapshot
       data:
-        entity_id: media_player.office_speakers, media_player.main_speakers
+        entity_id:
+          - media_player.office_speakers
+          - media_player.main_speakers
         with_group: true
     - choose:
-      - conditions:  # high priority
-          - condition: template
-            value_template: "{{ priority == 'high' }}"
-        sequence:
-        - service: media_player.volume_set
-          data_template:
-            entity_id: media_player.office_speakers
-            volume_level: 0.40 # set high priority speaking volume
-        - service: media_player.volume_set
-          data_template:
-            entity_id: media_player.main_speakers
-            volume_level: 0.50 # set high priority speaking volume
-        - service: tts.google_translate_say
-          data_template:
-            entity_id: media_player.main_speakers
-            message: "This is a high priority message. {{ message }}"
-      default:  # normal priority
+        - conditions: # high priority
+            - condition: template
+              value_template: "{{ priority == 'high' }}"
+          sequence:
+            - service: media_player.volume_set
+              data_template:
+                entity_id: media_player.office_speakers
+                volume_level: 0.40 # set high priority speaking volume
+            - service: media_player.volume_set
+              data_template:
+                entity_id: media_player.main_speakers
+                volume_level: 0.50 # set high priority speaking volume
+            - service: tts.google_translate_say
+              data_template:
+                entity_id: media_player.main_speakers
+                message: "This is a high priority message. {{ message }}"
+      default: # normal priority
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
           state: "on"
@@ -553,7 +554,9 @@ scr_say_phrase:
       timeout: "00:02:00"
     - service: sonos.restore # premature restore will cut off speech potentially
       data: # before it has started or during play
-        entity_id: media_player.main_speakers
+        entity_id:
+          - media_player.main_speakers
+          - media_player.office_speakers
         with_group: true
 
 #

@@ -32,6 +32,7 @@ google_calendars.yaml
 *.conf
 *.sh
 *.log
+*.log.*
 *.db
 
 

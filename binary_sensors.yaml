@@ -38,11 +38,11 @@
       friendly_name: "Washer ON/OFF sensor"
       unique_id: washer_on_off_sensor
       delay_on:
-        seconds: 30  # amount of time template state must be met before switching to ON
+        seconds: 30 # amount of time template state must be met before switching to ON
       delay_off:
-        seconds: 930  # amount of time template state is NOT met before switching to OFF
+        seconds: 930 # amount of time template state is NOT met before switching to OFF
       value_template: >-
-        {{ states('sensor.washer_energy_current') | float > 0.05 }}
+        {{ states('sensor.washer_energy_current') | float(default=0) > 0.05 }}
 
 - platform: template
   sensors:
@@ -50,11 +50,11 @@
       friendly_name: "Dishwasher ON/OFF sensor"
       unique_id: dishwasher_on_off_sensor
       delay_on:
-        seconds: 30  # amount of time template state must be met before switching to ON
+        seconds: 30 # amount of time template state must be met before switching to ON
       delay_off:
-        seconds: 60  # amount of time template state is NOT met before switching to OFF
+        seconds: 60 # amount of time template state is NOT met before switching to OFF
       value_template: >-
-        {{ states('sensor.dishwasher_energy_current') | float > 0.1 }}
+        {{ states('sensor.dishwasher_energy_current') | float(default=0) > 0.1 }}
 
 #
 # LUMINOSITY TRIGGERS - Consolidated as binary template sensors here so trigger values are in one place for automations & scripts #
@@ -99,7 +99,7 @@
   qos: 0
 
 - platform: mqtt
-  unique_id: utilitycloset_waterheater  # water heater on/off
+  unique_id: utilitycloset_waterheater # water heater on/off
   name: "Water Heater"
   state_topic: "utilitycloset/waterheater/State"
   payload_on: "1"
@@ -110,22 +110,6 @@
   unique_id: utilitycloset_leakdetector
   name: "Leak Water Heater"
   state_topic: "utilitycloset/leakdetector/State"
-  payload_on: "1"
-  payload_off: "0"
-  qos: 0
-
-- platform: mqtt
-  unique_id: washer_leak
-  name: "Leak Washer"
-  state_topic: "laundryroomleak/washer_leak/State"
-  payload_on: "1"
-  payload_off: "0"
-  qos: 0
-
-- platform: mqtt
-  unique_id: laundry_sink_leak
-  name: "Leak Laundry Sink"
-  state_topic: "laundryroomleak/laundry_sink_leak/State"
   payload_on: "1"
   payload_off: "0"
   qos: 0
@@ -142,14 +126,6 @@
   unique_id: dishwasher_leak
   name: "Leak Dishwasher"
   state_topic: "kitchenislandleak/dishwasher_leak/State"
-  payload_on: "1"
-  payload_off: "0"
-  qos: 0
-
-- platform: mqtt
-  unique_id: kitchen_sink_leak
-  name: "Leak Kitchen Sink"
-  state_topic: "kitchenislandleak/kitchen_sink_leak/State"
   payload_on: "1"
   payload_off: "0"
   qos: 0

@@ -157,20 +157,6 @@
   qos: 0
   unit_of_measurement: "ºF"
 
-- platform: mqtt
-  unique_id: longmeadow1_temperature
-  name: "Longmeadow1 Temperature"
-  state_topic: "longmeadow1/DS18b20/Temperature"
-  qos: 0
-  unit_of_measurement: "ºF"
-
-- platform: mqtt
-  unique_id: longmeadow2_temperature
-  name: "Longmeadow2 Temperature"
-  state_topic: "longmeadow2/DS18b20/Temperature"
-  qos: 0
-  unit_of_measurement: "ºF"
-
 #
 # SNMP sensors
 #
@@ -313,29 +299,29 @@
     wallet_value_ada:
       friendly_name: "ADA Wallet"
       value_template: >-
-        {{ ((states('sensor.coinbase_ada_wallet') | float) * (states('sensor.ada_exchange_rate') | float)) | round(2) }}
+        {{ ((states('sensor.coinbase_ada_wallet') | float(default=0)) * (states('sensor.ada_exchange_rate') | float(default=0))) | round(2) }}
 
 - platform: template
   sensors:
     wallet_value_btc:
       friendly_name: "BTC Wallet"
       value_template: >-
-        {{ ((states('sensor.coinbase_btc_wallet') | float) * (states('sensor.btc_exchange_rate') | float)) | round(2) }}
+        {{ ((states('sensor.coinbase_btc_wallet') | float(default=0)) * (states('sensor.btc_exchange_rate') | float(default=0))) | round(2) }}
 
 - platform: template
   sensors:
     wallet_value_eth:
       friendly_name: "ETH Wallet"
       value_template: >-
-        {{ ((states('sensor.coinbase_eth_wallet') | float) * (states('sensor.eth_exchange_rate') | float)) | round(2) }}
+        {{ ((states('sensor.coinbase_eth_wallet') | float(default=0)) * (states('sensor.eth_exchange_rate') | float(default=0))) | round(2) }}
 
 - platform: template
   sensors:
     last_static_pressure_test:
       friendly_name: "Last Static Pressure Test"
       value_template: >-
-        {{ as_timestamp( state_attr('sensor.unvalidated_water_static_pressure_test_result', 'test_end') ) 
-        | timestamp_custom ('%m/%d %H:%M') }}
+        {{ as_timestamp( state_attr('sensor.unvalidated_water_static_pressure_test_result', 'test_end'), '' ) 
+        | timestamp_custom ('%m/%d %H:%M', True, 'unknown') }}
 
 - platform: template
   sensors:
@@ -353,8 +339,8 @@
       friendly_name: "Pressure Loss per Minute"
       unit_of_measurement: "PSI"
       value_template: >
-        {{ (states('sensor.validated_water_static_pressure_test_result') | float) / 
-          (states('input_number.inp_num_spt_duration') | float) }}
+        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) / 
+          (states('input_number.inp_num_spt_duration') | float(default=0)) }}
 
 - platform: template
   sensors:
@@ -376,15 +362,15 @@
       friendly_name: "Suggested Brightness"
       unit_of_measurement: "%"
       value_template: >-
-        {% if ( ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_0_threshold') | float) ) ) %}
+        {% if ( ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_0_threshold') | float(default=0)) ) ) %}
           0
-        {% elif ( ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_0_threshold') | float) ) and
-              ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_med_threshold') | float) ) ) %}
+        {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_0_threshold') | float(default=0)) ) and
+              ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
           30
-        {% elif ( ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_low_threshold') | float) ) and
-              ( (states('sensor.living_rm_visible_light') | float) > (states('input_number.inp_num_high_threshold') | float) ) ) %}
+        {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
+              ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_high_threshold') | float(default=0)) ) ) %}
           50
-        {% elif ( (states('sensor.living_rm_visible_light') | float) <= (states('input_number.inp_num_high_threshold') | float) ) %}
+        {% elif ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_high_threshold') | float(default=0)) ) %}
           100
         {% else %}
           99

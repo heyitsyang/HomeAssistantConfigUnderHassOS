@@ -108,17 +108,6 @@ graphs:
   - history_graph.announcements
   - history_graph.sleeping
 
-#  misc:
-#  name: 'Misc Info'
-#  icon: mdi:file-question
-#  entities:
-#  - group.system_res
-#  - group.norcoose_sensors
-#  - group.longmeadow_sensors
-#  - group.netgear_trackers
-#  - group.bt_presence
-#  - group.proximity_measurements
-
 developmental:
   name: "Developmental"
   icon: mdi:test-tube
@@ -252,12 +241,6 @@ garage_door_status:
   - switch.sm_garage_opener_power
   - camera.garage_camera
 
-netgear_trackers:
-  name: 'Netgear Trackers'
-  entities:
-  - device_tracker.ys_cell
-  - device_tracker.kt_cell
-
 where_are_yskt:
   name: 'Where are yskt'
   entities:
@@ -304,12 +287,6 @@ norcoose_sensors:
   - sensor.rack_exhaust_temperature
   - sensor.rack_exhaust_humidity
   - sensor.rack_exhaust_pressure
-
-longmeadow_sensors:
-  name: "Longmeadow Sensors"
-  entities:
-  - sensor.longmeadow1_temperature
-  - sensor.longmeadow2_temperature
 
 all_lighting:                                    # This group created for frontend UI use
   name: 'All Lighting'                           # all_lights cannot be used - reserved & automatically created by HA/Wink also includes fans
