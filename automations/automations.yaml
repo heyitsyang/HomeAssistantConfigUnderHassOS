@@ -552,6 +552,7 @@
         - binary_sensor.leak_refrigerator
         - binary_sensor.leak_dishwasher
         - binary_sensor.leak_kitchen_sink
+        - binary_sensor.leak_kitchen_sink_rear
         - binary_sensor.leak_water_heater
         - binary_sensor.leak_karens_sink
         - binary_sensor.leak_yangs_sink
