@@ -154,6 +154,8 @@ binary_sensor.leak_dishwasher:
   device_class: moisture
 binary_sensor.leak_kitchen_sink:
   device_class: moisture
+binary_sensor.leak_kitchen_sink_rear:
+  device_class: moisture
 binary_sensor.leak_refrigerator:
   device_class: moisture
 binary_sensor.leak_karens_sink:

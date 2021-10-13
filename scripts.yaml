@@ -597,6 +597,12 @@ scr_sonos_eval_announce:
 #  MANUAL UI REQUESTS
 #
 
+# PAUSE ALARM
+scr_pause_alarm:
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.inp_bool_pause_alarm
+
 # SPEAK TIME
 scr_manual_say_time:
   mode: queued

@@ -11,8 +11,12 @@
 ## which can be controlled from the frontend or can serve   ##
 ## as boolean variables hidden from the UI                  ##
 
-inp_bool_inhibit_shades:
+inp_bool_inhibit_shades:  # prevent shade automations
   name: 'Inhibit shades'
+  icon: mdi:cancel
+
+inp_bool_pause_alarm:
+  name: 'Pause alarm'
   icon: mdi:cancel
 
 inp_bool_theater_mode:
