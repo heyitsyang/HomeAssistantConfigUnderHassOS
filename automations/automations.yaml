@@ -1565,13 +1565,13 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: input_boolen.pause_alarm
+      entity_id: input_boolean.inp_bool_pause_alarm
       from: "off"
       to: "on"
   action:
     - delay: 00:30:00
     - service: input_boolean.turn_off
-      entity_id: input_boolean.pause_alarm
+      entity_id: input_boolean.inp_bool_pause_alarm
 
 #
 #  GUEST MODE

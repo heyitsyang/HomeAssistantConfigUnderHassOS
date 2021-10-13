@@ -6,6 +6,7 @@
 ##################
 
 smart_home:
+  locale: en-US
   endpoint: https://api.amazonalexa.com/v3/events
   client_id: !secret alexa_client_id                        # not the same as the client_id and client secret in the security profile
   client_secret: !secret alexa_client_secret                # go to Alexa Developer Console:haha>Build>Permissions>Alexa Skill Messaging
@@ -19,6 +20,7 @@ smart_home:
       - switch.hamstation
       - switch.water_valve
       - input_boolean.inp_bool_theater_mode
+      - input_boolean.inp_bool_pause_alarm
       - input_boolean.inp_bool_guest_mode
       - input_boolean.inp_bool_sleeping
       - input_boolean.inp_bool_extended_absence_mode
@@ -51,6 +53,8 @@ smart_home:
       display_categories: LIGHT
     switch.hamstation:                                      # avoid Alexa confusion with radio stations
       name: "Ham radio"
+    input_boolean.inp_bool_pause_alarm:
+      name: "Cancel alarm"
     input_boolean.inp_bool_sleeping:
       name: "Sleep mode"
     input_boolean.inp_bool_guest_mode:

@@ -15,7 +15,7 @@ inp_bool_inhibit_shades:  # prevent shade automations
   name: 'Inhibit shades'
   icon: mdi:cancel
 
-inp_bool_pause_alarm':
+inp_bool_pause_alarm:
   name: 'Pause alarm'
   icon: mdi:cancel
 
