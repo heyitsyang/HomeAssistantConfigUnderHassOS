@@ -2,17 +2,17 @@
 ##  to yaml interpretation - do not delete them
  
 # LED Strips using Flux LED
-- platform: flux_led
-  devices:
-    10.0.0.153:
-      name: "Kitchen LEDs Front"
-      mode: "rgbw"
-    10.0.0.154:
-      name: "Kitchen LEDs Lower"
-      mode: "rgbw"
-    10.0.0.155:
-      name: "Kitchen LEDs Rear"
-      mode: "rgbw"
+#- platform: flux_led
+#  devices:
+#    10.0.0.153:
+#      name: "Kitchen LEDs Front"
+#      mode: "rgbw"
+#    10.0.0.154:
+#      name: "Kitchen LEDs Lower"
+#      mode: "rgbw"
+#    10.0.0.155:
+#      name: "Kitchen LEDs Rear"
+#      mode: "rgbw"
 
 
 
