@@ -63,7 +63,7 @@
     # don't run more often than every N hours from last test
     - condition: template
       value_template: >-
-        {{ (as_timestamp(now(),'') | int) - (as_timestamp(state_attr('automation.aut_start_spt_leak_test', 'last_triggered'),'') | int )
+        {{ (as_timestamp(now(),'') | int(default=0)) - (as_timestamp(state_attr('automation.aut_start_spt_leak_test', 'last_triggered'),'') | int(default=0) )
           > (4 * 60 * 60) }}
   action:
     - choose: # if water heater is ON, wait until OFF
@@ -131,7 +131,7 @@
   initial_state: on
   trigger:
     - platform: template
-      value_template: "{{ (state_attr('sensor.spt_data_status', 'consec_aborts') | int) > 3 }}"
+      value_template: "{{ (state_attr('sensor.spt_data_status', 'consec_aborts') | int(default=0)) > 3 }}"
   action:
     - service: notify.gmail_to_yang
       data_template:
@@ -178,7 +178,7 @@
   trigger: # in timestamp_custom() below, the local time flag is set to false since
     - platform: template # the timestamp compared is already in local time so no conversion desired
       value_template: >
-        {{ ( states('sensor.time') == (state_attr('input_datetime.assume_awake', 'timestamp') | int | timestamp_custom('%H:%M', false, '')) ) }}
+        {{ ( states('sensor.time') == (state_attr('input_datetime.assume_awake', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
   action:
     - service: input_boolean.turn_on
       data:
@@ -193,7 +193,7 @@
   trigger: # in timestamp_custom() below, the local time flag is set to false since
     - platform: template # the timestamp compared is already in local time so no conversion desired
       value_template: >
-        {{ ( states('sensor.time') == (state_attr('input_datetime.assume_asleep', 'timestamp') | int | timestamp_custom('%H:%M', false, '')) ) }}
+        {{ ( states('sensor.time') == (state_attr('input_datetime.assume_asleep', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
   action:
     - service: input_boolean.turn_on
       data:
@@ -205,7 +205,7 @@
   trigger:
     - platform: template # the timestamp compared is already in local time so no further conversion desired
       value_template: >
-        {{ ( states('sensor.time') == (state_attr('input_datetime.inhibit_announcements', 'timestamp') | int | timestamp_custom('%H:%M', false, '')) ) }}
+        {{ ( states('sensor.time') == (state_attr('input_datetime.inhibit_announcements', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
   action:
     - service: input_boolean.turn_off
       data:
@@ -287,7 +287,7 @@
       entity_id: sensor.suggested_brightness # this triggers with any state change
   condition:
     - condition: template # ignore if zero (prevent turn off of light using this mechanism)
-      value_template: "{{ states('sensor.suggested_brightness') | int != 0 }}"
+      value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
     - condition: state
       entity_id: binary_sensor.lum_lvrm_lights_indoor_trig
       state: "on"
@@ -303,7 +303,7 @@
     - service: light.turn_on
       data_template:
         entity_id: light.living_room_lights
-        brightness_pct: "{{ states('sensor.suggested_brightness') | int }}"
+        brightness_pct: "{{ states('sensor.suggested_brightness') | int(default=0) }}"
 
 ###########################################################
 #      Test luminosity based triggers and save states     #
@@ -316,7 +316,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.raw_solar_tube_luminosity') | int <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int ) }}
+        {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
@@ -327,7 +327,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.raw_solar_tube_luminosity') | int >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int ) }}
+        {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
@@ -360,7 +360,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int) ) }}
+        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
@@ -371,7 +371,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int) ) }}
+        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
@@ -382,7 +382,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.raw_solar_tube_luminosity') | int) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int) ) }}
+        {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
@@ -393,7 +393,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.raw_solar_tube_luminosity') | int) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int) ) }}
+        {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
@@ -478,13 +478,16 @@
         - sensor.eth_exchange_rate
       below: input_number.eth_low_trigger
   action:
-    - service: notify.pushover_yang
-      data:
-        title: "E.T.H. trading at {{ states('sensor.eth_exchange_rate') }}"
-        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
     - service: notify.gmail_to_yang
       data:
         title: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
+        message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
+    - condition: state
+      entity_id: input_boolean.inp_bool_crypto_pushover_notify
+      state: "on"
+    - service: notify.pushover_yang
+      data:
+        title: "E.T.H. trading at {{ states('sensor.eth_exchange_rate') }}"
         message: "Ethereum trading at {{ states('sensor.eth_exchange_rate') }} USD"
 
 #
@@ -619,7 +622,7 @@
   #  condition: # only announce first load in washer
   #    - condition: template
   #      value_template: >-
-  #        {{ ( ( as_timestamp(now(), '') - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered"), '' ) | int > (8 * 60 * 60)) )
+  #        {{ ( ( as_timestamp(now(), '') - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered"), '' ) | int(default=0) > (8 * 60 * 60)) )
   #            or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
   action:
     - service: script.scr_say_phrase
@@ -666,8 +669,8 @@
 #  condition:
 #  - condition: template                                                           # if not during assume_awake hours, then keep sleeping ON
 #    value_template: >
-#      {{ ( (states('sensor.time') > (state_attr('input_datetime.assume_asleep', 'timestamp') | int | timestamp_custom('%H:%M', false, '')) ) and
-#         (states('sensor.time') < (state_attr('input_datetime.assume_awake', 'timestamp') | int | timestamp_custom('%H:%M', false, ''))) ) }}
+#      {{ ( (states('sensor.time') > (state_attr('input_datetime.assume_asleep', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) and
+#         (states('sensor.time') < (state_attr('input_datetime.assume_awake', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, ''))) ) }}
 #  action:
 #  - service: input_boolean.turn_off
 #    entity_id: input_boolean.inp_bool_sleeping
@@ -712,7 +715,7 @@
       entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
       to: "on"
       for: # in motion activated lighting
-        minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int(default=0) }}"
   condition:
     - condition: and
       conditions:
@@ -740,7 +743,7 @@
       entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
       to: "off"
       for:
-        minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int(default=0) }}"
   condition: # only auto-off if daylight outside
     - condition: numeric_state #  prevent auto-off when light inside exceeds the above lux trigger
       entity_id: sun.sun #  light turns off when motion times out (below)
@@ -813,8 +816,8 @@
         state: "off"
       - condition: template # check if bright enough to bother
         value_template: >
-          {{ states('sensor.filtered_solar_tube_luminosity') | int >  
-          (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int) }}
+          {{ states('sensor.filtered_solar_tube_luminosity') | int(default=0) >  
+          (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}
       - condition: numeric_state
         entity_id: sun.sun
         value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
@@ -877,7 +880,7 @@
       entity_id: binary_sensor.lum_sunrm_shades_trig
       to: "off"
       for:
-        minutes: "{{ states('input_number.inp_num_sunrm_shades_close_low_lux_trig_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_sunrm_shades_close_low_lux_trig_delay') | int(default=0) }}"
   condition:
     - condition: state
       entity_id: input_boolean.inp_bool_inhibit_shades # do not execute if manuall inhibited
@@ -899,7 +902,7 @@
       entity_id: binary_sensor.lum_sunrm_shades_trig
       to: "on"
       for:
-        minutes: "{{ states('input_number.inp_num_sunrm_shades_open_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_sunrm_shades_open_delay') | int(default=0) }}"
   condition:
     condition: and
     conditions:
@@ -1023,7 +1026,7 @@
     - condition: template # debounce
       value_template: >-
         {{ ( ( as_timestamp(now(), '') - (as_timestamp(state_attr('automation.aut_frontporch_activity', 
-        'last_triggered'), '') | float(default=0)) ) | int ) > 14 }}
+        'last_triggered'), '') | float(default=0)) ) | int(default=0) ) > 14 }}
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_frontporch_activity
@@ -1040,32 +1043,32 @@
       entity_id: binary_sensor.front_ent_attic_uwave
       to: "off"
       for:
-        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
       entity_id: cover.large_garage_door
       to: "closed"
       for:
-        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
       entity_id: cover.small_garage_door
       to: "closed"
       for:
-        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
       entity_id: lock.front_door_lock
       to: "locked"
       for:
-        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
       entity_id: person.yang
       to: "home"
       for:
-        minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int + 5) | int }}"
+        minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) + 5) | int(default=0) }}"
     - platform: state
       entity_id: person.karen
       to: "home"
       for:
-        minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int + 5) | int }}"
+        minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) + 5) | int(default=0) }}"
   action:
     - service: light.turn_off
       entity_id: light.front_door_lights
@@ -1081,7 +1084,7 @@
       entity_id: lock.back_door_lock
       to: "locked"
       for:
-        minutes: "{{ states('input_number.inp_num_back_door_lights_off_delay') | int }}"
+        minutes: "{{ states('input_number.inp_num_back_door_lights_off_delay') | int(default=0) }}"
   action:
     - service: light.turn_off
       entity_id: light.back_door_lights
@@ -1097,7 +1100,7 @@
       event: sunrise
       offset: "+00:10:00"
     #  - platform: template
-    #    value_template: "{{ states('sensor.filtered_solar_tube_luminosity') | int > 230 }}"
+    #    value_template: "{{ states('sensor.filtered_solar_tube_luminosity') | int(default=0) > 230 }}"
     - platform: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       to: "off"
@@ -1128,7 +1131,7 @@
             - condition: template
               value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}" # we have to do template here because there is no "not" condition
             - condition: template
-              value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}" # sensor broken if zero
+              value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor broken if zero
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
           state: "off"
@@ -1187,14 +1190,14 @@
   trigger:
     - platform: template # calculate time since last door open activity  & check expiration
       value_template: >
-        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int) - 
-        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int))/60) | int ) > 
-        (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int) }}
+        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) }}
     - platform: state # cover case where unlocked, but door never opened
       entity_id: lock.front_door_lock
       to: "unlocked"
       for:
-        minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int) + 30 }}"
+        minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) + 30 }}"
   condition:
     - condition: state
       entity_id: lock.front_door_lock
@@ -1218,14 +1221,14 @@
   trigger:
     - platform: template # calculate time since last activity & check expiration
       value_template: >
-        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int) - 
-        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int))/60) | int ) > 
-        (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int) }}
+        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int(default=0)) }}
     - platform: state
       entity_id: lock.back_door_lock
       to: "unlocked"
       for:
-        minutes: "{{ (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int) + 30 }}"
+        minutes: "{{ (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int(default=0)) + 30 }}"
   condition:
     - condition: state
       entity_id: lock.back_door_lock
@@ -1374,7 +1377,7 @@
         seconds: 20
   condition: # this prevents immediate triggering after home assistant startup
     - condition: template
-      value_template: "{{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')| float(default=0)) ) | int ) > 10 }}"
+      value_template: "{{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')| float(default=0)) ) | int(default=0) ) > 10 }}"
   action:
     - wait_for_trigger:
         - platform: state

@@ -379,7 +379,7 @@ scr_motion_lighting_on:
           entity_id: input_boolean.inp_bool_sleeping # execute only if not sleeping
           state: "off"
         - condition: template # ignore if suggested is zero to avoid conflicting sensors
-          value_template: "{{ states('sensor.suggested_brightness') | int != 0 }}"
+          value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
         - condition: state
           entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in input_numbers.yaml
           state: "on"
@@ -389,7 +389,7 @@ scr_motion_lighting_on:
     - service: light.turn_on
       data_template:
         entity_id: light.living_room_lights
-        brightness_pct: "{{ states('sensor.suggested_brightness') | int}}"
+        brightness_pct: "{{ states('sensor.suggested_brightness') | int(default=0)}}"
 
 #
 # PATHWAY MOTION LIGHTING
@@ -483,7 +483,7 @@ scr_front_door_lights_on:
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
     - condition: template
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}" # sensor is broken if zero
+      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor is broken if zero
     - service: light.turn_on
       entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
 
@@ -493,7 +493,7 @@ scr_back_door_lights_on:
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
     - condition: template
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int > 0 }}" # sensor is broken if zero
+      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor is broken if zero
     - service: light.turn_on
       entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
 
