@@ -15,25 +15,25 @@
 # scroll down and understand the categories before entering info randomly and enter your
 # location info in the appropriate category.
 #
-# There are three types of Rec Centers as indicated by the categories.  
+# There are three types of Rec Centers as indicated by the categories.
 # From largest to smallest: Regional Rec Centers, Villages Rec Centers, & Neighborhood
-# Rec Centers.  Please place your Rec Center additions in the correct category. 
+# Rec Centers.  Please place your Rec Center additions in the correct category.
 
 #
 # ADDING A ZONE BY EDITING zones.yaml:
 #
-# To add a zone, use Google Maps to determine Long/Lat/Radius of the location you 
+# To add a zone, use Google Maps to determine Long/Lat/Radius of the location you
 # are adding:
 #   1. Use Google Maps to find location to be added
-#   2. Right click on the approximate center of the location and use the 
+#   2. Right click on the approximate center of the location and use the
 #      "distance to here" function to determine the Radius.  Shift the
 #      center as necessary to determine center of the facility.  The Google
-#      definition of the location center is not necessarily the center 
+#      definition of the location center is not necessarily the center
 #      desired for zone purposes. The desired center is the approximate geo-center
-#      of the entire grounds when overlaid with a circle - including parking, 
+#      of the entire grounds when overlaid with a circle - including parking,
 #      athletic facilities, activity centers, pools, etc.  Try to avoid overlapping
 #      cart paths and try to bias towards where people will congregate.
-#   3. Once the center and radius (in meters not feet! ) are determined, record the 
+#   3. Once the center and radius (in meters not feet! ) are determined, record the
 #      Lat/Long/Radius below along with a name.  You must use meters for the radius.
 #      Please leave "icon: mdi:blank" for rec centers as there are too many & any
 #      icons will clutter the map. ("mdi:blank" is an non-existent icon)
@@ -42,32 +42,31 @@
 #
 #####################################################################################
 
-
 #
 # PERSONAL MISC
 #
 - name: home
-  latitude: !secret latitude 
+  latitude: !secret latitude
   longitude: !secret longitude
-  radius: 30                # in meters
+  radius: 30 # in meters
   icon: mdi:home
 
 - name: Church@Springs - Villages
   latitude: 28.939792
   longitude: -81.927593
-  radius: 61                  # meters
+  radius: 61 # meters
   icon: mdi:church
 
 - name: Collier Evans Prairie Trail Gate
   latitude: 28.85382
   longitude: -82.00021
-  radius: 17                 # meters
+  radius: 17 # meters
   icon: mdi:blank
 
 - name: Collier Hendry Gate
   latitude: 28.84851
   longitude: -82.01064
-  radius: 24.4                # meters
+  radius: 24.4 # meters
   icon: mdi:blank
 
 #
@@ -76,54 +75,52 @@
 - name: The Villages Regional Hospital
   latitude: 28.950351
   longitude: -81.957802
-  radius: 170                  # meters
+  radius: 170 # meters
   icon: mdi:hospital
 
 - name: The Villages Hospital East Campus
-  latitude: 28.95211 
+  latitude: 28.95211
   longitude: -81.95517
-  radius: 170                  # meters
-  icon: mdi:hospital 
+  radius: 170 # meters
+  icon: mdi:hospital
 
 - name: Villages Health Creekside Care Center
   latitude: 28.907006
   longitude: -81.979164
-  radius: 40                   # meters
+  radius: 40 # meters
   icon: mdi:hospital
 
 - name: UF Health Emergency Care
   latitude: 28.840883
   longitude: -82.023891
-  radius: 86                   # meters
+  radius: 86 # meters
   icon: mdi:hospital
 
 - name: Center for Advanced Healthcare
   latitude: 28.845920
   longitude: -82.032300
-  radius: 112                  # meters
+  radius: 112 # meters
   icon: mdi:hospital
-
 
 # TOWN SQUARES
 #
 - name: Spanish Springs
   latitude: 28.940417
   longitude: -81.950512
-  radius: 259                  # meters
+  radius: 259 # meters
   icon: mdi:blank
 
 - name: Lake Sumter Landing
   latitude: 28.909091
   longitude: -81.975026
-  radius: 305                  # meters
+  radius: 305 # meters
   icon: mdi:blank
- 
+
 - name: Brownwood Paddock Square
   latitude: 28.844604
   longitude: -82.022163
-  radius: 350                  # meters
+  radius: 350 # meters
   icon: mdi:blank
-
 
 #
 # REGIONAL REC CENTERS
@@ -131,79 +128,79 @@
 - name: Mulberry Grove RRC
   latitude: 28.981104
   longitude: -82.013200
-  radius: 85                   # meters
+  radius: 85 # meters
   icon: mdi:blank
 
 - name: Paradise RRC
   latitude: 28.948021
   longitude: -81.950421
-  radius: 62                   # meters
+  radius: 62 # meters
   icon: mdi:blank
 
 - name: La Hacienda RRC
   latitude: 28.943342
   longitude: -81.951892
-  radius: 50                   # meters
+  radius: 50 # meters
   icon: mdi:blank
- 
+
 - name: Savannah RRC
   latitude: 28.951604
   longitude: -81.999091
-  radius: 81                   # meters
+  radius: 81 # meters
   icon: mdi:blank
 
 - name: Laurel Manor RRC
   latitude: 28.926390
   longitude: -82.002618
-  radius: 80                   # meters
+  radius: 80 # meters
   icon: mdi:blank
 
 - name: Lake Miona RRC
   latitude: 28.896525
   longitude: -81.980307
-  radius: 61                   # meters
+  radius: 61 # meters
   icon: mdi:blank
 
 - name: Seabreeze RRC
   latitude: 28.875081
   longitude: -81.992749
-  radius: 97                   # meters
+  radius: 97 # meters
   icon: mdi:blank
 
 - name: Colony Cottage RRC
   latitude: 28.866164
   longitude: -81.961261
-  radius: 70                   # meters
+  radius: 70 # meters
   icon: mdi:blank
 
 - name: Eisenhower RRC
   latitude: 28.847718
   longitude: -82.015365
-  radius: 102                  # meters
+  radius: 102 # meters
   icon: mdi:blank
 
 - name: Rohan RRC
   latitude: 28.824873
   longitude: -81.971911
-  radius: 110                  # meters
+  radius: 110 # meters
   icon: mdi:blank
-  
+
 - name: Fenney RRC
   latitude: 28.796074
   longitude: -82.038613
-  radius: 92                   # meters
+  radius: 92 # meters
   icon: mdi:blank
 
 - name: Everglades RRC
   latitude: 28.800575
   longitude: -82.004216
-  radius: 110                  # meters
+  radius: 110 # meters
   icon: mdi:blank
 
 - name: Ezell RRC
   latitude: 28.791618
   longitude: -81.968650
-  radius: 100                  # meters
+  radius: 100 # meters
   icon: mdi:blank
 
 #
@@ -212,172 +209,177 @@
 - name: Chatham VRC
   latitude: 28.970825
   longitude: -82.029440
-  radius: 100                  # meters
+  radius: 100 # meters
   icon: mdi:blank
 
 - name: Silver Lake VRC
   latitude: 28.945396
   longitude: -81.940073
-  radius: 60                   # meters
+  radius: 60 # meters
   icon: mdi:blank
 
 - name: Southside VRC
   latitude: 28.940328
   longitude: -81.935481
-  radius: 40                   # meters
+  radius: 40 # meters
   icon: mdi:blank
 
 - name: Chula Vista VRC
   latitude: 28.930479
   longitude: -81.946080
-  radius: 73                   # meters
-  icon: mdi:blank 
+  radius: 73 # meters
+  icon: mdi:blank
 
 - name: Tierra Del Sol VRC
   latitude: 28.935087
   longitude: -81.971541
-  radius: 64                   # meters
-  icon: mdi:blank 
+  radius: 64 # meters
+  icon: mdi:blank
 
 - name: El Santiago VRC
   latitude: 28.948330
   longitude: -81.984407
-  radius: 100                  # meters
+  radius: 100 # meters
   icon: mdi:blank
 
 - name: Saddlebrook VRC
   latitude: 28.931706
   longitude: -82.000795
-  radius: 100                  # meters
+  radius: 100 # meters
   icon: mdi:blank
-  
+
 - name: Bridgeport VRC
   latitude: 28.908482
   longitude: -81.993523
-  radius: 66                   # meters
+  radius: 66 # meters
   icon: mdi:blank
 
 - name: Churchill Street VRC
   latitude: 28.913620
   longitude: -82.012835
-  radius: 70                   # meters
+  radius: 70 # meters
   icon: mdi:blank
 
 - name: Pimlico VRC
   latitude: 28.919946
   longitude: -82.017577
-  radius: 80                   # meters
+  radius: 80 # meters
   icon: mdi:blank
 
 - name: Bacall VRC
   latitude: 28.883855
   longitude: -81.973015
-  radius: 61                   # meters
+  radius: 61 # meters
   icon: mdi:blank
 
 - name: Canal Street VRC
   latitude: 28.896646
   longitude: -81.972610
-  radius: 68                   # meters
+  radius: 68 # meters
   icon: mdi:blank
 
 - name: Coconut Cove VRC
   latitude: 28.898262
   longitude: -81.955849
-  radius: 46                   # meters
+  radius: 46 # meters
   icon: mdi:blank
 
 - name: Allamanda VRC
   latitude: 28.885368
   longitude: -81.990074
-  radius: 110                  # meters
-  icon: mdi:blank 
+  radius: 110 # meters
+  icon: mdi:blank
 
 - name: Fish Hawk VRC
   latitude: 28.887223
   longitude: -82.011936
-  radius: 60                  # meters
+  radius: 60 # meters
   icon: mdi:blank
 
 - name: Hibiscus VRC
   latitude: 28.892092
   longitude: -81.993426
-  radius: 61                   # meters
-  icon: mdi:blank 
+  radius: 61 # meters
+  icon: mdi:blank
 
 - name: Sterling Heights VRC
   latitude: 28.875618
   longitude: -82.002474
-  radius: 110                  # meters
+  radius: 110 # meters
   icon: mdi:blank
 
 - name: Odell VRC
   latitude: 28.878569
   longitude: -81.959843
-  radius: 48                   # meters
+  radius: 48 # meters
   icon: mdi:blank
 
 - name: Truman VRC
   latitude: 28.867955
   longitude: -81.978815
-  radius: 100                  # meters
-  icon: mdi:blank 
+  radius: 100 # meters
+  icon: mdi:blank
 
 - name: Big Cypress VRC
   latitude: 28.857372
   longitude: -82.011489
-  radius: 100                  # meters
-  icon: mdi:blank 
+  radius: 100 # meters
+  icon: mdi:blank
 
 - name: Bradenton Village VRC
   latitude: 28.854888
   longitude: -81.983364
-  radius: 61                   # meters
+  radius: 61 # meters
   icon: mdi:blank
 
 - name: Manatee VRC
   latitude: 28.848230
   longitude: -81.989848
-  radius: 61                   # meters
+  radius: 61 # meters
   icon: mdi:blank
 
 - name: Burnsed VRC
   latitude: 28.835987
   longitude: -81.964244
-  radius: 75                   # meters
-  icon: mdi:blank 
+  radius: 75 # meters
+  icon: mdi:blank
 
 - name: Captiva VRC
   latitude: 28.858123
   longitude: -81.965586
-  radius: 75                   # meters
+  radius: 75 # meters
   icon: mdi:blank
-  
+
 - name: Moyer VRC
   latitude: 28.860163
   longitude: -81.951261
-  radius: 85                   # meters
+  radius: 85 # meters
   icon: mdi:blank
 
 - name: Aviary VRC
   latitude: 28.794182
   longitude: -81.978904
-  radius: 75                   # meters
+  radius: 75 # meters
   icon: mdi:blank
 
 - name: Riverbend VRC
   latitude: 28.792301
   longitude: -81.998241
-  radius: 90                   # meters
+  radius: 90 # meters
   icon: mdi:blank
 
 - name: Water Lily VRC
   latitude: 28.817941
-  longitude:  -82.022452
-  radius: 88                   # meters
+  longitude: -82.022452
+  radius: 88 # meters
   icon: mdi:blank
 
-  
+- name: Cattail VRC
+  latitude: 28.806294
+  longitude: -82.024488
+  radius: 67 # meters
+  icon: mdi:blank
+
 #
 # Country Club & Practice Centers (facilities only)
 #
@@ -385,87 +387,86 @@
 - name: Cane Garden CC
   latitude: 28.892713
   longitude: -81.993969
-  radius: 105                  # meters
+  radius: 105 # meters
   icon: mdi:blank
-  
+
 - name: Glenview Champions CC
   latitude: 28.949804
   longitude: -82.005928
-  radius: 123                  # meters
-  icon: mdi:blank 
+  radius: 123 # meters
+  icon: mdi:blank
 
 - name: Hacienda Hills CC
   latitude: 28.943730
   longitude: -81.963653
-  radius: 100                  # meters
-  icon: mdi:blank 
+  radius: 100 # meters
+  icon: mdi:blank
 
 - name: Lopez Legacy CC
   latitude: 28.972338
   longitude: -82.014109
-  radius: 106                  # meters
+  radius: 106 # meters
   icon: mdi:blank
-  
+
 - name: Mallory Hills CC
   latitude: 28.895284
   longitude: -81.967692
-  radius: 91                   # meters
-  icon: mdi:blank 
+  radius: 91 # meters
+  icon: mdi:blank
 
 - name: Orange Blossom Hills CC
   latitude: 28.950952
   longitude: -81.946755
-  radius: 91                   # meters
-  icon: mdi:blank 
+  radius: 91 # meters
+  icon: mdi:blank
 
 - name: Palmer Legends CC
   latitude: 28.910104
   longitude: -81.993308
-  radius:  64                 # meters
+  radius: 64 # meters
   icon: mdi:blank
-  
+
 - name: Tierra Del Sol CC
   latitude: 28.934620
   longitude: -81.970594
-  radius: 65                  # meters
+  radius: 65 # meters
   icon: mdi:blank
-  
+
 - name: Havana CC
   latitude: 28.871228
   longitude: -81.965650
-  radius: 79                   # meters
-  icon: mdi:blank 
+  radius: 79 # meters
+  icon: mdi:blank
 
 - name: Bonifay CC
   latitude: 28.859309
   longitude: -81.975833
-  radius: 84                   # meters
+  radius: 84 # meters
   icon: mdi:blank
 
 - name: Evans Prairie CC
   latitude: 28.854258
   longitude: -81.998345
-  radius: 92                   # meters
+  radius: 92 # meters
   icon: mdi:blank
 
 - name: Belle Glade CC
   latitude: 28.845145
   longitude: -81.958513
-  radius: 82                   # meters
-  icon: mdi:blank 
+  radius: 82 # meters
+  icon: mdi:blank
 
 - name: Sarasota Golf Practice Ctr
   latitude: 28.860957
   longitude: -81.960759
-  radius: 79                   # meters
-  icon: mdi:blank 
-  
+  radius: 79 # meters
+  icon: mdi:blank
+
 - name: Villages Golf Academy
   latitude: 28.910629
   longitude: -81.992592
-  radius: 55                  # meters
+  radius: 55 # meters
   icon: mdi:blank
-
 
 #
 # NEIGHBORHOOD REC CENTERS
@@ -474,29 +475,28 @@
 - name: Collier NRC
   latitude: 28.851990
   longitude: -82.011360
-  radius: 41                   # meters
+  radius: 41 # meters
   icon: mdi:blank
 
-  
 #
 # SHOPPING CENTERS
 #
 - name: La Plaza Grande
   latitude: 28.938403
   longitude: -81.945410
-  radius: 280                  # meters
+  radius: 280 # meters
   icon: mdi:blank
-  
+
 - name: Colony Plaza
   latitude: 28.866266
   longitude: -81.955229
-  radius: 152                  # meters
-  icon: mdi:blank 
+  radius: 152 # meters
+  icon: mdi:blank
 
 - name: Pinellis Plaza
   latitude: 28.863955
   longitude: -82.017336
-  radius: 280                  # meters
+  radius: 280 # meters
   icon: mdi:blank
 
 - name: Trailwinds Village Plaza
@@ -508,12 +508,11 @@
 - name: Grand Traverse Plaza
   latitude: 28.845351
   longitude: -82.028638
-  radius: 168                  # meters
+  radius: 168 # meters
   icon: mdi:blank
 
 - name: Lake Deaton Plaza
   latitude: 28.824751
   longitude: -81.966561
-  radius: 200                  # meters
-  icon: mdi:blank 
-
+  radius: 200 # meters
+  icon: mdi:blank
