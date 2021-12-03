@@ -1,116 +1,116 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
- 
+
 ### HISTORY_GRAPHS ###
 
 gr1:
-  name: 'Outdoor Luminosity'
+  name: "Outdoor Luminosity"
   hours_to_show: 24
   refresh: 300
   entities:
-  - sensor.raw_solar_tube_luminosity
-  - sensor.filtered_solar_tube_luminosity
+    - sensor.raw_solar_tube_luminosity
+    - sensor.filtered_solar_tube_luminosity
 
 gr2:
-  name: 'Indoor Luminosity'
+  name: "Indoor Luminosity"
   hours_to_show: 24
   refresh: 300
   entities:
-  - sensor.living_rm_visible_light
-  - sensor.filtered_living_rm_visible_light
-  - sensor.living_rm_full_spectrum_light
-  - sensor.living_rm_infrared_light
+    - sensor.living_rm_visible_light
+    - sensor.filtered_living_rm_visible_light
+    - sensor.living_rm_full_spectrum_light
+    - sensor.living_rm_infrared_light
 
 gr3:
-  name: 'Temperature'
+  name: "Temperature"
   hours_to_show: 24
   refresh: 300
   entities:
-  - sensor.dark_sky_temperature
-  - sensor.attic_temperature
-  - sensor.garage_temperature
-  - sensor.rack_exhaust_temperature
+    - sensor.dark_sky_temperature
+    - sensor.attic_temperature
+    - sensor.garage_temperature
+    - sensor.rack_exhaust_temperature
 
 gr4:
-  name: 'Humidity'
+  name: "Humidity"
   hours_to_show: 24
   refresh: 300
   entities:
-  - sensor.dark_sky_humidity
-#  - sensor.attic_humidity
-  - sensor.rack_exhaust_humidity
+    - sensor.dark_sky_humidity
+    #  - sensor.attic_humidity
+    - sensor.rack_exhaust_humidity
 
 gr5:
-  name: 'Activity'
+  name: "Activity"
   hours_to_show: 24
   refresh: 60
   entities:
-  - binary_sensor.front_ent_soffit_uwave
-  - binary_sensor.front_ent_attic_uwave
-  - lock.front_door_lock
-  - lock.back_door_lock
-  - cover.large_garage_door
-  - cover.small_garage_door
-  - binary_sensor.living_area_motion
-  - binary_sensor.front_door_opened
-  - binary_sensor.garagehouse_door_opened
-  - binary_sensor.back_door_opened
+    - binary_sensor.front_ent_soffit_uwave
+    - binary_sensor.front_ent_attic_uwave
+    - lock.front_door_lock
+    - lock.back_door_lock
+    - cover.large_garage_door
+    - cover.small_garage_door
+    - binary_sensor.living_area_motion
+    - binary_sensor.front_door_opened
+    - binary_sensor.garagehouse_door_opened
+    - binary_sensor.back_door_opened
 
 gr6:
-  name: 'Location'
+  name: "Location"
   hours_to_show: 24
   refresh: 60
   entities:
-  - person.karen
-  - device_tracker.kt_phone
-  - person._yang
-  - device_tracker.ys_phone
+    - person.karen
+    - device_tracker.kt_cell_gps
+    - person._yang
+    - device_tracker.ys_cell_gps
 
 gr7:
-  name: 'Proximity to Home'
+  name: "Proximity to Home"
   hours_to_show: 24
   refresh: 60
   entities:
-  - proximity.home_ys
-  - proximity.home_kt
+    - proximity.home_ys
+    - proximity.home_kt
 
 gr8:
-  name: 'Announcements'
+  name: "Announcements"
   hours_to_show: 24
   refresh: 60
   entities:
-  - media_player.main_speakers
-  - media_player.office_speakers
-  
+    - media_player.main_speakers
+    - media_player.office_speakers
+
 gr9:
-  name: 'Switches'
+  name: "Switches"
   hours_to_show: 24
   refresh: 120
   entities:
-  - switch.lg_garage_opener_power
-  - switch.sm_garage_opener_power
-  - switch.above_cabinet_lights
-  - switch.candles
+    - switch.lg_garage_opener_power
+    - switch.sm_garage_opener_power
+    - switch.above_cabinet_lights
+    - switch.candles
 
 gr10:
-  name: 'Lights & Fans'
+  name: "Lights & Fans"
   hours_to_show: 24
   refresh: 120
   entities:
-  - switch.front_door_lights
-  - switch.back_door_lights
-  - light.cabinet_lights
-  - light.eating_area_lights
-  - light.guest_room_lights
-  - light.island_lights
-  - light.living_room_lights
-  - light.master_bedroon_lights
-  - light.office_lights
-  - light.sun_room_lights
-  - light.track_lights
-  - light.guest_room_fan
-  - light.sun_room_fan_1
-  - light.sun_room_fan_2
-  - light.living_room_fan
-  - light.master_bedroom_fan
-  - light.office_fan
+    - switch.front_door_lights
+    - switch.back_door_lights
+    - light.cabinet_lights
+    - light.eating_area_lights
+    - light.guest_room_lights
+    - light.island_lights
+    - light.living_room_lights
+    - light.master_bedroon_lights
+    - light.office_lights
+    - light.sun_room_lights
+    - light.track_lights
+    - light.guest_room_fan
+    - light.sun_room_fan_1
+    - light.sun_room_fan_2
+    - light.living_room_fan
+    - light.master_bedroom_fan
+    - light.office_fan
