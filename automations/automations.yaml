@@ -297,7 +297,7 @@
           entity_id: light.living_room_lights
           state: "on"
         - condition: state # in case in living room after motion timeout & lighting has changed
-          entity_id: media_player.samsung_dtv_rcr
+          entity_id: media_player.tv_livingrm
           state: "on"
   action:
     - service: light.turn_on
@@ -727,10 +727,10 @@
               entity_id: binary_sensor.living_area_motion
               state: "on"
             - condition: state
-              entity_id: media_player.samsung_dtv_rcr
+              entity_id: media_player.tv_livingrm
               state: "on"
             - condition: state
-              entity_id: media_player.samsung_dtv_rcr
+              entity_id: media_player.tv_livingrm
               state: "unknown"
   action:
     - service: script.scr_motion_lighting_on
@@ -767,7 +767,7 @@
         minutes: 30
   condition:
     - condition: state
-      entity_id: media_player.samsung_dtv_rcr
+      entity_id: media_player.tv_livingrm
       state: "off"
     - condition: state
       entity_id: light.eating_area_lights # if the eating area lights are on, we might be dining or
