@@ -47,7 +47,6 @@
 #
 # MQTT sensors
 #
-
 - platform: mqtt
   unique_id: water_spt_data_status
   name: "SPT Data Status"
@@ -156,6 +155,24 @@
   state_topic: "attic/DS18b20/Temperature"
   qos: 0
   unit_of_measurement: "ºF"
+
+#
+# MQTT_ROOM- room of device/beacon location
+#            Add one entry for each device tracked
+#
+- platform: mqtt_room
+  device_id: !secret ys_UUID_device_id
+  name: "YS cell BLE"
+  state_topic: !secret ys_UUID_state_topic
+  timeout: 60
+  away_timeout: 120
+
+- platform: mqtt_room
+  device_id: !secret kt_UUID_device_id
+  name: "KT cell BLE"
+  state_topic: !secret kt_UUID_state_topic
+  timeout: 60
+  away_timeout: 120
 
 #
 # SNMP sensors

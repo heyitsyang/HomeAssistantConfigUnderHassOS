@@ -38,8 +38,6 @@ exclude:
   domains:
     - group
   entities:
-    - device_tracker.ys_cell_ha_ble_tracker
-    - device_tracker.kt_cell_ha_ble_tracker
     - sensor.ys_cell_ble_room_presence
     - sensor.kt_cell_ble_room_presence
     - sensor.memory_free
