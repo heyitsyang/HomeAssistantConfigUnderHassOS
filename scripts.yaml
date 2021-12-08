@@ -24,8 +24,8 @@ scr_ha_startup:
         entity_id: input_boolean.inp_bool_sleeping
     - condition: template
       value_template: >
-        {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') | timestamp_local('')) )  and 
-          ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') | timestamp_local('')) ) }}
+        {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
+          ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_announcements
