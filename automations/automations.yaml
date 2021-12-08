@@ -409,10 +409,10 @@
 - id: aut_update_ys_cell_ble_tracker
   alias: "aut update ys cell ble tracker"
   trigger:
-    - entity_id: sensor.ys_cell_ble
-      platform: state
-    - event: start
-      platform: homeassistant
+    - platform: state
+      entity_id: sensor.ys_cell_ble_room
+    - platform: homeassistant
+      event: start
   action:
     - data_template:
         dev_id: ys_cell_ble
@@ -427,10 +427,10 @@
 - id: aut_update_kt_cell_ble_tracker
   alias: "aut update kt cell ble tracker"
   trigger:
-    - entity_id: sensor.kt_cell_ble
-      platform: state
-    - event: start
-      platform: homeassistant
+    - platform: state
+      entity_id: sensor.kt_cell_ble_room
+    - platform: homeassistant
+      event: start
   action:
     - data_template:
         dev_id: kt_cell_ble
