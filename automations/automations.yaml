@@ -1420,15 +1420,19 @@
   action:
     - wait_for_trigger:
         - platform: state
-          entity_id: binary_sensor.front_door_opened
-          from: "on"
-          to: "off"
+          entity_id: sensor.kt_cell_ble_room
+          to: "kitchen"
         - platform: state
-          entity_id: binary_sensor.garagehouse_door_opened
-          from: "on"
-          to: "off"
+          entity_id: sensor.kt_cell_ble_room
+          to: "greatrm"
+        - platform: state
+          entity_id: sensor.ys_cell_ble_room
+          to: "kitchen"
+        - platform: state
+          entity_id: sensor.ys_cell_ble_room
+          to: "greatrm"
       timeout:
-        seconds: 60
+        seconds: 90
     - service: script.scr_arrival_announcement
       data_template:
         person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
