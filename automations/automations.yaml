@@ -1384,7 +1384,7 @@
   trigger:
     - platform: template
       value_template: >
-        {{ (states('proximity.home_ys') | float(default=0) > 0.8) and (states('proximity.home_kt') | float(default=0) > 0.8) }}
+        {{ (states('person.yang') == 'not_home') and (states('person.karen') == 'not_home') }}
   condition:
     condition: or
     conditions:
