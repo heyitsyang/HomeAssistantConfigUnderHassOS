@@ -417,7 +417,7 @@
     - data_template:
         dev_id: ys_cell_ble
         location_name: >
-          {% if states('sensor.ys_cell_ble') != 'not_home' -%}
+          {% if states('sensor.ys_cell_ble_room') != 'not_home' -%}
             home
           {%- else -%}
             not_home
@@ -435,7 +435,7 @@
     - data_template:
         dev_id: kt_cell_ble
         location_name: >
-          {% if states('sensor.kt_cell_ble') != 'not_home' -%}
+          {% if states('sensor.kt_cell_ble_room') != 'not_home' -%}
             home
           {%- else -%}
             not_home
