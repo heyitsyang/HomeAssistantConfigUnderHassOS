@@ -407,7 +407,7 @@
 # DEVICE TRACKER UPDATE EVENTS
 #
 - id: aut_update_ys_cell_ble_tracker
-  alias: aut_update_ys_cell_ble_tracker
+  alias: "aut update ys cell ble tracker"
   trigger:
     - entity_id: sensor.ys_cell_ble
       platform: state
@@ -425,7 +425,7 @@
       service: device_tracker.see
 
 - id: aut_update_kt_cell_ble_tracker
-  alias: aut_update_kt_cell_ble_tracker
+  alias: "aut update kt cell ble tracker"
   trigger:
     - entity_id: sensor.kt_cell_ble
       platform: state
