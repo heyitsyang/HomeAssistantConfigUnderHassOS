@@ -54,7 +54,7 @@
 - name: near_home
   latitude: !secret latitude
   longitude: !secret longitude
-  radius: 100 # in meters
+  radius: 75 # in meters
   icon: mdi:blank
 
 - name: Church@Springs - Villages
