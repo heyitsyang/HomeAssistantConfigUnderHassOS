@@ -80,32 +80,42 @@ device_tracker.kt_cell_gps:
 sensor.ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.ecobee_humidity:
   friendly_name: Thermostat Humidity
   icon: mdi:water-percent
+  device_class: humidity
 sensor.ecobee_eating_area_temperature:
   friendly_name: Eating Area Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.ecobee_guest_suite_temperature:
   friendly_name: Guest Suite Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.ecobee_avg_indoor_temperature:
   friendly_name: Avg Indoor Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.sensibo_sunroom_temperature:
   icon: mdi:thermometer
+  device_class: temperature
 sensor.norcoose_outdoor_temperature:
   friendly_name: Norcoose Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.norcoose_outdoor_humidity:
   friendly_name: Norcoose Humidity
   icon: mdi:water-percent
+  device_class: humidity
 sensor.dark_sky_temperature:
   friendly_name: Outdoor Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.dark_sky_humidity:
   friendly_name: Outdoor Humidity
   icon: mdi:water-percent
+  device_class: humidity
 sensor.dark_sky_uv_index:
   friendly_name: UV Index
 sensor.allergy_index_today:
@@ -113,30 +123,37 @@ sensor.allergy_index_today:
 sensor.master_bedroom_temperature:
   friendly_name: Master Bedroom Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.10m_avg_master_bedroom_temperature:
   icon: mdi:format-align-middle
   unit_of_measurement: ºF
 sensor.garage_temperature:
   friendly_name: Garage Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.attic_temperature:
   friendly_name: Attic Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.rack_exhaust_temperature:
   friendly_name: Rack Exhaust Temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.rack_exhaust_humidity:
   friendly_name: Rack Exhaust Humidity
   icon: mdi:water-percent
+  device_class: humidity
 sensor.rack_exhaust_pressure:
   friendly_name: Rack Exhaust Pressure
   icon: mdi:fan
 sensor.raw_solar_tube_luminosity:
   friendly_name: Raw Solar Tube Luminosity
   icon: mdi:brightness-6
+  device_class: illuminance
 sensor.filtered_solar_tube_luminosity:
   friendly_name: Filtered Solar Tube Luminosity
   icon: mdi:sunglasses
+  device_class: illuminance
 sensor.suggested_brightness:
   icon: mdi:brightness-percent
 sensor.living_rm_visible_light:
@@ -233,35 +250,50 @@ sensor.last_static_pressure_test:
   icon: mdi:calendar-clock
 sensor.front_door_lock_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.back_door_lock_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.living_room_motion_sensor_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sunrm_window_1_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sunrm_window_2_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sunrm_window_3_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sunrm_window_4_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.front_door_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.back_door_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.garagehouse_door_opened_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sun_room_remote_1_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sun_room_remote_2_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sun_room_remote_3_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.sun_room_remote_4_battery:
   icon: mdi:battery-unknown
+  device_class: battery
 sensor.junior_temperature:
   friendly_name: Junior temperature
   icon: mdi:thermometer
+  device_class: temperature
 sensor.junior_system_fan_status:
   icon: mdi:tailwind
 sensor.junior_cpu_fan_status:
