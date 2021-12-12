@@ -964,29 +964,15 @@
 - id: aut_arrival_proximity
   alias: "aut arrival proximity"
   initial_state: true
-  trigger: # trigger on each indiv in case one is home
-    - platform: numeric_state
-      entity_id: proximity.home_ys
-      value_template: "{{ states('proximity.home_ys') | float(default=0) }}"
-      below: 0.7
+  trigger: # trigger on each indiv in case one is already home
     - platform: template
-      value_template: >
-        {{ ((states('person.yang') == 'zone.collier_evans_prairie_trail_gate')
-           or  (states('person.yang') == 'zone.collier_hendry_gate'))
-        and (state_attr('proximity.home_ys','dir_of_travel') == 'towards') }}
-    - platform: numeric_state
-      entity_id: proximity.home_kt
-      value_template: "{{ states('proximity.home_kt') | float(default=0) }}"
-      below: 0.7
+      value_template: >-
+        {{ ((states( 'proximity.home.ys') | float(default=0)) <= 0.2)
+        and (state_attr('proximity.home_ys','dir_of_travel') == 'towards')}}
     - platform: template
-      value_template: >
-        {{ ((states('person.karen') == 'zone.collier_evans_prairie_trail_gate')
-           or  (states('person.karen') == 'zone.collier_hendry_gate'))
-        and (state_attr('proximity.home_kt','dir_of_travel') == 'towards') }}
-  condition:
-    - condition: template # debounce
-      value_template: >
-        {{ (states('person.yang') != 'home') or (states('person.karen') != 'home') }}"
+      value_template: >-
+        {{ ((states( 'proximity.home.kt') | float(default=0)) <= 0.2)
+        and (state_attr('proximity.home_kt','dir_of_travel') == 'towards')}}
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_say_phrase
