@@ -408,6 +408,8 @@
 #
 - id: aut_update_ys_cell_ble_tracker
   alias: "aut update ys cell ble tracker"
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: state
       entity_id: sensor.ys_cell_ble_room
@@ -426,6 +428,8 @@
 
 - id: aut_update_kt_cell_ble_tracker
   alias: "aut update kt cell ble tracker"
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: state
       entity_id: sensor.kt_cell_ble_room
@@ -963,6 +967,8 @@
 #
 - id: aut_arrival_proximity
   alias: "aut arrival proximity"
+  mode: single
+  max_exceeded: silent
   initial_state: true
   trigger: # trigger on each indiv in case one is already home
     - platform: template
@@ -1254,11 +1260,11 @@
         state: "open"
       - condition: state
         entity_id: cover.small_garage_door
-        state: "open"        
+        state: "open"
   action:
-    - service: timer.start   # timer.start is the same as a timer reset/restart
+    - service: timer.start # timer.start is the same as a timer reset/restart
       target:
-        entity_id: 
+        entity_id:
           - timer.timer_lg_garage_door
           - timer.timer_sm_garage_door
 
