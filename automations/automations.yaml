@@ -994,6 +994,9 @@
     - service: script.scr_say_phrase
       data_template:
         message: "The large garage door has opened"
+    - service: timer.start
+      target:
+        entity_id: timer.timer_lg_garage_door
     - service: script.scr_front_door_lights_on
     - service: script.scr_check_if_suspicious
 
@@ -1009,8 +1012,37 @@
     - service: script.scr_say_phrase
       data_template:
         message: "The small garage door has opened"
+    - service: timer.start
+      target:
+        entity_id: timer.timer_sm_garage_door
     - service: script.scr_front_door_lights_on
     - service: script.scr_check_if_suspicious
+
+- id: aut_large_garage_door_closed
+  alias: "aut large garage door closed"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: cover.large_garage_door
+      from: "open"
+      to: "closed"
+  action:
+    - service: timer.cancel
+      target:
+        entity_id: timer.timer_lg_garage_door
+
+- id: aut_small_garage_door_closed
+  alias: "aut small garage door closed"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: cover.small_garage_door
+      from: "open"
+      to: "closed"
+  action:
+    - service: timer.cancel
+      target:
+        entity_id: timer.timer_sm_garage_door
 
 #
 # FRONT & BACK PORCH ACTIVITY TRIGGERS
@@ -1193,18 +1225,42 @@
   alias: "aut garage door left open while home"
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: cover.large_garage_door
-      to: "open"
-      for:
-        minutes: 120
-    - platform: state
-      entity_id: cover.small_garage_door
-      to: "open"
-      for:
-        minutes: 120
+    - platform: event
+      event_type: timer_finished
+      event_data:
+        entity_id: timer.timer_lg_garage_door
+    - platform: event
+      event_type: timer_finished
+      event_data:
+        entity_id: timer.timer_sm_garage_door
   action:
     - service: script.scr_repeat_say_garage_open
+
+- id: auto_reset_garage_timers
+  alias: "aut reset garage timers"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: device_tracker.ys_cell_ble
+      from: "garage"
+    - platform: state
+      entity_id: device_tracker.kt_cell_ble
+      from: "garage"
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: cover.large_garage_door
+        state: "open"
+      - condition: state
+        entity_id: cover.small_garage_door
+        state: "open"        
+  action:
+    - service: timer.start   # timer.start is the same as a timer reset/restart
+      target:
+        entity_id: 
+          - timer.timer_lg_garage_door
+          - timer.timer_sm_garage_door
 
 #
 # AUTO DOOR LOCK ON DOOR INACTIVITY
