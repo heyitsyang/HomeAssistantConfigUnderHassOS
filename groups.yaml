@@ -1,430 +1,424 @@
-
-
 #####################################################
 #
 # groups.yaml for UI display purposes is deprecated
 # in favor of Lovelace UI.  Control groups is still in
 # effect.
-# 
+#
 #####################################################
-
-
 
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
 
-
 #######################
-### VIEWS 
+### VIEWS
 #######################
 default_view:
-  name: 'Overview'
+  name: "Overview"
   icon: mdi:home
   entities:
-  - sensor.ecobee_avg_indoor_temperature
-  - sensor.ecobee_humidity
-  - sensor.dark_sky_temperature
-  - sensor.dark_sky_humidity
-  - sensor.time
-  - sensor.date_time
-  - sun.sun
-  - group.modes
-  - camera.frontporch_camera
-  - camera.doorbell_camera
+    - sensor.ecobee_avg_indoor_temperature
+    - sensor.ecobee_humidity
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_humidity
+    - sensor.time
+    - sensor.date_time
+    - sun.sun
+    - group.modes
+    - camera.frontporch_camera
+    - camera.doorbell_camera
 
 security:
-  name: 'Security'
+  name: "Security"
   icon: mdi:shield-home
   entities:
-  - group.locks
-  - group.door_sensors
-  - group.window_sensors
-  - group.garage_door_status
+    - group.locks
+    - group.door_sensors
+    - group.window_sensors
+    - group.garage_door_status
 
 cameras:
-  name: 'Cameras'
+  name: "Cameras"
   icon: mdi:video
   entities:
-  - camera.greatroom_camera
-  - camera.frontporch_camera
-  - camera.doorbell_camera
-  - camera.driveway_camera
-  - camera.garage_camera
-  - camera.sunroom_camera
+    - camera.greatroom_camera
+    - camera.frontporch_camera
+    - camera.doorbell_camera
+    - camera.driveway_camera
+    - camera.garage_camera
+    - camera.sunroom_camera
 
 controls:
-  name: 'Lights-Fans-Shades'
+  name: "Lights-Fans-Shades"
   icon: mdi:light-switch
   entities:
-  - group.all_lighting                      # all_lights cannot be used - reserved & automatically created by HA also includes fans
-  - group.ceiling_fans
-  - group.sunrm_shades
+    - group.all_lighting # all_lights cannot be used - reserved & automatically created by HA also includes fans
+    - group.ceiling_fans
+    - group.sunrm_shades
 
 media_players:
   name: "Media Players"
   icon: mdi:music
   entities:
-  - media_player.samsung_samsung_dtv_rcr
-#  - media_player.sun_room_tv
-#  - media_player.plex
-  - media_player.main_speakers
-  - media_player.office_speakers
+    - media_player.samsung_samsung_dtv_rcr
+    #  - media_player.sun_room_tv
+    #  - media_player.plex
+    - media_player.main_speakers
+    - media_player.office_speakers
 
 vacuum:
-  name: 'Vacuum'
+  name: "Vacuum"
   icon: mdi:robot-vacuum-variant
   entities:
-  - group.vacuum_rosie
+    - group.vacuum_rosie
 
 hvac:
-  name: 'Climate Control'
+  name: "Climate Control"
   icon: mdi:car-cruise-control
   entities:
-  - climate.ecobee
-  - climate.sunrm_ac
-  - group.indoor_climate_sensors
+    - climate.ecobee
+    - climate.sunrm_ac
+    - group.indoor_climate_sensors
 
 weather:
-  name: 'Weather'
+  name: "Weather"
   icon: mdi:weather-partly-cloudy
   entities:
-  - group.darksky
-#  - group.ambient
-  - camera.radar
+    - group.darksky
+    #  - group.ambient
+    - camera.radar
 
 graphs:
-  name: 'Graphs'
+  name: "Graphs"
   icon: mdi:chart-line
   entities:
-  - history_graph.outdoor_luminosity
-  - history_graph.indoor_luminosity
-  - history_graph.temperature
-  - history_graph.humidity
-  - history_graph.activity
-  - history_graph.lights_fans
-  - history_graph.switches
-  - history_graph.location
-  - history_graph.proximity_to_home
-  - history_graph.announcements
-  - history_graph.sleeping
+    - history_graph.outdoor_luminosity
+    - history_graph.indoor_luminosity
+    - history_graph.temperature
+    - history_graph.humidity
+    - history_graph.activity
+    - history_graph.lights_fans
+    - history_graph.switches
+    - history_graph.location
+    - history_graph.proximity_to_home
+    - history_graph.announcements
+    - history_graph.sleeping
 
 developmental:
   name: "Developmental"
   icon: mdi:test-tube
   entities:
-  - group.developmental_tests
-  - group.developmental_sw_saved_states
+    - group.developmental_tests
+    - group.developmental_sw_saved_states
 
 settings:
   name: "Settings"
   icon: mdi:cog
   entities:
-  - group.luminosity
-  - group.luminosity_triggers
-  - group.timeouts
-
+    - group.luminosity
+    - group.luminosity_triggers
+    - group.timeouts
 
 #######################
-### GROUPS 
+### GROUPS
 #######################
 
 timeouts:
   name: "Timeouts"
   entities:
-  - input_number.inp_num_front_door_lights_off_delay
-  - input_number.inp_num_back_door_lights_off_delay
-  - input_number.inp_num_auto_front_door_lock_trig_delay
-  - input_number.inp_num_auto_back_door_lock_trig_delay
-  - input_number.inp_num_lvrm_lights_on_delay
-  - input_number.inp_num_lvrm_lights_off_delay
-  - input_number.inp_num_sunrm_shades_open_delay
-  - input_number.inp_num_sunrm_shades_close_low_lux_trig_delay
+    - input_number.inp_num_front_door_lights_off_delay
+    - input_number.inp_num_back_door_lights_off_delay
+    - input_number.inp_num_auto_front_door_lock_trig_delay
+    - input_number.inp_num_auto_back_door_lock_trig_delay
+    - input_number.inp_num_lvrm_lights_on_delay
+    - input_number.inp_num_lvrm_lights_off_delay
+    - input_number.inp_num_sunrm_shades_open_delay
+    - input_number.inp_num_sunrm_shades_close_low_lux_trig_delay
 
 indoor_climate_sensors:
   name: "Indoor Climate Sensors"
   entities:
-  - sensor.ecobee_temperature
-  - sensor.ecobee_humidity
-  - sensor.ecobee_eating_area_temperature
-  - sensor.ecobee_guest_suite_temperature
+    - sensor.ecobee_temperature
+    - sensor.ecobee_humidity
+    - sensor.ecobee_eating_area_temperature
+    - sensor.ecobee_guest_suite_temperature
 
 vacuum_rosie:
   name: "Rosie the Vacuum"
   entities:
-  - input_boolean.inp_bool_vacuum_every_sunday
-  - script.scr_vacuum_custom_cleaning
-  - script.scr_vacuum_pause
-  - script.scr_vacuum_stop
-  - script.scr_vacuum_return_to_base
-  - camera.rosie_cleaning_map
-  - vacuum.rosie
+    - input_boolean.inp_bool_vacuum_every_sunday
+    - script.scr_vacuum_custom_cleaning
+    - script.scr_vacuum_pause
+    - script.scr_vacuum_stop
+    - script.scr_vacuum_return_to_base
+    - camera.rosie_cleaning_map
+    - vacuum.rosie
 
 developmental_tests:
   name: "Test Controls"
   entities:
-  - script.scr_manual_say_time
-  - input_boolean.inp_bool_half_mi_trig_test
-  - script.scr_occupied_sim
+    - script.scr_manual_say_time
+    - input_boolean.inp_bool_half_mi_trig_test
+    - script.scr_occupied_sim
 
 developmental_sw_saved_states:
   name: "States saved by SW"
   entities:
-  - input_boolean.inp_bool_announcements
-  - input_boolean.inp_bool_sleeping
-  - input_boolean.inp_bool_visitor_while_out_flag
-#  - input_select.inp_sel_saved_ecobee_hvac
-  - input_select.inp_sel_saved_sunroom_hvac
-  - input_boolean.inp_bool_lum_outdoor_lights_solar_trig
-#  - input_boolean.inp_bool_lum_lvrm_lights_f_solar_trig
-  - input_boolean.inp_bool_lum_mood_lights_f_solar_trig
-  - input_boolean.inp_bool_lum_sunrm_shades_trig
+    - input_boolean.inp_bool_announcements
+    - input_boolean.inp_bool_sleeping
+    - input_boolean.inp_bool_visitor_while_out_flag
+    #  - input_select.inp_sel_saved_ecobee_hvac
+    - input_select.inp_sel_saved_sunroom_hvac
+    - input_boolean.inp_bool_lum_outdoor_lights_solar_trig
+    #  - input_boolean.inp_bool_lum_lvrm_lights_f_solar_trig
+    - input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+    - input_boolean.inp_bool_lum_sunrm_shades_trig
 
 modes:
   name: "Modes"
   entities:
-  - input_boolean.inp_bool_guest_mode
-  - input_boolean.inp_bool_guest_in_sunroom
-  - input_boolean.inp_bool_extended_absence_mode
-  - input_boolean.inp_bool_vacuum_every_sunday
+    - input_boolean.inp_bool_guest_mode
+    - input_boolean.inp_bool_guest_in_sunroom
+    - input_boolean.inp_bool_extended_absence_mode
+    - input_boolean.inp_bool_vacuum_every_sunday
 
 mood_lights:
   name: "Mood Lights"
   entities:
-  - switch.candles
-  - light.kitchen_leds_front
-  - light.kitchen_leds_rear
-  - light.sun_room_uplights
-  - switch.mood_cats
+    - switch.candles
+    - light.kitchen_leds_front
+    - light.kitchen_leds_rear
+    - light.sun_room_uplights
+    - switch.mood_cats
 
 pathway_lights:
   name: "Pathway Lights"
   entities:
-  - switch.candles
-  - light.kitchen_leds_rear
+    - switch.candles
+    - light.kitchen_leds_rear
 
-sunrm_shades:                                               # This group is used to display all shades individually in the frontend UI
-  name: "Sun Room Shades"                                   # Using cover.sun_room_shades (defined in covers.yaml)
+sunrm_shades: # This group is used to display all shades individually in the frontend UI
+  name: "Sun Room Shades" # Using cover.sun_room_shades (defined in covers.yaml)
   entities:
-  - cover.sun_room_shades
-  - cover.sun_room_shade_1
-  - cover.sun_room_shade_2
-  - cover.sun_room_shade_3
-  - cover.sun_room_shade_4
+    - cover.sun_room_shades
+    - cover.sun_room_shade_1
+    - cover.sun_room_shade_2
+    - cover.sun_room_shade_3
+    - cover.sun_room_shade_4
 
 locks:
   name: "Locks"
   entities:
-  - lock.front_door_lock
-  - lock.back_door_lock
+    - lock.front_door_lock
+    - lock.back_door_lock
 
 window_sensors:
   name: "Window Sensors"
   entities:
-  - binary_sensor.sunrm_window_1_opened
-  - binary_sensor.sunrm_window_2_opened
-  - binary_sensor.sunrm_window_3_opened
-  - binary_sensor.sunrm_window_4_opened
+    - binary_sensor.sunrm_window_1_opened
+    - binary_sensor.sunrm_window_2_opened
+    - binary_sensor.sunrm_window_3_opened
+    - binary_sensor.sunrm_window_4_opened
 
 door_sensors:
   name: "Door Sensors"
   entities:
-  - binary_sensor.front_door_opened
-  - binary_sensor.back_door_opened
-  - binary_sensor.garagehouse_door_opened
-  
+    - binary_sensor.front_door_opened
+    - binary_sensor.back_door_opened
+    - binary_sensor.garagehouse_door_opened
+
 garage_door_status:
   name: "Garage Door Status"
   entities:
-  - cover.large_garage_door
-  - cover.small_garage_door
-  - switch.lg_garage_opener_power
-  - switch.sm_garage_opener_power
-  - camera.garage_camera
+    - cover.large_garage_door
+    - cover.small_garage_door
+    - switch.lg_garage_opener_power
+    - switch.sm_garage_opener_power
+    - camera.garage_camera
 
 where_are_yskt:
-  name: 'Where are yskt'
+  name: "Where are yskt"
   entities:
-  - person.yang
-  - person.karen
+    - person.yang
+    - person.karen
 
 proximity_measurements:
-  name: 'Proximity Measurements'
+  name: "Proximity Measurements"
   entities:
-  - proximity.home_ys
-  - proximity.home_kt
-  - proximity.home_yskt
+    - proximity.home_ys
+    - proximity.home_kt
+    - proximity.home_yskt
 
 luminosity:
   name: "Luminosity"
   entities:
-  - sensor.raw_solar_tube_luminosity
-  - sensor.filtered_solar_tube_luminosity
-  - sensor.living_rm_visible_light
-  - sensor.filtered_living_rm_visible_light
-  - sensor.test_filtered_living_rm_visible_light
-  - binary_sensor.lum_outdoor_lights_solar_trig
-  - binary_sensor.lum_mood_lights_f_solar_trig
-  - binary_sensor.lum_sunrm_shades_trig
+    - sensor.raw_solar_tube_luminosity
+    - sensor.filtered_solar_tube_luminosity
+    - sensor.living_rm_visible_light
+    - sensor.filtered_living_rm_visible_light
+    - sensor.test_filtered_living_rm_visible_light
+    - binary_sensor.lum_outdoor_lights_solar_trig
+    - binary_sensor.lum_mood_lights_f_solar_trig
+    - binary_sensor.lum_sunrm_shades_trig
 
 luminosity_triggers:
   name: "Luminosity Thresholds"
   entities:
-  - input_number.inp_num_outdoor_lights_on_solar_trig
-  - input_number.inp_num_outdoor_lights_off_solar_trig
-  - input_number.inp_num_mood_lights_on_f_solar_trig
-  - input_number.inp_num_mood_lights_off_f_solar_trig
-  - input_number.inp_num_sunrm_shades_open_trig 
-  - input_number.inp_num_sunrm_shades_close_low_lux_trig
-  - input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux
+    - input_number.inp_num_outdoor_lights_on_solar_trig
+    - input_number.inp_num_outdoor_lights_off_solar_trig
+    - input_number.inp_num_mood_lights_on_f_solar_trig
+    - input_number.inp_num_mood_lights_off_f_solar_trig
+    - input_number.inp_num_sunrm_shades_open_trig
+    - input_number.inp_num_sunrm_shades_close_low_lux_trig
+    - input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux
 
 norcoose_sensors:
   name: "Sensors"
   entities:
-  - sensor.garage_temperature
-  - sensor.attic_temperature
-#  - sensor.attic_humidity
-#  - sensor.attic_pressure
-  - sensor.rack_exhaust_temperature
-  - sensor.rack_exhaust_humidity
-  - sensor.rack_exhaust_pressure
+    - sensor.garage_temperature
+    - sensor.attic_temperature
+    #  - sensor.attic_humidity
+    #  - sensor.attic_pressure
+    - sensor.rack_exhaust_temperature
+    - sensor.rack_exhaust_humidity
+    - sensor.rack_exhaust_pressure
 
-all_lighting:                                    # This group created for frontend UI use
-  name: 'All Lighting'                           # all_lights cannot be used - reserved & automatically created by HA/Wink also includes fans
+all_lighting: # This group created for frontend UI use
+  name: "All Lighting" # all_lights cannot be used - reserved & automatically created by HA/Wink also includes fans
   entities:
-  - light.living_room_lights
-  - light.track_lights
-  - light.island_lights
-  - light.cabinet_lights
-  - light.eating_area_lights
-  - light.sun_room_lights
-  - light.sun_room_uplights
-  - light.master_bedroom_lights
-  - light.office_lights
-  - light.guest_room_lights
-  - switch.front_door_lights
-  - switch.back_door_lights
-  - switch.above_cabinet_lights
-  - switch.candles
-  - light.kitchen_leds_front
-  - light.kitchen_leds_rear
-  - light.kitchen_leds_lower
-  - switch.entryway_lights
-  - switch.mood_cats
+    - light.living_room_lights
+    - light.track_lights
+    - light.island_lights
+    - light.cabinet_lights
+    - light.eating_area_lights
+    - light.sun_room_lights
+    - light.sun_room_uplights
+    - light.master_bedroom_lights
+    - light.office_lights
+    - light.guest_room_lights
+    - switch.front_door_lights
+    - switch.back_door_lights
+    - switch.above_cabinet_lights
+    - switch.candles
+    - light.kitchen_leds_front
+    - light.kitchen_leds_rear
+    - light.kitchen_leds_lower
+    - switch.entryway_lights
+    - switch.mood_cats
 
 all_lighting_xabove_cabinet:
-  name: 'Lights'
+  name: "Lights"
   entities:
-  - light.living_room_lights
-  - light.track_lights
-  - light.island_lights
-  - light.cabinet_lights
-  - light.eating_area_lights
-  - light.sun_room_lights
-  - light.sun_room_uplights
-  - light.master_bedroom_lights
-  - light.office_lights
-  - light.guest_room_lights
-  - switch.front_door_lights
-  - switch.back_door_lights
-  - switch.candles
-#  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
-  - light.kitchen_leds_front
-  - light.kitchen_leds_rear
-  - light.kitchen_leds_lower
-  - switch.entryway_lights
-  - switch.mood_cats
+    - light.living_room_lights
+    - light.track_lights
+    - light.island_lights
+    - light.cabinet_lights
+    - light.eating_area_lights
+    - light.sun_room_lights
+    - light.sun_room_uplights
+    - light.master_bedroom_lights
+    - light.office_lights
+    - light.guest_room_lights
+    - switch.front_door_lights
+    - switch.back_door_lights
+    - switch.candles
+    #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
+    - light.kitchen_leds_front
+    - light.kitchen_leds_rear
+    - light.kitchen_leds_lower
+    - switch.entryway_lights
+    - switch.mood_cats
 
 great_room_lights:
-  name: 'Great Room Lights'
+  name: "Great Room Lights"
   entities:
-  - light.living_room_lights
-  - light.track_lights
-  - light.island_lights
-  - light.cabinet_lights
+    - light.living_room_lights
+    - light.track_lights
+    - light.island_lights
+    - light.cabinet_lights
 
 living_area_lights:
-  name: 'Living Area Lights'
+  name: "Living Area Lights"
   entities:
-  - light.living_room_lights
-  - light.track_lights
+    - light.living_room_lights
+    - light.track_lights
 
 kitchen_lights:
-  name: 'Kitchen Lights'
+  name: "Kitchen Lights"
   entities:
-  - light.island_lights
-  - light.cabinet_lights
-  - light.kitchen_leds_lower
-  - light.kitchen_leds_front
+    - light.island_lights
+    - light.cabinet_lights
+    - light.kitchen_leds_lower
+    - light.kitchen_leds_front
 
 ceiling_fans:
-  name: 'Ceiling Fans'
+  name: "Ceiling Fans"
   entities:
-  - light.living_room_fan
-  - light.master_bedroom_fan
-  - light.office_fan
-  - light.guest_room_fan
-  - light.sun_room_fan_1
-  - light.sun_room_fan_2
+    - light.living_room_fan
+    - light.master_bedroom_fan
+    - light.office_fan
+    - light.guest_room_fan
+    - light.sun_room_fan_1
+    - light.sun_room_fan_2
 
 sunroom_fans:
-  name: 'Sunroom Fans'
+  name: "Sunroom Fans"
   entities:
-  - light.sun_room_fan_1
-  - light.sun_room_fan_2
+    - light.sun_room_fan_1
+    - light.sun_room_fan_2
 
 outdoor_lights:
-  name: 'Outdoor Lights'
+  name: "Outdoor Lights"
   entities:
-  - switch.front_door_lights
-  - switch.back_door_lights
+    - switch.front_door_lights
+    - switch.back_door_lights
 
 indoor_lights:
-  name: 'Indoor Lights'
+  name: "Indoor Lights"
   entities:
-  - light.cabinet_lights
-  - light.eating_area_lights
-  - light.guest_room_lights
-  - light.island_lights
-  - light.living_room_lights
-  - light.master_bedroom_lights
-  - light.office_lights
-  - light.sun_room_lights
-  - light.track_lights
-  - switch.entryway_lights
-#  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
-  - switch.candles
-  - light.kitchen_leds_front
-  - light.kitchen_leds_rear
-  - light.kitchen_leds_lower
+    - light.cabinet_lights
+    - light.eating_area_lights
+    - light.guest_room_lights
+    - light.island_lights
+    - light.living_room_lights
+    - light.master_bedroom_lights
+    - light.office_lights
+    - light.sun_room_lights
+    - light.track_lights
+    - switch.entryway_lights
+    #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
+    - switch.candles
+    - light.kitchen_leds_front
+    - light.kitchen_leds_rear
+    - light.kitchen_leds_lower
 
 garage_opener_power:
-  name: 'Garage door power'
+  name: "Garage door power"
   entities:
-  - switch.lg_garage_opener_power
-  - switch.sm_garage_opener_power
+    - switch.lg_garage_opener_power
+    - switch.sm_garage_opener_power
 
 darksky:
-  name: "DarkSky Outdoor Conditions"           # use only those monitored condiions configured in sensors.yaml
+  name: "DarkSky Outdoor Conditions" # use only those monitored condiions configured in sensors.yaml
   entities:
-  - sensor.dark_sky_icon
-  - sensor.dark_sky_summary
-  - sensor.dark_sky_icon
-#  - sensor.dark_sky_precip_intensity
-  - sensor.dark_sky_precip_probability
-  - sensor.dark_sky_temperature
-#  - sensor.dark_sky_apparent_temperature 
-#  - sensor.dark_sky_dew_point
-#  - sensor.dark_sky_wind_speed
-#  - sensor.dark_sky_wind_bearing
-  - sensor.dark_sky_cloud_coverage
-  - sensor.dark_sky_humidity
-#  - sensor.dark_sky_pressure
-#  - sensor.dark_sky_visibility
-#  - sensor.dark_sky_uv_index
-#  - sensor.dark_sky_ozone
-  - sensor.dark_sky_minutely_summary
-  - sensor.dark_sky_hourly_summary
-  - sensor.dark_sky_daily_summary
+    - sensor.dark_sky_icon
+    - sensor.dark_sky_summary
+    - sensor.dark_sky_icon
+    #  - sensor.dark_sky_precip_intensity
+    - sensor.dark_sky_precip_probability
+    - sensor.dark_sky_temperature
+    #  - sensor.dark_sky_apparent_temperature
+    #  - sensor.dark_sky_dew_point
+    #  - sensor.dark_sky_wind_speed
+    #  - sensor.dark_sky_wind_bearing
+    - sensor.dark_sky_cloud_coverage
+    - sensor.dark_sky_humidity
+    #  - sensor.dark_sky_pressure
+    #  - sensor.dark_sky_visibility
+    #  - sensor.dark_sky_uv_index
+    #  - sensor.dark_sky_ozone
+    - sensor.dark_sky_minutely_summary
+    - sensor.dark_sky_hourly_summary
+    - sensor.dark_sky_daily_summary
 
 #ambient:
 #  name: "Ambient Weather Conditions"
@@ -452,10 +446,9 @@ darksky:
 system_res:
   name: "System Status"
   entities:
-  - sensor.uptime
-  - sensor.processor_use
-  - sensor.disk_free
-  - sensor.memory_free
-  - sensor.shencentral_ssl_certificate_expiry
-  - sensor.db_size
-
+    - sensor.uptime
+    - sensor.processor_use
+    - sensor.disk_free
+    - sensor.memory_free
+    - sensor.shencentral_ssl_certificate_expiry
+    - sensor.db_size

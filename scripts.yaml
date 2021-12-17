@@ -24,8 +24,8 @@ scr_ha_startup:
         entity_id: input_boolean.inp_bool_sleeping
     - condition: template
       value_template: >
-        {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') | timestamp_local('')) )  and 
-          ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') | timestamp_local('')) ) }}
+        {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
+          ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_announcements
@@ -482,8 +482,8 @@ scr_front_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - condition: template
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor is broken if zero
+    - condition: template  # sensor is broken if zero
+      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
       entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
 
@@ -492,8 +492,8 @@ scr_back_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - condition: template
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor is broken if zero
+    - condition: template  # sensor is broken if zero
+      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
       entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
 

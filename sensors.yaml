@@ -16,6 +16,7 @@
 - platform: statistics
   name: "24hr Avg Water Pressure"
   entity_id: sensor.water_pressure
+  state_characteristic: mean
   sampling_size: 1440 # allow for reporting every minute for 24 hours
   max_age:
     hours: 24
@@ -24,12 +25,14 @@
 - platform: statistics
   name: "Living Rm Visible Light"
   entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
+  state_characteristic: mean
   sampling_size: 15 # default state value is the running average of this many samples
   precision: 2
 
 - platform: statistics
   name: "10m Avg Master Bedroom Temperature"
   entity_id: sensor.master_bedroom_temperature
+  state_characteristic: mean
   sampling_size: 10 # default state value is the running average of this many samples
   precision: 1 # number of decimal places
 
@@ -47,7 +50,6 @@
 #
 # MQTT sensors
 #
-
 - platform: mqtt
   unique_id: water_spt_data_status
   name: "SPT Data Status"
@@ -156,6 +158,26 @@
   state_topic: "attic/DS18b20/Temperature"
   qos: 0
   unit_of_measurement: "ºF"
+
+#
+# MQTT_ROOM- room of device/beacon location
+#            Add one entry for each device tracked
+#
+- platform: mqtt_room
+  device_id: !secret ys_UUID_device_id
+  name: "YS cell BLE room"
+  #state_topic: !secret ys_UUID_state_topic
+  state_topic: "espresense/rooms"
+  timeout: 60
+  away_timeout: 120
+
+- platform: mqtt_room
+  device_id: !secret kt_UUID_device_id
+  name: "KT cell BLE room"
+  #state_topic: !secret kt_UUID_state_topic
+  state_topic: "espresense/rooms"
+  timeout: 60
+  away_timeout: 120
 
 #
 # SNMP sensors

@@ -51,23 +51,29 @@
   radius: 30 # in meters
   icon: mdi:home
 
+- name: near_home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  radius: 100 # in meters
+  icon: mdi:blank
+
 - name: Church@Springs - Villages
   latitude: 28.939792
   longitude: -81.927593
   radius: 61 # meters
   icon: mdi:church
 
-- name: Collier Evans Prairie Trail Gate
-  latitude: 28.85382
-  longitude: -82.00021
-  radius: 17 # meters
-  icon: mdi:blank
+#- name: Collier Evans Prairie Trail Gate
+#  latitude: 28.85382
+#  longitude: -82.00021
+#  radius: 17 # meters
+#  icon: mdi:blank
 
-- name: Collier Hendry Gate
-  latitude: 28.84851
-  longitude: -82.01064
-  radius: 24.4 # meters
-  icon: mdi:blank
+#- name: Collier Hendry Gate
+#  latitude: 28.84851
+#  longitude: -82.01064
+#  radius: 24.4 # meters
+#  icon: mdi:blank
 
 #
 # MEDICAL
