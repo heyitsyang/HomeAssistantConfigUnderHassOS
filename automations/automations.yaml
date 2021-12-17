@@ -971,13 +971,13 @@
   max_exceeded: silent
   initial_state: true
   trigger: # trigger on each indiv in case one is already home
-    - platform: template
+    - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'proximity.home.ys') | float(default=0)) <= 0.2)
+        {{ ((states( 'proximity.home.ys') | float(default=99)) <= 0.2)
         and (state_attr('proximity.home_ys','dir_of_travel') == 'towards')}}
-    - platform: template
+    - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'proximity.home.kt') | float(default=0)) <= 0.2)
+        {{ ((states( 'proximity.home.kt') | float(default=99)) <= 0.2)
         and (state_attr('proximity.home_kt','dir_of_travel') == 'towards')}}
   action:
     - service: script.scr_front_door_lights_on
