@@ -457,32 +457,21 @@ scr_frontporch_activity:
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
-    - service: notify.gmail_to_yskt_pushover
-      data:
-        title: "Front door activity"
-        message: "Front door activity detected. See https://shencentral.duckdns.org/lovelace/cameras for live view"
-        data:
-          images:
-            - /config/www/camera_stills/frontporch.jpg
-            - /config/www/camera_stills/doorbell.jpg
-            - /config/www/camera_stills/driveway.jpg
     - service: notify.pushover_yangandkaren
       data:
-        title: "Front door activity"
-        message: "Front door activity detected. See https://shencentral.duckdns.org/lovelace/cameras for live view"
+        title: Front door activity
+        message: "All snapshots:  https://shencentral.duckdns.org/lovelace/still-images"
         data:
+          attachment: "/config/www/camera_stills/frontporch.jpg"
+          url_title: "Click here for live view"
           url: "https://shencentral.duckdns.org/lovelace/cameras"
-          attachment:
-            - "/config/www/camera_stills/doorbell.jpg"
-            - "/config/www/camera_stills/frontporch.jpg"
-            - "/config/www/camera_stills/driveway.jpg"
 
 scr_front_door_lights_on:
   sequence:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - condition: template  # sensor is broken if zero
+    - condition: template # sensor is broken if zero
       value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
       entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
@@ -492,7 +481,7 @@ scr_back_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - condition: template  # sensor is broken if zero
+    - condition: template # sensor is broken if zero
       value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
       entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
