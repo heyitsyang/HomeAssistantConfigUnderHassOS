@@ -285,6 +285,7 @@
   trigger:
     - platform: state
       entity_id: sensor.suggested_brightness # this triggers with any state change
+      to: ~
   condition:
     - condition: template # ignore if zero (prevent turn off of light using this mechanism)
       value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
@@ -413,6 +414,7 @@
   trigger:
     - platform: state
       entity_id: sensor.ys_cell_ble_room
+      to: ~
     - platform: homeassistant
       event: start
   action:
@@ -433,6 +435,7 @@
   trigger:
     - platform: state
       entity_id: sensor.kt_cell_ble_room
+      to: ~
     - platform: homeassistant
       event: start
   action:
