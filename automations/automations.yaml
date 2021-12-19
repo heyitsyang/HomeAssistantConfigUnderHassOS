@@ -1451,17 +1451,25 @@
   alias: "aut arrival announcement"
   initial_state: true
   mode: queued
-  trigger: # either trigger will fire the automation (logical OR)
+  trigger: # any trigger will fire the automation (logical OR)
+    #    - platform: state
+    #      entity_id: person.yang
+    #      to: "home"
+    #      for:
+    #        seconds: 20
+    #    - platform: state
+    #      entity_id: person.karen
+    #      to: "home"
+    #      for:
+    #        seconds: 20
     - platform: state
-      entity_id: person.yang
-      to: "home"
-      for:
-        seconds: 20
+      entity_id: sensor.ys_cell_ble_room
+      from: "not_home"
+      to: "garage"
     - platform: state
-      entity_id: person.karen
-      to: "home"
-      for:
-        seconds: 20
+      entity_id: sensor.kt_cell_ble_room
+      from: "not_home"
+      to: "garage"
   condition: # this prevents immediate triggering after home assistant startup
     - condition: template
       value_template: "{{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')| float(default=0)) ) | int(default=0) ) > 10 }}"
@@ -1483,7 +1491,7 @@
         seconds: 90
     - service: script.scr_arrival_announcement
       data_template:
-        person: "{{ trigger.entity_id|replace('person.', '') | capitalize }}"
+        person: "{{ trigger.entity_id | replace('person.', '') | capitalize }}"
 
 #
 # HOME DEPARTURE ANNOUNCEMENT
