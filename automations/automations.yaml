@@ -1467,10 +1467,12 @@
     #        seconds: 20
     - platform: state
       entity_id: sensor.ys_cell_ble_room
+      id: "yang"
       from: "not_home"
       to: "garage"
     - platform: state
       entity_id: sensor.kt_cell_ble_room
+      id: "karen"
       from: "not_home"
       to: "garage"
   condition: # this prevents immediate triggering after home assistant startup
@@ -1494,7 +1496,8 @@
         seconds: 90
     - service: script.scr_arrival_announcement
       data_template:
-        person: "{{ trigger.entity_id | replace('person.', '') | capitalize }}"
+        person: "{{ trigger.id }}"
+#        person: "{{ trigger.entity_id | replace('person.', '') | capitalize }}"
 
 #
 # HOME DEPARTURE ANNOUNCEMENT
