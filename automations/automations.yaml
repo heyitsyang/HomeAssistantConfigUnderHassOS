@@ -1427,26 +1427,15 @@
   initial_state: true
   mode: queued
   trigger: # any trigger will fire the automation (logical OR)
-    #    - platform: state
-    #      entity_id: person.yang
-    #      to: "home"
-    #      for:
-    #        seconds: 20
-    #    - platform: state
-    #      entity_id: person.karen
-    #      to: "home"
-    #      for:
-    #        seconds: 20
-    - platform: state
-      entity_id: sensor.ys_cell_ble_room
-      id: "yang"
-      from: "not_home"
-      to: "garage"
-    - platform: state
-      entity_id: sensor.kt_cell_ble_room
-      id: "karen"
-      from: "not_home"
-      to: "garage"
+        - platform: state
+          entity_id: person.yang
+          id: "yang"
+          to: "home"
+        - platform: state
+          entity_id: person.karen
+          id: "karen"
+          to: "home"
+
   condition: # this prevents immediate triggering after home assistant startup
     - condition: template
       value_template: "{{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')| float(default=0)) ) | int(default=0) ) > 10 }}"
