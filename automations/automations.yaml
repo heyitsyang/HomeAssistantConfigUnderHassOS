@@ -56,10 +56,10 @@
     - condition: state
       entity_id: binary_sensor.dishwasher_on_or_off
       state: "off"
-    # don't continue if washer is ON
+    # don't continue if wash_completed is OFF
     - condition: state
-      entity_id: binary_sensor.washer_on_or_off
-      state: "off"
+      entity_id: binary_sensor.top_load_washer_wash_completed
+      state: "on"
     # don't run more often than every N hours from last test
     - condition: template
       value_template: >-
@@ -103,10 +103,10 @@
     - condition: state
       entity_id: binary_sensor.dishwasher_on_or_off
       state: "off"
-    # don't continue if washer is ON
+    # don't continue if wash_completed is OFF
     - condition: state
-      entity_id: binary_sensor.washer_on_or_off
-      state: "off"
+      entity_id: binary_sensor.top_load_washer_wash_completed
+      state: "on"
   action:
     - delay:
         minutes: 15
@@ -627,21 +627,15 @@
               seconds: 30
 
 #
-# WASHER DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
+# LAUNDRY DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
 #
 - id: aut_washer_done_announce
   alias: "aut washer done"
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.washer_on_or_off # time delay adjust is in binary_sensor.yaml
-      from: "on"
-      to: "off"
-  #  condition: # only announce first load in washer
-  #    - condition: template
-  #      value_template: >-
-  #        {{ ( ( as_timestamp(now(), '') - as_timestamp(state_attr("automation.aut_washer_done_announce", "last_triggered"), '' ) | int(default=0) > (8 * 60 * 60)) )
-  #            or (state_attr("automation.aut_washer_done_announce","last_triggered") == none) }}
+      entity_id: binary_sensor.top_load_washer_wash_completed
+      to: "on"
   action:
     - service: script.scr_say_phrase
       data_template:
@@ -650,48 +644,20 @@
       data_template:
         message: "The washer cycle has finished"
 
-#
-# PHONE ATTRIBUTE DRIVEN AUTOMATIONS
-# aut_sleeping_mode_on/off commented out because phone_charger_type is not reliable
-#
-#- id: aut_sleeping_mode_on                        # sleeping mode also set by time - see aut_assume_asleep
-#  alias: "aut sleeping mode on"
-#  initial_state: true
-#  trigger:                                        # see if phones are in charging cradles
-#  - platform: template
-#    value_template: >
-#      {{ (is_state('sensor.ys_phone_charger_type','ac')) and
-#         (is_state('sensor.kt_phone_charger_type','ac')) }}
-#  condition:
-#  - condition: state
-#    entity_id: input_boolean.inp_bool_extended_absence_mode       # only do this if not traveling
-#    state: 'off'
-#  - condition: template
-#    value_template: >
-#      {{  is_state('person.karen','home') and is_state('person.yang', 'home') }}
-#  action:
-## - delay: '01:00:00'                              # phones may be in chargers a little earlier than people in bed
-#  - service: input_boolean.turn_on
-#    entity_id: input_boolean.inp_bool_sleeping
-
-#- id: aut_sleeping_mode_off                        # sleeping mode also set by time - see aut_assume_awake
-#  alias: "aut sleeping mode off"
-#  initial_state: true
-#  trigger:
-#  - platform: template                                                            # one phone must be not charging for sleep off
-#    value_template: >
-#      {{ (is_state('sensor.ys_phone_charger_type','ac')) }}
-#  - platform: template                                                            # one phone must be not charging for sleep off
-#    value_template: >
-#      {{ (is_state('sensor.kt_phone_charger_type','ac')) }}
-#  condition:
-#  - condition: template                                                           # if not during assume_awake hours, then keep sleeping ON
-#    value_template: >
-#      {{ ( (states('sensor.time') > (state_attr('input_datetime.assume_asleep', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) and
-#         (states('sensor.time') < (state_attr('input_datetime.assume_awake', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, ''))) ) }}
-#  action:
-#  - service: input_boolean.turn_off
-#    entity_id: input_boolean.inp_bool_sleeping
+- id: aut_dryer_done_announce
+  alias: "aut dryer done"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dryer_dry_completed
+      to: "on"
+  action:
+    - service: script.scr_say_phrase
+      data_template:
+        message: "The dryer cycle has finished"
+    - service: notify.alexa_yellow_ring
+      data_template:
+        message: "The dryer cycle has finished"
 
 #
 # AUTO LIVING AREA LIGHTING - MOTION
@@ -1427,14 +1393,14 @@
   initial_state: true
   mode: queued
   trigger: # any trigger will fire the automation (logical OR)
-        - platform: state
-          entity_id: person.yang
-          id: "yang"
-          to: "home"
-        - platform: state
-          entity_id: person.karen
-          id: "karen"
-          to: "home"
+    - platform: state
+      entity_id: person.yang
+      id: "yang"
+      to: "home"
+    - platform: state
+      entity_id: person.karen
+      id: "karen"
+      to: "home"
   condition: # this prevents immediate triggering after home assistant startup
     - condition: template
       value_template: "{{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')| float(default=0)) ) | int(default=0) ) > 10 }}"
