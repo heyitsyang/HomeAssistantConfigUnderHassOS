@@ -316,26 +316,6 @@
 #
 # TEMPLATE SENSORS
 #
-- platform: template
-  sensors:
-    wallet_value_ada:
-      friendly_name: "ADA Wallet"
-      value_template: >-
-        {{ ((states('sensor.coinbase_ada_wallet') | float(default=0)) * (states('sensor.ada_exchange_rate') | float(default=0))) | round(2) }}
-
-- platform: template
-  sensors:
-    wallet_value_btc:
-      friendly_name: "BTC Wallet"
-      value_template: >-
-        {{ ((states('sensor.coinbase_btc_wallet') | float(default=0)) * (states('sensor.btc_exchange_rate') | float(default=0))) | round(2) }}
-
-- platform: template
-  sensors:
-    wallet_value_eth:
-      friendly_name: "ETH Wallet"
-      value_template: >-
-        {{ ((states('sensor.coinbase_eth_wallet') | float(default=0)) * (states('sensor.eth_exchange_rate') | float(default=0))) | round(2) }}
 
 - platform: template
   sensors:
