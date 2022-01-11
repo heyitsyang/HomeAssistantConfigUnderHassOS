@@ -319,6 +319,20 @@
 
 - platform: template
   sensors:
+    ys_cell_gps_accuracy:
+      friendly_name: "YS Cell GPS Accuracy"
+      unit_of_measurement: "m"
+      value_template: "{{ state_attr('device_tracker.ys_cell_gps', 'gps_accuracy') }}"
+
+- platform: template
+  sensors:
+    kt_cell_gps_accuracy:
+      friendly_name: "KT Cell GPS Accuracy"
+      unit_of_measurement: "m"
+      value_template: "{{ state_attr('device_tracker.kt_cell_gps', 'gps_accuracy') }}"
+
+- platform: template
+  sensors:
     last_static_pressure_test:
       friendly_name: "Last Static Pressure Test"
       value_template: >-
