@@ -51,11 +51,11 @@
   radius: 30 # in meters
   icon: mdi:home
 
-- name: near_home
-  latitude: !secret latitude
-  longitude: !secret longitude
-  radius: 100 # in meters
-  icon: mdi:blank
+#- name: near_home
+#  latitude: !secret latitude
+#  longitude: !secret longitude
+#  radius: 100 # in meters
+#  icon: mdi:blank
 
 - name: Church@Springs - Villages
   latitude: 28.939792
