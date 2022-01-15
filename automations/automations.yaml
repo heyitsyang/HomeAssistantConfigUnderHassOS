@@ -134,7 +134,7 @@
       value_template: "{{ (state_attr('sensor.spt_data_status', 'consec_aborts') | int(default=0)) > 3 }}"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "SPT consecutive aborts exceeds threshold"
         message: "SPT consecutive aborts: {{ state_attr('sensor.spt_data_status', 'consec_aborts') }}"
 
@@ -222,7 +222,7 @@
       minutes: 00 # Matches every hour at 00 minutes
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
 
 #
@@ -302,7 +302,7 @@
           state: "on"
   action:
     - service: light.turn_on
-      data_template:
+      data:
         entity_id: light.living_room_lights
         brightness_pct: "{{ states('sensor.suggested_brightness') | int(default=0) }}"
 
@@ -418,7 +418,7 @@
     - platform: homeassistant
       event: start
   action:
-    - data_template:
+    - data:
         dev_id: ys_cell_ble
         location_name: >
           {% if states('sensor.ys_cell_ble_room') != 'not_home' -%}
@@ -439,7 +439,7 @@
     - platform: homeassistant
       event: start
   action:
-    - data_template:
+    - data:
         dev_id: kt_cell_ble
         location_name: >
           {% if states('sensor.kt_cell_ble_room') != 'not_home' -%}
@@ -467,7 +467,7 @@
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "HA UPS on battery power"
         message: "HA UPS on battery mode: {{ states('sensor.rackups_status') }}"
 
@@ -484,7 +484,7 @@
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "HA grid power restored"
         message: "HA UPS on AC mode: {{ states('sensor.rackups_status') }}"
 
@@ -499,11 +499,11 @@
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
     - service: notify.pushover_yang
-      data_template:
+      data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
     - service: hassio.host_shutdown
@@ -556,7 +556,7 @@
   #           (-0.028125 * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "SPT water leak detected"
         message: |
           Leak detected during Static Pressure Test!\n
@@ -588,11 +588,11 @@
     - service: switch.turn_off
       entity_id: switch.water_valve
     - service: script.scr_say_phrase
-      data_template:
+      data:
         priority: "high"
         message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         priority: "high"
         message: "House water has been turned off.  Turn on manually when leak is resolved."
     - service: notify.pushover_yangandkaren
@@ -614,7 +614,7 @@
             state: "off"
         sequence:
           - service: script.scr_say_phrase
-            data_template:
+            data:
               priority: "high"
               message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
           - service: notify.pushover_yangandkaren
@@ -638,10 +638,10 @@
       to: "on"
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "The washer cycle has finished"
     - service: notify.alexa_yellow_ring
-      data_template:
+      data:
         message: "The washer cycle has finished"
 
 - id: aut_dryer_done_announce
@@ -653,10 +653,10 @@
       to: "on"
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "The dryer cycle has finished"
     - service: notify.alexa_yellow_ring
-      data_template:
+      data:
         message: "The dryer cycle has finished"
 
 #
@@ -810,7 +810,7 @@
   action:
     - service: script.scr_check_sunrm_windows # be sure no windows are open
     - service: script.scr_partially_close_sunrm_shades
-      data_template:
+      data:
         position: "40" # drop shades to X% open
 
 #
@@ -923,7 +923,7 @@
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "Someone special will be home soon"
 
 #
@@ -939,7 +939,7 @@
       to: "open"
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "The large garage door has opened"
     - service: timer.start
       target:
@@ -957,7 +957,7 @@
       to: "open"
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "The small garage door has opened"
     - service: timer.start
       target:
@@ -1289,18 +1289,18 @@
   action:
     #  - service: input_select.select_option
     #    entity_id: input_select.inp_sel_saved_ecobee_hvac
-    #    data_template:
+    #    data:
     #      option: "{{ states('climate.ecobee') }}"
     - service: climate.turn_off
       entity_id: climate.ecobee
     - service: input_select.select_option
       entity_id: input_select.inp_sel_saved_sunroom_hvac
-      data_template:
+      data:
         option: "{{ states('climate.sunroom_ac') }}"
     - service: climate.turn_off
       entity_id: climate.sunroom_ac
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "A window is open. Climate control is now turned off"
 
 - id: aut_all_windows_closed
@@ -1315,16 +1315,16 @@
   action:
     #  - service: climate.set_hvac_mode
     #    entity_id: climate.ecobee
-    #    data_template:
+    #    data:
     #      hvac_mode: "{{ states('input_select.inp_sel_saved_ecobee_hvac') }}"
     - service: climate.turn_on
       entity_id: climate.ecobee
     - service: climate.set_hvac_mode
       entity_id: climate.sunroom_ac
-      data_template:
+      data:
         hvac_mode: "{{ states('input_select.inp_sel_saved_sunroom_hvac') }}"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "Windows are all closed. Climate control is restored"
 
 #
@@ -1425,7 +1425,7 @@
       timeout:
         seconds: 90
     - service: script.scr_arrival_announcement
-      data_template:
+      data:
         person: "{{ trigger.id }}"
 #        person: "{{ trigger.entity_id | replace('person.', '') | capitalize }}"
 
@@ -1447,7 +1447,7 @@
   #    to: not_home
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "{{ trigger.entity_id|replace('person.', '') | capitalize }} is away."
 
 #
@@ -1464,7 +1464,7 @@
       for: "00:10:00"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "Rack exhaust fan fault"
         message: "Rack exhaust fan fault: Currently {{ states('sensor.rack_exhaust_fan_speed') }} RPM"
 
@@ -1566,7 +1566,7 @@
       for: "00:30:00"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         title: "Low batteries: {{ trigger.entity_id }}"
         message: "Low batteries: {{ trigger.entity_id }}  {{ states(trigger.entity_id) }}%"
 
@@ -1583,7 +1583,7 @@
       to: "on"
   action:
     - service: notify.gmail_to_yang
-      data_template:
+      data:
         message: |
           'Home Assistant {{state_attr("binary_sensor.updater", "newest_version")}} is now available.
            You are on version {{states("sensor.current_version")}}.
@@ -1689,7 +1689,7 @@
       state: "off" # in case we have a guest while we are gone
   action:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "Extended absence mode enabled"
     - service: notify.pushover_yangandkaren
       data:
@@ -1711,7 +1711,7 @@
   action:
     - service: script.scr_shared_extended_absence_off
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "Extended absence mode disabled"
     - service: notify.gmail_to_yang
       data:

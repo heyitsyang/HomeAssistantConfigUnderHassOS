@@ -61,7 +61,7 @@ scr_goodnight: # called by Alexa as part of Goodnight Routine
 scr_nobody_home:
   sequence:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "I feel so empty inside when my people are away."
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
@@ -91,16 +91,16 @@ scr_arrival_announcement:
   mode: queued
   sequence:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "Hi {{ person }}, welcome home."
     - condition: state
       entity_id: input_boolean.inp_bool_visitor_while_out_flag # do not execute remaining unless flag is ON
       state: "on"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "While you where away, there was visitor at the front door"
     - service: notify.alexa_yellow_ring
-      data_template:
+      data:
         message: "While you where away, there was visitor at the front door"
     - service: input_boolean.turn_off
       data:
@@ -170,10 +170,10 @@ scr_check_sunrm_windows:
           entity_id: binary_sensor.sunrm_window_4_opened
           state: "on"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "You have a window open in the sun room.  The shades will not be automatically closed."
     - service: notify.alexa_yellow_ring
-      data_template:
+      data:
         message: "You have a window open in the sun room.  The shades will not be automatically closed."
 
 #
@@ -224,7 +224,7 @@ scr_partial_close_sunrm_shades:
           entity_id: binary_sensor.sunrm_window_4_opened
           state: "off"
     - service: cover.set_cover_position
-      data_template:
+      data:
         entity_id: cover.sun_room_shades
         position: "{{ position }}"
 
@@ -232,7 +232,7 @@ scr_partially_close_sunrm_shades:
   sequence:
     - service: script.scr_check_sunrm_windows # be sure no windows are open
     - service: script.scr_partial_close_sunrm_shades
-      data_template:
+      data:
         position: "40" # drop shades to X% open
 
 #
@@ -287,7 +287,7 @@ scr_check_garage_open:
 scr_repeat_say_garage_open:
   sequence:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "A garage door has been left open"
     - delay: "00:10:00"
     - condition: or
@@ -299,7 +299,7 @@ scr_repeat_say_garage_open:
           entity_id: cover.small_garage_door
           state: "open"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "A garage door is still open"
     - delay: "00:10:00"
     - condition: or
@@ -311,7 +311,7 @@ scr_repeat_say_garage_open:
           entity_id: cover.small_garage_door
           state: "open"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "A garage door is still open"
     - delay: "00:10:00"
     - condition: or
@@ -323,7 +323,7 @@ scr_repeat_say_garage_open:
           entity_id: cover.small_garage_door
           state: "open"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "A garage door is still open"
     - delay: "00:10:00"
     - condition: or
@@ -335,7 +335,7 @@ scr_repeat_say_garage_open:
           entity_id: cover.small_garage_door
           state: "open"
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "A garage door is still open.  This is your last reminder."
 
 #
@@ -387,7 +387,7 @@ scr_motion_lighting_on:
           entity_id: input_boolean.inp_bool_theater_mode # avoid changing brightness if theater mode
           state: "off"
     - service: light.turn_on
-      data_template:
+      data:
         entity_id: light.living_room_lights
         brightness_pct: "{{ states('sensor.suggested_brightness') | int(default=0)}}"
 
@@ -507,15 +507,15 @@ scr_say_phrase:
               value_template: "{{ priority == 'high' }}"
           sequence:
             - service: media_player.volume_set
-              data_template:
+              data:
                 entity_id: media_player.office_speakers
                 volume_level: 0.40 # set high priority speaking volume
             - service: media_player.volume_set
-              data_template:
+              data:
                 entity_id: media_player.main_speakers
                 volume_level: 0.50 # set high priority speaking volume
             - service: tts.google_translate_say
-              data_template:
+              data:
                 entity_id: media_player.main_speakers
                 message: "This is a high priority message. {{ message }}"
       default: # normal priority
@@ -526,15 +526,15 @@ scr_say_phrase:
           entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
           state: "off"
         - service: media_player.volume_set
-          data_template:
+          data:
             entity_id: media_player.office_speakers
             volume_level: 0.18 # set normal speaking volume
         - service: media_player.volume_set
-          data_template:
+          data:
             entity_id: media_player.main_speakers
             volume_level: 0.28 # set normal speaking volume
         - service: tts.google_translate_say
-          data_template:
+          data:
             entity_id: media_player.main_speakers
             message: "{{ message }}"
     - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
@@ -597,7 +597,7 @@ scr_manual_say_time:
   mode: queued
   sequence:
     - service: script.scr_say_phrase
-      data_template:
+      data:
         message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
 
 # VACUUM COMMANDS
