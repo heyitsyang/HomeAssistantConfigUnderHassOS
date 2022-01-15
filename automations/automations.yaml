@@ -414,7 +414,7 @@
   trigger:
     - platform: state
       entity_id: sensor.ys_cell_ble_room
-      to: ~
+      to: 
     - platform: homeassistant
       event: start
   action:
@@ -435,7 +435,7 @@
   trigger:
     - platform: state
       entity_id: sensor.kt_cell_ble_room
-      to: ~
+      to: 
     - platform: homeassistant
       event: start
   action:
@@ -1409,15 +1409,19 @@
         - platform: state
           entity_id: sensor.kt_cell_ble_room
           to: "kitchen"
+          for: 00:00:10
         - platform: state
           entity_id: sensor.kt_cell_ble_room
           to: "greatrm"
+          for: 00:00:10
         - platform: state
           entity_id: sensor.ys_cell_ble_room
           to: "kitchen"
+          for: 00:00:10
         - platform: state
           entity_id: sensor.ys_cell_ble_room
           to: "greatrm"
+          for: 00:00:10
       timeout:
         seconds: 90
     - service: script.scr_arrival_announcement
