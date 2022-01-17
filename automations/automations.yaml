@@ -645,11 +645,11 @@
             The washer cycle has finished and the dryer is available
           {% else %}
             {% if (state_attr('sensor.dryer', 'remain_time').split(':')[0]) == '0' %}
-              The washer cycle has finished and the dryer has {{ (state_attr('sensor.dryer', 'remain_time').split(':')[1] | int(default=0)) }}
-              minutes remaining
+              The washer cycle has finished.  The dryer will be available in {{ (state_attr('sensor.dryer', 'remain_time').split(':')[1] | int(default=0)) }}
+              minutes
             {% else %}
-              The washer cycle has fnished and the dryer has {{ (state_attr('sensor.dryer', 'remain_time').split(':')[0] | int(default=0)) }}
-              hours and {{ (state_attr('sensor.dryer', 'remain_time').split(':')[1] | int(default=0)) }} minutes remaining
+              The washer cycle has fnished,  The dryer will be available in {{ (state_attr('sensor.dryer', 'remain_time').split(':')[0] | int(default=0)) }}
+              hours and {{ (state_attr('sensor.dryer', 'remain_time').split(':')[1] | int(default=0)) }} minutes
             {% endif %}
           {% endif %}
     - service: notify.alexa_yellow_ring
