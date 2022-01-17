@@ -316,26 +316,20 @@
 #
 # TEMPLATE SENSORS
 #
-- platform: template
-  sensors:
-    wallet_value_ada:
-      friendly_name: "ADA Wallet"
-      value_template: >-
-        {{ ((states('sensor.coinbase_ada_wallet') | float(default=0)) * (states('sensor.ada_exchange_rate') | float(default=0))) | round(2) }}
 
 - platform: template
   sensors:
-    wallet_value_btc:
-      friendly_name: "BTC Wallet"
-      value_template: >-
-        {{ ((states('sensor.coinbase_btc_wallet') | float(default=0)) * (states('sensor.btc_exchange_rate') | float(default=0))) | round(2) }}
+    ys_cell_gps_accuracy:
+      friendly_name: "YS Cell GPS Accuracy"
+      unit_of_measurement: "m"
+      value_template: "{{ state_attr('device_tracker.ys_cell_gps', 'gps_accuracy') }}"
 
 - platform: template
   sensors:
-    wallet_value_eth:
-      friendly_name: "ETH Wallet"
-      value_template: >-
-        {{ ((states('sensor.coinbase_eth_wallet') | float(default=0)) * (states('sensor.eth_exchange_rate') | float(default=0))) | round(2) }}
+    kt_cell_gps_accuracy:
+      friendly_name: "KT Cell GPS Accuracy"
+      unit_of_measurement: "m"
+      value_template: "{{ state_attr('device_tracker.kt_cell_gps', 'gps_accuracy') }}"
 
 - platform: template
   sensors:
@@ -409,6 +403,16 @@
       friendly_name: "Sunroom Temperature"
       value_template: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "ºF"
+
+    #    norcoose_dewpoint:
+    #      friendly_name: "Norcoose Dewpoint"
+    #      unit_of_measurement: "ºF"
+    #      value_template: >-
+    #        {{((((states('sensor.acurite_5n1_1002_f')) |
+    #        round(2)-32)*5/9)-(100 - (states('sensor.acurite_5n1_1002_h')) |
+    #        round(2))/5)*1.8+32}}
+    ## DewpointC = TempC -((100 - RH)/5.0)
+    ## DewpointF = (((TempF-32)*5.0/9.0) - ((100 - RH)/5.0) * 1.8) + 32.0
 
     #  BATTERIES #
     #    - not all batteries need sensor attribute templates, so not all are here

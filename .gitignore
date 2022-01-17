@@ -12,7 +12,7 @@
 .git
 .storage
 .cloud
-custom_components/hacs
+custom_components
 tts
 www
 examples
