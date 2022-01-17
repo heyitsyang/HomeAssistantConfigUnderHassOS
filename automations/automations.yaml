@@ -629,6 +629,7 @@
 #
 # LAUNDRY DONE ANNOUNCEMENT & SUPPORTING AUTOMATIONS
 #
+# {{ (state_attr('sensor.dryer', 'remain_time')).split(':')[1]  | int(default=0) }}
 - id: aut_washer_done_announce
   alias: "aut washer done"
   initial_state: true
@@ -639,7 +640,18 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "The washer cycle has finished"
+        message: >
+          {% if state_attr('sensor.dryer', 'remain_time') == '0:00' %}
+            The washer cycle has finished and the dryer is available
+          {% else %}
+            {% if (state_attr('sensor.dryer', 'remain_time').split(':')[0]) == '0' %}
+              The washer cycle has finished and the dryer has {{ (state_attr('sensor.dryer', 'remain_time').split(':')[1] | int(default=0)) }}
+              minutes remaining
+            {% else %}
+              The washer cycle has fnished and the dryer has {{ (state_attr('sensor.dryer', 'remain_time').split(':')[0] | int(default=0)) }}
+              hours and {{ (state_attr('sensor.dryer', 'remain_time').split(':')[1] | int(default=0)) }} minutes remaining
+            {% endif %}
+          {% endif %}
     - service: notify.alexa_yellow_ring
       data:
         message: "The washer cycle has finished"
