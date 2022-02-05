@@ -81,6 +81,6 @@ notify: !include notifiers.yaml
 camera: !include cameras.yaml
 proximity: !include proximity.yaml
 shell_command: !include shell_commands.yaml
-climate: !include climate.yaml
+#climate: !include climate.yaml
 alexa: !include alexa.yaml
 zone: !include zones.yaml
