@@ -4,12 +4,6 @@
 ### SENSORS  ###
 
 #
-# Detect current version
-#
-- platform: version
-  image: intel-nuc
-
-#
 # Filters are considered a type of sensor
 #
 
