@@ -6,6 +6,6 @@
 # configuration.yaml as its own platform
 
 # Sensibo remote for Mitsubishi Mid-Split Unit
-- platform: sensibo
-  api_key: !secret sensibo_api_key
-
+# Sensibo noe configured in UI 
+#- platform: sensibo
+#- api_key: !secret sensibo_api_key

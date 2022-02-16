@@ -48,7 +48,7 @@
 - name: home
   latitude: !secret latitude
   longitude: !secret longitude
-  radius: 50 # in meters
+  radius: 60 # in meters
   icon: mdi:home
 
 #- name: near_home
