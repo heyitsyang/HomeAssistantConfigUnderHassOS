@@ -17,8 +17,10 @@ smart_home:
   filter:
     include_entities:
       - light.kitchen_leds_lower
+      - light.barstool_outlet
       - switch.hamstation
       - switch.water_valve
+      - switch.master_closet_lights
       - input_boolean.inp_bool_theater_mode
       - input_boolean.inp_bool_pause_alarm
       - input_boolean.inp_bool_guest_mode
