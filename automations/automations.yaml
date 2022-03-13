@@ -1598,7 +1598,6 @@
       data:
         message: |
           'Home Assistant {{states("sensor.home_assistant_versions")}} is now available.
-           You are on version {{states("sensor.current_version")}}.
            See https://github.com/home-assistant/home-assistant/releases'
 
 #####################################
