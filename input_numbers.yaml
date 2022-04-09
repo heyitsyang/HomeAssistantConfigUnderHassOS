@@ -284,8 +284,8 @@ inp_num_sunrm_shades_close_low_lux_trig:                        # original value
   name: 'Shades CLOSE solar'
   mode: slider
   step: 10
-  min: 100
-  max: 300
+  min: 150
+  max: 350
   icon: mdi:blinds
   unit_of_measurement: lux
 
