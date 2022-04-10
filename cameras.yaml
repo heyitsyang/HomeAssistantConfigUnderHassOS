@@ -5,10 +5,6 @@
 ### CAMERAS ###
 # MOST CAMERAS ARE NOW CONFIGURED THROUGH THE ONVIF INTEGRATION IN THE UI
 
-- platform: generic
-  still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=TBW&brand=wui&num=6&delay=15&type=N0R&frame=0&scale=0.6891304347826087&noclutter=0&showstorms=0&mapx=400&mapy=240&centerx=297.69716088328084&centery=343.75394321766555&transx=-102.30283911671916&transy=103.75394321766555&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24737804&lat=0&lon=0&label=you
-  name: Radar
-
 #- platform: ffmpeg
 #  name: 'GreatRoom camera'                       # DIGOO M1Ql ONVIF2.0/RTSP camera
 #  input: !secret greatroom_url
