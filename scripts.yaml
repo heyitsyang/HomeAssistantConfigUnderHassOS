@@ -448,12 +448,14 @@ scr_frontporch_activity:
       data:
         entity_id: camera.driveway_mainprofile
         filename: "/config/www/camera_stills/driveway.jpg"
-    - condition: and # continue only if both not home
+    - condition: not  # testing for not_home else doesn't work if in a known zone
       conditions:
-        - condition: template # testing for not_home else doesn't work if in a known zone
-          value_template: "{{ states('person.yang') != 'home' }}"
-        - condition: template # testing for not_home else doesn't work if in a known zone
-          value_template: "{{ states('person.karen') != 'home' }}"
+        - condition: state
+          entity_id: person.yang
+          state: "home"
+        - condition: state
+          entity_id: person.karen
+          state: "home"
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
