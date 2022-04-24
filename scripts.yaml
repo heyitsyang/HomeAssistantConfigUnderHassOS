@@ -248,10 +248,14 @@ scr_check_if_suspicious:
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute remainder unless Extended Absence is ON
           state: "on"
-        - condition: template # testing for not_home doesn't work if in a known zone
-          value_template: "{{ states('person.yang') != 'home' }}"
-        - condition: template # testing for not_home doesn't work if in a known zone
-          value_template: "{{ states('person.karen') != 'home' }}"
+        - condition: not  # testing for not_home else doesn't work if in a known zone
+          conditions:
+            - condition: state
+              entity_id: person.yang
+              state: "home"
+            - condition: state
+              entity_id: person.karen
+              state: "home"
     - service: notify.pushover_yangandkaren
       data:
         title: "SUSPICIOUS ACTIVITY at Norcoose home"
