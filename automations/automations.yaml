@@ -1597,8 +1597,8 @@
     - service: notify.gmail_to_yang
       data:
         message: |
-          'Home Assistant {{states("sensor.home_assistant_versions")}} is now available.
-           See https://github.com/home-assistant/home-assistant/releases'
+          Home Assistant {{states("sensor.home_assistant_versions")}} is now available.
+           See https://github.com/home-assistant/home-assistant/releases
 
 #####################################
 #    Security & House Modes         #
