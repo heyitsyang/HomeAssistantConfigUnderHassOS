@@ -7,5 +7,3 @@
   cache: false
   cache_dir: tts
   time_memory: 57600 # secs voice data is held in MEMORY for quick playback - max is 57600 (16hrs)
-  #  base_url: https://shencentral.duckdns.org:61615         #  this is important - must be set if different than https external address in config
-  base_url: http://haha.shencentral.net:8123 #  this is important - must be set if different than https external address in config
