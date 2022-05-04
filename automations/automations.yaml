@@ -1590,16 +1590,15 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.updater
+      entity_id: binary_sensor.home_assistant_versions_update_available
       from: "off"
       to: "on"
   action:
     - service: notify.gmail_to_yang
       data:
         message: |
-          'Home Assistant {{state_attr("binary_sensor.updater", "newest_version")}} is now available.
-           You are on version {{states("sensor.current_version")}}.
-           See https://github.com/home-assistant/home-assistant/releases'
+          Home Assistant {{states("sensor.home_assistant_versions")}} is now available.
+           See https://github.com/home-assistant/home-assistant/releases
 
 #####################################
 #    Security & House Modes         #

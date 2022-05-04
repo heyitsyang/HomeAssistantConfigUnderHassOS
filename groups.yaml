@@ -293,6 +293,7 @@ all_lighting: # This group created for frontend UI use
     - light.sun_room_lights
     - light.sun_room_uplights
     - light.master_bedroom_lights
+    - switch.master_closet_lights
     - light.office_lights
     - light.guest_room_lights
     - switch.front_door_lights
@@ -316,6 +317,7 @@ all_lighting_xabove_cabinet:
     - light.sun_room_lights
     - light.sun_room_uplights
     - light.master_bedroom_lights
+    - switch.master_closet_lights
     - light.office_lights
     - light.guest_room_lights
     - switch.front_door_lights

@@ -235,9 +235,9 @@
 #- platform: cert_expiry                               # now configured using GUI
 #  host: "shencentral.duckdns.org"
 
-- platform: filesize
-  file_paths:
-    - /config/home-assistant_v2.db
+#- platform: filesize                                  # now configured via UI
+#  file_paths:
+#    - /config/home-assistant_v2.db
 
 #
 # OUTDOOR WEATHER & ENVIRONMENTAL SENSORS
