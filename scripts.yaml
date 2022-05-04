@@ -560,7 +560,7 @@ scr_say_phrase:
 scr_sonos_join4announce:
   sequence:
     - condition: template
-      value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'sonos_group') }}"
+      value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'group_members') }}"
     - service: sonos.join
       data:
         master: media_player.main_speakers
@@ -571,7 +571,7 @@ scr_sonos_join4announce:
 scr_sonos_unjoin4announce:
   sequence:
     - condition: template
-      value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'sonos_group') }}"
+      value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'group_members') }}"
     - service: sonos.unjoin
       data:
         entity_id:
