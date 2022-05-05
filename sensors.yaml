@@ -109,28 +109,28 @@
   name: "Raw Living Rm Visible Light"
   state_topic: "livingrmfan/TSL2561/Human"
   qos: 0
-  unit_of_measurement: "Lux"
+  unit_of_measurement: "lx"
 
 - platform: mqtt
   unique_id: raw_living_rm_full_spectrum_light
   name: "Raw Living Rm Full Spectrum Light"
   state_topic: "livingrmfan/TSL2561/Broadband"
   qos: 0
-  unit_of_measurement: "Lux"
+  unit_of_measurement: "lx"
 
 - platform: mqtt
   unique_id: raw_living_rm_infrared_light
   name: "Raw Living Rm Infrared Light"
   state_topic: "livingrmfan/TSL2561/Infrared"
   qos: 0
-  unit_of_measurement: "Lux"
+  unit_of_measurement: "lx"
 
 - platform: mqtt
   unique_id: raw_solar_tube_luminosity
   name: "Raw Solar Tube Luminosity"
   state_topic: "solartube/BH1750/Lux"
   qos: 0
-  unit_of_measurement: "Lux"
+  unit_of_measurement: "lx"
 
 - platform: mqtt
   unique_id: garage_temperature
