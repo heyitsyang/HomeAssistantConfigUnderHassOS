@@ -414,7 +414,7 @@
   trigger:
     - platform: state
       entity_id: sensor.ys_cell_ble_room
-      to: 
+      to:
     - platform: homeassistant
       event: start
   action:
@@ -435,7 +435,7 @@
   trigger:
     - platform: state
       entity_id: sensor.kt_cell_ble_room
-      to: 
+      to:
     - platform: homeassistant
       event: start
   action:
@@ -1590,14 +1590,15 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.home_assistant_versions_update_available
+      entity_id: binary_sensor.home_assistant_website_update_available
       from: "off"
       to: "on"
   action:
     - service: notify.gmail_to_yang
       data:
         message: |
-          Home Assistant {{states("sensor.home_assistant_versions")}} is now available.
+          Home Assistant {{states("sensor.home_assistant_website")}} is now available.
+           Your current version is {{states("sensor.current_version")}}.
            See https://github.com/home-assistant/home-assistant/releases
 
 #####################################
