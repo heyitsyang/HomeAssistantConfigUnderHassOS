@@ -1195,6 +1195,7 @@
   action:
     - service: script.scr_repeat_say_garage_open
 
+# Reset timer if moving in/out of garage
 - id: auto_reset_garage_timers
   alias: "aut reset garage timers"
   initial_state: true
