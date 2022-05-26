@@ -341,6 +341,9 @@ scr_repeat_say_garage_open:
     - service: script.scr_say_phrase
       data:
         message: "A garage door is still open.  This is your last reminder."
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "A garage door is still open"
 
 #
 # MOOD LIGHTING
