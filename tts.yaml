@@ -4,6 +4,6 @@
 ### TTS ###
 
 - platform: google_translate
-  cache: false
+  cache: true
   cache_dir: tts
   time_memory: 57600 # secs voice data is held in MEMORY for quick playback - max is 57600 (16hrs)
