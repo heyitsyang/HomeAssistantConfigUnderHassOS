@@ -39,14 +39,14 @@ neato:
   client_secret: !secret neato_client_secret
 
 # GOOGLE CALENDAR
-google:
-  client_id: !secret google_cal_client_id
-  client_secret: !secret google_cal_client_secret
+#google:              # now added via UI
+#  client_id: !secret google_cal_client_id
+#  client_secret: !secret google_cal_client_secret
 
 # OTHER HA HUBS
-vera:
-  #  vera_controller_url: http://veraplus.shencentral.net:3480/
-  vera_controller_url: http://10.0.0.40:3480/
+#vera:     # now added via UI
+#  vera_controller_url: http://veraplus.shencentral.net:3480/
+# vera_controller_url: http://10.0.0.40:3480/
 
 ############################################
 # INCLUDES
