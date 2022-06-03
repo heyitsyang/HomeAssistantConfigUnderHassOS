@@ -1,0 +1,194 @@
+#
+# MQTT SENSORS
+#
+sensor:
+  - unique_id: water_spt_data_status
+    name: "SPT Data Status"
+    state_topic: "watermain/spt_data_status"
+    json_attributes_topic: "watermain/data_status/attributes"
+    qos: 0
+
+  - unique_id: water_pressure
+    name: "Water Pressure"
+    state_topic: "watermain/water_pressure"
+    qos: 0
+    device_class: "pressure"
+    unit_of_measurement: "psi"
+    expire_after: 600 # state becomes "unknown" after 10 minutes
+
+  - unique_id: water_temperature
+    name: "Water Temperature"
+    state_topic: "watermain/water_temperature"
+    qos: 0
+    device_class: "temperature"
+    unit_of_measurement: "°F"
+    expire_after: 600 # state becomes "unknown" after 10 minutes
+
+  - unique_id: unvalidated_water_static_pressure_test_result
+    name: "Unvalidated Water Static Pressure Test Result"
+    state_topic: "watermain/spt_result"
+    unit_of_measurement: "psi"
+    json_attributes_topic: "watermain/spt_result/attributes"
+
+  - unique_id: rack_exhaust_temperature
+    name: "Rack Exhaust Temperature"
+    state_topic: "labrack/BME280/Temperature"
+    qos: 0
+    unit_of_measurement: "°F"
+
+  - unique_id: rack_exhaust_fan_speed
+    name: "Rack Exhaust Fan Speed"
+    state_topic: "labrack/FanRPM/RPM"
+    qos: 0
+    unit_of_measurement: "RPM"
+
+  - unique_id: rack_exhaust_humidity
+    name: "Rack Exhaust Humidity"
+    state_topic: "labrack/BME280/Humidity"
+    qos: 0
+    unit_of_measurement: "%"
+
+  - unique_id: rack_exhaust_pressure
+    name: "Rack Exhaust Pressure"
+    state_topic: "labrack/BME280/Pressure"
+    qos: 0
+    unit_of_measurement: "mbar"
+
+  - unique_id: raw_living_rm_visible_light
+    name: "Raw Living Rm Visible Light"
+    state_topic: "livingrmfan/TSL2561/Human"
+    qos: 0
+    unit_of_measurement: "lx"
+
+  - unique_id: raw_living_rm_full_spectrum_light
+    name: "Raw Living Rm Full Spectrum Light"
+    state_topic: "livingrmfan/TSL2561/Broadband"
+    qos: 0
+    unit_of_measurement: "lx"
+
+  - unique_id: raw_living_rm_infrared_light
+    name: "Raw Living Rm Infrared Light"
+    state_topic: "livingrmfan/TSL2561/Infrared"
+    qos: 0
+    unit_of_measurement: "lx"
+
+  - unique_id: raw_solar_tube_luminosity
+    name: "Raw Solar Tube Luminosity"
+    state_topic: "solartube/BH1750/Lux"
+    qos: 0
+    unit_of_measurement: "lx"
+
+  - unique_id: garage_temperature
+    name: "Garage Temperature"
+    state_topic: "garage/DS18b20/Temperature"
+    qos: 0
+    unit_of_measurement: "°F"
+
+  - unique_id: master_bedroom_temperature
+    name: "Master Bedroom Temperature"
+    state_topic: "masterbdrmfan/DS18b20/Temperature"
+    qos: 0
+    unit_of_measurement: "°F"
+
+  - unique_id: attic_temperature
+    name: "Attic Temperature"
+    state_topic: "attic/DS18b20/Temperature"
+    qos: 0
+    unit_of_measurement: "°F"
+
+#
+# MQTT BINARY SENSORS
+#
+binary_sensor:
+  - unique_id: utilitycloset_airhandler
+    name: "Air Handler"
+    state_topic: "utilitycloset/airhandler/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - unique_id: utilitycloset_waterheater # water heater on/off
+    name: "Water Heater"
+    state_topic: "utilitycloset/waterheater/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - unique_id: utilitycloset_leakdetector
+    name: "Leak Water Heater"
+    state_topic: "utilitycloset/leakdetector/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - unique_id: refigerator_leak
+    name: "Leak Refrigerator"
+    state_topic: "refrigeratorleak/leakdetector/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - unique_id: dishwasher_leak
+    name: "Leak Dishwasher"
+    state_topic: "kitchenislandleak/dishwasher_leak/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - unique_id: kitchen_sink_rear_leak
+    name: "Leak Kitchen Sink Rear"
+    state_topic: "kitchenislandleak/kitchen_sink_leak_rear/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - name: "Front Ent Attic uWave"
+    unique_id: front_ent_attic_uwave
+    state_topic: "frontentrance/FrontEntAtticuWave/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+  - name: "Front Ent Soffit uWave"
+    unique_id: front_ent_soffit_uwave
+    state_topic: "frontentrance/FrontEntSoffituWave/State"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 0
+
+#
+# MQTT COVERS
+#
+
+cover:
+  ## Large Garage Door ##
+  - name: "Large Garage Door"
+    state_topic: "garage/LgGarDoor/zeroisclosed"
+    state_open: "1"
+    state_closed: "0"
+    command_topic: "garage/cmd"
+    payload_open: "pulse,4,1,500"
+    payload_close: "pulse,4,1,500"
+    qos: 0
+
+  ## Small Garage Door ##
+  - name: "Small Garage Door"
+    state_topic: "garage/SmGarDoor/zeroisclosed"
+    state_open: "1"
+    state_closed: "0"
+    command_topic: "garage/cmd"
+    payload_open: "pulse,5,1,500"
+    payload_close: "pulse,5,1,500"
+    qos: 0
+
+#
+# MQTT SWITCHES
+#
+switch:
+  - name: "Water Valve"
+    unique_id: water_valve
+    state_topic: "watermain/valve_zeroisclosed"
+    command_topic: "watermain/cmd/valveState"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 2

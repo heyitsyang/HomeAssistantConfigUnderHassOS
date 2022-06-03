@@ -110,17 +110,17 @@ scr_arrival_announcement:
 #
 scr_occupied_sim:
   sequence:
-    - delay: "00:{{ (range(1, 20)|random|int) }}:00"
+    - delay: "00:{{ (range(1, 20)|random|int(default=0)) }}:00"
     - service: light.turn_on
       data:
         entity_id: light.living_room_lights
         brightness_pct: 100
-    - delay: "02:{{ (range(1, 59)|random|int) }}:00"
+    - delay: "02:{{ (range(1, 59)|random|int(default=0)) }}:00"
     - service: light.turn_on
       data:
         entity_id: light.master_bedroom_lights
         brightness_pct: 50
-    - delay: "00:{{ (range(1, 59)|random|int) }}:00"
+    - delay: "00:{{ (range(1, 59)|random|int(default=0)) }}:00"
     - service: homeassistant.turn_off
       entity_id: group.indoor_lights
 
@@ -248,7 +248,7 @@ scr_check_if_suspicious:
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute remainder unless Extended Absence is ON
           state: "on"
-        - condition: not  # testing for not_home else doesn't work if in a known zone
+        - condition: not # testing for not_home else doesn't work if in a known zone
           conditions:
             - condition: state
               entity_id: person.yang
@@ -455,7 +455,7 @@ scr_frontporch_activity:
       data:
         entity_id: camera.driveway_mainprofile
         filename: "/config/www/camera_stills/driveway.jpg"
-    - condition: not  # testing for not_home else doesn't work if in a known zone
+    - condition: not # testing for not_home else doesn't work if in a known zone
       conditions:
         - condition: state
           entity_id: person.yang
