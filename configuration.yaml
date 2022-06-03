@@ -65,6 +65,7 @@ automation old: !include_dir_merge_list automations # hand coded yaml goes in th
 sensor: !include sensors.yaml
 script: !include scripts.yaml
 tts: !include tts.yaml
+mqtt: !include mqtt.yaml
 #device_tracker: !include device_trackers.yaml
 binary_sensor: !include binary_sensors.yaml
 input_boolean: !include input_booleans.yaml
