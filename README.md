@@ -19,16 +19,17 @@ This repository contains my Home Assistant configuration files.
 - Garage door monitor & controller
 - Water leak detection system w/valve, pressure sensor, moisture sensors
 
-**Other fun stuff  working with Home Assistant**
+**Other fun stuff working with Home Assistant**
 - Amazon Echo
+- Sonos/Tasmota Zigbee Bridge
 - Ecobee Lite Thermostat & remote sensors
 - Sensibo Sky Smart AC Controller
 - Neato Botvac D5 Connected
 - Netgear Orbi RBK50 WiFi Router
 - Sonos WiFi/Ethernet Speakers
 - Ambient Weather WS-0900-IP Weather Station
-- Misc RTSP capable network cameras
-- Monitor RaspberryPi Bluetooth Presence Detection
+- Misc ONVIF/RTSP capable network cameras
+- ESPresense Bluetooth Presence Detection
 - Flux LED strip controllers
 - Xiaomi/Aquara zigbee buttons
 
