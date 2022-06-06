@@ -58,7 +58,7 @@
       state: "off"
     # don't continue if washer is ON
     - condition: state
-      entity_id: binary_sensor.top_load_washer
+      entity_id: sensor.top_load_washer
       state: "off"
     # don't run more often than every N hours from last test
     - condition: template
