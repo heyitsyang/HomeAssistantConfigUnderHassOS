@@ -36,7 +36,6 @@ This repository contains my Home Assistant configuration files.
 - Misc ONVIF/RTSP capable network cameras
 - ESPresense Bluetooth Presence Detection
 - Flux LED strip controllers
-- Xiaomi/Aquara zigbee buttons
 - LG washer & dryer
 
 
