@@ -19,7 +19,7 @@ This repository contains my Home Assistant configuration files.
 - Garage door monitor & controller
 - Water leak detection system w/valve, pressure sensor, moisture sensors
 
-**Connected via Sonos/Tasmota Zigbee Bridge (ZHA)
+**Connected via Sonos/Tasmota Zigbee Bridge (ZHA)**
 - Xiaomi/Aquara pushbutton switch
 - BlitzWolf ZigBee Water Leak Sensor
 - GZTH Tuya Zigbee 3.0 Water Leak Sensor
