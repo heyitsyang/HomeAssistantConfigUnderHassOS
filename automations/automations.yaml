@@ -56,10 +56,10 @@
     - condition: state
       entity_id: binary_sensor.dishwasher_on_or_off
       state: "off"
-    # don't continue if wash_completed is OFF
+    # don't continue if washer is ON
     - condition: state
-      entity_id: binary_sensor.top_load_washer_wash_completed
-      state: "on"
+      entity_id: sensor.top_load_washer
+      state: "off"
     # don't run more often than every N hours from last test
     - condition: template
       value_template: >-
@@ -103,7 +103,7 @@
     - condition: state
       entity_id: binary_sensor.dishwasher_on_or_off
       state: "off"
-    # don't continue if wash_completed is OFF
+    # don't continue if washer is ON
     - condition: state
       entity_id: sensor.top_load_washer
       state: "off"
