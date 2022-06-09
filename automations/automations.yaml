@@ -105,8 +105,8 @@
       state: "off"
     # don't continue if wash_completed is OFF
     - condition: state
-      entity_id: binary_sensor.top_load_washer_wash_completed
-      state: "on"
+      entity_id: sensor.top_load_washer
+      state: "off"
   action:
     - delay:
         minutes: 15

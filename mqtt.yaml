@@ -119,28 +119,28 @@ binary_sensor:
     state_topic: "utilitycloset/leakdetector/State"
     payload_on: "1"
     payload_off: "0"
-    qos: 0
+    qos: 1
 
   - unique_id: refigerator_leak
     name: "Leak Refrigerator"
     state_topic: "refrigeratorleak/leakdetector/State"
     payload_on: "1"
     payload_off: "0"
-    qos: 0
+    qos: 1
 
   - unique_id: dishwasher_leak
     name: "Leak Dishwasher"
     state_topic: "kitchenislandleak/dishwasher_leak/State"
     payload_on: "1"
     payload_off: "0"
-    qos: 0
+    qos: 1
 
   - unique_id: kitchen_sink_rear_leak
     name: "Leak Kitchen Sink Rear"
     state_topic: "kitchenislandleak/kitchen_sink_leak_rear/State"
     payload_on: "1"
     payload_off: "0"
-    qos: 0
+    qos: 1
 
   - name: "Front Ent Attic uWave"
     unique_id: front_ent_attic_uwave
