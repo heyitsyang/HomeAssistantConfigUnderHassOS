@@ -1,16 +1,16 @@
-- id: '1618534663591'
+- id: "1618534663591"
   alias: aut_toggle_kitchen_counter_leds
   description: Toggle Kitchen Counter LEDs
   trigger:
-  - device_id: ab00b9f12c558537936a4186afcb2311
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: remote_button_short_press
+    - device_id: ab00b9f12c558537936a4186afcb2311
+      domain: zha
+      platform: device
+      type: remote_button_short_press
+      subtype: remote_button_short_press
   condition: []
   action:
-  - service: light.toggle
-    target:
-      entity_id: light.kitchen_leds_lower
+    - service: light.toggle
+      target:
+        entity_id: light.kitchen_leds_lower
   mode: queued
   max: 3
