@@ -47,13 +47,29 @@ scr_goodnight: # called by Alexa as part of Goodnight Routine
     #   entity_id: group.mood_lights
     - service: lock.lock
       entity_id: lock.front_door_lock, lock.back_door_lock
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode # goodnight routine ignores guest area lights if overnight guest mode is ON
-      state: "off"
-    - service: light.turn_off
-      entity_id: light.office_lights
-    - service: light.turn_off
-      entity_id: light.guest_room_lights
+    - if:
+        - or:
+            - condition: state
+              entity_id: cover.large_garage_door
+              state: "open"
+            - condition: state
+              entity_id: cover.small_garage_door
+              state: "open"
+      then:
+        - service: notify.alexa_yellow_ring
+          data:
+            message: "A garage door is still open"
+    - if:
+        - condition: state
+          entity_id: input_boolean.inp_bool_guest_mode # goodnight routine ignores guest area lights if overnight guest mode is ON
+          state: "off"
+      then:
+        - service: light.turn_off
+          entity_id: light.office_lights
+        - service: light.turn_off
+          entity_id: light.office_cabinet_leds_master
+        - service: light.turn_off
+          entity_id: light.guest_room_lights
 
 #
 # NOBODY HOME
