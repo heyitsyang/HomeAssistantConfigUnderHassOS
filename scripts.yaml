@@ -35,16 +35,14 @@ scr_ha_startup:
 
 #
 # GOODNIGHT SCRIPT
+#   All lights except guest suite are turned off in an Alexa routine before
+#   running this script, so only guest suite lights a handled here
 #
-scr_goodnight: # called by Alexa as part of Goodnight Routine
+scr_goodnight: # called by Alexa as PART of Goodnight Routine
   sequence:
-    #  - service: homeassistant.turn_off                # faster if group created in Alexa App
-    #    entity_id: group.indoor_lights                 # so group defined & turned off there instead
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_sleeping
-    #  - service: homeassistant.turn_off
-    #   entity_id: group.mood_lights
     - service: lock.lock
       entity_id: lock.front_door_lock, lock.back_door_lock
     - if:
@@ -56,6 +54,9 @@ scr_goodnight: # called by Alexa as part of Goodnight Routine
               entity_id: cover.small_garage_door
               state: "open"
       then:
+        - service: script.scr_say_phrase
+          data:
+            message: "A garage door is still open"
         - service: notify.alexa_yellow_ring
           data:
             message: "A garage door is still open"
