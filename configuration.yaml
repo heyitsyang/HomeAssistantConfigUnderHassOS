@@ -39,14 +39,14 @@ neato:
   client_secret: !secret neato_client_secret
 
 # GOOGLE CALENDAR
-google:
-  client_id: !secret google_cal_client_id
-  client_secret: !secret google_cal_client_secret
+#google:              # now added via UI
+#  client_id: !secret google_cal_client_id
+#  client_secret: !secret google_cal_client_secret
 
 # OTHER HA HUBS
-vera:
-  #  vera_controller_url: http://veraplus.shencentral.net:3480/
-  vera_controller_url: http://10.0.0.40:3480/
+#vera:     # now added via UI
+#  vera_controller_url: http://veraplus.shencentral.net:3480/
+# vera_controller_url: http://10.0.0.40:3480/
 
 ############################################
 # INCLUDES
@@ -65,6 +65,7 @@ automation old: !include_dir_merge_list automations # hand coded yaml goes in th
 sensor: !include sensors.yaml
 script: !include scripts.yaml
 tts: !include tts.yaml
+mqtt: !include mqtt.yaml
 #device_tracker: !include device_trackers.yaml
 binary_sensor: !include binary_sensors.yaml
 input_boolean: !include input_booleans.yaml
