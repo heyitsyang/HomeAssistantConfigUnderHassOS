@@ -115,6 +115,9 @@ smart_home:
     group.mood_lights:
       name: "Mood lights"
       display_categories: LIGHT
+    group.office_cabinet_lights:
+      name: "Office cabinet lights"
+      display_categories: LIGHT
     light.office_cabinet_leds:
       name: "Lower office cabinet lights"
       display_categories: LIGHT

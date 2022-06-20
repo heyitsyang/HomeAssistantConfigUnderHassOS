@@ -196,6 +196,12 @@ pathway_lights:
     - switch.candles
     - light.kitchen_leds_rear
 
+office_cabinet_lights:
+  name: "Office Cabinet Lights"
+  entities:
+    - light.office_cabinet_leds
+    - light.office_cabinet_leds_segment_1
+
 sunrm_shades: # This group is used to display all shades individually in the frontend UI
   name: "Sun Room Shades" # Using cover.sun_room_shades (defined in covers.yaml)
   entities:
