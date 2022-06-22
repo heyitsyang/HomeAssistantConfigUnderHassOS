@@ -121,6 +121,9 @@ smart_home:
     light.office_cabinet_leds_segment_1:
       name: "Upper office cabinet lights"
       display_categories: LIGHT
+    light.office-display-leds:
+      name: "Office display light"
+      display_categories: LIGHT
 #    group.indoor_lights:
 #      name: "Indoor lights"
 #      display_categories: LIGHT
