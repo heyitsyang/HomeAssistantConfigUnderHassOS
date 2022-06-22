@@ -46,6 +46,8 @@ smart_home:
       - group.mood_lights
       - light.office_cabinet_leds
       - light.office_cabinet_leds_segment_1
+      - light.office_cabinet_leds_master
+      - light.office_monitor_leds
   #      - group.indoor_lights
   #      - group.kitchen_lights
   #      - group.living_area_lights
