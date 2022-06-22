@@ -1046,9 +1046,9 @@
       value_template: >-
         {{ ( ( as_timestamp(now(), '') - (as_timestamp(state_attr('automation.aut_frontporch_activity', 
         'last_triggered'), '') | float(default=0)) ) | int(default=0) ) > 14 }}
-        - condition: state
-          entity_id: timer.timer_front_door_opened
-          state: "idle"
+    - condition: state
+      entity_id: timer.timer_front_door_opened
+      state: "idle"
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_frontporch_activity
