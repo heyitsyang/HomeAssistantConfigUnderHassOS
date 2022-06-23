@@ -30,6 +30,12 @@ sensor:
     unit_of_measurement: "psi"
     json_attributes_topic: "watermain/spt_result/attributes"
 
+  - unique_id: iotlink_ys_desktop_idle_secs
+    name: "YS Desktop Idle Secs"
+    state_topic: "iotlink/shencentral/ys-desktop/windows-monitor/system/idle-time"
+    qos: 1
+    unit_of_measurement: "s"
+
   - unique_id: rack_exhaust_temperature
     name: "Rack Exhaust Temperature"
     state_topic: "labrack/BME280/Temperature"
