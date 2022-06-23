@@ -1716,6 +1716,7 @@
         message: "Home Assistant: Extended absence mode enabled"
     - service: notify.gmail_to_yang
       data:
+        title: "Extended absence mode has been enabled"
         message: "Extended absence mode enabled"
     - service: script.scr_shared_extended_absence_on
 
