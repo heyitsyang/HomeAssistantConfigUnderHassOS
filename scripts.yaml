@@ -153,8 +153,13 @@ scr_shared_extended_absence_on:
       entity_id: lock.front_door_lock,lock.back_door_lock
     - service: homeassistant.turn_off
       entity_id: group.all_lighting_xabove_cabinet
-    - service: switch.turn_off
-      entity_id: switch.water_valve
+    - if:
+        - condition: state
+          entity_id: input_boolean.leave_water_valve_on
+          state: "off"
+      then:
+        - service: switch.turn_off
+          entity_id: switch.water_valve
     - delay: "00:20:00"
     - service: switch.turn_off
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
