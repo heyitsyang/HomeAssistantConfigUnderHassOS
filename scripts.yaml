@@ -153,8 +153,13 @@ scr_shared_extended_absence_on:
       entity_id: lock.front_door_lock,lock.back_door_lock
     - service: homeassistant.turn_off
       entity_id: group.all_lighting_xabove_cabinet
-    - service: switch.turn_off
-      entity_id: switch.water_valve
+    - if:
+        - condition: state
+          entity_id: input_boolean.leave_water_valve_on
+          state: "off"
+      then:
+        - service: switch.turn_off
+          entity_id: switch.water_valve
     - delay: "00:20:00"
     - service: switch.turn_off
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
@@ -581,21 +586,20 @@ scr_sonos_join4announce:
   sequence:
     - condition: template
       value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'group_members') }}"
-    - service: sonos.join
+    - service: media_player.join
+      target:
+        entity_id: media_player.office_speakers
       data:
-        master: media_player.main_speakers
-        entity_id:
-          - media_player.office_speakers
+        group_members: media_player.main_speakers
     - delay: "00:00:15" # give it time to join/unjoin
 
 scr_sonos_unjoin4announce:
   sequence:
     - condition: template
       value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'group_members') }}"
-    - service: sonos.unjoin
-      data:
-        entity_id:
-          - media_player.office_speakers
+    - service: media_player.unjoin
+      target:
+        entity_id: media_player.office_speakers
     - delay: "00:00:15" # give it time to join/unjoin
 
 scr_sonos_eval_announce:

@@ -46,6 +46,8 @@ smart_home:
       - group.mood_lights
       - light.office_cabinet_leds
       - light.office_cabinet_leds_segment_1
+      - light.office_cabinet_leds_master
+      - light.office_monitor_leds
   #      - group.indoor_lights
   #      - group.kitchen_lights
   #      - group.living_area_lights
@@ -115,7 +117,7 @@ smart_home:
     group.mood_lights:
       name: "Mood lights"
       display_categories: LIGHT
-    group.office_cabinet_lights:
+    light.office_cabinet_leds_master:
       name: "Office cabinet lights"
       display_categories: LIGHT
     light.office_cabinet_leds:
@@ -123,6 +125,9 @@ smart_home:
       display_categories: LIGHT
     light.office_cabinet_leds_segment_1:
       name: "Upper office cabinet lights"
+      display_categories: LIGHT
+    light.office_monitor_leds:
+      name: "Office monitor lights"
       display_categories: LIGHT
 #    group.indoor_lights:
 #      name: "Indoor lights"
