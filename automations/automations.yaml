@@ -405,6 +405,52 @@
 ##################################################
 
 #
+# OFFICE MOOD LIGHTS
+#
+- id: aut_office_mood_lights_auto_on
+  alias: aut office mood lights auto on
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ys_desktop_lwt
+      to: "on"
+    - platform: numeric_state
+      entity_id: sensor.ys_desktop_system_idle_time
+      below: 1
+  condition:
+    - condition: state
+      entity_id: binary_sensor.lum_mood_lights_f_solar_trig
+      state: "on"
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.office_monitor_leds
+        - light.office_cabinet_leds_segment_1
+        - light.office_cabinet_leds_segment_2
+        - light.office_cabinet_leds_segment_3
+
+- id: aut_office_mood_lights_auto_off
+  alias: aut office mood lights auto off
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ys_desktop_lwt
+      to: "off"
+    - platform: numeric_state
+      entity_id: sensor.ys_desktop_system_idle_time
+      above: 3600 # one hour
+    - platform: state
+      entity_id: binary_sensor.lum_mood_lights_f_solar_trig
+      to: "off"
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.office_monitor_leds
+        - light.office_cabinet_leds_segment_1
+        - light.office_cabinet_leds_segment_2
+        - light.office_cabinet_leds_segment_3
+
+#
 # DEVICE TRACKER UPDATE EVENTS
 #
 - id: aut_update_ys_cell_ble_tracker
