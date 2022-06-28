@@ -438,7 +438,7 @@
       to: "off"
     - platform: numeric_state
       entity_id: sensor.ys_desktop_system_idle_time
-      above: 3600 # one hour
+      above: 3600 # seconds
     - platform: state
       entity_id: binary_sensor.lum_mood_lights_f_solar_trig
       to: "off"
