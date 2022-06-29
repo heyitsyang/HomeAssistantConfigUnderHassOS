@@ -425,6 +425,7 @@
     - service: light.turn_on
       entity_id:
         - light.office_monitor_leds
+        - light.office_cabinet_leds_master
         - light.office_cabinet_leds_segment_1
         - light.office_cabinet_leds_segment_2
         - light.office_cabinet_leds_segment_3
@@ -446,9 +447,7 @@
     - service: light.turn_off
       entity_id:
         - light.office_monitor_leds
-        - light.office_cabinet_leds_segment_1
-        - light.office_cabinet_leds_segment_2
-        - light.office_cabinet_leds_segment_3
+        - light.office_cabinet_leds_master
 
 #
 # DEVICE TRACKER UPDATE EVENTS
