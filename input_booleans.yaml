@@ -18,8 +18,8 @@ inp_bool_crypto_pushover_notify: # prevent pushover notification
   name: "Crypto pushover notify"
   icon: mdi:cancel
 
-inp_bool_pause_alarm:
-  name: "Pause alarm"
+inp_bool_pause_leak_alarm:
+  name: "Pause leak alarm"
   icon: mdi:cancel
 
 inp_bool_theater_mode:

@@ -617,10 +617,10 @@ scr_sonos_eval_announce:
 #
 
 # PAUSE ALARM
-scr_pause_alarm:
+scr_pause_leak_alarm:
   sequence:
     - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_pause_alarm
+      entity_id: input_boolean.inp_bool_pause_leak_alarm
 
 # SPEAK TIME
 scr_manual_say_time:

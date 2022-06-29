@@ -655,7 +655,7 @@
             entity_id: switch.water_valve
             state: "off"
           - condition: state
-            entity_id: input_boolean.pause_alarm
+            entity_id: input_boolean.pause_leak_alarm
             state: "off"
         sequence:
           - service: script.scr_say_phrase
