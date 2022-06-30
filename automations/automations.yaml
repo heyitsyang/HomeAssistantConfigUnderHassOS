@@ -639,14 +639,14 @@
     - service: script.scr_say_phrase
       data:
         priority: "high"
-        message: "House water has been turned off.  Turn on manually when leak is resolved."
+        message: "House water has been turned off.  Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
     - service: notify.pushover_yangandkaren
       data:
-        title: "House water turned OFF"
+        title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         message: "House water is OFF.  Turn on manually when leak is resolved."
     - service: notify.alexa_yellow_ring
       data:
-        message: "House water is OFF.  Turn on manually when leak is resolved."
+        message: "House water is OFF. Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
     - repeat:
         while:
           - condition: template
