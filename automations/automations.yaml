@@ -1446,8 +1446,9 @@
       - condition: template
         value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'away_from' }}"
   action:
-    - service: script.scr_nobody_home
     - service: script.scr_check_garage_open
+    - service: script.scr_nobody_home
+
 
 #
 # HOME ARRIVAL/DEPARTURE ANNOUNCEMENTS
