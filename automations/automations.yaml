@@ -686,7 +686,7 @@
     - service: script.scr_say_phrase
       data:
         message: >
-          {% if state_attr('sensor.dryer', 'remain_time') == '0:00' %}
+          {% if state_attr('sensor.dryer', 'remain_time') == '0:00:00' %}
             The washer cycle has finished and the dryer is available
           {% else %}
             {% if (state_attr('sensor.dryer', 'remain_time').split(':')[0]) == '0' %}
