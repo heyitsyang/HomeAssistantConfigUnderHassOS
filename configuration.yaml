@@ -67,7 +67,7 @@ script: !include scripts.yaml
 tts: !include tts.yaml
 mqtt: !include mqtt.yaml
 #device_tracker: !include device_trackers.yaml
-binary_sensor: !include binary_sensors.yaml
+#binary_sensor: !include binary_sensors.yaml
 template: !include templates.yaml
 input_boolean: !include input_booleans.yaml
 input_select: !include input_selects.yaml
