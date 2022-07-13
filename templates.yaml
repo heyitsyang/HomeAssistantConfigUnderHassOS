@@ -1,0 +1,229 @@
+#######################
+###    TEMPLATES    ###
+#######################
+
+#
+# CURRENT SENSING TEMPLATE SENSORS
+#
+
+- binary_sensor:
+    - name: "dishwasher_on_or_off" # since this is a binary sensor, we only have to determine true/false
+      #      friendly_name: "Dishwasher ON/OFF sensor"
+      unique_id: dishwasher_on_off_sensor
+      delay_on:
+        seconds: 30 # amount of time template state must be met before switching to ON
+      delay_off:
+        seconds: 60 # amount of time template state is NOT met before switching to OFF
+      state: >-
+        {{ states('sensor.dishwasher_energy_current') | float(default=0) > 0.1 }}
+
+#
+# LUMINOSITY TRIGGERS - Consolidated as binary template sensors here so trigger values are in one place for automations & scripts #
+#   These are binary sensors that are set ON/OFF in automations.yaml based on the input_number settings on the UI settings view.  #
+#   Other automations then trigger based on these binary sensors.  A roundabout way to centralize.                                #
+#
+#   Some triggers have a ON value and an offset OFF value which prevents them as being implemented directly as a binary sensor,   #
+#   hence the need to use an input_boolean                                                                                        #
+#
+- binary_sensor:
+    - name: lum_outdoor_lights_solar_trig
+      #      friendly_name: "Outdoor lights on/off per solar sensor" # sync as closely with post light as possible
+      state: >-
+        {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
+
+- binary_sensor:
+    - name: lum_lvrm_lights_indoor_trig
+      #     friendly_name: "LvRm lights on/off per indoor sensor"
+      state: >-
+        {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
+
+- binary_sensor:
+    - name: lum_mood_lights_f_solar_trig
+      #      friendly_name: "Mood lights on/off per f_solar sensor"
+      state: >-
+        {{ is_state('input_boolean.inp_bool_lum_mood_lights_f_solar_trig','on') }}
+
+- binary_sensor:
+    - name: lum_sunrm_shades_trig
+      #      friendly_name: "Sunroom shades open per solar sensor"
+      state: >-
+        {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
+
+- sensor:
+    - name: ys_cell_gps_accuracy
+      #      friendly_name: "YS Cell GPS Accuracy"
+      unit_of_measurement: "m"
+      state: "{{ state_attr('device_tracker.ys_cell_gps', 'gps_accuracy') }}"
+
+- sensor:
+    - name: kt_cell_gps_accuracy
+      #      friendly_name: "KT Cell GPS Accuracy"
+      unit_of_measurement: "m"
+      state: "{{ state_attr('device_tracker.kt_cell_gps', 'gps_accuracy') }}"
+
+- sensor:
+    - name: last_static_pressure_test
+      #      friendly_name: "Last Static Pressure Test"
+      state: >-
+        {{ as_timestamp( state_attr('sensor.unvalidated_water_static_pressure_test_result', 'test_end'), '' ) 
+        | timestamp_custom ('%m/%d %H:%M', True, 'unknown') }}
+
+- sensor:
+    - name: validated_water_static_pressure_test_result
+      #      friendly_name: "Validated Water Static Pressure Test Result"
+      unit_of_measurement: "psi"
+      state: >-
+        {% if (is_state('sensor.spt_data_status', 'valid')) %}
+          {{ states('sensor.unvalidated_water_static_pressure_test_result') }}
+        {% endif %}
+
+- sensor:
+    - name: water_static_pressure_loss_per_minute
+      #      friendly_name: "Pressure Loss per Minute"
+      unit_of_measurement: "psi"
+      state: >
+        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) / 
+          (states('input_number.inp_num_spt_duration') | float(default=0)) }}
+
+- sensor:
+    - name: min_water_pressure
+      #      friendly_name: "Min Water Pressure"
+      unit_of_measurement: "psi"
+      state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'min_value') }}"
+
+- sensor:
+    - name: max_water_pressure
+      #      friendly_name: "Max Water Pressure"
+      unit_of_measurement: "psi"
+      state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'max_value') }}"
+
+- sensor:
+    - name: suggested_brightness
+      #      friendly_name: "Suggested Brightness"
+      unit_of_measurement: "%"
+      state: >-
+        {% if ( ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_0_threshold') | float(default=0)) ) ) %}
+          0
+        {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_0_threshold') | float(default=0)) ) and
+              ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
+          30
+        {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
+              ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_high_threshold') | float(default=0)) ) ) %}
+          50
+        {% elif ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_high_threshold') | float(default=0)) ) %}
+          100
+        {% else %}
+          99
+        {% endif %}
+
+    # CLIMATE #
+
+- sensor:
+    - name: ecobee_avg_indoor_temperature # ecobee current temp is the average
+      #      friendly_name: "Avg Indoor Temperature" # of all ecobee sensors
+      state: "{{ state_attr('climate.ecobee','current_temperature') }}"
+      unit_of_measurement: "°F"
+
+- sensor:
+    - name: sensibo_sunroom_temperature
+      #      friendly_name: "Sunroom Temperature"
+      state: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
+      unit_of_measurement: "°F"
+
+    #-sensor:
+    #   -name: norcoose_dewpoint
+    ##     friendly_name: "Norcoose Dewpoint"
+    #      unit_of_measurement: "°F"
+    #      state: >-
+    #        {{((((states('sensor.acurite_5n1_1002_f')) |
+    #        round(2,0)-32)*5/9)-(100 - (states('sensor.acurite_5n1_1002_h')) |
+    #        round(2,0))/5)*1.8+32}}
+    ## DewpointC = TempC -((100 - RH)/5.0)
+    ## DewpointF = (((TempF-32)*5.0/9.0) - ((100 - RH)/5.0) * 1.8) + 32.0
+
+    #  BATTERIES #
+    #    - not all batteries need sensor attribute templates, so not all are here
+
+- sensor:
+    - name: front_door_lock_battery
+      #      friendly_name: "Front Door Lock Batttery"
+      state: "{{ state_attr('lock.front_door_lock','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: back_door_lock_battery
+      #      friendly_name: "Back Door Lock Battery"
+      state: "{{ state_attr('lock.back_door_lock','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: living_area_motion_battery
+      #      friendly_name: "Living Area Motion Battery"
+      state: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sunrm_window_1_opened_battery
+      #      friendly_name: "Sunroom Window 1 Battery"
+      state: "{{ state_attr('binary_sensor.sunrm_window_1_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sunrm_window_2_opened_battery
+      #      friendly_name: "Sunroom Window 2 Battery"
+      state: "{{ state_attr('binary_sensor.sunrm_window_2_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sunrm_window_3_opened_battery
+      #      friendly_name: "Sunroom Window 3 Battery"
+      state: "{{ state_attr('binary_sensor.sunrm_window_3_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sunrm_window_4_opened_battery
+      #      friendly_name: "Sunroom Window 4 Battery"
+      state: "{{ state_attr('binary_sensor.sunrm_window_4_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: front_door_opened_battery
+      #      friendly_name: "Front Door Battery"
+      state: "{{ state_attr('binary_sensor.front_door_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: back_door_opened_battery
+      #      friendly_name: "Back Door Battery"
+      state: "{{ state_attr('binary_sensor.back_door_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: garagehouse_door_opened_battery
+      #      friendly_name: "Garage-House Battery"
+      state: "{{ state_attr('binary_sensor.garagehouse_door_opened','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sun_room_remote_1_battery
+      #      friendly_name: "Sunroom Remote 1 Battery"
+      state: "{{ state_attr('sensor.sun_room_remote_1','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sun_room_remote_2_battery
+      #      friendly_name: "Sunroom Remote 2 Battery"
+      state: "{{ state_attr('sensor.sun_room_remote_2','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sun_room_remote_3_battery
+      #      friendly_name: "Sunroom Remote 3 Battery"
+      state: "{{ state_attr('sensor.sun_room_remote_3','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
+
+- sensor:
+    - name: sun_room_remote_4_battery
+      #      friendly_name: "Sunroom Remote 4 Battery"
+      state: "{{ state_attr('sensor.sun_room_remote_4','battery_level') | int(default=0) }}"
+      unit_of_measurement: "%"
