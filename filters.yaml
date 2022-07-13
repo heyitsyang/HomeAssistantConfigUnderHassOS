@@ -8,6 +8,6 @@
 - platform: filter
   name: "Filtered Solar Tube Luminosity" 
   entity_id: sensor.raw_solar_tube_luminosity
-    filters:
-      - filter: lowpass                       # lowpass is exponential smoothing
-        time_constant: 10                     # 10 is the default value
+  filters:
+    - filter: lowpass                       # lowpass is exponential smoothing
+      time_constant: 10                     # 10 is the default value
