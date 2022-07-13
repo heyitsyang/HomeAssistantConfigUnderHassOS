@@ -405,6 +405,51 @@
 ##################################################
 
 #
+# OFFICE MOOD LIGHTS
+#
+- id: aut_office_mood_lights_auto_on
+  alias: aut office mood lights auto on
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ys_desktop_lwt
+      to: "on"
+    - platform: numeric_state
+      entity_id: sensor.ys_desktop_system_idle_time
+      below: 1
+  condition:
+    - condition: state
+      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+      state: "on"
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.office_monitor_leds
+        - light.office_cabinet_leds_master
+        - light.office_cabinet_leds_segment_1
+        - light.office_cabinet_leds_segment_2
+        - light.office_cabinet_leds_segment_3
+
+- id: aut_office_mood_lights_auto_off
+  alias: aut office mood lights auto off
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ys_desktop_lwt
+      to: "off"
+    - platform: numeric_state
+      entity_id: sensor.ys_desktop_system_idle_time
+      above: 3600 # seconds
+    - platform: state
+      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+      to: "off"
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.office_monitor_leds
+        - light.office_cabinet_leds_master
+
+#
 # DEVICE TRACKER UPDATE EVENTS
 #
 - id: aut_update_ys_cell_ble_tracker
@@ -594,14 +639,14 @@
     - service: script.scr_say_phrase
       data:
         priority: "high"
-        message: "House water has been turned off.  Turn on manually when leak is resolved."
+        message: "House water has been turned off.  Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
     - service: notify.pushover_yangandkaren
       data:
-        title: "House water turned OFF"
+        title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         message: "House water is OFF.  Turn on manually when leak is resolved."
     - service: notify.alexa_yellow_ring
       data:
-        message: "House water is OFF.  Turn on manually when leak is resolved."
+        message: "House water is OFF. Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
     - repeat:
         while:
           - condition: template
@@ -610,7 +655,7 @@
             entity_id: switch.water_valve
             state: "off"
           - condition: state
-            entity_id: input_boolean.pause_alarm
+            entity_id: input_boolean.pause_leak_alarm
             state: "off"
         sequence:
           - service: script.scr_say_phrase
@@ -641,7 +686,7 @@
     - service: script.scr_say_phrase
       data:
         message: >
-          {% if state_attr('sensor.dryer', 'remain_time') == '0:00' %}
+          {% if state_attr('sensor.dryer', 'remain_time') == '0:00:00' %}
             The washer cycle has finished and the dryer is available
           {% else %}
             {% if (state_attr('sensor.dryer', 'remain_time').split(':')[0]) == '0' %}
@@ -1401,8 +1446,9 @@
       - condition: template
         value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'away_from' }}"
   action:
-    - service: script.scr_nobody_home
     - service: script.scr_check_garage_open
+    - service: script.scr_nobody_home
+
 
 #
 # HOME ARRIVAL/DEPARTURE ANNOUNCEMENTS
