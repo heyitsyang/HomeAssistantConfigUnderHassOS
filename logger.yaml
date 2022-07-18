@@ -6,40 +6,39 @@
 # Severity high to low: critical, fatal, error, warning, warn, info, debug, notset
 
 #  default:  debug
-#  default: info 
-  default: warn 
-  logs:                                 # ignore events less than levels defined below
-    zigpy.zcl: error
-    slixxmpp: error
-#    aioharmony.harmonyclient: debug
-    urllib3.connectionpool: error
-#    pubnub: critical
-    homeassistant.components.iqvia: fatal
-    homeassistant.components.cert_expiry.sensor: fatal
-    homeassistant.components.ecobee: error
-    haffmpeg.tools: error
-    homeassistant.components.weather: error                          # ecobee service outages
-    homeassistant.components.neato: error                            # neato service outages
-    homeassistant.components.locationsharinglib.Service: error
-    homeassistant.components.device_tracker: error
-    locationsharinglib.Service: error
-    homeassistant.components.light.kitchen_leds_front: error
-    homeassistant.components.light.kitchen_leds_rear: error
-    homeassistant.components.light.flux_led: error
-    homeassistant.helpers.entity: error
-    homeassistant.components.sensor: error
-    homeassistant.components.binary_sensor: error
-#    homeassistant.components.automation: info                       # enable this to help debug
-    homeassistant.core: info
-  filters:
-    homeassistant.components.neato.vacuum:
-      - "Unable to communicate with robot"
-    homeassistant.components.neato.switch:
-      - "Unable to communicate with robot"
-    homeassistant.components.sonos:
-      - "Failed to connect to discovered player '10.0.0.40'"
-    homeassistant.components.onvif:
-      - "Failed to restart ONVIF PullPoint subscription"
-      - "Failed to fetch ONVIF PullPoint subscription"
-      - "this could lead to authentication issues"
-      - "http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet"
+#  default: info
+default: warn
+logs: # ignore events less than levels defined below
+  zigpy.zcl: error
+  slixxmpp: error
+  #    aioharmony.harmonyclient: debug
+  urllib3.connectionpool: error
+  #    pubnub: critical
+  homeassistant.components.iqvia: fatal
+  homeassistant.components.cert_expiry.sensor: fatal
+  homeassistant.components.ecobee: error
+  haffmpeg.tools: error
+  homeassistant.components.weather: error # ecobee service outages
+  homeassistant.components.neato: error # neato service outages
+  homeassistant.components.locationsharinglib.Service: error
+  homeassistant.components.device_tracker: error
+  locationsharinglib.Service: error
+  homeassistant.components.light.kitchen_leds_rear: error
+  homeassistant.components.light.flux_led: error
+  homeassistant.helpers.entity: error
+  homeassistant.components.sensor: error
+  homeassistant.components.binary_sensor: error
+  #    homeassistant.components.automation: info                       # enable this to help debug
+  homeassistant.core: info
+filters:
+  homeassistant.components.neato.vacuum:
+    - "Unable to communicate with robot"
+  homeassistant.components.neato.switch:
+    - "Unable to communicate with robot"
+  homeassistant.components.sonos:
+    - "Failed to connect to discovered player '10.0.0.40'"
+  homeassistant.components.onvif:
+    - "Failed to restart ONVIF PullPoint subscription"
+    - "Failed to fetch ONVIF PullPoint subscription"
+    - "this could lead to authentication issues"
+    - "http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet"

@@ -52,57 +52,7 @@
       supported_features: 151
       icon: mdi:led-strip-variant
       state: 'on'
-    light.kitchen_leds_front:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - blue_fade
-      - blue_strobe
-      - colorjump
-      - colorloop
-      - colorstrobe
-      - cyan_fade
-      - cyan_strobe
-      - gb_cross_fade
-      - green_fade
-      - green_strobe
-      - purple_fade
-      - purple_strobe
-      - rb_cross_fade
-      - red_fade
-      - red_strobe
-      - rg_cross_fade
-      - white_fade
-      - white_strobe
-      - yellow_fade
-      - yellow_strobe
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      - rgbw
-      color_mode: rgbw
-      brightness: 8
-      rgbw_color:
-      - 255
-      - 191
-      - 31
-      - 10
-      white_value: 10
-      hs_color:
-      - 42.857
-      - 87.5
-      rgb_color:
-      - 255
-      - 191
-      - 31
-      xy_color:
-      - 0.522
-      - 0.442
-      friendly_name: Kitchen LEDs Front
-      supported_features: 151
-      icon: mdi:led-strip-variant
-      state: 'on'
+
 - id: trash_night_led_mood
   name: Trash Night LED Mood
   entities:
@@ -157,57 +107,7 @@
       supported_features: 151
       icon: mdi:led-strip-variant
       state: 'on'
-    light.kitchen_leds_front:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - blue_fade
-      - blue_strobe
-      - colorjump
-      - colorloop
-      - colorstrobe
-      - cyan_fade
-      - cyan_strobe
-      - gb_cross_fade
-      - green_fade
-      - green_strobe
-      - purple_fade
-      - purple_strobe
-      - rb_cross_fade
-      - red_fade
-      - red_strobe
-      - rg_cross_fade
-      - white_fade
-      - white_strobe
-      - yellow_fade
-      - yellow_strobe
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      - rgbw
-      color_mode: rgbw
-      brightness: 16
-      rgbw_color:
-      - 0
-      - 255
-      - 47
-      - 0
-      white_value: 0
-      hs_color:
-      - 131.25
-      - 100
-      rgb_color:
-      - 0
-      - 255
-      - 47
-      xy_color:
-      - 0.171
-      - 0.721
-      friendly_name: Kitchen LEDs Front
-      supported_features: 151
-      icon: mdi:led-strip-variant
-      state: 'on'
+
 - id: sun_room_uplight_brightness
   name: Sun Room Uplights Brightness
   entities:
@@ -283,57 +183,6 @@
 - id: '1618884078126'
   name: Bright LED Mood
   entities:
-    light.kitchen_leds_front:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - blue_fade
-      - blue_strobe
-      - colorjump
-      - colorloop
-      - colorstrobe
-      - cyan_fade
-      - cyan_strobe
-      - gb_cross_fade
-      - green_fade
-      - green_strobe
-      - purple_fade
-      - purple_strobe
-      - rb_cross_fade
-      - red_fade
-      - red_strobe
-      - rg_cross_fade
-      - white_fade
-      - white_strobe
-      - yellow_fade
-      - yellow_strobe
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      - rgbw
-      color_mode: rgbw
-      brightness: 38
-      rgbw_color:
-      - 255
-      - 255
-      - 255
-      - 40
-      white_value: 40
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      friendly_name: Kitchen LEDs Front
-      supported_features: 151
-      icon: mdi:led-strip-variant
-      state: 'on'
     light.kitchen_leds_rear:
       min_mireds: 153
       max_mireds: 500
