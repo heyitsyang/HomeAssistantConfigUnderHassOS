@@ -40,13 +40,4 @@ google_calendars.yaml
 blueprints/automation/homeassistant/motion_light.yaml
 blueprints/automation/homeassistant/notify_leaving_zone.yaml
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-home-assistant.log.1
-home-assistant.log.fault
-=======
-
->>>>>>> dev
-=======
 zigbee.db-journal
->>>>>>> dev
