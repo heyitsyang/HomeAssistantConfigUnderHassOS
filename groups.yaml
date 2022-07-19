@@ -185,7 +185,6 @@ mood_lights:
   name: "Mood Lights"
   entities:
     - switch.candles
-    - light.kitchen_leds_front
     - light.kitchen_leds_rear
     - light.sun_room_uplights
     - switch.mood_cats
@@ -300,7 +299,6 @@ all_lighting: # This group created for frontend UI use
     - switch.back_door_lights
     - switch.above_cabinet_lights
     - switch.candles
-    - light.kitchen_leds_front
     - light.kitchen_leds_rear
     - light.kitchen_leds_lower
     - switch.entryway_lights
@@ -324,7 +322,6 @@ all_lighting_xabove_cabinet:
     - switch.back_door_lights
     - switch.candles
     #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
-    - light.kitchen_leds_front
     - light.kitchen_leds_rear
     - light.kitchen_leds_lower
     - switch.entryway_lights
@@ -350,7 +347,6 @@ kitchen_lights:
     - light.island_lights
     - light.cabinet_lights
     - light.kitchen_leds_lower
-    - light.kitchen_leds_front
 
 ceiling_fans:
   name: "Ceiling Fans"
@@ -389,7 +385,6 @@ indoor_lights:
     - switch.entryway_lights
     #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
     - switch.candles
-    - light.kitchen_leds_front
     - light.kitchen_leds_rear
     - light.kitchen_leds_lower
 
