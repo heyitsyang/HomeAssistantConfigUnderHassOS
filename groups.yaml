@@ -185,7 +185,7 @@ mood_lights:
   name: "Mood Lights"
   entities:
     - switch.candles
-    - light.kitchen_leds_rear
+    - light.kitchen_leds_upper
     - light.sun_room_uplights
     - switch.mood_cats
 
@@ -193,7 +193,7 @@ pathway_lights:
   name: "Pathway Lights"
   entities:
     - switch.candles
-    - light.kitchen_leds_rear
+    - light.kitchen_leds_upper
 
 sunrm_shades: # This group is used to display all shades individually in the frontend UI
   name: "Sun Room Shades" # Using cover.sun_room_shades (defined in covers.yaml)
@@ -299,7 +299,7 @@ all_lighting: # This group created for frontend UI use
     - switch.back_door_lights
     - switch.above_cabinet_lights
     - switch.candles
-    - light.kitchen_leds_rear
+    - light.kitchen_leds_upper
     - light.kitchen_leds_lower
     - switch.entryway_lights
     - switch.mood_cats
@@ -322,7 +322,7 @@ all_lighting_xabove_cabinet:
     - switch.back_door_lights
     - switch.candles
     #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
-    - light.kitchen_leds_rear
+    - light.kitchen_leds_upper
     - light.kitchen_leds_lower
     - switch.entryway_lights
     - switch.mood_cats
@@ -385,7 +385,7 @@ indoor_lights:
     - switch.entryway_lights
     #  - switch.above_cabinet_lights               # taken out of group so it can be left ON all the time and so mood front/rear lights can be controlled
     - switch.candles
-    - light.kitchen_leds_rear
+    - light.kitchen_leds_upper
     - light.kitchen_leds_lower
 
 garage_opener_power:
