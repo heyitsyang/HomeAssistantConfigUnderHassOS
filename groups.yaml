@@ -187,7 +187,6 @@ mood_lights:
     - switch.candles
     - light.kitchen_leds_upper
     - light.sun_room_uplights
-    - switch.mood_cats
 
 pathway_lights:
   name: "Pathway Lights"
