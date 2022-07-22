@@ -18,6 +18,7 @@ smart_home:
   filter:
     include_entities:
       - light.kitchen_leds_lower
+      - light.kitchen_leds_upper_master
       - light.barstool_outlet
       - switch.hamstation
       - switch.water_valve
