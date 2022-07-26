@@ -1,5 +1,5 @@
 - id: sun_room_uplight_brightness
-  name: Sun Room Uplights Mood Mode
+  name: Sun Room Uplights 20%
   entities:
     light.sun_room_uplights:
       supported_color_modes:
@@ -177,7 +177,7 @@
   icon: mdi:led-strip-variant
   metadata: {}
 - id: '1658840138818'
-  name: Kitchen Mood Default
+  name: Kitchen Mood Spots 50% Warm White
   entities:
     light.kitchen_leds_upper_master:
       supported_color_modes:
@@ -310,6 +310,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -323,9 +326,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_1:
       effect_list:
@@ -449,6 +449,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-1
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -462,9 +465,6 @@
       - 0.411
       - 0.392
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-1
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_2:
       effect_list:
@@ -588,6 +588,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-morrocan-plate
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -601,9 +604,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-morrocan-plate
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_3:
       effect_list:
@@ -727,6 +727,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-2
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -740,9 +743,6 @@
       - 0.411
       - 0.392
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-2
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_4:
       effect_list:
@@ -866,6 +866,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-jmt-plate
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -879,9 +882,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-jmt-plate
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_5:
       effect_list:
@@ -1005,6 +1005,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-3
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -1018,9 +1021,6 @@
       - 0.411
       - 0.392
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-3
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_6:
       effect_list:
@@ -1144,6 +1144,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-belize-fish
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -1157,9 +1160,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-belize-fish
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_7:
       effect_list:
@@ -1283,6 +1283,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-4
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -1296,9 +1299,6 @@
       - 0.411
       - 0.392
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-4
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_8:
       effect_list:
@@ -1422,6 +1422,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-chilli-fish
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -1435,9 +1438,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-chilli-fish
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_9:
       effect_list:
@@ -1561,6 +1561,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-5
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -1574,9 +1577,6 @@
       - 0.411
       - 0.392
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-5
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_10:
       effect_list:
@@ -1700,6 +1700,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-aztec-fish
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
@@ -1713,9 +1716,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-aztec-fish
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_11:
       effect_list:
@@ -1839,6 +1839,9 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-6
+      supported_features: 36
       color_mode: rgb
       brightness: 255
       hs_color:
@@ -1852,9 +1855,6 @@
       - 0
       - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-6
-      supported_features: 36
       state: 'on'
     select.kitchen_leds_upper_playlist:
       options: []
@@ -3573,7 +3573,7 @@
   icon: mdi:led-strip-variant
   metadata: {}
 - id: '1658840593905'
-  name: Kitchen Mood Pathway Lighting
+  name: Kitchen Mood Spots 20% Warm White
   entities:
     light.kitchen_leds_upper_master:
       supported_color_modes:
@@ -5271,7 +5271,7 @@
   icon: mdi:led-strip-variant
   metadata: {}
 - id: '1658840677125'
-  name: Kitchen Mood 100% Bright White
+  name: Kitchen Mood  All Seg 100% Bright White
   entities:
     light.kitchen_leds_upper_master:
       supported_color_modes:
@@ -5404,22 +5404,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_1:
       effect_list:
@@ -5543,22 +5543,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
-      color_mode: rgb
-      brightness: 201
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      effect: Solid
       icon: mdi:led-strip-variant
       friendly_name: kitchen-leds-upper-unassigned-1
       supported_features: 36
+      color_mode: rgb
+      brightness: 201
+      hs_color:
+      - 40.421
+      - 37.255
+      rgb_color:
+      - 255
+      - 224
+      - 160
+      xy_color:
+      - 0.411
+      - 0.392
+      effect: Solid
       state: 'on'
     light.kitchen_leds_upper_segment_2:
       effect_list:
@@ -5682,22 +5682,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-morrocan-plate
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-morrocan-plate
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_3:
       effect_list:
@@ -5821,22 +5821,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
-      color_mode: rgb
-      brightness: 201
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      effect: Solid
       icon: mdi:led-strip-variant
       friendly_name: kitchen-leds-upper-unassigned-2
       supported_features: 36
+      color_mode: rgb
+      brightness: 201
+      hs_color:
+      - 40.421
+      - 37.255
+      rgb_color:
+      - 255
+      - 224
+      - 160
+      xy_color:
+      - 0.411
+      - 0.392
+      effect: Solid
       state: 'on'
     light.kitchen_leds_upper_segment_4:
       effect_list:
@@ -5960,22 +5960,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-jmt-plate
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-jmt-plate
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_5:
       effect_list:
@@ -6099,22 +6099,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
-      color_mode: rgb
-      brightness: 201
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      effect: Solid
       icon: mdi:led-strip-variant
       friendly_name: kitchen-leds-upper-unassigned-3
       supported_features: 36
+      color_mode: rgb
+      brightness: 201
+      hs_color:
+      - 40.421
+      - 37.255
+      rgb_color:
+      - 255
+      - 224
+      - 160
+      xy_color:
+      - 0.411
+      - 0.392
+      effect: Solid
       state: 'on'
     light.kitchen_leds_upper_segment_6:
       effect_list:
@@ -6238,22 +6238,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-belize-fish
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-belize-fish
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_7:
       effect_list:
@@ -6377,22 +6377,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
-      color_mode: rgb
-      brightness: 201
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      effect: Solid
       icon: mdi:led-strip-variant
       friendly_name: kitchen-leds-upper-unassigned-4
       supported_features: 36
+      color_mode: rgb
+      brightness: 201
+      hs_color:
+      - 40.421
+      - 37.255
+      rgb_color:
+      - 255
+      - 224
+      - 160
+      xy_color:
+      - 0.411
+      - 0.392
+      effect: Solid
       state: 'on'
     light.kitchen_leds_upper_segment_8:
       effect_list:
@@ -6516,22 +6516,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-chilli-fish
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-chilli-fish
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_9:
       effect_list:
@@ -6655,22 +6655,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
-      color_mode: rgb
-      brightness: 201
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      xy_color:
-      - 0.323
-      - 0.329
-      effect: Solid
       icon: mdi:led-strip-variant
       friendly_name: kitchen-leds-upper-unassigned-5
       supported_features: 36
+      color_mode: rgb
+      brightness: 201
+      hs_color:
+      - 40.421
+      - 37.255
+      rgb_color:
+      - 255
+      - 224
+      - 160
+      xy_color:
+      - 0.411
+      - 0.392
+      effect: Solid
       state: 'on'
     light.kitchen_leds_upper_segment_10:
       effect_list:
@@ -6794,22 +6794,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-aztec-fish
+      supported_features: 36
       color_mode: rgb
       brightness: 201
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-aztec-fish
-      supported_features: 36
       state: 'on'
     light.kitchen_leds_upper_segment_11:
       effect_list:
@@ -6933,22 +6933,22 @@
       - Wipe Random
       supported_color_modes:
       - rgb
+      icon: mdi:led-strip-variant
+      friendly_name: kitchen-leds-upper-unassigned-6
+      supported_features: 36
       color_mode: rgb
       brightness: 255
       hs_color:
       - 0
       - 0
       rgb_color:
-      - 255
-      - 255
-      - 255
+      - 0
+      - 0
+      - 0
       xy_color:
-      - 0.323
-      - 0.329
+      - 0
+      - 0
       effect: Solid
-      icon: mdi:led-strip-variant
-      friendly_name: kitchen-leds-upper-unassigned-6
-      supported_features: 36
       state: 'on'
     select.kitchen_leds_upper_playlist:
       options: []
@@ -6965,6 +6965,6 @@
       - Trash Night
       icon: mdi:playlist-play
       friendly_name: kitchen-leds-upper Preset
-      state: All Seg Bright Wht 100%
+      state: Spots Warm Wht 100%
   icon: mdi:led-strip-variant
   metadata: {}

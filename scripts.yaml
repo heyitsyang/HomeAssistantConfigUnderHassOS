@@ -376,7 +376,7 @@ scr_mood_lighting_on:
       entity_id: group.mood_lights
       state: "off"
     - service: scene.turn_on
-      entity_id: scene.sun_room_uplights_brightness
+      entity_id: scene.sun_room_uplights_20
     - service: homeassistant.turn_on
       entity_id: group.mood_lights
     - choose:
@@ -387,15 +387,15 @@ scr_mood_lighting_on:
                 - thu # night before trash day
           sequence:
             - service: scene.turn_on
-              entity_id: scene.trash_night_led_mood
+              entity_id: scene.kitchen_mood_trash_night
       default:
         - service: scene.turn_on
-          entity_id: scene.default_led_mood
+          entity_id: scene.kitchen_mood_spots_50_warm_white
 
 scr_reset_mood_lights_to_default:
   sequence:
     - service: scene.turn_on
-      entity_id: scene.default_led_mood
+      entity_id: scene.kitchen_mood_spots_50_warm_white
 
 #
 # MOTION LIGHTING - if luminosity is low and motion is detected
@@ -428,7 +428,7 @@ scr_pathway_motion_lighting_on:
       entity_id: binary_sensor.lum_mood_lights_f_solar_trig
       state: "on"
     - service: scene.turn_on
-      entity_id: scene.default_led_mood
+      entity_id: scene.kitchen_mood_spots_20_warm_white
     - service: homeassistant.turn_on
       entity_id: group.pathway_lights
 
