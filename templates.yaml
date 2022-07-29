@@ -98,7 +98,7 @@
       state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'max_value') }}"
 
 - sensor:
-    - name: suggested_brightness
+    - name: lv_rm_suggested_brightness
       #      friendly_name: "Suggested Brightness"
       unit_of_measurement: "%"
       state: >-
@@ -106,12 +106,12 @@
           0
         {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_0_threshold') | float(default=0)) ) and
               ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
-          30
+          10
         {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
               ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_high_threshold') | float(default=0)) ) ) %}
-          50
+          20
         {% elif ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_high_threshold') | float(default=0)) ) %}
-          100
+          30
         {% else %}
           99
         {% endif %}

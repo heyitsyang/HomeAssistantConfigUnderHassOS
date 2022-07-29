@@ -23,8 +23,6 @@ logs: # ignore events less than levels defined below
   homeassistant.components.locationsharinglib.Service: error
   homeassistant.components.device_tracker: error
   locationsharinglib.Service: error
-  homeassistant.components.light.kitchen_leds_rear: error
-  homeassistant.components.light.flux_led: error
   homeassistant.helpers.entity: error
   homeassistant.components.sensor: error
   homeassistant.components.binary_sensor: error
