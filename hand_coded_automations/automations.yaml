@@ -1928,7 +1928,7 @@
     - platform: template
       value_template: >-
         {{ is_state('light.island_lights', 'on') and is_state('light.cabinet_lights', 'on') and 
-        is_state('lights.kitchen_leds_upper', 'on') }}
+        is_state('light.kitchen_leds_lower', 'on') }}
   action:
     - service: scene.turn_on
       entity_id: scene.kitchen_mood_100_bright_white
@@ -1956,6 +1956,9 @@
       then:
         - service: scene.turn_on
           entity_id: scene.kitchen_mood_spots_50_warm_white
+      else:
+        - service: homeassistant.turn_off
+          entity_id: light.kitchen_leds_upper_master
 
 #################################
 #                               #
