@@ -240,8 +240,8 @@
       entity_id: group.mood_lights
       state: "on"
   action:
-    - service: scene.turn_on
-      entity_id: scene.default_led_mood
+    - service: scene.turn_on # set default before turning off
+      entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       entity_id: group.mood_lights
 
@@ -1223,8 +1223,8 @@
       entity_id: group.mood_lights
       state: "on"
   action:
-    - service: scene.turn_on
-      entity_id: scene.default_led_mood
+    - service: scene.turn_on # set the lights to the default before turning off
+      entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       entity_id: group.mood_lights
 
