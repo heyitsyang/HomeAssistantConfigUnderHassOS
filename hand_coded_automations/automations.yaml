@@ -419,7 +419,7 @@
       below: 1
   condition:
     - condition: state
-      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       state: "on"
   action:
     - service: light.turn_on
@@ -441,7 +441,7 @@
       entity_id: sensor.ys_desktop_system_idle_time
       above: 3600 # seconds
     - platform: state
-      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       to: "off"
   action:
     - service: light.turn_off
