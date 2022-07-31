@@ -240,8 +240,8 @@
       entity_id: group.mood_lights
       state: "on"
   action:
-    - service: scene.turn_on
-      entity_id: scene.default_led_mood
+    - service: scene.turn_on # set default before turning off
+      entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       entity_id: group.mood_lights
 
@@ -419,7 +419,7 @@
       below: 1
   condition:
     - condition: state
-      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       state: "on"
   action:
     - service: light.turn_on
@@ -441,7 +441,7 @@
       entity_id: sensor.ys_desktop_system_idle_time
       above: 3600 # seconds
     - platform: state
-      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       to: "off"
   action:
     - service: light.turn_off
@@ -1223,8 +1223,8 @@
       entity_id: group.mood_lights
       state: "on"
   action:
-    - service: scene.turn_on
-      entity_id: scene.default_led_mood
+    - service: scene.turn_on # set the lights to the default before turning off
+      entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       entity_id: group.mood_lights
 
