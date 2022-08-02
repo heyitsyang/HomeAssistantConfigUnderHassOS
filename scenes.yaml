@@ -6955,7 +6955,6 @@
       friendly_name: kitchen-leds-upper Preset
       state: All Seg Bright Wht 100%
   icon: mdi:led-strip-variant
-  metadata: {}
 - id: '1659055074226'
   name: Living Room 100%
   entities:
@@ -6968,7 +6967,6 @@
       color_mode: brightness
       brightness: 255
       state: 'on'
-  metadata:
     light.living_room_lights:
       entity_only: true
   icon: mdi:lightbulb
