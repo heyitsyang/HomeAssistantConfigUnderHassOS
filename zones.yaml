@@ -108,7 +108,7 @@
   radius: 112 # meters
   icon: mdi:hospital
 
-# TOWN SQUARES
+# TOWN SQUARES AND GATHERING PLACES
 #
 - name: Spanish Springs
   latitude: 28.940417
@@ -126,6 +126,12 @@
   latitude: 28.844604
   longitude: -82.022163
   radius: 350 # meters
+  icon: mdi:blank
+
+- name: Sawgrass Grove
+  latitude: 28.79027
+  longitude: -81.96881
+  radius: 111 # meters
   icon: mdi:blank
 
 #
@@ -386,6 +392,12 @@
   radius: 67 # meters
   icon: mdi:blank
 
+- name: First Responders VRC
+  latitude: 28.97571
+  longitude: -82.02577
+  radius: 96 # meters
+  icon: mdi:blank
+
 #
 # Country Club & Practice Centers (facilities only)
 #
@@ -522,3 +534,10 @@
   longitude: -81.966561
   radius: 200 # meters
   icon: mdi:blank
+
+- name: Magnolia Plaza
+  latitude: 28.80115
+  longitude: -82.00680
+  raduis: 165 # meters
+  icon: mdi:blank
+  
