@@ -390,6 +390,13 @@ indoor_lights:
     - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
 
+upper_office_cabinet_leds:
+  name: "Upper Office Cabinet Leds"
+  entities:
+    - light.office_cabinet_leds
+    - light.office_cabinet_leds_segment_1
+    - light.office_cabinet_leds_segment_2
+
 garage_opener_power:
   name: "Garage door power"
   entities:
