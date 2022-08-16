@@ -538,6 +538,6 @@
 - name: Magnolia Plaza
   latitude: 28.80115
   longitude: -82.00680
-  raduis: 165 # meters
+  radius: 165 # meters
   icon: mdi:blank
   
