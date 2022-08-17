@@ -391,7 +391,7 @@ indoor_lights:
     - light.kitchen_leds_lower
 
 upper_office_cabinet_leds:
-  name: "Upper Office Cabinet Leds"
+  name: "Upper Office Cabinet LEDs"
   entities:
     - light.office_cabinet_leds
     - light.office_cabinet_leds_segment_1

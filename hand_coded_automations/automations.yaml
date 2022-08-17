@@ -425,10 +425,10 @@
     - service: light.turn_on
       entity_id:
         - light.office_monitor_leds
-        - light.office_cabinet_leds_master
-        - light.office_cabinet_leds_segment_1
-        - light.office_cabinet_leds_segment_2
-        - light.office_cabinet_leds_segment_3
+    - service: select.select_option
+      entity_id: select.office_cabinet_leds_preset
+      data:
+        option: "Upper Blu-Org"
 
 - id: aut_office_mood_lights_auto_off
   alias: aut office mood lights auto off
