@@ -28,6 +28,9 @@ logs: # ignore events less than levels defined below
   homeassistant.components.binary_sensor: error
   #    homeassistant.components.automation: info                       # enable this to help debug
   homeassistant.core: info
+  # homeassistant.components.netgear: debug
+  # pynetgear: debug
+
 filters:
   homeassistant.components.neato.vacuum:
     - "Unable to communicate with robot"
