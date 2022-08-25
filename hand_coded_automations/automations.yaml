@@ -1049,7 +1049,7 @@
         entity_id: timer.timer_sm_garage_door
 
 #
-# FRONT & BACK PORCH ACTIVITY TRIGGERS
+# FRONT & BACK DOOR OPENING ACTIVITY TRIGGERS
 #
 - id: aut_front_door_opening
   alias: "aut front door opening"
@@ -1078,6 +1078,8 @@
 #
 - id: aut_frontporch_activity
   alias: "aut frontporch activity"
+  mode: single
+  max_exceeded: silent
   initial_state: true
   trigger:
     - platform: template
@@ -1091,9 +1093,6 @@
       value_template: >-
         {{ ( ( as_timestamp(now(), '') - (as_timestamp(state_attr('automation.aut_frontporch_activity', 
         'last_triggered'), '') | float(default=0)) ) | int(default=0) ) > 14 }}
-    - condition: state
-      entity_id: timer.timer_front_door_opened
-      state: "idle"
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_frontporch_activity
