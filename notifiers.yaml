@@ -51,21 +51,6 @@
   password: !secret gmail_pwd
   recipient: !secret gmail_to_ys_pushover_recipient
 
-- name: pushover_yang
-  platform: pushover
-  api_key: !secret ys_pushover_api_key
-  user_key: !secret ys_pushover_user_key
-
-- name: pushover_karen
-  platform: pushover
-  api_key: !secret kt_pushover_api_key
-  user_key: !secret kt_pushover_user_key
-
-- name: pushover_yangandkaren
-  platform: pushover
-  api_key: !secret ys_pushover_api_key
-  user_key: !secret yangandkaren_group_pushover_user_key
-
 # GROUP NOTIFICATIONS #
 # required for notifiers that pass data in Alerts #
 
