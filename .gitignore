@@ -41,3 +41,5 @@ blueprints/automation/homeassistant/motion_light.yaml
 blueprints/automation/homeassistant/notify_leaving_zone.yaml
 
 zigbee.db-journal
+zigbee.db-shm
+zigbee.db-wal
