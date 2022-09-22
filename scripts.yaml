@@ -115,10 +115,10 @@ scr_arrival_announcement:
       state: "on"
     - service: script.scr_say_phrase
       data:
-        message: "While you where away, there was visitor at the front door"
+        message: "While you where away, there was a visitor at the front door"
     - service: notify.alexa_yellow_ring
       data:
-        message: "While you where away, there was visitor at the front door"
+        message: "While you where away, there was a visitor at the front door"
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
