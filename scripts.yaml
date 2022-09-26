@@ -468,15 +468,15 @@ scr_frontporch_activity:
     - service: camera.snapshot
       data:
         entity_id: camera.doorbell_mediaprofile_channel1_mainstream
-        filename: "/config/www/camera_stills/doorbell.jpg"
+        filename: /config/www/camera_stills/doorbell.jpg
     - service: camera.snapshot
       data:
         entity_id: camera.frontporch_mainstream
-        filename: "/config/www/camera_stills/frontporch.jpg"
+        filename: /config/www/camera_stills/frontporch.jpg
     - service: camera.snapshot
       data:
-        entity_id: camera.driveway_mainprofile
-        filename: "/config/www/camera_stills/driveway.jpg"
+        entity_id: camera.driveway_mediaprofile_channel1_mainstream
+        filename: /config/www/camera_stills/driveway.jpg
     - condition: not # testing for not_home else doesn't work if in a known zone
       conditions:
         - condition: state
