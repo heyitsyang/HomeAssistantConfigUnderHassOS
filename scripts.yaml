@@ -491,11 +491,11 @@ scr_frontporch_activity:
     - service: notify.pushover_yangandkaren
       data:
         title: Front door activity
-        message: "All snapshots:  https://shencentral.duckdns.org/lovelace/still-images"
+        message: "All snapshots:  https://shencentral.duckdns.org:61615/lovelace/still-images"
         data:
           attachment: "/config/www/camera_stills/frontporch.jpg"
           url_title: "Click here for live view"
-          url: "https://shencentral.duckdns.org/lovelace/cameras"
+          url: "https://shencentral.duckdns.org:61615/lovelace/cameras"
 
 scr_front_door_lights_on:
   sequence:
