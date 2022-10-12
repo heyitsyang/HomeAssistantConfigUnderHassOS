@@ -471,7 +471,7 @@ scr_frontporch_activity:
         filename: /config/www/camera_stills/doorbell.jpg
     - service: camera.snapshot
       data:
-        entity_id: camera.frontporch_mainstream
+        entity_id: camera.frontporch_profile_000
         filename: /config/www/camera_stills/frontporch.jpg
     - service: camera.snapshot
       data:
