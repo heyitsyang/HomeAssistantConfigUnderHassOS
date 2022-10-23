@@ -115,10 +115,10 @@ scr_arrival_announcement:
       state: "on"
     - service: script.scr_say_phrase
       data:
-        message: "While you where away, there was visitor at the front door"
+        message: "While you where away, there was a visitor at the front door"
     - service: notify.alexa_yellow_ring
       data:
-        message: "While you where away, there was visitor at the front door"
+        message: "While you where away, there was a visitor at the front door"
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
@@ -468,15 +468,15 @@ scr_frontporch_activity:
     - service: camera.snapshot
       data:
         entity_id: camera.doorbell_mediaprofile_channel1_mainstream
-        filename: "/config/www/camera_stills/doorbell.jpg"
+        filename: /config/www/camera_stills/doorbell.jpg
     - service: camera.snapshot
       data:
-        entity_id: camera.frontporch_mainstream
-        filename: "/config/www/camera_stills/frontporch.jpg"
+        entity_id: camera.frontporch_profile_000
+        filename: /config/www/camera_stills/frontporch.jpg
     - service: camera.snapshot
       data:
-        entity_id: camera.driveway_mainprofile
-        filename: "/config/www/camera_stills/driveway.jpg"
+        entity_id: camera.driveway_mediaprofile_channel1_mainstream
+        filename: /config/www/camera_stills/driveway.jpg
     - condition: not # testing for not_home else doesn't work if in a known zone
       conditions:
         - condition: state
@@ -491,11 +491,11 @@ scr_frontporch_activity:
     - service: notify.pushover_yangandkaren
       data:
         title: Front door activity
-        message: "All snapshots:  https://shencentral.duckdns.org/lovelace/still-images"
+        message: "All snapshots:  https://shencentral.duckdns.org:61615/lovelace/still-images"
         data:
           attachment: "/config/www/camera_stills/frontporch.jpg"
           url_title: "Click here for live view"
-          url: "https://shencentral.duckdns.org/lovelace/cameras"
+          url: "https://shencentral.duckdns.org:61615/lovelace/cameras"
 
 scr_front_door_lights_on:
   sequence:

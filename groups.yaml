@@ -36,16 +36,16 @@ security:
     - group.window_sensors
     - group.garage_door_status
 
-cameras:
-  name: "Cameras"
-  icon: mdi:video
-  entities:
-    - camera.greatroom_camera
-    - camera.frontporch_camera
-    - camera.doorbell_camera
-    - camera.driveway_camera
-    - camera.garage_camera
-    - camera.sunroom_camera
+#cameras:
+#  name: "Cameras"
+#  icon: mdi:video
+#  entities:
+#    - camera.greatroom_camera
+#    - camera.frontporch_camera
+#    - camera.doorbell_camera
+#    - camera.driveway_camera
+#    - camera.garage_camera
+#    - camera.sunroom_camera
 
 controls:
   name: "Lights-Fans-Shades"

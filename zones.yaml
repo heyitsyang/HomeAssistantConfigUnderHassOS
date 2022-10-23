@@ -46,21 +46,21 @@
 # PERSONAL MISC
 #
 - name: home
-  latitude: !secret latitude
-  longitude: !secret longitude
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
   radius: 60 # in meters
   icon: mdi:home
-
-#- name: near_home
-#  latitude: !secret latitude
-#  longitude: !secret longitude
-#  radius: 100 # in meters
-#  icon: mdi:blank
 
 - name: Church@Springs - Villages
   latitude: 28.939792
   longitude: -81.927593
   radius: 61 # meters
+  icon: mdi:church
+
+- name: First Baptist - Village Park
+  latitude: 28.857509
+  longitude: -81.934602
+  radius: 152 # meters
   icon: mdi:church
 
 #- name: Collier Evans Prairie Trail Gate
@@ -540,4 +540,3 @@
   longitude: -82.00680
   radius: 165 # meters
   icon: mdi:blank
-  

@@ -117,9 +117,6 @@
     - type: "memory_free"
     - type: "processor_use"
 
-- platform: uptime
-  name: "Uptime"
-
 #- platform: cert_expiry                               # now configured using GUI
 #  host: "shencentral.duckdns.org"
 

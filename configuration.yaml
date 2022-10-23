@@ -34,9 +34,9 @@ frontend: # Enables the frontend
   themes: !include_dir_merge_named themes # themes go in the themes directory
 
 # NEATO VACUUM
-neato:
-  client_id: !secret neato_client_id
-  client_secret: !secret neato_client_secret
+#neato:
+#  client_id: !secret neato_client_id
+#  client_secret: !secret neato_client_secret
 
 # GOOGLE CALENDAR
 #google:              # now added via UI
