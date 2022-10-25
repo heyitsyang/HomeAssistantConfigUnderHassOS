@@ -4,7 +4,7 @@
 
 # Enables support for tracking state changes over time.
 # This stores all data in home-assistant.db indicated under the recorder settings
-# The database can get very large even without enabling history. 
+# The database can get very large even without enabling history.
 
 include:
   domains:
@@ -26,7 +26,7 @@ include:
 exclude:
   domains:
     - group
-  entities:   
+  entities:
     - device_tracker.ys_cell_on_router
     - device_tracker.ys_cell_on_router_2
     - device_tracker.kt_cell_on_router
@@ -42,17 +42,6 @@ exclude:
     - sensor.esp01_atod_input
     - binary_sensor.esp01_pushbutton_s2
     - binary_sensor.esp01_pushbutton_s3
-    - camera.radar
-    - sensor.dark_sky_daily_high_apparent_temperature
-    - sensor.dark_sky_daily_high_temperatue
-    - sensor.dark_sky_daily_low_apparent_temperature
-    - sensor.dark_sky_daily_low_temperature
-    - sensor.dark_sky_daily_max_precip_intensity
-    - sensor.dark_sky_daily_summary
-    - sensor.dark_sky_hourly_summary
-    - sensor.dark_sky_icon
-    - sensor.dark_sky_minutely_summary
-    - sensor.dark_sky_summary
     - sensor.date
     - sensor.time
     - sensor.date_time
