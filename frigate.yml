@@ -1,0 +1,24 @@
+mqtt:
+  host: haha.shencentral.net
+  port: 1883
+  topic_prefix: frigate
+  client_id: frigate
+  user: !secret frigate_user
+  password: !secret frigate_pwd
+detectors:
+  coral:
+    type: edgetpu
+    device: pci
+ffmpeg:
+  hwaccel_args: -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format yuv420p
+cameras:
+  greatroom:
+    ffmpeg:
+      inputs:
+        - path: !secret video_greatroom_rtsp
+          roles:
+            - detect
+            - rtmp
+    detect:
+      width: 1280
+      height: 960
