@@ -410,6 +410,8 @@
 - id: aut_office_mood_lights_auto_on
   alias: aut office mood lights auto on
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: state
       entity_id: binary_sensor.ys_desktop_lwt

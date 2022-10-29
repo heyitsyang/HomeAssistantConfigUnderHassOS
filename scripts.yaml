@@ -11,10 +11,6 @@
 scr_ha_startup:
   sequence:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
-    - service: mqtt.publish
-      data:
-        topic: "tasmotas/cmnd/state"
-        payload: ""
     - service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
       data:
@@ -467,15 +463,15 @@ scr_frontporch_activity:
           message: "You have a visitor at the front door"
     - service: camera.snapshot
       data:
-        entity_id: camera.doorbell_mediaprofile_channel1_mainstream
+        entity_id: camera.doorbell
         filename: /config/www/camera_stills/doorbell.jpg
     - service: camera.snapshot
       data:
-        entity_id: camera.frontporch_profile_000
+        entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
     - service: camera.snapshot
       data:
-        entity_id: camera.driveway_mediaprofile_channel1_mainstream
+        entity_id: camera.driveway
         filename: /config/www/camera_stills/driveway.jpg
     - condition: not # testing for not_home else doesn't work if in a known zone
       conditions:

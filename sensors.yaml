@@ -128,49 +128,7 @@
 # OUTDOOR WEATHER & ENVIRONMENTAL SENSORS
 #
 
-# Ambient Weather is set up in configuration.yaml
-
-# Darksky - formerly Forecast.io
-- platform: darksky
-  api_key: !secret darksky_key
-  scan_interval: "00:10"
-  #  forecast:
-  #    - 0
-  #    - 1
-  #    - 2
-  #    - 3
-  #    - 4
-  #    - 5
-  #    - 6
-  #  hourly_forecast:
-  #    - 7
-  #    - 10
-  #    - 14
-  #    - 17
-  #    - 20
-  #    - 22
-  #    - 31
-  #    - 34
-  #    - 38
-  monitored_conditions:
-    - summary
-    - icon
-    #    - precip_intensity
-    - precip_probability
-    - temperature
-    #    - apparent_temperature
-    #    - dew_point
-    #    - wind_speed
-    #    - wind_bearing
-    - cloud_cover
-    - humidity
-    #    - pressure
-    - uv_index
-    #    - visibility
-    #    - ozone
-    - minutely_summary
-    - hourly_summary
-    - daily_summary
+# Ambient Weather and OpenWeatherMap is set up in configuration.yaml
 
 #
 # INFLUXDB SENSORS
@@ -191,4 +149,3 @@
       database: _internal
       where: "time > now() - 10s"
       field: diskBytes
-
