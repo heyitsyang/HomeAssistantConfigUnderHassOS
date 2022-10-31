@@ -426,6 +426,7 @@
   action:
     - service: light.turn_on
       entity_id:
+        - light.office_monitor_leds_master
         - light.office_monitor_leds
     - service: select.select_option
       entity_id: select.office_cabinet_leds_preset
@@ -449,6 +450,7 @@
     - service: light.turn_off
       entity_id:
         - light.office_monitor_leds
+        - light.office_monitor_leds_master
         - light.office_cabinet_leds_master
 
 #
@@ -1948,7 +1950,9 @@
       entity_id: light.cabinet_lights
       to: "off"
     - platform: state
-      entity_id: light.kitchen_leds_lower
+      entity_id:
+        - light.kitchen_leds_lower
+        - light.kitchen_leds_lower_master
       to: "off"
   action:
     - if:

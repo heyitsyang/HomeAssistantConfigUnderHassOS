@@ -62,11 +62,12 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
           state: "off"
       then:
         - service: light.turn_off
-          entity_id: light.office_lights
-        - service: light.turn_off
-          entity_id: light.office_cabinet_leds_master
-        - service: light.turn_off
-          entity_id: light.guest_room_lights
+          entity_id:
+            - light.office_lights
+            - light.office_cabinet_leds_master
+            - light.office_monitor_leds
+            - light.office_monitor_leds_master
+            - light.guest_room_lights
 
 #
 # NOBODY HOME
