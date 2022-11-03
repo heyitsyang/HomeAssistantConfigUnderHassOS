@@ -18,6 +18,7 @@ www
 examples
 image
 NOTES
+zigbee2mqtt
 
 # Ignore files
 home-assistant_v2.db-shm
