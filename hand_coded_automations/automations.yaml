@@ -996,7 +996,6 @@
   trigger:
     - platform: state
       entity_id: cover.large_garage_door
-      from: "closed"
       to: "open"
   action:
     - service: script.scr_say_phrase
@@ -1014,7 +1013,6 @@
   trigger:
     - platform: state
       entity_id: cover.small_garage_door
-      from: "closed"
       to: "open"
   action:
     - service: script.scr_say_phrase
@@ -1032,7 +1030,6 @@
   trigger:
     - platform: state
       entity_id: cover.large_garage_door
-      from: "open"
       to: "closed"
   action:
     - service: timer.cancel
@@ -1045,7 +1042,6 @@
   trigger:
     - platform: state
       entity_id: cover.small_garage_door
-      from: "open"
       to: "closed"
   action:
     - service: timer.cancel
