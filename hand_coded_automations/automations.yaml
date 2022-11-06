@@ -1544,7 +1544,7 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.living_area_motion_battery
+      entity_id: sensor.living_area_motion_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
@@ -1608,19 +1608,19 @@
       below: 20
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_1_battery
+      entity_id: sensor.sun_room_remote_1_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_2_battery
+      entity_id: sensor.sun_room_remote_2_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_3_battery
+      entity_id: sensor.sun_room_remote_3_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_4_battery
+      entity_id: sensor.sun_room_remote_4_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
   action:

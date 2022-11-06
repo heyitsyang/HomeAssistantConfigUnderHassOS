@@ -286,7 +286,7 @@ all_lighting: # This group created for frontend UI use
     - light.living_room_lights
     - light.track_lights
     - light.island_lights
-    - light.cabinet_lights
+    - light.kitchen_cabinet_lights
     - light.eating_area_lights
     - light.sun_room_lights
     - light.sun_room_uplights
@@ -298,7 +298,6 @@ all_lighting: # This group created for frontend UI use
     - light.guest_room_lights
     - switch.front_door_lights
     - switch.back_door_lights
-    - switch.above_cabinet_lights
     - switch.candles
     - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
@@ -310,7 +309,7 @@ all_lighting_xabove_cabinet:
     - light.living_room_lights
     - light.track_lights
     - light.island_lights
-    - light.cabinet_lights
+    - light.kitchen_cabinet_lights
     - light.eating_area_lights
     - light.sun_room_lights
     - light.sun_room_uplights
@@ -323,7 +322,6 @@ all_lighting_xabove_cabinet:
     - switch.front_door_lights
     - switch.back_door_lights
     - switch.candles
-    - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
     - switch.entryway_lights
 
@@ -333,7 +331,7 @@ great_room_lights:
     - light.living_room_lights
     - light.track_lights
     - light.island_lights
-    - light.cabinet_lights
+    - light.kitchen_cabinet_lights
 
 living_area_lights:
   name: "Living Area Lights"
@@ -345,25 +343,25 @@ kitchen_lights:
   name: "Kitchen Lights"
   entities:
     - light.island_lights
-    - light.cabinet_lights
+    - light.kitchen_cabinet_lights
     - light.kitchen_leds_lower
     - light.kitchen_leds_upper_master
 
 ceiling_fans:
   name: "Ceiling Fans"
   entities:
-    - light.living_room_fan
-    - light.master_bedroom_fan
-    - light.office_fan
-    - light.guest_room_fan
-    - light.sun_room_fan_1
-    - light.sun_room_fan_2
+    - fan.living_room_fan
+    - fan.master_bedroom_fan
+    - fan.office_fan
+    - fan.guest_room_fan
+    - fan.sun_room_fan_1
+    - fan.sun_room_fan_2
 
 sunroom_fans:
   name: "Sunroom Fans"
   entities:
-    - light.sun_room_fan_1
-    - light.sun_room_fan_2
+    - fan.sun_room_fan_1
+    - fan.sun_room_fan_2
 
 outdoor_lights:
   name: "Outdoor Lights"
@@ -374,7 +372,7 @@ outdoor_lights:
 indoor_lights:
   name: "Indoor Lights"
   entities:
-    - light.cabinet_lights
+    - light.kitchen_cabinet_lights
     - light.eating_area_lights
     - light.guest_room_lights
     - light.island_lights

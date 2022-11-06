@@ -7,22 +7,22 @@ light.front_door_lights:
 light.back_door_lights:
   friendly_name: Back Door Lights
   icon: mdi:lightbulb
-light.master_bedroom_fan:
+fan.master_bedroom_fan:
   friendly_name: Master Bedroom Fan
   icon: mdi:fan
-light.office_fan:
+fan.office_fan:
   friendly_name: Office Fan
   icon: mdi:fan
-light.guest_room_fan:
+fan.guest_room_fan:
   friendly_name: Guest Room Fan
   icon: mdi:fan
-light.sun_room_fan_1:
+fan.sun_room_fan_1:
   friendly_name: Sun Room Fan 1
   icon: mdi:fan
-light.sun_room_fan_2:
+fan.sun_room_fan_2:
   friendly_name: Sun Room Fan 2
   icon: mdi:fan
-light.living_room_fan:
+fan.living_room_fan:
   friendly_name: Living Room Fan
   icon: mdi:fan
 switch.candles:
@@ -250,7 +250,7 @@ sensor.front_door_lock_battery:
 sensor.back_door_lock_battery:
   icon: mdi:battery-unknown
   device_class: battery
-sensor.living_room_motion_sensor_battery:
+sensor.living_room_motion_battery_level:
   icon: mdi:battery-unknown
   device_class: battery
 sensor.sunrm_window_1_opened_battery:
@@ -274,16 +274,16 @@ sensor.back_door_opened_battery:
 sensor.garagehouse_door_opened_battery:
   icon: mdi:battery-unknown
   device_class: battery
-sensor.sun_room_remote_1_battery:
+sensor.sun_room_remote_1_battery_level:
   icon: mdi:battery-unknown
   device_class: battery
-sensor.sun_room_remote_2_battery:
+sensor.sun_room_remote_2_battery_level:
   icon: mdi:battery-unknown
   device_class: battery
-sensor.sun_room_remote_3_battery:
+sensor.sun_room_remote_3_battery_level:
   icon: mdi:battery-unknown
   device_class: battery
-sensor.sun_room_remote_4_battery:
+sensor.sun_room_remote_4_battery_level:
   icon: mdi:battery-unknown
   device_class: battery
 sensor.junior_temperature:

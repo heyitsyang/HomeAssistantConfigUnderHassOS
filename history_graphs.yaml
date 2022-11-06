@@ -89,7 +89,6 @@ gr9:
   entities:
     - switch.lg_garage_opener_power
     - switch.sm_garage_opener_power
-    - switch.above_cabinet_lights
     - switch.candles
 
 gr10:
@@ -99,7 +98,7 @@ gr10:
   entities:
     - switch.front_door_lights
     - switch.back_door_lights
-    - light.cabinet_lights
+    - light.kitchen_cabinet_lights
     - light.eating_area_lights
     - light.guest_room_lights
     - light.island_lights
@@ -108,9 +107,9 @@ gr10:
     - light.office_lights
     - light.sun_room_lights
     - light.track_lights
-    - light.guest_room_fan
-    - light.sun_room_fan_1
-    - light.sun_room_fan_2
-    - light.living_room_fan
-    - light.master_bedroom_fan
-    - light.office_fan
+    - fan.guest_room_fan
+    - fan.sun_room_fan_1
+    - fan.sun_room_fan_2
+    - fan.living_room_fan
+    - fan.master_bedroom_fan
+    - fan.office_fan
