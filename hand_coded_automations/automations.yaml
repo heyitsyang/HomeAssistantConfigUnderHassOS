@@ -1934,7 +1934,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ is_state('light.island_lights', 'on') and is_state('light.cabinet_lights', 'on') and 
+        {{ is_state('light.island_lights', 'on') and is_state('light.kitchen_cabinet_lights', 'on') and 
         is_state('light.kitchen_leds_lower', 'on') }}
   action:
     - service: scene.turn_on
@@ -1951,7 +1951,7 @@
       entity_id: light.island_lights
       to: "off"
     - platform: state
-      entity_id: light.cabinet_lights
+      entity_id: light.kitchen_cabinet_lights
       to: "off"
     - platform: state
       entity_id:
