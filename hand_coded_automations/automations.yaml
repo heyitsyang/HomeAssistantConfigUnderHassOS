@@ -1056,7 +1056,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.front_door_opened
+      entity_id: binary_sensor.front_door_window_door_is_open
       from: "off"
       to: "on"
   action:
@@ -1067,7 +1067,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.back_door_opened
+      entity_id: binary_sensor.back_door_window_door_is_open
       from: "off"
       to: "on"
   action:
@@ -1282,7 +1282,7 @@
     - platform: template # calculate time since last door open activity  & check expiration
       value_template: >
         {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
-        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_window_door_is_open', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
         (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) }}
     - platform: state # cover case where unlocked, but door never opened
       entity_id: lock.front_door_lock
@@ -1296,7 +1296,7 @@
       for: # This check prevents immediate notification from 1st trigger
         minutes: 2 #   when last activity > delay time at boot
     - condition: state
-      entity_id: binary_sensor.front_door_opened
+      entity_id: binary_sensor.front_door_window_door_is_open
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
@@ -1313,7 +1313,7 @@
     - platform: template # calculate time since last activity & check expiration
       value_template: >
         {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
-        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_window_door_is_open', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
         (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int(default=0)) }}
     - platform: state
       entity_id: lock.back_door_lock
@@ -1327,7 +1327,7 @@
       for:
         minutes: 2 # this check prevents immediate notification on reboot from 1st trigger
     - condition: state
-      entity_id: binary_sensor.back_door_opened
+      entity_id: binary_sensor.back_door_window_door_is_open
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
