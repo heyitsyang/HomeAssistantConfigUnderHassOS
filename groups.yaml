@@ -212,17 +212,19 @@ locks:
 window_sensors:
   name: "Window Sensors"
   entities:
-    - binary_sensor.sunrm_window_1_opened
-    - binary_sensor.sunrm_window_2_opened
-    - binary_sensor.sunrm_window_3_opened
-    - binary_sensor.sunrm_window_4_opened
+    - binary_sensor.sun_room_window_1_window_door_is_open
+    - binary_sensor.sun_room_window_2_window_door_is_open
+    - binary_sensor.sun_room_window_3_window_door_is_open
+    - binary_sensor.sun_room_window_4_window_door_is_open
+    - binary_sensor.sun_room_window_5_window_door_is_open
+    - binary_sensor.sun_room_window_6_window_door_is_open
 
 door_sensors:
   name: "Door Sensors"
   entities:
-    - binary_sensor.front_door_opened
-    - binary_sensor.back_door_opened
-    - binary_sensor.garagehouse_door_opened
+    - binary_sensor.front_door_window_door_is_open
+    - binary_sensor.back_door_window_door_is_open
+    - binary_sensor.garagehouse_door_window_door_is_open
 
 garage_door_status:
   name: "Garage Door Status"

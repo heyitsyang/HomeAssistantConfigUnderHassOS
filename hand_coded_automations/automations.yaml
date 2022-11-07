@@ -1548,31 +1548,39 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_1_opened_battery
+      entity_id: sensor.sun_room_window_1_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_2_opened_battery
+      entity_id: sensor.sun_room_window_2_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_3_opened_battery
+      entity_id: sensor.sun_room_window_3_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_4_opened_battery
+      entity_id: sensor.sun_room_window_4_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.front_door_opened_battery
+      entity_id: sensor.sun_room_window_5_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.back_door_opened_battery
+      entity_id: sensor.sun_room_window_6_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.garagehouse_door_opened_battery
+      entity_id: sensor.front_door_battery_level
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.back_door_battery_level
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.garagehouse_door_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state

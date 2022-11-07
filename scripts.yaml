@@ -176,16 +176,22 @@ scr_check_sunrm_windows:
     - condition: or
       conditions:
         - condition: state
-          entity_id: binary_sensor.sunrm_window_1_opened
+          entity_id: binary_sensor.sun_room_window_1_window_door_is_open
           state: "on"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_2_opened
+          entity_id: binary_sensor.sun_room_window_2_window_door_is_open
           state: "on"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_3_opened
+          entity_id: binary_sensor.sun_room_window_3_window_door_is_open
           state: "on"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_4_opened
+          entity_id: binary_sensor.sun_room_window_4_window_door_is_open
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.sun_room_window_5_window_door_is_open
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "on"
     - service: script.scr_say_phrase
       data:
@@ -205,16 +211,22 @@ scr_close_sunrm_shades:
           entity_id: input_boolean.inp_bool_inhibit_shades
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_1_opened
+          entity_id: binary_sensor.sun_room_window_1_window_door_is_open
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_2_opened
+          entity_id: binary_sensor.sun_room_window_2_window_door_is_open
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_3_opened
+          entity_id: binary_sensor.sun_room_window_3_window_door_is_open
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_4_opened
+          entity_id: binary_sensor.sun_room_window_4_window_door_is_open
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sun_room_window_5_window_door_is_open
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "off"
     - service: cover.close_cover
       entity_id: cover.sun_room_shades
@@ -230,16 +242,22 @@ scr_partial_close_sunrm_shades:
           entity_id: input_boolean.inp_bool_inhibit_shades
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_1_opened
+          entity_id: binary_sensor.sun_room_window_1_window_door_is_open
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_2_opened
+          entity_id: binary_sensor.sun_room_window_2_window_door_is_open
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_3_opened
+          entity_id: binary_sensor.sun_room_window_3_window_door_is_open
           state: "off"
         - condition: state
-          entity_id: binary_sensor.sunrm_window_4_opened
+          entity_id: binary_sensor.sun_room_window_4_window_door_is_open
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sun_room_window_5_window_door_is_open
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "off"
     - service: cover.set_cover_position
       data:
