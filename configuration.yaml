@@ -15,6 +15,7 @@ homeassistant:
   customize: !include customize.yaml # customize, customize_domain, & customize_glob
   customize_domain: !include customize_domain.yaml # must be under the homeassistant: section
   customize_glob: !include customize_glob.yaml # or it will not work
+  packages: !include_dir_named packages
 
 http:
   # server_port: 61615                                 #  default port 8123 is used for local network unencrypted http

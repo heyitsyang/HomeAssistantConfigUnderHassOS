@@ -1,0 +1,315 @@
+  - title: 'back_door Codes and Configuration'
+    path: keypad-back_door
+    icon: 'mdi:lock-smart'
+    panel: false
+    badges:
+      - input_text.back_door_lockname
+      - input_text.back_door_front_door_parent
+      - input_boolean.back_door_lock_notifications
+      - input_boolean.back_door_dooraccess_notifications
+      - input_boolean.back_door_garageacess_notifications
+      - entity: >-
+          lock.back_door_lock
+      - entity: >-
+          binary_sensor.back_door_window_door_is_open
+      - entity: input_text.keymaster_back_door_autolock_door_time_day
+      - entity: input_text.keymaster_back_door_autolock_door_time_night
+      - entity: input_boolean.keymaster_back_door_autolock
+      - entity: timer.keymaster_back_door_autolock
+    cards:
+      - type: vertical-stack
+        cards:
+          - content: |
+              ## Code 1
+            type: markdown
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: input_text.back_door_name_1
+              - entity: input_text.back_door_pin_1
+              - entity: input_boolean.enabled_back_door_1
+              - entity: input_boolean.notify_back_door_1
+              - type: divider
+              - entity: input_boolean.override_parent_back_door_1
+              - type: divider
+              - entity: sensor.connected_back_door_1
+                state_color: true
+              - entity: binary_sensor.active_back_door_1
+                state_color: true
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Advanced Options
+                entities:
+                  - entity: input_boolean.reset_codeslot_back_door_1
+                  - type: divider
+                  - entity: input_boolean.accesslimit_back_door_1
+                  - entity: input_number.accesscount_back_door_1
+                    type: 'custom:numberbox-card'
+                    icon: 'mdi:key-variant'
+                    speed: 250
+                  - type: divider
+                  - entity: input_boolean.daterange_back_door_1
+                  - entity: input_datetime.start_date_back_door_1
+                  - entity: input_datetime.end_date_back_door_1
+                  - type: 'custom:fold-entity-row'
+                    head:
+                      type: section
+                      label: Custom Weekdays
+                    entities:
+                      - input_boolean.sun_back_door_1
+                      - input_boolean.sun_inc_back_door_1
+                      - input_datetime.sun_start_date_back_door_1
+                      - input_datetime.sun_end_date_back_door_1
+                      - type: divider
+                      - input_boolean.mon_back_door_1
+                      - input_boolean.mon_inc_back_door_1
+                      - input_datetime.mon_start_date_back_door_1
+                      - input_datetime.mon_end_date_back_door_1
+                      - type: divider
+                      - input_boolean.tue_back_door_1
+                      - input_boolean.tue_inc_back_door_1
+                      - input_datetime.tue_start_date_back_door_1
+                      - input_datetime.tue_end_date_back_door_1
+                      - type: divider
+                      - input_boolean.wed_back_door_1
+                      - input_boolean.wed_inc_back_door_1
+                      - input_datetime.wed_start_date_back_door_1
+                      - input_datetime.wed_end_date_back_door_1
+                      - type: divider
+                      - input_boolean.thu_back_door_1
+                      - input_boolean.thu_inc_back_door_1
+                      - input_datetime.thu_start_date_back_door_1
+                      - input_datetime.thu_end_date_back_door_1
+                      - type: divider
+                      - input_boolean.fri_back_door_1
+                      - input_boolean.fri_inc_back_door_1
+                      - input_datetime.fri_start_date_back_door_1
+                      - input_datetime.fri_end_date_back_door_1
+                      - type: divider
+                      - input_boolean.sat_back_door_1
+                      - input_boolean.sat_inc_back_door_1
+                      - input_datetime.sat_start_date_back_door_1
+                      - input_datetime.sat_end_date_back_door_1
+      - type: vertical-stack
+        cards:
+          - content: |
+              ## Code 2
+            type: markdown
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: input_text.back_door_name_2
+              - entity: input_text.back_door_pin_2
+              - entity: input_boolean.enabled_back_door_2
+              - entity: input_boolean.notify_back_door_2
+              - type: divider
+              - entity: input_boolean.override_parent_back_door_2
+              - type: divider
+              - entity: sensor.connected_back_door_2
+                state_color: true
+              - entity: binary_sensor.active_back_door_2
+                state_color: true
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Advanced Options
+                entities:
+                  - entity: input_boolean.reset_codeslot_back_door_2
+                  - type: divider
+                  - entity: input_boolean.accesslimit_back_door_2
+                  - entity: input_number.accesscount_back_door_2
+                    type: 'custom:numberbox-card'
+                    icon: 'mdi:key-variant'
+                    speed: 250
+                  - type: divider
+                  - entity: input_boolean.daterange_back_door_2
+                  - entity: input_datetime.start_date_back_door_2
+                  - entity: input_datetime.end_date_back_door_2
+                  - type: 'custom:fold-entity-row'
+                    head:
+                      type: section
+                      label: Custom Weekdays
+                    entities:
+                      - input_boolean.sun_back_door_2
+                      - input_boolean.sun_inc_back_door_2
+                      - input_datetime.sun_start_date_back_door_2
+                      - input_datetime.sun_end_date_back_door_2
+                      - type: divider
+                      - input_boolean.mon_back_door_2
+                      - input_boolean.mon_inc_back_door_2
+                      - input_datetime.mon_start_date_back_door_2
+                      - input_datetime.mon_end_date_back_door_2
+                      - type: divider
+                      - input_boolean.tue_back_door_2
+                      - input_boolean.tue_inc_back_door_2
+                      - input_datetime.tue_start_date_back_door_2
+                      - input_datetime.tue_end_date_back_door_2
+                      - type: divider
+                      - input_boolean.wed_back_door_2
+                      - input_boolean.wed_inc_back_door_2
+                      - input_datetime.wed_start_date_back_door_2
+                      - input_datetime.wed_end_date_back_door_2
+                      - type: divider
+                      - input_boolean.thu_back_door_2
+                      - input_boolean.thu_inc_back_door_2
+                      - input_datetime.thu_start_date_back_door_2
+                      - input_datetime.thu_end_date_back_door_2
+                      - type: divider
+                      - input_boolean.fri_back_door_2
+                      - input_boolean.fri_inc_back_door_2
+                      - input_datetime.fri_start_date_back_door_2
+                      - input_datetime.fri_end_date_back_door_2
+                      - type: divider
+                      - input_boolean.sat_back_door_2
+                      - input_boolean.sat_inc_back_door_2
+                      - input_datetime.sat_start_date_back_door_2
+                      - input_datetime.sat_end_date_back_door_2
+      - type: vertical-stack
+        cards:
+          - content: |
+              ## Code 3
+            type: markdown
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: input_text.back_door_name_3
+              - entity: input_text.back_door_pin_3
+              - entity: input_boolean.enabled_back_door_3
+              - entity: input_boolean.notify_back_door_3
+              - type: divider
+              - entity: input_boolean.override_parent_back_door_3
+              - type: divider
+              - entity: sensor.connected_back_door_3
+                state_color: true
+              - entity: binary_sensor.active_back_door_3
+                state_color: true
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Advanced Options
+                entities:
+                  - entity: input_boolean.reset_codeslot_back_door_3
+                  - type: divider
+                  - entity: input_boolean.accesslimit_back_door_3
+                  - entity: input_number.accesscount_back_door_3
+                    type: 'custom:numberbox-card'
+                    icon: 'mdi:key-variant'
+                    speed: 250
+                  - type: divider
+                  - entity: input_boolean.daterange_back_door_3
+                  - entity: input_datetime.start_date_back_door_3
+                  - entity: input_datetime.end_date_back_door_3
+                  - type: 'custom:fold-entity-row'
+                    head:
+                      type: section
+                      label: Custom Weekdays
+                    entities:
+                      - input_boolean.sun_back_door_3
+                      - input_boolean.sun_inc_back_door_3
+                      - input_datetime.sun_start_date_back_door_3
+                      - input_datetime.sun_end_date_back_door_3
+                      - type: divider
+                      - input_boolean.mon_back_door_3
+                      - input_boolean.mon_inc_back_door_3
+                      - input_datetime.mon_start_date_back_door_3
+                      - input_datetime.mon_end_date_back_door_3
+                      - type: divider
+                      - input_boolean.tue_back_door_3
+                      - input_boolean.tue_inc_back_door_3
+                      - input_datetime.tue_start_date_back_door_3
+                      - input_datetime.tue_end_date_back_door_3
+                      - type: divider
+                      - input_boolean.wed_back_door_3
+                      - input_boolean.wed_inc_back_door_3
+                      - input_datetime.wed_start_date_back_door_3
+                      - input_datetime.wed_end_date_back_door_3
+                      - type: divider
+                      - input_boolean.thu_back_door_3
+                      - input_boolean.thu_inc_back_door_3
+                      - input_datetime.thu_start_date_back_door_3
+                      - input_datetime.thu_end_date_back_door_3
+                      - type: divider
+                      - input_boolean.fri_back_door_3
+                      - input_boolean.fri_inc_back_door_3
+                      - input_datetime.fri_start_date_back_door_3
+                      - input_datetime.fri_end_date_back_door_3
+                      - type: divider
+                      - input_boolean.sat_back_door_3
+                      - input_boolean.sat_inc_back_door_3
+                      - input_datetime.sat_start_date_back_door_3
+                      - input_datetime.sat_end_date_back_door_3
+      - type: vertical-stack
+        cards:
+          - content: |
+              ## Code 4
+            type: markdown
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: input_text.back_door_name_4
+              - entity: input_text.back_door_pin_4
+              - entity: input_boolean.enabled_back_door_4
+              - entity: input_boolean.notify_back_door_4
+              - type: divider
+              - entity: input_boolean.override_parent_back_door_4
+              - type: divider
+              - entity: sensor.connected_back_door_4
+                state_color: true
+              - entity: binary_sensor.active_back_door_4
+                state_color: true
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Advanced Options
+                entities:
+                  - entity: input_boolean.reset_codeslot_back_door_4
+                  - type: divider
+                  - entity: input_boolean.accesslimit_back_door_4
+                  - entity: input_number.accesscount_back_door_4
+                    type: 'custom:numberbox-card'
+                    icon: 'mdi:key-variant'
+                    speed: 250
+                  - type: divider
+                  - entity: input_boolean.daterange_back_door_4
+                  - entity: input_datetime.start_date_back_door_4
+                  - entity: input_datetime.end_date_back_door_4
+                  - type: 'custom:fold-entity-row'
+                    head:
+                      type: section
+                      label: Custom Weekdays
+                    entities:
+                      - input_boolean.sun_back_door_4
+                      - input_boolean.sun_inc_back_door_4
+                      - input_datetime.sun_start_date_back_door_4
+                      - input_datetime.sun_end_date_back_door_4
+                      - type: divider
+                      - input_boolean.mon_back_door_4
+                      - input_boolean.mon_inc_back_door_4
+                      - input_datetime.mon_start_date_back_door_4
+                      - input_datetime.mon_end_date_back_door_4
+                      - type: divider
+                      - input_boolean.tue_back_door_4
+                      - input_boolean.tue_inc_back_door_4
+                      - input_datetime.tue_start_date_back_door_4
+                      - input_datetime.tue_end_date_back_door_4
+                      - type: divider
+                      - input_boolean.wed_back_door_4
+                      - input_boolean.wed_inc_back_door_4
+                      - input_datetime.wed_start_date_back_door_4
+                      - input_datetime.wed_end_date_back_door_4
+                      - type: divider
+                      - input_boolean.thu_back_door_4
+                      - input_boolean.thu_inc_back_door_4
+                      - input_datetime.thu_start_date_back_door_4
+                      - input_datetime.thu_end_date_back_door_4
+                      - type: divider
+                      - input_boolean.fri_back_door_4
+                      - input_boolean.fri_inc_back_door_4
+                      - input_datetime.fri_start_date_back_door_4
+                      - input_datetime.fri_end_date_back_door_4
+                      - type: divider
+                      - input_boolean.sat_back_door_4
+                      - input_boolean.sat_inc_back_door_4
+                      - input_datetime.sat_start_date_back_door_4
+                      - input_datetime.sat_end_date_back_door_4
