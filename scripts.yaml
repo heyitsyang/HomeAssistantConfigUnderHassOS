@@ -481,16 +481,8 @@ scr_frontporch_activity:
           message: "You have a visitor at the front door"
     - service: camera.snapshot
       data:
-        entity_id: camera.doorbell
-        filename: /config/www/camera_stills/doorbell.jpg
-    - service: camera.snapshot
-      data:
         entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
-    - service: camera.snapshot
-      data:
-        entity_id: camera.driveway
-        filename: /config/www/camera_stills/driveway.jpg
     - condition: not # testing for not_home else doesn't work if in a known zone
       conditions:
         - condition: state
@@ -505,11 +497,11 @@ scr_frontporch_activity:
     - service: notify.pushover_yangandkaren
       data:
         title: Front door activity
-        message: "All snapshots:  https://shencentral.duckdns.org:61615/lovelace/still-images"
+        message: "All snapshots:  https://shencentral.duckdns.org:61615/lovelace/video"
         data:
           attachment: "/config/www/camera_stills/frontporch.jpg"
-          url_title: "Click here for live view"
-          url: "https://shencentral.duckdns.org:61615/lovelace/cameras"
+          url_title: "Click here for recordings"
+          url: "https://shencentral.duckdns.org:61615/lovelace/video"
 
 scr_front_door_lights_on:
   sequence:
