@@ -435,6 +435,8 @@
 - id: aut_office_mood_lights_auto_off
   alias: aut office mood lights auto off
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: state
       entity_id: binary_sensor.ys_desktop_lwt
@@ -994,7 +996,6 @@
   trigger:
     - platform: state
       entity_id: cover.large_garage_door
-      from: "closed"
       to: "open"
   action:
     - service: script.scr_say_phrase
@@ -1012,7 +1013,6 @@
   trigger:
     - platform: state
       entity_id: cover.small_garage_door
-      from: "closed"
       to: "open"
   action:
     - service: script.scr_say_phrase
@@ -1030,7 +1030,6 @@
   trigger:
     - platform: state
       entity_id: cover.large_garage_door
-      from: "open"
       to: "closed"
   action:
     - service: timer.cancel
@@ -1043,7 +1042,6 @@
   trigger:
     - platform: state
       entity_id: cover.small_garage_door
-      from: "open"
       to: "closed"
   action:
     - service: timer.cancel
@@ -1058,7 +1056,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.front_door_opened
+      entity_id: binary_sensor.front_door_window_door_is_open
       from: "off"
       to: "on"
   action:
@@ -1069,7 +1067,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.back_door_opened
+      entity_id: binary_sensor.back_door_window_door_is_open
       from: "off"
       to: "on"
   action:
@@ -1284,7 +1282,7 @@
     - platform: template # calculate time since last door open activity  & check expiration
       value_template: >
         {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
-        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_window_door_is_open', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
         (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) }}
     - platform: state # cover case where unlocked, but door never opened
       entity_id: lock.front_door_lock
@@ -1298,7 +1296,7 @@
       for: # This check prevents immediate notification from 1st trigger
         minutes: 2 #   when last activity > delay time at boot
     - condition: state
-      entity_id: binary_sensor.front_door_opened
+      entity_id: binary_sensor.front_door_window_door_is_open
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
@@ -1315,7 +1313,7 @@
     - platform: template # calculate time since last activity & check expiration
       value_template: >
         {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
-        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_opened', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.back_door_window_door_is_open', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
         (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int(default=0)) }}
     - platform: state
       entity_id: lock.back_door_lock
@@ -1329,7 +1327,7 @@
       for:
         minutes: 2 # this check prevents immediate notification on reboot from 1st trigger
     - condition: state
-      entity_id: binary_sensor.back_door_opened
+      entity_id: binary_sensor.back_door_window_door_is_open
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
@@ -1405,12 +1403,12 @@
           (states('input_number.inp_num_masterbdrmfan_on_temp') | float(default=0)) ) }}
   condition:
     condition: state
-    entity_id: light.master_bedroom_fan
+    entity_id: fan.master_bedroom_fan
     state: "off"
   action:
     service: light.turn_on
     data:
-      entity_id: light.master_bedroom_fan
+      entity_id: fan.master_bedroom_fan
       brightness_pct: 30
 
 - id: aut_master_bedroom_fan_trig_off
@@ -1423,11 +1421,11 @@
           (states('input_number.inp_num_masterbdrmfan_off_temp') | float(default=0)) ) }}
   condition:
     condition: state
-    entity_id: light.master_bedroom_fan
+    entity_id: fan.master_bedroom_fan
     state: "on"
   action:
     service: light.turn_off
-    entity_id: light.master_bedroom_fan
+    entity_id: fan.master_bedroom_fan
 
 #
 # NOBODY HOME ACTIONS
@@ -1546,35 +1544,43 @@
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.living_area_motion_battery
+      entity_id: sensor.living_area_motion_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_1_opened_battery
+      entity_id: sensor.sun_room_window_1_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_2_opened_battery
+      entity_id: sensor.sun_room_window_2_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_3_opened_battery
+      entity_id: sensor.sun_room_window_3_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sunrm_window_4_opened_battery
+      entity_id: sensor.sun_room_window_4_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.front_door_opened_battery
+      entity_id: sensor.sun_room_window_5_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.back_door_opened_battery
+      entity_id: sensor.sun_room_window_6_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.garagehouse_door_opened_battery
+      entity_id: sensor.front_door_battery_level
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.back_door_battery_level
+      below: 30
+      for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.garagehouse_door_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
@@ -1610,19 +1616,19 @@
       below: 20
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_1_battery
+      entity_id: sensor.sun_room_remote_1_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_2_battery
+      entity_id: sensor.sun_room_remote_2_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_3_battery
+      entity_id: sensor.sun_room_remote_3_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.sun_room_remote_4_battery
+      entity_id: sensor.sun_room_remote_4_battery_level
       below: 20 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
   action:
@@ -1928,7 +1934,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ is_state('light.island_lights', 'on') and is_state('light.cabinet_lights', 'on') and 
+        {{ is_state('light.island_lights', 'on') and is_state('light.kitchen_cabinet_lights', 'on') and 
         is_state('light.kitchen_leds_lower', 'on') }}
   action:
     - service: scene.turn_on
@@ -1945,10 +1951,11 @@
       entity_id: light.island_lights
       to: "off"
     - platform: state
-      entity_id: light.cabinet_lights
+      entity_id: light.kitchen_cabinet_lights
       to: "off"
     - platform: state
-      entity_id: light.kitchen_leds_lower
+      entity_id:
+        - light.kitchen_leds_lower
       to: "off"
   action:
     - if:

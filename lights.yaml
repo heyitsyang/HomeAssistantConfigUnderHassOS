@@ -1,6 +1,6 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
- 
+
 # LED Strips using Flux LED
 #- platform: flux_led
 #  devices:
@@ -14,8 +14,6 @@
 #      name: "Kitchen LEDs Rear"
 #      mode: "rgbw"
 
-
-
 # Change switch entities to light_switch so they act like lights
 #  A switch in Home Assistant is a wall module, but some in-wall devices
 #  appear as switches even though they should show as lights
@@ -27,3 +25,18 @@
   name: Back Door Lights
   entity_id: switch.back_door_lights
 
+- platform: switch
+  name: Entryway Lights
+  entity_id: switch.entryway_lights
+
+- platform: switch
+  name: Master Closet Lights
+  entity_id: switch.master_closet_lights
+
+- platform: switch
+  name: Kitchen Cabinet Lights
+  entity_id: switch.kitchen_cabinet_lights
+
+- platform: switch
+  name: Eating Area Lights
+  entity_id: switch.eating_area_lights

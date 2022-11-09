@@ -12,17 +12,22 @@ smart_home:
   client_secret:
     !secret alexa_client_secret # go to Alexa Developer Console:haha>Build>Permissions>Alexa Skill Messaging
     # to get this client_id and client_secret
-  # Filter everything OFF to prevent
-  # wholesale discovery and dupes from Vera
-  # and use include_entities individually below
+
+  # if no "filter:" then everything is included
+  # usingpresence of "filter:" excludes everything unless explicitly listed
   filter:
+    include_domains:
+      - light
+      - cover
+      - fan
+    exclude_entity_globs:
+      - light.*leds*segment*
     include_entities:
-      - light.kitchen_leds_lower
-      - light.kitchen_leds_upper_master
-      - light.barstool_outlet
       - switch.hamstation
       - switch.water_valve
-      - switch.master_closet_lights
+      - switch.hamstation
+      - switch.candles
+      - switch.christmas_tree
       - input_boolean.inp_bool_theater_mode
       - input_boolean.inp_bool_pause_leak_alarm
       - input_boolean.inp_bool_guest_mode
@@ -31,38 +36,42 @@ smart_home:
       - script.scr_goodnight
       - script.scr_vacuum_start_custom_cleaning
       - script.scr_reset_mood_lights_to_default
-      - cover.large_garage_door
-      - cover.small_garage_door
-      - cover.garage_doors
-      - cover.sun_room_shade_1
-      - cover.sun_room_shade_2
-      - cover.sun_room_shade_3
-      - cover.sun_room_shade_4
-      - cover.sun_room_shades
       - script.scr_partially_close_sunrm_shades
       - sensor.attic_temperature
       - sensor.garage_temperature
       - sensor.ecobee_avg_indoor_temperature
       - group.garage_opener_power
       - group.mood_lights
-      - light.office_cabinet_leds
-      - light.office_cabinet_leds_segment_1
-      - light.office_cabinet_leds_master
-      - light.office_monitor_leds
-  #      - group.indoor_lights
-  #      - group.kitchen_lights
-  #      - group.living_area_lights
-  #      - group.ceiling_fans
+    #      - switch.lg_garage_opener_power  # use group.garage_opener_power instead
+    #      - switch.sm_garage_opener_power  # use group.garage_opener_power instead
+    #      - group.indoor_lights            # these groups are done in Alexa groups instead
+    #      - group.kitchen_lights           # for faster reaction time
+    #      - group.living_area_lights
+    #      - group.ceiling_fans
+    exclude_entities:
+      - light.kitchen_leds_upper # using ..._master instead
+      - light.office_cabinet_leds # using ..._master instead
+      - light.office_fan
+      - light.guest_room_fan
+      - light.master_bedroom_fan
+      - light.living_room_fan
+      - light.sun_room_fan_1
+      - light.sun_room_fan_2
+      - switch.front_door_lights       # mapped to lights.xxx
+      - switch.back_door_lights        # mapped to lights.xxx
+      #      - switch.entryway_lights         # mapped to lights.xxx
+      #      - switch.kitchen_cabinet_lights  # mapped to lights.xxx
+      #      - switch.master_closet_lights    # mapped to lights.xxx
 
   # Create friendlier aliases for Alexa
   entity_config:
     light.kitchen_leds_lower:
       name: "Kitchen counter lights"
       display_categories: LIGHT
-    switch.hamstation: # avoid Alexa confusion with radio stations
+    switch.hamstation: # avoid Alexa confusion with radio "stations"
       name: "Ham radio"
     input_boolean.inp_bool_pause_leak_alarm:
-      name: "Pause Warning"
+      name: "Pause leak alarm"
     input_boolean.inp_bool_sleeping:
       name: "Sleep mode"
     input_boolean.inp_bool_guest_mode:
@@ -105,13 +114,13 @@ smart_home:
       name: "Partial shades"
       display_categories: INTERIOR_BLIND
     sensor.attic_temperature:
-      name: "Temperature in the attic"
+      name: "Attic"
       display_categories: TEMPERATURE_SENSOR
     sensor.garage_temperature:
-      name: "Temperature in the garage"
+      name: "Garage"
       display_categories: TEMPERATURE_SENSOR
     sensor.ecobee_avg_indoor_temperature:
-      name: "Temperature indoors"
+      name: "Indoor"
       display_categories: TEMPERATURE_SENSOR
     group.garage_opener_power:
       name: "Garage opener power"

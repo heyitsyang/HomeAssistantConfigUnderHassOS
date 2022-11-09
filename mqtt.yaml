@@ -169,6 +169,7 @@ binary_sensor:
 cover:
   ## Large Garage Door ##
   - name: "Large Garage Door"
+    unique_id: large_garage_door
     state_topic: "garage/LgGarDoor/zeroisclosed"
     state_open: "1"
     state_closed: "0"
@@ -179,6 +180,7 @@ cover:
 
   ## Small Garage Door ##
   - name: "Small Garage Door"
+    unique_id: small_garage_door
     state_topic: "garage/SmGarDoor/zeroisclosed"
     state_open: "1"
     state_closed: "0"
