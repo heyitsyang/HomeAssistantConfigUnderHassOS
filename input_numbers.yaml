@@ -1,29 +1,29 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
- 
-###################### 
+
+######################
 ### INPUT NUMBERS  ###
-###################### 
+######################
 
 ## The input_numbers component allows for input boxs and entry ##
 ## of numeric values which can be controlled from the frontend     ##
 
-## input_numbers having to do with time of day are created in the UI (Configuration>Helpers) 
+## input_numbers having to do with time of day are created in the UI (Configuration>Helpers)
 ## as using the UI is now the recommended way of creating input_number entities
 
-# 
+#
 # AUDIO CONTROLS
 #
-inp_num_office_announce_vol:                                     # original value = 0.18
-  name: 'Office announce vol'
+inp_num_office_announce_vol: # original value = 0.18
+  name: "Office announce vol"
   mode: slider
   step: 0.01
   min: 0.10
   max: 0.32
   icon: mdi:speaker-wireless
 
-inp_num_greatrm_announce_vol:                                    # original value = 0.28
-  name: 'GreatRm announce vol'
+inp_num_greatrm_announce_vol: # original value = 0.28
+  name: "GreatRm announce vol"
   mode: slider
   step: 0.01
   min: 0.15
@@ -34,8 +34,8 @@ inp_num_greatrm_announce_vol:                                    # original valu
 # DELAYS & DURATIONS
 #
 
-inp_num_front_door_lights_off_delay:                            # original value = 10 minutes
-  name: 'FrDr lights OFF'
+inp_num_front_door_lights_off_delay: # original value = 10 minutes
+  name: "FrDr lights OFF"
   mode: slider
   step: 1
   min: 5
@@ -43,8 +43,8 @@ inp_num_front_door_lights_off_delay:                            # original value
   icon: mdi:timer-sand
   unit_of_measurement: minutes
 
-inp_num_back_door_lights_off_delay:                             # original value = 10 minutes
-  name: 'BkDr lights OFF'
+inp_num_back_door_lights_off_delay: # original value = 10 minutes
+  name: "BkDr lights OFF"
   mode: slider
   step: 1
   min: 5
@@ -52,8 +52,8 @@ inp_num_back_door_lights_off_delay:                             # original value
   icon: mdi:timer-sand
   unit_of_measurement: minutes
 
-inp_num_lvrm_lights_on_delay:                                  # original value = 5 minutes
-  name: 'LvRm lights ON'
+inp_num_lvrm_lights_on_delay: # original value = 5 minutes
+  name: "LvRm lights ON"
   mode: slider
   step: 1
   min: 0
@@ -61,8 +61,8 @@ inp_num_lvrm_lights_on_delay:                                  # original value 
   icon: mdi:timer-sand
   unit_of_measurement: minutes
 
-inp_num_lvrm_lights_off_delay:                                 # original value =  15 minutes
-  name: 'LvRm lights OFF'
+inp_num_lvrm_lights_off_delay: # original value =  15 minutes
+  name: "LvRm lights OFF"
   mode: slider
   step: 1
   min: 0
@@ -71,8 +71,8 @@ inp_num_lvrm_lights_off_delay:                                 # original value 
   unit_of_measurement: minutes
 
 # DOOR LOCK DELAY
-inp_num_auto_front_door_lock_trig_delay:                       # original value = 120 minutes
-  name: 'Fr door lock'
+inp_num_auto_front_door_lock_trig_delay: # original value = 120 minutes
+  name: "Fr door lock"
   mode: slider
   step: 5
   min: 5
@@ -80,8 +80,8 @@ inp_num_auto_front_door_lock_trig_delay:                       # original value 
   icon: mdi:lock-clock
   unit_of_measurement: minutes
 
-inp_num_auto_back_door_lock_trig_delay:                        # original value = 120 minutes
-  name: 'Bk door lock'
+inp_num_auto_back_door_lock_trig_delay: # original value = 120 minutes
+  name: "Bk door lock"
   mode: slider
   step: 5
   min: 5
@@ -90,8 +90,8 @@ inp_num_auto_back_door_lock_trig_delay:                        # original value 
   unit_of_measurement: minutes
 
 # WINDOW SHADES DELAY
-inp_num_sunrm_shades_open_delay:                               # original value = 10 minutes
-  name: 'Shades OPEN'
+inp_num_sunrm_shades_open_delay: # original value = 10 minutes
+  name: "Shades OPEN"
   mode: slider
   step: 1
   min: 5
@@ -99,15 +99,15 @@ inp_num_sunrm_shades_open_delay:                               # original value 
   icon: mdi:timer-sand
   unit_of_measurement: minutes
 
-inp_num_sunrm_shades_close_low_lux_trig_delay:                 # original value =  10 minutes
-  name: 'Shades CLOSE'
+inp_num_sunrm_shades_close_low_lux_trig_delay: # original value =  10 minutes
+  name: "Shades CLOSE"
   mode: slider
   step: 1
   min: 5
   max: 15
   icon: mdi:timer-sand
   unit_of_measurement: minutes
-  
+
 # STATIC PRESSURE TEST DURATION
 inp_num_spt_duration:
   name: "SPT Duration"
@@ -117,14 +117,13 @@ inp_num_spt_duration:
   icon: mdi:camera-timer
   unit_of_measurement: minutes
 
-
 #
 # TRIGGERS
 #
 
 # TEMPERATURE RELATED
-inp_num_masterbdrmfan_on_temp: 
-  name: 'MstBdrm Fan ON'
+inp_num_masterbdrmfan_on_temp:
+  name: "MstBdrm Fan ON"
   mode: slider
   step: 1
   min: 65
@@ -132,8 +131,8 @@ inp_num_masterbdrmfan_on_temp:
   icon: mdi:fan
   unit_of_measurement: "ºF"
 
-inp_num_masterbdrmfan_off_temp: 
-  name: 'MstBdrm Fan OFF'
+inp_num_masterbdrmfan_off_temp:
+  name: "MstBdrm Fan OFF"
   mode: slider
   step: 1
   min: 65
@@ -141,17 +140,17 @@ inp_num_masterbdrmfan_off_temp:
   icon: mdi:fan-off
   unit_of_measurement: "ºF"
 
-inp_num_outdoor_lights_on_solar_trig:                            # original value = 85
-  name: 'Outdoors ON solar'
+inp_num_outdoor_lights_on_solar_trig: # original value = 85
+  name: "Outdoors ON solar"
   mode: slider
   step: 0.5
   min: 40
-  max: 140 
+  max: 140
   icon: mdi:lightbulb-outline
   unit_of_measurement: lux
 
-inp_num_outdoor_lights_off_solar_trig:                           # original value = 210
-  name: 'Outdoors OFF solar'
+inp_num_outdoor_lights_off_solar_trig: # original value = 210
+  name: "Outdoors OFF solar"
   mode: slider
   step: 1
   min: 150
@@ -177,8 +176,8 @@ inp_num_outdoor_lights_off_solar_trig:                           # original valu
 #  icon: mdi:lightbulb-off-outline
 #  unit_of_measurement: lux
 
-inp_num_lvrm_lights_on_indoor_trig:                                # original value =  13
-  name: 'LvRm ON indoor'
+inp_num_lvrm_lights_on_indoor_trig: # original value =  13
+  name: "LvRm ON indoor"
   mode: slider
   step: 0.05
   min: 15
@@ -186,17 +185,17 @@ inp_num_lvrm_lights_on_indoor_trig:                                # original va
   icon: mdi:lightbulb-outline
   unit_of_measurement: lux
 
-inp_num_lvrm_lights_off_indoor_trig:                             # original value = 24
-  name: 'LvRm OFF indoor'                                        # visible lum is 26 lux max when all lights on so value must
-  mode: slider                                                   #   be > 26 or lights will go off due to their own light
-  step: 0.05 
+inp_num_lvrm_lights_off_indoor_trig: # original value = 24
+  name: "LvRm OFF indoor" # visible lum is 26 lux max when all lights on so value must
+  mode: slider #   be > 26 or lights will go off due to their own light
+  step: 0.05
   min: 15
   max: 30
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lux
 
-inp_num_mood_lights_on_f_solar_trig:                              # original value = 900
-  name: 'Mood ON f_solar'
+inp_num_mood_lights_on_f_solar_trig: # original value = 900
+  name: "Mood ON f_solar"
   mode: slider
   step: 50
   min: 600
@@ -204,17 +203,17 @@ inp_num_mood_lights_on_f_solar_trig:                              # original val
   icon: mdi:lightbulb-outline
   unit_of_measurement: lux
 
-inp_num_mood_lights_off_f_solar_trig:                             # original value = 3000
-  name: 'Mood OFF f_solar'
+inp_num_mood_lights_off_f_solar_trig: # original value = 3000
+  name: "Mood OFF f_solar"
   mode: slider
   step: 100
-  min: 2000
-  max: 4000
+  min: 1500
+  max: 3000
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lux
 
-inp_num_sunrm_shades_part_close_min_reqd_trig_lux:              # original value = 4200
-  name: 'Shades part CLOSE min lux'                             # shades don't close if not brighter than this number
+inp_num_sunrm_shades_part_close_min_reqd_trig_lux: # original value = 4200
+  name: "Shades part CLOSE min lux" # shades don't close if not brighter than this number
   mode: slider
   step: 100
   min: 2000
@@ -222,12 +221,11 @@ inp_num_sunrm_shades_part_close_min_reqd_trig_lux:              # original value
   icon: mdi:blinds
   unit_of_measurement: lux
 
-
 # WINDOW SHADES TRIGGERS
 
 # SUNROOM SHADES SETTINGS
-inp_num_sunrm_shades_part_pct_open:                            # original value = 40 percent
-  name: 'Shades part % open'
+inp_num_sunrm_shades_part_pct_open: # original value = 40 percent
+  name: "Shades part % open"
   mode: slider
   step: 10
   min: 20
@@ -235,8 +233,8 @@ inp_num_sunrm_shades_part_pct_open:                            # original value 
   icon: mdi:blinds
   unit_of_measurement: percent
 
-inp_num_sunrm_shades_part_close_trig_angle:                    # original value = 32.5 degrees
-  name: 'Shades part close angle'
+inp_num_sunrm_shades_part_close_trig_angle: # original value = 32.5 degrees
+  name: "Shades part close angle"
   mode: slider
   step: 0.1
   min: 29
@@ -244,8 +242,8 @@ inp_num_sunrm_shades_part_close_trig_angle:                    # original value 
   icon: mdi:weather-sunset
   unit_of_measurement: degrees
 
-inp_num_sunrm_shades_part_close_reopen_angle:                  # original value = 14.1 degrees
-  name: 'Shades part reopen angle'                             # house behind blocks sun ~12-14 degrees
+inp_num_sunrm_shades_part_close_reopen_angle: # original value = 14.1 degrees
+  name: "Shades part reopen angle" # house behind blocks sun ~12-14 degrees
   mode: slider
   step: 0.1
   min: 12
@@ -253,8 +251,8 @@ inp_num_sunrm_shades_part_close_reopen_angle:                  # original value 
   icon: mdi:weather-sunset
   unit_of_measurement: degrees
 
-inp_num_sunrm_shades_part_sun_penetration_min_azimuth:         # original value = 204 degrees
-  name: 'Shades part min azimuth'
+inp_num_sunrm_shades_part_sun_penetration_min_azimuth: # original value = 204 degrees
+  name: "Shades part min azimuth"
   mode: slider
   step: 1
   min: 195
@@ -262,8 +260,8 @@ inp_num_sunrm_shades_part_sun_penetration_min_azimuth:         # original value 
   icon: mdi:compass-outline
   unit_of_measurement: degrees
 
-inp_num_sunrm_shades_close_sun_penetration_max_azimuth:         # original value = 267 to 280 degrees
-  name: 'Shades part max azimuth'
+inp_num_sunrm_shades_close_sun_penetration_max_azimuth: # original value = 267 to 280 degrees
+  name: "Shades part max azimuth"
   mode: slider
   step: 1
   min: 260
@@ -271,8 +269,8 @@ inp_num_sunrm_shades_close_sun_penetration_max_azimuth:         # original value
   icon: mdi:compass-outline
   unit_of_measurement: degrees
 
-inp_num_sunrm_shades_open_trig:                                 # original value = 450 lux
-  name: 'Shades OPEN solar'
+inp_num_sunrm_shades_open_trig: # original value = 450 lux
+  name: "Shades OPEN solar"
   mode: slider
   step: 10
   min: 300
@@ -280,8 +278,8 @@ inp_num_sunrm_shades_open_trig:                                 # original value
   icon: mdi:window-maximize
   unit_of_measurement: lux
 
-inp_num_sunrm_shades_close_low_lux_trig:                        # original value = 200 lux
-  name: 'Shades CLOSE solar'
+inp_num_sunrm_shades_close_low_lux_trig: # original value = 200 lux
+  name: "Shades CLOSE solar"
   mode: slider
   step: 10
   min: 150
@@ -289,10 +287,9 @@ inp_num_sunrm_shades_close_low_lux_trig:                        # original value
   icon: mdi:blinds
   unit_of_measurement: lux
 
-
 # PROXIMITY TRIGGERS
-inp_num_outdoor_lights_prox_trigger:                           # original value = 0.5 miles
-  name: 'Outdoor lights ON'
+inp_num_outdoor_lights_prox_trigger: # original value = 0.5 miles
+  name: "Outdoor lights ON"
   mode: slider
   step: 0.1
   min: 0.2
@@ -300,8 +297,8 @@ inp_num_outdoor_lights_prox_trigger:                           # original value 
   icon: mdi:map-marker-distance
   unit_of_measurement: miles
 
-inp_num_auto_nobody_home_prox_trigger:                         # original value = 0.8 miles
-  name: 'Nobody home ON'
+inp_num_auto_nobody_home_prox_trigger: # original value = 0.8 miles
+  name: "Nobody home ON"
   mode: slider
   step: 0.1
   min: 0.2
@@ -309,8 +306,8 @@ inp_num_auto_nobody_home_prox_trigger:                         # original value 
   icon: mdi:map-marker-distance
   unit_of_measurement: miles
 
-inp_num_auto_absence_on_departure_trigger:                     # original value = 100 miles
-  name: 'Absence mode ON'
+inp_num_auto_absence_on_departure_trigger: # original value = 100 miles
+  name: "Absence mode ON"
   mode: slider
   step: 10
   min: 20
@@ -318,12 +315,11 @@ inp_num_auto_absence_on_departure_trigger:                     # original value 
   icon: mdi:map-marker-distance
   unit_of_measurement: miles
 
-inp_num_auto_absence_off_arrival_trigger:                      # original value = 30 miles
-  name: 'Absence mode OFF'
+inp_num_auto_absence_off_arrival_trigger: # original value = 30 miles
+  name: "Absence mode OFF"
   mode: slider
   step: 10
   min: 10
   max: 100
   icon: mdi:map-marker-distance
   unit_of_measurement: miles
-
