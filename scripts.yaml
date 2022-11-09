@@ -272,6 +272,33 @@ scr_partially_close_sunrm_shades:
         position: "40" # drop shades to X% open
 
 #
+# DOOR LOCK / KEYMASTER
+#
+keymaster_front_door_manual_notify:
+  mode: parallel
+  sequence:
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "{{ title }}"
+        message: "{{ message }}"
+    - service: notify.mobile_app_kt_cell
+      data:
+        title: "{{ title }}"
+        message: "{{ message }}"
+
+keymaster_back_door_manual_notify:
+  mode: parallel
+  sequence:
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "{{ title }}"
+        message: "{{ message }}"
+    - service: notify.mobile_app_kt_cell
+      data:
+        title: "{{ title }}"
+        message: "{{ message }}"
+
+#
 # SUSPICIOUS ACTIVITY IF NOBODY HOME
 #
 scr_check_if_suspicious:
