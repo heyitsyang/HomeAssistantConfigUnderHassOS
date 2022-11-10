@@ -551,7 +551,7 @@
       data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
-    - service: notify.pushover_yang
+    - service: notify.mobile_app_ys_cell
       data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
@@ -569,7 +569,7 @@
         - sensor.water_pressure
       above: 85
   action:
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
         message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
@@ -644,13 +644,32 @@
       data:
         priority: "high"
         message: "House water has been turned off.  Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         message: "House water is OFF.  Turn on manually when leak is resolved."
     - service: notify.alexa_yellow_ring
       data:
         message: "House water is OFF. Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
+    - service: notify.yskt_cell_phones
+      data:
+        message: "TTS"
+        title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
+        data:
+          media_stream: "alarm_stream"
+    - service: notify.yskt_cell_phones
+      data:
+        title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
+        message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
+        data:
+          channel: "Urgent"
+          importance: "high"
+          vibrationPattern: "100, 1000, 100, 1000, 100, 1000"
+          persistent: "true"
+          tag: "persistent"
+    - service: notify.gmail_to_yang
+      data:
+        message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
     - repeat:
         while:
           - condition: template
@@ -666,12 +685,7 @@
             data:
               priority: "high"
               message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-          - service: notify.pushover_yangandkaren
-            data:
-              title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-              message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-              data:
-                priority: 1
+
           - delay:
               seconds: 30
 
@@ -1301,9 +1315,9 @@
   action:
     - service: lock.lock
       entity_id: lock.front_door_lock
-    - service: notify.pushover_yang
+    - service: notify.mobile_app_ys_cell
       data:
-        message: "Front door automatically locked"
+        message: "TTS"
         title: "Front door automatically locked"
 
 - id: aut_auto_back_door_lock
@@ -1332,9 +1346,9 @@
   action:
     - service: lock.lock
       entity_id: lock.back_door_lock
-    - service: notify.pushover_yang
+    - service: notify.mobile_app_ys_cell
       data:
-        message: "Back door automatically locked"
+        message: "TTS"
         title: "Back door automatically locked"
 
 #
@@ -1758,7 +1772,7 @@
     - service: script.scr_say_phrase
       data:
         message: "Extended absence mode enabled"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "Extended absence mode has been enabled"
         message: "Home Assistant: Extended absence mode enabled"
@@ -1785,7 +1799,7 @@
       data:
         title: "Home Assistant: Extended Absence Mode disabled"
         message: "Extended absence mode disabled"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "Extended absence mode has been disabled"
         message: "Home Assistant: Extended absence mode disabled"
@@ -2001,11 +2015,8 @@
     - condition: template
       value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
   action:
-    - service: notify.pushover_yang
+    - service: notify.mobile_app_ys_cell
       data:
-        title: "Half mile trigger"
-        message: "Half mile exceeded"
-#    - service: notify.mobile_app_ys_phone
-#      data:
-#        title: "Half mile trigger"
-#        message: "Half mile exceeded"
+        message: "TTS"
+        title: "Half mile exceeded"
+

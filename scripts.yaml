@@ -277,11 +277,7 @@ scr_partially_close_sunrm_shades:
 keymaster_front_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.mobile_app_ys_cell
-      data:
-        title: "{{ title }}"
-        message: "{{ message }}"
-    - service: notify.mobile_app_kt_cell
+    - service: notify.yskt_cell_phones
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -289,11 +285,7 @@ keymaster_front_door_manual_notify:
 keymaster_back_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.mobile_app_ys_cell
-      data:
-        title: "{{ title }}"
-        message: "{{ message }}"
-    - service: notify.mobile_app_kt_cell
+    - service: notify.yskt_cell_phones
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -319,13 +311,23 @@ scr_check_if_suspicious:
             - condition: state
               entity_id: person.karen
               state: "home"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
-        title: "SUSPICIOUS ACTIVITY at Norcoose home"
-        message: "Suspicious actvity detected in Norcoose home"
+        message: "TTS"
+        title: "SUSPICIOUS ACTIVITY at Norcoose"
         data:
-          url: "https://shencentral.duckdns.org/lovelace/cameras"
-          priority: 1 # priority 1 used for urgent messages
+          media_stream: "alarm_stream"
+    - service: notify.yskt_cell_phones
+      data:
+        title: "SUSPICIOUS ACTIVITY at Norcoose"
+        message: "PRESS to investigate"
+        data:
+          clickAction: "ccab4aaf_frigate/dashboard"
+          channel: "Urgent"
+          importance: "high"
+          vibrationPattern: "100, 1000, 100, 1000, 100, 1000"
+          persistent: "true"
+          tag: "persistent"
     - service: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
@@ -343,13 +345,12 @@ scr_check_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
-        title: "GARAGE DOOR LEFT OPEN"
-        message: "Garage door left open"
+        message: "TTS"
+        title: "A garage door has been left open"
         data:
-          url: "https://shencentral.duckdns.org/lovelace/security"
-          sound: siren
+          media_stream: "alarm_stream"
 
 scr_repeat_say_garage_open:
   sequence:
@@ -521,14 +522,12 @@ scr_frontporch_activity:
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: Front door activity
-        message: "All snapshots:  https://shencentral.duckdns.org:61615/lovelace/video"
+        message: "Front door activity detected"
         data:
-          attachment: "/config/www/camera_stills/frontporch.jpg"
-          url_title: "Click here for recordings"
-          url: "https://shencentral.duckdns.org:61615/lovelace/video"
+          clickAction: "lovelace/video"
 
 scr_front_door_lights_on:
   sequence:
