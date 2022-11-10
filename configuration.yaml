@@ -19,8 +19,11 @@ homeassistant:
 
 http:
   # server_port: 61615                                 #  default port 8123 is used for local network unencrypted http
-  #  ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
-  #  ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
+  
+  # NOTE: ssl_certiciate and ssl_key are now configured in the NGINX add-on
+  # ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
+  # ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
+
   use_x_forwarded_for: true # required for
   trusted_proxies: # reverse proxy
     - 10.0.0.44 #   home assistant address
