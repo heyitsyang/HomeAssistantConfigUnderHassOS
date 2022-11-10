@@ -1,7 +1,6 @@
 ##  Note: leading spaces in each line are critical
 ##  to yaml interpretation - do not delete them
 
-
 ### NOTIFICATION METHODS ###
 
 # The following notification method require the NotifyMe Alexa Skill
@@ -64,3 +63,8 @@
         sound: alien
         priority: 0
 
+- platform: group
+  name: yskt_cell_phones
+  services:
+    - service: mobile_app_ys_cell
+    - service: mobile_app_kt_cell
