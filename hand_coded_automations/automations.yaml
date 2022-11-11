@@ -656,7 +656,9 @@
         message: "TTS"
         title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         data:
-          media_stream: "alarm_stream"
+          priority: high
+          ttl: 0
+          media_stream: alarm_stream
     - service: notify.yskt_cell_phones
       data:
         title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
@@ -667,6 +669,8 @@
           vibrationPattern: "100, 1000, 100, 1000, 100, 1000"
           persistent: "true"
           tag: "persistent"
+          priority: high
+          ttl: 0
     - service: notify.gmail_to_yang
       data:
         message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
@@ -685,7 +689,6 @@
             data:
               priority: "high"
               message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-
           - delay:
               seconds: 30
 
@@ -2019,4 +2022,3 @@
       data:
         message: "TTS"
         title: "Half mile exceeded"
-

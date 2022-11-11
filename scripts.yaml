@@ -325,9 +325,12 @@ scr_check_if_suspicious:
           clickAction: "ccab4aaf_frigate/dashboard"
           channel: "Urgent"
           importance: "high"
+          media_stream: alarm_stream
           vibrationPattern: "100, 1000, 100, 1000, 100, 1000"
           persistent: "true"
           tag: "persistent"
+          priority: high
+          ttl: 0
     - service: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
@@ -351,6 +354,16 @@ scr_check_garage_open:
         title: "A garage door has been left open"
         data:
           media_stream: "alarm_stream"
+          priority: high
+          ttl: 0
+    - service: notify.yskt_cell_phones
+      data:
+        title: "GARAGE DOOR LEFT OPEN"
+        message: "Did you forget to close it?  PRESS to see."
+        data:
+          clickAction: "lovelace/security"
+          priority: high
+          ttl: 0
 
 scr_repeat_say_garage_open:
   sequence:
