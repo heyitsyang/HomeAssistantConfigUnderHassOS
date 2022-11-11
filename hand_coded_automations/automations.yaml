@@ -654,8 +654,8 @@
     - service: notify.yskt_cell_phones
       data:
         message: "TTS"
-        title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         data:
+          tts_text: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
           priority: high
           ttl: 0
           media_stream: alarm_stream
@@ -1318,10 +1318,10 @@
   action:
     - service: lock.lock
       entity_id: lock.front_door_lock
-    - service: notify.mobile_app_ys_cell
+    - service: notify.yskt_cell_phones
       data:
-        message: "TTS"
         title: "Front door automatically locked"
+        message: "Oops. Someone left it unlocked!"
 
 - id: aut_auto_back_door_lock
   alias: "aut auto back door lock"
@@ -1349,10 +1349,10 @@
   action:
     - service: lock.lock
       entity_id: lock.back_door_lock
-    - service: notify.mobile_app_ys_cell
+    - service: notify.yskt_cell_phones
       data:
-        message: "TTS"
         title: "Back door automatically locked"
+        message: "Oops. Someone left it unlocked!"
 
 #
 # WINDOW TRIGGERED ACTIONS
@@ -1783,7 +1783,7 @@
       data:
         title: "Extended absence mode has been enabled"
         message: "Extended absence mode enabled"
-    - service: script.scr_shared_extended_absence_on
+    - service: script.scr_common_extended_absence_on
 
 - id: aut_extended_absence_off
   alias: "aut extended absence off"
@@ -1794,7 +1794,7 @@
       from: "on"
       to: "off"
   action:
-    - service: script.scr_shared_extended_absence_off
+    - service: script.scr_common_extended_absence_off
     - service: script.scr_say_phrase
       data:
         message: "Extended absence mode disabled"
@@ -2021,4 +2021,5 @@
     - service: notify.mobile_app_ys_cell
       data:
         message: "TTS"
-        title: "Half mile exceeded"
+        data:
+          tts_text: "Half mile exceeded"

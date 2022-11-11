@@ -138,9 +138,9 @@ scr_occupied_sim:
       entity_id: group.indoor_lights
 
 #
-# SHARED EXTENDED ABSENCE ACTIONS
+# COMMON EXTENDED ABSENCE ACTIONS
 #
-scr_shared_extended_absence_on:
+scr_common_extended_absence_on:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: script.scr_check_sunrm_windows
@@ -160,7 +160,7 @@ scr_shared_extended_absence_on:
     - service: switch.turn_off
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
-scr_shared_extended_absence_off:
+scr_common_extended_absence_off:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: switch.turn_on
@@ -314,9 +314,9 @@ scr_check_if_suspicious:
     - service: notify.yskt_cell_phones
       data:
         message: "TTS"
-        title: "SUSPICIOUS ACTIVITY at Norcoose"
         data:
-          media_stream: "alarm_stream"
+          tts_text: "SUSPICIOUS ACTIVITY at Norcoose"
+          media_stream: alarm_stream
     - service: notify.yskt_cell_phones
       data:
         title: "SUSPICIOUS ACTIVITY at Norcoose"
@@ -351,9 +351,9 @@ scr_check_garage_open:
     - service: notify.yskt_cell_phones
       data:
         message: "TTS"
-        title: "A garage door has been left open"
         data:
-          media_stream: "alarm_stream"
+          tts_text: "A garage door has been left open"
+          media_stream: alarm_stream
           priority: high
           ttl: 0
     - service: notify.yskt_cell_phones
