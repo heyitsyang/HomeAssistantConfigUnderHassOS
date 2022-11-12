@@ -540,7 +540,7 @@ scr_frontporch_activity:
         title: Front door activity
         message: "Front door activity detected"
         data:
-          clickAction: "lovelace/video"
+          clickAction: "lovelace/last-snaps"
 
 scr_front_door_lights_on:
   sequence:
