@@ -169,6 +169,41 @@ scr_common_extended_absence_off:
       entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
 #
+# COMMON EXTENDED ABSENCE ACTIONS
+#
+scr_common_guest_mode_on:
+  mode: restart
+  sequence:
+    - service: script.scr_sonos_unjoin4announce
+    - service: input_boolean.turn_on                # leave water valve ON if absent & with guest
+      target:
+        entity_id: input_boolean.leave_water_valve_on
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inhibit_office_mood_lighting    
+
+scr_common_guest_mode_off:
+  mode: restart
+  sequence:
+    - service: script.scr_sonos_join4announce
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_guest_in_sunroom
+    - service: input_boolean.turn_off                # leave water valve ON if absent & with guest
+      target:
+        entity_id: input_boolean.leave_water_valve_on
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inhibit_office_mood_lighting   
+
+
+#
 # CHECK IF SUN ROOM WINDOWS ARE OPEN & REPORT
 #
 scr_check_sunrm_windows:

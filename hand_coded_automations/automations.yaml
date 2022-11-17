@@ -1670,8 +1670,8 @@
       data:
         message: |
           Home Assistant {{states("sensor.home_assistant_website")}} is now available.
-           Your current version is {{states("sensor.current_version")}}.
-           See https://github.com/home-assistant/home-assistant/releases
+            Your current version is {{states("sensor.current_version")}}.
+            See https://github.com/home-assistant/home-assistant/releases
 
 #####################################
 #    Security & House Modes         #
@@ -1707,7 +1707,8 @@
       from: "off"
       to: "on"
   action:
-    - service: script.scr_sonos_unjoin4announce
+    - service: script.scr_common_guest_mode_on
+
 
 - id: aut_guest_mode_off
   alias: "aut guest mode off"
@@ -1718,9 +1719,7 @@
       from: "on"
       to: "off"
   action:
-    - service: script.scr_sonos_join4announce
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_guest_in_sunroom
+    - service: script.scr_common_guest_mode_off
 
 - id: aut_datetime_guest_mode_on
   alias: "aut datetime guest mode on"
@@ -1734,8 +1733,9 @@
       state: "off"
   action:
     - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_guest_mode
-    - service: script.scr_sonos_unjoin4announce
+      target:
+        entity_id: input_boolean.inp_bool_guest_mode
+    - service: script.scr_common_guest_mode_on
 
 - id: aut_datetime_guest_mode_off
   alias: "aut datetime guest mode off"
@@ -1749,10 +1749,9 @@
       state: "on"
   action:
     - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_guest_mode
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_guest_in_sunroom
-    - service: script.scr_sonos_join4announce
+      target:
+        entity_id: input_boolean.inp_bool_guest_mode
+    - service: script.scr_common_guest_mode_off
 
 #
 # EXTENDED ABSENCE MODE
