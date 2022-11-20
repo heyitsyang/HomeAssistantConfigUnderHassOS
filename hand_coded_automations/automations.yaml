@@ -1423,10 +1423,11 @@
     entity_id: fan.master_bedroom_fan
     state: "off"
   action:
-    service: light.turn_on
-    data:
+    service: fan.set_percentage
+    target:
       entity_id: fan.master_bedroom_fan
-      brightness_pct: 30
+    data:
+      percentage: 30
 
 - id: aut_master_bedroom_fan_trig_off
   alias: "aut master bedroom fan trig off"
@@ -1441,7 +1442,7 @@
     entity_id: fan.master_bedroom_fan
     state: "on"
   action:
-    service: light.turn_off
+    service: fan.turn_off
     entity_id: fan.master_bedroom_fan
 
 #
