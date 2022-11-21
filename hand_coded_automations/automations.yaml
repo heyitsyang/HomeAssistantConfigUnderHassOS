@@ -241,9 +241,11 @@
       state: "on"
   action:
     - service: scene.turn_on # set default before turning off
-      entity_id: scene.kitchen_mood_spots_50_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
-      entity_id: group.mood_lights
+      target:
+        entity_id: group.mood_lights
 
 #
 # FAILSAFE TO EXTINGUISH OUTDOOR LIGHTS
@@ -261,7 +263,8 @@
         minutes: 120
   action:
     - service: switch.turn_off
-      entity_id: group.outdoor_lights
+      target:
+        entity_id: group.outdoor_lights
 
 #
 # FAILSAFE TO EXTINGUISH INDOOR LIGHTS
@@ -274,7 +277,8 @@
       at: "02:30:00"
   action:
     - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
+      target:
+        entity_id: group.indoor_lights
 
 #
 # ADJUST LIVING ROOM LIGHT BRIGHTNESS IF NECESSARY
@@ -320,7 +324,8 @@
         {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
 - id: aut_lum_outdoor_lights_solar_trig_off
   alias: "aut lum outdoor lights solar trig off"
@@ -331,7 +336,8 @@
         {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
 - id: aut_lum_lvrm_lights_indoor_trig_on # Normal TV watching lights are ~14 Lux
   alias: "aut lum lvrm lights indoor trig on" # ~25 Lux if all contributing indoor lights are ON 100%
@@ -342,7 +348,8 @@
         {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
 - id: aut_lum_lvrm_lights_indoor_trig_off # Normal TV watching lights are ~14 Lux
   alias: "aut lum lvrm lights indoor trig off" # ~25 Lux if all contributing indoor lights are ON 100%
@@ -353,7 +360,8 @@
         {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_on
   alias: "aut lum mood lights f_solar trig on"
@@ -364,7 +372,8 @@
         {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_off
   alias: "aut lum mood lights f_solar trig off"
@@ -375,7 +384,8 @@
         {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_sunrm_shades_trig_on
   alias: "aut lum sunrm shades trig on"
@@ -386,7 +396,8 @@
         {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 - id: aut_lum_sunrm_shades_trig_off
   alias: "aut lum sunrm shades trig off"
@@ -397,7 +408,8 @@
         {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 ##################################################
 #      Sensor event driven automations           #
@@ -425,8 +437,8 @@
       state: "on"
   action:
     - service: light.turn_on
-      entity_id:
-        - light.office_monitor_leds
+      target:
+        entity_id: light.office_monitor_leds
     - service: select.select_option
       entity_id: select.office_cabinet_leds_preset
       data:
@@ -449,9 +461,10 @@
       to: "off"
   action:
     - service: light.turn_off
-      entity_id:
-        - light.office_monitor_leds
-        - light.office_cabinet_leds_master
+      target:
+        entity_id:
+          - light.office_monitor_leds
+          - light.office_cabinet_leds_master
 
 #
 # DEVICE TRACKER UPDATE EVENTS
@@ -635,7 +648,8 @@
       to: "on"
   action:
     - service: switch.turn_off
-      entity_id: switch.water_valve
+      target:
+        entity_id: switch.water_valve
     - service: script.scr_say_phrase
       data:
         priority: "high"
@@ -813,7 +827,8 @@
       above: 14.0 # house behind blocks sun at this angle, so above it is "daylight"
   action:
     - service: light.turn_off
-      entity_id: light.living_room_lights
+      target:
+        entity_id: light.living_room_lights
 
 #
 # GREAT ROOM MOTION INACTIVITY TIMEOUT
@@ -926,7 +941,8 @@
         state: "on"
   action:
     - service: cover.open_cover
-      entity_id: cover.sun_room_shades
+      target:
+        entity_id: cover.sun_room_shades
 
 #
 # CLOSE SUN RM SHADES BASED ON SUNSET OR LUMINOSITY FOR THE EVENING
@@ -1154,7 +1170,8 @@
         minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) + 5) | int(default=0) }}"
   action:
     - service: light.turn_off
-      entity_id: light.front_door_lights
+      target:
+        entity_id: light.front_door_lights
 
 #
 # BACK DOOR LIGHTS INACTIVITY TIMEOUT
@@ -1170,7 +1187,8 @@
         minutes: "{{ states('input_number.inp_num_back_door_lights_off_delay') | int(default=0) }}"
   action:
     - service: light.turn_off
-      entity_id: light.back_door_lights
+      target:
+        entity_id: light.back_door_lights
 
 #
 # OUTDOOR LIGHTS AUTO OFF
@@ -1189,7 +1207,8 @@
       to: "off"
   action:
     - service: switch.turn_off
-      entity_id: group.outdoor_lights
+      target:
+        entity_id: group.outdoor_lights
 
 #
 # MOOD LIGHTS AUTO ON BASED ON LUMINOSITY
@@ -1240,9 +1259,11 @@
       state: "on"
   action:
     - service: scene.turn_on # set the lights to the default before turning off
-      entity_id: scene.kitchen_mood_spots_50_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
-      entity_id: group.mood_lights
+      target:
+        entity_id: group.mood_lights
 
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
@@ -1317,7 +1338,8 @@
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
-      entity_id: lock.front_door_lock
+      target:
+        entity_id: lock.front_door_lock
     - service: notify.yskt_cell_phones
       data:
         title: "Front door automatically locked"
@@ -1348,7 +1370,8 @@
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
-      entity_id: lock.back_door_lock
+      target:
+        entity_id: lock.back_door_lock
     - service: notify.yskt_cell_phones
       data:
         title: "Back door automatically locked"
@@ -1372,13 +1395,15 @@
     #    data:
     #      option: "{{ states('climate.ecobee') }}"
     - service: climate.turn_off
-      entity_id: climate.ecobee
+      target:
+        entity_id: climate.ecobee
     - service: input_select.select_option
       entity_id: input_select.inp_sel_saved_sunroom_hvac
       data:
         option: "{{ states('climate.sunroom_ac') }}"
     - service: climate.turn_off
-      entity_id: climate.sunroom_ac
+      target:
+        entity_id: climate.sunroom_ac
     - service: script.scr_say_phrase
       data:
         message: "A window is open. Climate control is now turned off"
@@ -1398,7 +1423,8 @@
     #    data:
     #      hvac_mode: "{{ states('input_select.inp_sel_saved_ecobee_hvac') }}"
     - service: climate.turn_on
-      entity_id: climate.ecobee
+      target:
+        entity_id: climate.ecobee
     - service: climate.set_hvac_mode
       entity_id: climate.sunroom_ac
       data:
@@ -1443,7 +1469,8 @@
     state: "on"
   action:
     service: fan.turn_off
-    entity_id: fan.master_bedroom_fan
+    target:
+      entity_id: fan.master_bedroom_fan
 
 #
 # NOBODY HOME ACTIONS
@@ -1694,7 +1721,8 @@
   action:
     - delay: 00:30:00
     - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_pause_alarm
+      target:
+        entity_id: input_boolean.inp_bool_pause_alarm
 
 #
 #  GUEST MODE
@@ -1833,7 +1861,8 @@
         value_template: "{{ states('group.where_are_yskt') != 'home' }}"
   action:
     - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
+      target:
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
 
 - id: aut_extended_absence_auto_off
   alias: "aut extended absence auto off"
@@ -1878,7 +1907,8 @@
       state: "off"
   action:
     - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
+      target:
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
 
 - id: aut_datetime_extended_absence_off
   alias: "aut datetime extended absence off"
@@ -1892,7 +1922,8 @@
       state: "on"
   action:
     - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change    - service: input_boolean.turn_off
 
 #
 # Simulate home occupied in evening if Extended Absence Mode is ON
@@ -1938,7 +1969,8 @@
       to: "off"
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_normal_mode
+      target:
+        entity_id: scene.living_room_normal_mode
 
 #
 # KITCHEN UPPER CABINET MOOD LIGHTING
@@ -1955,7 +1987,8 @@
         is_state('light.kitchen_leds_lower', 'on') }}
   action:
     - service: scene.turn_on
-      entity_id: scene.kitchen_mood_100_bright_white
+      target:
+        entity_id: scene.kitchen_mood_100_bright_white
 
 # return kitchen mood lights to "normal" based on luminosity
 - id: aut_kitchen_mood_normal
@@ -1987,13 +2020,16 @@
               - thu # night before trash day
           then:
             service: scene.turn_on
-            entity_id: scene.kitchen_mood_trash_night
+            target:
+              entity_id: scene.kitchen_mood_trash_night
           else:
             service: scene.turn_on
-            entity_id: scene.kitchen_mood_spots_50_warm_white
+            target:
+              entity_id: scene.kitchen_mood_spots_50_warm_white
       else:
         - service: homeassistant.turn_off
-          entity_id: light.kitchen_leds_upper_master
+          target:
+            entity_id: light.kitchen_leds_upper_master
 
 #################################
 #                               #

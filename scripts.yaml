@@ -13,20 +13,20 @@ scr_ha_startup:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
     - service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
-      data:
+      target:
         entity_id: input_boolean.inp_bool_announcements
     - service: input_boolean.turn_off # initialize sleeping as ON
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
     - condition: template
       value_template: >
         {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
           ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
     - service: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_announcements
     - service: input_boolean.turn_off
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
 
 #
@@ -37,10 +37,11 @@ scr_ha_startup:
 scr_goodnight: # called by Alexa as PART of Goodnight Routine
   sequence:
     - service: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
     - service: lock.lock
-      entity_id: lock.front_door_lock, lock.back_door_lock
+      target:
+        entity_id: lock.front_door_lock, lock.back_door_lock
     - if:
         - or:
             - condition: state
@@ -62,11 +63,12 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
           state: "off"
       then:
         - service: light.turn_off
-          entity_id:
-            - light.office_lights
-            - light.office_cabinet_leds_master
-            - light.office_monitor_leds
-            - light.guest_room_lights
+          target:
+            entity_id:
+              - light.office_lights
+              - light.office_cabinet_leds_master
+              - light.office_monitor_leds
+              - light.guest_room_lights
 
 #
 # NOBODY HOME
@@ -80,9 +82,11 @@ scr_nobody_home:
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
       state: "off"
     - service: lock.lock
-      entity_id: lock.front_door_lock, lock.back_door_lock
+      target:
+        entity_id: lock.front_door_lock, lock.back_door_lock
     - service: homeassistant.turn_off
-      entity_id: group.all_lighting_xabove_cabinet
+      target:
+        entity_id: group.all_lighting_xabove_cabinet
 
 #
 # PLUMBING & WATER RELATED
@@ -135,7 +139,8 @@ scr_occupied_sim:
         brightness_pct: 50
     - delay: "00:{{ (range(1, 59)|random|int(default=0)) }}:00"
     - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
+      target:
+        entity_id: group.indoor_lights
 
 #
 # COMMON EXTENDED ABSENCE ACTIONS
@@ -146,27 +151,33 @@ scr_common_extended_absence_on:
     - service: script.scr_check_sunrm_windows
     - service: script.scr_close_sunrm_shades
     - service: lock.lock
-      entity_id: lock.front_door_lock,lock.back_door_lock
+      target:
+        entity_id: lock.front_door_lock,lock.back_door_lock
     - service: homeassistant.turn_off
-      entity_id: group.all_lighting_xabove_cabinet
+      target:
+        entity_id: group.all_lighting_xabove_cabinet
     - if:
         - condition: state
           entity_id: input_boolean.leave_water_valve_on
           state: "off"
       then:
         - service: switch.turn_off
-          entity_id: switch.water_valve
+          target:
+            entity_id: switch.water_valve
     - delay: "00:20:00"
     - service: switch.turn_off
-      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+      target:
+        entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
 scr_common_extended_absence_off:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: switch.turn_on
-      entity_id: switch.water_valve
+      target:
+        entity_id: switch.water_valve
     - service: switch.turn_on
-      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+      target:
+        entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
 #
 # COMMON EXTENDED ABSENCE ACTIONS
@@ -264,7 +275,8 @@ scr_close_sunrm_shades:
           entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "off"
     - service: cover.close_cover
-      entity_id: cover.sun_room_shades
+      target:
+        entity_id: cover.sun_room_shades
 
 #
 # PARTIALLY CLOSE SUN ROOM SHADES
@@ -466,9 +478,11 @@ scr_mood_lighting_on:
       entity_id: group.mood_lights
       state: "off"
     - service: scene.turn_on
-      entity_id: scene.sun_room_uplights_20
+      target:
+        entity_id: scene.sun_room_uplights_20
     - service: homeassistant.turn_on
-      entity_id: group.mood_lights
+      target:
+        entity_id: group.mood_lights
     - choose:
         - conditions:
             - condition: time
@@ -477,15 +491,18 @@ scr_mood_lighting_on:
                 - thu # night before trash day
           sequence:
             - service: scene.turn_on
-              entity_id: scene.kitchen_mood_trash_night
+              target:
+                entity_id: scene.kitchen_mood_trash_night
       default:
         - service: scene.turn_on
-          entity_id: scene.kitchen_mood_spots_50_warm_white
+          target:
+            entity_id: scene.kitchen_mood_spots_50_warm_white
 
 scr_reset_mood_lights_to_default:
   sequence:
     - service: scene.turn_on
-      entity_id: scene.kitchen_mood_spots_50_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_50_warm_white
 
 #
 # MOTION LIGHTING - if luminosity is low and motion is detected
@@ -518,9 +535,11 @@ scr_pathway_motion_lighting_on:
       entity_id: binary_sensor.lum_mood_lights_f_solar_trig
       state: "on"
     - service: scene.turn_on
-      entity_id: scene.kitchen_mood_spots_20_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_20_warm_white
     - service: homeassistant.turn_on
-      entity_id: group.pathway_lights
+      target:
+        entity_id: group.pathway_lights
 
 scr_pathway_motion_lighting_off:
   sequence:
@@ -532,7 +551,8 @@ scr_pathway_motion_lighting_off:
       entity_id: group.pathway_lights
       state: "on"
     - service: homeassistant.turn_off
-      entity_id: group.pathway_lights
+      target:
+        entity_id: group.pathway_lights
 
 #
 # GREAT ROOM LIGHTING
@@ -543,7 +563,8 @@ scr_great_room_motion_lighting_off:
       entity_id: group.great_room_lights
       state: "on"
     - service: light.turn_off
-      entity_id: group.great_room_lights
+      target:
+        entity_id: group.great_room_lights
 
 #
 # OUTDOOR LIGHTS AND NOTIFICATIONS
@@ -568,7 +589,7 @@ scr_frontporch_activity:
           entity_id: person.karen
           state: "home"
     - service: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
     - service: notify.yskt_cell_phones
       data:
@@ -585,7 +606,8 @@ scr_front_door_lights_on:
     - condition: template # sensor is broken if zero
       value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
-      entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
+      target:
+        entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
 
 scr_back_door_lights_on:
   sequence:
@@ -595,7 +617,8 @@ scr_back_door_lights_on:
     - condition: template # sensor is broken if zero
       value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
-      entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
+      target:
+        entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
 
 #
 # SPEAK PHRASE
@@ -700,7 +723,8 @@ scr_sonos_eval_announce:
 scr_pause_leak_alarm:
   sequence:
     - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_pause_leak_alarm
+      target:
+        entity_id: input_boolean.inp_bool_pause_leak_alarm
 
 # SPEAK TIME
 scr_manual_say_time:
@@ -717,19 +741,23 @@ scr_vacuum_start_custom_cleaning:
       entity_id: vacuum.rosie # do not execute unless docked (not already cleaning)
       state: "docked"
     - service: neato.custom_cleaning
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
 
 scr_vacuum_pause:
   sequence:
     - service: vacuum.pause
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
 
 scr_vacuum_stop:
   sequence:
     - service: vacuum.stop
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
 
 scr_vacuum_return_to_base:
   sequence:
     - service: vacuum.return_to_base
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
