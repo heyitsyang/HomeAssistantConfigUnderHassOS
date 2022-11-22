@@ -1107,6 +1107,26 @@
     - service: script.scr_back_door_lights_on
 
 #
+# FRONT PORCH CAMERA ACTIVITY TRIGGERS
+#
+- id: aut_frontporch_camera_zone_actvity
+  alias: "aut frontporch camera zone activity"
+  mode: single
+  max_exceeded: silent
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.frontporch_zone_book_occupancy
+      to: "on"
+  action:
+    - service: script.scr_say_phrase
+      data:
+        message: "You have a package at the front door"
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "You have a package at the front door"
+
+#
 # FRONT PORCH INGRESS SENSORS ACTIVITY TRIGGERS
 #
 - id: aut_frontporch_activity
