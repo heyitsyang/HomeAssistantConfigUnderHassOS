@@ -281,6 +281,81 @@
         entity_id: group.indoor_lights
 
 #
+# PARTY MODE
+#
+
+# PARTY MODE ON/OFF ACTIONS
+- id: aut_party_mode_on
+  alias: party mode on
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.party_mode
+      from: "off"
+      to: "on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lights
+        brightness_pct: 30
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.track_lights
+          - group.kitchen_lights
+          - light.sun_room_lights
+          - light.eating_area_lights
+          - light.entryway_lights
+
+- id: aut_party_mode_off
+  alias: party mode off
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.party_mode
+      from: "on"
+      to: "off"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id:
+          - light.track_lights
+          - light.sun_room_lights
+          - light.eating_area_lights
+          - light.entryway_lights
+
+# PARTY MODE DETERMINED BY DATE/TIME
+- id: aut_datetime_party_mode_on
+  alias: "aut datetime extended absence on"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.party_mode_start
+  condition:
+    - condition: state # only bother if currently OFF
+      entity_id: input_boolean.party_mode
+      state: "off"
+  action:
+    - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
+      target:
+        entity_id: input_boolean.party_mode # since it is triggered by off-to-on input_boolean change
+
+- id: aut_datetime_party_mode_off
+  alias: "aut datetime extended absence off"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.party_mode_end
+  condition:
+    - condition: state # only bother if currently ON
+      entity_id: input_boolean.party_mode
+      state: "on"
+  action:
+    - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
+      target:
+        entity_id: input_boolean.party_mode # since it is triggered by on-to-off input_boolen change
+
+#
 # ADJUST LIVING ROOM LIGHT BRIGHTNESS IF NECESSARY
 #
 - id: auto_adj_lvrm_brightness
@@ -291,6 +366,9 @@
       entity_id: sensor.suggested_brightness # this triggers with any state change
       to: ~
   condition:
+    - condition: state
+      entity_id: input_boolean.party_mode
+      state: "off"
     - condition: template # ignore if zero (prevent turn off of light using this mechanism)
       value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
     - condition: state
@@ -1107,7 +1185,24 @@
     - service: script.scr_back_door_lights_on
 
 #
-# FRONT PORCH CAMERA ACTIVITY TRIGGERS
+# DRIVWAY CAMERA ZONE ACTIVITY TRIGGERS
+#
+- id: aut_driveway_camera_zone_actvity
+  alias: "aut driveway camera zone activity"
+  mode: single
+  max_exceeded: silent
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.driveway_zone_person_occupancy
+        - binary_sensor.driveway_zone_car_occupancy
+      to: "on"
+  action:
+    - service: script.scr_front_door_lights_on
+
+#
+# FRONT PORCH CAMERA ZONE ACTIVITY TRIGGERS
 #
 - id: aut_frontporch_camera_zone_actvity
   alias: "aut frontporch camera zone activity"
@@ -1158,6 +1253,16 @@
   initial_state: true
   mode: restart
   trigger:
+    - platform: state
+      entity_id: binary_sensor.driveway_zone_car_occupancy
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
+    - platform: state
+      entity_id: binary_sensor.driveway_zone_person_occupancy
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
       entity_id: binary_sensor.front_ent_attic_uwave
       to: "off"
@@ -1758,7 +1863,6 @@
   action:
     - service: script.scr_common_guest_mode_on
 
-
 - id: aut_guest_mode_off
   alias: "aut guest mode off"
   initial_state: true
@@ -1943,7 +2047,7 @@
   action:
     - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
       target:
-        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change    - service: input_boolean.turn_off
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change
 
 #
 # Simulate home occupied in evening if Extended Absence Mode is ON
