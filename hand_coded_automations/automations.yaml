@@ -899,6 +899,9 @@
       for:
         minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int(default=0) }}"
   condition: # only auto-off if daylight outside
+    - condition: state
+      entity_id: input_boolean.party_mode
+      state: "off"
     - condition: numeric_state #  prevent auto-off when light inside exceeds the above lux trigger
       entity_id: sun.sun #  light turns off when motion times out (below)
       value_template: "{{ state_attr('sun.sun', 'elevation') }}"
