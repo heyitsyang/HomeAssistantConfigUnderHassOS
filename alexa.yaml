@@ -66,6 +66,9 @@ smart_home:
 
   # Create friendlier aliases for Alexa
   entity_config:
+    switch.christmas_tree:
+      name: "Christmas Tree"
+      display_categories: LIGHT
     light.kitchen_leds_lower:
       name: "Kitchen counter lights"
       display_categories: LIGHT
