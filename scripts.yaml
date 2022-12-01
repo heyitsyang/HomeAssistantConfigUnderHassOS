@@ -565,7 +565,7 @@ scr_great_room_motion_lighting_off:
     - condition: state
       entity_id: group.great_room_lights
       state: "on"
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       target:
         entity_id: group.great_room_lights
 

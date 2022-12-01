@@ -262,7 +262,7 @@
       for:
         minutes: 120
   action:
-    - service: switch.turn_off
+    - service: homeassistant.turn_off
       target:
         entity_id: group.outdoor_lights
 
@@ -1334,7 +1334,7 @@
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       to: "off"
   action:
-    - service: switch.turn_off
+    - service: homeassistant.turn_off
       target:
         entity_id: group.outdoor_lights
 
