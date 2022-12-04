@@ -31,26 +31,14 @@ http:
 
 default_config:
 
-#stream: # Enables stream component
-#ffmpeg: # enables ffmpeg integration
-
 frontend: # Enables the frontend
   themes: !include_dir_merge_named themes # themes go in the themes directory
-
-# NEATO VACUUM
-#neato:
-#  client_id: !secret neato_client_id
-#  client_secret: !secret neato_client_secret
 
 # GOOGLE CALENDAR
 #google:              # now added via UI
 #  client_id: !secret google_cal_client_id
 #  client_secret: !secret google_cal_client_secret
 
-# OTHER HA HUBS
-#vera:     # now added via UI
-#  vera_controller_url: http://veraplus.shencentral.net:3480/
-# vera_controller_url: http://10.0.0.40:3480/
 
 ############################################
 # INCLUDES
