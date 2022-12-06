@@ -58,11 +58,12 @@ smart_home:
       - light.living_room_fan
       - light.sun_room_fan_1
       - light.sun_room_fan_2
-      - switch.front_door_lights       # mapped to lights.xxx
-      - switch.back_door_lights        # mapped to lights.xxx
-      #      - switch.entryway_lights         # mapped to lights.xxx
-      #      - switch.kitchen_cabinet_lights  # mapped to lights.xxx
-      #      - switch.master_closet_lights    # mapped to lights.xxx
+      - switch.front_door_lights # mapped to lights.xxx
+      - switch.back_door_lights # mapped to lights.xxx
+      - switch.entryway_lights # mapped to lights.xxx
+      - switch.kitchen_cabinet_lights # mapped to lights.xxx
+      - switch.master_closet_lights # mapped to lights.xxx
+      - switch.eating_area_lights # mapped to lights.xxx
 
   # Create friendlier aliases for Alexa
   entity_config:
