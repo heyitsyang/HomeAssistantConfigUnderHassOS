@@ -119,9 +119,6 @@ scr_arrival_announcement:
     - service: script.scr_say_phrase
       data:
         message: "While you where away, there was a visitor at the front door"
-    - service: notify.alexa_yellow_ring
-      data:
-        message: "While you where away, there was a visitor at the front door"
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
@@ -594,6 +591,9 @@ scr_frontporch_activity:
     - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "While you where away, there was a visitor at the front door"
     - service: notify.yskt_cell_phones
       data:
         title: Front door activity
