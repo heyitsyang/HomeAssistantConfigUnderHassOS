@@ -19,8 +19,8 @@ homeassistant:
 
 http:
   # server_port: 61615                                 #  default port 8123 is used for local network unencrypted http
-  
-  # NOTE: ssl_certiciate and ssl_key are now configured in the NGINX add-on
+
+  # NOTE: ssl_certiciate and ssl_key are now configured in the NGINX SSL Proxy add-on
   # ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
   # ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
 
@@ -38,7 +38,6 @@ frontend: # Enables the frontend
 #google:              # now added via UI
 #  client_id: !secret google_cal_client_id
 #  client_secret: !secret google_cal_client_secret
-
 
 ############################################
 # INCLUDES
