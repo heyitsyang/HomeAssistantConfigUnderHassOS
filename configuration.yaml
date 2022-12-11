@@ -7,9 +7,9 @@ homeassistant:
   #  elevation: 23 # (meters) needed for weather/sunrise functions
   #  unit_system: imperial # 'metric' for Metric, 'imperial' for Imperial
   #  time_zone: America/New_York # google "List of TZ database time zones"
-  currency: USD
-  external_url: !secret external_url
-  internal_url: !secret internal_url
+  # currency: USD
+  # external_url: !secret external_url  # now configured in Settings>System>Networks
+  # internal_url: !secret internal_url  # now configured in Settings>System>Networks
   allowlist_external_dirs:
     - /config # this is required for filesize sensor to work on the home assistant db
   customize: !include customize.yaml # customize, customize_domain, & customize_glob
