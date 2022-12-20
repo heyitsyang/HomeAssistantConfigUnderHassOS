@@ -651,9 +651,15 @@ scr_say_phrase:
               data:
                 entity_id: media_player.main_speakers
                 volume_level: 0.50 # set high priority speaking volume
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.garage_speakers
+                volume_level: 0.99 # set high priority speaking volume
             - service: tts.google_translate_say
               data:
-                entity_id: media_player.main_speakers
+                entity_id: 
+                  - media_player.main_speakers
+                  - media_player.garage_speakers
                 message: "This is a high priority message. {{ message }}"
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
@@ -670,9 +676,15 @@ scr_say_phrase:
           data:
             entity_id: media_player.main_speakers
             volume_level: 0.28 # set normal speaking volume
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.garage_speakers
+            volume_level: 0.99 # set high priority speaking volume
         - service: tts.google_translate_say
           data:
-            entity_id: media_player.main_speakers
+            entity_id: 
+              - media_player.main_speakers
+              - media_player.garage_speakers
             message: "{{ message }}"
     - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
       timeout: "00:00:15"
