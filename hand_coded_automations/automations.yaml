@@ -505,6 +505,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.ys_desktop_lwt
+      from: "off"
       to: "on"
     - platform: numeric_state
       entity_id: sensor.ys_desktop_system_idle_time
