@@ -241,9 +241,11 @@
       state: "on"
   action:
     - service: scene.turn_on # set default before turning off
-      entity_id: scene.kitchen_mood_spots_50_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
-      entity_id: group.mood_lights
+      target:
+        entity_id: group.mood_lights
 
 #
 # FAILSAFE TO EXTINGUISH OUTDOOR LIGHTS
@@ -260,8 +262,9 @@
       for:
         minutes: 120
   action:
-    - service: switch.turn_off
-      entity_id: group.outdoor_lights
+    - service: homeassistant.turn_off
+      target:
+        entity_id: group.outdoor_lights
 
 #
 # FAILSAFE TO EXTINGUISH INDOOR LIGHTS
@@ -274,7 +277,83 @@
       at: "02:30:00"
   action:
     - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
+      target:
+        entity_id: group.indoor_lights
+
+#
+# PARTY MODE
+#
+
+# PARTY MODE ON/OFF ACTIONS
+- id: aut_party_mode_on
+  alias: party mode on
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.party_mode
+      from: "off"
+      to: "on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lights
+        brightness_pct: 30
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.track_lights
+          - group.kitchen_lights
+          - light.sun_room_lights
+          - light.eating_area_lights
+          - light.entryway_lights
+
+- id: aut_party_mode_off
+  alias: party mode off
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.party_mode
+      from: "on"
+      to: "off"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id:
+          - light.track_lights
+          - light.sun_room_lights
+          - light.eating_area_lights
+          - light.entryway_lights
+
+# PARTY MODE DETERMINED BY DATE/TIME
+- id: aut_datetime_party_mode_on
+  alias: "aut datetime extended absence on"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.party_mode_start
+  condition:
+    - condition: state # only bother if currently OFF
+      entity_id: input_boolean.party_mode
+      state: "off"
+  action:
+    - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
+      target:
+        entity_id: input_boolean.party_mode # since it is triggered by off-to-on input_boolean change
+
+- id: aut_datetime_party_mode_off
+  alias: "aut datetime extended absence off"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.party_mode_end
+  condition:
+    - condition: state # only bother if currently ON
+      entity_id: input_boolean.party_mode
+      state: "on"
+  action:
+    - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
+      target:
+        entity_id: input_boolean.party_mode # since it is triggered by on-to-off input_boolen change
 
 #
 # ADJUST LIVING ROOM LIGHT BRIGHTNESS IF NECESSARY
@@ -287,6 +366,9 @@
       entity_id: sensor.suggested_brightness # this triggers with any state change
       to: ~
   condition:
+    - condition: state
+      entity_id: input_boolean.party_mode
+      state: "off"
     - condition: template # ignore if zero (prevent turn off of light using this mechanism)
       value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
     - condition: state
@@ -320,7 +402,8 @@
         {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
 - id: aut_lum_outdoor_lights_solar_trig_off
   alias: "aut lum outdoor lights solar trig off"
@@ -331,7 +414,8 @@
         {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
 - id: aut_lum_lvrm_lights_indoor_trig_on # Normal TV watching lights are ~14 Lux
   alias: "aut lum lvrm lights indoor trig on" # ~25 Lux if all contributing indoor lights are ON 100%
@@ -342,7 +426,8 @@
         {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
 - id: aut_lum_lvrm_lights_indoor_trig_off # Normal TV watching lights are ~14 Lux
   alias: "aut lum lvrm lights indoor trig off" # ~25 Lux if all contributing indoor lights are ON 100%
@@ -353,7 +438,8 @@
         {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_on
   alias: "aut lum mood lights f_solar trig on"
@@ -364,7 +450,8 @@
         {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_off
   alias: "aut lum mood lights f_solar trig off"
@@ -375,7 +462,8 @@
         {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_sunrm_shades_trig_on
   alias: "aut lum sunrm shades trig on"
@@ -386,7 +474,8 @@
         {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
-    entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 - id: aut_lum_sunrm_shades_trig_off
   alias: "aut lum sunrm shades trig off"
@@ -397,7 +486,8 @@
         {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
-    entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
+    target:
+      entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 ##################################################
 #      Sensor event driven automations           #
@@ -425,8 +515,8 @@
       state: "on"
   action:
     - service: light.turn_on
-      entity_id:
-        - light.office_monitor_leds
+      target:
+        entity_id: light.office_monitor_leds
     - service: select.select_option
       entity_id: select.office_cabinet_leds_preset
       data:
@@ -449,9 +539,10 @@
       to: "off"
   action:
     - service: light.turn_off
-      entity_id:
-        - light.office_monitor_leds
-        - light.office_cabinet_leds_master
+      target:
+        entity_id:
+          - light.office_monitor_leds
+          - light.office_cabinet_leds_master
 
 #
 # DEVICE TRACKER UPDATE EVENTS
@@ -551,7 +642,7 @@
       data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
-    - service: notify.pushover_yang
+    - service: notify.mobile_app_ys_cell
       data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
@@ -569,7 +660,7 @@
         - sensor.water_pressure
       above: 85
   action:
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
         message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
@@ -635,7 +726,8 @@
       to: "on"
   action:
     - service: switch.turn_off
-      entity_id: switch.water_valve
+      target:
+        entity_id: switch.water_valve
     - service: script.scr_say_phrase
       data:
         priority: "high"
@@ -644,13 +736,36 @@
       data:
         priority: "high"
         message: "House water has been turned off.  Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         message: "House water is OFF.  Turn on manually when leak is resolved."
     - service: notify.alexa_yellow_ring
       data:
         message: "House water is OFF. Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
+    - service: notify.yskt_cell_phones
+      data:
+        message: "TTS"
+        data:
+          tts_text: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
+          priority: high
+          ttl: 0
+          media_stream: alarm_stream
+    - service: notify.yskt_cell_phones
+      data:
+        title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
+        message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
+        data:
+          channel: "Urgent"
+          importance: "high"
+          vibrationPattern: "100, 1000, 100, 1000, 100, 1000"
+          persistent: "true"
+          tag: "persistent"
+          priority: high
+          ttl: 0
+    - service: notify.gmail_to_yang
+      data:
+        message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
     - repeat:
         while:
           - condition: template
@@ -666,12 +781,6 @@
             data:
               priority: "high"
               message: "Water Leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-          - service: notify.pushover_yangandkaren
-            data:
-              title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-              message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
-              data:
-                priority: 1
           - delay:
               seconds: 30
 
@@ -685,6 +794,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.top_load_washer_wash_completed
+      from: "off"
       to: "on"
   action:
     - service: script.scr_say_phrase
@@ -711,6 +821,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.dryer_dry_completed
+      from: "off"
       to: "on"
   action:
     - service: script.scr_say_phrase
@@ -790,13 +901,17 @@
       for:
         minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int(default=0) }}"
   condition: # only auto-off if daylight outside
+    - condition: state
+      entity_id: input_boolean.party_mode
+      state: "off"
     - condition: numeric_state #  prevent auto-off when light inside exceeds the above lux trigger
       entity_id: sun.sun #  light turns off when motion times out (below)
       value_template: "{{ state_attr('sun.sun', 'elevation') }}"
       above: 14.0 # house behind blocks sun at this angle, so above it is "daylight"
   action:
     - service: light.turn_off
-      entity_id: light.living_room_lights
+      target:
+        entity_id: light.living_room_lights
 
 #
 # GREAT ROOM MOTION INACTIVITY TIMEOUT
@@ -909,7 +1024,8 @@
         state: "on"
   action:
     - service: cover.open_cover
-      entity_id: cover.sun_room_shades
+      target:
+        entity_id: cover.sun_room_shades
 
 #
 # CLOSE SUN RM SHADES BASED ON SUNSET OR LUMINOSITY FOR THE EVENING
@@ -1074,6 +1190,49 @@
     - service: script.scr_back_door_lights_on
 
 #
+# DRIVWAY CAMERA ZONE ACTIVITY TRIGGERS
+#
+- id: aut_driveway_camera_zone_actvity
+  alias: "aut driveway camera zone activity"
+  mode: single
+  max_exceeded: silent
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.driveway_zone_person_occupancy
+        - binary_sensor.driveway_zone_car_occupancy
+      to: "on"
+  action:
+    - service: script.scr_front_door_lights_on
+
+#
+# FRONT PORCH CAMERA ZONE ACTIVITY TRIGGERS
+#
+- id: aut_frontporch_camera_zone_actvity
+  alias: "aut frontporch camera zone activity"
+  mode: single
+  max_exceeded: silent
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.frontporch_zone_book_occupancy
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.frontporch_zone_suitcase_occupancy
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.frontporch_zone_handbag_occupancy
+      to: "on"
+  action:
+    - service: script.scr_say_phrase
+      data:
+        message: "You have a package at the front door"
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "You have a package at the front door"
+
+#
 # FRONT PORCH INGRESS SENSORS ACTIVITY TRIGGERS
 #
 - id: aut_frontporch_activity
@@ -1084,10 +1243,13 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (is_state('binary_sensor.doorbell_field_detection', 'on')) and (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
+        {{ (is_state('binary_sensor.doorbell_zone_person_occupancy', 'on')) and (is_state('binary_sensor.front_ent_attic_uwave', 'on')) }}
     - platform: template
       value_template: >-
-        {{ (is_state('binary_sensor.front_ent_attic_uwave', 'on')) and (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
+        {{ (is_state('binary_sensor.frontporch_zone_person_occupancy', 'on')) and (is_state('binary_sensor.front_ent_attic_uwave', 'on')) }}
+    - platform: template
+      value_template: >-
+        {{ (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) and (is_state('binary_sensor.front_ent_attic_uwave', 'on')) }}
   condition:
     - condition: template # debounce
       value_template: >-
@@ -1105,6 +1267,16 @@
   initial_state: true
   mode: restart
   trigger:
+    - platform: state
+      entity_id: binary_sensor.driveway_zone_car_occupancy
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
+    - platform: state
+      entity_id: binary_sensor.driveway_zone_person_occupancy
+      to: "off"
+      for:
+        minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
       entity_id: binary_sensor.front_ent_attic_uwave
       to: "off"
@@ -1137,7 +1309,8 @@
         minutes: "{{ (states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) + 5) | int(default=0) }}"
   action:
     - service: light.turn_off
-      entity_id: light.front_door_lights
+      target:
+        entity_id: light.front_door_lights
 
 #
 # BACK DOOR LIGHTS INACTIVITY TIMEOUT
@@ -1153,7 +1326,8 @@
         minutes: "{{ states('input_number.inp_num_back_door_lights_off_delay') | int(default=0) }}"
   action:
     - service: light.turn_off
-      entity_id: light.back_door_lights
+      target:
+        entity_id: light.back_door_lights
 
 #
 # OUTDOOR LIGHTS AUTO OFF
@@ -1171,8 +1345,9 @@
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       to: "off"
   action:
-    - service: switch.turn_off
-      entity_id: group.outdoor_lights
+    - service: homeassistant.turn_off
+      target:
+        entity_id: group.outdoor_lights
 
 #
 # MOOD LIGHTS AUTO ON BASED ON LUMINOSITY
@@ -1223,9 +1398,11 @@
       state: "on"
   action:
     - service: scene.turn_on # set the lights to the default before turning off
-      entity_id: scene.kitchen_mood_spots_50_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
-      entity_id: group.mood_lights
+      target:
+        entity_id: group.mood_lights
 
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
@@ -1300,11 +1477,12 @@
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
-      entity_id: lock.front_door_lock
-    - service: notify.pushover_yang
+      target:
+        entity_id: lock.front_door_lock
+    - service: notify.yskt_cell_phones
       data:
-        message: "Front door automatically locked"
         title: "Front door automatically locked"
+        message: "Oops. Someone left it unlocked!"
 
 - id: aut_auto_back_door_lock
   alias: "aut auto back door lock"
@@ -1331,11 +1509,12 @@
       state: "off" # be sure door is closed
   action:
     - service: lock.lock
-      entity_id: lock.back_door_lock
-    - service: notify.pushover_yang
+      target:
+        entity_id: lock.back_door_lock
+    - service: notify.yskt_cell_phones
       data:
-        message: "Back door automatically locked"
         title: "Back door automatically locked"
+        message: "Oops. Someone left it unlocked!"
 
 #
 # WINDOW TRIGGERED ACTIONS
@@ -1355,13 +1534,15 @@
     #    data:
     #      option: "{{ states('climate.ecobee') }}"
     - service: climate.turn_off
-      entity_id: climate.ecobee
+      target:
+        entity_id: climate.ecobee
     - service: input_select.select_option
       entity_id: input_select.inp_sel_saved_sunroom_hvac
       data:
         option: "{{ states('climate.sunroom_ac') }}"
     - service: climate.turn_off
-      entity_id: climate.sunroom_ac
+      target:
+        entity_id: climate.sunroom_ac
     - service: script.scr_say_phrase
       data:
         message: "A window is open. Climate control is now turned off"
@@ -1381,7 +1562,8 @@
     #    data:
     #      hvac_mode: "{{ states('input_select.inp_sel_saved_ecobee_hvac') }}"
     - service: climate.turn_on
-      entity_id: climate.ecobee
+      target:
+        entity_id: climate.ecobee
     - service: climate.set_hvac_mode
       entity_id: climate.sunroom_ac
       data:
@@ -1406,10 +1588,11 @@
     entity_id: fan.master_bedroom_fan
     state: "off"
   action:
-    service: light.turn_on
-    data:
+    service: fan.set_percentage
+    target:
       entity_id: fan.master_bedroom_fan
-      brightness_pct: 30
+    data:
+      percentage: 30
 
 - id: aut_master_bedroom_fan_trig_off
   alias: "aut master bedroom fan trig off"
@@ -1424,8 +1607,9 @@
     entity_id: fan.master_bedroom_fan
     state: "on"
   action:
-    service: light.turn_off
-    entity_id: fan.master_bedroom_fan
+    service: fan.turn_off
+    target:
+      entity_id: fan.master_bedroom_fan
 
 #
 # NOBODY HOME ACTIONS
@@ -1653,8 +1837,8 @@
       data:
         message: |
           Home Assistant {{states("sensor.home_assistant_website")}} is now available.
-           Your current version is {{states("sensor.current_version")}}.
-           See https://github.com/home-assistant/home-assistant/releases
+            Your current version is {{states("sensor.current_version")}}.
+            See https://github.com/home-assistant/home-assistant/releases
 
 #####################################
 #    Security & House Modes         #
@@ -1676,7 +1860,8 @@
   action:
     - delay: 00:30:00
     - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_pause_alarm
+      target:
+        entity_id: input_boolean.inp_bool_pause_alarm
 
 #
 #  GUEST MODE
@@ -1690,7 +1875,7 @@
       from: "off"
       to: "on"
   action:
-    - service: script.scr_sonos_unjoin4announce
+    - service: script.scr_common_guest_mode_on
 
 - id: aut_guest_mode_off
   alias: "aut guest mode off"
@@ -1701,9 +1886,7 @@
       from: "on"
       to: "off"
   action:
-    - service: script.scr_sonos_join4announce
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_guest_in_sunroom
+    - service: script.scr_common_guest_mode_off
 
 - id: aut_datetime_guest_mode_on
   alias: "aut datetime guest mode on"
@@ -1717,8 +1900,9 @@
       state: "off"
   action:
     - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_guest_mode
-    - service: script.scr_sonos_unjoin4announce
+      target:
+        entity_id: input_boolean.inp_bool_guest_mode
+    - service: script.scr_common_guest_mode_on
 
 - id: aut_datetime_guest_mode_off
   alias: "aut datetime guest mode off"
@@ -1732,10 +1916,9 @@
       state: "on"
   action:
     - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_guest_mode
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.inp_bool_guest_in_sunroom
-    - service: script.scr_sonos_join4announce
+      target:
+        entity_id: input_boolean.inp_bool_guest_mode
+    - service: script.scr_common_guest_mode_off
 
 #
 # EXTENDED ABSENCE MODE
@@ -1758,7 +1941,7 @@
     - service: script.scr_say_phrase
       data:
         message: "Extended absence mode enabled"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "Extended absence mode has been enabled"
         message: "Home Assistant: Extended absence mode enabled"
@@ -1766,7 +1949,7 @@
       data:
         title: "Extended absence mode has been enabled"
         message: "Extended absence mode enabled"
-    - service: script.scr_shared_extended_absence_on
+    - service: script.scr_common_extended_absence_on
 
 - id: aut_extended_absence_off
   alias: "aut extended absence off"
@@ -1777,7 +1960,7 @@
       from: "on"
       to: "off"
   action:
-    - service: script.scr_shared_extended_absence_off
+    - service: script.scr_common_extended_absence_off
     - service: script.scr_say_phrase
       data:
         message: "Extended absence mode disabled"
@@ -1785,7 +1968,7 @@
       data:
         title: "Home Assistant: Extended Absence Mode disabled"
         message: "Extended absence mode disabled"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
         title: "Extended absence mode has been disabled"
         message: "Home Assistant: Extended absence mode disabled"
@@ -1816,7 +1999,8 @@
         value_template: "{{ states('group.where_are_yskt') != 'home' }}"
   action:
     - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
+      target:
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
 
 - id: aut_extended_absence_auto_off
   alias: "aut extended absence auto off"
@@ -1861,7 +2045,8 @@
       state: "off"
   action:
     - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
+      target:
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by off-to-on input_boolean change
 
 - id: aut_datetime_extended_absence_off
   alias: "aut datetime extended absence off"
@@ -1875,7 +2060,8 @@
       state: "on"
   action:
     - service: input_boolean.turn_off # This action triggers aut_extended_absence_off
-      entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_extended_absence_mode # since it is triggered by on-to-off input_boolen change
 
 #
 # Simulate home occupied in evening if Extended Absence Mode is ON
@@ -1921,7 +2107,8 @@
       to: "off"
   action:
     - service: scene.turn_on
-      entity_id: scene.living_room_normal_mode
+      target:
+        entity_id: scene.living_room_normal_mode
 
 #
 # KITCHEN UPPER CABINET MOOD LIGHTING
@@ -1938,7 +2125,8 @@
         is_state('light.kitchen_leds_lower', 'on') }}
   action:
     - service: scene.turn_on
-      entity_id: scene.kitchen_mood_100_bright_white
+      target:
+        entity_id: scene.kitchen_mood_100_bright_white
 
 # return kitchen mood lights to "normal" based on luminosity
 - id: aut_kitchen_mood_normal
@@ -1970,13 +2158,16 @@
               - thu # night before trash day
           then:
             service: scene.turn_on
-            entity_id: scene.kitchen_mood_trash_night
+            target:
+              entity_id: scene.kitchen_mood_trash_night
           else:
             service: scene.turn_on
-            entity_id: scene.kitchen_mood_spots_50_warm_white
+            target:
+              entity_id: scene.kitchen_mood_spots_50_warm_white
       else:
         - service: homeassistant.turn_off
-          entity_id: light.kitchen_leds_upper_master
+          target:
+            entity_id: light.kitchen_leds_upper_master
 
 #################################
 #                               #
@@ -2001,11 +2192,8 @@
     - condition: template
       value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
   action:
-    - service: notify.pushover_yang
+    - service: notify.mobile_app_ys_cell
       data:
-        title: "Half mile trigger"
-        message: "Half mile exceeded"
-#    - service: notify.mobile_app_ys_phone
-#      data:
-#        title: "Half mile trigger"
-#        message: "Half mile exceeded"
+        message: "TTS"
+        data:
+          tts_text: "Half mile exceeded"

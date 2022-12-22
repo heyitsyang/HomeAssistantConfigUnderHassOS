@@ -7,9 +7,9 @@ homeassistant:
   #  elevation: 23 # (meters) needed for weather/sunrise functions
   #  unit_system: imperial # 'metric' for Metric, 'imperial' for Imperial
   #  time_zone: America/New_York # google "List of TZ database time zones"
-  currency: USD
-  external_url: !secret external_url
-  internal_url: !secret internal_url
+  # currency: USD
+  # external_url: !secret external_url  # now configured in Settings>System>Networks
+  # internal_url: !secret internal_url  # now configured in Settings>System>Networks
   allowlist_external_dirs:
     - /config # this is required for filesize sensor to work on the home assistant db
   customize: !include customize.yaml # customize, customize_domain, & customize_glob
@@ -19,8 +19,11 @@ homeassistant:
 
 http:
   # server_port: 61615                                 #  default port 8123 is used for local network unencrypted http
-  #  ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
-  #  ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
+
+  # NOTE: ssl_certiciate and ssl_key are now configured in the NGINX SSL Proxy add-on
+  # ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
+  # ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
+
   use_x_forwarded_for: true # required for
   trusted_proxies: # reverse proxy
     - 10.0.0.44 #   home assistant address
@@ -28,32 +31,19 @@ http:
 
 default_config:
 
-#stream: # Enables stream component
-#ffmpeg: # enables ffmpeg integration
-
 frontend: # Enables the frontend
   themes: !include_dir_merge_named themes # themes go in the themes directory
-
-# NEATO VACUUM
-#neato:
-#  client_id: !secret neato_client_id
-#  client_secret: !secret neato_client_secret
 
 # GOOGLE CALENDAR
 #google:              # now added via UI
 #  client_id: !secret google_cal_client_id
 #  client_secret: !secret google_cal_client_secret
 
-# OTHER HA HUBS
-#vera:     # now added via UI
-#  vera_controller_url: http://veraplus.shencentral.net:3480/
-# vera_controller_url: http://10.0.0.40:3480/
-
 ############################################
 # INCLUDES
 ############################################
 
-# note the include for customize: is required
+# note the customize: & !include is required
 # to be in the homeassitant: section
 
 history: !include history.yaml # doesn't work, check all three
@@ -69,13 +59,12 @@ sensor: !include sensors.yaml
 script: !include scripts.yaml
 tts: !include tts.yaml
 mqtt: !include mqtt.yaml
-#device_tracker: !include device_trackers.yaml
 #binary_sensor: !include binary_sensors.yaml
 template: !include templates.yaml
 input_boolean: !include input_booleans.yaml
 input_select: !include input_selects.yaml
-#input_text: !include input_text.yaml
-input_number: !include input_numbers.yaml
+#input_text: !include input_text.yaml      # configuring this in helpers is now preferred
+input_number: !include input_numbers.yaml  # configuring this in helpers is now preferred
 light: !include lights.yaml
 switch: !include switches.yaml
 cover: !include covers.yaml

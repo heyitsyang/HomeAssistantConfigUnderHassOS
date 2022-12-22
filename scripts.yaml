@@ -13,20 +13,20 @@ scr_ha_startup:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
     - service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
-      data:
+      target:
         entity_id: input_boolean.inp_bool_announcements
     - service: input_boolean.turn_off # initialize sleeping as ON
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
     - condition: template
       value_template: >
         {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
           ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
     - service: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_announcements
     - service: input_boolean.turn_off
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
 
 #
@@ -37,10 +37,14 @@ scr_ha_startup:
 scr_goodnight: # called by Alexa as PART of Goodnight Routine
   sequence:
     - service: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.party_mode
     - service: lock.lock
-      entity_id: lock.front_door_lock, lock.back_door_lock
+      target:
+        entity_id: lock.front_door_lock, lock.back_door_lock
     - if:
         - or:
             - condition: state
@@ -62,11 +66,12 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
           state: "off"
       then:
         - service: light.turn_off
-          entity_id:
-            - light.office_lights
-            - light.office_cabinet_leds_master
-            - light.office_monitor_leds
-            - light.guest_room_lights
+          target:
+            entity_id:
+              - light.office_lights
+              - light.office_cabinet_leds_master
+              - light.office_monitor_leds
+              - light.guest_room_lights
 
 #
 # NOBODY HOME
@@ -80,9 +85,11 @@ scr_nobody_home:
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
       state: "off"
     - service: lock.lock
-      entity_id: lock.front_door_lock, lock.back_door_lock
+      target:
+        entity_id: lock.front_door_lock, lock.back_door_lock
     - service: homeassistant.turn_off
-      entity_id: group.all_lighting_xabove_cabinet
+      target:
+        entity_id: group.all_lighting_xabove_cabinet
 
 #
 # PLUMBING & WATER RELATED
@@ -112,9 +119,6 @@ scr_arrival_announcement:
     - service: script.scr_say_phrase
       data:
         message: "While you where away, there was a visitor at the front door"
-    - service: notify.alexa_yellow_ring
-      data:
-        message: "While you where away, there was a visitor at the front front_door_openeddoor"
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
@@ -135,38 +139,80 @@ scr_occupied_sim:
         brightness_pct: 50
     - delay: "00:{{ (range(1, 59)|random|int(default=0)) }}:00"
     - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
+      target:
+        entity_id: group.indoor_lights
 
 #
-# SHARED EXTENDED ABSENCE ACTIONS
+# COMMON EXTENDED ABSENCE ACTIONS
 #
-scr_shared_extended_absence_on:
+scr_common_extended_absence_on:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: script.scr_check_sunrm_windows
     - service: script.scr_close_sunrm_shades
     - service: lock.lock
-      entity_id: lock.front_door_lock,lock.back_door_lock
+      target:
+        entity_id: lock.front_door_lock,lock.back_door_lock
     - service: homeassistant.turn_off
-      entity_id: group.all_lighting_xabove_cabinet
+      target:
+        entity_id: group.all_lighting_xabove_cabinet
     - if:
         - condition: state
           entity_id: input_boolean.leave_water_valve_on
           state: "off"
       then:
         - service: switch.turn_off
-          entity_id: switch.water_valve
+          target:
+            entity_id: switch.water_valve
     - delay: "00:20:00"
     - service: switch.turn_off
-      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+      target:
+        entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
 
-scr_shared_extended_absence_off:
+scr_common_extended_absence_off:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
     - service: switch.turn_on
-      entity_id: switch.water_valve
+      target:
+        entity_id: switch.water_valve
     - service: switch.turn_on
-      entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+      target:
+        entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+
+#
+# COMMON EXTENDED ABSENCE ACTIONS
+#
+scr_common_guest_mode_on:
+  mode: restart
+  sequence:
+    - service: script.scr_sonos_unjoin4announce
+    - service: input_boolean.turn_on                # leave water valve ON if absent & with guest
+      target:
+        entity_id: input_boolean.leave_water_valve_on
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inhibit_office_mood_lighting    
+
+scr_common_guest_mode_off:
+  mode: restart
+  sequence:
+    - service: script.scr_sonos_join4announce
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_guest_in_sunroom
+    - service: input_boolean.turn_off                # leave water valve ON if absent & with guest
+      target:
+        entity_id: input_boolean.leave_water_valve_on
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inhibit_office_mood_lighting   
+
 
 #
 # CHECK IF SUN ROOM WINDOWS ARE OPEN & REPORT
@@ -229,7 +275,8 @@ scr_close_sunrm_shades:
           entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "off"
     - service: cover.close_cover
-      entity_id: cover.sun_room_shades
+      target:
+        entity_id: cover.sun_room_shades
 
 #
 # PARTIALLY CLOSE SUN ROOM SHADES
@@ -277,11 +324,7 @@ scr_partially_close_sunrm_shades:
 keymaster_front_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.mobile_app_ys_cell
-      data:
-        title: "{{ title }}"
-        message: "{{ message }}"
-    - service: notify.mobile_app_kt_cell
+    - service: notify.yskt_cell_phones
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -289,11 +332,7 @@ keymaster_front_door_manual_notify:
 keymaster_back_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.mobile_app_ys_cell
-      data:
-        title: "{{ title }}"
-        message: "{{ message }}"
-    - service: notify.mobile_app_kt_cell
+    - service: notify.yskt_cell_phones
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -319,13 +358,26 @@ scr_check_if_suspicious:
             - condition: state
               entity_id: person.karen
               state: "home"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
       data:
-        title: "SUSPICIOUS ACTIVITY at Norcoose home"
-        message: "Suspicious actvity detected in Norcoose home"
+        message: "TTS"
         data:
-          url: "https://shencentral.duckdns.org/lovelace/cameras"
-          priority: 1 # priority 1 used for urgent messages
+          tts_text: "SUSPICIOUS ACTIVITY at Norcoose"
+          media_stream: alarm_stream
+    - service: notify.yskt_cell_phones
+      data:
+        title: "SUSPICIOUS ACTIVITY at Norcoose"
+        message: "PRESS to investigate"
+        data:
+          clickAction: "ccab4aaf_frigate/dashboard"
+          channel: "Urgent"
+          importance: "high"
+          media_stream: alarm_stream
+          vibrationPattern: "100, 1000, 100, 1000, 100, 1000"
+          persistent: "true"
+          tag: "persistent"
+          priority: high
+          ttl: 0
     - service: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
@@ -343,13 +395,22 @@ scr_check_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: notify.pushover_yangandkaren
+    - service: notify.yskt_cell_phones
+      data:
+        message: "TTS"
+        data:
+          tts_text: "A garage door has been left open"
+          media_stream: alarm_stream
+          priority: high
+          ttl: 0
+    - service: notify.yskt_cell_phones
       data:
         title: "GARAGE DOOR LEFT OPEN"
-        message: "Garage door left open"
+        message: "Did you forget to close it?  PRESS to see."
         data:
-          url: "https://shencentral.duckdns.org/lovelace/security"
-          sound: siren
+          clickAction: "lovelace/security"
+          priority: high
+          ttl: 0
 
 scr_repeat_say_garage_open:
   sequence:
@@ -417,9 +478,11 @@ scr_mood_lighting_on:
       entity_id: group.mood_lights
       state: "off"
     - service: scene.turn_on
-      entity_id: scene.sun_room_uplights_20
+      target:
+        entity_id: scene.sun_room_uplights_20
     - service: homeassistant.turn_on
-      entity_id: group.mood_lights
+      target:
+        entity_id: group.mood_lights
     - choose:
         - conditions:
             - condition: time
@@ -428,15 +491,18 @@ scr_mood_lighting_on:
                 - thu # night before trash day
           sequence:
             - service: scene.turn_on
-              entity_id: scene.kitchen_mood_trash_night
+              target:
+                entity_id: scene.kitchen_mood_trash_night
       default:
         - service: scene.turn_on
-          entity_id: scene.kitchen_mood_spots_50_warm_white
+          target:
+            entity_id: scene.kitchen_mood_spots_50_warm_white
 
 scr_reset_mood_lights_to_default:
   sequence:
     - service: scene.turn_on
-      entity_id: scene.kitchen_mood_spots_50_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_50_warm_white
 
 #
 # MOTION LIGHTING - if luminosity is low and motion is detected
@@ -469,9 +535,11 @@ scr_pathway_motion_lighting_on:
       entity_id: binary_sensor.lum_mood_lights_f_solar_trig
       state: "on"
     - service: scene.turn_on
-      entity_id: scene.kitchen_mood_spots_20_warm_white
+      target:
+        entity_id: scene.kitchen_mood_spots_20_warm_white
     - service: homeassistant.turn_on
-      entity_id: group.pathway_lights
+      target:
+        entity_id: group.pathway_lights
 
 scr_pathway_motion_lighting_off:
   sequence:
@@ -483,7 +551,8 @@ scr_pathway_motion_lighting_off:
       entity_id: group.pathway_lights
       state: "on"
     - service: homeassistant.turn_off
-      entity_id: group.pathway_lights
+      target:
+        entity_id: group.pathway_lights
 
 #
 # GREAT ROOM LIGHTING
@@ -493,8 +562,9 @@ scr_great_room_motion_lighting_off:
     - condition: state
       entity_id: group.great_room_lights
       state: "on"
-    - service: light.turn_off
-      entity_id: group.great_room_lights
+    - service: homeassistant.turn_off
+      target:
+        entity_id: group.great_room_lights
 
 #
 # OUTDOOR LIGHTS AND NOTIFICATIONS
@@ -519,16 +589,17 @@ scr_frontporch_activity:
           entity_id: person.karen
           state: "home"
     - service: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
-    - service: notify.pushover_yangandkaren
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "While you where away, there was a visitor at the front door"
+    - service: notify.yskt_cell_phones
       data:
         title: Front door activity
-        message: "All snapshots:  https://shencentral.duckdns.org:61615/lovelace/video"
+        message: "Front door activity detected"
         data:
-          attachment: "/config/www/camera_stills/frontporch.jpg"
-          url_title: "Click here for recordings"
-          url: "https://shencentral.duckdns.org:61615/lovelace/video"
+          clickAction: "lovelace/last-snaps"
 
 scr_front_door_lights_on:
   sequence:
@@ -538,7 +609,8 @@ scr_front_door_lights_on:
     - condition: template # sensor is broken if zero
       value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
-      entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
+      target:
+        entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
 
 scr_back_door_lights_on:
   sequence:
@@ -548,7 +620,8 @@ scr_back_door_lights_on:
     - condition: template # sensor is broken if zero
       value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
-      entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
+      target:
+        entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
 
 #
 # SPEAK PHRASE
@@ -578,9 +651,15 @@ scr_say_phrase:
               data:
                 entity_id: media_player.main_speakers
                 volume_level: 0.50 # set high priority speaking volume
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.garage_speakers
+                volume_level: 0.99 # set high priority speaking volume
             - service: tts.google_translate_say
               data:
-                entity_id: media_player.main_speakers
+                entity_id: 
+                  - media_player.main_speakers
+                  - media_player.garage_speakers
                 message: "This is a high priority message. {{ message }}"
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
@@ -597,9 +676,15 @@ scr_say_phrase:
           data:
             entity_id: media_player.main_speakers
             volume_level: 0.28 # set normal speaking volume
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.garage_speakers
+            volume_level: 0.99 # set high priority speaking volume
         - service: tts.google_translate_say
           data:
-            entity_id: media_player.main_speakers
+            entity_id: 
+              - media_player.main_speakers
+              - media_player.garage_speakers
             message: "{{ message }}"
     - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
       timeout: "00:00:15"
@@ -653,7 +738,8 @@ scr_sonos_eval_announce:
 scr_pause_leak_alarm:
   sequence:
     - service: input_boolean.turn_on
-      entity_id: input_boolean.inp_bool_pause_leak_alarm
+      target:
+        entity_id: input_boolean.inp_bool_pause_leak_alarm
 
 # SPEAK TIME
 scr_manual_say_time:
@@ -670,19 +756,23 @@ scr_vacuum_start_custom_cleaning:
       entity_id: vacuum.rosie # do not execute unless docked (not already cleaning)
       state: "docked"
     - service: neato.custom_cleaning
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
 
 scr_vacuum_pause:
   sequence:
     - service: vacuum.pause
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
 
 scr_vacuum_stop:
   sequence:
     - service: vacuum.stop
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie
 
 scr_vacuum_return_to_base:
   sequence:
     - service: vacuum.return_to_base
-      entity_id: vacuum.rosie
+      target:
+        entity_id: vacuum.rosie

@@ -187,6 +187,7 @@ mood_lights:
     - switch.candles
     - light.kitchen_leds_upper_master
     - light.sun_room_uplights
+    - switch.christmas_tree
 
 pathway_lights:
   name: "Pathway Lights"
@@ -303,7 +304,8 @@ all_lighting: # This group created for frontend UI use
     - switch.candles
     - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
-    - switch.entryway_lights
+    - light.entryway_lights
+    - switch.christmas_tree
 
 all_lighting_xabove_cabinet:
   name: "Lights"
@@ -325,7 +327,8 @@ all_lighting_xabove_cabinet:
     - switch.back_door_lights
     - switch.candles
     - light.kitchen_leds_lower
-    - switch.entryway_lights
+    - light.entryway_lights
+    - switch.christmas_tree
 
 great_room_lights:
   name: "Great Room Lights"
@@ -334,6 +337,7 @@ great_room_lights:
     - light.track_lights
     - light.island_lights
     - light.kitchen_cabinet_lights
+    - switch.christmas_tree
 
 living_area_lights:
   name: "Living Area Lights"
@@ -385,10 +389,11 @@ indoor_lights:
     - light.office_monitor_leds
     - light.sun_room_lights
     - light.track_lights
-    - switch.entryway_lights
+    - light.entryway_lights
     - switch.candles
     - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
+    - switch.christmas_tree
 
 upper_office_cabinet_leds:
   name: "Upper Office Cabinet LEDs"

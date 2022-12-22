@@ -28,6 +28,7 @@ smart_home:
       - switch.hamstation
       - switch.candles
       - switch.christmas_tree
+      - input_boolean.party_mode
       - input_boolean.inp_bool_theater_mode
       - input_boolean.inp_bool_pause_leak_alarm
       - input_boolean.inp_bool_guest_mode
@@ -57,14 +58,18 @@ smart_home:
       - light.living_room_fan
       - light.sun_room_fan_1
       - light.sun_room_fan_2
-      - switch.front_door_lights       # mapped to lights.xxx
-      - switch.back_door_lights        # mapped to lights.xxx
-      #      - switch.entryway_lights         # mapped to lights.xxx
-      #      - switch.kitchen_cabinet_lights  # mapped to lights.xxx
-      #      - switch.master_closet_lights    # mapped to lights.xxx
+      - switch.front_door_lights # mapped to lights.xxx
+      - switch.back_door_lights # mapped to lights.xxx
+      - switch.entryway_lights # mapped to lights.xxx
+      - switch.kitchen_cabinet_lights # mapped to lights.xxx
+      - switch.master_closet_lights # mapped to lights.xxx
+      - switch.eating_area_lights # mapped to lights.xxx
 
   # Create friendlier aliases for Alexa
   entity_config:
+    switch.christmas_tree:
+      name: "Christmas Tree"
+      display_categories: LIGHT
     light.kitchen_leds_lower:
       name: "Kitchen counter lights"
       display_categories: LIGHT
@@ -76,6 +81,8 @@ smart_home:
       name: "Sleep mode"
     input_boolean.inp_bool_guest_mode:
       name: "Guest mode"
+    input_boolean.party_mode:
+      name: "Party mode"
     script.scr_reset_mood_lights_to_default:
       name: "Reset mood lights"
       display_categories: LIGHT
