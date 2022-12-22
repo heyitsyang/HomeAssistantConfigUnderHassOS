@@ -794,6 +794,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.top_load_washer_wash_completed
+      from: "off"
       to: "on"
   action:
     - service: script.scr_say_phrase
@@ -820,6 +821,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.dryer_dry_completed
+      from: "off"
       to: "on"
   action:
     - service: script.scr_say_phrase
