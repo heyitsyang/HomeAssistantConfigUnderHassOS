@@ -15,7 +15,7 @@ logs: # ignore events less than levels defined below
   urllib3.connectionpool: error
   #    pubnub: critical
   homeassistant.components.iqvia: fatal
-  homeassistant.components.cert_expiry.sensor: fatal
+  # homeassistant.components.cert_expiry.sensor: fatal
   homeassistant.components.ecobee: error
   haffmpeg.tools: error
   homeassistant.components.weather: error # ecobee service outages
@@ -31,7 +31,9 @@ logs: # ignore events less than levels defined below
   #homeassistant.components.netgear: debug
   #pynetgear: debug
 
-#filters:
+  #filters:
+  homeassistant.helpers.service:
+    - "Unable to find referenced entities switch.christmas_tree"
 #  homeassistant.components.neato.vacuum:
 #    - "Unable to communicate with robot"
 #  homeassistant.components.neato.switch:
