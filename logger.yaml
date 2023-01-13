@@ -31,7 +31,7 @@ logs: # ignore events less than levels defined below
   #homeassistant.components.netgear: debug
   #pynetgear: debug
 
-  #filters:
+filters:
   homeassistant.helpers.service:
     - "Unable to find referenced entities switch.christmas_tree"
 #  homeassistant.components.neato.vacuum:
