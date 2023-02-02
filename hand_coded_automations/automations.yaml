@@ -1692,10 +1692,12 @@
     - platform: state
       entity_id: person.yang
       from: home
+      for: "00:01:00"
     #    to: not_home
     - platform: state
       entity_id: person.karen
       from: home
+      for: "00:01:00"
   #    to: not_home
   action:
     - service: script.scr_say_phrase
