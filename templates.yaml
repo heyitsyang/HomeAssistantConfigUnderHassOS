@@ -27,7 +27,7 @@
 #
 - binary_sensor:
     - name: lum_outdoor_lights_solar_trig
-      #      friendly_name: "Outdoor lights on/off per solar sensor" # sync as closely with post light as possible
+      #      friendly_name: "Outdoor lights on/off per solar sensor"
       state: >-
         {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
 
@@ -48,6 +48,24 @@
       #      friendly_name: "Sunroom shades open per solar sensor"
       state: >-
         {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
+
+#
+# ESPHOME - sensors used in espHome
+#
+
+- sensor:
+    - name: weather_hourly_next_8
+      unique_id: weather_hourly_next_8
+      state: >-
+        {%- for i in state_attr('weather.forecast_home_hourly', 'forecast') -%}
+          {%- if(loop.index <= 8) -%}
+            {{(as_timestamp(i.datetime) | timestamp_custom('%-I%p')) | lower}},{{ i.condition }},{{ i.precipitation }}#
+          {%- endif -%}
+        {%- endfor -%}
+
+#
+# MISC SENSORS
+#
 
 - sensor:
     - name: ys_cell_gps_accuracy
@@ -129,17 +147,6 @@
       #      friendly_name: "Sunroom Temperature"
       state: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "°F"
-
-    #-sensor:
-    #   -name: norcoose_dewpoint
-    ##     friendly_name: "Norcoose Dewpoint"
-    #      unit_of_measurement: "°F"
-    #      state: >-
-    #        {{((((states('sensor.acurite_5n1_1002_f')) |
-    #        round(2,0)-32)*5/9)-(100 - (states('sensor.acurite_5n1_1002_h')) |
-    #        round(2,0))/5)*1.8+32}}
-    ## DewpointC = TempC -((100 - RH)/5.0)
-    ## DewpointF = (((TempF-32)*5.0/9.0) - ((100 - RH)/5.0) * 1.8) + 32.0
 
     #  BATTERIES #
     #    - not all batteries need sensor attribute templates, so not all are here
