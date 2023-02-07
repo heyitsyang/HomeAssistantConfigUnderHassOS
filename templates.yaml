@@ -152,18 +152,6 @@
     #    - not all batteries need sensor attribute templates, so not all are here
 
 - sensor:
-    - name: front_door_lock_battery
-      #      friendly_name: "Front Door Lock Batttery"
-      state: "{{ state_attr('lock.front_door_lock','battery_level') | int(default=0) }}"
-      unit_of_measurement: "%"
-
-- sensor:
-    - name: back_door_lock_battery
-      #      friendly_name: "Back Door Lock Battery"
-      state: "{{ state_attr('lock.back_door_lock','battery_level') | int(default=0) }}"
-      unit_of_measurement: "%"
-
-- sensor:
     - name: living_area_motion_battery
       #      friendly_name: "Living Area Motion Battery"
       state: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int(default=0) }}"
