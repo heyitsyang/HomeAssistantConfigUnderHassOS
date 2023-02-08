@@ -104,18 +104,6 @@
           (states('input_number.inp_num_spt_duration') | float(default=0)) }}
 
 - sensor:
-    - name: min_water_pressure
-      #      friendly_name: "Min Water Pressure"
-      unit_of_measurement: "psi"
-      state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'min_value') }}"
-
-- sensor:
-    - name: max_water_pressure
-      #      friendly_name: "Max Water Pressure"
-      unit_of_measurement: "psi"
-      state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'max_value') }}"
-
-- sensor:
     - name: lv_rm_suggested_brightness
       #      friendly_name: "Suggested Brightness"
       unit_of_measurement: "%"
