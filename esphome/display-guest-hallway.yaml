@@ -1,9 +1,31 @@
+#
+#  This program in in deep sleep most of the time
+#  and must be installed via serial cable
+#
+
 esphome:
   name: display-guest-hallway
+  on_boot:
+    priority: -100.0
+    then:
+      - component.update: esptime
+      - delay: 20s                       # allow time to execute before sleeping
+      - wait_until:
+          condition:
+            time.has_time
+          timeout: 10s
+      - if:                              # sleep duration conditions
+          condition:
+            lambda: |-
+              return ((id(esptime).now().hour >= 23) || (id(esptime).now().hour < 6));
+          then:
+            - deep_sleep.enter:
+                until: "06:00:00"        # sleep until this time if between hours above
+                time_id: esptime
+          else:
+            - deep_sleep.enter:
+                sleep_duration: 1h      # normally sleep for this long
 
-deep_sleep:
-  run_duration: 20s
-  sleep_duration: 3580s
 
 esp32:
   board: mhetesp32minikit
@@ -34,9 +56,17 @@ time:
   - platform: homeassistant
     id: esptime
 
+deep_sleep:                 # enable deep_sleep functions
+
+switch:
+  - platform: shutdown
+    name: "sleep_forever"
+    id: sleep_forever
+
 binary_sensor:
-  - platform: status
-    name: "Display Status"
+  - platform: status        # expose node status to home assistant
+    name: "display-guest-hallway status"
+
 
 sensor:
   - platform: adc
@@ -99,7 +129,7 @@ font:
   - file: 'fonts/comicbd.ttf'
     id: smaller_font
     size: 10
-  - file: 'fonts/consola.ttf'
+  - file: 'fonts/LucidaSansRegular.ttf'
     id: tiny_font
     size: 8
   - file: 'fonts/materialdesignicons-webfont.ttf'
@@ -139,16 +169,19 @@ font:
       - "\U000F059D" #"windy"
       - "\U000F059E" #"windy-variant"
 
-display:
+
+
+display:                    # note display update settings only applies in deep_sleep run_duration window
   - platform: waveshare_epaper
     id: epaper_display
     cs_pin: 5
     dc_pin: 17
     busy_pin: 4
     reset_pin: 16
-    model: 2.13in-ttgo-dke
-    update_interval: 5s
-    full_update_every: 99  # <full_update> every <update_interval> cycles
+    model: 2.13in-ttgo-dke    
+    # <full_update> every <update_interval> cycles
+    full_update_every: 99  # purposely set high to avoid full update altogether
+    update_interval: 10s    # updates a few time during wake from deep sleep - low number minimizes waiting for user
     rotation: 90
     lambda: |-
 
@@ -173,23 +206,23 @@ display:
         it.printf(5, 3, id(large_glyph), TextAlign::TOP_LEFT, weather_icon_map[id(weather_state).state.c_str()].c_str());
         if (id(weather_hourly_next_8).has_state()) {
           char *token, *next8;
-          int count = 1, glyph_x = 0, hour_x = 4, precip_x = 0;
+          int count = 1, glyph_x = 0, hour_x = 4, precip_x = 8;
           next8 = strdup(id(weather_hourly_next_8).state.c_str());
           token = strtok (next8,",#");
           ESP_LOGI("main","pre while glyph_x = %d",glyph_x);
           while (token != NULL)
           {
             if(count == 1) {
-              it.printf(hour_x, it.get_height()-46, id(smaller_font), TextAlign::BOTTOM_LEFT, token);
+              it.printf(hour_x, it.get_height()-48, id(smaller_font), TextAlign::BOTTOM_LEFT, token);
               hour_x = hour_x + 31;
             }
             if(count == 2) {
-              it.printf(glyph_x, it.get_height()-15, id(small_glyph), TextAlign::BOTTOM_LEFT, weather_icon_map[token].c_str());
+              it.printf(glyph_x, it.get_height()-17, id(small_glyph), TextAlign::BOTTOM_LEFT, weather_icon_map[token].c_str());
               glyph_x = glyph_x + 31;
             }
             if(count == 3) {
               if(strcmp("0.0", token) != 0) {
-                it.printf(precip_x + 10, it.get_height()-7, id(smaller_font), TextAlign::BOTTOM_LEFT, token);
+                it.printf(precip_x, it.get_height()-9, id(smaller_font), TextAlign::BOTTOM_LEFT, token);
               }
               precip_x = precip_x + 31;
               count = 1;
@@ -231,10 +264,17 @@ display:
 
       // Print battery voltage
       if (id(guest_suite_display_battery).has_state()) {
+        if (id(guest_suite_display_battery).state < 3.0) {
+          it.fill(COLOR_ON);
+          id(sleep_forever).turn_on();
+        }
         it.printf(0, it.get_height(), id(tiny_font), TextAlign::BOTTOM_LEFT, "%.1fv", id(guest_suite_display_battery).state);
       }
 
       // Print last update time
-      it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %H:%M %b %e", id(esptime).now());
+      if (id(esptime).now().is_valid()) {
+        it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %k:%M %b %e", id(esptime).now());
+      }
+
 
 
