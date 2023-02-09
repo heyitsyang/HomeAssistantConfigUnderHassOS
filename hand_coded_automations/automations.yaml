@@ -1727,11 +1727,11 @@
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.front_door_lock_battery
+      entity_id: sensor.front_door_lock_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity_id: sensor.back_door_lock_battery
+      entity_id: sensor.back_door_lock_battery_level
       below: 30
       for: "00:30:00"
     - platform: numeric_state

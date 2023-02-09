@@ -104,18 +104,6 @@
           (states('input_number.inp_num_spt_duration') | float(default=0)) }}
 
 - sensor:
-    - name: min_water_pressure
-      #      friendly_name: "Min Water Pressure"
-      unit_of_measurement: "psi"
-      state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'min_value') }}"
-
-- sensor:
-    - name: max_water_pressure
-      #      friendly_name: "Max Water Pressure"
-      unit_of_measurement: "psi"
-      state: "{{ state_attr('sensor.24hr_avg_water_pressure', 'max_value') }}"
-
-- sensor:
     - name: lv_rm_suggested_brightness
       #      friendly_name: "Suggested Brightness"
       unit_of_measurement: "%"
@@ -150,18 +138,6 @@
 
     #  BATTERIES #
     #    - not all batteries need sensor attribute templates, so not all are here
-
-- sensor:
-    - name: front_door_lock_battery
-      #      friendly_name: "Front Door Lock Batttery"
-      state: "{{ state_attr('lock.front_door_lock','battery_level') | int(default=0) }}"
-      unit_of_measurement: "%"
-
-- sensor:
-    - name: back_door_lock_battery
-      #      friendly_name: "Back Door Lock Battery"
-      state: "{{ state_attr('lock.back_door_lock','battery_level') | int(default=0) }}"
-      unit_of_measurement: "%"
 
 - sensor:
     - name: living_area_motion_battery

@@ -34,6 +34,11 @@ logs: # ignore events less than levels defined below
 filters:
   homeassistant.helpers.service:
     - "Unable to find referenced entities switch.christmas_tree"
+  aioesphomeapi.connection:
+    - "display-guest-hallway" # cannot connect due to normal deep sleep
+  aioesphomeapi.reconnect_logic:
+    - "display-guest-hallway" # cannot connect due to normal deep sleep
+
 #  homeassistant.components.neato.vacuum:
 #    - "Unable to communicate with robot"
 #  homeassistant.components.neato.switch:
