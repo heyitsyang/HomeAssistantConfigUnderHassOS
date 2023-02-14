@@ -1808,19 +1808,19 @@
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.sun_room_remote_1_battery_level
-      below: 20 # lower threshhold since battery affected by outside temp
+      below: 10 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.sun_room_remote_2_battery_level
-      below: 20 # lower threshhold since battery affected by outside temp
+      below: 10 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.sun_room_remote_3_battery_level
-      below: 20 # lower threshhold since battery affected by outside temp
+      below: 10 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.sun_room_remote_4_battery_level
-      below: 20 # lower threshhold since battery affected by outside temp
+      below: 10 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
   action:
     - service: notify.gmail_to_yang
