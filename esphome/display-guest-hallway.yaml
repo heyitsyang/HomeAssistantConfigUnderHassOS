@@ -8,34 +8,22 @@ esphome:
   on_boot:
     priority: -100.0
     then:
+      - switch.turn_on: disable_sd_card  # save about 80uA
       - wait_until:
           condition:
             wifi.connected
           timeout: 20s                   # add time if wifi needs it
-      - component.update: esptime
+      - component.update: homeassistant_time
       - delay: 20s                       # allow time to execute before sleeping
       - wait_until:
           condition:
             time.has_time
           timeout: 10s
-      - switch.turn_on: disable_sd_card  # save  about 80uA
-      - if:                              # sleep duration conditions
-          condition:
-            lambda: |-
-              return ((id(esptime).now().hour >= 23) || (id(esptime).now().hour < 6));
-          then:
-            - switch.turn_on: disable_sd_card  # save  about 100uA
-            - deep_sleep.enter:
-                until: "06:00:00"        # sleep until this time if between hours above
-                time_id: esptime
-          else:
-            - switch.turn_on: disable_sd_card  # save  about 100uA
-            - deep_sleep.enter:
-                sleep_duration: 1h      # normally sleep for this long
-
+      - deep_sleep.enter:
+          sleep_duration: 3550s
 
 esp32:
-  board: mhetesp32minikit
+  board: esp32dev
   framework:
     type: esp-idf
     version: recommended
@@ -67,7 +55,7 @@ spi:
 
 time:
   - platform: homeassistant
-    id: esptime
+    id: homeassistant_time
 
 deep_sleep:                 # enable deep_sleep functions
 
@@ -80,7 +68,7 @@ switch:
     name: "disable_sd_card"
     id: disable_sd_card
     pin: 
-      number: 13
+      number: GPIO13
 
 
 binary_sensor:
@@ -292,8 +280,8 @@ display:                    # note display update settings only applies in deep_
       }
 
       // Print last update time
-      if (id(esptime).now().is_valid()) {
-        it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %k:%M %b %e", id(esptime).now());
+      if (id(homeassistant_time).now().is_valid()) {
+        it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %k:%M %b %e", id(homeassistant_time).now());
       }
 
 
