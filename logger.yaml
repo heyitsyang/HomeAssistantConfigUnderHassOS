@@ -38,6 +38,8 @@ filters:
     - "display-guest-hallway" # cannot connect due to normal deep sleep
   aioesphomeapi.reconnect_logic:
     - "display-guest-hallway" # cannot connect due to normal deep sleep
+  homeassistant.loader:
+    - "^We found .* which has not been tested"
 
 #  homeassistant.components.neato.vacuum:
 #    - "Unable to communicate with robot"
