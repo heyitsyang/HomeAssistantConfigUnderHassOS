@@ -1,0 +1,300 @@
+#
+#  This program in in deep sleep most of the time
+#  and must be installed via serial cable
+#
+
+esphome:
+  name: "display-guest-suite"
+  on_boot:
+    priority: -100.0
+    then:
+      - switch.turn_on: disable_sd_card  # save about 80uA
+      - wait_until:
+          condition:
+            wifi.connected
+          timeout: 20s                   # add time if wifi needs it
+      - component.update: homeassistant_time
+      - delay: 20s                       # allow time to execute before sleeping
+      - wait_until:
+          condition:
+            time.has_time
+          timeout: 10s
+      - deep_sleep.enter:
+          sleep_duration: 3580s
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+    version: recommended
+    # Custom sdkconfig options
+    sdkconfig_options:
+      CONFIG_COMPILER_OPTIMIZATION_SIZE: y
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "sOo2TcX3/kdZRzPGxt7KZw9nfxfglTKIE+g3dl3238g="
+
+ota:
+  password: "ce50277556e728e4fe5f68f177998432"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  domain: ".shencentral.net"
+  reboot_timeout: 90s
+  fast_connect: on
+
+spi:
+  clk_pin: 18
+  mosi_pin: 23
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+deep_sleep:                 # enable deep_sleep functions
+
+switch:
+  - platform: shutdown
+    name: "sleep_forever"
+    id: sleep_forever
+
+  - platform: gpio
+    name: "disable_sd_card"
+    id: disable_sd_card
+    pin: 
+      number: GPIO13
+
+
+binary_sensor:
+  - platform: status        # expose node status to home assistant
+    name: "display-guest-suite status"
+
+
+sensor:
+  - platform: adc
+    pin: 35
+    id: guest_suite_display_battery_voltage
+    name: "Guest Suite Display Battery Voltage"
+    accuracy_decimals: 2
+    attenuation: 11dB
+    filters:
+      - multiply: 2.0  # The voltage divider requires us to multiply by 2
+    update_interval: 10s
+  
+  - platform: template
+    name: "Guest Suite Display Bettery Percent"
+    id: guest_suite_battery_percent
+    unit_of_measurement: "%"
+    lambda: |-
+      if(id(guest_suite_display_battery_voltage).state >= 4.2) {
+        return 100;
+      } else {
+        return ( id(guest_suite_display_battery_voltage).state/4.2 * 100 );
+      }     
+    update_interval: 10s
+
+  - platform: homeassistant
+    id: outside_temperature
+    entity_id: sensor.kflwildw56_temp
+    internal: true
+
+  - platform: homeassistant
+    id: outside_humidity
+    entity_id: sensor.kflwildw56_humidity
+    internal: true
+
+  - platform: homeassistant
+    id: feels_like_temperature
+    entity_id: sensor.kflwildw56_feels_like
+    internal: true
+
+  - platform: homeassistant
+    id: todays_forecast_high
+    entity_id: sensor.openweathermap_forecast_temperature
+    internal: true
+  
+  - platform: homeassistant
+    id: todays_forecast_low
+    entity_id: sensor.openweathermap_forecast_temperature_low
+    internal: true
+  
+text_sensor:
+  - platform: homeassistant
+    id: weather_state
+    name: "Current Weather Icon"
+    entity_id: sensor.openweathermap_condition
+    internal: true
+
+  - platform: homeassistant
+    id: weather_hourly_next_8
+    entity_id: sensor.weather_hourly_next_8
+    internal: true
+
+font:
+  - file: 'fonts/comic.ttf'
+    id: large_font
+    size: 40
+  - file: 'fonts/comic.ttf'
+    id: medium_font
+    size: 16
+  - file: 'fonts/comic.ttf'
+    id: small_font
+    size: 14
+  - file: 'fonts/comicbd.ttf'
+    id: smaller_font
+    size: 10
+  - file: 'fonts/LucidaSansRegular.ttf'
+    id: tiny_font
+    size: 8
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: large_glyph
+    size: 64
+    glyphs:
+      - "\U000F0594" #"clear-night"
+      - "\U000F0590" #"cloudy"
+      - "\U000F0591" #"fog"
+      - "\U000F0592" #"hail"
+      - "\U000F0593" #"lightning"
+      - "\U000F067E" #"lightning-rainy"
+      - "\U000F0595" #"partlycloudy"
+      - "\U000F0596" #"pouring"
+      - "\U000F0597" #"rainy"
+      - "\U000F0598" #"snowy"
+      - "\U000F067F" #"snowy-rainy"
+      - "\U000F0599" #"sunny"
+      - "\U000F059D" #"windy"
+      - "\U000F059E" #"windy-variant"
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: small_glyph
+    size: 32
+    glyphs:
+      - "\U000F0594" #"clear-night"
+      - "\U000F0590" #"cloudy"
+      - "\U000F0591" #"fog"
+      - "\U000F0592" #"hail"
+      - "\U000F0593" #"lightning"
+      - "\U000F067E" #"lightning-rainy"
+      - "\U000F0595" #"partlycloudy"
+      - "\U000F0596" #"pouring"
+      - "\U000F0597" #"rainy"
+      - "\U000F0598" #"snowy"
+      - "\U000F067F" #"snowy-rainy"
+      - "\U000F0599" #"sunny"
+      - "\U000F059D" #"windy"
+      - "\U000F059E" #"windy-variant"
+
+
+
+display:                    # note display update settings only applies in deep_sleep run_duration window
+  - platform: waveshare_epaper
+    id: epaper_display
+    cs_pin: 5
+    dc_pin: 17
+    busy_pin: 4
+    reset_pin: 16
+    model: 2.13in-ttgo-dke    
+    # <full_update> every <update_interval> cycles
+    full_update_every: 99  # purposely set high to avoid full update altogether
+    update_interval: 10s    # updates a few time during wake from deep sleep - low number minimizes waiting for user
+    rotation: 90
+    lambda: |-
+
+      if (id(weather_state).has_state()) {
+        std::map<std::string, std::string> weather_icon_map
+          {
+            {"clear-night", "\U000F0594"},
+            {"cloudy", "\U000F0590"},
+            {"fog", "\U000F0591"},
+            {"hail", "\U000F0592"},
+            {"lightning", "\U000F0593"},
+            {"lightning-rainy", "\U000F067E"},
+            {"partlycloudy", "\U000F0595"},
+            {"pouring", "\U000F0596"},
+            {"rainy", "\U000F0597"},
+            {"snowy", "\U000F0598"},
+            {"snowy-rainy", "\U000F067F"},
+            {"sunny", "\U000F0599"},
+            {"windy", "\U000F059D"},
+            {"windy-variant", "\U000F059E"},
+          };
+        it.printf(5, 3, id(large_glyph), TextAlign::TOP_LEFT, weather_icon_map[id(weather_state).state.c_str()].c_str());
+        if (id(weather_hourly_next_8).has_state()) {
+          char *token, *next8;
+          int count = 1, glyph_x = 0, hour_x = 4, precip_x = 8;
+          next8 = strdup(id(weather_hourly_next_8).state.c_str());
+          token = strtok (next8,",#");
+          ESP_LOGI("main","pre while glyph_x = %d",glyph_x);
+          while (token != NULL)
+          {
+            if(count == 1) {
+              it.printf(hour_x, it.get_height()-48, id(smaller_font), TextAlign::BOTTOM_LEFT, token);
+              hour_x = hour_x + 31;
+            }
+            if(count == 2) {
+              it.printf(glyph_x, it.get_height()-17, id(small_glyph), TextAlign::BOTTOM_LEFT, weather_icon_map[token].c_str());
+              glyph_x = glyph_x + 31;
+            }
+            if(count == 3) {
+              if(strcmp("0.0", token) != 0) {
+                it.printf(precip_x, it.get_height()-9, id(smaller_font), TextAlign::BOTTOM_LEFT, token);
+              }
+              precip_x = precip_x + 31;
+              count = 1;
+            } else 
+                count++;
+            token = strtok (NULL, ",#");
+          }
+          free(next8);
+        }
+
+      }
+
+      // ESP_LOGI("main", id(weather_hourly_next_8).state.c_str());
+
+      // Print outside temperature (from homeassistant sensor)
+      if (id(outside_temperature).has_state()) {
+        it.printf(77, 0, id(large_font), "%3.0f°", id(outside_temperature).state);
+      }
+
+      // Print humidity (from homeassistant sensor)
+      if (id(outside_humidity).has_state()) {
+        it.printf(141, 24, id(medium_font), "%3.0f%%", id(outside_humidity).state);
+      }
+
+      // Print feels like temperature (from homeassistant sensor)
+      if (id(feels_like_temperature).has_state()) {
+        it.printf(77, 43, id(small_font), "Feels like %3.0f°", id(feels_like_temperature).state);
+      }
+
+      // Print Forecast High
+      if (id(todays_forecast_high).has_state()) {
+        it.printf((it.get_width()-10), 16, id(small_font), TextAlign::TOP_RIGHT, "Hi %3.0f°", id(todays_forecast_high).state);
+      }
+      
+      // Print Forecast Low
+      if (id(todays_forecast_low).has_state()) {
+        it.printf((it.get_width()-10), 32, id(small_font), TextAlign::TOP_RIGHT, "Lo %3.0f°", id(todays_forecast_low).state);
+      }
+
+      // Print battery voltage
+      if (id(guest_suite_display_battery_voltage).has_state()) {
+        if (id(guest_suite_display_battery_voltage).state < 3.0) {
+          it.fill(COLOR_ON);
+          id(sleep_forever).turn_on();
+        }
+        it.printf(0, it.get_height(), id(tiny_font), TextAlign::BOTTOM_LEFT, "%.1fv", id(guest_suite_display_battery_voltage).state);
+      }
+
+      // Print last update time
+      if (id(homeassistant_time).now().is_valid()) {
+        it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %k:%M %b %e", id(homeassistant_time).now());
+      }
+
+
+
