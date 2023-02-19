@@ -4,38 +4,26 @@
 #
 
 esphome:
-  name: display-guest-hallway
+  name: "display-guest-suite"
   on_boot:
     priority: -100.0
     then:
+      - switch.turn_on: disable_sd_card  # save about 80uA
       - wait_until:
           condition:
             wifi.connected
           timeout: 20s                   # add time if wifi needs it
-      - component.update: esptime
+      - component.update: homeassistant_time
       - delay: 20s                       # allow time to execute before sleeping
       - wait_until:
           condition:
             time.has_time
           timeout: 10s
-      - switch.turn_on: disable_sd_card  # save  about 80uA
-      - if:                              # sleep duration conditions
-          condition:
-            lambda: |-
-              return ((id(esptime).now().hour >= 23) || (id(esptime).now().hour < 6));
-          then:
-            - switch.turn_on: disable_sd_card  # save  about 100uA
-            - deep_sleep.enter:
-                until: "06:00:00"        # sleep until this time if between hours above
-                time_id: esptime
-          else:
-            - switch.turn_on: disable_sd_card  # save  about 100uA
-            - deep_sleep.enter:
-                sleep_duration: 1h      # normally sleep for this long
-
+      - deep_sleep.enter:
+          sleep_duration: 3580s
 
 esp32:
-  board: mhetesp32minikit
+  board: esp32dev
   framework:
     type: esp-idf
     version: recommended
@@ -67,7 +55,7 @@ spi:
 
 time:
   - platform: homeassistant
-    id: esptime
+    id: homeassistant_time
 
 deep_sleep:                 # enable deep_sleep functions
 
@@ -80,23 +68,35 @@ switch:
     name: "disable_sd_card"
     id: disable_sd_card
     pin: 
-      number: 13
+      number: GPIO13
 
 
 binary_sensor:
   - platform: status        # expose node status to home assistant
-    name: "display-guest-hallway status"
+    name: "display-guest-suite status"
 
 
 sensor:
   - platform: adc
     pin: 35
-    id: guest_suite_display_battery
-    name: "Guest Suite Display Battery"
+    id: guest_suite_display_battery_voltage
+    name: "Guest Suite Display Battery Voltage"
     accuracy_decimals: 2
     attenuation: 11dB
     filters:
       - multiply: 2.0  # The voltage divider requires us to multiply by 2
+    update_interval: 10s
+  
+  - platform: template
+    name: "Guest Suite Display Bettery Percent"
+    id: guest_suite_battery_percent
+    unit_of_measurement: "%"
+    lambda: |-
+      if(id(guest_suite_display_battery_voltage).state >= 4.2) {
+        return 100;
+      } else {
+        return ( id(guest_suite_display_battery_voltage).state/4.2 * 100 );
+      }     
     update_interval: 10s
 
   - platform: homeassistant
@@ -283,17 +283,17 @@ display:                    # note display update settings only applies in deep_
       }
 
       // Print battery voltage
-      if (id(guest_suite_display_battery).has_state()) {
-        if (id(guest_suite_display_battery).state < 3.0) {
+      if (id(guest_suite_display_battery_voltage).has_state()) {
+        if (id(guest_suite_display_battery_voltage).state < 3.0) {
           it.fill(COLOR_ON);
           id(sleep_forever).turn_on();
         }
-        it.printf(0, it.get_height(), id(tiny_font), TextAlign::BOTTOM_LEFT, "%.1fv", id(guest_suite_display_battery).state);
+        it.printf(0, it.get_height(), id(tiny_font), TextAlign::BOTTOM_LEFT, "%.1fv", id(guest_suite_display_battery_voltage).state);
       }
 
       // Print last update time
-      if (id(esptime).now().is_valid()) {
-        it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %k:%M %b %e", id(esptime).now());
+      if (id(homeassistant_time).now().is_valid()) {
+        it.strftime(it.get_width(), it.get_height(), id(tiny_font), TextAlign::BOTTOM_RIGHT, "Last update: %k:%M %b %e", id(homeassistant_time).now());
       }
 
 
