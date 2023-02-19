@@ -35,12 +35,11 @@ filters:
   homeassistant.helpers.service:
     - "Unable to find referenced entities switch.christmas_tree"
   aioesphomeapi.connection:
-    - "display-guest-hallway" # cannot connect due to normal deep sleep
+    - "display-guest-suite" # cannot connect due to normal deep sleep
   aioesphomeapi.reconnect_logic:
-    - "display-guest-hallway" # cannot connect due to normal deep sleep
+    - "display-guest-suite" # cannot connect due to normal deep sleep
   homeassistant.loader:
     - "^We found .* which has not been tested"
-
 #  homeassistant.components.neato.vacuum:
 #    - "Unable to communicate with robot"
 #  homeassistant.components.neato.switch:
