@@ -40,6 +40,8 @@ filters:
     - "display-guest-suite" # cannot connect due to normal deep sleep
   homeassistant.loader:
     - "^We found .* which has not been tested"
+  frontend.js:
+    - ":0:0 ResizeObserver loop completed with undelivered notifications"
 #  homeassistant.components.neato.vacuum:
 #    - "Unable to communicate with robot"
 #  homeassistant.components.neato.switch:
