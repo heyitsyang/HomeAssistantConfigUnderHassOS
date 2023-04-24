@@ -5,6 +5,10 @@
 ##     - states between reboots                ##
 ##     - history data                          ##
 ##                                             ##
+##  Items kept in tyhe recorder should be      ##
+##  for the short term (~30days max).  Longer  ##
+##  term data shoudl go into influxDB          ##
+##                                             ##
 ##    See influxdb.yaml for influxdb filters   ##
 ##                                             ##
 #################################################
