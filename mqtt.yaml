@@ -2,6 +2,11 @@
 # MQTT SENSORS
 #
 sensor:
+  - unique_id: esp32_igrill_ble_client
+    state_topic: "homeassistant/sensor/igrill_70918f19e8d1/status"
+    name: "ESP32 iGrill BLE Client"
+    json_attributes_topic: "homeassistant/sensor/igrill_70918f19e8d1/systeminfo"
+
   - unique_id: yang_bmi
     name: "Yang BMI"
     state_topic: "miscale/Yang/weight"

@@ -3,6 +3,55 @@
 #######################
 
 #
+# TEMPLATE SENSORS FOR Weber iGrill
+#
+- sensor:
+    - name: "grill_alert_temp"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) < (states.input_number.igrill_alert_low.state | int(default=0)) 
+               or (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0))  > (states.input_number.igrill_alert_high.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_1"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_1.state | int(default=0)) >= (states.input_number.igrill_probe_1_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_2"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_2.state | int(default=0)) >= (states.input_number.igrill_probe_2_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_3"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_3.state | int(default=0)) >= (states.input_number.igrill_probe_3_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_4"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) >= (states.input_number.igrill_probe_4_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+#
 # CURRENT SENSING TEMPLATE SENSORS
 #
 

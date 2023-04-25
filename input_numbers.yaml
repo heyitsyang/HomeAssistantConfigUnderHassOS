@@ -12,6 +12,47 @@
 ## as using the UI is now the recommended way of creating input_number entities
 
 #
+# WEBER iGRILL
+# SLIDERS FOR IGRILL ALERTS
+#
+igrill_alert_low:
+  name: Grill Low Temp
+  initial: 150
+  min: 100
+  max: 500
+  step: 5
+igrill_alert_high:
+  name: Grill High Temp
+  initial: 340
+  min: 100
+  max: 500
+  step: 5
+igrill_probe_1_target:
+  name: Probe 1 Target Temp
+  initial: 160
+  min: 60
+  max: 250
+  step: 1
+igrill_probe_2_target:
+  name: Probe 2 Target Temp
+  initial: 160
+  min: 60
+  max: 250
+  step: 1
+igrill_probe_3_target:
+  name: Probe 3 Target Temp
+  initial: 160
+  min: 60
+  max: 250
+  step: 1
+igrill_probe_4_target:
+  name: Probe 4 Target Temp
+  initial: 160
+  min: 60
+  max: 250
+  step: 1
+
+#
 # AUDIO CONTROLS
 #
 inp_num_office_announce_vol: # original value = 0.18
