@@ -16,48 +16,58 @@
 db_url: !secret mariadb_url
 
 auto_purge: true
+auto_repack: true
 purge_keep_days: 31 # how many days of history to keep
 
 include:
   domains:
-    - automation
+    #    - automation
     - binary_sensor
-    - input_boolean
-    - input_select
-    - input_number
-    - input_text
-    - camera
-    - climate
-    - cover
-    - device_tracker
-    - light
-    - lock
-    - media_player
-    - sensor
-    - filter
-    - scene
-    - script
-    - switch
-    - proximity
+    #    - button
+    #    - camera
+    #    - climate
+    #    - cover
+    #    - device_tracker
+    #    - input_boolean
+    #    - input_datetime
+    #    - input_number
+    #    - input_select
+    #    - input_text
+    #    - light
+    #    - lock
+    #    - media_player
+    #    - number
     - person
+    - proximity
+    #    - select
+    - sensor
+    #    - scene
+    #    - script
+    #    - switch
+    #    - update
+    #    - zone
+  entity_globs:
+    - device_tracker.ys_*
+    - device_tracker.kt_*
+  entities:
+    - device_tracker.opnsense_ys_cell_shencentral_net
+    - device_tracker.opnsense_kt_cell_shencentral_net
+
 exclude:
   domains:
     - group
+  entity_globs:
+    - sensor.*_battery*
+    - sensor.esp01_*
+    - sensor.hot_*
+    - sensor.openweathermap_*
+    - sensor.weather_*
+    - sensor.kflwildw56_*
+    - binary_sensor.*_battery*
+    - binary_sensor.esp01_*
+    - binary_sensor.hot_*
   entities:
-    - sensor.ys_cell_ble_room_presence
-    - sensor.kt_cell_ble_room_presence
-    - sensor.memory_free
-    - switch.esp01_white_led
-    - switch.esp01_red_led
-    - switch.esp01_green_led
-    - switch.esp01_blue_led
-    - switch.esp01_relay
-    - switch.esp01_buzzer
-    - sensor.esp01_temperature
-    - sensor.esp01_humidity
-    - sensor.esp01_atod_input
-    - binary_sensor.esp01_pushbutton_s2
-    - binary_sensor.esp01_pushbutton_s3
+    - sensor.influxdb_db_size
     - sensor.pollen
     - sensor.date
     - sensor.time
