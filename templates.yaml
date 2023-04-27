@@ -111,7 +111,7 @@
       delay_off:
         seconds: 60 # amount of time template state is NOT met before switching to OFF
       state: >-
-        {{ states('sensor.dishwasher_energy_current') | float(default=0) > 0.1 }}
+        {{ states('sensor.dishwasher_sonoff_energy_current') | float(default=0) > 0.1 }}
 
 #
 # LUMINOSITY TRIGGERS - Consolidated as binary template sensors here so trigger values are in one place for automations & scripts #
