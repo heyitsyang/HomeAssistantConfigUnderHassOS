@@ -54,6 +54,15 @@ include:
     - sensor.*_temperature*
     - sensor.*_humidity*
     - sensor.*_pressure*
+    - sensor.*_basal_metabolism
+    - sensor.*_body_fat
+    - sensor.*_bone_mass
+    - sensor.*_lean_body_mass
+    - sensor.*_muscle_mass
+    - sensor.*_protien
+    - sensor.*_impedance
+    - sensor.*_visceral_fat
+    - sensor.*_water
     - sensor.*_weight
     - sensor.*_bmi
   entities:
