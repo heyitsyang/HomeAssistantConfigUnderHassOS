@@ -65,10 +65,16 @@ include:
     - sensor.*_water
     - sensor.*_weight
     - sensor.*_bmi
+    - sensor.*_luminosity
+
   entities:
     - binary_sensor.dishwasher_on_or_off
-    - sensor.dishwasher_sonoff_energy_current
     - binary_sensor.water_heater
     - device_tracker.opnsense_ys_cell_shencentral_net
     - device_tracker.opnsense_kt_cell_shencentral_net
+    - sensor.dishwasher_sonoff_energy_current
+    - sensor.living_rm_visible_light
+    - sensor.raw_living_rm_visible_light
+    - sensor.raw_living_rm_full_spectrum_light
+    - sensor.raw_living_rm_infrared_light
 # EVERYTHING ELSE IS IMPLICITLY EXCLUDED
