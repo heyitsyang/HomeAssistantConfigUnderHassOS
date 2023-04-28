@@ -62,7 +62,6 @@ exclude:
     - sensor.hot_*
     - sensor.openweathermap_*
     - sensor.weather_*
-    - sensor.kflwildw56_*
     - binary_sensor.*_battery*
     - binary_sensor.esp01_*
     - binary_sensor.hot_*
