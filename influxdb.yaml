@@ -15,7 +15,7 @@ port: 8086
 database: homeassistant
 username: !secret influxdb_user
 password: !secret influxdb_pwd
-max_retries: 3
+max_retries: 5
 default_measurement: state
 
 #
