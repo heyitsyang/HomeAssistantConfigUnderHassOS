@@ -12,7 +12,7 @@
       icon: mdi:weight-lb
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
-          {% if 180 <= weight <= 200 %}
+          {% if (180 <= weight <= 200) and (states('sensor.ble_weight_d03e7d3e3afa') not in ['unknown', 'unavailable']) %}
             {{ states("sensor.ble_weight_d03e7d3e3afa") }}      
           {% else %}
             {{ states("sensor.yang_template_weight") }}
@@ -23,7 +23,7 @@
       icon: mdi:weight-lb
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
-          {% if 130 <= weight <= 150 %}
+          {% if (130 <= weight <= 150) and (states('sensor.ble_weight_d03e7d3e3afa') not in ['unknown', 'unavailable']) %}  
             {{ states("sensor.ble_weight_d03e7d3e3afa") }}
           {% else %}
             {{ states("sensor.karen_template_weight") }}
@@ -33,7 +33,7 @@
       unit_of_measurement: "ohm"
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
-          {% if 180 <= weight <= 200 %}
+          {% if (180 <= weight <= 200) and (states('sensor.ble_impedance_d03e7d3e3afa') not in ['unknown', 'unavailable']) %}  
             {{ states("sensor.ble_impedance_d03e7d3e3afa") }}      
           {% else %}
             {{ states("sensor.yang_template_impedance") }}
@@ -43,7 +43,7 @@
       unit_of_measurement: "ohm"
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
-          {% if 130 <= weight <= 150 %}
+          {% if (130 <= weight <= 150) and (states('sensor.ble_impedance_d03e7d3e3afa') not in ['unknown', 'unavailable']) %}
             {{ states("sensor.ble_impedance_d03e7d3e3afa") }}
           {% else %}
             {{ states("sensor.karen_template_impedance") }}
@@ -56,7 +56,7 @@
     - name: "grill_alert_temp"
       state: >-
         {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) < (states.input_number.igrill_alert_low.state | int(default=0)) 
-               or (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0))  > (states.input_number.igrill_alert_high.state | int(default=0)) %}
+              or (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0))  > (states.input_number.igrill_alert_high.state | int(default=0)) %}
           Alert
         {% else %}
           Normal
