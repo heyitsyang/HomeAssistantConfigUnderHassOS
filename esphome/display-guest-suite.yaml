@@ -101,7 +101,7 @@ sensor:
 
   - platform: homeassistant
     id: outside_temperature
-    entity_id: sensor.kflwildw56_temp
+    entity_id: sensor.kflwildw56_temperature
     internal: true
 
   - platform: homeassistant
