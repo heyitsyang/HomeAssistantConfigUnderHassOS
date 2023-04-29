@@ -16,7 +16,7 @@
 
 - platform: statistics
   name: "24hr Avg Water Pressure"
-  entity_id: sensor.24hr_avg_water_pressure
+  entity_id: sensor.water_pressure
   state_characteristic: mean
   sampling_size: 1440 # allow for reporting every minute for 24 hours
   max_age:
@@ -25,14 +25,14 @@
 
 - platform: statistics
   name: "24hr Max Water Pressure"
-  entity_id: sensor.24hr_max_water_pressure
+  entity_id: sensor.water_pressure
   state_characteristic: value_max
   max_age:
     hours: 24
 
 - platform: statistics
   name: "24hr Min Water Pressure"
-  entity_id: sensor.24hr_min_water_pressure
+  entity_id: sensor.water_pressure
   state_characteristic: value_min
   max_age:
     hours: 24
