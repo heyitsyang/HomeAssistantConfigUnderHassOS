@@ -62,6 +62,9 @@ exclude:
     - sensor.hot_*
     - sensor.openweathermap_*
     - sensor.weather_*
+    - sensor.asthma_*
+    - sensor.allergy_*
+    - sensor.cold_*
     - binary_sensor.*_battery*
     - binary_sensor.esp01_*
     - binary_sensor.hot_*
