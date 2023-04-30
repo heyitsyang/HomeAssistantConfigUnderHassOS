@@ -5,7 +5,7 @@
 ##     - states between reboots                ##
 ##     - history data                          ##
 ##                                             ##
-##    See recorder.yaml for default HA         ##
+##    See recorder.yaml for HA                 ##
 ##      database filters                       ##
 ##                                             ##
 #################################################
@@ -15,7 +15,7 @@ port: 8086
 database: homeassistant
 username: !secret influxdb_user
 password: !secret influxdb_pwd
-max_retries: 3
+max_retries: 5
 default_measurement: state
 
 #
@@ -23,49 +23,58 @@ default_measurement: state
 #
 include:
   domains:
-#   - automation
-    - binary_sensor
-#    - input_boolean
-#    - input_select
-#    - input_number
-#    - input_text
-#    - camera
-#    - climate
-#    - cover
-#    - device_tracker
-#    - light
-#    - lock
-#    - media_player
-    - sensor
-    - filter
-#    - scene
-#    - script
-#    - switch
-#    - proximity
-#    - person
-exclude:
-  domains:
-    - group
-  entities:   
-    - sensor.influxdb_db_size
-    - device_tracker.ys_cell_on_router
-    - device_tracker.ys_cell_on_router_2
-    - device_tracker.kt_cell_on_router
-    - device_tracker.kt_cell_on_router_2
-    - switch.esp01_white_led
-    - switch.esp01_red_led
-    - switch.esp01_green_led
-    - switch.esp01_blue_led
-    - switch.esp01_relay
-    - switch.esp01_buzzer
-    - sensor.esp01_temperature
-    - sensor.esp01_humidity
-    - sensor.esp01_atod_input
-    - binary_sensor.esp01_pushbutton_s2
-    - binary_sensor.esp01_pushbutton_s3
-    - sensor.pollen
-    - sensor.date
-    - sensor.time
-    - sensor.date_time
-    - sensor.time_date
-    - sun.sun
+    #    - automation
+    #    - binary_sensor
+    #    - button
+    #    - camera
+    #    - climate
+    #    - cover
+    #    - device_tracker
+    #    - input_boolean
+    #    - input_datetime
+    #    - input_number
+    #    - input_select
+    #    - input_text
+    #    - light
+    #    - lock
+    #    - media_player
+    #    - number
+    - person
+    #    - proximity
+    #    - select
+    #    - sensor
+    #    - scene
+    #    - script
+    #    - switch
+    #    - update
+    #    - zone
+  entity_globs:
+    - device_tracker.ys_*
+    - device_tracker.kt_*
+    - sensor.*_temperature*
+    - sensor.*_humidity*
+    - sensor.*_pressure*
+    - sensor.*_basal_metabolism
+    - sensor.*_body_fat
+    - sensor.*_bone_mass
+    - sensor.*_lean_body_mass
+    - sensor.*_muscle_mass
+    - sensor.*_protien
+    - sensor.*_impedance
+    - sensor.*_visceral_fat
+    - sensor.*_water
+    - sensor.*_weight
+    - sensor.*_bmi
+    - sensor.*_luminosity
+
+  entities:
+    - binary_sensor.dishwasher_on_or_off
+    - binary_sensor.water_heater
+    - device_tracker.opnsense_ys_cell_shencentral_net
+    - device_tracker.opnsense_kt_cell_shencentral_net
+    - sensor.dishwasher_sonoff_energy_current
+    - sensor.living_rm_visible_light
+    - sensor.raw_living_rm_visible_light
+    - sensor.raw_living_rm_full_spectrum_light
+    - sensor.raw_living_rm_infrared_light
+# EVERYTHING ELSE IS IMPLICITLY EXCLUDED

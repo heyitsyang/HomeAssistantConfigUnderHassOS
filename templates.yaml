@@ -3,7 +3,103 @@
 #######################
 
 #
-# CURRENT SENSING TEMPLATE SENSORS
+# MISCALE WEIGHT/PERSON MAPPING
+#
+
+- sensor:
+    - name: "yang_template_weight"
+      unit_of_measurement: "lbs"
+      icon: mdi:weight-lb
+      state: >-
+        {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
+          {% if (180 <= weight <= 200) %}
+            {{ states("sensor.ble_weight_d03e7d3e3afa") }}      
+          {% else %}
+            {{ states("sensor.yang_template_weight") }}
+          {% endif %}
+
+    - name: "karen_template_weight"
+      unit_of_measurement: "lbs"
+      icon: mdi:weight-lb
+      state: >-
+        {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
+          {% if (130 <= weight <= 150) %}  
+            {{ states("sensor.ble_weight_d03e7d3e3afa") }}
+          {% else %}
+            {{ states("sensor.karen_template_weight") }}
+          {% endif %}
+
+    - name: "yang_template_impedance"
+      unit_of_measurement: "ohm"
+      state: >-
+        {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
+          {% if (180 <= weight <= 200) %}  
+            {{ states("sensor.ble_impedance_d03e7d3e3afa") }}      
+          {% else %}
+            {{ states("sensor.yang_template_impedance") }}
+          {% endif %}
+
+    - name: "karen_template_impedance"
+      unit_of_measurement: "ohm"
+      state: >-
+        {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
+          {% if (130 <= weight <= 150) %}
+            {{ states("sensor.ble_impedance_d03e7d3e3afa") }}
+          {% else %}
+            {{ states("sensor.karen_template_impedance") }}
+          {% endif %}
+
+#
+# SENSORS FOR Weber iGrill
+#
+- sensor:
+    - name: "grill_alert_temp"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) < (states.input_number.igrill_alert_low.state | int(default=0)) 
+              or (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0))  > (states.input_number.igrill_alert_high.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_1"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_1.state | int(default=0)) >= (states.input_number.igrill_probe_1_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_2"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_2.state | int(default=0)) >= (states.input_number.igrill_probe_2_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_3"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_3.state | int(default=0)) >= (states.input_number.igrill_probe_3_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+- sensor:
+    - name: "target_alert_temp_probe_4"
+      state: >-
+        {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) >= (states.input_number.igrill_probe_4_target.state | int(default=0)) %}
+          Alert
+        {% else %}
+          Normal
+        {% endif %}
+
+#
+# CURRENT SENSING SENSORS
 #
 
 - binary_sensor:
@@ -15,7 +111,7 @@
       delay_off:
         seconds: 60 # amount of time template state is NOT met before switching to OFF
       state: >-
-        {{ states('sensor.dishwasher_energy_current') | float(default=0) > 0.1 }}
+        {{ states('sensor.dishwasher_sonoff_energy_current') | float(default=0) > 0.1 }}
 
 #
 # LUMINOSITY TRIGGERS - Consolidated as binary template sensors here so trigger values are in one place for automations & scripts #
