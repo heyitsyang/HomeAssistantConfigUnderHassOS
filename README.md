@@ -2,9 +2,9 @@
 
 This repository contains my Home Assistant configuration files.
 
-## My list of devices integrated with Home Assistant
+## My partial list of devices integrated with Home Assistant
 
-**Connected via VeraPlus Hub**
+**Connected via Zooz 700 Series Z-Wave Dongle**
 - Lots of Zwave in-wall smart light & fan switches various mfrs
 - ZWave PIR sensors
 - Bali/Springs Window Fashions motorized shades
@@ -30,13 +30,16 @@ This repository contains my Home Assistant configuration files.
 - Ecobee Lite Thermostat & remote sensors
 - Sensibo Sky Smart AC Controller
 - Neato Botvac D5 Connected
-- Netgear Orbi RBK50 WiFi Router
+- OPNSense Router
 - Sonos WiFi/Ethernet Speakers
 - Ambient Weather WS-0900-IP Weather Station
 - Misc ONVIF/RTSP capable network cameras
 - ESPresense Bluetooth Presence Detection
 - Flux LED strip controllers
 - LG washer & dryer
+- Xiaomi/Aquara zigbee buttons
+- Weber iGrill
+- Xiaomi Miscale2 body Composition Scale
 
 
 
