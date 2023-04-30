@@ -19,6 +19,11 @@ This repository contains my Home Assistant configuration files.
 - Garage door monitor & controller
 - Water leak detection system w/valve, pressure sensor, moisture sensors
 
+**Connected via Sonoff Zigbee 3.0 Dongle (Zigbee2MQTT)**
+- Xiaomi/Aquara pushbutton switch
+- BlitzWolf ZigBee Water Leak Sensor
+- GZTH Tuya Zigbee 3.0 Water Leak Sensor
+
 **Other fun stuff working with Home Assistant**
 - Amazon Echo
 - Ecobee Lite Thermostat & remote sensors
@@ -27,16 +32,10 @@ This repository contains my Home Assistant configuration files.
 - OPNSense Router
 - Sonos WiFi/Ethernet Speakers
 - Ambient Weather WS-0900-IP Weather Station
-- Misc RTSP capable network cameras
-- Monitor RaspberryPi Bluetooth Presence Detection
+- Misc ONVIF/RTSP capable network cameras
+- ESPresense Bluetooth Presence Detection
 - Flux LED strip controllers
 - LG washer & dryer
 - Xiaomi/Aquara zigbee buttons
 - Weber iGrill
 - Xiaomi Miscale2 body Composition Scale
-
-
-
-
-
-
