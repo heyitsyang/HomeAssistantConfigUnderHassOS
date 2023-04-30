@@ -19,7 +19,7 @@ This repository contains my Home Assistant configuration files.
 - Garage door monitor & controller
 - Water leak detection system w/valve, pressure sensor, moisture sensors
 
-**Other fun stuff  working with Home Assistant**
+**Other fun stuff working with Home Assistant**
 - Amazon Echo
 - Ecobee Lite Thermostat & remote sensors
 - Sensibo Sky Smart AC Controller
@@ -30,6 +30,7 @@ This repository contains my Home Assistant configuration files.
 - Misc RTSP capable network cameras
 - Monitor RaspberryPi Bluetooth Presence Detection
 - Flux LED strip controllers
+- LG washer & dryer
 - Xiaomi/Aquara zigbee buttons
 - Weber iGrill
 - Xiaomi Miscale2 body Composition Scale
