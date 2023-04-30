@@ -24,7 +24,7 @@ This repository contains my Home Assistant configuration files.
 - Ecobee Lite Thermostat & remote sensors
 - Sensibo Sky Smart AC Controller
 - Neato Botvac D5 Connected
-- OpnSense Router
+- OPNSense Router
 - Sonos WiFi/Ethernet Speakers
 - Ambient Weather WS-0900-IP Weather Station
 - Misc RTSP capable network cameras
