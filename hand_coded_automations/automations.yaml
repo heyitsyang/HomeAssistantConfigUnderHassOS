@@ -843,8 +843,12 @@
       entity_id: sensor.igrill_alert_temp
       to: "Alert"
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
+        message: "Grill temp outside limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "Grill temp ouside limits"
         message: "Grill temp outside limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
 
 - alias: "Monitor Grill Temp Normal"
@@ -854,9 +858,13 @@
       entity_id: sensor.igrill_alert_temp
       to: "Normal"
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
         message: "Grill temp within limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "Grill temp within limits"
+        message: "Grill temp withiin limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
 
 - alias: "Probe 1 Target Temp"
   initial_state: "off"
@@ -865,8 +873,12 @@
       entity_id: sensor.target_alert_temp_probe_1
       to: "Alert"
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
+        message: "Probe 1 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_1.state }} °F"
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "Probe 1 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_1.state }} °F"
         message: "Probe 1 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_1.state }} °F"
 
 - alias: "Probe 2 Target Temp"
@@ -876,8 +888,12 @@
       entity_id: sensor.target_alert_temp_probe_2
       to: "Alert"
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
+        message: "Probe 2 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_2.state }} °F"
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "Probe 2 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_2.state }} °F"
         message: "Probe 2 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_2.state }} °F"
 
 - alias: "Probe 3 Target Temp"
@@ -887,8 +903,12 @@
       entity_id: sensor.target_alert_temp_probe_3
       to: "Alert"
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
+        message: "Probe 3 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_3.state }} °F"
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "Probe 3 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_3.state }} °F"
         message: "Probe 3 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_3.state }} °F"
 
 - alias: "Probe 4 Target Temp"
@@ -898,8 +918,12 @@
       entity_id: sensor.target_alert_temp_probe_4
       to: "Alert"
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
+        message: "Probe 4 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+    - service: notify.mobile_app_ys_cell
+      data:
+        title: "Probe 4 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
         message: "Probe 4 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
 
 - alias: "Monitor iGrill Device Connectivity"
@@ -911,7 +935,7 @@
       for:
         minutes: 5
   action:
-    - service: notify.admin
+    - service: script.scr_say_phrase
       data:
         message: "!! - iGrill Device Disconnected - !!"
 

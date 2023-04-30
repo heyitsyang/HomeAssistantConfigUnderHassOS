@@ -24,8 +24,8 @@ igrill_alert_low:
 igrill_alert_high:
   name: Grill High Temp
   initial: 340
-  min: 100
-  max: 500
+  min: 300
+  max: 600
   step: 5
 igrill_probe_1_target:
   name: Probe 1 Target Temp
