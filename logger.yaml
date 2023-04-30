@@ -28,8 +28,6 @@ logs: # ignore events less than levels defined below
   homeassistant.components.binary_sensor: error
   #    homeassistant.components.automation: info                       # enable this to help debug
   homeassistant.core: info
-  #homeassistant.components.netgear: debug
-  #pynetgear: debug
 
 filters:
   homeassistant.helpers.service:
@@ -41,10 +39,4 @@ filters:
   homeassistant.loader:
     - "^We found .* which has not been tested"
   frontend.js:
-    - ":0:0 ResizeObserver loop completed with undelivered notifications"
-#  homeassistant.components.neato.vacuum:
-#    - "Unable to communicate with robot"
-#  homeassistant.components.neato.switch:
-#    - "Unable to communicate with robot"
-#  homeassistant.components.sonos:
-#    - "Failed to connect to discovered player '10.0.0.40'"
+    - ":0:0 ResizeObserver loop completed with undelivered notifications."
