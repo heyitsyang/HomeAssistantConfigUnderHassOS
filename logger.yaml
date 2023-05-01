@@ -40,3 +40,5 @@ filters:
     - "^We found .* which has not been tested"
   frontend.js:
     - ":0:0 ResizeObserver loop completed with undelivered notifications."
+  homeassistant.components.websocket_api.http.connection:
+    - "Did not receive auth message within 10 seconds"
