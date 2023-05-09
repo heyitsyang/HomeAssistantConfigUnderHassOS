@@ -46,7 +46,6 @@ frontend: # Enables the frontend
 # note the customize: & !include is required
 # to be in the homeassitant: section
 
-history: !include history.yaml # doesn't work, check all three
 logger: !include logger.yaml
 influxdb: !include influxdb.yaml
 recorder: !include recorder.yaml # history graphing settings
@@ -68,7 +67,7 @@ input_number: !include input_numbers.yaml  # configuring this in helpers is now 
 light: !include lights.yaml
 switch: !include switches.yaml
 cover: !include covers.yaml
-media_player: !include media_players.yaml
+#media_player: !include media_players.yaml
 notify: !include notifiers.yaml
 #alert: !include alerts.yaml
 camera: !include cameras.yaml
