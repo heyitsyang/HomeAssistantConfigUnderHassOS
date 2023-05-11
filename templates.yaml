@@ -188,7 +188,7 @@
       unit_of_measurement: "psi"
       state: >-
         {% if (is_state('sensor.spt_data_status', 'valid')) %}
-          {{ states('sensor.unvalidated_water_static_pressure_test_result') }}
+          {{ states('sensor.unvalidated_water_static_pressure_test_result') | float(default=0) }}
         {% endif %}
 
 - sensor:

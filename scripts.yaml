@@ -11,7 +11,7 @@
 scr_ha_startup:
   sequence:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
-    - service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
+    #- service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
       target:
         entity_id: input_boolean.inp_bool_announcements
@@ -185,8 +185,8 @@ scr_common_extended_absence_off:
 scr_common_guest_mode_on:
   mode: restart
   sequence:
-    - service: script.scr_sonos_unjoin4announce
-    - service: input_boolean.turn_on                # leave water valve ON if absent & with guest
+    #- service: script.scr_sonos_unjoin4announce
+    - service: input_boolean.turn_on # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
     - service: input_boolean.turn_off
@@ -194,16 +194,16 @@ scr_common_guest_mode_on:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - service: input_boolean.turn_on
       target:
-        entity_id: input_boolean.inhibit_office_mood_lighting    
+        entity_id: input_boolean.inhibit_office_mood_lighting
 
 scr_common_guest_mode_off:
   mode: restart
   sequence:
-    - service: script.scr_sonos_join4announce
+    #- service: script.scr_sonos_join4announce
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_guest_in_sunroom
-    - service: input_boolean.turn_off                # leave water valve ON if absent & with guest
+    - service: input_boolean.turn_off # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
     - service: input_boolean.turn_on
@@ -211,8 +211,7 @@ scr_common_guest_mode_off:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.inhibit_office_mood_lighting   
-
+        entity_id: input_boolean.inhibit_office_mood_lighting
 
 #
 # CHECK IF SUN ROOM WINDOWS ARE OPEN & REPORT
@@ -607,7 +606,6 @@ scr_frontporch_activity:
         data:
           tts_text: "Front door activity detected"
 
-
 scr_front_door_lights_on:
   sequence:
     - condition: state
@@ -662,12 +660,30 @@ scr_say_phrase:
               data:
                 entity_id: media_player.garage_speakers
                 volume_level: 0.99 # set high priority speaking volume
-            - service: tts.google_translate_say
-              data:
-                entity_id: 
-                  - media_player.main_speakers
-                  - media_player.garage_speakers
-                message: "This is a high priority message. {{ message }}"
+            - choose:
+                - conditions:
+                    - condition: state
+                      entity_id: input_boolean.inp_bool_guest_mode
+                      state: "on"
+                  sequence:
+                    - service: media_player.play_media
+                      data:
+                        announce: false
+                        entity_id:
+                          - media_player.main_speakers
+                          - media_player.garage_speakers
+                        media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
+                        media_content_type: music
+              default:
+                - service: media_player.play_media
+                  data:
+                    announce: false
+                    entity_id:
+                      - media_player.main_speakers
+                      - media_player.garage_speakers
+                      - media_player.office_speakers
+                    media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
+                    media_content_type: music
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
@@ -687,12 +703,30 @@ scr_say_phrase:
           data:
             entity_id: media_player.garage_speakers
             volume_level: 0.99 # set high priority speaking volume
-        - service: tts.google_translate_say
-          data:
-            entity_id: 
-              - media_player.main_speakers
-              - media_player.garage_speakers
-            message: "{{ message }}"
+        - choose:
+            - conditions:
+                - condition: state
+                  entity_id: input_boolean.inp_bool_guest_mode
+                  state: "on"
+              sequence:
+                - service: media_player.play_media
+                  data:
+                    announce: false
+                    entity_id:
+                      - media_player.main_speakers
+                      - media_player.garage_speakers
+                    media_content_id: media-source://tts/google_translate?message="{{ message }}"
+                    media_content_type: music
+          default:
+            - service: media_player.play_media
+              data:
+                announce: false
+                entity_id:
+                  - media_player.main_speakers
+                  - media_player.garage_speakers
+                  - media_player.office_speakers
+                media_content_id: media-source://tts/google_translate?message="{{ message }}"
+                media_content_type: music
     - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
       timeout: "00:00:15"
     - wait_template: "{{ not is_state('media_player.main_speakers', 'playing') }}" # wait for finish
@@ -707,35 +741,35 @@ scr_say_phrase:
 #
 #  SONOS JOIN/UNJOIN SCRIPTS
 #
-scr_sonos_join4announce:
-  sequence:
-    - condition: template
-      value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'group_members') }}"
-    - service: media_player.join
-      target:
-        entity_id: media_player.office_speakers
-      data:
-        group_members: media_player.main_speakers
-    - delay: "00:00:15" # give it time to join/unjoin
+# scr_sonos_join4announce:
+#   sequence:
+#     - condition: template
+#       value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'group_members') }}"
+#     - service: media_player.join
+#       target:
+#         entity_id: media_player.office_speakers
+#       data:
+#         group_members: media_player.main_speakers
+#     - delay: "00:00:15" # give it time to join/unjoin
 
-scr_sonos_unjoin4announce:
-  sequence:
-    - condition: template
-      value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'group_members') }}"
-    - service: media_player.unjoin
-      target:
-        entity_id: media_player.office_speakers
-    - delay: "00:00:15" # give it time to join/unjoin
+# scr_sonos_unjoin4announce:
+#   sequence:
+#     - condition: template
+#       value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'group_members') }}"
+#     - service: media_player.unjoin
+#       target:
+#         entity_id: media_player.office_speakers
+#     - delay: "00:00:15" # give it time to join/unjoin
 
-scr_sonos_eval_announce:
-  sequence:
-    - service: script.scr_sonos_join4announce # join as the default
-    - delay: "00:00:15" # give it time to join/unjoin
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
-      state: "on"
-    - service: script.scr_sonos_unjoin4announce # unjoin if guests
-    - delay: "00:00:15" # give it time to join/unjoin
+# scr_sonos_eval_announce:
+#   sequence:
+#     - service: script.scr_sonos_join4announce # join as the default
+#     - delay: "00:00:15" # give it time to join/unjoin
+#     - condition: state
+#       entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
+#       state: "on"
+#     - service: script.scr_sonos_unjoin4announce # unjoin if guests
+#     - delay: "00:00:15" # give it time to join/unjoin
 
 #
 #  MANUAL UI REQUESTS
