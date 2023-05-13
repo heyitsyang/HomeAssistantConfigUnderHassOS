@@ -38,7 +38,7 @@ filters:
     - "display-guest-suite" # cannot connect due to normal deep sleep
   homeassistant.loader:
     - "^We found .* which has not been tested"
-  frontend.js:
-    - ":0:0 ResizeObserver loop completed with undelivered notifications."
+  frontend.js.latest:
+    - "0:0 ResizeObserver loop completed with undelivered notifications."
   homeassistant.components.websocket_api.http.connection:
     - "Did not receive auth message within 10 seconds"
