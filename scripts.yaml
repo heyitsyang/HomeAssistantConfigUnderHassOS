@@ -30,7 +30,30 @@ scr_ha_startup:
         entity_id: input_boolean.inp_bool_sleeping
 
 #
-# GOODNIGHT SCRIPT
+# GOOD MORNING SCRIPT
+#   Other actions are accomplished in the Alexa routine - see Alexa App
+#
+scr_goodmorning:
+  sequence:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.semaphore_good_morning_was_used
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_sleeping
+    - service: cover.set_cover_position
+      target:
+        entity_id: cover.master_bedroom_blackout_shades
+      data:
+        position: 30
+    - delay:
+        minutes: 15
+    - service: cover.open_cover
+      target:
+        entity_id: cover.master_bedroom_blackout_shades
+
+#
+# GOOD NIGHT SCRIPT
 #   All lights except guest suite are turned off in an Alexa routine before
 #   running this script, so only guest suite lights a handled here
 #
@@ -277,6 +300,21 @@ scr_close_sunrm_shades:
       target:
         entity_id: cover.sun_room_shades
 
+#
+# PARTIALLY CLOSE SUN ROOM SHADES
+#
+scr_partial_close_masterbdrm_filtering_shades:
+  sequence:
+    - service: cover.set_cover_position
+      data:
+        entity_id: cover.master_bedroom_filtering_shades
+        position: "{{ position }}"
+
+scr_partially_close_masterbdrm_filtering_shades:
+  sequence:
+    - service: script.scr_partial_close_sunrm_shades
+      data:
+        position: "30" # drop shades to X% open
 #
 # PARTIALLY CLOSE SUN ROOM SHADES
 #
@@ -528,6 +566,7 @@ scr_motion_lighting_on:
 
 #
 # PATHWAY MOTION LIGHTING
+#
 scr_pathway_motion_lighting_on:
   sequence:
     - condition: state

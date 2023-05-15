@@ -28,6 +28,32 @@
 #####################################
 
 #
+# SET MASTER BEDROOM SHADES FOR MID-MORNING
+#
+- id: aut_masterbdrm_shades_mid_morning
+  alias: "aut masterbdrm shades mid morning"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: "10:00:00"
+  condition:
+    - condition: state
+      entity_id: input_boolean.semaphore_good_morning_was_used
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.inp_bool_extended_absence_mode
+      state: "off"
+    - condition: state
+      entity_id: input_boolean.inp_bool_sleeping
+      state: "off"
+  action:
+    - service: cover.set_cover_position
+      target:
+        entity_id: cover.master_bedroom_filtering_shades
+      data:
+        positon: 27
+
+#
 # PLUMBING STATIC PRESSURE TEST
 #
 - id: aut_start_spt_leak_test
@@ -246,6 +272,20 @@
     - service: homeassistant.turn_off
       target:
         entity_id: group.mood_lights
+
+#
+# TURN OFF GOOD MORNING USED SEMAPHORE
+#
+- id: aut_good_morning_used_semphore_reset
+  alias: "aut good morning used semaphore reset"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: "23:59:00"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.semaphore_good_morning_was_used
 
 #
 # FAILSAFE TO EXTINGUISH OUTDOOR LIGHTS
@@ -849,7 +889,7 @@
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
-        data: 
+        data:
           tts_text: "Grill temp outside limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
 
 - alias: "Monitor Grill Temp Normal"
@@ -1067,6 +1107,20 @@
     - service: script.scr_pathway_motion_lighting_off
 
 #
+# CLOSE MASTER BEDROOM FILTERING SHADES WHEN SOLAR NOON REACHED
+#
+- id: aut_masterbdrm_filtering_shades_down_solar_noon
+  alias: "aut masterbdrm filtering shades down solar noon"
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: "{{ state_attr('sun.sun', 'rising') == false }}"
+  action:
+    - service: cover.close_cover
+      target:
+        entity_id: cover.master_bedroom_filtering_shades
+
+#
 # CLOSE SUN RM SHADES BASED ON SUN ANGLE, & AZMUTH IN THE AFTERNOON IF WINDOWS CLOSED & DARK ENOUGH, ETC.
 # Calculations based on manual simulations at suncalc.com - place locator at rear neighbor roof peak
 # Assumptions:  Rear neighbor roof height is 20ft, distance from roof peak to outer sunroom edge is 30ft
@@ -1165,6 +1219,20 @@
   action:
     - service: script.scr_check_sunrm_windows
     - service: script.scr_close_sunrm_shades
+
+#
+# CLOSE MASTER BEDROOM SHADES AT SUNSET
+#
+- id: aut_masterbdrm_shades_down_evening
+  alias: "aut masterbdrm shades down evening"
+  initial_state: true
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: cover.close_cover
+      target:
+        entity_id: cover.master_bedroom_shades
 
 #
 # OPEN SUN RM SHADES IN THE MORNING OR BRIGHT

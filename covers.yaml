@@ -20,3 +20,31 @@
   entities:
     - cover.large_garage_door
     - cover.small_garage_door
+
+- platform: group
+  name: "Master Bedroom Shades"
+  entities:
+    - cover.master_bedroom_shade_1_a
+    - cover.master_bedroom_shade_2_a
+    - cover.master_bedroom_shade_3_a
+    - cover.master_bedroom_shade_4_a
+    - cover.master_bedroom_shade_1_b
+    - cover.master_bedroom_shade_2_b
+    - cover.master_bedroom_shade_3_b
+    - cover.master_bedroom_shade_4_b
+
+- platform: group
+  name: "Master Bedroom Filtering Shades"
+  entities:
+    - cover.master_bedroom_shade_1_a
+    - cover.master_bedroom_shade_2_a
+    - cover.master_bedroom_shade_3_a
+    - cover.master_bedroom_shade_4_a
+
+- platform: group
+  name: "Master Bedroom Blackout Shades"
+  entities:
+    - cover.master_bedroom_shade_1_b
+    - cover.master_bedroom_shade_2_b
+    - cover.master_bedroom_shade_3_b
+    - cover.master_bedroom_shade_4_b
