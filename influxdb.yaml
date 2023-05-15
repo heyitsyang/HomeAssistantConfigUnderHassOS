@@ -70,6 +70,8 @@ include:
   entities:
     - binary_sensor.dishwasher_on_or_off
     - binary_sensor.water_heater
+    - binary_sensor.air_handler
+    - binary_sensor.water_heater
     - device_tracker.opnsense_ys_cell_shencentral_net
     - device_tracker.opnsense_kt_cell_shencentral_net
     - sensor.dishwasher_sonoff_energy_current

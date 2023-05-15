@@ -79,7 +79,7 @@ gr8:
   hours_to_show: 24
   refresh: 60
   entities:
-    - media_player.main_speakers
+    - media_player.greatroom_speakers
     - media_player.office_speakers
 
 gr9:

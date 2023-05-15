@@ -11,7 +11,7 @@
 scr_ha_startup:
   sequence:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
-    - service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
+    #- service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
       target:
         entity_id: input_boolean.inp_bool_announcements
@@ -30,7 +30,30 @@ scr_ha_startup:
         entity_id: input_boolean.inp_bool_sleeping
 
 #
-# GOODNIGHT SCRIPT
+# GOOD MORNING SCRIPT
+#   Other actions are accomplished in the Alexa routine - see Alexa App
+#
+scr_goodmorning:
+  sequence:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.semaphore_good_morning_was_used
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_sleeping
+    - service: cover.set_cover_position
+      target:
+        entity_id: cover.master_bedroom_blackout_shades
+      data:
+        position: 30
+    - delay:
+        minutes: 15
+    - service: cover.open_cover
+      target:
+        entity_id: cover.master_bedroom_blackout_shades
+
+#
+# GOOD NIGHT SCRIPT
 #   All lights except guest suite are turned off in an Alexa routine before
 #   running this script, so only guest suite lights a handled here
 #
@@ -185,8 +208,8 @@ scr_common_extended_absence_off:
 scr_common_guest_mode_on:
   mode: restart
   sequence:
-    - service: script.scr_sonos_unjoin4announce
-    - service: input_boolean.turn_on                # leave water valve ON if absent & with guest
+    #- service: script.scr_sonos_unjoin4announce
+    - service: input_boolean.turn_on # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
     - service: input_boolean.turn_off
@@ -194,16 +217,16 @@ scr_common_guest_mode_on:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - service: input_boolean.turn_on
       target:
-        entity_id: input_boolean.inhibit_office_mood_lighting    
+        entity_id: input_boolean.inhibit_office_mood_lighting
 
 scr_common_guest_mode_off:
   mode: restart
   sequence:
-    - service: script.scr_sonos_join4announce
+    #- service: script.scr_sonos_join4announce
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_guest_in_sunroom
-    - service: input_boolean.turn_off                # leave water valve ON if absent & with guest
+    - service: input_boolean.turn_off # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
     - service: input_boolean.turn_on
@@ -211,8 +234,7 @@ scr_common_guest_mode_off:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.inhibit_office_mood_lighting   
-
+        entity_id: input_boolean.inhibit_office_mood_lighting
 
 #
 # CHECK IF SUN ROOM WINDOWS ARE OPEN & REPORT
@@ -278,6 +300,21 @@ scr_close_sunrm_shades:
       target:
         entity_id: cover.sun_room_shades
 
+#
+# PARTIALLY CLOSE SUN ROOM SHADES
+#
+scr_partial_close_masterbdrm_filtering_shades:
+  sequence:
+    - service: cover.set_cover_position
+      data:
+        entity_id: cover.master_bedroom_filtering_shades
+        position: "{{ position }}"
+
+scr_partially_close_masterbdrm_filtering_shades:
+  sequence:
+    - service: script.scr_partial_close_sunrm_shades
+      data:
+        position: "30" # drop shades to X% open
 #
 # PARTIALLY CLOSE SUN ROOM SHADES
 #
@@ -360,12 +397,6 @@ scr_check_if_suspicious:
               state: "home"
     - service: notify.yskt_cell_phones
       data:
-        message: "TTS"
-        data:
-          tts_text: "SUSPICIOUS ACTIVITY at Norcoose"
-          media_stream: alarm_stream
-    - service: notify.yskt_cell_phones
-      data:
         title: "SUSPICIOUS ACTIVITY at Norcoose"
         message: "PRESS to investigate"
         data:
@@ -381,6 +412,12 @@ scr_check_if_suspicious:
     - service: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
+    - service: notify.yskt_cell_phones
+      data:
+        message: "TTS"
+        data:
+          tts_text: "SUSPICIOUS ACTIVITY at Norcoose"
+          media_stream: alarm_stream_max
 
 #
 # NOTIFY IF GARAGE DOOR IS OPEN
@@ -529,6 +566,7 @@ scr_motion_lighting_on:
 
 #
 # PATHWAY MOTION LIGHTING
+#
 scr_pathway_motion_lighting_on:
   sequence:
     - condition: state
@@ -600,6 +638,12 @@ scr_frontporch_activity:
         message: "Front door activity detected"
         data:
           clickAction: "lovelace/last-snaps"
+    - service: notify.yskt_cell_phones
+      data:
+        title: Front door activity
+        message: TTS
+        data:
+          tts_text: "Front door activity detected"
 
 scr_front_door_lights_on:
   sequence:
@@ -636,31 +680,53 @@ scr_say_phrase:
       data:
         entity_id:
           - media_player.office_speakers
-          - media_player.main_speakers
+          - media_player.greatroom_speakers
         with_group: true
     - choose:
         - conditions: # high priority - ignores announce & sleeping conditions
             - condition: template
               value_template: "{{ priority == 'high' }}"
           sequence:
-            - service: media_player.volume_set
-              data:
-                entity_id: media_player.office_speakers
-                volume_level: 0.40 # set high priority speaking volume
-            - service: media_player.volume_set
-              data:
-                entity_id: media_player.main_speakers
-                volume_level: 0.50 # set high priority speaking volume
-            - service: media_player.volume_set
-              data:
-                entity_id: media_player.garage_speakers
-                volume_level: 0.99 # set high priority speaking volume
-            - service: tts.google_translate_say
-              data:
-                entity_id: 
-                  - media_player.main_speakers
-                  - media_player.garage_speakers
-                message: "This is a high priority message. {{ message }}"
+            # - service: media_player.volume_set
+            #   data:
+            #     entity_id: media_player.office_speakers
+            #     volume_level: 0.40 # set high priority speaking volume
+            # - service: media_player.volume_set
+            #   data:
+            #     entity_id: media_player.greatroom_speakers
+            #     volume_level: 0.50 # set high priority speaking volume
+            # - service: media_player.volume_set
+            #   data:
+            #     entity_id: media_player.garage_speakers
+            #     volume_level: 0.99 # set high priority speaking volume
+            - choose:
+                - conditions:
+                    - condition: state
+                      entity_id: input_boolean.inp_bool_guest_mode
+                      state: "on"
+                  sequence:
+                    - service: media_player.play_media
+                      data:
+                        announce: true
+                        entity_id:
+                          - media_player.greatroom_speakers
+                          - media_player.garage_speakers
+                        media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
+                        media_content_type: music
+                        extra:
+                          volume: 80
+              default:
+                - service: media_player.play_media
+                  data:
+                    announce: true
+                    entity_id:
+                      - media_player.greatroom_speakers
+                      - media_player.garage_speakers
+                      - media_player.office_speakers
+                    media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
+                    media_content_type: music
+                    extra:
+                      volume: 80
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
@@ -668,67 +734,89 @@ scr_say_phrase:
         - condition: state
           entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
           state: "off"
-        - service: media_player.volume_set
-          data:
-            entity_id: media_player.office_speakers
-            volume_level: 0.18 # set normal speaking volume
-        - service: media_player.volume_set
-          data:
-            entity_id: media_player.main_speakers
-            volume_level: 0.28 # set normal speaking volume
-        - service: media_player.volume_set
-          data:
-            entity_id: media_player.garage_speakers
-            volume_level: 0.99 # set high priority speaking volume
-        - service: tts.google_translate_say
-          data:
-            entity_id: 
-              - media_player.main_speakers
-              - media_player.garage_speakers
-            message: "{{ message }}"
-    - wait_template: "{{ is_state('media_player.main_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
-      timeout: "00:00:15"
-    - wait_template: "{{ not is_state('media_player.main_speakers', 'playing') }}" # wait for finish
-      timeout: "00:02:00"
+        # - service: media_player.volume_set
+        #   data:
+        #     entity_id: media_player.office_speakers
+        #     volume_level: 0.18 # set normal speaking volume
+        # - service: media_player.volume_set
+        #   data:
+        #     entity_id: media_player.greatroom_speakers
+        #     volume_level: 0.28 # set normal speaking volume
+        # - service: media_player.volume_set
+        #   data:
+        #     entity_id: media_player.garage_speakers
+        #     volume_level: 0.99 # set high priority speaking volume
+        - choose:
+            - conditions:
+                - condition: state
+                  entity_id: input_boolean.inp_bool_guest_mode
+                  state: "on"
+              sequence:
+                - service: media_player.play_media
+                  data:
+                    announce: true
+                    entity_id:
+                      - media_player.greatroom_speakers
+                      - media_player.garage_speakers
+                    media_content_id: media-source://tts/google_translate?message="{{ message }}"
+                    media_content_type: music
+                    extra:
+                      volume: 27
+          default:
+            - service: media_player.play_media
+              data:
+                announce: true
+                entity_id:
+                  - media_player.greatroom_speakers
+                  - media_player.garage_speakers
+                  - media_player.office_speakers
+                media_content_id: media-source://tts/google_translate?message="{{ message }}"
+                media_content_type: music
+                extra:
+                  volume: 27
+    # - wait_template: "{{ is_state('media_player.greatroom_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
+    #   timeout: "00:00:15"
+    # - wait_template: "{{ not is_state('media_player.greatroom_speakers', 'playing') }}" # wait for finish
+    #   timeout: "00:02:00"
     - service: sonos.restore # premature restore will cut off speech potentially
       data: # before it has started or during play
         entity_id:
-          - media_player.main_speakers
+          - media_player.greatroom_speakers
           - media_player.office_speakers
         with_group: true
 
 #
 #  SONOS JOIN/UNJOIN SCRIPTS
 #
-scr_sonos_join4announce:
-  sequence:
-    - condition: template
-      value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.main_speakers', 'group_members') }}"
-    - service: media_player.join
-      target:
-        entity_id: media_player.office_speakers
-      data:
-        group_members: media_player.main_speakers
-    - delay: "00:00:15" # give it time to join/unjoin
+# scr_sonos_join4announce:
+#   sequence:
+#     - condition: template
+#       value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.greatroom_speakers', 'group_members') }}"
+#     - service: media_player.join
+#       target:
+#         entity_id: media_player.office_speakers
+#       data:
+#         group_members: media_player.greatroom_speakers
+#     - delay: "00:00:15" # give it time to join/unjoin
 
-scr_sonos_unjoin4announce:
-  sequence:
-    - condition: template
-      value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.main_speakers', 'group_members') }}"
-    - service: media_player.unjoin
-      target:
-        entity_id: media_player.office_speakers
-    - delay: "00:00:15" # give it time to join/unjoin
+# scr_sonos_unjoin4announce:
+#   sequence:
+#     - condition: template
+#       value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.greatroom_speakers', 'group_members') }}"
+#     - service: media_player.unjoin
+#       target:
+#         entity_id: media_player.office_speakers
+#     - delay: "00:00:15" # give it time to join/unjoin
 
-scr_sonos_eval_announce:
-  sequence:
-    - service: script.scr_sonos_join4announce # join as the default
-    - delay: "00:00:15" # give it time to join/unjoin
-    - condition: state
-      entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
-      state: "on"
-    - service: script.scr_sonos_unjoin4announce # unjoin if guests
-    - delay: "00:00:15" # give it time to join/unjoin
+# scr_sonos_eval_announce:
+#   sequence:
+#     - service: script.scr_sonos_join4announce # join as the default
+#     - delay: "00:00:15" # give it time to join/unjoin
+#     - condition: state
+#       entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
+#       state: "on"
+#     - service: script.scr_sonos_unjoin4announce # unjoin if guests
+#     - delay: "00:00:15" # give it time to join/unjoin
 
 #
 #  MANUAL UI REQUESTS

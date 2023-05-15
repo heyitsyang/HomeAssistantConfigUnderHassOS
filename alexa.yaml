@@ -86,6 +86,8 @@ smart_home:
     script.scr_reset_mood_lights_to_default:
       name: "Reset mood lights"
       display_categories: LIGHT
+    script.scr_goodmorning:
+      name: "Goodmorning script"
     script.scr_goodnight:
       name: "Goodnight Script"
     script.scr_vacuum_start_custom_cleaning:
@@ -102,23 +104,59 @@ smart_home:
     cover.garage_doors:
       name: "Garage doors"
       display_categories: GARAGE_DOOR
+    cover.master_bedroom_shades:
+      name: "All master bedroom shades"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_filtering_shades:
+      name: "Master bedroom filtering shades"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_blackout_shades:
+      name: "Master bedroom black out shades"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_1_a:
+      name: Master bedroom shade 1 A"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_2_a:
+      name: Master bedroom shade 2 A"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_3_a:
+      name: Master bedroom shade 3 A"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_4_a:
+      name: Master bedroom shade 4 A"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_1_b:
+      name: Master bedroom shade 1 B"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_2_b:
+      name: Master bedroom shade 2 B"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_3_b:
+      name: Master bedroom shade 3 B"
+      display_categories: INTERIOR_BLIND
+    cover.master_bedroom_shade_4_b:
+      name: Master bedroom shade 4 B"
+      display_categories: INTERIOR_BLIND
+    script.scr_partially_close_masterbdrm_filtering_shades:
+      name: "Partial master bedroom shades"
+      display_categories: INTERIOR_BLIND
     cover.sun_room_shade_1:
-      name: "Shade 1"
+      name: "Sun room shade 1"
       display_categories: INTERIOR_BLIND
     cover.sun_room_shade_2:
-      name: "Shade 2"
+      name: "Sun room shade 2"
       display_categories: INTERIOR_BLIND
     cover.sun_room_shade_3:
-      name: "Shade 3"
+      name: "Sun room shade 3"
       display_categories: INTERIOR_BLIND
     cover.sun_room_shade_4:
-      name: "Shade 4"
+      name: "Sun room shade 4"
       display_categories: INTERIOR_BLIND
     cover.sun_room_shades:
-      name: "Shades"
+      name: "All sun room shades"
       display_categories: INTERIOR_BLIND
     script.scr_partially_close_sunrm_shades:
-      name: "Partial shades"
+      name: "Partial sun room shades"
       display_categories: INTERIOR_BLIND
     sensor.attic_temperature:
       name: "Attic"

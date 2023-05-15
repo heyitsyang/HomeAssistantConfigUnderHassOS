@@ -29,7 +29,7 @@ sensor:
     unit_of_measurement: "°F"
     expire_after: 600 # state becomes "unknown" after 10 minutes
 
-  - unique_id: unvalidated_water_static_pressure_test_result # see sensor.validated_water_static_pressure_test_result
+  - unique_id: unvalidated_water_static_pressure_test_result # see template sensor.validated_water_static_pressure_test_result
     name: "Unvalidated Water Static Pressure Test Result"
     state_topic: "watermain/spt_result"
     unit_of_measurement: "psi"
