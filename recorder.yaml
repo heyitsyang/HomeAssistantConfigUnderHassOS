@@ -21,7 +21,7 @@ purge_keep_days: 14 # how many days of history to keep
 
 include:
   domains:
-    #    - automation
+    - automation # keep automations for debugging using Logbook
     - binary_sensor
     #    - button
     #    - camera
