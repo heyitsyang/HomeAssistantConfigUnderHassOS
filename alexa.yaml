@@ -35,6 +35,7 @@ smart_home:
       - input_boolean.inp_bool_sleeping
       - input_boolean.inp_bool_extended_absence_mode
       - script.scr_goodnight
+      - script.scr_goodmorning
       - script.scr_vacuum_start_custom_cleaning
       - script.scr_reset_mood_lights_to_default
       - script.scr_partially_close_sunrm_shades

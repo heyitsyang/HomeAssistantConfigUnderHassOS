@@ -1,12 +1,76 @@
-light.kitchen_leds_lower:
-  friendly_name: Kitchen Counter Lights
-  icon: mdi:led-strip-variant
-light.front_door_lights:
-  friendly_name: Front Door Lights
-  icon: mdi:lightbulb
-light.back_door_lights:
-  friendly_name: Back Door Lights
-  icon: mdi:lightbulb
+binary_sensor.leak_water_heater:
+  device_class: moisture
+binary_sensor.leak_dishwasher:
+  device_class: moisture
+binary_sensor.leak_kitchen_sink:
+  device_class: moisture
+binary_sensor.leak_kitchen_sink_rear:
+  device_class: moisture
+binary_sensor.leak_refrigerator:
+  device_class: moisture
+binary_sensor.leak_karens_sink:
+  device_class: moisture
+binary_sensor.leak_yangs_sink:
+  device_class: moisture
+binary_sensor.leak_guest_sink:
+  device_class: moisture
+binary_sensor.leak_guest_toilet:
+  device_class: moisture
+binary_sensor.leak_laundry_sink:
+  device_class: moisture
+binary_sensor.leak_washer:
+  device_class: moisture
+binary_sensor.front_door_opened:
+  friendly_name: Front Door
+  device_class: door
+  icon: mdi:door
+binary_sensor.back_door_opened:
+  friendly_name: Back Door
+  device_class: door
+  icon: mdi:door
+binary_sensor.garagehouse_door_opened:
+  friendly_name: Garage-House Door
+  device_class: door
+  icon: mdi:door
+binary_sensor.sunrm_window_1_opened:
+  friendly_name: Sun Room Window 1
+  device_class: window
+  icon: mdi:window-closed
+binary_sensor.sunrm_window_2_opened:
+  friendly_name: Sun Room Window 2
+  device_class: window
+  icon: mdi:window-closed
+binary_sensor.sunrm_window_3_opened:
+  friendly_name: Sun Room Window 3
+  device_class: window
+  icon: mdi:window-closed
+binary_sensor.sunrm_window_4_opened:
+  friendly_name: Sun Room Window 4
+  device_class: window
+  icon: mdi:window-closed
+camera.rosie_cleaning_map:
+  friendly_name: Rosie's last cleaning map
+climate.sunrm_ac:
+  friendly_name: Sunroom
+climate.ecobee:
+  friendly_name: Main House
+cover.large_garage_door:
+  friendly_name: Large Garage Door
+  device_class: garage_door
+  icon: mdi:garage
+cover.small_garage_door:
+  friendly_name: Small Garage Door
+  device_class: garage_door
+  icon: mdi:garage
+cover.sun_room_shades:
+  friendly_name: All Sun Room Shades
+  icon: mdi:window-open-variant
+device_tracker.ys_cell_gps:
+  entity_picture: /local/avatars/ys.jpg
+  friendly_name: YS Cell GPS
+device_tracker.kt_cell_gps:
+  entity_picture: /local/avatars/kt.jpg
+  friendly_name: KT Cell GPS
 fan.master_bedroom_fan:
   friendly_name: Master Bedroom Fan
   icon: mdi:fan
@@ -25,38 +89,21 @@ fan.sun_room_fan_2:
 fan.living_room_fan:
   friendly_name: Living Room Fan
   icon: mdi:fan
-switch.candles:
-  friendly_name: Candles
-  icon: mdi:candle
-switch.above_cabinet_lights:
-  friendly_name: Above Cabinet Lights
+group.door_sensors:
+  device_class: door
+group.garage_door_status:
+  device_class: garage_door
+input_boolean.inp_bool_sleeping:
+  icon: mdi:power-sleep
+light.kitchen_leds_lower:
+  friendly_name: Kitchen Counter Lights
+  icon: mdi:led-strip-variant
+light.front_door_lights:
+  friendly_name: Front Door Lights
   icon: mdi:lightbulb
-switch.sm_garage_opener_power:
-  friendly_name: Sm Garage Door Power
-  icon: mdi:toggle-switch
-switch.lg_garage_opener_power:
-  friendly_name: Lg Garage Door Power
-  icon: mdi:toggle-switch
-cover.large_garage_door:
-  friendly_name: Large Garage Door
-  device_class: garage_door
-  icon: mdi:garage
-cover.small_garage_door:
-  friendly_name: Small Garage Door
-  device_class: garage_door
-  icon: mdi:garage
-cover.sun_room_shades:
-  friendly_name: All Sun Room Shades
-  icon: mdi:window-open-variant
-sensor.ssl_cert_expiry:
-  friendly_name: SSL Cert Expiry
-  icon: mdi:timer-sand
-sensor.home_assistant_v2_db:
-  friendly_name: MySQL DB size
-  icon: mdi:database
-sensor.influxdb_db_size:
-  friendly_name: Influx DB Size
-  icon: mdi:database
+light.back_door_lights:
+  friendly_name: Back Door Lights
+  icon: mdi:lightbulb
 proximity.home_ys:
   icon: mdi:map-marker-distance
 proximity.home_kt:
@@ -67,12 +114,15 @@ person.yang:
   entity_picture: /local/avatars/ys.jpg
 person.karen:
   entity_picture: /local/avatars/kt.jpg
-device_tracker.ys_cell_gps:
-  entity_picture: /local/avatars/ys.jpg
-  friendly_name: YS Cell GPS
-device_tracker.kt_cell_gps:
-  entity_picture: /local/avatars/kt.jpg
-  friendly_name: KT Cell GPS
+sensor.ssl_cert_expiry:
+  friendly_name: SSL Cert Expiry
+  icon: mdi:timer-sand
+sensor.home_assistant_v2_db:
+  friendly_name: MySQL DB size
+  icon: mdi:database
+sensor.influxdb_db_size:
+  friendly_name: Influx DB Size
+  icon: mdi:database
 sensor.ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
@@ -93,6 +143,9 @@ sensor.ecobee_avg_indoor_temperature:
   friendly_name: Avg Indoor Temperature
   icon: mdi:thermometer
   device_class: temperature
+sensor.guest_suite_display_battery_percent:
+  icon: mdi:battery-unknown
+  device_class: battery
 sensor.sensibo_sunroom_temperature:
   icon: mdi:thermometer
   device_class: temperature
@@ -161,60 +214,18 @@ sensor.raw_living_rm_visible_light:
 sensor.raw_living_rm_infrared_light:
   friendly_name: Raw Living Rm Infrared Light
   icon: mdi:brightness-6
-binary_sensor.leak_water_heater:
-  device_class: moisture
-binary_sensor.leak_dishwasher:
-  device_class: moisture
-binary_sensor.leak_kitchen_sink:
-  device_class: moisture
-binary_sensor.leak_kitchen_sink_rear:
-  device_class: moisture
-binary_sensor.leak_refrigerator:
-  device_class: moisture
-binary_sensor.leak_karens_sink:
-  device_class: moisture
-binary_sensor.leak_yangs_sink:
-  device_class: moisture
-binary_sensor.leak_guest_sink:
-  device_class: moisture
-binary_sensor.leak_guest_toilet:
-  device_class: moisture
-binary_sensor.leak_laundry_sink:
-  device_class: moisture
-binary_sensor.leak_washer:
-  device_class: moisture
-binary_sensor.front_door_opened:
-  friendly_name: Front Door
-  device_class: door
-  icon: mdi:door
-binary_sensor.back_door_opened:
-  friendly_name: Back Door
-  device_class: door
-  icon: mdi:door
-binary_sensor.garagehouse_door_opened:
-  friendly_name: Garage-House Door
-  device_class: door
-  icon: mdi:door
-binary_sensor.sunrm_window_1_opened:
-  friendly_name: Sun Room Window 1
-  device_class: window
-  icon: mdi:window-closed
-binary_sensor.sunrm_window_2_opened:
-  friendly_name: Sun Room Window 2
-  device_class: window
-  icon: mdi:window-closed
-binary_sensor.sunrm_window_3_opened:
-  friendly_name: Sun Room Window 3
-  device_class: window
-  icon: mdi:window-closed
-binary_sensor.sunrm_window_4_opened:
-  friendly_name: Sun Room Window 4
-  device_class: window
-  icon: mdi:window-closed
-climate.sunrm_ac:
-  friendly_name: Sunroom
-climate.ecobee:
-  friendly_name: Main House
+switch.candles:
+  friendly_name: Candles
+  icon: mdi:candle
+switch.above_cabinet_lights:
+  friendly_name: Above Cabinet Lights
+  icon: mdi:lightbulb
+switch.sm_garage_opener_power:
+  friendly_name: Sm Garage Door Power
+  icon: mdi:toggle-switch
+switch.lg_garage_opener_power:
+  friendly_name: Lg Garage Door Power
+  icon: mdi:toggle-switch
 script.scr_unregistered_spt_test:
   friendly_name: Unregistered SPT Test
   icon: mdi:gesture-tap-button
@@ -236,12 +247,6 @@ script.scr_vacuum_stop:
 script.scr_vacuum_return_to_base:
   friendly_name: Return to base
   icon: mdi:home-map-marker
-camera.rosie_cleaning_map:
-  friendly_name: Rosie's last cleaning map
-vacuum.rosie:
-  friendly_name: Rosie status
-input_boolean.inp_bool_sleeping:
-  icon: mdi:power-sleep
 sensor.last_static_pressure_test:
   icon: mdi:calendar-clock
 sensor.front_door_lock_battery:
@@ -300,7 +305,5 @@ sensor.nas_cpu_fan_status:
   icon: mdi:memory
 sensor.nas_system_fan_status:
   icon: mdi:tailwind
-group.door_sensors:
-  device_class: door
-group.garage_door_status:
-  device_class: garage_door
+vacuum.rosie:
+  friendly_name: Rosie status
