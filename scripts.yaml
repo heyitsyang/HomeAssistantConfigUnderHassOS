@@ -687,18 +687,18 @@ scr_say_phrase:
             - condition: template
               value_template: "{{ priority == 'high' }}"
           sequence:
-            # - service: media_player.volume_set
-            #   data:
-            #     entity_id: media_player.office_speakers
-            #     volume_level: 0.40 # set high priority speaking volume
-            # - service: media_player.volume_set
-            #   data:
-            #     entity_id: media_player.greatroom_speakers
-            #     volume_level: 0.50 # set high priority speaking volume
-            # - service: media_player.volume_set
-            #   data:
-            #     entity_id: media_player.garage_speakers
-            #     volume_level: 0.99 # set high priority speaking volume
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.office_speakers
+                volume_level: 0.40 # set high priority speaking volume
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.greatroom_speakers
+                volume_level: 0.50 # set high priority speaking volume
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.garage_speakers
+                volume_level: 0.99 # set high priority speaking volume
             - choose:
                 - conditions:
                     - condition: state
@@ -707,26 +707,22 @@ scr_say_phrase:
                   sequence:
                     - service: media_player.play_media
                       data:
-                        announce: true
+                        announce: false
                         entity_id:
                           - media_player.greatroom_speakers
                           - media_player.garage_speakers
                         media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
                         media_content_type: music
-                        extra:
-                          volume: 80
               default:
                 - service: media_player.play_media
                   data:
-                    announce: true
+                    announce: false
                     entity_id:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
                       - media_player.office_speakers
                     media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
                     media_content_type: music
-                    extra:
-                      volume: 80
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
@@ -734,18 +730,18 @@ scr_say_phrase:
         - condition: state
           entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
           state: "off"
-        # - service: media_player.volume_set
-        #   data:
-        #     entity_id: media_player.office_speakers
-        #     volume_level: 0.18 # set normal speaking volume
-        # - service: media_player.volume_set
-        #   data:
-        #     entity_id: media_player.greatroom_speakers
-        #     volume_level: 0.28 # set normal speaking volume
-        # - service: media_player.volume_set
-        #   data:
-        #     entity_id: media_player.garage_speakers
-        #     volume_level: 0.99 # set high priority speaking volume
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.office_speakers
+            volume_level: 0.18 # set normal speaking volume
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.greatroom_speakers
+            volume_level: 0.28 # set normal speaking volume
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.garage_speakers
+            volume_level: 0.99 # set high priority speaking volume
         - choose:
             - conditions:
                 - condition: state
@@ -754,31 +750,30 @@ scr_say_phrase:
               sequence:
                 - service: media_player.play_media
                   data:
-                    announce: true
+                    announce: false
                     entity_id:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
                     media_content_id: media-source://tts/google_translate?message="{{ message }}"
                     media_content_type: music
-                    extra:
-                      volume: 27
           default:
             - service: media_player.play_media
               data:
-                announce: true
+                announce: false
                 entity_id:
                   - media_player.greatroom_speakers
                   - media_player.garage_speakers
                   - media_player.office_speakers
                 media_content_id: media-source://tts/google_translate?message="{{ message }}"
                 media_content_type: music
-                extra:
-                  volume: 27
-    # - wait_template: "{{ is_state('media_player.greatroom_speakers', 'playing') }}" # check for start to be sure next wait isn't too soon
-    #   timeout: "00:00:15"
-    # - wait_template: "{{ not is_state('media_player.greatroom_speakers', 'playing') }}" # wait for finish
-    #   timeout: "00:02:00"
-    - service: sonos.restore # premature restore will cut off speech potentially
+    - delay: "00:00:01"   # delay needed so media attributes for announcement are loaded
+    # - service: logbook.log
+    #   data_template:
+    #     name: test
+    #     message: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') }}"
+    - delay:
+        seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') }}"  # wait for announce duration
+    - service: sonos.restore # premature restore will cut off speech
       data: # before it has started or during play
         entity_id:
           - media_player.greatroom_speakers
