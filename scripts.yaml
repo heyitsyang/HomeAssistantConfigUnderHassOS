@@ -768,15 +768,18 @@ scr_say_phrase:
                   - media_player.office_speakers
                 media_content_id: media-source://tts/google_translate?message="{{ message }}"
                 media_content_type: music
-    - delay: "00:00:01" # delay needed so media attributes for announcement are loaded
+    #- delay: "00:00:01" # delay needed so media attributes for announcement are loaded
+    - wait_template: "{{ states('media_player.greatroom_speakers')}}" # wait for a state change
+      timeout:
+        seconds: 1
     # - service: logbook.log
     #   data_template:
-    #     name: test
+    #     name: "media_duration ="
     #     message: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') }}"
     - delay:
         seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') }}" # wait for announce duration
-    - service: sonos.restore # premature restore will cut off speech
-      data: # before it has started or during play
+    - service: sonos.restore # premature restore will cut off speech before it has started or during play
+      data:
         entity_id:
           - media_player.greatroom_speakers
           - media_player.office_speakers
