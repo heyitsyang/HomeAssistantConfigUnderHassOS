@@ -28,11 +28,11 @@ include:
     #    - climate
     #    - cover
     #    - device_tracker
-    #    - input_boolean
-    #    - input_datetime
-    #    - input_number
-    #    - input_select
-    #    - input_text
+    - input_boolean
+    - input_datetime
+    - input_number
+    - input_select
+    - input_text
     #    - light
     #    - lock
     #    - media_player
