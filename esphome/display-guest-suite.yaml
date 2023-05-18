@@ -91,11 +91,12 @@ sensor:
     name: "Guest Suite Display Battery Percent"
     id: guest_suite_battery_percent
     unit_of_measurement: "%"
+    accuracy_decimals: 0
     lambda: |-
       if(id(guest_suite_display_battery_voltage).state >= 4.2) {
         return 100;
       } else {
-        return ( (1 - (4.2 - id(guest_suite_display_battery_voltage).state)) * 100 );
+        return ( round((1 - (4.2 - id(guest_suite_display_battery_voltage).state)) * 100) );
       }     
     update_interval: 10s
 
