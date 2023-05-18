@@ -13,9 +13,9 @@
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}
-            {{ states("sensor.ble_weight_d03e7d3e3afa") }}      
+            {{ states("sensor.ble_weight_d03e7d3e3afa") | float(default=0)}}      
           {% else %}
-            {{ states("sensor.yang_template_weight") }}
+            {{ states("sensor.yang_template_weight_previous") }}
           {% endif %}
 
     - name: "karen_template_weight"
@@ -24,9 +24,9 @@
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}  
-            {{ states("sensor.ble_weight_d03e7d3e3afa") }}
+            {{ states("sensor.ble_weight_d03e7d3e3afa") | float(default=0) }}
           {% else %}
-            {{ states("sensor.karen_template_weight") }}
+            {{ states("sensor.karen_template_weight_previous") }}
           {% endif %}
 
     - name: "yang_template_impedance"
@@ -34,9 +34,9 @@
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}  
-            {{ states("sensor.ble_impedance_d03e7d3e3afa") }}      
+            {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}      
           {% else %}
-            {{ states("sensor.yang_template_impedance") }}
+            {{ states("sensor.yang_template_impedance_previous") }}
           {% endif %}
 
     - name: "karen_template_impedance"
@@ -44,9 +44,9 @@
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}
-            {{ states("sensor.ble_impedance_d03e7d3e3afa") }}
+            {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}
           {% else %}
-            {{ states("sensor.karen_template_impedance") }}
+            {{ states("sensor.karen_template_impedance_previous") }}
           {% endif %}
 
 #

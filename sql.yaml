@@ -1,0 +1,116 @@
+
+- name: yang_template_weight_previous
+  query: >
+    SELECT
+      states.state
+    FROM
+      states
+    WHERE
+      state_id = (
+        SELECT
+          states.old_state_id
+        FROM
+          states
+        WHERE
+          metadata_id = (
+            SELECT
+              metadata_id
+            FROM
+              states_meta
+            WHERE
+              entity_id = 'sensor.yang_template_weight'
+          )
+          AND old_state_id IS NOT NULL
+        ORDER BY
+          last_updated_ts DESC
+        LIMIT
+          1
+      );
+  column: 'state'
+
+- name: karen_template_weight_previous
+  query: >
+    SELECT
+      states.state
+    FROM
+      states
+    WHERE
+      state_id = (
+        SELECT
+          states.old_state_id
+        FROM
+          states
+        WHERE
+          metadata_id = (
+            SELECT
+              metadata_id
+            FROM
+              states_meta
+            WHERE
+              entity_id = 'sensor.karen_template_weight'
+          )
+          AND old_state_id IS NOT NULL
+        ORDER BY
+          last_updated_ts DESC
+        LIMIT
+          1
+      );
+  column: 'state'
+
+- name: yang_template_impedance_previous
+  query: >
+    SELECT
+      states.state
+    FROM
+      states
+    WHERE
+      state_id = (
+        SELECT
+          states.old_state_id
+        FROM
+          states
+        WHERE
+          metadata_id = (
+            SELECT
+              metadata_id
+            FROM
+              states_meta
+            WHERE
+              entity_id = 'sensor.yang_template_impedance'
+          )
+          AND old_state_id IS NOT NULL
+        ORDER BY
+          last_updated_ts DESC
+        LIMIT
+          1
+      );
+  column: 'state'
+      
+- name: karen_template_impedance_previous
+  query: >
+    SELECT
+      states.state
+    FROM
+      states
+    WHERE
+      state_id = (
+        SELECT
+          states.old_state_id
+        FROM
+          states
+        WHERE
+          metadata_id = (
+            SELECT
+              metadata_id
+            FROM
+              states_meta
+            WHERE
+              entity_id = 'sensor.karen_template_impedance'
+          )
+          AND old_state_id IS NOT NULL
+        ORDER BY
+          last_updated_ts DESC
+        LIMIT
+          1
+      );
+  column: 'state'

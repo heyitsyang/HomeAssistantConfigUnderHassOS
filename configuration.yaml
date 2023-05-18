@@ -66,6 +66,7 @@ input_select: !include input_selects.yaml
 input_number: !include input_numbers.yaml  # configuring this in helpers is now preferred
 light: !include lights.yaml
 switch: !include switches.yaml
+sql: !include sql.yaml
 cover: !include covers.yaml
 #media_player: !include media_players.yaml
 notify: !include notifiers.yaml
