@@ -13,7 +13,7 @@
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}
-            {{ states("sensor.ble_weight_d03e7d3e3afa") | float(default=0)}}      
+            {{ weight }}      
           {% else %}
             {{ states("sensor.yang_template_weight_previous") }}
           {% endif %}
@@ -24,7 +24,7 @@
       state: >-
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}  
-            {{ states("sensor.ble_weight_d03e7d3e3afa") | float(default=0) }}
+            {{ weight }}
           {% else %}
             {{ states("sensor.karen_template_weight_previous") }}
           {% endif %}
