@@ -8,6 +8,7 @@
 
 - sensor:
     - name: "yang_template_weight"
+      device_class: "weight"
       unit_of_measurement: "lbs"
       icon: mdi:weight-lb
       state: >-
@@ -19,6 +20,7 @@
           {% endif %}
 
     - name: "karen_template_weight"
+      device_class: "weight"
       unit_of_measurement: "lbs"
       icon: mdi:weight-lb
       state: >-
