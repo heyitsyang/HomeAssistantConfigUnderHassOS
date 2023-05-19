@@ -62,15 +62,11 @@ exclude:
     - sensor.hot_*
     - sensor.openweathermap_*
     - sensor.weather_*
-    - sensor.asthma_*
-    - sensor.allergy_*
-    - sensor.cold_*
     - binary_sensor.*_battery*
     - binary_sensor.esp01_*
     - binary_sensor.hot_*
   entities:
     - sensor.influxdb_db_size
-    - sensor.pollen
     - sensor.date
     - sensor.time
     - sensor.date_time
