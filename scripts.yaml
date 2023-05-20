@@ -70,6 +70,8 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
     - service: lock.lock
       target:
         entity_id: lock.front_door_lock, lock.back_door_lock
+    - service: cover.close_cover
+      entity_id: cover.master_bedroom_shades
     - if:
         - or:
             - condition: state
