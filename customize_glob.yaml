@@ -7,3 +7,6 @@
 # ex: light.kitchen_* or scene.kitchen_*_colors
 
 
+
+"*_totalstarttime":          # tasmota timestamps
+  device_class: timestamp
