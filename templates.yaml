@@ -16,7 +16,7 @@
           {% if (180 <= weight <= 200) %}
             {{ weight }}      
           {% else %}
-            {{ states("sensor.yang_template_weight_previous") }}
+            {{ states("sensor.yang_template_weight") | float(default=0) }}
           {% endif %}
 
     - name: "karen_template_weight"
@@ -28,7 +28,7 @@
           {% if (130 <= weight <= 150) %}  
             {{ weight }}
           {% else %}
-            {{ states("sensor.karen_template_weight_previous") }}
+            {{ states("sensor.karen_template_weight_") | float(default=0) }}
           {% endif %}
 
     - name: "yang_template_impedance"
@@ -38,7 +38,7 @@
           {% if (180 <= weight <= 200) %}  
             {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}      
           {% else %}
-            {{ states("sensor.yang_template_impedance_previous") }}
+            {{ states("sensor.yang_template_impedance") | float(default=0) }}
           {% endif %}
 
     - name: "karen_template_impedance"
@@ -48,7 +48,7 @@
           {% if (130 <= weight <= 150) %}
             {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}
           {% else %}
-            {{ states("sensor.karen_template_impedance_previous") }}
+            {{ states("sensor.karen_template_impedance") | float(default=0) }}
           {% endif %}
 
 #
