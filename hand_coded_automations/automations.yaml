@@ -249,7 +249,10 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00','') }}"
+        message: >
+          "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00','') | replace(':01', ' oh 1')
+          | replace(':02', ' oh 2') | replace(':03', ' oh 3') | replace(':04', ' oh 4') | replace(':05', ' oh 5')
+          | replace(':06', ' oh 6') | replace(':07', ' oh 7') | replace(':08', ' oh 8') | replace(':09', ' oh 9') }}"
 
 #
 # EXTINGUISH MOOD LIGHTS DAILY
