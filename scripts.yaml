@@ -11,7 +11,6 @@
 scr_ha_startup:
   sequence:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
-    #- service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
       target:
         entity_id: input_boolean.inp_bool_announcements
@@ -212,7 +211,6 @@ scr_common_extended_absence_off:
 scr_common_guest_mode_on:
   mode: restart
   sequence:
-    #- service: script.scr_sonos_unjoin4announce
     - service: input_boolean.turn_on # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
@@ -226,7 +224,6 @@ scr_common_guest_mode_on:
 scr_common_guest_mode_off:
   mode: restart
   sequence:
-    #- service: script.scr_sonos_join4announce
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_guest_in_sunroom
@@ -737,7 +734,7 @@ scr_say_phrase:
         - service: media_player.volume_set
           data:
             entity_id: media_player.office_speakers
-            volume_level: 0.18 # set normal speaking volume
+            volume_level: 0.16 # set normal speaking volume
         - service: media_player.volume_set
           data:
             entity_id: media_player.greatroom_speakers
@@ -786,39 +783,6 @@ scr_say_phrase:
           - media_player.greatroom_speakers
           - media_player.office_speakers
         with_group: true
-
-#
-#  SONOS JOIN/UNJOIN SCRIPTS
-#
-# scr_sonos_join4announce:
-#   sequence:
-#     - condition: template
-#       value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.greatroom_speakers', 'group_members') }}"
-#     - service: media_player.join
-#       target:
-#         entity_id: media_player.office_speakers
-#       data:
-#         group_members: media_player.greatroom_speakers
-#     - delay: "00:00:15" # give it time to join/unjoin
-
-# scr_sonos_unjoin4announce:
-#   sequence:
-#     - condition: template
-#       value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.greatroom_speakers', 'group_members') }}"
-#     - service: media_player.unjoin
-#       target:
-#         entity_id: media_player.office_speakers
-#     - delay: "00:00:15" # give it time to join/unjoin
-
-# scr_sonos_eval_announce:
-#   sequence:
-#     - service: script.scr_sonos_join4announce # join as the default
-#     - delay: "00:00:15" # give it time to join/unjoin
-#     - condition: state
-#       entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
-#       state: "on"
-#     - service: script.scr_sonos_unjoin4announce # unjoin if guests
-#     - delay: "00:00:15" # give it time to join/unjoin
 
 #
 #  MANUAL UI REQUESTS
