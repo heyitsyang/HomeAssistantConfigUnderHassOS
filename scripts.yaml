@@ -774,7 +774,7 @@ scr_say_phrase:
     - service: logbook.log
       data_template:
         name: "say_phrase: "
-        message: "{{ message + '(' ~ state_attr('media_player.greatroom_speakers', 'media_duration') + 's)' }}"
+        message: "{{ message + '(' ~ state_attr('media_player.greatroom_speakers', 'media_duration') + 's)' }}" # tilde converts to string in jinja
     - delay:
         seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') | int(default=5) }}" # wait for announce duration
     - service: sonos.restore # premature restore will cut off speech before it has started or during play
