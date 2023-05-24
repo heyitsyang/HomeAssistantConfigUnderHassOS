@@ -68,6 +68,14 @@
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
 
+- platform: filter
+  name: "Filtered Weather Station Luminosity"
+  entity_id: sensor.kflwildw56_solar_rad_lx  # sensor provides mean value for every 5 minute interval
+  filters:
+    - filter: lowpass
+      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
+      precision: 0
+
 #
 # MQTT_ROOM- room of device/beacon location
 #            Add one entry for each device tracked
