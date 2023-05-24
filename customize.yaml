@@ -123,8 +123,6 @@ sensor.home_assistant_v2_db:
 sensor.influxdb_db_size:
   friendly_name: Influx DB Size
   icon: mdi:database
-sensor.ys_desktop_battery_level:           # uses High, Low, etc.
-  device_slass: None                       # so don't allow device_class battery (%)
 sensor.ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
