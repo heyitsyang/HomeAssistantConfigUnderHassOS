@@ -791,7 +791,7 @@
       data:
         message: "TTS"
         data:
-          tts_text: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
+          tts_text: "House water turned OFF. Leak detected at {{ trigger.entity_id }}"
           priority: high
           ttl: 0
           media_stream: alarm_stream
@@ -1888,7 +1888,7 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "{{ trigger.entity_id|replace('person.', '') | capitalize }} is away."
+        message: "{{ trigger.entity_id|replace('person.', '') | capitalize }} is away"
 
 #
 # CONDITIONS REQUIRING ATTENTION

@@ -106,7 +106,7 @@ scr_nobody_home:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: "I feel so empty inside when my people are away."
+        message: "I feel so empty inside when my people are away"
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
       state: "off"
@@ -138,7 +138,7 @@ scr_arrival_announcement:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: "Hi {{ person }}, welcome home."
+        message: "Hi {{ person }}, welcome home"
     - condition: state
       entity_id: input_boolean.inp_bool_visitor_while_out_flag # do not execute remaining unless flag is ON
       state: "on"
@@ -264,10 +264,10 @@ scr_check_sunrm_windows:
           state: "on"
     - service: script.scr_say_phrase
       data:
-        message: "You have a window open in the sun room.  The shades will not be automatically closed."
+        message: "You have a window open in the sun room.  The shades will not be automatically closed"
     - service: notify.alexa_yellow_ring
       data:
-        message: "You have a window open in the sun room.  The shades will not be automatically closed."
+        message: "You have a window open in the sun room.  The shades will not be automatically closed"
 
 #
 # CLOSE SUN ROOM SHADES
@@ -502,7 +502,7 @@ scr_repeat_say_garage_open:
           state: "open"
     - service: script.scr_say_phrase
       data:
-        message: "A garage door is still open.  This is your last reminder."
+        message: "A garage door is still open.  This is your last reminder"
     - service: notify.alexa_yellow_ring
       data:
         message: "A garage door is still open"
@@ -680,8 +680,7 @@ scr_say_phrase:
     - service: sonos.snapshot
       data:
         entity_id:
-          - media_player.office_speakers
-          - media_player.greatroom_speakers
+          - all
         with_group: true
     - choose:
         - conditions: # high priority - ignores announce & sleeping conditions
@@ -776,12 +775,11 @@ scr_say_phrase:
         name: "say_phrase: "
         message: "{{ message + '(' ~ state_attr('media_player.greatroom_speakers', 'media_duration') + 's)' }}" # tilde converts to string in jinja
     - delay:
-        seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') + 1 | int(default=5) }}" # wait for announce duration
+        seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') | int(default=5) }}" # wait for announce duration
     - service: sonos.restore # premature restore will cut off speech before it has started or during play
       data:
         entity_id:
-          - media_player.greatroom_speakers
-          - media_player.office_speakers
+          - all
         with_group: true
 
 #
@@ -801,10 +799,10 @@ scr_manual_say_time:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: > 
-         "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00','') | replace(':01', ' oh 1')
-          | replace(':02', ' oh 2') | replace(':03', ' oh 3') | replace(':04', ' oh 4') | replace(':05', ' oh 5')
-          | replace(':06', ' oh 6') | replace(':07', ' oh 7') | replace(':08', ' oh 8') | replace(':09', ' oh 9') }}"
+        message: >
+          "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00','') | replace(':01', ' oh 1')
+           | replace(':02', ' oh 2') | replace(':03', ' oh 3') | replace(':04', ' oh 4') | replace(':05', ' oh 5')
+           | replace(':06', ' oh 6') | replace(':07', ' oh 7') | replace(':08', ' oh 8') | replace(':09', ' oh 9') }}"
 
 # VACUUM COMMANDS
 scr_vacuum_start_custom_cleaning:
