@@ -737,7 +737,7 @@ scr_say_phrase:
         - service: media_player.volume_set
           data:
             entity_id: media_player.greatroom_speakers
-            volume_level: 0.28 # set normal speaking volume
+            volume_level: 0.26 # set normal speaking volume
         - service: media_player.volume_set
           data:
             entity_id: media_player.garage_speakers
