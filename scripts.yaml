@@ -711,7 +711,7 @@ scr_say_phrase:
                         entity_id:
                           - media_player.greatroom_speakers
                           - media_player.garage_speakers
-                        media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message }}"
+                        media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | regex_replace('\.$', '') }}"
                         media_content_type: music
               default:
                 - service: media_player.play_media
@@ -721,7 +721,7 @@ scr_say_phrase:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
                       - media_player.office_speakers
-                    media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message }}"
+                    media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | regex_replace('\.$', '') }}"
                     media_content_type: music
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
@@ -754,7 +754,7 @@ scr_say_phrase:
                     entity_id:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
-                    media_content_id: media-source://tts/tts.piper?message="{{ message }}"
+                    media_content_id: media-source://tts/tts.piper?message="{{ message | regex_replace('\.$', '') }}"
                     media_content_type: music
           default:
             - service: media_player.play_media
@@ -799,10 +799,7 @@ scr_manual_say_time:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: >
-          "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00','') | replace(':01', ' oh 1')
-           | replace(':02', ' oh 2') | replace(':03', ' oh 3') | replace(':04', ' oh 4') | replace(':05', ' oh 5')
-           | replace(':06', ' oh 6') | replace(':07', ' oh 7') | replace(':08', ' oh 8') | replace(':09', ' oh 9') }}"
+        message: "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00', '') | regex_replace(':0(\\d)', ' oh \\1') }}"
 
 # VACUUM COMMANDS
 scr_vacuum_start_custom_cleaning:
