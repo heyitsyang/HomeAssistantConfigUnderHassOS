@@ -74,7 +74,6 @@ inp_num_greatrm_announce_vol: # original value = 0.28
 #
 # DELAYS & DURATIONS
 #
-
 inp_num_front_door_lights_off_delay: # original value = 10 minutes
   name: "FrDr lights OFF"
   mode: slider
@@ -115,9 +114,18 @@ inp_num_lvrm_lights_off_delay: # original value =  15 minutes
 inp_num_auto_front_door_lock_trig_delay: # original value = 120 minutes
   name: "Fr door lock"
   mode: slider
-  step: 5
+  step: 10
   min: 5
   max: 180
+  icon: mdi:lock-clock
+  unit_of_measurement: minutes
+
+inp_num_auto_front_door_lock_trig_party_delay: # original value = 120 minutes
+  name: "Fr door lock party mode"
+  mode: slider
+  step: 10
+  min: 180
+  max: 360
   icon: mdi:lock-clock
   unit_of_measurement: minutes
 

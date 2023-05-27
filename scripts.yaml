@@ -138,7 +138,15 @@ scr_arrival_announcement:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: "Hi {{ person }}, welcome home"
+        message: >
+          {% if person == "karen" %}
+            "Hello Mistress Karen, welcome home"
+          {% else %}
+            "Hello Master Yaang, welcome home"
+          {% endif %}
+
+    #           "Hi {{ person }}, welcome home"
+
     - condition: state
       entity_id: input_boolean.inp_bool_visitor_while_out_flag # do not execute remaining unless flag is ON
       state: "on"
@@ -515,9 +523,14 @@ scr_mood_lighting_on:
     - condition: state
       entity_id: group.mood_lights
       state: "off"
-    - service: scene.turn_on
-      target:
-        entity_id: scene.sun_room_uplights_20
+    - if:
+        - condition: state
+          entity_id: input_boolean.inp_bool_guest_in_sunroom
+          state: "off"
+      then:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.sun_room_uplights_20
     - service: homeassistant.turn_on
       target:
         entity_id: group.mood_lights

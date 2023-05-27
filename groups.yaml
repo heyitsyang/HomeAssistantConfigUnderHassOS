@@ -185,7 +185,6 @@ mood_lights:
   entities:
     - switch.candles
     - light.kitchen_leds_upper_master
-    - light.sun_room_uplights
     - switch.christmas_tree
 
 pathway_lights:

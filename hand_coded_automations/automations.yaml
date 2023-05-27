@@ -261,17 +261,15 @@
     - platform: state
       entity_id: input_boolean.inp_bool_sleeping
       to: "on"
-  condition:
-    - condition: state
-      entity_id: group.mood_lights
-      state: "on"
   action:
     - service: scene.turn_on # set default before turning off
       target:
         entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       target:
-        entity_id: group.mood_lights
+        entity_id:
+          - light.sun_room_uplights
+          - group.mood_lights
 
 #
 # TURN OFF GOOD MORNING USED SEMAPHORE
@@ -363,6 +361,11 @@
           - light.sun_room_lights
           - light.eating_area_lights
           - light.entryway_lights
+    - service: lock.lock
+      target:
+        entity_id:
+          - lock.front_door_lock
+          - lock.back_door_lock
 
 # PARTY MODE DETERMINED BY DATE/TIME
 - id: aut_datetime_party_mode_on
@@ -1580,17 +1583,15 @@
       to: "off"
       for:
         minutes: 10
-  condition:
-    - condition: state
-      entity_id: group.mood_lights
-      state: "on"
   action:
     - service: scene.turn_on # set the lights to the default before turning off
       target:
         entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       target:
-        entity_id: group.mood_lights
+        entity_id:
+          - light.sun_room_uplights
+          - group.mood_lights
 
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
@@ -1656,6 +1657,9 @@
         minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) + 30 }}"
   condition:
     - condition: state
+      entity_id: input_boolean.party_mode
+      state: "off"
+    - condition: state
       entity_id: lock.front_door_lock
       state: "unlocked" # May not be unlocked if using door activity trigger
       for: # This check prevents immediate notification from 1st trigger
@@ -1671,6 +1675,41 @@
       data:
         title: "Front door automatically locked"
         message: "Oops. Someone left it unlocked!"
+
+- id: aut_auto_front_door_lock_party_mode
+  alias: "aut auto front door lock party mode"
+  initial_state: true
+  trigger:
+    - platform: template # calculate time since last door open activity  & check expiration
+      value_template: >
+        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_window_door_is_open', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (states('input_number.inp_num_auto_front_door_lock_trig_party_delay') | int(default=0)) }}
+    - platform: state # cover case where unlocked, but door never opened
+      entity_id: lock.front_door_lock
+      to: "unlocked"
+      for:
+        minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_party_delay') | int(default=0)) + 30 }}"
+  condition:
+    - condition: state
+      entity_id: input_boolean.party_mode
+      state: "on"
+    - condition: state
+      entity_id: lock.front_door_lock
+      state: "unlocked" # May not be unlocked if using door activity trigger
+      for: # This check prevents immediate notification from 1st trigger
+        minutes: 2 #   when last activity > delay time at boot
+    - condition: state
+      entity_id: binary_sensor.front_door_window_door_is_open
+      state: "off" # be sure door is closed
+  action:
+    - service: lock.lock
+      target:
+        entity_id: lock.front_door_lock
+    - service: notify.yskt_cell_phones
+      data:
+        title: "Front door automatically locked"
+        message: "The party's over!"
 
 - id: aut_auto_back_door_lock
   alias: "aut auto back door lock"
@@ -1885,7 +1924,14 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "{{ trigger.entity_id|replace('person.', '') | capitalize }} is away"
+        message: >
+          {% if (trigger.entity_id|replace('person.', '')) == "karen" %}
+            "Mistress Karen is away"
+          {% else %}
+            "Master Yaang is away"
+          {% endif %}
+
+#"{{ trigger.entity_id|replace('person.', '') }} is away"
 
 #
 # CONDITIONS REQUIRING ATTENTION
