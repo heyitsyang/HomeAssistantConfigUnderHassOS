@@ -17,7 +17,7 @@ db_url: !secret mariadb_url
 
 auto_purge: true
 auto_repack: true
-purge_keep_days: 14 # how many days of history to keep
+purge_keep_days: 7 # how many days of history to keep
 
 include:
   domains:
