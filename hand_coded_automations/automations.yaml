@@ -1530,8 +1530,6 @@
     - platform: sun
       event: sunrise
       offset: "+00:10:00"
-    #  - platform: template
-    #    value_template: "{{ states('sensor.filtered_solar_tube_luminosity') | int(default=0) > 230 }}"
     - platform: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       to: "off"
@@ -1561,7 +1559,7 @@
         - condition: and
           conditions:
             - condition: template
-              value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}" # we have to do template here because there is no "not" condition
+              value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}"
             - condition: template
               value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor broken if zero
         - condition: state

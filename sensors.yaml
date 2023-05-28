@@ -44,18 +44,18 @@
     hours: 24
 
 - platform: statistics
-  name: "Living Rm Visible Light"
-  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
-  state_characteristic: mean
-  sampling_size: 15 # default state value is the running average of this many samples
-  precision: 2
-
-- platform: statistics
   name: "10m Avg Master Bedroom Temperature"
   entity_id: sensor.master_bedroom_temperature
   state_characteristic: mean
   sampling_size: 10 # default state value is the running average of this many samples
   precision: 1 # number of decimal places
+
+- platform: statistics
+  name: "Living Rm Visible Light"
+  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
+  state_characteristic: mean
+  sampling_size: 15 # default state value is the running average of this many samples
+  precision: 2
 
 - platform: filter
   name: "Filtered Solar Tube Luminosity"
