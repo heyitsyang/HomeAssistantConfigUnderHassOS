@@ -16,10 +16,9 @@ gr2:
   hours_to_show: 24
   refresh: 300
   entities:
-    - sensor.living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
-    - sensor.living_rm_full_spectrum_light
-    - sensor.living_rm_infrared_light
+    - sensor.statistical_mean_living_rm_visible_light
+    - sensor.raw_living_rm_visible_light
 
 gr3:
   name: "Temperature"

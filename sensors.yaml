@@ -51,11 +51,24 @@
   precision: 1 # number of decimal places
 
 - platform: statistics
-  name: "Living Rm Visible Light"
+  name: "Statistical Mean Living Rm Visible Light"
+  unique_id: statistical_mean_living_rm_visible_light
   entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
   state_characteristic: mean
-  sampling_size: 15 # default state value is the running average of this many samples
+  sampling_size: 10 # default state value is the running average of this many samples
   precision: 2
+
+- platform: filter
+  name: "Filtered Living Rm Visible Light"
+  unique_id: filtered_living_rm_visible_light
+  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
+  filters:
+    - filter: outlier
+      radius: 10 # default radius is 2 if unspecified
+      window_size: 30 # num of prev states to define median (default = 1)
+    - filter: lowpass
+      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
+      precision: 0
 
 - platform: filter
   name: "Filtered Solar Tube Luminosity"
@@ -70,8 +83,12 @@
 
 - platform: filter
   name: "Filtered Weather Station Luminosity"
-  entity_id: sensor.kflwildw56_solar_rad_lx  # sensor provides mean value for every 5 minute interval
+  unique_id: filtered_weather_station_luminosity
+  entity_id: sensor.kflwildw56_solar_rad_lx # sensor provides mean value for every 5 minute interval
   filters:
+    - filter: outlier
+      radius: 4000 # default radius is 2 if unspecified
+      window_size: 5 # num of prev states to define median (default = 1)
     - filter: lowpass
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0

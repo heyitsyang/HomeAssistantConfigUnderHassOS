@@ -252,9 +252,8 @@ luminosity:
   entities:
     - sensor.raw_solar_tube_luminosity
     - sensor.filtered_solar_tube_luminosity
-    - sensor.living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
-    - sensor.test_filtered_living_rm_visible_light
+    - sensor.statistical_mean_living_rm_visible_light
     - binary_sensor.lum_outdoor_lights_solar_trig
     - binary_sensor.lum_mood_lights_f_solar_trig
     - binary_sensor.lum_sunrm_shades_trig

@@ -466,7 +466,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
+        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -478,7 +478,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
+        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -1035,7 +1035,7 @@
     - condition: and
       conditions:
         - condition: template # lvrm sensor can be zero & not broken
-          value_template: "{{ states('sensor.living_rm_visible_light') != 'unknown' }}" # sensor broken if 'unknown'
+          value_template: "{{ states('sensor.filtered_living_rm_visible_light') != 'unknown' }}" # sensor broken if 'unknown'
         - condition: or
           conditions:
             - condition: state

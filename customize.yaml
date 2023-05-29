@@ -205,8 +205,8 @@ sensor.filtered_solar_tube_luminosity:
   device_class: illuminance
 sensor.suggested_brightness:
   icon: mdi:brightness-percent
-sensor.living_rm_visible_light:
-  friendly_name: Living Rm Visible Light
+sensor.filtered_living_rm_visible_light:
+  friendly_name: Filtered Living Rm Visible Light
   icon: mdi:brightness-6
 sensor.raw_living_rm_visible_light:
   friendly_name: Raw Living Rm Visible Light
