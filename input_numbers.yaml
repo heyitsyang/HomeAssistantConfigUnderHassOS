@@ -247,8 +247,8 @@ inp_num_mood_lights_on_f_solar_trig: # solartube original value = 900
   name: "Mood ON f_solar"
   mode: slider
   step: 10
-  min: 3600
-  max: 3900
+  min: 3800
+  max: 4200
   icon: mdi:lightbulb-outline
   unit_of_measurement: lx
 
@@ -256,8 +256,8 @@ inp_num_mood_lights_off_f_solar_trig: # solartube original value = 3000
   name: "Mood OFF f_solar"
   mode: slider
   step: 10
-  min: 7500
-  max: 8500
+  min: 4200
+  max: 5500
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lx
 

@@ -509,7 +509,7 @@
       entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_sunrm_shades_trig_on
-  alias: "aut lum sunrm shades trig on"
+  alias: "aut lum sunrm shades trig on"  # set bool to "on" when bright enough
   initial_state: true
   trigger:
     - platform: template
@@ -521,7 +521,7 @@
       entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 - id: aut_lum_sunrm_shades_trig_off
-  alias: "aut lum sunrm shades trig off"
+  alias: "aut lum sunrm shades trig off"  # set bool to "off" when too dark
   initial_state: true
   trigger:
     - platform: template
@@ -1192,7 +1192,7 @@
         state: "off"
       - condition: time # do not execute at sunrise
         after: "12:00:00"
-      - condition: state
+      - condition: state # don't bother if too dark
         entity_id: binary_sensor.lum_sunrm_shades_trig
         state: "on"
   action:
@@ -1210,7 +1210,7 @@
     - platform: sun
       event: sunset
       offset: "-00:10:00"
-    - platform: state
+    - platform: state  # also lower if too dark before sunset (stormy day)
       entity_id: binary_sensor.lum_sunrm_shades_trig
       to: "off"
       for:
@@ -1246,7 +1246,7 @@
   trigger:
     - platform: sun
       event: sunrise
-    - platform: state
+    - platform: state  # also open if previously closed due to dark skies (stormy) & now bright
       entity_id: binary_sensor.lum_sunrm_shades_trig
       to: "on"
       for:
