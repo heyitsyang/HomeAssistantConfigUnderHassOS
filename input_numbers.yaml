@@ -189,91 +189,82 @@ inp_num_masterbdrmfan_off_temp:
   icon: mdi:fan-off
   unit_of_measurement: "ºF"
 
-inp_num_outdoor_lights_on_solar_trig: # original value = 85
+inp_num_outdoor_lights_on_solar_trig: # solartube original value = 75
   name: "Outdoors ON solar"
   mode: slider
-  step: 0.5
-  min: 40
-  max: 140
+  step: 10
+  min: 600
+  max: 750
   icon: mdi:lightbulb-outline
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
-inp_num_outdoor_lights_off_solar_trig: # original value = 210
+inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
   name: "Outdoors OFF solar"
   mode: slider
-  step: 1
-  min: 150
-  max: 250
+  step: 10
+  min: 750
+  max: 800
   icon: mdi:lightbulb-off-outline
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
-#inp_num_lvrm_lights_on_f_solar_trig:                               # original value = 1000
+#inp_num_lvrm_lights_on_f_solar_trig:                               # solartube original value = 1000
 #  name: 'LvRm ON f_solar'
 #  mode: slider
 #  step: 50
 #  min: 500
 #  max: 2000
 #  icon: mdi:lightbulb-outline
-#  unit_of_measurement: lux
+#  unit_of_measurement: lx
 #
-#inp_num_lvrm_lights_off_f_solar_trig:                             # original value = 4500
+#inp_num_lvrm_lights_off_f_solar_trig:                             # solartubeoriginal value = 4500
 #  name: 'LvRm OFF f_solar'
 #  mode: slider
 #  step: 50
 #  min: 3000
 #  max: 5500
 #  icon: mdi:lightbulb-off-outline
-#  unit_of_measurement: lux
+#  unit_of_measurement: lx
 
 inp_num_lvrm_lights_on_indoor_trig: # original value =  13
   name: "LvRm ON indoor"
   mode: slider
   step: 0.05
   min: 15
-  max: 30
+  max: 25
   icon: mdi:lightbulb-outline
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
 inp_num_lvrm_lights_off_indoor_trig: # original value = 24
   name: "LvRm OFF indoor" # visible lum is 26 lux max when all lights on so value must
   mode: slider #   be > 26 or lights will go off due to their own light
   step: 0.05
-  min: 15
+  min: 25
   max: 30
   icon: mdi:lightbulb-off-outline
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
-inp_num_mood_lights_on_f_solar_trig: # original value = 900
+inp_num_mood_lights_on_f_solar_trig: # solartube original value = 900
   name: "Mood ON f_solar"
   mode: slider
-  step: 50
-  min: 600
-  max: 1200
+  step: 10
+  min: 3600
+  max: 3900
   icon: mdi:lightbulb-outline
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
-inp_num_mood_lights_off_f_solar_trig: # original value = 3000
+inp_num_mood_lights_off_f_solar_trig: # solartube original value = 3000
   name: "Mood OFF f_solar"
   mode: slider
-  step: 100
-  min: 1500
-  max: 3000
+  step: 10
+  min: 7500
+  max: 8500
   icon: mdi:lightbulb-off-outline
-  unit_of_measurement: lux
-
-inp_num_sunrm_shades_part_close_min_reqd_trig_lux: # original value = 4200
-  name: "Shades part CLOSE min lux" # shades don't close if not brighter than this number
-  mode: slider
-  step: 100
-  min: 2000
-  max: 6000
-  icon: mdi:blinds
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
 # WINDOW SHADES TRIGGERS
 
 # SUNROOM SHADES SETTINGS
-inp_num_sunrm_shades_part_pct_open: # original value = 40 percent
+inp_num_sunrm_shades_part_pct_open: # solartube original value = 40 percent
   name: "Shades part % open"
   mode: slider
   step: 10
@@ -282,7 +273,7 @@ inp_num_sunrm_shades_part_pct_open: # original value = 40 percent
   icon: mdi:blinds
   unit_of_measurement: percent
 
-inp_num_sunrm_shades_part_close_trig_angle: # original value = 32.5 degrees
+inp_num_sunrm_shades_part_close_trig_angle: # solartube original value = 32.5 degrees
   name: "Shades part close angle"
   mode: slider
   step: 0.1
@@ -318,23 +309,32 @@ inp_num_sunrm_shades_close_sun_penetration_max_azimuth: # original value = 267 t
   icon: mdi:compass-outline
   unit_of_measurement: degrees
 
-inp_num_sunrm_shades_open_trig: # original value = 450 lux
+inp_num_sunrm_shades_open_trig: # solartube original value = 450 lux
   name: "Shades OPEN solar"
   mode: slider
   step: 10
-  min: 300
-  max: 600
+  min: 3000
+  max: 4500
   icon: mdi:window-maximize
-  unit_of_measurement: lux
+  unit_of_measurement: lx
 
-inp_num_sunrm_shades_close_low_lux_trig: # original value = 200 lux
+inp_num_sunrm_shades_close_low_lux_trig: # solartube original value = 200 lux
   name: "Shades CLOSE solar"
   mode: slider
   step: 10
-  min: 150
-  max: 350
+  min: 2000
+  max: 3000
   icon: mdi:blinds
-  unit_of_measurement: lux
+  unit_of_measurement: lx
+
+inp_num_sunrm_shades_part_close_min_reqd_trig_lux: # solartube original value = 4200
+  name: "Shades part CLOSE min lux" # shades don't close if not brighter than this number
+  mode: slider
+  step: 10
+  min: 12500
+  max: 14000
+  icon: mdi:blinds
+  unit_of_measurement: lx
 
 # PROXIMITY TRIGGERS
 inp_num_outdoor_lights_prox_trigger: # original value = 0.5 miles

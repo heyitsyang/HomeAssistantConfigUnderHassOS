@@ -65,7 +65,7 @@
   filters:
     - filter: outlier
       radius: 10 # default radius is 2 if unspecified
-      window_size: 30 # num of prev states to define median (default = 1)
+      window_size: 5 # num of prev states to define median (default = 1)
     - filter: lowpass
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
@@ -87,7 +87,7 @@
   entity_id: sensor.kflwildw56_solar_rad_lx # sensor provides mean value for every 5 minute interval
   filters:
     - filter: outlier
-      radius: 4000 # default radius is 2 if unspecified
+      radius: 1000 # default radius is 2 if unspecified
       window_size: 5 # num of prev states to define median (default = 1)
     - filter: lowpass
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output

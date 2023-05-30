@@ -442,7 +442,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
+        {{ (states('sensor.kflwildw56_solar_rad_lx') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -454,7 +454,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
+        {{ (states('sensor.kflwildw56_solar_rad_lx') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -490,7 +490,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_weather_station_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -502,7 +502,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_weather_station_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -514,7 +514,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.kflwildw56_solar_rad_lx') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -526,7 +526,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.kflwildw56_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -1149,7 +1149,7 @@
         state: "off"
       - condition: template # check if bright enough to bother
         value_template: >
-          {{ states('sensor.filtered_solar_tube_luminosity') | int(default=0) >  
+          {{ states('sensor.filtered_weather_station_luminosity') | int(default=0) >  
           (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}
       - condition: numeric_state
         entity_id: sun.sun
@@ -1559,9 +1559,9 @@
         - condition: and
           conditions:
             - condition: template
-              value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}"
+              value_template: "{{ states('sensor.kflwildw56_solar_rad_lx') != 'unknown' }}"
             - condition: template
-              value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor broken if zero
+              value_template: "{{ states('sensor.kflwildw56_solar_rad_lx') | int(default=0) > 0 }}" # sensor broken if zero
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
           state: "off"
@@ -1926,7 +1926,7 @@
           {% if (trigger.entity_id|replace('person.', '')) == "karen" %}
             "Mistress Karen is away"
           {% else %}
-            "Master Yaang is away"
+            "Master Yainng is away"
           {% endif %}
 
 #"{{ trigger.entity_id|replace('person.', '') }} is away"

@@ -142,7 +142,7 @@ scr_arrival_announcement:
           {% if person == "karen" %}
             "Hello Mistress Karen, welcome home"
           {% else %}
-            "Hello Master Yaang, welcome home"
+            "Hello Master Yainng, welcome home"
           {% endif %}
 
     #           "Hi {{ person }}, welcome home"
@@ -665,7 +665,7 @@ scr_front_door_lights_on:
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
     - condition: template # sensor is broken if zero
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
+      value_template: "{{ states('sensor.kflwildw56_solar_rad_lx') | int(default=0) > 0 }}"
     - service: light.turn_on
       target:
         entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
@@ -676,7 +676,7 @@ scr_back_door_lights_on:
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
     - condition: template # sensor is broken if zero
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
+      value_template: "{{ states('sensor.kflwildw56_solar_rad_lx') | int(default=0) > 0 }}"
     - service: light.turn_on
       target:
         entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
