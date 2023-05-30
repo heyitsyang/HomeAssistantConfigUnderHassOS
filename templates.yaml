@@ -12,11 +12,12 @@
       unit_of_measurement: "lbs"
       icon: mdi:weight-lb
       state: >-
+        {% set yang_previous_weight = states('sensor.yang_template_weight') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}
             {{ weight }}      
           {% else %}
-            {{ states("sensor.yang_template_weight") | float(default=0) }}
+            {{ yang_previous_weight }}
           {% endif %}
 
     - name: "karen_template_weight"
@@ -24,31 +25,34 @@
       unit_of_measurement: "lbs"
       icon: mdi:weight-lb
       state: >-
+        {% set karen_previous_weight = states('sensor.karen_template_weight') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}  
             {{ weight }}
           {% else %}
-            {{ states("sensor.karen_template_weight_") | float(default=0) }}
+            {{ karen_previous_weight }}
           {% endif %}
 
     - name: "yang_template_impedance"
       unit_of_measurement: "ohm"
       state: >-
+        {% set yang_previous_impedance = states('sensor.yang_template_impedance') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}  
             {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}      
           {% else %}
-            {{ states("sensor.yang_template_impedance") | float(default=0) }}
+            {{ yang_previous_impedance }}
           {% endif %}
 
     - name: "karen_template_impedance"
       unit_of_measurement: "ohm"
       state: >-
+        {% set karen_previous_impedance = states('sensor.karen_template_impedance') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}
             {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}
           {% else %}
-            {{ states("sensor.karen_template_impedance") | float(default=0) }}
+            {{ karen_previous_impedance }}
           {% endif %}
 
 #
