@@ -140,19 +140,17 @@ scr_arrival_announcement:
       data:
         message: >
           {% if person == "karen" %}
-            "Hello Mistress Karen, welcome home"
+            {% if states('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
+              "Hello Mistress Karen, welcome home.  While you were away, there was a visitor at the front door."
+            {% else %}
+              "Hello Mistress Karen, welcome home"
+            {% endif %}
           {% else %}
-            "Hello Master Yainng, welcome home"
+            {% if states('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
+              "Hello Master Yang, welcome home.  While you were away, there was a visitor at the front door."
+            {% else %}
+              "Hello Master Yang, welcome home"
           {% endif %}
-
-    #           "Hi {{ person }}, welcome home"
-
-    - condition: state
-      entity_id: input_boolean.inp_bool_visitor_while_out_flag # do not execute remaining unless flag is ON
-      state: "on"
-    - service: script.scr_say_phrase
-      data:
-        message: "While you where away, there was a visitor at the front door"
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
@@ -724,7 +722,7 @@ scr_say_phrase:
                         entity_id:
                           - media_player.greatroom_speakers
                           - media_player.garage_speakers
-                        media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | regex_replace('\.$', '') }}"
+                        media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | replace(' Yang', ' Yainng')  |regex_replace('\.$', '') }}"
                         media_content_type: music
               default:
                 - service: media_player.play_media
@@ -734,7 +732,7 @@ scr_say_phrase:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
                       - media_player.office_speakers
-                    media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | regex_replace('\.$', '') }}"
+                    media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | replace(' Yang', ' Yainng') | regex_replace('\.$', '') }}"
                     media_content_type: music
       default: # normal priority - respects announce & sleeping conditions
         - condition: state

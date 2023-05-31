@@ -1926,7 +1926,7 @@
           {% if (trigger.entity_id|replace('person.', '')) == "karen" %}
             "Mistress Karen is away"
           {% else %}
-            "Master Yainng is away"
+            "Master Yang is away"
           {% endif %}
 
 #"{{ trigger.entity_id|replace('person.', '') }} is away"
