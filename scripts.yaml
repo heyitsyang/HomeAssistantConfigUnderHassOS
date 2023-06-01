@@ -143,13 +143,14 @@ scr_arrival_announcement:
             {% if states('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
               "Hello Mistress Karen, welcome home.  While you were away, there was a visitor at the front door."
             {% else %}
-              "Hello Mistress Karen, welcome home"
+              "Hello Mistress Karen, welcome home."
             {% endif %}
           {% else %}
             {% if states('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
               "Hello Master Yang, welcome home.  While you were away, there was a visitor at the front door."
             {% else %}
-              "Hello Master Yang, welcome home"
+              "Hello Master Yang, welcome home."
+            {% endif %}
           {% endif %}
     - service: input_boolean.turn_off
       data:

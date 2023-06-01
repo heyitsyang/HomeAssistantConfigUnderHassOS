@@ -1147,7 +1147,7 @@
       - condition: state
         entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
         state: "off"
-      - condition: template # check if bright enough to bother closing
+      - condition: template # check if dark enough to bother closing
         value_template: >
           {{ states('sensor.filtered_weather_station_luminosity') | int(default=0) >  
           (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}

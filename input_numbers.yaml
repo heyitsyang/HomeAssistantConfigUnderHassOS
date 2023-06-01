@@ -246,18 +246,18 @@ inp_num_lvrm_lights_off_indoor_trig: # original value = 24
 inp_num_mood_lights_on_f_solar_trig: # solartube original value = 900
   name: "Mood ON f_solar"
   mode: slider
-  step: 10
-  min: 3800
-  max: 4200
+  step: 50
+  min: 6000
+  max: 9000
   icon: mdi:lightbulb-outline
   unit_of_measurement: lx
 
 inp_num_mood_lights_off_f_solar_trig: # solartube original value = 3000
   name: "Mood OFF f_solar"
   mode: slider
-  step: 10
-  min: 4200
-  max: 5500
+  step: 50
+  min: 9000
+  max: 10000
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lx
 
@@ -312,27 +312,27 @@ inp_num_sunrm_shades_close_sun_penetration_max_azimuth: # original value = 267 t
 inp_num_sunrm_shades_open_trig: # solartube original value = 450 lux
   name: "Shades OPEN solar"
   mode: slider
-  step: 10
-  min: 3000
-  max: 4500
+  step: 50
+  min: 8000
+  max: 10000
   icon: mdi:window-maximize
   unit_of_measurement: lx
 
 inp_num_sunrm_shades_close_low_lux_trig: # solartube original value = 200 lux
   name: "Shades CLOSE solar"
   mode: slider
-  step: 10
-  min: 2000
-  max: 3000
+  step: 50
+  min: 4000
+  max: 8000
   icon: mdi:blinds
   unit_of_measurement: lx
 
 inp_num_sunrm_shades_part_close_min_reqd_trig_lux: # solartube original value = 4200
   name: "Shades part CLOSE min lux" # shades don't close if not brighter than this number
   mode: slider
-  step: 10
-  min: 12500
-  max: 14000
+  step: 100
+  min: 20000
+  max: 80000
   icon: mdi:blinds
   unit_of_measurement: lx
 
