@@ -192,18 +192,18 @@ inp_num_masterbdrmfan_off_temp:
 inp_num_outdoor_lights_on_solar_trig: # solartube original value = 75
   name: "Outdoors ON solar"
   mode: slider
-  step: 10
-  min: 600
-  max: 750
+  step: 50
+  min: 900
+  max: 1400
   icon: mdi:lightbulb-outline
   unit_of_measurement: lx
 
 inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
   name: "Outdoors OFF solar"
   mode: slider
-  step: 10
-  min: 750
-  max: 800
+  step: 50
+  min: 1500
+  max: 1800
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lx
 
