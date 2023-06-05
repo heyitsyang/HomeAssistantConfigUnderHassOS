@@ -554,6 +554,9 @@
       entity_id: sensor.ys_desktop_system_idle_time
       below: 1
   condition:
+    - condition: state                       # don't repetitively turn on
+      entity_id: group.office_mood_lights
+      state: "off"
     - condition: state
       entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       state: "on"
@@ -585,8 +588,7 @@
     - service: light.turn_off
       target:
         entity_id:
-          - light.office_monitor_leds
-          - light.office_cabinet_leds_master
+          - group.office_mood_lights
 
 #
 # DEVICE TRACKER UPDATE EVENTS

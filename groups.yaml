@@ -399,6 +399,12 @@ upper_office_cabinet_leds:
     - light.office_cabinet_leds_segment_1
     - light.office_cabinet_leds_segment_2
 
+office_mood_lights:
+  name: "Office Mood Lights"
+  entities:
+    - light.office_cabinet_leds_master
+    - light.office_monitor_leds
+
 garage_opener_power:
   name: "Garage door power"
   entities:
