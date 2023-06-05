@@ -193,7 +193,7 @@
   password: !secret influxdb_pwd
   scan_interval: 3600
   queries:
-    - name: InfluxDB DB size
+    - name: "InfluxDB DB size"
       unit_of_measurement: MB
       value_template: "{{ (value|float / 1024 /1024)|round(1) }}"
       group_function: sum
