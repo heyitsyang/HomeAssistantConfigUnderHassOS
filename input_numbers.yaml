@@ -13,7 +13,7 @@
 
 #
 # WEBER iGRILL
-# SLIDERS FOR IGRILL ALERTS
+# boxS FOR IGRILL ALERTS
 #
 igrill_alert_low:
   name: Grill Low Temp
@@ -57,7 +57,7 @@ igrill_probe_4_target:
 #
 inp_num_office_announce_vol: # original value = 0.18
   name: "Office announce vol"
-  mode: slider
+  mode: box
   step: 0.01
   min: 0.10
   max: 0.32
@@ -65,7 +65,7 @@ inp_num_office_announce_vol: # original value = 0.18
 
 inp_num_greatrm_announce_vol: # original value = 0.28
   name: "GreatRm announce vol"
-  mode: slider
+  mode: box
   step: 0.01
   min: 0.15
   max: 0.32
@@ -76,7 +76,7 @@ inp_num_greatrm_announce_vol: # original value = 0.28
 #
 inp_num_front_door_lights_off_delay: # original value = 10 minutes
   name: "FrDr lights OFF"
-  mode: slider
+  mode: box
   step: 1
   min: 5
   max: 30
@@ -85,7 +85,7 @@ inp_num_front_door_lights_off_delay: # original value = 10 minutes
 
 inp_num_back_door_lights_off_delay: # original value = 10 minutes
   name: "BkDr lights OFF"
-  mode: slider
+  mode: box
   step: 1
   min: 5
   max: 30
@@ -94,7 +94,7 @@ inp_num_back_door_lights_off_delay: # original value = 10 minutes
 
 inp_num_lvrm_lights_on_delay: # original value = 5 minutes
   name: "LvRm lights ON"
-  mode: slider
+  mode: box
   step: 1
   min: 0
   max: 12
@@ -103,7 +103,7 @@ inp_num_lvrm_lights_on_delay: # original value = 5 minutes
 
 inp_num_lvrm_lights_off_delay: # original value =  15 minutes
   name: "LvRm lights OFF"
-  mode: slider
+  mode: box
   step: 1
   min: 0
   max: 30
@@ -113,7 +113,7 @@ inp_num_lvrm_lights_off_delay: # original value =  15 minutes
 # DOOR LOCK DELAY
 inp_num_auto_front_door_lock_trig_delay: # original value = 120 minutes
   name: "Fr door lock"
-  mode: slider
+  mode: box
   step: 10
   min: 5
   max: 180
@@ -122,7 +122,7 @@ inp_num_auto_front_door_lock_trig_delay: # original value = 120 minutes
 
 inp_num_auto_front_door_lock_trig_party_delay: # original value = 120 minutes
   name: "Fr door lock party mode"
-  mode: slider
+  mode: box
   step: 10
   min: 180
   max: 360
@@ -131,7 +131,7 @@ inp_num_auto_front_door_lock_trig_party_delay: # original value = 120 minutes
 
 inp_num_auto_back_door_lock_trig_delay: # original value = 120 minutes
   name: "Bk door lock"
-  mode: slider
+  mode: box
   step: 5
   min: 5
   max: 180
@@ -141,7 +141,7 @@ inp_num_auto_back_door_lock_trig_delay: # original value = 120 minutes
 # WINDOW SHADES DELAY
 inp_num_sunrm_shades_open_delay: # original value = 10 minutes
   name: "Shades OPEN"
-  mode: slider
+  mode: box
   step: 1
   min: 5
   max: 15
@@ -150,7 +150,7 @@ inp_num_sunrm_shades_open_delay: # original value = 10 minutes
 
 inp_num_sunrm_shades_close_low_lux_trig_delay: # original value =  10 minutes
   name: "Shades CLOSE"
-  mode: slider
+  mode: box
   step: 1
   min: 5
   max: 15
@@ -160,7 +160,7 @@ inp_num_sunrm_shades_close_low_lux_trig_delay: # original value =  10 minutes
 # STATIC PRESSURE TEST DURATION
 inp_num_spt_duration:
   name: "SPT Duration"
-  mode: slider
+  mode: box
   min: 1
   max: 15
   icon: mdi:camera-timer
@@ -173,7 +173,7 @@ inp_num_spt_duration:
 # TEMPERATURE RELATED
 inp_num_masterbdrmfan_on_temp:
   name: "MstBdrm Fan ON"
-  mode: slider
+  mode: box
   step: 1
   min: 65
   max: 85
@@ -182,7 +182,7 @@ inp_num_masterbdrmfan_on_temp:
 
 inp_num_masterbdrmfan_off_temp:
   name: "MstBdrm Fan OFF"
-  mode: slider
+  mode: box
   step: 1
   min: 65
   max: 85
@@ -191,7 +191,7 @@ inp_num_masterbdrmfan_off_temp:
 
 inp_num_outdoor_lights_on_solar_trig: # solartube original value = 75
   name: "Outdoors ON solar"
-  mode: slider
+  mode: box
   step: 50
   min: 900
   max: 1400
@@ -200,7 +200,7 @@ inp_num_outdoor_lights_on_solar_trig: # solartube original value = 75
 
 inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
   name: "Outdoors OFF solar"
-  mode: slider
+  mode: box
   step: 50
   min: 1500
   max: 1800
@@ -209,7 +209,7 @@ inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
 
 #inp_num_lvrm_lights_on_f_solar_trig:                               # solartube original value = 1000
 #  name: 'LvRm ON f_solar'
-#  mode: slider
+#  mode: box
 #  step: 50
 #  min: 500
 #  max: 2000
@@ -218,7 +218,7 @@ inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
 #
 #inp_num_lvrm_lights_off_f_solar_trig:                             # solartubeoriginal value = 4500
 #  name: 'LvRm OFF f_solar'
-#  mode: slider
+#  mode: box
 #  step: 50
 #  min: 3000
 #  max: 5500
@@ -227,25 +227,25 @@ inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
 
 inp_num_lvrm_lights_on_indoor_trig: # original value =  13
   name: "LvRm ON indoor"
-  mode: slider
+  mode: box
   step: 0.05
-  min: 15
-  max: 25
+  min: 20
+  max: 30
   icon: mdi:lightbulb-outline
   unit_of_measurement: lx
 
 inp_num_lvrm_lights_off_indoor_trig: # original value = 24
   name: "LvRm OFF indoor" # visible lum is 26 lux max when all lights on so value must
-  mode: slider #   be > 26 or lights will go off due to their own light
+  mode: box #   be > 26 or lights will go off due to their own light
   step: 0.05
-  min: 25
-  max: 30
+  min: 30.05
+  max: 40
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lx
 
 inp_num_mood_lights_on_f_solar_trig: # solartube original value = 900
   name: "Mood ON f_solar"
-  mode: slider
+  mode: box
   step: 50
   min: 6000
   max: 9000
@@ -254,7 +254,7 @@ inp_num_mood_lights_on_f_solar_trig: # solartube original value = 900
 
 inp_num_mood_lights_off_f_solar_trig: # solartube original value = 3000
   name: "Mood OFF f_solar"
-  mode: slider
+  mode: box
   step: 50
   min: 9000
   max: 10000
@@ -266,7 +266,7 @@ inp_num_mood_lights_off_f_solar_trig: # solartube original value = 3000
 # SUNROOM SHADES SETTINGS
 inp_num_sunrm_shades_part_pct_open: # solartube original value = 40 percent
   name: "Shades part % open"
-  mode: slider
+  mode: box
   step: 10
   min: 20
   max: 60
@@ -275,7 +275,7 @@ inp_num_sunrm_shades_part_pct_open: # solartube original value = 40 percent
 
 inp_num_sunrm_shades_part_close_trig_angle: # solartube original value = 32.5 degrees
   name: "Shades part close angle"
-  mode: slider
+  mode: box
   step: 0.1
   min: 29
   max: 35
@@ -284,7 +284,7 @@ inp_num_sunrm_shades_part_close_trig_angle: # solartube original value = 32.5 de
 
 inp_num_sunrm_shades_part_close_reopen_angle: # original value = 14.1 degrees
   name: "Shades part reopen angle" # house behind blocks sun ~12-14 degrees
-  mode: slider
+  mode: box
   step: 0.1
   min: 12
   max: 16
@@ -293,7 +293,7 @@ inp_num_sunrm_shades_part_close_reopen_angle: # original value = 14.1 degrees
 
 inp_num_sunrm_shades_part_sun_penetration_min_azimuth: # original value = 204 degrees
   name: "Shades part min azimuth"
-  mode: slider
+  mode: box
   step: 1
   min: 195
   max: 215
@@ -302,7 +302,7 @@ inp_num_sunrm_shades_part_sun_penetration_min_azimuth: # original value = 204 de
 
 inp_num_sunrm_shades_close_sun_penetration_max_azimuth: # original value = 267 to 280 degrees
   name: "Shades part max azimuth"
-  mode: slider
+  mode: box
   step: 1
   min: 260
   max: 290
@@ -311,7 +311,7 @@ inp_num_sunrm_shades_close_sun_penetration_max_azimuth: # original value = 267 t
 
 inp_num_sunrm_shades_open_trig: # solartube original value = 450 lux
   name: "Shades OPEN solar"
-  mode: slider
+  mode: box
   step: 50
   min: 8000
   max: 10000
@@ -320,7 +320,7 @@ inp_num_sunrm_shades_open_trig: # solartube original value = 450 lux
 
 inp_num_sunrm_shades_close_low_lux_trig: # solartube original value = 200 lux
   name: "Shades CLOSE solar"
-  mode: slider
+  mode: box
   step: 50
   min: 4000
   max: 8000
@@ -329,7 +329,7 @@ inp_num_sunrm_shades_close_low_lux_trig: # solartube original value = 200 lux
 
 inp_num_sunrm_shades_part_close_min_reqd_trig_lux: # solartube original value = 4200
   name: "Shades part CLOSE min lux" # shades don't close if not brighter than this number
-  mode: slider
+  mode: box
   step: 100
   min: 20000
   max: 80000
@@ -339,7 +339,7 @@ inp_num_sunrm_shades_part_close_min_reqd_trig_lux: # solartube original value = 
 # PROXIMITY TRIGGERS
 inp_num_outdoor_lights_prox_trigger: # original value = 0.5 miles
   name: "Outdoor lights ON"
-  mode: slider
+  mode: box
   step: 0.1
   min: 0.2
   max: 3.0
@@ -348,7 +348,7 @@ inp_num_outdoor_lights_prox_trigger: # original value = 0.5 miles
 
 inp_num_auto_nobody_home_prox_trigger: # original value = 0.8 miles
   name: "Nobody home ON"
-  mode: slider
+  mode: box
   step: 0.1
   min: 0.2
   max: 3.0
@@ -357,7 +357,7 @@ inp_num_auto_nobody_home_prox_trigger: # original value = 0.8 miles
 
 inp_num_auto_absence_on_departure_trigger: # original value = 100 miles
   name: "Absence mode ON"
-  mode: slider
+  mode: box
   step: 10
   min: 20
   max: 200
@@ -366,7 +366,7 @@ inp_num_auto_absence_on_departure_trigger: # original value = 100 miles
 
 inp_num_auto_absence_off_arrival_trigger: # original value = 30 miles
   name: "Absence mode OFF"
-  mode: slider
+  mode: box
   step: 10
   min: 10
   max: 100

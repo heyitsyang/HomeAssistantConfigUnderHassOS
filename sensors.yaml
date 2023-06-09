@@ -82,9 +82,9 @@
       precision: 0
 
 - platform: filter
-  name: "Filtered Weather Station Luminosity"
-  unique_id: filtered_weather_station_luminosity
-  entity_id: sensor.kflwildw56_solar_rad_lx # sensor provides mean value for every 5 minute interval
+  name: "Filtered KFLWILDW56 Local Luminosity"
+  unique_id: filtered_kflwildw56_local_luminosity
+  entity_id: sensor.kflwildw56_backed_up_local_solar_rad_lx # sensor provides mean value for every 5 minute interval
   filters:
     - filter: outlier
       radius: 1000 # default radius is 2 if unspecified

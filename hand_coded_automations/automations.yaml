@@ -442,7 +442,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.kflwildw56_solar_rad_lx') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
+        {{ (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -454,7 +454,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.kflwildw56_solar_rad_lx') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
+        {{ (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -490,7 +490,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_weather_station_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_local_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -502,7 +502,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_weather_station_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_local_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -514,7 +514,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.kflwildw56_solar_rad_lx') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -526,7 +526,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.kflwildw56_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -554,7 +554,7 @@
       entity_id: sensor.ys_desktop_system_idle_time
       below: 1
   condition:
-    - condition: state                       # don't repetitively turn on
+    - condition: state # don't repetitively turn on
       entity_id: group.office_mood_lights
       state: "off"
     - condition: state
@@ -1151,7 +1151,7 @@
         state: "off"
       - condition: template # check if dark enough to bother closing
         value_template: >
-          {{ states('sensor.filtered_weather_station_luminosity') | int(default=0) >  
+          {{ states('sensor.filtered_kflwildw56_luminosity') | int(default=0) >  
           (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}
       - condition: numeric_state
         entity_id: sun.sun
@@ -1559,7 +1559,7 @@
     - condition: or
       conditions:
         - condition: template
-          value_template: "{{ states('sensor.kflwildw56_solar_rad_lx') != 'unknown' }}"
+          value_template: "{{ states('sensor.kflwildw56_local_solar_rad_lx') != 'unknown' }}"
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
           state: "off"

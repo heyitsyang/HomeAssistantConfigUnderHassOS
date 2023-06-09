@@ -75,7 +75,8 @@ include:
     - device_tracker.opnsense_ys_cell_shencentral_net
     - device_tracker.opnsense_kt_cell_shencentral_net
     - sensor.dishwasher_sonoff_energy_current
-    - sensor.kflwildw56_solar_rad_lx
+    - sensor.kflwildw56_backed_up_local_solar_rad_lx
+    - sensor.filtered_kflwildw56_local_luminosity
     - sensor.statistical_mean_living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
     - sensor.raw_living_rm_visible_light

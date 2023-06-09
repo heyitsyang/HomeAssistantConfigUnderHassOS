@@ -152,6 +152,21 @@
         {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
 
 #
+# LUMINOSITY OTHER
+#
+
+- sensor:
+    - name: kflwildw56_backed_up_local_solar_rad_lx  # uses aws if local not avaialble
+      unique_id: kflwild w56_backed_up_local_solar_rad_lx
+      state: >
+        {% if(is_number(states("sensor.kflwildw56_local_solar_rad_lx"))) %}
+          {{ states("sensor.kflwildw56_local_solar_rad_lx") }}
+        {% else %}
+          {{ states("sensor.kflwildw56_aws_solar_rad_lx") }}
+        {% endif %}
+      
+
+#
 # ESPHOME - sensors used in espHome
 #
 
