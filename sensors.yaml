@@ -7,11 +7,7 @@
 # Filters are considered a type of sensor
 #
 
-- platform: command_line
-  name: "CPU Temperature"
-  command: "cat /sys/class/thermal/thermal_zone2/temp"
-  unit_of_measurement: "°C"
-  value_template: "{{ value | multiply(0.001) | round(2)  }}"
+
 
 - platform: statistics
   name: "7 Day Avg Soil Temperature"
