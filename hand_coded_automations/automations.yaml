@@ -442,7 +442,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
+        {{ (states('kflwildw56_backed_up_local_solar_rad_lx') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -454,7 +454,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
+        {{ (states('kflwildw56_backed_up_local_solar_rad_lx') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -514,7 +514,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
+        {{ ( (states('kflwildw56_backed_up_local_solar_rad_lx') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -526,7 +526,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.kflwildw56_local_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
+        {{ ( (states('kflwildw56_backed_up_local_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -1559,7 +1559,7 @@
     - condition: or
       conditions:
         - condition: template
-          value_template: "{{ states('sensor.kflwildw56_local_solar_rad_lx') != 'unknown' }}"
+          value_template: "{{ states('kflwildw56_backed_up_local_solar_rad_lx') != 'unknown' }}"
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
           state: "off"
