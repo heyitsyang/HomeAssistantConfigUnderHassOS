@@ -1,5 +1,11 @@
-##  Note: leading spaces in each line are critical
-##  to yaml interpretation - do not delete them
+
+
+# BINARY SENSORS CAN BE CREATED IN OTHER FILES:
+# - templates.yaml
+# - command_line.yaml
+# etc.
+
+
 
 #######################
 ### BINARY SENSORS  ###
