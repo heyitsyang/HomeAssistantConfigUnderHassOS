@@ -90,6 +90,10 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
         - condition: state
           entity_id: input_boolean.inp_bool_guest_mode # goodnight routine ignores guest area lights if overnight guest mode is ON
           state: "off"
+        - not:
+            condition: state
+            entity_id: sensor.ys_cell_ble_room
+            state: "office"
       then:
         - service: light.turn_off
           target:

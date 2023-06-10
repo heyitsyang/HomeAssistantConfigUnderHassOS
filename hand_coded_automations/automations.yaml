@@ -878,6 +878,23 @@
         message: "The dryer cycle has finished"
 
 #
+# VACUUM DONE NOTIFICATION
+#
+
+- id: aut_vacuum_done_announce
+  alias: "aut vacuum done"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: vacuum.rosie
+      from: "cleaning"
+      to: "docked"
+  action:
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "Rosie says she's all done and needs to be cleaned"
+
+#
 # WEBER iGRILL SUPPORTING AUTOMATIONS
 #
 

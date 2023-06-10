@@ -80,11 +80,11 @@
 - platform: filter
   name: "Filtered KFLWILDW56 Local Luminosity"
   unique_id: filtered_kflwildw56_local_luminosity
-  entity_id: sensor.kflwildw56_backed_up_local_solar_rad_lx # sensor provides mean value for every 5 minute interval
+  entity_id: sensor.kflwildw56_backed_up_local_solar_rad_lx # sensor provides mean value every minute
   filters:
     - filter: outlier
       radius: 1000 # default radius is 2 if unspecified
-      window_size: 5 # num of prev states to define median (default = 1)
+      window_size: 10 # num of prev states to define median (default = 1)
     - filter: lowpass
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
