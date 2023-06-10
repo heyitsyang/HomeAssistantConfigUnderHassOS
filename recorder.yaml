@@ -17,7 +17,7 @@ db_url: !secret mariadb_url
 
 auto_purge: true
 auto_repack: true
-purge_keep_days: 14 # how many days of history to keep
+purge_keep_days: 7 # how many days of history to keep
 
 include:
   domains:
@@ -28,11 +28,11 @@ include:
     #    - climate
     #    - cover
     #    - device_tracker
-    #    - input_boolean
-    #    - input_datetime
-    #    - input_number
-    #    - input_select
-    #    - input_text
+    - input_boolean
+    - input_datetime
+    - input_number
+    - input_select
+    - input_text
     #    - light
     #    - lock
     #    - media_player
@@ -52,6 +52,7 @@ include:
   entities:
     - device_tracker.opnsense_ys_cell_shencentral_net
     - device_tracker.opnsense_kt_cell_shencentral_net
+    - vacuum.rosie
 
 exclude:
   domains:
@@ -62,15 +63,11 @@ exclude:
     - sensor.hot_*
     - sensor.openweathermap_*
     - sensor.weather_*
-    - sensor.asthma_*
-    - sensor.allergy_*
-    - sensor.cold_*
     - binary_sensor.*_battery*
     - binary_sensor.esp01_*
     - binary_sensor.hot_*
   entities:
     - sensor.influxdb_db_size
-    - sensor.pollen
     - sensor.date
     - sensor.time
     - sensor.date_time

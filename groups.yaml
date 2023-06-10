@@ -185,7 +185,6 @@ mood_lights:
   entities:
     - switch.candles
     - light.kitchen_leds_upper_master
-    - light.sun_room_uplights
     - switch.christmas_tree
 
 pathway_lights:
@@ -253,9 +252,8 @@ luminosity:
   entities:
     - sensor.raw_solar_tube_luminosity
     - sensor.filtered_solar_tube_luminosity
-    - sensor.living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
-    - sensor.test_filtered_living_rm_visible_light
+    - sensor.statistical_mean_living_rm_visible_light
     - binary_sensor.lum_outdoor_lights_solar_trig
     - binary_sensor.lum_mood_lights_f_solar_trig
     - binary_sensor.lum_sunrm_shades_trig
@@ -400,6 +398,12 @@ upper_office_cabinet_leds:
     - light.office_cabinet_leds
     - light.office_cabinet_leds_segment_1
     - light.office_cabinet_leds_segment_2
+
+office_mood_lights:
+  name: "Office Mood Lights"
+  entities:
+    - light.office_cabinet_leds_master
+    - light.office_monitor_leds
 
 garage_opener_power:
   name: "Garage door power"

@@ -249,7 +249,7 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
+        message: "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00', '') | regex_replace(':0(\\d)', ' oh \\1') }}"
 
 #
 # EXTINGUISH MOOD LIGHTS DAILY
@@ -261,17 +261,15 @@
     - platform: state
       entity_id: input_boolean.inp_bool_sleeping
       to: "on"
-  condition:
-    - condition: state
-      entity_id: group.mood_lights
-      state: "on"
   action:
     - service: scene.turn_on # set default before turning off
       target:
         entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       target:
-        entity_id: group.mood_lights
+        entity_id:
+          - light.sun_room_uplights
+          - group.mood_lights
 
 #
 # TURN OFF GOOD MORNING USED SEMAPHORE
@@ -363,6 +361,11 @@
           - light.sun_room_lights
           - light.eating_area_lights
           - light.entryway_lights
+    - service: lock.lock
+      target:
+        entity_id:
+          - lock.front_door_lock
+          - lock.back_door_lock
 
 # PARTY MODE DETERMINED BY DATE/TIME
 - id: aut_datetime_party_mode_on
@@ -439,7 +442,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
+        {{ (states('sensor.kflwildw56_backed_up_local_solar_rad_lx') | int(default=0) <= states('input_number.inp_num_outdoor_lights_on_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -451,7 +454,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.raw_solar_tube_luminosity') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
+        {{ (states('sensor.kflwildw56_backed_up_local_solar_rad_lx') | int(default=0) >= states('input_number.inp_num_outdoor_lights_off_solar_trig') | int(default=0) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -463,7 +466,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
+        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -475,7 +478,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
+        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -487,7 +490,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_local_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -499,31 +502,31 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_local_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
       entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
 
 - id: aut_lum_sunrm_shades_trig_on
-  alias: "aut lum sunrm shades trig on"
+  alias: "aut lum sunrm shades trig on" # set bool to "on" when bright enough
   initial_state: true
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.kflwildw56_backed_up_local_solar_rad_lx') | int(default=0)) >= (states('input_number.inp_num_sunrm_shades_open_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
       entity_id: input_boolean.inp_bool_lum_sunrm_shades_trig
 
 - id: aut_lum_sunrm_shades_trig_off
-  alias: "aut lum sunrm shades trig off"
+  alias: "aut lum sunrm shades trig off" # set bool to "off" when too dark
   initial_state: true
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.raw_solar_tube_luminosity') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.kflwildw56_backed_up_local_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -551,6 +554,9 @@
       entity_id: sensor.ys_desktop_system_idle_time
       below: 1
   condition:
+    - condition: state # don't repetitively turn on
+      entity_id: group.office_mood_lights
+      state: "off"
     - condition: state
       entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       state: "on"
@@ -582,8 +588,7 @@
     - service: light.turn_off
       target:
         entity_id:
-          - light.office_monitor_leds
-          - light.office_cabinet_leds_master
+          - group.office_mood_lights
 
 #
 # DEVICE TRACKER UPDATE EVENTS
@@ -788,7 +793,7 @@
       data:
         message: "TTS"
         data:
-          tts_text: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
+          tts_text: "House water turned OFF. Leak detected at {{ trigger.entity_id }}"
           priority: high
           ttl: 0
           media_stream: alarm_stream
@@ -871,6 +876,23 @@
     - service: notify.alexa_yellow_ring
       data:
         message: "The dryer cycle has finished"
+
+#
+# VACUUM DONE NOTIFICATION
+#
+
+- id: aut_vacuum_done_announce
+  alias: "aut vacuum done"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: vacuum.rosie
+      from: "cleaning"
+      to: "docked"
+  action:
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "Rosie says she's all done and needs to be cleaned"
 
 #
 # WEBER iGRILL SUPPORTING AUTOMATIONS
@@ -1032,7 +1054,7 @@
     - condition: and
       conditions:
         - condition: template # lvrm sensor can be zero & not broken
-          value_template: "{{ states('sensor.living_rm_visible_light') != 'unknown' }}" # sensor broken if 'unknown'
+          value_template: "{{ states('sensor.filtered_living_rm_visible_light') != 'unknown' }}" # sensor broken if 'unknown'
         - condition: or
           conditions:
             - condition: state
@@ -1144,9 +1166,9 @@
       - condition: state
         entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
         state: "off"
-      - condition: template # check if bright enough to bother
+      - condition: template # check if dark enough to bother closing
         value_template: >
-          {{ states('sensor.filtered_solar_tube_luminosity') | int(default=0) >  
+          {{ states('sensor.filtered_kflwildw56_luminosity') | int(default=0) >  
           (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}
       - condition: numeric_state
         entity_id: sun.sun
@@ -1189,7 +1211,7 @@
         state: "off"
       - condition: time # do not execute at sunrise
         after: "12:00:00"
-      - condition: state
+      - condition: state # don't bother if too dark
         entity_id: binary_sensor.lum_sunrm_shades_trig
         state: "on"
   action:
@@ -1207,7 +1229,7 @@
     - platform: sun
       event: sunset
       offset: "-00:10:00"
-    - platform: state
+    - platform: state # also lower if too dark before sunset (stormy day)
       entity_id: binary_sensor.lum_sunrm_shades_trig
       to: "off"
       for:
@@ -1243,7 +1265,7 @@
   trigger:
     - platform: sun
       event: sunrise
-    - platform: state
+    - platform: state # also open if previously closed due to dark skies (stormy) & now bright
       entity_id: binary_sensor.lum_sunrm_shades_trig
       to: "on"
       for:
@@ -1527,8 +1549,6 @@
     - platform: sun
       event: sunrise
       offset: "+00:10:00"
-    #  - platform: template
-    #    value_template: "{{ states('sensor.filtered_solar_tube_luminosity') | int(default=0) > 230 }}"
     - platform: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       to: "off"
@@ -1555,12 +1575,8 @@
   condition:
     - condition: or
       conditions:
-        - condition: and
-          conditions:
-            - condition: template
-              value_template: "{{ states('sensor.raw_solar_tube_luminosity') != 'unknown' }}" # we have to do template here because there is no "not" condition
-            - condition: template
-              value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}" # sensor broken if zero
+        - condition: template
+          value_template: "{{ states('sensor.kflwildw56_backed_up_local_solar_rad_lx') != 'unknown' }}"
         - condition: state
           entity_id: input_boolean.inp_bool_extended_absence_mode # do not execute unless Extended Absence is OFF
           state: "off"
@@ -1580,17 +1596,15 @@
       to: "off"
       for:
         minutes: 10
-  condition:
-    - condition: state
-      entity_id: group.mood_lights
-      state: "on"
   action:
     - service: scene.turn_on # set the lights to the default before turning off
       target:
         entity_id: scene.kitchen_mood_spots_50_warm_white
     - service: homeassistant.turn_off
       target:
-        entity_id: group.mood_lights
+        entity_id:
+          - light.sun_room_uplights
+          - group.mood_lights
 
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
@@ -1656,6 +1670,9 @@
         minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) + 30 }}"
   condition:
     - condition: state
+      entity_id: input_boolean.party_mode
+      state: "off"
+    - condition: state
       entity_id: lock.front_door_lock
       state: "unlocked" # May not be unlocked if using door activity trigger
       for: # This check prevents immediate notification from 1st trigger
@@ -1671,6 +1688,41 @@
       data:
         title: "Front door automatically locked"
         message: "Oops. Someone left it unlocked!"
+
+- id: aut_auto_front_door_lock_party_mode
+  alias: "aut auto front door lock party mode"
+  initial_state: true
+  trigger:
+    - platform: template # calculate time since last door open activity  & check expiration
+      value_template: >
+        {{ ( (((as_timestamp(strptime(states('sensor.date_time'),'%Y-%m-%d, %H:%M'), '') | int(default=0)) - 
+        (as_timestamp(as_timestamp(state_attr('binary_sensor.front_door_window_door_is_open', 'last_tripped_time'), '') | timestamp_local(''), '') | int(default=0)))/60) | int(default=0) ) > 
+        (states('input_number.inp_num_auto_front_door_lock_trig_party_delay') | int(default=0)) }}
+    - platform: state # cover case where unlocked, but door never opened
+      entity_id: lock.front_door_lock
+      to: "unlocked"
+      for:
+        minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_party_delay') | int(default=0)) + 30 }}"
+  condition:
+    - condition: state
+      entity_id: input_boolean.party_mode
+      state: "on"
+    - condition: state
+      entity_id: lock.front_door_lock
+      state: "unlocked" # May not be unlocked if using door activity trigger
+      for: # This check prevents immediate notification from 1st trigger
+        minutes: 2 #   when last activity > delay time at boot
+    - condition: state
+      entity_id: binary_sensor.front_door_window_door_is_open
+      state: "off" # be sure door is closed
+  action:
+    - service: lock.lock
+      target:
+        entity_id: lock.front_door_lock
+    - service: notify.yskt_cell_phones
+      data:
+        title: "Front door automatically locked"
+        message: "The party's over!"
 
 - id: aut_auto_back_door_lock
   alias: "aut auto back door lock"
@@ -1885,7 +1937,14 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "{{ trigger.entity_id|replace('person.', '') | capitalize }} is away."
+        message: >
+          {% if (trigger.entity_id|replace('person.', '')) == "karen" %}
+            "Mistress Karen is away"
+          {% else %}
+            "Master Yang is away"
+          {% endif %}
+
+#"{{ trigger.entity_id|replace('person.', '') }} is away"
 
 #
 # CONDITIONS REQUIRING ATTENTION

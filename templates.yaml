@@ -8,45 +8,55 @@
 
 - sensor:
     - name: "yang_template_weight"
+      unique_id: yang_template_weight
+      device_class: "weight"
       unit_of_measurement: "lbs"
       icon: mdi:weight-lb
       state: >-
+        {% set yang_previous_weight = states('sensor.yang_template_weight') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}
-            {{ states("sensor.ble_weight_d03e7d3e3afa") | float(default=0)}}      
+            {{ weight }}      
           {% else %}
-            {{ states("sensor.yang_template_weight_previous") }}
+            {{ yang_previous_weight }}
           {% endif %}
 
     - name: "karen_template_weight"
+      unique_id: karen_template_weight
+      device_class: "weight"
       unit_of_measurement: "lbs"
       icon: mdi:weight-lb
       state: >-
+        {% set karen_previous_weight = states('sensor.karen_template_weight') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}  
-            {{ states("sensor.ble_weight_d03e7d3e3afa") | float(default=0) }}
+            {{ weight }}
           {% else %}
-            {{ states("sensor.karen_template_weight_previous") }}
+            {{ karen_previous_weight }}
           {% endif %}
 
     - name: "yang_template_impedance"
+      unique_id: yang_template_impedance
       unit_of_measurement: "ohm"
       state: >-
+        {% set yang_previous_impedance = states('sensor.yang_template_impedance') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (180 <= weight <= 200) %}  
             {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}      
           {% else %}
-            {{ states("sensor.yang_template_impedance_previous") }}
+            {{ yang_previous_impedance }}
           {% endif %}
 
     - name: "karen_template_impedance"
+      unique_id: karen_template_impedance
       unit_of_measurement: "ohm"
       state: >-
+        {% set karen_previous_impedance = states('sensor.karen_template_impedance') | float(default=0) %}
         {% set weight = states('sensor.ble_weight_d03e7d3e3afa') | float(default=0) %}
           {% if (130 <= weight <= 150) %}
             {{ states("sensor.ble_impedance_d03e7d3e3afa") | float(default=0) }}
           {% else %}
-            {{ states("sensor.karen_template_impedance_previous") }}
+            {{ karen_previous_impedance }}
           {% endif %}
 
 #
@@ -123,27 +133,46 @@
 #
 - binary_sensor:
     - name: lum_outdoor_lights_solar_trig
+      unique_id: lum_outdoor_lights_solar_trig
       #      friendly_name: "Outdoor lights on/off per solar sensor"
       state: >-
         {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
 
 - binary_sensor:
     - name: lum_lvrm_lights_indoor_trig
+      unique_id: lum_lvrm_lights_indoor_trig
       #     friendly_name: "LvRm lights on/off per indoor sensor"
       state: >-
         {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
 
 - binary_sensor:
     - name: lum_mood_lights_f_solar_trig
+      unique_id: lum_mood_lights_f_solar_trig
       #      friendly_name: "Mood lights on/off per f_solar sensor"
       state: >-
         {{ is_state('input_boolean.inp_bool_lum_mood_lights_f_solar_trig','on') }}
 
 - binary_sensor:
     - name: lum_sunrm_shades_trig
+      unique_id: lum_sunrm_shades_trig
       #      friendly_name: "Sunroom shades open per solar sensor"
       state: >-
         {{ is_state('input_boolean.inp_bool_lum_sunrm_shades_trig','on') }}
+
+#
+# LUMINOSITY OTHER
+#
+
+- sensor:
+    - name: kflwildw56_backed_up_local_solar_rad_lx # uses aws if local not avaialble
+      unique_id: kflwild w56_backed_up_local_solar_rad_lx
+      unit_of_measurement: "lx"
+      state: >
+        {% if(is_number(states("sensor.kflwildw56_local_solar_rad_lx"))) %}
+          {{ states("sensor.kflwildw56_local_solar_rad_lx") }}
+        {% else %}
+          {{ states("sensor.kflwildw56_aws_solar_rad_lx") }}
+        {% endif %}
 
 #
 # ESPHOME - sensors used in espHome
@@ -206,15 +235,15 @@
       #      friendly_name: "Suggested Brightness"
       unit_of_measurement: "%"
       state: >-
-        {% if ( ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_0_threshold') | float(default=0)) ) ) %}
+        {% if ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_0_threshold') | float(default=0)) ) ) %}
           0
-        {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_0_threshold') | float(default=0)) ) and
-              ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
+        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_0_threshold') | float(default=0)) ) and
+              ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
           15
-        {% elif ( ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
-              ( (states('sensor.living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_high_threshold') | float(default=0)) ) ) %}
+        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
+              ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_high_threshold') | float(default=0)) ) ) %}
           20
-        {% elif ( (states('sensor.living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_high_threshold') | float(default=0)) ) %}
+        {% elif ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_high_threshold') | float(default=0)) ) %}
           30
         {% else %}
           99

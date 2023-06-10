@@ -7,11 +7,7 @@
 # Filters are considered a type of sensor
 #
 
-- platform: command_line
-  name: "CPU Temperature"
-  command: "cat /sys/class/thermal/thermal_zone2/temp"
-  unit_of_measurement: "°C"
-  value_template: "{{ value | multiply(0.001) | round(2)  }}"
+
 
 - platform: statistics
   name: "7 Day Avg Soil Temperature"
@@ -44,18 +40,31 @@
     hours: 24
 
 - platform: statistics
-  name: "Living Rm Visible Light"
-  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
-  state_characteristic: mean
-  sampling_size: 15 # default state value is the running average of this many samples
-  precision: 2
-
-- platform: statistics
   name: "10m Avg Master Bedroom Temperature"
   entity_id: sensor.master_bedroom_temperature
   state_characteristic: mean
   sampling_size: 10 # default state value is the running average of this many samples
   precision: 1 # number of decimal places
+
+- platform: statistics
+  name: "Statistical Mean Living Rm Visible Light"
+  unique_id: statistical_mean_living_rm_visible_light
+  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
+  state_characteristic: mean
+  sampling_size: 10 # default state value is the running average of this many samples
+  precision: 2
+
+- platform: filter
+  name: "Filtered Living Rm Visible Light"
+  unique_id: filtered_living_rm_visible_light
+  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
+  filters:
+    - filter: outlier
+      radius: 10 # default radius is 2 if unspecified
+      window_size: 5 # num of prev states to define median (default = 1)
+    - filter: lowpass
+      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
+      precision: 0
 
 - platform: filter
   name: "Filtered Solar Tube Luminosity"
@@ -63,6 +72,18 @@
   filters:
     - filter: outlier
       radius: 500 # default radius is 2 if unspecified
+      window_size: 10 # num of prev states to define median (default = 1)
+    - filter: lowpass
+      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
+      precision: 0
+
+- platform: filter
+  name: "Filtered KFLWILDW56 Local Luminosity"
+  unique_id: filtered_kflwildw56_local_luminosity
+  entity_id: sensor.kflwildw56_backed_up_local_solar_rad_lx # sensor provides mean value every minute
+  filters:
+    - filter: outlier
+      radius: 1000 # default radius is 2 if unspecified
       window_size: 10 # num of prev states to define median (default = 1)
     - filter: lowpass
       time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
@@ -168,7 +189,7 @@
   password: !secret influxdb_pwd
   scan_interval: 3600
   queries:
-    - name: InfluxDB DB size
+    - name: "InfluxDB DB size"
       unit_of_measurement: MB
       value_template: "{{ (value|float / 1024 /1024)|round(1) }}"
       group_function: sum

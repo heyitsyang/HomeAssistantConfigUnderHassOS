@@ -11,7 +11,6 @@
 scr_ha_startup:
   sequence:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
-    #- service: script.scr_sonos_eval_announce # evaluate how to start speakers - joined or unjoined based on guest mode
     - service: input_boolean.turn_off # initialize announcements as off
       target:
         entity_id: input_boolean.inp_bool_announcements
@@ -70,6 +69,8 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
     - service: lock.lock
       target:
         entity_id: lock.front_door_lock, lock.back_door_lock
+    - service: cover.close_cover
+      entity_id: cover.master_bedroom_shades
     - if:
         - or:
             - condition: state
@@ -89,6 +90,10 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
         - condition: state
           entity_id: input_boolean.inp_bool_guest_mode # goodnight routine ignores guest area lights if overnight guest mode is ON
           state: "off"
+        - not:
+            condition: state
+            entity_id: sensor.ys_cell_ble_room
+            state: "office"
       then:
         - service: light.turn_off
           target:
@@ -105,7 +110,7 @@ scr_nobody_home:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: "I feel so empty inside when my people are away."
+        message: "I feel so empty inside when my people are away"
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
       state: "off"
@@ -137,13 +142,20 @@ scr_arrival_announcement:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: "Hi {{ person }}, welcome home."
-    - condition: state
-      entity_id: input_boolean.inp_bool_visitor_while_out_flag # do not execute remaining unless flag is ON
-      state: "on"
-    - service: script.scr_say_phrase
-      data:
-        message: "While you where away, there was a visitor at the front door"
+        message: >
+          {% if person == "karen" %}
+            {% if is_state('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
+              "Hello Mistress Karen, welcome home.  While you were away, there was a visitor at the front door"
+            {% else %}
+              "Hello Mistress Karen, welcome home"
+            {% endif %}
+          {% else %}
+            {% if is_state('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
+              "Hello Master Yang, welcome home.  While you were away, there was a visitor at the front door"
+            {% else %}
+              "Hello Master Yang, welcome home"
+            {% endif %}
+          {% endif %}
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
@@ -210,7 +222,6 @@ scr_common_extended_absence_off:
 scr_common_guest_mode_on:
   mode: restart
   sequence:
-    #- service: script.scr_sonos_unjoin4announce
     - service: input_boolean.turn_on # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
@@ -224,7 +235,6 @@ scr_common_guest_mode_on:
 scr_common_guest_mode_off:
   mode: restart
   sequence:
-    #- service: script.scr_sonos_join4announce
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_guest_in_sunroom
@@ -265,10 +275,10 @@ scr_check_sunrm_windows:
           state: "on"
     - service: script.scr_say_phrase
       data:
-        message: "You have a window open in the sun room.  The shades will not be automatically closed."
+        message: "You have a window open in the sun room.  The shades will not be automatically closed"
     - service: notify.alexa_yellow_ring
       data:
-        message: "You have a window open in the sun room.  The shades will not be automatically closed."
+        message: "You have a window open in the sun room.  The shades will not be automatically closed"
 
 #
 # CLOSE SUN ROOM SHADES
@@ -503,7 +513,7 @@ scr_repeat_say_garage_open:
           state: "open"
     - service: script.scr_say_phrase
       data:
-        message: "A garage door is still open.  This is your last reminder."
+        message: "A garage door is still open.  This is your last reminder"
     - service: notify.alexa_yellow_ring
       data:
         message: "A garage door is still open"
@@ -516,9 +526,14 @@ scr_mood_lighting_on:
     - condition: state
       entity_id: group.mood_lights
       state: "off"
-    - service: scene.turn_on
-      target:
-        entity_id: scene.sun_room_uplights_20
+    - if:
+        - condition: state
+          entity_id: input_boolean.inp_bool_guest_in_sunroom
+          state: "off"
+      then:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.sun_room_uplights_20
     - service: homeassistant.turn_on
       target:
         entity_id: group.mood_lights
@@ -652,8 +667,6 @@ scr_front_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - condition: template # sensor is broken if zero
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
       target:
         entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
@@ -663,8 +676,6 @@ scr_back_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - condition: template # sensor is broken if zero
-      value_template: "{{ states('sensor.raw_solar_tube_luminosity') | int(default=0) > 0 }}"
     - service: light.turn_on
       target:
         entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
@@ -681,8 +692,7 @@ scr_say_phrase:
     - service: sonos.snapshot
       data:
         entity_id:
-          - media_player.office_speakers
-          - media_player.greatroom_speakers
+          - all
         with_group: true
     - choose:
         - conditions: # high priority - ignores announce & sleeping conditions
@@ -713,7 +723,7 @@ scr_say_phrase:
                         entity_id:
                           - media_player.greatroom_speakers
                           - media_player.garage_speakers
-                        media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
+                        media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | replace(' Yang', ' Yainng')  | regex_replace('.$', '') }}"
                         media_content_type: music
               default:
                 - service: media_player.play_media
@@ -723,7 +733,7 @@ scr_say_phrase:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
                       - media_player.office_speakers
-                    media_content_id: media-source://tts/google_translate?message="This is a high priority message. {{ message }}"
+                    media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | replace(' Yang', ' Yainng') | regex_replace('.$', '') }}"
                     media_content_type: music
       default: # normal priority - respects announce & sleeping conditions
         - condition: state
@@ -735,11 +745,11 @@ scr_say_phrase:
         - service: media_player.volume_set
           data:
             entity_id: media_player.office_speakers
-            volume_level: 0.18 # set normal speaking volume
+            volume_level: 0.16 # set normal speaking volume
         - service: media_player.volume_set
           data:
             entity_id: media_player.greatroom_speakers
-            volume_level: 0.28 # set normal speaking volume
+            volume_level: 0.26 # set normal speaking volume
         - service: media_player.volume_set
           data:
             entity_id: media_player.garage_speakers
@@ -756,7 +766,7 @@ scr_say_phrase:
                     entity_id:
                       - media_player.greatroom_speakers
                       - media_player.garage_speakers
-                    media_content_id: media-source://tts/google_translate?message="{{ message }}"
+                    media_content_id: media-source://tts/tts.piper?message="{{ message | regex_replace('.$', '') }}"
                     media_content_type: music
           default:
             - service: media_player.play_media
@@ -766,57 +776,23 @@ scr_say_phrase:
                   - media_player.greatroom_speakers
                   - media_player.garage_speakers
                   - media_player.office_speakers
-                media_content_id: media-source://tts/google_translate?message="{{ message }}"
+                media_content_id: media-source://tts/tts.piper?message="{{ message }}"
                 media_content_type: music
     #- delay: "00:00:01" # delay needed so media attributes for announcement are loaded
     - wait_template: "{{ states('media_player.greatroom_speakers')}}" # wait for a state change
       timeout:
         seconds: 1
-    # - service: logbook.log
-    #   data_template:
-    #     name: "media_duration ="
-    #     message: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') }}"
+    - service: logbook.log
+      data_template:
+        name: "say_phrase: "
+        message: "{{ message + '(' ~ state_attr('media_player.greatroom_speakers', 'media_duration') + 's)' }}" # tilde converts to string in jinja
     - delay:
-        seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') }}" # wait for announce duration
+        seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') | int(default=5) }}" # wait for announce duration
     - service: sonos.restore # premature restore will cut off speech before it has started or during play
       data:
         entity_id:
-          - media_player.greatroom_speakers
-          - media_player.office_speakers
+          - all
         with_group: true
-
-#
-#  SONOS JOIN/UNJOIN SCRIPTS
-#
-# scr_sonos_join4announce:
-#   sequence:
-#     - condition: template
-#       value_template: "{{ 'media_player.office_speakers' not in state_attr('media_player.greatroom_speakers', 'group_members') }}"
-#     - service: media_player.join
-#       target:
-#         entity_id: media_player.office_speakers
-#       data:
-#         group_members: media_player.greatroom_speakers
-#     - delay: "00:00:15" # give it time to join/unjoin
-
-# scr_sonos_unjoin4announce:
-#   sequence:
-#     - condition: template
-#       value_template: "{{ 'media_player.office_speakers' in state_attr('media_player.greatroom_speakers', 'group_members') }}"
-#     - service: media_player.unjoin
-#       target:
-#         entity_id: media_player.office_speakers
-#     - delay: "00:00:15" # give it time to join/unjoin
-
-# scr_sonos_eval_announce:
-#   sequence:
-#     - service: script.scr_sonos_join4announce # join as the default
-#     - delay: "00:00:15" # give it time to join/unjoin
-#     - condition: state
-#       entity_id: input_boolean.inp_bool_guest_mode # do not execute remaining unless overnight guests
-#       state: "on"
-#     - service: script.scr_sonos_unjoin4announce # unjoin if guests
-#     - delay: "00:00:15" # give it time to join/unjoin
 
 #
 #  MANUAL UI REQUESTS
@@ -835,7 +811,7 @@ scr_manual_say_time:
   sequence:
     - service: script.scr_say_phrase
       data:
-        message: "The time is {{ now().time().strftime('%-I:%M %p') }}"
+        message: "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00', '') | regex_replace(':0(\\d)', ' oh \\1') }}"
 
 # VACUUM COMMANDS
 scr_vacuum_start_custom_cleaning:

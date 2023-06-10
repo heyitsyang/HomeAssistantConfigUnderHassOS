@@ -26,7 +26,7 @@ http:
 
   use_x_forwarded_for: true # required for
   trusted_proxies: # reverse proxy
-    - 10.0.0.44 #   home assistant address
+    - 10.27.0.44 #   home assistant address
     - 172.0.0.0/8 #   internal network for docker
 
 default_config:
@@ -66,12 +66,12 @@ input_select: !include input_selects.yaml
 input_number: !include input_numbers.yaml  # configuring this in helpers is now preferred
 light: !include lights.yaml
 switch: !include switches.yaml
-sql: !include sql.yaml
 cover: !include covers.yaml
 #media_player: !include media_players.yaml
 notify: !include notifiers.yaml
 #alert: !include alerts.yaml
 camera: !include cameras.yaml
+command_line: !include command_line.yaml
 proximity: !include proximity.yaml
 shell_command: !include shell_commands.yaml
 #climate: !include climate.yaml
