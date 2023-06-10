@@ -44,3 +44,5 @@ filters:
     - "Updating samsungtv media_player took longer than the scheduled update interval 0:00:10" # happens routinely when TV is on
   homeassistant.components.websocket_api.http.connection:
     - "Did not receive auth message within 10 seconds"
+  py.warnings:
+    - "InsecureRequestWarning: Unverified HTTPS request is being made to host '10.27.0.1'"
