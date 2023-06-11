@@ -7,8 +7,6 @@
 # Filters are considered a type of sensor
 #
 
-
-
 - platform: statistics
   name: "7 Day Avg Soil Temperature"
   entity_id: sensor.soil_probe_ds18b20_temperature # probe reports every hour
@@ -67,19 +65,8 @@
       precision: 0
 
 - platform: filter
-  name: "Filtered Solar Tube Luminosity"
-  entity_id: sensor.raw_solar_tube_luminosity # sensor is set to update every minute
-  filters:
-    - filter: outlier
-      radius: 500 # default radius is 2 if unspecified
-      window_size: 10 # num of prev states to define median (default = 1)
-    - filter: lowpass
-      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
-      precision: 0
-
-- platform: filter
-  name: "Filtered KFLWILDW56 Local Luminosity"
-  unique_id: filtered_kflwildw56_local_luminosity
+  name: "Filtered KFLWILDW56 BU Local Lx"
+  unique_id: filtered_kflwildw56_bu_local_rad_lx
   entity_id: sensor.kflwildw56_backed_up_local_solar_rad_lx # sensor provides mean value every minute
   filters:
     - filter: outlier
