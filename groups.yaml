@@ -250,8 +250,10 @@ proximity_measurements:
 luminosity:
   name: "Luminosity"
   entities:
-    - sensor.raw_solar_tube_luminosity
-    - sensor.filtered_solar_tube_luminosity
+    - sensor.kflwildw56_aws_solar_rad_lx
+    - sensor.kflwildw56_local_solar_rad_lx
+    - sensor.kflwildw56_backed_up_local_solar_rad_lx
+    - sensor.filtered_kflwildw56_bu_local_rad_lx
     - sensor.filtered_living_rm_visible_light
     - sensor.statistical_mean_living_rm_visible_light
     - binary_sensor.lum_outdoor_lights_solar_trig

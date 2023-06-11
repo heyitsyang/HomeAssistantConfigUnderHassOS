@@ -195,12 +195,16 @@ sensor.rack_exhaust_humidity:
 sensor.rack_exhaust_pressure:
   friendly_name: Rack Exhaust Pressure
   icon: mdi:fan
-sensor.raw_solar_tube_luminosity:
-  friendly_name: Raw Solar Tube Luminosity
+sensor.kflwildw56_local_solar_rad_lx:
+  friendly_name: Weather Station Raw Solar Local Lx
   icon: mdi:brightness-6
   device_class: illuminance
-sensor.filtered_solar_tube_luminosity:
-  friendly_name: Filtered Solar Tube Luminosity
+sensor.kflwildw56_backed_up_local_solar_rad_lx:
+  friendly_name: B/U Weather Station Raw Solar Local Lx
+  icon: mdi:brightness-6
+  device_class: illuminance
+sensor.filtered_kflwildw56_bu_local_lx:
+  friendly_name: Filtered Weather Station BU Local Lx
   icon: mdi:sunglasses
   device_class: illuminance
 sensor.suggested_brightness:

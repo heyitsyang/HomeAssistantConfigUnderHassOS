@@ -490,7 +490,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_kflwildw56_local_luminosity') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_bu_local_lx') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -502,7 +502,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_kflwildw56_local_luminosity') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_bu_local_lx') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -892,7 +892,7 @@
   action:
     - service: notify.alexa_yellow_ring
       data:
-        message: "Rosie says she's all done and needs to be cleaned"
+        message: "Rosie is a dirty girl"
 
 #
 # WEBER iGRILL SUPPORTING AUTOMATIONS
@@ -1168,7 +1168,7 @@
         state: "off"
       - condition: template # check if dark enough to bother closing
         value_template: >
-          {{ states('sensor.filtered_kflwildw56_luminosity') | int(default=0) >  
+          {{ states('sensor.filtered_kflwildw56_bu_local_lx') | int(default=0) >  
           (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}
       - condition: numeric_state
         entity_id: sun.sun
