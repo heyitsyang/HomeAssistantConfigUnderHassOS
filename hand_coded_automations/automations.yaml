@@ -892,7 +892,7 @@
   action:
     - service: notify.alexa_yellow_ring
       data:
-        message: "Rosie says she's all done and needs to be cleaned"
+        message: "Rosie is a dirty girl"
 
 #
 # WEBER iGRILL SUPPORTING AUTOMATIONS
