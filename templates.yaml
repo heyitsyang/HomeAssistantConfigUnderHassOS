@@ -253,12 +253,14 @@
 
 - sensor:
     - name: ecobee_avg_indoor_temperature # ecobee current temp is the average
+      unique_id: ecobee_avg_indoor_temperature
       #      friendly_name: "Avg Indoor Temperature" # of all ecobee sensors
       state: "{{ state_attr('climate.ecobee','current_temperature') }}"
       unit_of_measurement: "°F"
 
 - sensor:
     - name: sensibo_sunroom_temperature
+      unique_id: sensibo_sunroom_temperature
       #      friendly_name: "Sunroom Temperature"
       state: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "°F"

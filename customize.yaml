@@ -140,7 +140,7 @@ sensor.ecobee_guest_suite_temperature:
   icon: mdi:thermometer
   device_class: temperature
 sensor.ecobee_avg_indoor_temperature:
-  friendly_name: Avg Indoor Temperature
+  friendly_name: Avg Indoor Temp
   icon: mdi:thermometer
   device_class: temperature
 sensor.guest_suite_display_battery_percent:
