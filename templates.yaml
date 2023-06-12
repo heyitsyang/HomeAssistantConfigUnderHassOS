@@ -239,7 +239,7 @@
           0
         {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_0_threshold') | float(default=0)) ) and
               ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
-          15
+          12
         {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
               ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_high_threshold') | float(default=0)) ) ) %}
           20
