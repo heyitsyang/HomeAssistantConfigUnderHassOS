@@ -53,25 +53,6 @@ igrill_probe_4_target:
   step: 1
 
 #
-# AUDIO CONTROLS
-#
-inp_num_office_announce_vol: # original value = 0.18
-  name: "Office announce vol"
-  mode: box
-  step: 0.01
-  min: 0.10
-  max: 0.32
-  icon: mdi:speaker-wireless
-
-inp_num_greatrm_announce_vol: # original value = 0.28
-  name: "GreatRm announce vol"
-  mode: box
-  step: 0.01
-  min: 0.15
-  max: 0.32
-  icon: mdi:speaker-wireless
-
-#
 # DELAYS & DURATIONS
 #
 inp_num_front_door_lights_off_delay: # original value = 10 minutes

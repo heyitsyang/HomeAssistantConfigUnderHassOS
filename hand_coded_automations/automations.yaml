@@ -194,9 +194,11 @@
     - service: script.scr_vacuum_start_custom_cleaning
 
 #
-# SET ANNOUNCEMENT HOURS AUTOMATICALLY
+# SET SLEEPING & ANNOUNCEMENT HOURS AUTOMATICALLY
 #
 # *** These times should match those in startup in scripts.yaml  ***
+#
+# Note spleeping hours and announcement hours are not the same
 #
 - id: aut_assume_awake # sleeping also set by sensors - see aut_sleeping_mode_off
   alias: "aut assume awake"
@@ -225,17 +227,29 @@
       data:
         entity_id: input_boolean.inp_bool_sleeping
 
-- id: aut_announcements_off
-  alias: "aut announcements off"
+- id: aut_datetime_announcements_on
+  alias: "aut datetime announcements on"
   initial_state: true
   trigger:
-    - platform: template # the timestamp compared is already in local time so no further conversion desired
-      value_template: >
-        {{ ( states('sensor.time') == (state_attr('input_datetime.inhibit_announcements', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
+    - platform: time
+      at: input_datetime.announcements_enable
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inp_bool_announcements
+
+- id: aut_datetime_announcements_off
+  alias: "aut datetime announcements off"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.announcements_disable
   action:
     - service: input_boolean.turn_off
-      data:
+      target:
         entity_id: input_boolean.inp_bool_announcements
+
+
 
 #
 # HOURLY TIME ANNOUNCEMENT
@@ -2421,6 +2435,7 @@
         - service: homeassistant.turn_off
           target:
             entity_id: light.kitchen_leds_upper_master
+
 
 #################################
 #                               #

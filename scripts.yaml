@@ -17,16 +17,24 @@ scr_ha_startup:
     - service: input_boolean.turn_off # initialize sleeping as ON
       target:
         entity_id: input_boolean.inp_bool_sleeping
-    - condition: template
-      value_template: >
-        {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
-          ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.inp_bool_announcements
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.inp_bool_sleeping
+    - if:
+        - condition: template # initialize announcements state
+          value_template: >
+            {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.announcements_enable') ) )  and 
+              ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.announcements_disable') ) ) }}
+      then:
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inp_bool_announcements
+    - if:
+        - condition: template # initialize sleeping state
+          value_template: >
+            {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
+              ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
+      then:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.inp_bool_sleeping
 
 #
 # GOOD MORNING SCRIPT
@@ -695,22 +703,22 @@ scr_say_phrase:
           - all
         with_group: true
     - choose:
-        - conditions: # high priority - ignores announce & sleeping conditions
+        - conditions: # high priority - ignores announce & sleeping conditions & boost volume
             - condition: template
               value_template: "{{ priority == 'high' }}"
           sequence:
             - service: media_player.volume_set
               data:
                 entity_id: media_player.office_speakers
-                volume_level: 0.40 # set high priority speaking volume
+                volume_level: "{{ '%0.2f' | format(states('input_number.office_announce_vol') | float(default=0)  + 0.25) }}" # set high priority speaking volume
             - service: media_player.volume_set
               data:
                 entity_id: media_player.greatroom_speakers
-                volume_level: 0.50 # set high priority speaking volume
+                volume_level: "{{ '%0.2f' | format(states('input_number.greatrm_announce_vol') | float(default=0)  + 0.25) }}" # set high priority speaking volume
             - service: media_player.volume_set
               data:
                 entity_id: media_player.garage_speakers
-                volume_level: 0.99 # set high priority speaking volume
+                volume_level: "{{ '%0.2f' | format(states('input_number.garage_announce_vol') | float(default=0)  + 0.25) }}}" # set high priority speaking volume
             - choose:
                 - conditions:
                     - condition: state
@@ -735,25 +743,25 @@ scr_say_phrase:
                       - media_player.office_speakers
                     media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | replace(' Yang', ' Yainng') | regex_replace('.$', '') }}"
                     media_content_type: music
-      default: # normal priority - respects announce & sleeping conditions
+      default: # normal priority - respects announcement conditions
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
           state: "on"
         - condition: state
-          entity_id: input_boolean.inp_bool_sleeping # do not execute remaining unless sleeping is OFF
-          state: "off"
+          entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announcements enabled
+          state: "on"
         - service: media_player.volume_set
           data:
             entity_id: media_player.office_speakers
-            volume_level: 0.16 # set normal speaking volume
+            volume_level: "{{ states('input_number.office_announce_vol') }}" # set normal speaking volume
         - service: media_player.volume_set
           data:
             entity_id: media_player.greatroom_speakers
-            volume_level: 0.26 # set normal speaking volume
+            volume_level: "{{ states('input_number.greatrm_announce_vol') }}" # set normal speaking volume
         - service: media_player.volume_set
           data:
             entity_id: media_player.garage_speakers
-            volume_level: 0.99 # set high priority speaking volume
+            volume_level: "{{ states('input_number.garage_announce_vol') }}" # set high priority speaking volume
         - choose:
             - conditions:
                 - condition: state
