@@ -58,10 +58,10 @@
   entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
   filters:
     - filter: outlier
-      radius: 10 # default radius is 2 if unspecified
+      radius: 5 # default radius is 2 if unspecified
       window_size: 5 # num of prev states to define median (default = 1)
     - filter: lowpass
-      time_constant: 10 # Loosely relates to the amount of time it takes for a state to influence the output
+      time_constant: 5 # Loosely relates to the amount of time it takes for a state to influence the output
       precision: 0
 
 - platform: filter
