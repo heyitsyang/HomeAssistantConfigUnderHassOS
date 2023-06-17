@@ -420,14 +420,14 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: sensor.suggested_brightness # this triggers with any state change
+      entity_id: sensor.lv_rm_suggested_brightness # this triggers with any state change
       to: ~
   condition:
     - condition: state
       entity_id: input_boolean.party_mode
       state: "off"
     - condition: template # ignore if zero (prevent turn off of light using this mechanism)
-      value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
+      value_template: "{{ states('sensor.lv_rm_suggested_brightness') | int(default=0) != 0 }}"
     - condition: state
       entity_id: binary_sensor.lum_lvrm_lights_indoor_trig
       state: "on"
@@ -443,7 +443,7 @@
     - service: light.turn_on
       data:
         entity_id: light.living_room_lights
-        brightness_pct: "{{ states('sensor.suggested_brightness') | int(default=0) }}"
+        brightness_pct: "{{ states('sensor.lv_rm_suggested_brightness') | int(default=0) }}"
 
 ###########################################################
 #      Test luminosity based triggers and save states     #
