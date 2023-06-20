@@ -269,12 +269,6 @@
     #    - not all batteries need sensor attribute templates, so not all are here
 
 - sensor:
-    - name: living_area_motion_battery
-      #      friendly_name: "Living Area Motion Battery"
-      state: "{{ state_attr('binary_sensor.living_area_motion','battery_level') | int(default=0) }}"
-      unit_of_measurement: "%"
-
-- sensor:
     - name: sunrm_window_1_opened_battery
       #      friendly_name: "Sunroom Window 1 Battery"
       state: "{{ state_attr('binary_sensor.sunrm_window_1_opened','battery_level') | int(default=0) }}"
