@@ -102,17 +102,17 @@ sensor:
 
   - platform: homeassistant
     id: outside_temperature
-    entity_id: sensor.kflwildw56_temperature
+    entity_id: sensor.kflwildw56_local_temp
     internal: true
 
   - platform: homeassistant
     id: outside_humidity
-    entity_id: sensor.kflwildw56_humidity
+    entity_id: sensor.kflwildw56_local_humidity
     internal: true
 
   - platform: homeassistant
     id: feels_like_temperature
-    entity_id: sensor.kflwildw56_feels_like
+    entity_id: sensor.kflwildw56_local_feels_like
     internal: true
 
   - platform: homeassistant
