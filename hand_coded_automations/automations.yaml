@@ -208,9 +208,6 @@
       value_template: >
         {{ ( states('sensor.time') == (state_attr('input_datetime.assume_awake', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
   action:
-    - service: input_boolean.turn_on
-      data:
-        entity_id: input_boolean.inp_bool_announcements
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_sleeping
@@ -248,8 +245,6 @@
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_announcements
-
-
 
 #
 # HOURLY TIME ANNOUNCEMENT
@@ -2435,7 +2430,6 @@
         - service: homeassistant.turn_off
           target:
             entity_id: light.kitchen_leds_upper_master
-
 
 #################################
 #                               #

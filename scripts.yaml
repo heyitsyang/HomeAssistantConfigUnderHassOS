@@ -747,9 +747,6 @@ scr_say_phrase:
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
           state: "on"
-        - condition: state
-          entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announcements enabled
-          state: "on"
         - service: media_player.volume_set
           data:
             entity_id: media_player.office_speakers
