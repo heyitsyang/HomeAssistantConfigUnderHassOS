@@ -80,6 +80,4 @@ include:
     - sensor.statistical_mean_living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
     - sensor.raw_living_rm_visible_light
-    - sensor.raw_living_rm_full_spectrum_light
-    - sensor.raw_living_rm_infrared_light
 # EVERYTHING ELSE IS IMPLICITLY EXCLUDED

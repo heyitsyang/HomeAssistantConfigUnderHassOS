@@ -215,9 +215,6 @@ sensor.filtered_living_rm_visible_light:
 sensor.raw_living_rm_visible_light:
   friendly_name: Raw Living Rm Visible Light
   icon: mdi:brightness-6
-sensor.raw_living_rm_infrared_light:
-  friendly_name: Raw Living Rm Infrared Light
-  icon: mdi:brightness-6
 switch.candles:
   friendly_name: Candles
   icon: mdi:candle
