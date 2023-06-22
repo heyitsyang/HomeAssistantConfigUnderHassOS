@@ -204,8 +204,10 @@ display:                    # note display update settings only applies in deep_
     full_update_every: 99  # purposely set high to avoid full update altogether
     update_interval: 10s    # updates a few time during wake from deep sleep - low number minimizes waiting for user
     rotation: 90
+    # first line it.fill(Color::BLACK);  is workaround for ESPHome 2023.6 - remove when fixed
     lambda: |-
 
+      it.fill(Color::BLACK);
       if (id(weather_state).has_state()) {
         std::map<std::string, std::string> weather_icon_map
           {
