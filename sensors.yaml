@@ -65,7 +65,7 @@
       precision: 0
 
 - platform: filter
-  name: "Filtered KFLWILDW56 BU Local Lx"
+  name: "Filtered KFLWILDW56 BU Local Rad Lx"
   unique_id: filtered_kflwildw56_bu_local_rad_lx
   entity_id: sensor.kflwildw56_backed_up_local_solar_rad_lx # sensor provides mean value every minute
   filters:
