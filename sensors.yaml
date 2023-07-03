@@ -44,14 +44,6 @@
   sampling_size: 10 # default state value is the running average of this many samples
   precision: 1 # number of decimal places
 
-- platform: statistics
-  name: "Statistical Mean Living Rm Visible Light"
-  unique_id: statistical_mean_living_rm_visible_light
-  entity_id: sensor.raw_living_rm_visible_light # sensor is set to update every minute
-  state_characteristic: mean
-  sampling_size: 10 # default state value is the running average of this many samples
-  precision: 2
-
 - platform: filter
   name: "Filtered Living Rm Visible Light"
   unique_id: filtered_living_rm_visible_light
