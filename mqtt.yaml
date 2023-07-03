@@ -61,7 +61,9 @@ sensor:
 
   - unique_id: raw_living_rm_visible_light
     name: "Raw Living Rm Visible Light"
+    device_class: "illuminance"
     state_topic: "espresense/rooms/greatrm/tsl2561_lux"
+    force_update: true  # update even if values haven't changed - required if filters depend on update timing for calc
     qos: 0
     unit_of_measurement: "lx"
 
