@@ -188,42 +188,6 @@ inp_num_outdoor_lights_off_solar_trig: # solartubeoriginal value = 180
   icon: mdi:lightbulb-off-outline
   unit_of_measurement: lx
 
-#inp_num_lvrm_lights_on_f_solar_trig:                               # solartube original value = 1000
-#  name: 'LvRm ON f_solar'
-#  mode: box
-#  step: 50
-#  min: 500
-#  max: 2000
-#  icon: mdi:lightbulb-outline
-#  unit_of_measurement: lx
-#
-#inp_num_lvrm_lights_off_f_solar_trig:                             # solartubeoriginal value = 4500
-#  name: 'LvRm OFF f_solar'
-#  mode: box
-#  step: 50
-#  min: 3000
-#  max: 5500
-#  icon: mdi:lightbulb-off-outline
-#  unit_of_measurement: lx
-
-inp_num_lvrm_lights_on_indoor_trig: # original value =  13
-  name: "LvRm ON indoor"
-  mode: box
-  step: 0.05
-  min: 20
-  max: 30
-  icon: mdi:lightbulb-outline
-  unit_of_measurement: lx
-
-inp_num_lvrm_lights_off_indoor_trig: # original value = 24
-  name: "LvRm OFF indoor" # visible lum is 26 lux max when all lights on so value must
-  mode: box #   be > 26 or lights will go off due to their own light
-  step: 0.05
-  min: 30.05
-  max: 40
-  icon: mdi:lightbulb-off-outline
-  unit_of_measurement: lx
-
 inp_num_mood_lights_on_f_solar_trig: # solartube original value = 900
   name: "Mood ON f_solar"
   mode: box

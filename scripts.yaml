@@ -576,11 +576,6 @@ scr_motion_lighting_on:
         - condition: state
           entity_id: input_boolean.inp_bool_sleeping # execute only if not sleeping
           state: "off"
-        - condition: template # ignore if suggested is zero to avoid conflicting sensors
-          value_template: "{{ states('sensor.lv_rm_suggested_brightness') | int(default=0) != 0 }}"
-        - condition: state
-          entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in input_numbers.yaml
-          state: "on"
         - condition: state
           entity_id: input_boolean.inp_bool_theater_mode # avoid changing brightness if theater mode
           state: "off"

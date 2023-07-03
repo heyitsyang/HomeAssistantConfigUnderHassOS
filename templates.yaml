@@ -137,12 +137,6 @@
         {{ is_state('input_boolean.inp_bool_lum_outdoor_lights_solar_trig','on') }}
 
 - binary_sensor:
-    - name: lum_lvrm_lights_indoor_trig
-      unique_id: lum_lvrm_lights_indoor_trig
-      state: >-
-        {{ is_state('input_boolean.inp_bool_lum_lvrm_lights_indoor_trig','on') }}
-
-- binary_sensor:
     - name: lum_mood_lights_f_solar_trig
       unique_id: lum_mood_lights_f_solar_trig
       state: >-

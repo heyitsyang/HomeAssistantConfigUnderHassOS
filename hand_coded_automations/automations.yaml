@@ -421,11 +421,6 @@
     - condition: state
       entity_id: input_boolean.party_mode
       state: "off"
-    - condition: template # ignore if zero (prevent turn off of light using this mechanism)
-      value_template: "{{ states('sensor.lv_rm_suggested_brightness') | int(default=0) != 0 }}"
-    - condition: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig
-      state: "on"
     - condition: or
       conditions:
         - condition: state # motion has triggered them ON
@@ -468,30 +463,6 @@
     service: input_boolean.turn_off
     target:
       entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
-
-- id: aut_lum_lvrm_lights_indoor_trig_on # Normal TV watching lights are ~14 Lux
-  alias: "aut lum lvrm lights indoor trig on" # ~25 Lux if all contributing indoor lights are ON 100%
-  initial_state: true #  keep OFF trigger >> ON trigger to avoid cycling
-  trigger:
-    - platform: template
-      value_template: >-
-        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
-  action:
-    service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
-
-- id: aut_lum_lvrm_lights_indoor_trig_off # Normal TV watching lights are ~14 Lux
-  alias: "aut lum lvrm lights indoor trig off" # ~25 Lux if all contributing indoor lights are ON 100%
-  initial_state: true #  keep OFF trigger >> ON trigger to avoid cycling
-  trigger:
-    - platform: template
-      value_template: >-
-        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
-  action:
-    service: input_boolean.turn_off
-    target:
-      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
 
 - id: aut_lum_mood_lights_f_solar_trig_on
   alias: "aut lum mood lights f_solar trig on"
@@ -1054,9 +1025,9 @@
   alias: "aut auto on living area luminosity"
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
-      to: "on"
+    - platform: numeric_state
+      entity_id: sensor.lv_rm_suggested_brightness
+      above: 0
       for: # in motion activated lighting
         minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int(default=0) }}"
   condition:
@@ -1082,9 +1053,9 @@
   alias: "aut auto off living area luminosity"
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
-      to: "off"
+    - platform: numeric_state
+      entity_id: sensor.lv_rm_suggested_brightness
+      below: 1
       for:
         minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int(default=0) }}"
   condition: # only auto-off if daylight outside
