@@ -1930,6 +1930,28 @@
 # CONDITIONS REQUIRING ATTENTION
 #
 
+- id: aut_hvac_fault
+  alias: "aut hvac fault"
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: >
+        {{ (states('sensor.ecobee_avg_indoor_temperature') | float - state_attr('climate.ecobee', 'temperature') | float ) | round(2) | abs > 3 }}
+    - platform: template
+      value_template: >
+        {{ (states('sensor.sensibo_sunroom_temperature') | float - state_attr('climate.sunroom_ac', 'temperature') | float ) | round(2) | abs > 4 }}
+  action:
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "Climate control is outside of tolerance - {{trigger.entity_id}}"
+    - service: notify.yskt_cell_phones
+      data:
+        title: "HVAC system fault detected"
+        message: "Climate control is outside of tolerance! - {{trigger.entity_id}}"
+    - service: script.scr_say_phrase
+      data:
+        message: "H.V.A.C. fault detected - {{trigger.entity_id}}"
+
 - id: aut_rack_exhaust_fan_fault
   alias: "aut rack exhaust fan fault"
   initial_state: true
