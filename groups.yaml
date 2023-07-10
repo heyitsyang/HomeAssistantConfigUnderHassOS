@@ -17,7 +17,7 @@ default_view:
   icon: mdi:home
   entities:
     - sensor.ecobee_avg_indoor_temperature
-    - sensor.ecobee_humidity
+    - sensor.local_ecobee_humidity
     - sensor.dark_sky_temperature
     - sensor.dark_sky_humidity
     - sensor.time
@@ -75,7 +75,7 @@ hvac:
   name: "Climate Control"
   icon: mdi:car-cruise-control
   entities:
-    - climate.ecobee
+    - climate.local_ecobee
     - climate.sunrm_ac
     - group.indoor_climate_sensors
 
@@ -136,10 +136,10 @@ timeouts:
 indoor_climate_sensors:
   name: "Indoor Climate Sensors"
   entities:
-    - sensor.ecobee_temperature
-    - sensor.ecobee_humidity
-    - sensor.ecobee_eating_area_temperature
-    - sensor.ecobee_guest_suite_temperature
+    - sensor.local_ecobee_temperature
+    - sensor.Local_ecobee_humidity
+    - sensor.local_ecobee_eating_area_temperature
+    - sensor.local_ecobee_guest_suite_temperature
 
 vacuum_rosie:
   name: "Rosie the Vacuum"

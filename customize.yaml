@@ -52,7 +52,7 @@ camera.rosie_cleaning_map:
   friendly_name: Rosie's last cleaning map
 climate.sunrm_ac:
   friendly_name: Sunroom
-climate.ecobee:
+climate.local_ecobee:
   friendly_name: Main House
 cover.large_garage_door:
   friendly_name: Large Garage Door
@@ -123,19 +123,19 @@ sensor.home_assistant_v2_db:
 sensor.influxdb_db_size:
   friendly_name: Influx DB Size
   icon: mdi:database
-sensor.ecobee_temperature:
+sensor.local_ecobee_temperature:
   friendly_name: Thermostat Temperature
   icon: mdi:thermometer
   device_class: temperature
-sensor.ecobee_humidity:
+sensor.local_ecobee_humidity:
   friendly_name: Thermostat Humidity
   icon: mdi:water-percent
   device_class: humidity
-sensor.ecobee_eating_area_temperature:
-  friendly_name: Eating Area Temperature
+sensor.local_ecobee_master_bedrm_temperature:
+  friendly_name: Master Bedroom Temperature
   icon: mdi:thermometer
   device_class: temperature
-sensor.ecobee_guest_suite_temperature:
+sensor.local_ecobee_guest_suite_temperature:
   friendly_name: Guest Suite Temperature
   icon: mdi:thermometer
   device_class: temperature
