@@ -68,9 +68,6 @@ scr_goodmorning:
 scr_goodnight: # called by Alexa as PART of Goodnight Routine
   mode: single
   sequence:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.inp_bool_sleeping
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.party_mode
@@ -110,6 +107,12 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
               - light.office_cabinet_leds_master
               - light.office_monitor_leds
               - light.guest_room_lights
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inp_bool_sleeping
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_announcements
 
 #
 # NOBODY HOME
