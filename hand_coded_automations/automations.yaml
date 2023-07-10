@@ -194,9 +194,11 @@
     - service: script.scr_vacuum_start_custom_cleaning
 
 #
-# SET ANNOUNCEMENT HOURS AUTOMATICALLY
+# SET SLEEPING & ANNOUNCEMENT HOURS AUTOMATICALLY
 #
 # *** These times should match those in startup in scripts.yaml  ***
+#
+# Note spleeping hours and announcement hours are not the same
 #
 - id: aut_assume_awake # sleeping also set by sensors - see aut_sleeping_mode_off
   alias: "aut assume awake"
@@ -206,9 +208,6 @@
       value_template: >
         {{ ( states('sensor.time') == (state_attr('input_datetime.assume_awake', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
   action:
-    - service: input_boolean.turn_on
-      data:
-        entity_id: input_boolean.inp_bool_announcements
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_sleeping
@@ -225,16 +224,26 @@
       data:
         entity_id: input_boolean.inp_bool_sleeping
 
-- id: aut_announcements_off
-  alias: "aut announcements off"
+- id: aut_datetime_announcements_on
+  alias: "aut datetime announcements on"
   initial_state: true
   trigger:
-    - platform: template # the timestamp compared is already in local time so no further conversion desired
-      value_template: >
-        {{ ( states('sensor.time') == (state_attr('input_datetime.inhibit_announcements', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
+    - platform: time
+      at: input_datetime.announcements_enable
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inp_bool_announcements
+
+- id: aut_datetime_announcements_off
+  alias: "aut datetime announcements off"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: input_datetime.announcements_disable
   action:
     - service: input_boolean.turn_off
-      data:
+      target:
         entity_id: input_boolean.inp_bool_announcements
 
 #
@@ -406,17 +415,12 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: sensor.suggested_brightness # this triggers with any state change
+      entity_id: sensor.lv_rm_suggested_brightness # this triggers with any state change
       to: ~
   condition:
     - condition: state
       entity_id: input_boolean.party_mode
       state: "off"
-    - condition: template # ignore if zero (prevent turn off of light using this mechanism)
-      value_template: "{{ states('sensor.suggested_brightness') | int(default=0) != 0 }}"
-    - condition: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig
-      state: "on"
     - condition: or
       conditions:
         - condition: state # motion has triggered them ON
@@ -429,7 +433,7 @@
     - service: light.turn_on
       data:
         entity_id: light.living_room_lights
-        brightness_pct: "{{ states('sensor.suggested_brightness') | int(default=0) }}"
+        brightness_pct: "{{ states('sensor.lv_rm_suggested_brightness') | int(default=0) }}"
 
 ###########################################################
 #      Test luminosity based triggers and save states     #
@@ -460,37 +464,13 @@
     target:
       entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
 
-- id: aut_lum_lvrm_lights_indoor_trig_on # Normal TV watching lights are ~14 Lux
-  alias: "aut lum lvrm lights indoor trig on" # ~25 Lux if all contributing indoor lights are ON 100%
-  initial_state: true #  keep OFF trigger >> ON trigger to avoid cycling
-  trigger:
-    - platform: template
-      value_template: >-
-        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_lvrm_lights_on_indoor_trig') | float(default=0)) ) }}
-  action:
-    service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
-
-- id: aut_lum_lvrm_lights_indoor_trig_off # Normal TV watching lights are ~14 Lux
-  alias: "aut lum lvrm lights indoor trig off" # ~25 Lux if all contributing indoor lights are ON 100%
-  initial_state: true #  keep OFF trigger >> ON trigger to avoid cycling
-  trigger:
-    - platform: template
-      value_template: >-
-        {{ ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) >= (states('input_number.inp_num_lvrm_lights_off_indoor_trig') | float(default=0)) ) }}
-  action:
-    service: input_boolean.turn_off
-    target:
-      entity_id: input_boolean.inp_bool_lum_lvrm_lights_indoor_trig
-
 - id: aut_lum_mood_lights_f_solar_trig_on
   alias: "aut lum mood lights f_solar trig on"
   initial_state: true
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_kflwildw56_bu_local_lx') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_bu_local_rad_lx') | int(default=0)) <= (states('input_number.inp_num_mood_lights_on_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_on
     target:
@@ -502,7 +482,7 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ ( (states('sensor.filtered_kflwildw56_bu_local_lx') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
+        {{ ( (states('sensor.filtered_kflwildw56_bu_local_rad_lx') | int(default=0)) >= (states('input_number.inp_num_mood_lights_off_f_solar_trig') | int(default=0)) ) }}
   action:
     service: input_boolean.turn_off
     target:
@@ -1045,9 +1025,9 @@
   alias: "aut auto on living area luminosity"
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
-      to: "on"
+    - platform: numeric_state
+      entity_id: sensor.lv_rm_suggested_brightness
+      above: 0
       for: # in motion activated lighting
         minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int(default=0) }}"
   condition:
@@ -1073,9 +1053,9 @@
   alias: "aut auto off living area luminosity"
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: binary_sensor.lum_lvrm_lights_indoor_trig # luminosity level is set in UI (settings)
-      to: "off"
+    - platform: numeric_state
+      entity_id: sensor.lv_rm_suggested_brightness
+      below: 1
       for:
         minutes: "{{ states('input_number.inp_num_lvrm_lights_off_delay') | int(default=0) }}"
   condition: # only auto-off if daylight outside
@@ -1168,7 +1148,7 @@
         state: "off"
       - condition: template # check if dark enough to bother closing
         value_template: >
-          {{ states('sensor.filtered_kflwildw56_bu_local_lx') | int(default=0) >  
+          {{ states('sensor.filtered_kflwildw56_bu_local_rad_lx') | int(default=0) >  
           (states('input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux') | int(default=0)) }}
       - condition: numeric_state
         entity_id: sun.sun
@@ -1949,6 +1929,28 @@
 #
 # CONDITIONS REQUIRING ATTENTION
 #
+
+- id: aut_hvac_fault
+  alias: "aut hvac fault"
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: >
+        {{ (states('sensor.ecobee_avg_indoor_temperature') | float - state_attr('climate.ecobee', 'temperature') | float ) | round(2) | abs > 3 }}
+    - platform: template
+      value_template: >
+        {{ (states('sensor.sensibo_sunroom_temperature') | float - state_attr('climate.sunroom_ac', 'temperature') | float ) | round(2) | abs > 4 }}
+  action:
+    - service: notify.alexa_yellow_ring
+      data:
+        message: "Climate control is outside of tolerance - {{trigger.entity_id}}"
+    - service: notify.yskt_cell_phones
+      data:
+        title: "HVAC system fault detected"
+        message: "Climate control is outside of tolerance! - {{trigger.entity_id}}"
+    - service: script.scr_say_phrase
+      data:
+        message: "H.V.A.C. fault detected - {{trigger.entity_id}}"
 
 - id: aut_rack_exhaust_fan_fault
   alias: "aut rack exhaust fan fault"

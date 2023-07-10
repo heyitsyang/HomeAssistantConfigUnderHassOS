@@ -123,9 +123,9 @@
   icon: mdi:blank
 
 - name: Brownwood Paddock Square
-  latitude: 28.844604
-  longitude: -82.022163
-  radius: 350 # meters
+  latitude: 28.844450
+  longitude: -82.02211
+  radius: 300 # meters
   icon: mdi:blank
 
 - name: Sawgrass Grove
@@ -135,7 +135,10 @@
   icon: mdi:blank
 
 #
-# REGIONAL REC CENTERS
+# REGIONAL REC CENTERS (RRC)
+#
+# Note: Villages Rec Centers (VRC) & Neighborhoon Rec Centers (NRC)
+# do not go in this section
 #
 - name: Mulberry Grove RRC
   latitude: 28.981104
@@ -216,7 +219,10 @@
   icon: mdi:blank
 
 #
-# VILLAGES REC CENTERS
+# VILLAGES REC CENTERS (VRC)
+#
+# Note: Regional Rec CEnters (RRC) and Neighborhood Rec Centers (NRC)
+# do not go in this section
 #
 - name: Chatham VRC
   latitude: 28.970825
@@ -392,16 +398,37 @@
   radius: 67 # meters
   icon: mdi:blank
 
+- name: Trillium VRC
+  latitude: 28.8418
+  longitude: -82.02093
+  radius: 26 # meters
+  icon: mdi:blank
+
 - name: First Responders VRC
   latitude: 28.97571
   longitude: -82.02577
   radius: 96 # meters
   icon: mdi:blank
 
+# to be added when more info avaialble:
+# Clarendon VRC
+# Franklin VRC
+
+#
+# NEIGHBORHOOD REC CENTERS (VRC)
+#
+# Note: Regional Rec CEnters (RRC) and Villages Rec Centers (VRC)
+# do not go in this section
+#
+- name: Collier NRC
+  latitude: 28.85197
+  longitude: -82.01149
+  radius: 26 # meters
+  icon: mdi:blank
+
 #
 # Country Club & Practice Centers (facilities only)
 #
-
 - name: Cane Garden CC
   latitude: 28.892713
   longitude: -81.993969

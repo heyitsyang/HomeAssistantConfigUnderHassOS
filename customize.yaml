@@ -140,7 +140,7 @@ sensor.ecobee_guest_suite_temperature:
   icon: mdi:thermometer
   device_class: temperature
 sensor.ecobee_avg_indoor_temperature:
-  friendly_name: Avg Indoor Temperature
+  friendly_name: Avg Indoor Temp
   icon: mdi:thermometer
   device_class: temperature
 sensor.guest_suite_display_battery_percent:
@@ -200,11 +200,11 @@ sensor.kflwildw56_local_solar_rad_lx:
   icon: mdi:brightness-6
   device_class: illuminance
 sensor.kflwildw56_backed_up_local_solar_rad_lx:
-  friendly_name: B/U Weather Station Raw Solar Local Lx
+  friendly_name: B/U Weather Station Raw Solar Local Rad Lx
   icon: mdi:brightness-6
   device_class: illuminance
-sensor.filtered_kflwildw56_bu_local_lx:
-  friendly_name: Filtered Weather Station BU Local Lx
+sensor.filtered_kflwildw56_bu_local_rad_lx:
+  friendly_name: Filtered Weather Station BU Local Rad Lx
   icon: mdi:sunglasses
   device_class: illuminance
 sensor.suggested_brightness:
@@ -214,9 +214,6 @@ sensor.filtered_living_rm_visible_light:
   icon: mdi:brightness-6
 sensor.raw_living_rm_visible_light:
   friendly_name: Raw Living Rm Visible Light
-  icon: mdi:brightness-6
-sensor.raw_living_rm_infrared_light:
-  friendly_name: Raw Living Rm Infrared Light
   icon: mdi:brightness-6
 switch.candles:
   friendly_name: Candles

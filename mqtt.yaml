@@ -61,19 +61,9 @@ sensor:
 
   - unique_id: raw_living_rm_visible_light
     name: "Raw Living Rm Visible Light"
-    state_topic: "livingrmfan/TSL2561/Human"
-    qos: 0
-    unit_of_measurement: "lx"
-
-  - unique_id: raw_living_rm_full_spectrum_light
-    name: "Raw Living Rm Full Spectrum Light"
-    state_topic: "livingrmfan/TSL2561/Broadband"
-    qos: 0
-    unit_of_measurement: "lx"
-
-  - unique_id: raw_living_rm_infrared_light
-    name: "Raw Living Rm Infrared Light"
-    state_topic: "livingrmfan/TSL2561/Infrared"
+    device_class: "illuminance"
+    state_topic: "espresense/rooms/greatrm/tsl2561_lux"
+    force_update: true  # update even if values haven't changed - required if filters depend on update timing for calc
     qos: 0
     unit_of_measurement: "lx"
 
