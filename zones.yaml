@@ -392,6 +392,12 @@
   radius: 67 # meters
   icon: mdi:blank
 
+- name: Trillium VRC
+  latitude: 28.8418
+  longitude: -82.02093
+  radius: 26 # meters
+  icon: mdi:blank
+
 - name: First Responders VRC
   latitude: 28.97571
   longitude: -82.02577
