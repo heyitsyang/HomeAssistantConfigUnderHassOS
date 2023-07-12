@@ -247,7 +247,7 @@
 - sensor:
     - name: ecobee_avg_indoor_temperature # ecobee current temp is the average
       unique_id: ecobee_avg_indoor_temperature
-      state: "{{ state_attr('climate.ecobee','current_temperature') }}"
+      state: "{{ state_attr('climate.local_ecobee','current_temperature') }}"
       unit_of_measurement: "°F"
 
 - sensor:
