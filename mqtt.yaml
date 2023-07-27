@@ -155,7 +155,6 @@ binary_sensor:
 #
 # MQTT COVERS
 #
-
 cover:
   ## Large Garage Door ##
   - name: "Large Garage Door"
