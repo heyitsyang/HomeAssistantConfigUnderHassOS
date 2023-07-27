@@ -258,7 +258,9 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "The time is {{ now().time().strftime('%-I:%M %p')  | replace(':00', '') | regex_replace(':0(\\d)', ' oh \\1') }}"
+        message: >-
+          'The time is {{ now().time().strftime("%-I:%M")  | replace(":00", " o'clock") 
+          | regex_replace(":0(\\d)", " oh \\1") }}'
 
 #
 # EXTINGUISH MOOD LIGHTS DAILY
