@@ -1378,7 +1378,7 @@
     - service: script.scr_back_door_lights_on
 
 #
-# DRIVWAY CAMERA ZONE ACTIVITY TRIGGERS
+# DRIVEWAY CAMERA ZONE ACTIVITY TRIGGERS
 #
 - id: aut_driveway_camera_zone_actvity
   alias: "aut driveway camera zone activity"
