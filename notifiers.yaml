@@ -64,7 +64,7 @@
         priority: 0
 
 - platform: group
-  name: yskt_cell_phones
+  name: mobile_app_yskt_cell
   services:
     - service: mobile_app_ys_cell
     - service: mobile_app_kt_cell
