@@ -24,6 +24,7 @@ zigbee2mqtt
 home-assistant_v2.db-shm
 home-assistant_v2.db-wal
 frigate.yml
+frigate.yml.bak
 secrets.yaml
 logger.yaml
 .uuid
