@@ -1949,10 +1949,12 @@
     - service: notify.mobile_app_yskt_cell
       data:
         title: "HVAC system fault detected"
-        message: "Climate control is outside of tolerance! - {{trigger.entity_id}}"
+        message: >
+          "{{ (trigger.entity_id) | replace('_ac', '') | replace('climate.local.ecobee', 'main house')}} temperature is outside of tolerance!"
     - service: script.scr_say_phrase
       data:
-        message: "{{trigger.entity_id}} fault detected"
+        message: >
+          "{{ (trigger.entity_id) | replace('_ac', '') | replace('climate.local.ecobee', 'main house')}} temperature is outside of tolerance"
 
 - id: aut_rack_exhaust_fan_fault
   alias: "aut rack exhaust fan fault"
