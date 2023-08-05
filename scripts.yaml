@@ -204,7 +204,7 @@ scr_common_extended_absence_on:
     - service: homeassistant.turn_off
       target:
         entity_id: group.all_lighting_xabove_cabinet
-    - service: input_boolean_turn_off
+    - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - if:
@@ -229,7 +229,7 @@ scr_common_extended_absence_off:
     - service: switch.turn_on
       target:
         entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
-    - service: input_boolean_turn_on
+    - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
 
