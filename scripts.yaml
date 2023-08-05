@@ -204,6 +204,9 @@ scr_common_extended_absence_on:
     - service: homeassistant.turn_off
       target:
         entity_id: group.all_lighting_xabove_cabinet
+    - service: input_boolean_turn_off
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - if:
         - condition: state
           entity_id: input_boolean.leave_water_valve_on
@@ -226,9 +229,12 @@ scr_common_extended_absence_off:
     - service: switch.turn_on
       target:
         entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+    - service: input_boolean_turn_on
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
 
 #
-# COMMON EXTENDED ABSENCE ACTIONS
+# COMMON GUEST MODE ACTIONS
 #
 scr_common_guest_mode_on:
   mode: restart
