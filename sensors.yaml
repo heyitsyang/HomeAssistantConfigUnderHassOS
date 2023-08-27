@@ -97,7 +97,7 @@
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.2.0
   accept_errors: true
-  unit_of_measurement: "ºC"
+  unit_of_measurement: "°C"
 
 - platform: snmp
   name: "NAS system fan status"
