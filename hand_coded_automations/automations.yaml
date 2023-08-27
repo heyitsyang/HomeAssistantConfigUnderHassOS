@@ -1937,28 +1937,39 @@
   initial_state: true
   trigger:
     - platform: template
-      value_template: >
-        {{ (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local.ecobee', 'temperature') | float(default=0) ) | round(2) | abs > 3 }}
+      value_template: >-
+        {{ states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
+        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2) | abs > 3 }}
     - platform: template
-      value_template: >
-        {{ (states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') | float(default=0) ) | round(2) | abs > 4 }}
+      value_template: >-
+        {{ states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
+        | float(default=state_attr('climate.ecobee', 'temperature')) ) | round(2) | abs > 4 }}
   action:
     - service: notify.alexa_yellow_ring
       data:
         message: >-
           "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
-              | replace('climate.local.ecobee', 'main house')}} temperature is outside of tolerance!"
+              | replace('climate.local_ecobee', 'main house')
+              | replace('sensor.sensibo_sunroom_temperature', 'sun room')
+              | replace('sensor.ecobee_avg_indoor_temperature', 'main house')
+              }} temperature is outside of tolerance!"
     - service: notify.mobile_app_yskt_cell
       data:
         title: "HVAC system fault detected"
         message: >-
           "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
-              | replace('climate.local.ecobee', 'main house')}} temperature is outside of tolerance!"
+              | replace('climate.local_ecobee', 'main house')
+              | replace('sensor.sensibo_sunroom_temperature', 'sun room')
+              | replace('sensor.ecobee_avg_indoor_temperature', 'main house')
+              }} temperature is outside of tolerance!"
     - service: script.scr_say_phrase
       data:
         message: >-
           "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
-              | replace('climate.local.ecobee', 'main house')}} temperature is outside of tolerance"
+              | replace('climate.local_ecobee', 'main house')
+              | replace('sensor.sensibo_sunroom_temperature', 'sun room')
+              | replace('sensor.ecobee_avg_indoor_temperature', 'main house')              
+              }} temperature is outside of tolerance"
 
 - id: aut_rack_exhaust_fan_fault
   alias: "aut rack exhaust fan fault"
