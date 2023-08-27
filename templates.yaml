@@ -256,6 +256,12 @@
       state: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "°F"
 
+- sensor:
+    - name: espresense_adjusted_sunroom_temperature
+      unique_id: espresense_adjusted_sunroom_temperature
+      state: "{{ (states('sensor.espresense_sunrm_bme280_temperature') | float(default=0) - 8.63) | round(2) }}"
+      unit_of_measurement: "°F"
+
     #  BATTERIES #
     #    - not all batteries need sensor attribute templates, so not all are here
 
