@@ -42,7 +42,7 @@ frontend: # Enables the frontend
 # to be in the homeassitant: section
 
 automation: !include automations.yaml # hassio generated yaml goes here
-automation old: !include_dir_merge_list hand_coded_automations # hand coded yaml goes in this dir to preserve comments, order, etc.logger: !include logger.yaml
+automation non-gui: !include_dir_merge_list hand_coded_automations # hand coded yaml goes in this dir to preserve comments, order, etc.logger: !include logger.yaml
 alexa: !include alexa.yaml
 #alert: !include alerts.yaml
 #binary_sensor: !include binary_sensors.yaml
