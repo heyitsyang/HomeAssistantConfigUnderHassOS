@@ -529,12 +529,12 @@
   max_exceeded: silent
   trigger:
     - platform: state
-      entity_id: binary_sensor.ys_desktop_lwt
+      entity_id: binary_sensor.ys_desktop_availability
       from: "off"
       to: "on"
-    - platform: numeric_state
-      entity_id: sensor.ys_desktop_system_idle_time
-      below: 1
+    - platform: template
+      value_template: >-
+        {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.ys_desktop_lastactive'), '')| float(default=0)) ) | int(default=0) ) < 15 }}
   condition:
     - condition: state # don't repetitively turn on
       entity_id: group.office_mood_lights
@@ -558,11 +558,11 @@
   max_exceeded: silent
   trigger:
     - platform: state
-      entity_id: binary_sensor.ys_desktop_lwt
+      entity_id: binary_sensor.ys_desktop_availability
       to: "off"
-    - platform: numeric_state
-      entity_id: sensor.ys_desktop_system_idle_time
-      above: 3600 # seconds
+    - platform: template
+      value_template: >-
+        {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.ys_desktop_lastactive'), '')| float(default=0)) ) | int(default=0) ) > 3600 }}
     - platform: state
       entity_id: input_boolean.inp_bool_lum_outdoor_lights_solar_trig
       to: "off"
@@ -981,18 +981,20 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.igrill_70918f19e8d1_connectivity
+      from: "on"
       to: "off"
       for:
         minutes: 5
     - platform: state
       entity_id: binary_sensor.igrill_70918f19e8d1_sensor
+      from: "on"
       to: "off"
       for:
         minutes: 5
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Grill Device Disconnected"
+        message: "I Grill Device Disconnected"
 
 #
 # AUTO LIVING AREA LIGHTING - MOTION
