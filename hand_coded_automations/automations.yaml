@@ -889,12 +889,12 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Grill temp outside limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+        message: "Grill temp outside limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
         data:
-          tts_text: "Grill temp outside limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+          tts_text: "Grill temp outside limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
 
 - alias: "Monitor Grill Temp Normal"
   initial_state: "off"
@@ -905,12 +905,12 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Grill temp within limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+        message: "Grill temp within limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
         data:
-          tts_text: "Grill temp withiin limits. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+          tts_text: "Grill temp withiin limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
 
 - alias: "Probe 1 Target Temp"
   initial_state: "off"
@@ -921,12 +921,12 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Probe 1 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_1.state }} °F"
+        message: "Probe 1 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_1') }} °F"
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
         data:
-          tts_text: "Probe 1 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_1.state }} °F"
+          tts_text: "Probe 1 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_1') }} °F"
 
 - alias: "Probe 2 Target Temp"
   initial_state: "off"
@@ -937,12 +937,12 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Probe 2 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_2.state }} °F"
+        message: "Probe 2 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_2') }} °F"
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
         data:
-          tts_text: "Probe 2 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_2.state }} °F"
+          tts_text: "Probe 2 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_2') }} °F"
 
 - alias: "Probe 3 Target Temp"
   initial_state: "off"
@@ -953,12 +953,12 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Probe 3 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_3.state }} °F"
+        message: "Probe 3 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_3') }} °F"
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
         data:
-          tts_text: "Probe 3 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_3.state }} °F"
+          tts_text: "Probe 3 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_3') }} °F"
 
 - alias: "Probe 4 Target Temp"
   initial_state: "off"
@@ -969,27 +969,30 @@
   action:
     - service: script.scr_say_phrase
       data:
-        message: "Probe 4 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+        message: "Probe 4 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
     - service: notify.mobile_app_ys_cell
       data:
         message: TTS
         data:
-          tts_text: "Probe 4 has reached the target temp. Currently {{ states.sensor.igrill_70918f19e8d1_probe_4.state }} °F"
+          tts_text: "Probe 4 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
 
 - alias: "Monitor iGrill Device Connectivity"
   initial_state: "on"
   trigger:
     - platform: state
-      entity_id: sensor.esp32_igrill_ble_client
-      to: "offline"
+      entity_id: binary_sensor.igrill_70918f19e8d1_connectivity
+      to: "off"
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: binary_sensor.igrill_70918f19e8d1_sensor
+      to: "off"
       for:
         minutes: 5
   action:
     - service: script.scr_say_phrase
       data:
-        message: TTS
-        data:
-          tts_text: "Grill Device Disconnected"
+        message: "Grill Device Disconnected"
 
 #
 # AUTO LIVING AREA LIGHTING - MOTION
