@@ -29,6 +29,7 @@ logs: # ignore events less than levels defined below
 filters:
   homeassistant.helpers.service:
     - "Unable to find referenced entities switch.christmas_tree"
+    - "Referenced entities switch.christmas_tree are missing or not currently available"
   aioesphomeapi.connection:
     - "display-guest-suite" # cannot connect due to normal deep sleep
   aioesphomeapi.reconnect_logic:
@@ -43,3 +44,7 @@ filters:
     - "Did not receive auth message within 10 seconds"
   py.warnings:
     - "InsecureRequestWarning: Unverified HTTPS request is being made to host '10.27.0.1'"
+  homeassistant.components.mqtt.mixins: # remove filter below after fix
+    - "zigbee2mqtt/bridge/state"
+    - "espresense_"
+    - "hass.agent"
