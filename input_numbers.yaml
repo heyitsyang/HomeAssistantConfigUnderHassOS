@@ -23,7 +23,7 @@ igrill_alert_low:
   step: 5
 igrill_alert_high:
   name: Grill High Temp
-  initial: 340
+  initial: 500
   min: 300
   max: 600
   step: 5
