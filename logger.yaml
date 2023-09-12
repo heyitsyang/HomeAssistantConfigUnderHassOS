@@ -48,3 +48,5 @@ filters:
     - "zigbee2mqtt/bridge/state"
     - "espresense_"
     - "hass.agent"
+    - "hamstation"
+    - "dishwasher-sonoff"
