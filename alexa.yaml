@@ -25,7 +25,6 @@ smart_home:
     include_entities:
       - switch.hamstation
       - switch.water_valve
-      - switch.hamstation
       - switch.candles
       - switch.christmas_tree
       - input_boolean.party_mode
