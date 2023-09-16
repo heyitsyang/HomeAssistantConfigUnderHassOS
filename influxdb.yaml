@@ -80,4 +80,5 @@ include:
     - sensor.statistical_mean_living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
     - sensor.raw_living_rm_visible_light
+    - input_number.loss_per_minute_alarm_threshold
 # EVERYTHING ELSE IS IMPLICITLY EXCLUDED

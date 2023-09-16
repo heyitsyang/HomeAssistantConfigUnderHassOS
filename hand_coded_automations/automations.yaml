@@ -718,7 +718,8 @@
     - condition: template
       value_template: >
         {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) < 
-          (-0.1 * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
+          ((states('input_number.loss_per_minute_alarm_threshold') | float(default=0)) 
+            * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
   #      value_template: >
   #        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) <
   #           (-0.028125 * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
