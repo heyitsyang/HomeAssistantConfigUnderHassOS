@@ -9,7 +9,7 @@
 ##  for the short term (~30days max).  Longer  ##
 ##  term data shoudl go into influxDB          ##
 ##                                             ##
-##    See influxdb.yaml for influxdb filters   ##
+##    SEE influxdb.yaml FOR INFLUXDB FILTERS!  ##
 ##                                             ##
 #################################################
 
@@ -53,7 +53,6 @@ include:
     - device_tracker.opnsense_ys_cell_shencentral_net
     - device_tracker.opnsense_kt_cell_shencentral_net
     - vacuum.rosie
-    - sensor.kflwildw56_local_temp
 
 exclude:
   domains:
