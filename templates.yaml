@@ -65,8 +65,8 @@
 - sensor:
     - name: "grill_alert_temp"
       state: >-
-        {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) < (states.input_number.igrill_alert_low.state | int(default=0)) 
-              or (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0))  > (states.input_number.igrill_alert_high.state | int(default=0)) %}
+        {% if (states('sensor.igrill_70918f19e8d1_probe_4') | int(default=0)) < (states('input_number.igrill_alert_low') | int(default=0)) 
+              or (states('sensor.igrill_70918f19e8d1_probe_4') | int(default=0))  > (states('input_number.igrill_alert_high') | int(default=0)) %}
           Alert
         {% else %}
           Normal
@@ -75,7 +75,7 @@
 - sensor:
     - name: "target_alert_temp_probe_1"
       state: >-
-        {% if (states.sensor.igrill_70918f19e8d1_probe_1.state | int(default=0)) >= (states.input_number.igrill_probe_1_target.state | int(default=0)) %}
+        {% if (states('sensor.igrill_70918f19e8d1_probe_1') | int(default=0)) >= (states('input_number.igrill_probe_1_target') | int(default=0)) %}
           Alert
         {% else %}
           Normal
@@ -84,7 +84,7 @@
 - sensor:
     - name: "target_alert_temp_probe_2"
       state: >-
-        {% if (states.sensor.igrill_70918f19e8d1_probe_2.state | int(default=0)) >= (states.input_number.igrill_probe_2_target.state | int(default=0)) %}
+        {% if (states('sensor.igrill_70918f19e8d1_probe_2') | int(default=0)) >= (states('input_number.igrill_probe_2_target') | int(default=0)) %}
           Alert
         {% else %}
           Normal
@@ -93,7 +93,7 @@
 - sensor:
     - name: "target_alert_temp_probe_3"
       state: >-
-        {% if (states.sensor.igrill_70918f19e8d1_probe_3.state | int(default=0)) >= (states.input_number.igrill_probe_3_target.state | int(default=0)) %}
+        {% if (states('sensor.igrill_70918f19e8d1_probe_3') | int(default=0)) >= (states('input_number.igrill_probe_3_target') | int(default=0)) %}
           Alert
         {% else %}
           Normal
@@ -102,7 +102,7 @@
 - sensor:
     - name: "target_alert_temp_probe_4"
       state: >-
-        {% if (states.sensor.igrill_70918f19e8d1_probe_4.state | int(default=0)) >= (states.input_number.igrill_probe_4_target.state | int(default=0)) %}
+        {% if (states('sensor.igrill_70918f19e8d1_probe_4') | int(default=0)) >= (states('input_number.igrill_probe_4_target') | int(default=0)) %}
           Alert
         {% else %}
           Normal
@@ -254,6 +254,12 @@
     - name: sensibo_sunroom_temperature
       unique_id: sensibo_sunroom_temperature
       state: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
+      unit_of_measurement: "°F"
+
+- sensor:
+    - name: espresense_adjusted_sunroom_temperature
+      unique_id: espresense_adjusted_sunroom_temperature
+      state: "{{ (states('sensor.espresense_sunrm_bme280_temperature') | float(default=0) - 10.23) | round(2) }}"
       unit_of_measurement: "°F"
 
     #  BATTERIES #

@@ -25,46 +25,46 @@
   password: !secret gmail_pwd
   recipient: !secret gmail_to_yang_recipient
 
-  # Pushover
-- name: gmail_to_yskt_pushover
-  platform: smtp
-  server: smtp.gmail.com
-  port: 587
-  timeout: 15
-  sender: "hass@shencentral.net"
-  sender_name: "My Home Assistant"
-  encryption: starttls
-  username: !secret gmail_user
-  password: !secret gmail_pwd
-  recipient: !secret gmail_to_yskt_pushover_recipient
+#   # Pushover
+# - name: gmail_to_yskt_pushover
+#   platform: smtp
+#   server: smtp.gmail.com
+#   port: 587
+#   timeout: 15
+#   sender: "hass@shencentral.net"
+#   sender_name: "My Home Assistant"
+#   encryption: starttls
+#   username: !secret gmail_user
+#   password: !secret gmail_pwd
+#   recipient: !secret gmail_to_yskt_pushover_recipient
 
-- name: gmail_to_ys_pushover
-  platform: smtp
-  server: smtp.gmail.com
-  port: 587
-  timeout: 15
-  sender: "hass@shencentral.net"
-  sender_name: "My Home Assistant"
-  encryption: starttls
-  username: !secret gmail_user
-  password: !secret gmail_pwd
-  recipient: !secret gmail_to_ys_pushover_recipient
+# - name: gmail_to_ys_pushover
+#   platform: smtp
+#   server: smtp.gmail.com
+#   port: 587
+#   timeout: 15
+#   sender: "hass@shencentral.net"
+#   sender_name: "My Home Assistant"
+#   encryption: starttls
+#   username: !secret gmail_user
+#   password: !secret gmail_pwd
+#   recipient: !secret gmail_to_ys_pushover_recipient
 
 # GROUP NOTIFICATIONS #
 # required for notifiers that pass data in Alerts #
 
-- platform: group
-  name: pushover_garage_left_open
-  services:
-    - service: pushover_yang
-      data:
-        message: "Garage door left open"
-        title: "Norcoose Alert"
-        sound: alien
-        priority: 0
+# - platform: group
+#   name: pushover_garage_left_open
+#   services:
+#     - service: pushover_yang
+#       data:
+#         message: "Garage door left open"
+#         title: "Norcoose Alert"
+#         sound: alien
+#         priority: 0
 
 - platform: group
-  name: yskt_cell_phones
+  name: mobile_app_yskt_cell
   services:
     - service: mobile_app_ys_cell
     - service: mobile_app_kt_cell

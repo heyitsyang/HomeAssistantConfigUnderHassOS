@@ -204,6 +204,9 @@ scr_common_extended_absence_on:
     - service: homeassistant.turn_off
       target:
         entity_id: group.all_lighting_xabove_cabinet
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - if:
         - condition: state
           entity_id: input_boolean.leave_water_valve_on
@@ -226,9 +229,12 @@ scr_common_extended_absence_off:
     - service: switch.turn_on
       target:
         entity_id: switch.lg_garage_opener_power,switch.sm_garage_opener_power
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.inp_bool_vacuum_every_sunday
 
 #
-# COMMON EXTENDED ABSENCE ACTIONS
+# COMMON GUEST MODE ACTIONS
 #
 scr_common_guest_mode_on:
   mode: restart
@@ -384,7 +390,7 @@ scr_partially_close_sunrm_shades:
 keymaster_front_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -392,7 +398,7 @@ keymaster_front_door_manual_notify:
 keymaster_back_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -418,7 +424,7 @@ scr_check_if_suspicious:
             - condition: state
               entity_id: person.karen
               state: "home"
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         title: "SUSPICIOUS ACTIVITY at Norcoose"
         message: "PRESS to investigate"
@@ -435,7 +441,7 @@ scr_check_if_suspicious:
     - service: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         message: "TTS"
         data:
@@ -455,7 +461,7 @@ scr_check_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         message: "TTS"
         data:
@@ -463,7 +469,7 @@ scr_check_garage_open:
           media_stream: alarm_stream
           priority: high
           ttl: 0
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         title: "GARAGE DOOR LEFT OPEN"
         message: "Did you forget to close it?  PRESS to see."
@@ -655,13 +661,13 @@ scr_frontporch_activity:
     - service: notify.alexa_yellow_ring
       data:
         message: "While you where away, there was a visitor at the front door"
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         title: Front door activity
         message: "Front door activity detected"
         data:
           clickAction: "lovelace/last-snaps"
-    - service: notify.yskt_cell_phones
+    - service: notify.mobile_app_yskt_cell
       data:
         title: Front door activity
         message: TTS

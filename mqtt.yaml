@@ -64,9 +64,33 @@ sensor:
     device_class: "illuminance"
     state_class: measurement
     state_topic: "espresense/rooms/greatrm/tsl2561_lux"
-    force_update: true  # update even if values haven't changed - required if filters depend on update timing for calc
+    force_update: true # update even if values haven't changed - required if filters depend on update timing for calc
     qos: 0
     unit_of_measurement: "lx"
+
+  - unique_id: sunroom_espresense_temperature
+    name: "Sunroom ESPresense Temperature"
+    device_class: "temperature"
+    state_class: measurement
+    state_topic: "espresense/rooms/sunrm/bme280_temperature"
+    qos: 0
+    unit_of_measurement: "°C"
+
+  - unique_id: sunroom_espresense_humidity
+    name: "Sunroom ESPresense Humidity"
+    device_class: "humidity"
+    state_class: measurement
+    state_topic: "espresense/rooms/sunrm/bme280_humidity"
+    qos: 0
+    unit_of_measurement: "%"
+
+  - unique_id: sunroom_espresense_pressure
+    name: "Sunroom ESPresense Pressure"
+    device_class: "atmospheric_pressure"
+    state_class: measurement
+    state_topic: "espresense/rooms/sunrm/bme280_pressure"
+    qos: 0
+    unit_of_measurement: "hPa"
 
   - unique_id: garage_temperature
     name: "Garage Temperature"
@@ -146,11 +170,11 @@ binary_sensor:
     payload_off: "0"
     qos: 0
 
-  - name: "YS-Desktop LWT"
-    unique_id: ys_desktop_lwt
-    state_topic: iotlink/shencentral/ys-desktop/lwt
-    payload_on: "ON"
-    payload_off: "OFF"
+  - name: "YS-Desktop availability"
+    unique_id: ys_desktop_availability
+    state_topic: homeassistant/sensor/YS-DESKTOP/availability
+    payload_on: "online"
+    payload_off: "offline"
 
 #
 # MQTT COVERS

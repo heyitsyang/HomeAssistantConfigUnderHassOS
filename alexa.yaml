@@ -23,17 +23,16 @@ smart_home:
     exclude_entity_globs:
       - light.*leds*segment*
     include_entities:
-      - switch.hamstation
-      - switch.water_valve
-      - switch.hamstation
-      - switch.candles
-      - switch.christmas_tree
+      - group.garage_opener_power
+      - group.mood_lights
       - input_boolean.party_mode
       - input_boolean.inp_bool_theater_mode
       - input_boolean.inp_bool_pause_leak_alarm
       - input_boolean.inp_bool_guest_mode
       - input_boolean.inp_bool_sleeping
       - input_boolean.inp_bool_extended_absence_mode
+      - lock.front_door_lock
+      - lock.back_door_lock
       - script.scr_goodnight
       - script.scr_goodmorning
       - script.scr_vacuum_start_custom_cleaning
@@ -42,8 +41,10 @@ smart_home:
       - sensor.attic_temperature
       - sensor.garage_temperature
       - sensor.ecobee_avg_indoor_temperature
-      - group.garage_opener_power
-      - group.mood_lights
+      - switch.hamstation
+      - switch.water_valve
+      - switch.candles
+      - switch.christmas_tree
     #      - switch.lg_garage_opener_power  # use group.garage_opener_power instead
     #      - switch.sm_garage_opener_power  # use group.garage_opener_power instead
     #      - group.indoor_lights            # these groups are done in Alexa groups instead

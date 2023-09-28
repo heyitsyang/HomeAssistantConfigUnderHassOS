@@ -9,7 +9,7 @@
 ##  for the short term (~30days max).  Longer  ##
 ##  term data shoudl go into influxDB          ##
 ##                                             ##
-##    See influxdb.yaml for influxdb filters   ##
+##    SEE influxdb.yaml FOR INFLUXDB FILTERS!  ##
 ##                                             ##
 #################################################
 
