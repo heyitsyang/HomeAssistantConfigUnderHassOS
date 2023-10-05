@@ -259,7 +259,7 @@
 - sensor:
     - name: espresense_adjusted_sunroom_temperature
       unique_id: espresense_adjusted_sunroom_temperature
-      state: "{{ (states('sensor.espresense_sunrm_bme280_temperature') | float(default=0) - 10.23) | round(2) }}"
+      state: "{{ (states('sensor.espresense_sunrm_temperature') | float(default=0) - 8.23) | round(2) }}"
       unit_of_measurement: "°F"
 
     #  BATTERIES #

@@ -72,7 +72,7 @@ sensor:
     name: "Sunroom ESPresense Temperature"
     device_class: "temperature"
     state_class: measurement
-    state_topic: "espresense/rooms/sunrm/bme280_temperature"
+    state_topic: "espresense/rooms/sunrm/temperature"
     qos: 0
     unit_of_measurement: "°C"
 
@@ -80,17 +80,9 @@ sensor:
     name: "Sunroom ESPresense Humidity"
     device_class: "humidity"
     state_class: measurement
-    state_topic: "espresense/rooms/sunrm/bme280_humidity"
+    state_topic: "espresense/rooms/sunrm/humidity"
     qos: 0
     unit_of_measurement: "%"
-
-  - unique_id: sunroom_espresense_pressure
-    name: "Sunroom ESPresense Pressure"
-    device_class: "atmospheric_pressure"
-    state_class: measurement
-    state_topic: "espresense/rooms/sunrm/bme280_pressure"
-    qos: 0
-    unit_of_measurement: "hPa"
 
   - unique_id: garage_temperature
     name: "Garage Temperature"
