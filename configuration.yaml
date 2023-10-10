@@ -22,7 +22,7 @@ http:
 
   # NOTE: ssl_certiciate and ssl_key are now configured in the NGINX SSL Proxy add-on
   # ssl_certificate: /ssl/fullchain.pem               #  WAN port 443 must pass thru to 443 on HA for cert renewal
-  # ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by DuckDNS or nginx (not sure which)
+  # ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by NGINX Proxy Manager
 
   use_x_forwarded_for: true # required for
   trusted_proxies: # reverse proxy
