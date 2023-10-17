@@ -1944,12 +1944,14 @@
   trigger:
     - platform: template
       value_template: >-
-        {{ (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
-        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2) | abs) > 3 }}
+        {{ ((states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
+        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2)) > 3) 
+        and (states('climate.local_ecobee', 'cool')) }}
     - platform: template
       value_template: >-
-        {{ (states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
-        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2) | abs) > 4 }}
+        {{ ((states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
+        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2)) > 4)
+        and (states('climate.sunroom_ac', 'cool')) }}
   action:
     - service: notify.alexa_yellow_ring
       data:
