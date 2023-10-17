@@ -2456,6 +2456,24 @@
 #################################
 
 #
+# RESET KITCHEN WLED LIGHTS
+#
+- id: kitchen_wled_reset
+  alias: "kitchen wled reset"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id:
+        - light.kitchen_leds_upper_master
+        - light.kitchen_leds_lower
+      to: "unavailable"
+  action:
+    - delay: 00:00:10
+    - service: switch.turn_on
+      target:
+        entity_id: switch.kitchen_wled_reset
+
+#
 # PROXIMITY TESTING
 #
 - id: aut_half_mile_departure
