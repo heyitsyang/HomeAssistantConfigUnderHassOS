@@ -2458,7 +2458,23 @@
 #################################
 
 #
-# RESET KITCHEN WLED LIGHTS
+# AUTO TURN OFF HVAC CLOSET LIGHTS AFTER DELAY
+#
+- id: hvac_closet_auto_off
+  alias: hvac_closet_auto_off
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: light.hvac_closet_lights
+      to: "on"
+  action:
+    - delay: 02:00:00
+    - service: light.turn_off
+      target:
+        entity_id: light.hvac_closet_lights
+
+#
+# AUTO RESET KITCHEN WLED LIGHTS
 #
 - id: kitchen_wled_reset
   alias: "kitchen wled reset"
