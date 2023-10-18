@@ -40,3 +40,7 @@
 - platform: switch
   name: Eating Area Lights
   entity_id: switch.eating_area_lights
+
+- platform: switch
+  name: HVAC Closet Lights
+  entity_id: switch.hvac_closet_lights
