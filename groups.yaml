@@ -393,6 +393,8 @@ indoor_lights:
     - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
     - switch.christmas_tree
+    - light.master_closet_lights
+    - light.hvac_closet_lights
 
 upper_office_cabinet_leds:
   name: "Upper Office Cabinet LEDs"
