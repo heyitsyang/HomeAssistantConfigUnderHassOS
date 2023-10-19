@@ -44,6 +44,8 @@
 
 #
 # PERSONAL MISC
+#  anything with !secret will cause an error - delete this personal misc
+#  section these lines or replace with your own
 #
 - name: home
   latitude: !secret home_latitude
