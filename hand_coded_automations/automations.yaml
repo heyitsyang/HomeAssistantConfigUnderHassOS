@@ -2486,6 +2486,9 @@
         - light.kitchen_leds_lower
       to: "unavailable"
   action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.kitchen_wled_reset
     - delay: 00:00:10
     - service: switch.turn_on
       target:
