@@ -394,6 +394,8 @@ keymaster_front_door_manual_notify:
       data:
         title: "{{ title }}"
         message: "{{ message }}"
+        data:
+          car_ui: true
 
 keymaster_back_door_manual_notify:
   mode: parallel
@@ -402,6 +404,8 @@ keymaster_back_door_manual_notify:
       data:
         title: "{{ title }}"
         message: "{{ message }}"
+        data:
+          car_ui: true
 
 #
 # SUSPICIOUS ACTIVITY IF NOBODY HOME
@@ -438,6 +442,8 @@ scr_check_if_suspicious:
           tag: "persistent"
           priority: high
           ttl: 0
+          data:
+            car_ui: true
     - service: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
@@ -447,6 +453,8 @@ scr_check_if_suspicious:
         data:
           tts_text: "SUSPICIOUS ACTIVITY at Norcoose"
           media_stream: alarm_stream_max
+          data:
+            car_ui: true
 
 #
 # NOTIFY IF GARAGE DOOR IS OPEN
@@ -469,6 +477,8 @@ scr_check_garage_open:
           media_stream: alarm_stream
           priority: high
           ttl: 0
+          data:
+            car_ui: true
     - service: notify.mobile_app_yskt_cell
       data:
         title: "GARAGE DOOR LEFT OPEN"
@@ -477,6 +487,8 @@ scr_check_garage_open:
           clickAction: "lovelace/security"
           priority: high
           ttl: 0
+          data:
+            car_ui: true
 
 scr_repeat_say_garage_open:
   sequence:
@@ -673,6 +685,8 @@ scr_frontporch_activity:
         message: TTS
         data:
           tts_text: "Front door activity detected"
+          data:
+            car_ui: true
 
 scr_front_door_lights_on:
   sequence:

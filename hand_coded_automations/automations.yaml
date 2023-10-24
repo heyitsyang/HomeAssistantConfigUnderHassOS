@@ -674,6 +674,8 @@
       data:
         title: "HA UPS emergency shutdown"
         message: "UPS emergency shutdown: {{ states('sensor.rackups_battery_runtime') }} seconds remaining"
+        data:
+          car_ui: true
     - service: hassio.host_shutdown
 
 #
@@ -692,6 +694,8 @@
       data:
         title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
         message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
+        data:
+          car_ui: true
     - service: notify.gmail_to_yang
       data:
         title: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
@@ -769,6 +773,8 @@
       data:
         title: "House water turned OFF. Leak detected at {{ trigger.entity_id }}."
         message: "House water is OFF.  Turn on manually when leak is resolved."
+        data:
+          car_ui: true
     - service: notify.alexa_yellow_ring
       data:
         message: "House water is OFF. Leak detected at {{ trigger.entity_id }}. Turn on manually when leak is resolved."
@@ -780,6 +786,8 @@
           priority: high
           ttl: 0
           media_stream: alarm_stream
+          data:
+            car_ui: true
     - service: notify.mobile_app_yskt_cell
       data:
         title: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
@@ -792,6 +800,8 @@
           tag: "persistent"
           priority: high
           ttl: 0
+          data:
+            car_ui: true
     - service: notify.gmail_to_yang
       data:
         message: "Water leak detected at the {{ trigger.entity_id|replace('binary_sensor.leak_', '') | replace('_', '') }}"
@@ -896,6 +906,8 @@
         message: TTS
         data:
           tts_text: "Grill temp outside limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
+          data:
+            car_ui: true
 
 - alias: "Monitor Grill Temp Normal"
   initial_state: "off"
@@ -912,6 +924,8 @@
         message: TTS
         data:
           tts_text: "Grill temp withiin limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
+          data:
+            car_ui: true
 
 - alias: "Probe 1 Target Temp"
   initial_state: "off"
@@ -928,6 +942,8 @@
         message: TTS
         data:
           tts_text: "Probe 1 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_1') }} °F"
+          data:
+            car_ui: true
 
 - alias: "Probe 2 Target Temp"
   initial_state: "off"
@@ -944,6 +960,8 @@
         message: TTS
         data:
           tts_text: "Probe 2 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_2') }} °F"
+          data:
+            car_ui: true
 
 - alias: "Probe 3 Target Temp"
   initial_state: "off"
@@ -960,6 +978,8 @@
         message: TTS
         data:
           tts_text: "Probe 3 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_3') }} °F"
+          data:
+            car_ui: true
 
 - alias: "Probe 4 Target Temp"
   initial_state: "off"
@@ -976,6 +996,8 @@
         message: TTS
         data:
           tts_text: "Probe 4 has reached the target temp. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
+          data:
+            car_ui: true
 
 - alias: "Monitor iGrill Device Connectivity"
   initial_state: "on"
@@ -1676,6 +1698,8 @@
       data:
         title: "Front door automatically locked"
         message: "Oops. Someone left it unlocked!"
+        data:
+          car_ui: true
 
 - id: aut_auto_front_door_lock_party_mode
   alias: "aut auto front door lock party mode"
@@ -1711,6 +1735,8 @@
       data:
         title: "Front door automatically locked"
         message: "The party's over!"
+        data:
+          car_ui: true
 
 - id: aut_auto_back_door_lock
   alias: "aut auto back door lock"
@@ -1743,6 +1769,8 @@
       data:
         title: "Back door automatically locked"
         message: "Oops. Someone left it unlocked!"
+        data:
+          car_ui: true
 
 #
 # WINDOW TRIGGERED ACTIONS
@@ -1970,6 +1998,8 @@
               | replace('sensor.sensibo_sunroom_temperature', 'sun room')
               | replace('sensor.ecobee_avg_indoor_temperature', 'main house')
               }} temperature is outside of tolerance!"
+        data:
+          car_ui: true
     - service: script.scr_say_phrase
       data:
         message: >-
@@ -2227,6 +2257,8 @@
       data:
         title: "Extended absence mode has been enabled"
         message: "Home Assistant: Extended absence mode enabled"
+        data:
+          car_ui: true
     - service: notify.gmail_to_yang
       data:
         title: "Extended absence mode has been enabled"
@@ -2254,6 +2286,8 @@
       data:
         title: "Extended absence mode has been disabled"
         message: "Home Assistant: Extended absence mode disabled"
+        data:
+          car_ui: true
 
 # EXTENDED ABSENCE DETERMINED BY DISTANCE & TIME AWAY
 - id: aut_extended_absence_auto_on
@@ -2516,3 +2550,5 @@
         message: "TTS"
         data:
           tts_text: "Half mile exceeded"
+          data:
+            car_ui: true
