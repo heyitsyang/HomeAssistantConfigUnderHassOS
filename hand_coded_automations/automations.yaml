@@ -732,10 +732,10 @@
       data:
         title: "SPT water leak detected"
         message: |
-          Leak detected during Static Pressure Test!\n
-          Test ending: {{ states('sensor.last_static_pressure_test') }}\n
-          Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') | float(default=0) }}\n
-          Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}\n
+          Leak detected during Static Pressure Test!
+          Test ended: {{ states('sensor.last_static_pressure_test') }}
+          Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') | float(default=0) }}
+          Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}
 
 - id: aut_leak_detected
   alias: "aut leak detected"
