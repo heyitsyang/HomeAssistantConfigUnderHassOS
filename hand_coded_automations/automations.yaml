@@ -2519,6 +2519,7 @@
         - light.kitchen_leds_upper_master
         - light.kitchen_leds_lower
       to: "unavailable"
+      for: 00:00:10
   action:
     - service: switch.turn_off
       target:
