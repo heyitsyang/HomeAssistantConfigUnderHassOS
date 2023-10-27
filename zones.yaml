@@ -44,8 +44,8 @@
 
 #
 # PERSONAL MISC
-#  anything with !secret will cause an error - delete this personal misc
-#  section these lines or replace with your own
+#  if copying, anything with !secret will cause an error - delete this
+#   personal misc section or replace with your own
 #
 - name: home
   latitude: !secret home_latitude
@@ -53,7 +53,7 @@
   radius: 60 # in meters
   icon: mdi:home
 
-- name: Church@Springs - Villages
+- name: Church@Springs - Lady Lake
   latitude: 28.939792
   longitude: -81.927593
   radius: 61 # meters
@@ -64,18 +64,6 @@
   longitude: -81.934602
   radius: 152 # meters
   icon: mdi:church
-
-#- name: Collier Evans Prairie Trail Gate
-#  latitude: 28.85382
-#  longitude: -82.00021
-#  radius: 17 # meters
-#  icon: mdi:blank
-
-#- name: Collier Hendry Gate
-#  latitude: 28.84851
-#  longitude: -82.01064
-#  radius: 24.4 # meters
-#  icon: mdi:blank
 
 #
 # MEDICAL
