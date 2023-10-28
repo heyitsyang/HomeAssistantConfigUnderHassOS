@@ -1906,7 +1906,9 @@
       to: "home"
   condition: # this prevents immediate triggering after home assistant startup
     - condition: template
-      value_template: "{{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')| float(default=0)) ) | int(default=0) ) > 10 }}"
+      value_template: >-
+        {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')
+            | float(default=0)) ) | int(default=0) ) > 10 }} 
   action:
     - wait_for_trigger:
         - platform: state
