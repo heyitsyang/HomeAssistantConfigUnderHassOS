@@ -68,22 +68,6 @@ sensor:
     qos: 0
     unit_of_measurement: "lx"
 
-  - unique_id: espresense_sunrm_temperature
-    name: "Espresense Sunrm Temperature"
-    device_class: "temperature"
-    state_class: measurement
-    state_topic: "espresense/rooms/sunrm/temperature"
-    qos: 0
-    unit_of_measurement: "°C"
-
-  - unique_id: espresense_sunrm_humidity
-    name: "ESPresense Sunrm Humidity"
-    device_class: "humidity"
-    state_class: measurement
-    state_topic: "espresense/rooms/sunrm/humidity"
-    qos: 0
-    unit_of_measurement: "%"
-
   - unique_id: garage_temperature
     name: "Garage Temperature"
     state_topic: "garage/DS18b20/Temperature"
