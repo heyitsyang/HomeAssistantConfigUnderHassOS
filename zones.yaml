@@ -38,14 +38,14 @@
 #      Please leave "icon: mdi:blank" for rec centers as there are too many & any
 #      icons will clutter the map. ("mdi:blank" is an non-existent icon)
 #   4. Delete any private locations or use !secret to protect and publish this file
-#      to the group by emailing vHOTSmComp@googlegroups.com
+#      or your additions to the group by emailing vHOTSmComp@googlegroups.com
 #
 #####################################################################################
 
 #
 # PERSONAL MISC
-#  if copying, anything with !secret will cause an error - delete this
-#   personal misc section or replace with your own
+#  Delete this personal misc section or replace with your own
+#  Anything with !secret without corresponding data will cause an error
 #
 - name: home
   latitude: !secret home_latitude
