@@ -44,9 +44,11 @@ filters:
     - "Did not receive auth message within 10 seconds"
   py.warnings:
     - "InsecureRequestWarning: Unverified HTTPS request is being made to host '10.27.0.1'"
-  homeassistant.components.mqtt.mixins: # remove filter below after fix
-    - "zigbee2mqtt/bridge/state"
+  homeassistant.components.mqtt.mixins:
+    #  - "zigbee2mqtt/bridge/state"
     - "espresense_"
     - "hass.agent"
     - "hamstation"
     - "dishwasher-sonoff"
+  homeassistant.components.sonos.speaker:
+    - "No recent activity and cannot reach"

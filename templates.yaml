@@ -224,9 +224,10 @@
       unique_id: lv_rm_suggested_brightness
       unit_of_measurement: "%"
       # lvrm lux sensor is embedded in espresence_greatrm
-      # remember suggested brightness goes up as lux goes down
+      # - remember suggested brightness goes up as lux goes down
+      # - return fixed value if sun below horizon to prevent TV & other interaction with sensor
       state: >-
-        {% if ( is_state('binary_sensor.espresense_greatrm', 'off') ) %} 
+        {% if ( is_state('binary_sensor.espresense_greatrm', 'off')  or is_state('sun.sun', 'below_horizon') ) %} 
           30
         {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_off_threshold') | float(default=0)) ) ) %}
           0
