@@ -75,16 +75,14 @@
 - platform: mqtt_room
   device_id: !secret ys_UUID_device_id
   name: "YS cell BLE room"
-  #state_topic: !secret ys_UUID_state_topic
-  state_topic: "espresense/rooms"
+  state_topic: !secret ys_UUID_state_topic
   timeout: 60
   away_timeout: 120
 
 - platform: mqtt_room
   device_id: !secret kt_UUID_device_id
   name: "KT cell BLE room"
-  #state_topic: !secret kt_UUID_state_topic
-  state_topic: "espresense/rooms"
+  state_topic: !secret kt_UUID_state_topic
   timeout: 60
   away_timeout: 120
 
