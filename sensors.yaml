@@ -145,19 +145,6 @@
     - type: "memory_free"
     - type: "processor_use"
 
-#- platform: cert_expiry                               # now configured using GUI
-#  host: "shencentral.duckdns.org"
-
-#- platform: filesize                                  # now configured via UI
-#  file_paths:
-#    - /config/home-assistant_v2.db
-
-#
-# OUTDOOR WEATHER & ENVIRONMENTAL SENSORS
-#
-
-# Ambient Weather and OpenWeatherMap is set up in configuration.yaml
-
 #
 # INFLUXDB SENSORS
 #
@@ -177,3 +164,16 @@
       database: _internal
       where: "time > now() - 10s"
       field: diskBytes
+
+#
+#  RESTful sensors
+#
+- platform: rest
+  resource: https://api.ipgeolocation.io/astronomy?lat=28.8519&long=-82.0033&apiKey=5e276b3bc63e4871a546b4f51bed9289
+  name: ip_geo_location
+  scan_interval: 300
+  value_template: "OK"
+  json_attributes:
+    - moonrise
+    - moonset
+    - moon_altitude
