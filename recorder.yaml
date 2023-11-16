@@ -58,6 +58,7 @@ exclude:
   domains:
     - group
   entity_globs:
+    - sensor.ys_desktop_*
     - sensor.*_battery*
     - sensor.esp01_*
     - sensor.hot_*
@@ -67,6 +68,7 @@ exclude:
     - binary_sensor.esp01_*
     - binary_sensor.hot_*
   entities:
+    - automation.awtrix_mega_weather
     - sensor.influxdb_db_size
     - sensor.date
     - sensor.time

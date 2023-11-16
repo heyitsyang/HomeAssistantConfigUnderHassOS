@@ -90,7 +90,8 @@
 # SNMP sensors
 #
 - platform: snmp
-  name: "NAS temperature"
+  unique_id: junior_temperature
+  name: "junior temperature"
   device_class: temperature
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.2.0
@@ -98,7 +99,8 @@
   unit_of_measurement: "°C"
 
 - platform: snmp
-  name: "NAS system fan status"
+  unique_id: junior_system_fan_status
+  name: "junior system fan status"
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.1.0
   accept_errors: true
@@ -110,8 +112,44 @@
     {% endif %}
 
 - platform: snmp
-  name: "NAS CPU fan status"
+  unique_id: junior_cpu_fan_status
+  name: "junior CPU fan status"
   host: junior.shencentral.net
+  baseoid: 1.3.6.1.4.1.6574.1.4.2.0
+  accept_errors: true
+  value_template: >
+    {% if value | int(default=0) == 1 %}
+    OK
+    {% else %}
+    FAULT
+    {% endif %}
+
+- platform: snmp
+  unique_id: bacman_temperature
+  name: "bacman temperature"
+  device_class: temperature
+  host: bacman.shencentral.net
+  baseoid: 1.3.6.1.4.1.6574.1.2.0
+  accept_errors: true
+  unit_of_measurement: "°C"
+
+- platform: snmp
+  unique_id: bacman_system_fan_status
+  name: "bacman system fan status"
+  host: bacman.shencentral.net
+  baseoid: 1.3.6.1.4.1.6574.1.4.1.0
+  accept_errors: true
+  value_template: >
+    {% if value | int(default=0) == 1 %}
+    OK
+    {% else %}
+    FAULT
+    {% endif %}
+
+- platform: snmp
+  unique_id: bacman_cpu_fan_status
+  name: "bacman CPU fan status"
+  host: bacman.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.2.0
   accept_errors: true
   value_template: >
