@@ -39,7 +39,7 @@ sensor:
     name: "Rack Exhaust Temperature"
     state_topic: "labrack/BME280/Temperature"
     qos: 0
-    unit_of_measurement: "°F"
+    unit_of_measurement: "°C"
 
   - unique_id: rack_exhaust_fan_speed
     name: "Rack Exhaust Fan Speed"
