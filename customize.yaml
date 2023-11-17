@@ -293,18 +293,17 @@ sensor.sun_room_remote_4_battery_level:
   icon: mdi:battery-unknown
   device_class: battery
 sensor.junior_temperature:
-  friendly_name: Junior temperature
   icon: mdi:thermometer
   device_class: temperature
 sensor.junior_system_fan_status:
   icon: mdi:tailwind
 sensor.junior_cpu_fan_status:
   icon: mdi:memory
-sensor.nas_temperature:
+sensor.bacman_temperature:
   icon: mdi:thermometer
-sensor.nas_cpu_fan_status:
+sensor.bacman_cpu_fan_status:
   icon: mdi:memory
-sensor.nas_system_fan_status:
+sensor.bacman_system_fan_status:
   icon: mdi:tailwind
 vacuum.rosie:
   friendly_name: Rosie status
