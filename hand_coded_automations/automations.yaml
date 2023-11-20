@@ -1905,7 +1905,7 @@
     - condition: template
       value_template: >-
         {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')
-            | float(default=0)) ) | int(default=0) ) > 10 }} 
+            | float(default=0)) ) | int(default=0) ) > 10 }}
   action:
     - wait_for_trigger:
         - platform: state
@@ -2008,19 +2008,19 @@
               | replace('sensor.ecobee_avg_indoor_temperature', 'main house')              
               }} temperature is outside of tolerance"
 
-- id: aut_rack_exhaust_fan_fault
-  alias: "aut rack exhaust fan fault"
+- id: aut_lab_rack_fan_fault
+  alias: "aut rack fan fault"
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.rack_exhaust_fan_speed
-      below: 550
+      entity_id: sensor.lab_rack_fan_speed
+      below: 1000
       for: "00:10:00"
   action:
     - service: notify.gmail_to_yang
       data:
         title: "Rack exhaust fan fault"
-        message: "Rack exhaust fan fault: Currently {{ states('sensor.rack_exhaust_fan_speed') }} RPM"
+        message: "Rack exhaust fan fault: Currently {{ states('sensor.lab_rack_fan_speed') }} RPM"
 
 - id: aut_low_battery_notification
   alias: "aut low battery notification"
