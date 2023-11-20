@@ -35,30 +35,6 @@ sensor:
     unit_of_measurement: "psi"
     json_attributes_topic: "watermain/spt_result/attributes"
 
-  - unique_id: rack_exhaust_temperature
-    name: "Rack Exhaust Temperature"
-    state_topic: "labrack/BME280/Temperature"
-    qos: 0
-    unit_of_measurement: "°C"
-
-  - unique_id: rack_exhaust_fan_speed
-    name: "Rack Exhaust Fan Speed"
-    state_topic: "labrack/FanRPM/RPM"
-    qos: 0
-    unit_of_measurement: "RPM"
-
-  - unique_id: rack_exhaust_humidity
-    name: "Rack Exhaust Humidity"
-    state_topic: "labrack/BME280/Humidity"
-    qos: 0
-    unit_of_measurement: "%"
-
-  - unique_id: rack_exhaust_pressure
-    name: "Rack Exhaust Pressure"
-    state_topic: "labrack/BME280/Pressure"
-    qos: 0
-    unit_of_measurement: "mbar"
-
   - unique_id: raw_living_rm_visible_light
     name: "Raw Living Rm Visible Light"
     device_class: "illuminance"
