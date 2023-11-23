@@ -1865,22 +1865,19 @@
       entity_id: fan.master_bedroom_fan
 
 #
-# NOBODY HOME ACTIONS
+# HOME DEPARTURE SECURITY/GARAGE CHECK
 #
-- id: aut_home_departure
-  alias: "aut home departure"
+- id: aut_departure_security_check
+  alias: "aut departure security check"
+  mode: single
+  max_exceeded: silent
   initial_state: true
   trigger:
-    - platform: template
-      value_template: >
-        {{ (states('person.yang') == 'not_home') and (states('person.karen') == 'not_home') }}
-  condition:
-    condition: or
-    conditions:
-      - condition: template
-        value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
-      - condition: template
-        value_template: "{{ state_attr('proximity.home_kt','dir_of_travel') == 'away_from' }}"
+    - platform: template # default=99 if proximity is non-numeric (e.g. unknown)
+      value_template: >-
+        {{ (states('person.yang') == 'not_home') and (states('person.karen') == 'not_home')
+            and ((states( 'proximity.home.ys') | float(default=99)) >= 0.2) 
+            and ((states( 'proximity.home.kt') | float(default=99)) >= 0.2) }}
   action:
     - service: script.scr_check_garage_open
     - service: script.scr_nobody_home
