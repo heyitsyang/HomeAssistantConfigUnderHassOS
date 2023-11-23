@@ -2010,14 +2010,20 @@
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.lab_rack_fan_speed
-      below: 1000
+      entity_id: sensor.lab_rack_fan1_speed
+      below: 550
+      for: "00:10:00"
+    - platform: numeric_state
+      entity_id: sensor.lab_rack_fan2_speed
+      below: 550
       for: "00:10:00"
   action:
     - service: notify.gmail_to_yang
       data:
         title: "Rack exhaust fan fault"
-        message: "Rack exhaust fan fault: Currently {{ states('sensor.lab_rack_fan_speed') }} RPM"
+        message: >-
+          "{{ trigger.entity_id | replace('sensor.', '') }} fault: 
+              currently {{ states('{{trigger.entity_id}}') }} RPM"
 
 - id: aut_low_battery_notification
   alias: "aut low battery notification"
