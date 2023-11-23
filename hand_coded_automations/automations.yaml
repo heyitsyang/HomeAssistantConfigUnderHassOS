@@ -2020,10 +2020,10 @@
   action:
     - service: notify.gmail_to_yang
       data:
-        title: "Rack exhaust fan fault"
-        message: >-
-          "{{ trigger.entity_id | replace('sensor.', '') }} fault: 
-              currently {{ states('{{trigger.entity_id}}') }} RPM"
+        title: "{{ trigger.entity_id | replace('sensor.', '') }} fault"
+        message: >
+          {{ trigger.entity_id | replace('sensor.', '') }} fault: 
+              currently {{ states('{{trigger.entity_id}}') }} RPM
 
 - id: aut_low_battery_notification
   alias: "aut low battery notification"
