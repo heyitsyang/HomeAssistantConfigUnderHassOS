@@ -50,12 +50,6 @@ sensor:
     qos: 0
     unit_of_measurement: "°F"
 
-  - unique_id: master_bedroom_temperature
-    name: "Master Bedroom Temperature"
-    state_topic: "masterbdrmfan/DS18b20/Temperature"
-    qos: 0
-    unit_of_measurement: "°F"
-
   - unique_id: attic_temperature
     name: "Attic Temperature"
     state_topic: "attic/DS18b20/Temperature"

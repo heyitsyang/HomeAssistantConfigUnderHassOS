@@ -23,9 +23,7 @@ wifi:
   domain: ".shencentral.net"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Garage-Speakers Fallback Hotspot"
-    password: "7C47VMosNHd8"
+  ap: {}
 
 captive_portal:
 

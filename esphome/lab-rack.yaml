@@ -120,9 +120,11 @@ sensor:
       # If you don't smooth the temperature readings 
       # the PID controller over reacts to small changes.
       filters:
-      - exponential_moving_average:  
-          alpha: 0.1
-          send_every: 1
+        - exponential_moving_average:  
+            alpha: 0.1
+            send_every: 1
+        - lambda:: return x * (9.0/5.0) + 32.0;
+      unit_of_measurement: '°F'
 
     humidity:
       name: "Mid Rack Humidity"
@@ -145,6 +147,8 @@ sensor:
         - exponential_moving_average:  
             alpha: 0.1
             send_every: 1
+        - lambda:: return x * (9.0/5.0) + 32.0;
+      unit_of_measurement: '°F'
 
     humidity:
       name: "Upper Rack Humidity"
