@@ -123,7 +123,7 @@ sensor:
         - exponential_moving_average:  
             alpha: 0.1
             send_every: 1
-        - lambda:: return x * (9.0/5.0) + 32.0;
+        - lambda: return x * (9.0/5.0) + 32.0;
       unit_of_measurement: '°F'
 
     humidity:
@@ -147,7 +147,7 @@ sensor:
         - exponential_moving_average:  
             alpha: 0.1
             send_every: 1
-        - lambda:: return x * (9.0/5.0) + 32.0;
+        - lambda: return x * (9.0/5.0) + 32.0;
       unit_of_measurement: '°F'
 
     humidity:
