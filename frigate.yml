@@ -55,6 +55,8 @@ cameras:
         coordinates: 159,109,157,55,373,68,497,87,640,129,640,194,354,135
       driveway_zone:
         coordinates: 142,193,308,175,359,136,571,183,452,480,116,480,0,264
+      walk_way_zone:
+        coordinates: 0,313,370,195,176,108,0,127
     snapshots:
       enabled: True
       timestamp: true
