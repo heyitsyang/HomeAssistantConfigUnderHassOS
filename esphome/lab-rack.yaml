@@ -39,7 +39,6 @@ wifi:
 captive_portal:
 
 
-
 text_sensor:
 
   # Send IP Address
@@ -112,9 +111,10 @@ sensor:
   # GET TEMP/HUMIDITY FROM DHT22
   - platform: dht
     pin: GPIO23
+    update_interval: 10s
     temperature:
-      name: "Mid Rack Temperature"
-      id: lab_rack_dht1_temperature
+      name: "Mid Rack Temperature C"
+      id: lab_rack_dht1_temperature_c
       accuracy_decimals: 3
 
       # If you don't smooth the temperature readings 
@@ -123,22 +123,19 @@ sensor:
         - exponential_moving_average:  
             alpha: 0.1
             send_every: 1
-        - lambda: return x * (9.0/5.0) + 32.0;
-      unit_of_measurement: '°F'
-
     humidity:
       name: "Mid Rack Humidity"
       id: lab_rack_dht1_humidity
-  
+
       # the DHT22 can only be read every 1s. Use 1.3s to be safe.
       # update_interval: 1.3s
-    update_interval: 10s
 
   - platform: dht
     pin: GPIO21
+    update_interval: 10s
     temperature:
-      name: "Upper Rack Temperature"
-      id: lab_rack_dht2_temperature
+      name: "Upper Rack Temperature C"
+      id: lab_rack_dht2_temperature_c
       accuracy_decimals: 3
 
       # If you don't smooth the temperature readings 
@@ -147,16 +144,27 @@ sensor:
         - exponential_moving_average:  
             alpha: 0.1
             send_every: 1
-        - lambda: return x * (9.0/5.0) + 32.0;
-      unit_of_measurement: '°F'
-
     humidity:
       name: "Upper Rack Humidity"
       id: lab_rack_dht2_humidity
+      # the DHT22 can only be read every 1s. Use 1.3s to be safe.
+      # update_interval: 1.3s
 
-    # the DHT11 can only be read every 1s. Use 1.3s to be safe.
-    # update_interval: 1.3s
+# CREATE °F VERSIONS
+  - platform: template
+    name: "Mid Rack Temperature F"
+    id: mid_rack_temperature_f
     update_interval: 10s
+    lambda: return ( (id(lab_rack_dht1_temperature_c).state * 9/5) + 32 );
+    unit_of_measurement: '°F'
+
+  - platform: template
+    name: "Upper Rack Temperature F"
+    id: upper_rack_temperature_f
+    update_interval: 10s
+    lambda: return ( (id(lab_rack_dht2_temperature_c).state * 9/5) + 32 );
+    unit_of_measurement: '°F'
+
 
 switch:
   # Expose an ESP32 restart button to HA
