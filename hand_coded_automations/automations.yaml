@@ -2030,11 +2030,11 @@
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity: sensor.govee_display_battery
+      entity_id: sensor.govee_display_battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state
-      entity: sensor.freezer_sensor_battery
+      entity_id: sensor.freezer_sensor_battery
       below: 30
       for: "00:30:00"
     - platform: numeric_state

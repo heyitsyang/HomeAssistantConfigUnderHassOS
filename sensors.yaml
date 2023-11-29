@@ -95,6 +95,7 @@
   device_class: temperature
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.2.0
+  scan_interval: 3600
   accept_errors: true
   unit_of_measurement: "°C"
 
@@ -103,6 +104,7 @@
   name: "junior system fan status"
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.1.0
+  scan_interval: 3600
   accept_errors: true
   value_template: >
     {% if value | int(default=0) == 1 %}
@@ -116,6 +118,7 @@
   name: "junior CPU fan status"
   host: junior.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.2.0
+  scan_interval: 3600 # one hour
   accept_errors: true
   value_template: >
     {% if value | int(default=0) == 1 %}
@@ -130,6 +133,7 @@
   device_class: temperature
   host: bacman.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.2.0
+  scan_interval: 3600 # one hour
   accept_errors: true
   unit_of_measurement: "°C"
 
@@ -138,6 +142,7 @@
   name: "bacman system fan status"
   host: bacman.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.1.0
+  scan_interval: 3600 # one hour
   accept_errors: true
   value_template: >
     {% if value | int(default=0) == 1 %}
@@ -151,6 +156,7 @@
   name: "bacman CPU fan status"
   host: bacman.shencentral.net
   baseoid: 1.3.6.1.4.1.6574.1.4.2.0
+  scan_interval: 3600 # one hour
   accept_errors: true
   value_template: >
     {% if value | int(default=0) == 1 %}
