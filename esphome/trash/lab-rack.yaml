@@ -1,0 +1,186 @@
+substitutions:
+  friendly_name: lab-rack
+
+
+esphome:
+  name: lab-rack
+
+# Throttle writing parameters to the internal flash memory to reduce ESP memory wear / degradation
+preferences:
+  flash_write_interval: 15min
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  level: DEBUG
+  logs: 
+    dht: WARN
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "49JYSBjzsdDaoSTGL5BZYQUbe+T8nXX1APjCbkbh+zA="
+
+ota:
+  password: "4d007ad452b2308f0433831018f7cf6d"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  domain: ".shencentral.net"
+  
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap: {}
+
+captive_portal:
+
+
+text_sensor:
+
+  # Send IP Address
+  - platform: wifi_info
+    ip_address:
+      name: $friendly_name IP Address
+
+  # Send Uptime in raw seconds
+  - platform: template
+    name: $friendly_name Uptime
+    id: uptime_human
+    icon: mdi:clock-start
+
+sensor:
+
+  # Send WiFi signal strength & uptime to HA
+  - platform: wifi_signal
+    name: $friendly_name WiFi Strength
+    update_interval: 60s
+
+  # This is a bit of overkill. It sends a human readable 
+  # uptime string 1h 41m 32s instead of 6092 seconds
+  - platform: uptime
+    name: $friendly_name Uptime
+    id: uptime_sensor
+    update_interval: 60s
+    on_raw_value:
+      then:
+        - text_sensor.template.publish:
+            id: uptime_human
+            # Custom C++ code to generate the result
+            state: !lambda |-
+              int seconds = round(id(uptime_sensor).raw_state);
+              int days = seconds / (24 * 3600);
+              seconds = seconds % (24 * 3600);
+              int hours = seconds / 3600;
+              seconds = seconds % 3600;
+              int minutes = seconds /  60;
+              seconds = seconds % 60;
+              return (
+                (days ? to_string(days) + "d " : "") +
+                (hours ? to_string(hours) + "h " : "") +
+                (minutes ? to_string(minutes) + "m " : "") +
+                (to_string(seconds) + "s")
+              ).c_str();
+
+  # Read the Tacho PIN and show measured RPM as a sensor (only with 4-pin PWM fans!)
+  - platform: pulse_counter
+    pin: 
+      number: GPIO19   # Connect to any input PIN on the ESP
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    id: fan1_speed
+    name: $friendly_name Fan1 Speed
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5  # Depending on how many pulses the fan sends per round - should be 0.5 or 1 - try...
+      
+  - platform: pulse_counter
+    pin: 
+      number: GPIO17   # Connect to any input PIN on the ESP
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    id: fan2_speed
+    name: $friendly_name Fan2 Speed
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5  # Depending on how many pulses the fan sends per round - should be 0.5 or 1 - try...
+
+  # GET TEMP/HUMIDITY FROM DHT22
+  - platform: dht
+    pin: GPIO23
+    update_interval: 10s
+    temperature:
+      name: "Mid Rack Temperature C"
+      id: lab_rack_dht1_temperature_c
+      accuracy_decimals: 3
+
+      # If you don't smooth the temperature readings 
+      # the PID controller over reacts to small changes.
+      filters:
+        - exponential_moving_average:  
+            alpha: 0.1
+            send_every: 1
+    humidity:
+      name: "Mid Rack Humidity"
+      id: lab_rack_dht1_humidity
+
+      # the DHT22 can only be read every 1s. Use 1.3s to be safe.
+      # update_interval: 1.3s
+
+  - platform: dht
+    pin: GPIO21
+    update_interval: 10s
+    temperature:
+      name: "Upper Rack Temperature C"
+      id: lab_rack_dht2_temperature_c
+      accuracy_decimals: 3
+
+      # If you don't smooth the temperature readings 
+      # the PID controller over reacts to small changes.
+      filters:
+        - exponential_moving_average:  
+            alpha: 0.1
+            send_every: 1
+    humidity:
+      name: "Upper Rack Humidity"
+      id: lab_rack_dht2_humidity
+      # the DHT22 can only be read every 1s. Use 1.3s to be safe.
+      # update_interval: 1.3s
+
+# CREATE °F VERSIONS
+  - platform: template
+    name: "Mid Rack Temperature F"
+    id: mid_rack_temperature_f
+    update_interval: 10s
+    lambda: return ( (id(lab_rack_dht1_temperature_c).state * 9/5) + 32 );
+    unit_of_measurement: '°F'
+
+  - platform: template
+    name: "Upper Rack Temperature F"
+    id: upper_rack_temperature_f
+    update_interval: 10s
+    lambda: return ( (id(lab_rack_dht2_temperature_c).state * 9/5) + 32 );
+    unit_of_measurement: '°F'
+
+
+switch:
+  # Expose an ESP32 restart button to HA
+  - platform: restart
+    name: ${friendly_name} ESP32 Restart
+    id: lab_rack_fan_restart
+
+# Restart every day at 12:30am. 
+# I've had some memory issues lockup 
+# the device after a couple weeks
+time:
+  - platform: homeassistant
+    on_time:
+      # Every morning at 12:30am
+    - seconds: 0
+      minutes: 30
+      hours: 0
+      then:
+      - switch.turn_on: lab_rack_fan_restart
