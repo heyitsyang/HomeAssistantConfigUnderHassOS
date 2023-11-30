@@ -40,6 +40,7 @@ filters:
     - "0:0 ResizeObserver loop completed with undelivered notifications." # long standing warning caused by UI window resizing
   homeassistant.components.media_player:
     - "Updating samsungtv media_player took longer than the scheduled update interval 0:00:10" # happens routinely when TV is on
+    - "Setup of media_player platform samsungtv is taking over 10 seconds"
   homeassistant.components.websocket_api.http.connection:
     - "Did not receive auth message within 10 seconds"
   py.warnings:
@@ -53,4 +54,6 @@ filters:
   homeassistant.components.sonos.speaker:
     - "No recent activity and cannot reach"
   homeassistant.components.sonos:
+    - "Subscription to 10.27.0.70 failed, attempting to poll directly"
     - "Subscription to 10.27.0.71 failed, attempting to poll directly"
+    - "Subscription to 10.27.0.72 failed, attempting to poll directly"
