@@ -1,6 +1,3 @@
-substitutions:
-  friendly_name: lab-rack
-
 
 esphome:
   name: lab-rack
@@ -44,11 +41,11 @@ text_sensor:
   # Send IP Address
   - platform: wifi_info
     ip_address:
-      name: $friendly_name IP Address
+      name: Lab Rack IP Address
 
   # Send Uptime in raw seconds
   - platform: template
-    name: $friendly_name Uptime
+    name: Lab Rack Uptime Human
     id: uptime_human
     icon: mdi:clock-start
 
@@ -56,13 +53,14 @@ sensor:
 
   # Send WiFi signal strength & uptime to HA
   - platform: wifi_signal
-    name: $friendly_name WiFi Strength
+    name: Lab Rack WiFi Strength
+    unit_of_measurement: 'dBm'
     update_interval: 60s
 
   # This is a bit of overkill. It sends a human readable 
   # uptime string 1h 41m 32s instead of 6092 seconds
   - platform: uptime
-    name: $friendly_name Uptime
+    name: Lab Rack Uptime
     id: uptime_sensor
     update_interval: 60s
     on_raw_value:
@@ -91,8 +89,8 @@ sensor:
       number: GPIO19   # Connect to any input PIN on the ESP
       mode: INPUT_PULLUP
     unit_of_measurement: 'RPM'
-    id: fan1_speed
-    name: $friendly_name Fan1 Speed
+    id: lab_rack_fan1_speed
+    name: Lab Rack Fan1 Speed
     accuracy_decimals: 0
     filters:
       - multiply: 0.5  # Depending on how many pulses the fan sends per round - should be 0.5 or 1 - try...
@@ -102,8 +100,8 @@ sensor:
       number: GPIO17   # Connect to any input PIN on the ESP
       mode: INPUT_PULLUP
     unit_of_measurement: 'RPM'
-    id: fan2_speed
-    name: $friendly_name Fan2 Speed
+    id: lab_rack_fan2_speed
+    name: Lab Rack Fan2 Speed
     accuracy_decimals: 0
     filters:
       - multiply: 0.5  # Depending on how many pulses the fan sends per round - should be 0.5 or 1 - try...
@@ -111,7 +109,7 @@ sensor:
   # GET TEMP/HUMIDITY FROM DHT22
   - platform: dht
     pin: GPIO23
-    update_interval: 10s
+    update_interval: 60s
     temperature:
       name: "Mid Rack Temperature C"
       id: lab_rack_dht1_temperature_c
@@ -132,7 +130,7 @@ sensor:
 
   - platform: dht
     pin: GPIO21
-    update_interval: 10s
+    update_interval: 60s
     temperature:
       name: "Upper Rack Temperature C"
       id: lab_rack_dht2_temperature_c
@@ -154,16 +152,18 @@ sensor:
   - platform: template
     name: "Mid Rack Temperature F"
     id: mid_rack_temperature_f
-    update_interval: 10s
-    lambda: return ( (id(lab_rack_dht1_temperature_c).state * 9/5) + 32 );
+    update_interval: 60s
     unit_of_measurement: '°F'
+    lambda: return ( (id(lab_rack_dht1_temperature_c).state * 9/5) + 32 );
+
 
   - platform: template
     name: "Upper Rack Temperature F"
     id: upper_rack_temperature_f
-    update_interval: 10s
-    lambda: return ( (id(lab_rack_dht2_temperature_c).state * 9/5) + 32 );
+    update_interval: 60s
     unit_of_measurement: '°F'
+    lambda: return ( (id(lab_rack_dht2_temperature_c).state * 9/5) + 32 );
+    
 
 
 switch:

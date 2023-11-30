@@ -50,5 +50,6 @@ filters:
     - "hass.agent"
     - "hamstation"
     - "dishwasher-sonoff"
-  homeassistant.components.sonos.speaker:
+  homeassistant.components.sonos:
     - "No recent activity and cannot reach"
+    - "Subscription to 10.27.0.71 failed, attempting to poll directly"
