@@ -1810,10 +1810,6 @@
       for:
         minutes: 2
   action:
-    #  - service: climate.set_hvac_mode
-    #    entity_id: climate.ecobee
-    #    data:
-    #      hvac_mode: "{{ states('input_select.inp_sel_saved_ecobee_hvac') }}"
     - service: climate.turn_on
       target:
         entity_id: climate.ecobee
@@ -1966,33 +1962,29 @@
   alias: "aut hvac fault"
   initial_state: true
   trigger:
-    - platform: template
-      value_template: >-
-        {{ ((states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
-        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2)) > 3) 
-        and (states('climate.local_ecobee', 'cool')) }}
-    - platform: template
-      value_template: >-
-        {{ ((states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
-        | float(default=state_attr('climate.ecobee', 'temperature')) | round(2)) > 4)
-        and (states('climate.sunroom_ac', 'cool')) }}
+    - platform: state
+      entity_id: binary_sensor.main_hvac_fault
+      from: "off"
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.sunroom_hvac_fault
+      from: "off"
+      to: "on"
   action:
     - service: notify.alexa_yellow_ring
       data:
         message: >-
           "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
-              | replace('climate.local_ecobee', 'main house')
-              | replace('sensor.sensibo_sunroom_temperature', 'sun room')
-              | replace('sensor.ecobee_avg_indoor_temperature', 'main house')
+              | replace('binary_sensor.main_hvac_fault', 'main house')
+              | replace('binary_sensor.sunroom_hvac_fault', 'sun room')
               }} temperature is outside of tolerance!"
     - service: notify.mobile_app_yskt_cell
       data:
         title: "HVAC system fault detected"
         message: >-
           "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
-              | replace('climate.local_ecobee', 'main house')
-              | replace('sensor.sensibo_sunroom_temperature', 'sun room')
-              | replace('sensor.ecobee_avg_indoor_temperature', 'main house')
+              | replace('binary_sensor.main_hvac_fault', 'main house')
+              | replace('binary_sensor.sunroom_hvac_fault', 'sun room')
               }} temperature is outside of tolerance!"
         data:
           car_ui: true
@@ -2000,10 +1992,9 @@
       data:
         message: >-
           "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
-              | replace('climate.local_ecobee', 'main house')
-              | replace('sensor.sensibo_sunroom_temperature', 'sun room')
-              | replace('sensor.ecobee_avg_indoor_temperature', 'main house')              
-              }} temperature is outside of tolerance"
+              | replace('binary_sensor.main_hvac_fault', 'main house')
+              | replace('binary_sensor.sunroom_hvac_fault', 'sun room')
+              }} temperature is outside of tolerance!"
 
 - id: aut_lab_rack_fan_fault
   alias: "aut rack fan fault"

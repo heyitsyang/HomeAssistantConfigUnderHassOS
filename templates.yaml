@@ -3,6 +3,46 @@
 #######################
 
 #
+# HVAC FAULT
+#
+- binary_sensor:
+    - name: "Main HVAC Fault"
+      unique_id: main_hvac_fault
+      icon: mdi:alert-circle
+      state: >-
+        {% if (is_state('climate.local_ecobee', 'cool')) %}
+          {{ ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
+              | float(default=state_attr('climate.ecobee', 'temperature')) | round(2)) > 3 ) }}
+        {% elif (is_state('climate.local_ecobee', 'heat')) %}
+          {{ ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
+              | float(default=state_attr('climate.ecobee', 'temperature')) | round(2)) < -3 ) }}
+        {% elif (is_state('climate.local_ecobee', 'heat_cool')) %}
+          {{
+              (
+                ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'target_temp_high')
+                  | float(default=state_attr('climate.ecobee', 'target_temp_high')) | round(2)) > 3 ) 
+              ) or
+              (
+                ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'target_temp_low')
+                  | float(default=state_attr('climate.ecobee', 'target_temp_low')) | round(2)) < -3 ) 
+              )
+          }}
+        {% endif %}
+
+- binary_sensor:
+    - name: "Sunroom HVAC Fault"
+      unique_id: sunroom_hvac_fault
+      icon: mdi:alert-circle
+      state: >-
+        {% if (is_state('climate.sunroom_ac', 'cool')) %}
+          {{ ( (states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
+                | float(default=state_attr('climate.ecobee', 'temperature')) | abs | round(2)) > 4 ) }}
+        {% elif (is_state('climate.sunroom_ac', 'heat')) %}
+          {{ ( (states('sensor.sensibo_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
+                | float(default=state_attr('climate.ecobee', 'temperature')) | abs | round(2)) > 4 ) }}
+        {% endif %}
+
+#
 # MISCALE WEIGHT/PERSON MAPPING
 #
 
@@ -21,6 +61,7 @@
             {{ yang_previous_weight }}
           {% endif %}
 
+- sensor:
     - name: "karen_template_weight"
       unique_id: karen_template_weight
       device_class: "weight"
@@ -35,6 +76,7 @@
             {{ karen_previous_weight }}
           {% endif %}
 
+- sensor:
     - name: "yang_template_impedance"
       unique_id: yang_template_impedance
       unit_of_measurement: "ohm"
@@ -47,6 +89,7 @@
             {{ yang_previous_impedance }}
           {% endif %}
 
+- sensor:
     - name: "karen_template_impedance"
       unique_id: karen_template_impedance
       unit_of_measurement: "ohm"
