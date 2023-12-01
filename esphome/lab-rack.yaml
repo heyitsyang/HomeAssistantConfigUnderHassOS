@@ -166,21 +166,21 @@ sensor:
     
 
 
-switch:
-  # Expose an ESP32 restart button to HA
-  - platform: restart
-    name: ${friendly_name} ESP32 Restart
-    id: lab_rack_fan_restart
+# switch:
+#   # Expose an ESP32 restart button to HA
+#   - platform: restart
+#     name: Lab Rack ESP32 Restart
+#     id: lab_rack_fan_restart
 
-# Restart every day at 12:30am. 
-# I've had some memory issues lockup 
-# the device after a couple weeks
-time:
-  - platform: homeassistant
-    on_time:
-      # Every morning at 12:30am
-    - seconds: 0
-      minutes: 30
-      hours: 0
-      then:
-      - switch.turn_on: lab_rack_fan_restart
+# # Restart every day at 12:30am. 
+# # I've had some memory issues lockup 
+# # the device after a couple weeks
+# time:
+#   - platform: homeassistant
+#     on_time:
+#       # Every morning at 12:30am
+#     - seconds: 0
+#       minutes: 30
+#       hours: 0
+#       then:
+#       - switch.turn_on: lab_rack_fan_restart
