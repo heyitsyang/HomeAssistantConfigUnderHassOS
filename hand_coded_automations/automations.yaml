@@ -1463,6 +1463,9 @@
     - platform: template
       value_template: >-
         {{ (is_state('binary_sensor.frontporch_zone_person_occupancy', 'on')) and (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
+    - platform: template
+      value_template: >-
+        {{ (is_state('binary_sensor.frontporch_zone_person_occupancy', 'on')) and (is_state('binary_sensor.doorbell_zone_person_occupancy', 'on')) }}
   condition:
     - condition: state
       entity_id: binary_sensor.front_door_window_door_is_open
