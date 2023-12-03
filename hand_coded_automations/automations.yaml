@@ -702,6 +702,35 @@
         message: "Water expansion tank fault: {{ states('sensor.water_pressure') }} PSI"
 
 #
+# REFRIGERATOR/FREEZER FAULT
+#
+- id: aut_freezer_fault
+  alias: "aut freezer fault"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.freezer_sensor_temperature
+      above: 7
+      for:
+        minutes: 90
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Freezer temperature too high"
+        message: "Freezer temperature is {{ states('sensor.freezer_sensor_temperature') }} F"
+        data:
+          clickAction: "lovelace/graphs"
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Freezer temperature too high"
+        message: TTS
+        data:
+          tts_text: "Freezer temperature problem detected.  Currently {{ states('sensor.freezer_sensor_temperature') }} degrees"
+          data:
+            car_ui: true
+
+#
 # LEAK DETECTION
 #
 
@@ -1573,6 +1602,8 @@
 - id: aut_mood_lights_luminosity_auto_on
   alias: "aut mood lights luminosity auto on"
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: sun
       event: sunset
