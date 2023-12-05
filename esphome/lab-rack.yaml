@@ -91,6 +91,7 @@ sensor:
     unit_of_measurement: 'RPM'
     id: lab_rack_fan1_speed
     name: Lab Rack Fan1 Speed
+    update_interval: 10s
     accuracy_decimals: 0
     filters:
       - multiply: 0.5  # Depending on how many pulses the fan sends per round - should be 0.5 or 1 - try...
@@ -102,6 +103,7 @@ sensor:
     unit_of_measurement: 'RPM'
     id: lab_rack_fan2_speed
     name: Lab Rack Fan2 Speed
+    update_interval: 10s
     accuracy_decimals: 0
     filters:
       - multiply: 0.5  # Depending on how many pulses the fan sends per round - should be 0.5 or 1 - try...
