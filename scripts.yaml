@@ -42,6 +42,7 @@ scr_ha_startup:
 #
 scr_goodmorning:
   mode: single
+  max_exceeded: silent
   sequence:
     - service: input_boolean.turn_on
       target:
@@ -67,6 +68,7 @@ scr_goodmorning:
 #
 scr_goodnight: # called by Alexa as PART of Goodnight Routine
   mode: single
+  max_exceeded: silent
   sequence:
     - service: input_boolean.turn_off
       target:
