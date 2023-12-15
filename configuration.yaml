@@ -25,9 +25,9 @@ http:
   # ssl_key: /ssl/privkey.pem                         #  ssl keys are renewed by either DuckDNS or NGINX Proxy Manager (not sure which)
 
   use_x_forwarded_for: true # required for
-  trusted_proxies: # reverse proxy
-    - 10.27.0.44 #   home assistant address
-    - 172.0.0.0/8 #   internal network for docker
+  trusted_proxies:          # reverse proxy
+    - 10.27.0.44      #   home assistant address
+    - 172.0.0.0/8     #   internal network for docker
 
 default_config:
 
