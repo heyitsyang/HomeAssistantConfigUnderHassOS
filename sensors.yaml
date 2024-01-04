@@ -178,22 +178,6 @@
     #- 'beat'
 
 #
-# System monitor
-#
-- platform: systemmonitor
-  resources:
-    - type: disk_free
-      arg: "/"
-    - type: disk_use_percent
-      arg: "/"
-    - type: memory_free
-    - type: memory_use_percent
-    - type: processor_use
-    - type: processor_temperature
-    - type: last_boot
-    - type: load_5m
-
-#
 # INFLUXDB SENSORS
 #
 
