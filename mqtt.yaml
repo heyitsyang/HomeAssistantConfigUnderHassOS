@@ -2,11 +2,125 @@
 # MQTT SENSORS
 #
 sensor:
-  - unique_id: esp32_igrill_ble_client
-    state_topic: "homeassistant/sensor/igrill_70918f19e8d1/status"
-    name: "ESP32 iGrill BLE Client"
-    json_attributes_topic: "homeassistant/sensor/igrill_70918f19e8d1/systeminfo"
+  # irrigation leak sensors
+  - unique_id: irrig_battery_voltage
+    name: "Irrig Battery Voltage"
+    state_topic: "irrig_leak/battery_volts"
+    qos: 0
 
+  - unique_id: irrig_battery_percent
+    name: "Irrig Battery Percent"
+    state_topic: "irrig_leak/battery_percent"
+    qos: 0
+
+  - unique_id: irrig_idle_water_pressure
+    name: "Irrig Idle Water Pressure"
+    state_topic: "irrig_leak/idle/water_pressure"
+    qos: 0
+    unit_of_measurement: "psi"
+
+  - unique_id: irrig_idle_water_temperature
+    name: "Irrig Idle Water Temperature"
+    state_topic: "irrig_leak/idle/water_temperature"
+    qos: 0
+    unit_of_measurement: "°F"
+
+  - unique_id: irrig_ota_mqtt_ready
+    name: "Irrig OTA MQTT Ready"
+    state_topic: "irrig_leak/ota_mqtt_ready"
+    qos: 0
+
+  - unique_id: irrig_last_idle_heartbeat
+    name: "Irrig Last Idle Heartbeat"
+    state_topic: "irrig_leak/idle/time_stamp"
+    qos: 0
+
+  - unique_id: irrig_idle_water_pressure
+    name: "Irrig Idle Water Pressure"
+    state_topic: "irrig_leak/idle/water_pressure"
+    qos: 0
+
+  - unique_id: irrig_idlw_water_temperature
+    name: "Irrig Idle Water Temperature"
+    state_topic: "irrig_leak/idle/water_temperature"
+    qos: 0
+
+  - unique_id: irrig_last_report_time
+    name: "Irrig Last Report Time"
+    state_topic: "irrig_leak/report/time_stamp"
+    qos: 0
+
+  - unique_id: irrig_report_tot_gallons_all_zones
+    name: "Irrig Report Total Gallons All Zones"
+    state_topic: "irrig_leak/report/tot_gals_all_zones"
+    qos: 0
+
+  - unique_id: irrig_report_valve_leak_gallons
+    name: "Irrig Report Valve Leak Gallons"
+    state_topic: "irrig_leak/report/valve_leak"
+    qos: 0
+
+  - unique_id: irrig_report_avg_gpm_zone_0
+    name: "Irrig Report Avg GPM Zone 0"
+    state_topic: "irrig_leak/report/avg_gpm_zone_0"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_gpm_zone_0/attributes"
+
+  - unique_id: irrig_report_avg_gpm_zone_1
+    name: "Irrig Report Avg GPM Zone 1"
+    state_topic: "irrig_leak/report/avg_gpm_zone_1"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_gpm_zone_1/attributes"
+
+  - unique_id: irrig_report_avg_gpm_zone_2
+    name: "Irrig Report Avg GPM Zone 2"
+    state_topic: "irrig_leak/report/avg_gpm_zone_2"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_gpm_zone_2/attributes"
+
+  - unique_id: irrig_report_avg_gpm_zone_3
+    name: "Irrig Report Avg GPM Zone 3"
+    state_topic: "irrig_leak/report/avg_gpm_zone_3"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_gpm_zone_3/attributes"
+
+  - unique_id: irrig_report_avg_gpm_zone_4
+    name: "Irrig Report Avg GPM Zone 4"
+    state_topic: "irrig_leak/report/avg_gpm_zone_4"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_gpm_zone_4/attributes"
+
+  - unique_id: irrig_report_avg_psi_zone_0
+    name: "Irrig Report Avg GPM Zone 0"
+    state_topic: "irrig_leak/report/avg_psi_zone_0"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_psi_zone_0/attributes"
+
+  - unique_id: irrig_report_avg_psi_zone_1
+    name: "Irrig Report Avg GPM Zone 1"
+    state_topic: "irrig_leak/report/avg_psi_zone_1"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_psi_zone_1/attributes"
+
+  - unique_id: irrig_report_avg_psi_zone_2
+    name: "Irrig Report Avg GPM Zone 2"
+    state_topic: "irrig_leak/report/avg_psi_zone_2"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_psi_zone_2/attributes"
+
+  - unique_id: irrig_report_avg_psi_zone_3
+    name: "Irrig Report Avg GPM Zone 3"
+    state_topic: "irrig_leak/report/avg_psi_zone_3"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_psi_zone_3/attributes"
+
+  - unique_id: irrig_report_avg_psi_zone_4
+    name: "Irrig Report Avg GPM Zone 4"
+    state_topic: "irrig_leak/report/avg_psi_zone_4"
+    qos: 0
+    json_attributes_topic: "irrig_leak/report/avg_psi_zone_4/attributes"
+
+  # SPT (watermain) sensors
   - unique_id: SPT_sensor_online_status
     name: "SPT Sensor Online Status"
     state_topic: "watermain/status/LWT"
@@ -39,6 +153,7 @@ sensor:
     state_topic: "watermain/spt_result"
     unit_of_measurement: "psi"
 
+  # misc individual sensors
   - unique_id: raw_living_rm_visible_light
     name: "Raw Living Rm Visible Light"
     device_class: "illuminance"
@@ -59,6 +174,11 @@ sensor:
     state_topic: "attic/DS18b20/Temperature"
     qos: 0
     unit_of_measurement: "°F"
+
+  - unique_id: esp32_igrill_ble_client
+    state_topic: "homeassistant/sensor/igrill_70918f19e8d1/status"
+    name: "ESP32 iGrill BLE Client"
+    json_attributes_topic: "homeassistant/sensor/igrill_70918f19e8d1/systeminfo"
 
 #
 # MQTT BINARY SENSORS
