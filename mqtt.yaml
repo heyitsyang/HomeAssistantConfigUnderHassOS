@@ -10,7 +10,7 @@ sensor:
   - unique_id: water_spt_data_status
     name: "SPT Data Status"
     state_topic: "watermain/spt_data_status"
-    json_attributes_topic: "watermain/data_status/attributes"
+    json_attributes_topic: "watermain/spt_data_status/attributes"
     qos: 0
 
   - unique_id: water_pressure
@@ -33,7 +33,6 @@ sensor:
     name: "Unvalidated Water Static Pressure Test Result"
     state_topic: "watermain/spt_result"
     unit_of_measurement: "psi"
-    json_attributes_topic: "watermain/spt_result/attributes"
 
   - unique_id: raw_living_rm_visible_light
     name: "Raw Living Rm Visible Light"
