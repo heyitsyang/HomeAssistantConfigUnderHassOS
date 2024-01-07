@@ -7,6 +7,11 @@ sensor:
     name: "ESP32 iGrill BLE Client"
     json_attributes_topic: "homeassistant/sensor/igrill_70918f19e8d1/systeminfo"
 
+  - unique_id: SPT_sensor_online_status
+    name: "SPT Sensor Online Status"
+    state_topic: "watermain/status/LWT"
+    qos: 0
+
   - unique_id: water_spt_data_status
     name: "SPT Data Status"
     state_topic: "watermain/spt_data_status"
