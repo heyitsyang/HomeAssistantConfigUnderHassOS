@@ -15,11 +15,6 @@ sensor:
     unit_of_measurement: "%"
     qos: 0
 
-  - unique_id: irrig_ota_mqtt_ready
-    name: "Irrig OTA MQTT Ready"
-    state_topic: "irrig_leak/ota_mqtt_ready"
-    qos: 0
-
   - unique_id: irrig_last_idle_heartbeat
     name: "Irrig Last Idle Heartbeat"
     state_topic: "irrig_leak/idle/time_stamp"
