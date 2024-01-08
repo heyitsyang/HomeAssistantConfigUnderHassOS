@@ -94,7 +94,7 @@ sensor:
     json_attributes_topic: "irrig_leak/report/avg_gpm_zone_4/attributes"
 
   - unique_id: irrig_report_avg_psi_zone_0
-    name: "Irrig Report Avg GPM Zone 0"
+    name: "Irrig Report Avg PSI Zone 0"
     state_topic: "irrig_leak/report/avg_psi_zone_0"
     state_class: measurement
     unit_of_measurement: "psi"
@@ -103,7 +103,7 @@ sensor:
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_0/attributes"
 
   - unique_id: irrig_report_avg_psi_zone_1
-    name: "Irrig Report Avg GPM Zone 1"
+    name: "Irrig Report Avg PSI Zone 1"
     state_topic: "irrig_leak/report/avg_psi_zone_1"
     state_class: measurement
     unit_of_measurement: "psi"
@@ -112,7 +112,7 @@ sensor:
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_1/attributes"
 
   - unique_id: irrig_report_avg_psi_zone_2
-    name: "Irrig Report Avg GPM Zone 2"
+    name: "Irrig Report Avg PSI Zone 2"
     state_topic: "irrig_leak/report/avg_psi_zone_2"
     state_class: measurement
     unit_of_measurement: "psi"
@@ -121,7 +121,7 @@ sensor:
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_2/attributes"
 
   - unique_id: irrig_report_avg_psi_zone_3
-    name: "Irrig Report Avg GPM Zone 3"
+    name: "Irrig Report Avg PSI Zone 3"
     state_topic: "irrig_leak/report/avg_psi_zone_3"
     state_class: measurement
     unit_of_measurement: "psi"
@@ -130,7 +130,7 @@ sensor:
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_3/attributes"
 
   - unique_id: irrig_report_avg_psi_zone_4
-    name: "Irrig Report Avg GPM Zone 4"
+    name: "Irrig Report Avg PSI Zone 4"
     state_topic: "irrig_leak/report/avg_psi_zone_4"
     state_class: measurement
     unit_of_measurement: "psi"
