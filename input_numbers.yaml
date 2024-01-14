@@ -267,8 +267,8 @@ inp_num_sunrm_shades_close_low_lux_trig: # solartube original value = 200 lux
   name: "Shades CLOSE solar"
   mode: box
   step: 50
-  min: 4000
-  max: 8000
+  min: 3500
+  max: 5000
   icon: mdi:blinds
   unit_of_measurement: lx
 
