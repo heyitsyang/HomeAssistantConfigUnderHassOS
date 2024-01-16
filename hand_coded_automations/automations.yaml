@@ -273,9 +273,11 @@
       entity_id: input_boolean.inp_bool_sleeping
       to: "on"
   action:
-    - service: scene.turn_on # set default before turning off
+    - service: select.select_option # set default before turning off
       target:
-        entity_id: scene.kitchen_mood_spots_50_warm_white
+        entity_id: select.kitchen_leds_upper_preset
+      data:
+        option: "Spots Warm Wht 50%"
     - service: homeassistant.turn_off
       target:
         entity_id:
@@ -509,6 +511,8 @@
     - platform: template
       value_template: >-
         {{ ( (states('sensor.kflwildw56_backed_up_local_solar_rad_lx') | int(default=0)) <= (states('input_number.inp_num_sunrm_shades_close_low_lux_trig') | int(default=0)) ) }}
+      for:
+        minutes: "{{ states('input_number.inp_num_sunrm_shades_close_low_lux_trig_delay') | int(default=0) }}"
   action:
     service: input_boolean.turn_off
     target:
@@ -1638,9 +1642,11 @@
       for:
         minutes: 10
   action:
-    - service: scene.turn_on # set the lights to the default before turning off
+    - service: select.select_option # set default before turning off
       target:
-        entity_id: scene.kitchen_mood_spots_50_warm_white
+        entity_id: select.kitchen_leds_upper_preset
+      data:
+        option: "Spots Warm Wht 50%"
     - service: homeassistant.turn_off
       target:
         entity_id:
@@ -2475,9 +2481,11 @@
         {{ is_state('light.island_lights', 'on') and is_state('light.kitchen_cabinet_lights', 'on') and 
         is_state('light.kitchen_leds_lower', 'on') }}
   action:
-    - service: scene.turn_on
+    - service: select.select_option
       target:
-        entity_id: scene.kitchen_mood_100_bright_white
+        entity_id: select.kitchen_leds_upper_preset
+      data:
+        option: "All Seg Bright Wht 100%"
 
 # return kitchen mood lights to "normal" based on luminosity
 - id: aut_kitchen_mood_normal
@@ -2508,13 +2516,17 @@
               - mon # night before trash day
               - thu # night before trash day
           then:
-            service: scene.turn_on
+            service: select.select_option
             target:
-              entity_id: scene.kitchen_mood_trash_night
+              entity_id: select.kitchen_leds_upper_preset
+            data:
+              option: "Trash Night"
           else:
-            service: scene.turn_on
+            service: select.select_option
             target:
-              entity_id: scene.kitchen_mood_spots_50_warm_white
+              entity_id: select.kitchen_leds_upper_preset
+            data:
+              option: "Spots Warm Wht 50%"
       else:
         - service: homeassistant.turn_off
           target:
