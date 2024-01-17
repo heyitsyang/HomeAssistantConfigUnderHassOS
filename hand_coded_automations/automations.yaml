@@ -781,13 +781,13 @@
         - binary_sensor.leak_kitchen_sink
         - binary_sensor.leak_kitchen_sink_rear
         - binary_sensor.leak_water_heater
-        - binary_sensor.leak_karens_sink
-        - binary_sensor.leak_yangs_sink
-        - binary_sensor.leak_guest_sink
-        - binary_sensor.leak_master_toilet
-        - binary_sensor.leak_guest_toilet
-        - binary_sensor.leak_washer
-        - binary_sensor.leak_laundry_sink
+        - binary_sensor.leak_karens_sink_water_leak
+        - binary_sensor.leak_yangs_sink_water_leak
+        - binary_sensor.leak_guest_sink_water_leak
+        - binary_sensor.leak_master_toilet_water_leak
+        - binary_sensor.leak_guest_toilet_water_leak
+        - binary_sensor.leak_washer_contact
+        - binary_sensor.leak_laundry
       from: "off"
       to: "on"
   action:
@@ -923,42 +923,6 @@
 #
 # WEBER iGRILL SUPPORTING AUTOMATIONS
 #
-
-- alias: "Monitor Grill Temp Alert"
-  initial_state: "off"
-  trigger:
-    - platform: state
-      entity_id: sensor.igrill_alert_temp
-      to: "Alert"
-  action:
-    - service: script.scr_say_phrase
-      data:
-        message: "Grill temp outside limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
-    - service: notify.mobile_app_ys_cell
-      data:
-        message: TTS
-        data:
-          tts_text: "Grill temp outside limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
-          data:
-            car_ui: true
-
-- alias: "Monitor Grill Temp Normal"
-  initial_state: "off"
-  trigger:
-    - platform: state
-      entity_id: sensor.igrill_alert_temp
-      to: "Normal"
-  action:
-    - service: script.scr_say_phrase
-      data:
-        message: "Grill temp within limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
-    - service: notify.mobile_app_ys_cell
-      data:
-        message: TTS
-        data:
-          tts_text: "Grill temp withiin limits. Currently {{ states('sensor.igrill_70918f19e8d1_probe_4') }} °F"
-          data:
-            car_ui: true
 
 - alias: "Probe 1 Target Temp"
   initial_state: "off"
@@ -2202,19 +2166,19 @@
 #
 
 # Reset paused alarm
-- id: aut_reset_paused_alarm
-  alias: "aut reset paused alarm"
+- id: aut_reset_paused_leak_alarm
+  alias: "aut reset paused leak alarm"
   initial_state: true
   trigger:
     - platform: state
-      entity_id: input_boolean.inp_bool_pause_alarm
+      entity_id: input_boolean.inp_bool_pause_leak_alarm
       from: "off"
       to: "on"
   action:
     - delay: 00:30:00
     - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.inp_bool_pause_alarm
+        entity_id: input_boolean.inp_bool_pause_leak_alarm
 
 #
 #  GUEST MODE
@@ -2458,9 +2422,6 @@
     - platform: state
       entity_id: input_boolean.inp_bool_theater_mode
       from: "on"
-      to: "off"
-    - platform: state
-      entity_id: media_player.samsung_samsung_dtr_rcr
       to: "off"
   action:
     - service: scene.turn_on
