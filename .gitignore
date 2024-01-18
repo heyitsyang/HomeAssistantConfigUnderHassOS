@@ -24,7 +24,9 @@ zigbee2mqtt
 home-assistant_v2.db-shm
 home-assistant_v2.db-wal
 frigate.yml
+frigate.yaml
 frigate.yml.bak
+frigate.yaml.bak
 secrets.yaml
 logger.yaml
 .uuid
@@ -46,4 +48,4 @@ blueprints/automation/homeassistant/notify_leaving_zone.yaml
 zigbee.db-journal
 zigbee.db-shm
 zigbee.db-wal
-frigate.yml.bak
+
