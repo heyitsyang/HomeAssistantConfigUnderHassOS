@@ -13,14 +13,14 @@ mood_lights:
   name: "Mood Lights"
   entities:
     - switch.candles
-    - light.kitchen_leds_upper
+    - light.kitchen_leds_upper_master
     - switch.christmas_tree
 
 pathway_lights:
   name: "Pathway Lights"
   entities:
     - switch.candles
-    - light.kitchen_leds_upper
+    - light.kitchen_leds_upper_master
 
 sunrm_shades: # This group is used to display all shades individually in the frontend UI
   name: "Sun Room Shades" # Using cover.sun_room_shades (defined in covers.yaml)
@@ -82,7 +82,7 @@ all_lighting: # This group created for frontend UI use
     - switch.front_door_lights
     - switch.back_door_lights
     - switch.candles
-    - light.kitchen_leds_upper
+    - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
     - light.entryway_lights
     - switch.christmas_tree
@@ -131,7 +131,7 @@ kitchen_lights:
     - light.island_lights
     - light.kitchen_cabinet_lights
     - light.kitchen_leds_lower
-    - light.kitchen_leds_upper
+    - light.kitchen_leds_upper_master
 
 ceiling_fans:
   name: "Ceiling Fans"
@@ -171,7 +171,7 @@ indoor_lights:
     - light.track_lights
     - light.entryway_lights
     - switch.candles
-    - light.kitchen_leds_upper
+    - light.kitchen_leds_upper_master
     - light.kitchen_leds_lower
     - switch.christmas_tree
     - light.master_closet_lights

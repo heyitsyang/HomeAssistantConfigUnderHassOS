@@ -2500,7 +2500,7 @@
       else:
         - service: light.turn_off
           target:
-            entity_id: light.kitchen_leds_upper
+            entity_id: light.kitchen_leds_upper_master
 
 #################################
 #                               #
