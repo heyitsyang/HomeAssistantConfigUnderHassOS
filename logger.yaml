@@ -28,8 +28,8 @@ logs: # ignore events less than levels defined below
 
 filters:
   homeassistant.helpers.service:
-    - "Unable to find referenced entities switch.christmas_tree"
-    - "Referenced entities switch.christmas_tree are missing or not currently available"
+    - "Unable to find referenced entities switch.christmas_tree" # connected only at christmas
+    - "Referenced entities switch.christmas_tree are missing or not currently available" # connected only at christmas
   aioesphomeapi.connection:
     - "display-guest-suite" # cannot connect due to normal deep sleep
   aioesphomeapi.reconnect_logic:
@@ -52,8 +52,8 @@ filters:
     - "hamstation"
     - "dishwasher-sonoff"
   homeassistant.components.sonos.speaker:
-    - "No recent activity and cannot reach"
-  homeassistant.components.sonos:
+    - "No recent activity and cannot reach" # sonos can be slow to respond
+  homeassistant.components.sonos: # sonos can be slow to respond
     - "Subscription to 10.27.0.70 failed, attempting to poll directly"
     - "Subscription to 10.27.0.71 failed, attempting to poll directly"
     - "Subscription to 10.27.0.72 failed, attempting to poll directly"
