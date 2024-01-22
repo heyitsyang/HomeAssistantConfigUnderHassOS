@@ -23,16 +23,14 @@ sensor:
   - unique_id: irrig_idle_water_pressure
     name: "Irrig Idle Water Pressure"
     state_topic: "irrig_leak/idle/water_pressure"
-    state_class: measurement
     unit_of_measurement: "psi"
-    device_class: "pressure"
+    device_class: pressure
     qos: 0
 
   - unique_id: irrig_idle_water_temperature
     name: "Irrig Idle Water Temperature"
     state_topic: "irrig_leak/idle/water_temperature"
-    state_class: measurement
-    device_class: "temperature"
+    device_class: temperature
     unit_of_measurement: "°F"
     qos: 0
 
@@ -44,13 +42,15 @@ sensor:
   - unique_id: irrig_report_tot_gallons_all_zones
     name: "Irrig Report Total Gallons All Zones"
     state_topic: "irrig_leak/report/tot_gals_all_zones"
-    state_class: total
+    device_class: water
+    unit_of_measurement: "gal"
     qos: 0
 
   - unique_id: irrig_report_valve_leak_gallons
     name: "Irrig Report Valve Leak Gallons"
     state_topic: "irrig_leak/report/valve_leak"
-    state_class: measurement
+    device_class: water
+    unit_of_measurement: "gal"
     qos: 0
 
   - unique_id: irrig_report_avg_gpm_zone_0
@@ -92,7 +92,7 @@ sensor:
     name: "Irrig Report Avg PSI Zone 0"
     state_topic: "irrig_leak/report/avg_psi_zone_0"
     unit_of_measurement: "psi"
-    device_class: "pressure"
+    device_class: pressure
     qos: 0
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_0/attributes"
 
@@ -100,7 +100,7 @@ sensor:
     name: "Irrig Report Avg PSI Zone 1"
     state_topic: "irrig_leak/report/avg_psi_zone_1"
     unit_of_measurement: "psi"
-    device_class: "pressure"
+    device_class: pressure
     qos: 0
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_1/attributes"
 
@@ -108,7 +108,7 @@ sensor:
     name: "Irrig Report Avg PSI Zone 2"
     state_topic: "irrig_leak/report/avg_psi_zone_2"
     unit_of_measurement: "psi"
-    device_class: "pressure"
+    device_class: pressure
     qos: 0
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_2/attributes"
 
@@ -116,7 +116,7 @@ sensor:
     name: "Irrig Report Avg PSI Zone 3"
     state_topic: "irrig_leak/report/avg_psi_zone_3"
     unit_of_measurement: "psi"
-    device_class: "pressure"
+    device_class: pressure
     qos: 0
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_3/attributes"
 
@@ -124,7 +124,7 @@ sensor:
     name: "Irrig Report Avg PSI Zone 4"
     state_topic: "irrig_leak/report/avg_psi_zone_4"
     unit_of_measurement: "psi"
-    device_class: "pressure"
+    device_class: pressure
     qos: 0
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_4/attributes"
 
@@ -144,7 +144,7 @@ sensor:
     name: "Water Pressure"
     state_topic: "watermain/water_pressure"
     qos: 0
-    device_class: "pressure"
+    device_class: pressure
     unit_of_measurement: "psi"
     expire_after: 600 # state becomes "unknown" after 10 minutes
 
@@ -152,7 +152,7 @@ sensor:
     name: "Water Temperature"
     state_topic: "watermain/water_temperature"
     qos: 0
-    device_class: "temperature"
+    device_class: temperature
     unit_of_measurement: "°F"
     expire_after: 600 # state becomes "unknown" after 10 minutes
 
@@ -164,7 +164,7 @@ sensor:
   # misc individual sensors
   - unique_id: raw_living_rm_visible_light
     name: "Raw Living Rm Visible Light"
-    device_class: "illuminance"
+    device_class: illuminance
     state_class: measurement
     state_topic: "espresense/rooms/greatrm/tsl2561_lux"
     force_update: true # update even if values haven't changed - required if filters depend on update timing for calc
