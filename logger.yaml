@@ -31,9 +31,9 @@ filters:
     - "Unable to find referenced entities switch.christmas_tree" # connected only at christmas
     - "Referenced entities switch.christmas_tree are missing or not currently available" # connected only at christmas
   aioesphomeapi.connection:
-    - "display-guest-suite" # cannot connect due to normal deep sleep
+    - "display-guest-suite" # normally cannot connect since device is normally in deep sleep, so OK
   aioesphomeapi.reconnect_logic:
-    - "display-guest-suite" # cannot connect due to normal deep sleep
+    - "display-guest-suite" # normally cannot connect since device is normally in deep sleep, so OK
   homeassistant.loader:
     - "^We found .* which has not been tested" # routine warning about HACS add-ons/integrations
   frontend.js.latest:
