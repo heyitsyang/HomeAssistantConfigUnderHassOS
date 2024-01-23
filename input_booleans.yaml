@@ -16,7 +16,7 @@ inp_bool_inhibit_shades: # prevent shade automations
 
 inp_bool_pause_leak_alarm:
   name: "Pause leak alarm"
-  icon: mdi:cancel
+  icon: mdi:pause
 
 inp_bool_theater_mode:
   name: "Theater mode"
