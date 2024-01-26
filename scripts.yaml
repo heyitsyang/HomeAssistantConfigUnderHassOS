@@ -568,22 +568,16 @@ scr_mood_lighting_on:
     - service: homeassistant.turn_on
       target:
         entity_id: group.mood_lights
-    - choose:
-        - conditions:
-            - condition: time
-              weekday:
-                - mon # night before trash day
-                - thu # night before trash day
-          sequence:
-            - service: light.turn_on
-              target:
-                entity_id: light.kitchen_leds_upper_master
-            - service: select.select_option
-              target:
-                entity_id: select.kitchen_leds_upper_preset
-              data:
-                option: "Trash Night"
-      default:
+    - service: script.scr_turn_on_kitchen_leds_upper
+
+scr_turn_on_kitchen_leds_upper:
+  sequence:
+    - if:
+        - condition: time
+          weekday:
+            - mon # night before trash day
+            - thu # night before trash day
+      then:
         - service: light.turn_on
           target:
             entity_id: light.kitchen_leds_upper_master
@@ -591,7 +585,12 @@ scr_mood_lighting_on:
           target:
             entity_id: select.kitchen_leds_upper_preset
           data:
-            option: "Spots Warm Wht 50%"
+            option: "Trash Night"
+      else:
+        - service: light.turn_on
+          target:
+            entity_id: light.kitchen_leds_upper_master
+        - service: script.scr_reset_mood_lights_to_default
 
 scr_reset_mood_lights_to_default:
   sequence:

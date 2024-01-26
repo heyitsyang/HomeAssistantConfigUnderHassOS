@@ -273,11 +273,7 @@
       entity_id: input_boolean.inp_bool_sleeping
       to: "on"
   action:
-    - service: select.select_option # set default before turning off
-      target:
-        entity_id: select.kitchen_leds_upper_preset
-      data:
-        option: "Spots Warm Wht 50%"
+    - service: script.scr_reset_mood_lights_to_default
     - service: homeassistant.turn_off
       target:
         entity_id:
@@ -738,6 +734,32 @@
 # LEAK DETECTION
 #
 
+# IRRIGATION SYSTEM
+- id: aut_irrig_valve_leak_notify
+  alias: "aut irrig valve leak notify"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.irrig_report_valve_leak_gallons
+      above: 0
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Leaky irrigation valve detected: {{ states('sensor.irrig_report_valve_leak_gallons') }} gallons"
+        message: |
+          Leaky irrigation valve detected: {{ states('sensor.irrig_report_valve_leak_gallons') }} gallons
+          were measured between watering cycles or when the valves should have been off.
+        data:
+          car_ui: true
+    - service: notify.gmail_to_yang
+      data:
+        title: "Leaky irrigation valve detected: {{ states('sensor.irrig_report_valve_leak_gallons') }} gallons"
+        message: |
+          Leaky irrigation valve detected: {{ states('sensor.irrig_report_valve_leak_gallons') }} gallons
+          were measured between watering cycles or when the valves should have been off.
+
+# HOUSE WATER
 - id: aut_spt_leak_notify
   alias: "aut spt leak notify"
   initial_state: true
@@ -1606,11 +1628,7 @@
       for:
         minutes: 10
   action:
-    - service: select.select_option # set default before turning off
-      target:
-        entity_id: select.kitchen_leds_upper_preset
-      data:
-        option: "Spots Warm Wht 50%"
+    - service: script.scr_reset_mood_lights_to_default
     - service: homeassistant.turn_off
       target:
         entity_id:
@@ -2474,33 +2492,7 @@
         entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
         state: "on"
       then:
-        - if:
-            condition: time
-            weekday:
-              - mon # night before trash day
-              - thu # night before trash day
-          then:
-            - service: light.turn_on
-              target:
-                entity_id: light.kitchen_leds_upper_master
-            - service: select.select_option
-              target:
-                entity_id: select.kitchen_leds_upper_preset
-              data:
-                option: "Trash Night"
-          else:
-            - service: light.turn_on
-              target:
-                entity_id: light.kitchen_leds_upper_master
-            - service: select.select_option
-              target:
-                entity_id: select.kitchen_leds_upper_preset
-              data:
-                option: "Spots Warm Wht 50%"
-      else:
-        - service: light.turn_off
-          target:
-            entity_id: light.kitchen_leds_upper_master
+        service: script.scr_turn_on_kitchen_leds_upper
 
 #################################
 #                               #
