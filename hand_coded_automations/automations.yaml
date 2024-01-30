@@ -2104,35 +2104,35 @@
       for: "02:00:00" # display reports once per hour so wait for 2 reports
     - platform: numeric_state
       entity_id: sensor.leak_karens_sink_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_yangs_sink_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_guest_sink_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_guest_toilet_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_master_toilet_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_kitchen_sink_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_laundry_sink_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.leak_washer_battery # leak detector battery
-      below: 20
+      below: 15
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.sun_room_remote_1_battery_level
