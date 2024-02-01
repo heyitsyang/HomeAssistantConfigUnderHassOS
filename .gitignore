@@ -23,15 +23,14 @@ zigbee2mqtt
 # Ignore files
 home-assistant_v2.db-shm
 home-assistant_v2.db-wal
-frigate.yml
-frigate.yml.bak
-frigate.yaml
-frigate.yaml.bak
+frigate*
 secrets.yaml
 logger.yaml
 .uuid
 .google.token
 .google_maps*
+.timeline
+.vacuum
 ip_bans.yaml
 known_devices.yaml
 google_calendars.yaml
