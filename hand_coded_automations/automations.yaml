@@ -65,7 +65,7 @@
     # trigger if more than N miles away and not directly after a reboot (resets last_trigger to NONE)
     - platform: template
       value_template: >-
-        {{ (states('proximity.home_ys') | float(default=0) > 2) and (states('proximity.home_kt') | float(default=0) > 2) 
+        {{ (states('sensor.home_ys_cell_gps_distance') | float(default=0) > 2) and (states('sensor.home_kt_cell_gps_distance') | float(default=0) > 2) 
         and (state_attr(" script.scr_spt_start","last_triggered") != none) }}
       for:
         minutes: 15
@@ -1326,12 +1326,12 @@
   trigger: # trigger on each indiv in case one is already home
     - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'proximity.home.ys') | float(default=99)) <= 0.2)
-        and (state_attr('proximity.home_ys','dir_of_travel') == 'towards')}}
+        {{ ((states( 'sensor.home_ys_cell_gps_distance') | float(default=99)) <= 0.2)
+        and (states('sensor.home_ys_cell_gps_direction_of_travel') == 'towards')}}
     - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'proximity.home.kt') | float(default=99)) <= 0.2)
-        and (state_attr('proximity.home_kt','dir_of_travel') == 'towards')}}
+        {{ ((states( 'sensor.home_kt_cell_gps_distance') | float(default=99)) <= 0.2)
+        and (states('sensor.home_kt_cell_gps_direction_of_travel') == 'towards')}}
   action:
     - service: script.scr_front_door_lights_on
     - service: script.scr_say_phrase
@@ -1894,8 +1894,8 @@
     - platform: template # default=99 if proximity is non-numeric (e.g. unknown)
       value_template: >-
         {{ (states('person.yang') == 'not_home') and (states('person.karen') == 'not_home')
-            and ((states( 'proximity.home.ys') | float(default=99)) >= 0.2) 
-            and ((states( 'proximity.home.kt') | float(default=99)) >= 0.2) }}
+            and ((states( 'sensor.home_ys_cell_gps_distance') | float(default=99)) >= 0.2) 
+            and ((states( 'sensor.home_kt_cell_gps_distance') | float(default=99)) >= 0.2) }}
   action:
     - service: script.scr_check_garage_open
     - service: script.scr_nobody_home
@@ -1958,12 +1958,14 @@
       entity_id: person.yang
       from: home
       for: "00:01:00"
-    #    to: not_home
     - platform: state
       entity_id: person.karen
       from: home
       for: "00:01:00"
-  #    to: not_home
+  condition:
+    - condition: state
+      entity_id: input_boolean.inhibit_presence_announcements
+      state: "off"
   action:
     - service: script.scr_say_phrase
       data:
@@ -2319,12 +2321,9 @@
   trigger:
     - platform: template # distance is in miles - BOTH must be > this distance away
       value_template: >
-        {{ (states('proximity.home_ys') | float(default=0) > 100) and
-        (states('proximity.home_kt') | float(default=0) > 100) }}
+        {{ (states('sensor.home_ys_cell_gps_distance') | float(default=0) > 100) and
+        (states('sensor.home_kt_cell_gps_distance') | float(default=0) > 100) }}
       for: "00:30:00"
-    - platform: template # OR....BOTH gone for > 24 hrs
-      value_template: "{{ states('group.where_are_yskt') != 'home' }}"
-      for: "23:59:00"
   condition:
     condition: and
     conditions:
@@ -2334,8 +2333,6 @@
       - condition: state
         entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
         state: "off" # in case we have a guest while we are gone
-      - condition: template # this is in case proximity is screwed up
-        value_template: "{{ states('group.where_are_yskt') != 'home' }}"
   action:
     - service: input_boolean.turn_on # This action triggers aut_extended_absence_on
       target:
@@ -2346,14 +2343,14 @@
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity_id: proximity.home_ys
-      value_template: "{{ states('proximity.home_ys') | float(default=0) }}"
+      entity_id: sensor.home_ys_cell_gps_distance
+      value_template: "{{ states('sensor.home_ys_cell_gps_distance') | float(default=0) }}"
       below: 30 # distance is in miles
       for:
         minutes: 10
     - platform: numeric_state
-      entity_id: proximity.home_kt
-      value_template: "{{ states('proximity.home_kt') | float(default=0) }}"
+      entity_id: sensor.home_kt_cell_gps_distance
+      value_template: "{{ states('sensor.home_kt_cell_gps_distance') | float(default=0) }}"
       below: 30 # distance is in miles
       for:
         minutes: 10
@@ -2547,13 +2544,14 @@
   trigger:
     - platform: template
       value_template: >
-        {{ (states('proximity.home_ys') | float(default=0) > 0.5) }}
+        {{ (states('sensor.home_ys_cell_gps_distance') | float(default=0) > 0.5) }}
   condition:
     - condition: state # only notify if test switch is ON
       entity_id: input_boolean.inp_bool_half_mi_trig_test
       state: "on"
-    - condition: template
-      value_template: "{{ state_attr('proximity.home_ys','dir_of_travel') == 'away_from' }}"
+    - condition: state
+      entity_id: sensor.home_ys_cell_gps_direction_of_travel
+      state: "away_from"
   action:
     - service: notify.mobile_app_ys_cell
       data:
