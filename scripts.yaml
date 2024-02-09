@@ -121,9 +121,9 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
 #
 scr_nobody_home:
   sequence:
-    - service: script.scr_say_phrase
-      data:
-        message: "I feel so empty inside when my people are away"
+    # - service: script.scr_say_phrase
+    #   data:
+    #     message: "I feel so empty inside when my people are away"
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
       state: "off"
@@ -153,6 +153,12 @@ scr_spt_start:
 scr_arrival_announcement:
   mode: queued
   sequence:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.inp_bool_visitor_while_out_flag
+    - condition: state # continue if not inhibited
+      entity_id: input_boolean.inhibit_presence_announcements
+      state: "off"
     - service: script.scr_say_phrase
       data:
         message: >
@@ -169,9 +175,7 @@ scr_arrival_announcement:
               "Hello Master Yang, welcome home"
             {% endif %}
           {% endif %}
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.inp_bool_visitor_while_out_flag
+
 
 # SIMULATE AN OCCUPIED HOME
 #
