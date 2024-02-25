@@ -2460,6 +2460,9 @@
     - service: light.turn_on
       target:
         entity_id: light.kitchen_leds_upper_master
+    - service: light.turn_on
+      target:
+        entity_id: light.kitchen_leds_upper
     - service: select.select_option
       target:
         entity_id: select.kitchen_leds_upper_preset
