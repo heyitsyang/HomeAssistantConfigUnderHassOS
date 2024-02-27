@@ -42,6 +42,7 @@ smart_home:
       - sensor.garage_temperature
       - sensor.ecobee_avg_indoor_temperature
       - switch.hamstation
+      - switch.lan2_power
       - switch.water_valve
       - switch.candles
       - switch.christmas_tree
@@ -72,6 +73,8 @@ smart_home:
     switch.christmas_tree:
       name: "Christmas Tree"
       display_categories: LIGHT
+    switch.lan2_power:
+      name: "Lan 2"
     light.kitchen_leds_lower:
       name: "Kitchen counter lights"
       display_categories: LIGHT
