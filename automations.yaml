@@ -1,4 +1,4 @@
-- id: '1699041731502'
+- id: '1710004236293'
   alias: awtrix_mega_weather
   description: from HA community awtrix mega weather
   use_blueprint:
@@ -6,7 +6,7 @@
     input:
       awtrix:
       - a8583420298728779e89f960f8079d14
-      forecast_var: weather.forecast_home_hourly
+      forecast_var: weather.forecast_home
       forecast_temp_field: temperature
       temp_suffix: °
       current_temp_var: sensor.kflwildw56_local_temperature
@@ -14,4 +14,6 @@
       moon_rise_set: sensor.ip_geo_location
       show_sun_rise_set: false
       message_duration_riseset: 0
-      message_duration_forecast: 6
+      message_duration_forecast: 10
+      hours_to_show: 12
+      temp_digits: 0

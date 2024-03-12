@@ -214,7 +214,7 @@
     - name: weather_hourly_next_8
       unique_id: weather_hourly_next_8
       state: >-
-        {%- for i in state_attr('weather.forecast_home_hourly', 'forecast') -%}
+        {%- for i in state_attr('weather.openweathermap', 'forecast') -%}
           {%- if(loop.index <= 8) -%}
             {{(as_timestamp(i.datetime) | timestamp_custom('%-I%p')) | lower}},{{ i.condition }},{{ i.precipitation }}#
           {%- endif -%}

@@ -281,6 +281,28 @@
           - group.mood_lights
 
 #
+# CYCLE PHOTO FRAMES FOR BATTERY HEALTH
+#
+- id: aut_cycle_photo_frames
+  alias: "aut cycle photo frames"
+  initial_state: true
+  trigger:
+    - platform: time
+      at: "07:00:00"
+  action:
+    - service: switch.turn_off # run on battery
+      target:
+        entity_id:
+          - switch.photoframe_lg_power
+          - switch.photoframe_sm_power
+    - delay: "08:00:00" # discharge time
+    - service: switch.turn_on # charge from wall power
+      target:
+        entity_id:
+          - switch.photoframe_lg_power
+          - switch.photoframe_sm_power
+
+#        #
 # TURN OFF GOOD MORNING USED SEMAPHORE
 #
 - id: aut_good_morning_used_semphore_reset
