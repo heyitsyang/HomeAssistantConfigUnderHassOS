@@ -909,7 +909,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.top_load_washer_wash_completed
+      entity_id: binary_sensor.top_load_washer_run_completed
       from: "off"
       to: "on"
   action:
@@ -936,7 +936,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.dryer_dry_completed
+      entity_id: binary_sensor.dryer_run_completed
       from: "off"
       to: "on"
   action:
