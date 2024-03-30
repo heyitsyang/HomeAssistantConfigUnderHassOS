@@ -2491,7 +2491,7 @@
       data:
         option: "All Seg Bright Wht 100%"
 
-# return kitchen mood lights to "normal" based on luminosity
+# return kitchen mood lights to "normal" if rest are off based on luminosity
 - id: aut_kitchen_mood_normal
   alias: "aut kitchen mood normal"
   initial_state: true
@@ -2510,11 +2510,17 @@
       to: "off"
   action:
     - if:
-        condition: state
-        entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
-        state: "on"
+        - condition: state
+          entity_id: input_boolean.inp_bool_lum_mood_lights_f_solar_trig
+          state: "on"
       then:
-        service: script.scr_turn_on_kitchen_leds_upper
+        - service: script.scr_turn_on_kitchen_leds_upper
+      else:
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.kitchen_leds_upper
+              - light.kitchen_leds_upper_master
 
 #################################
 #                               #
