@@ -288,15 +288,15 @@
   initial_state: true
   trigger:
     - platform: time
-      at: "07:00:00"
+      at: "19:00:00"
   action:
-    - service: switch.turn_off # run on battery
+    - service: switch.turn_on # charge
       target:
         entity_id:
           - switch.photoframe_lg_power
           - switch.photoframe_sm_power
-    - delay: "08:00:00" # discharge time
-    - service: switch.turn_on # charge from wall power
+    - delay: "12:00:00" # elapsed run time
+    - service: switch.turn_off # discharge
       target:
         entity_id:
           - switch.photoframe_lg_power
