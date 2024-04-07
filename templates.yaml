@@ -210,11 +210,28 @@
 # ESPHOME - sensors used in espHome
 #
 
+- trigger:
+    - platform: time_pattern
+      hours: /1
+  action:
+    - service: weather.get_forecasts
+      data:
+        type: hourly
+      target:
+        entity_id: weather.openweathermap
+      response_variable: hourly
+  sensor:
+    - name: Openweathermap Forecast Hourly
+      unique_id: openweathermap_forecast_hourly
+      state: "{{ now().isoformat() }}"
+      attributes:
+        forecast: "{{ hourly['weather.openweathermap'].forecast }}"
+
 - sensor:
     - name: weather_hourly_next_8
       unique_id: weather_hourly_next_8
       state: >-
-        {%- for i in state_attr('weather.openweathermap', 'forecast') -%}
+        {%- for i in state_attr('sensor.openweathermap_forecast_hourly', 'forecast') -%}
           {%- if(loop.index <= 8) -%}
             {{(as_timestamp(i.datetime) | timestamp_custom('%-I%p')) | lower}},{{ i.condition }},{{ i.precipitation }}#
           {%- endif -%}
