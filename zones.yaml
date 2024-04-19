@@ -26,14 +26,15 @@
 # are adding:
 #   1. Use Google Maps to find location to be added
 #   2. Right click on the approximate center of the location and use the
-#      "distance to here" function to determine the Radius.  Shift the
+#      "Measure distance" function to determine the Radius.  Shift the
 #      center as necessary to determine center of the facility.  The Google
 #      definition of the location center is not necessarily the center
 #      desired for zone purposes. The desired center is the approximate geo-center
-#      of the entire grounds when overlaid with a circle - including parking,
-#      athletic facilities, activity centers, pools, etc.  Try to avoid overlapping
-#      cart paths and try to bias towards where people will congregate.
-#   3. Once the center and radius (in meters not feet! ) are determined, record the
+#      of the entire grounds or building when overlaid with a circle - consider
+#      including parking, athletic facilities, activity centers, pools, etc.
+#      if appropriate.  Try to avoid overlapping cart paths and try
+#      to bias towards where people will congregate.
+#   3. Once the center and radius (in meters not feet!) are determined, record the
 #      Lat/Long/Radius below along with a name.  You must use meters for the radius.
 #      Please leave "icon: mdi:blank" for rec centers as there are too many & any
 #      icons will clutter the map. ("mdi:blank" is an non-existent icon)
@@ -52,6 +53,12 @@
   longitude: !secret home_longitude
   radius: 60 # in meters
   icon: mdi:home
+
+- name: Church@Springs - Ocala
+  latitude: 29.13195
+  longitude: -82.05666
+  radius: 145 # meters
+  icon: mdi:church
 
 - name: Church@Springs - Lady Lake
   latitude: 28.939792
@@ -97,6 +104,38 @@
   longitude: -82.032300
   radius: 112 # meters
   icon: mdi:hospital
+
+# THEATERS, INDOOR VENUES
+#
+- name: Old Mill Movies
+  latitude: 28.90769
+  longitude: -81.97513
+  radius: 51 # meters
+  icon: mdi:blank
+
+- name: Sharon Morse Performing Arts
+  latitude: 29.94092
+  longitude: -81.95098
+  radius: 30 # meters
+  icon: mdi:blank
+
+- name: Savannah Center Theater
+  latitude: 28.95141
+  longitude: -81.99892
+  radius: 58 # meters
+  icon: mdi:blank
+
+- name: AMC Lake Square Movies
+  latitude: 28.82503
+  longitude: -81.78461
+  radius: 34 # meters
+  icon: mdi:blank
+
+- name: Orange Blossom Opry
+  latitude: 28.98341
+  longitude: -81.92186
+  radius: 25 # meters
+  icon: mdi:blank
 
 # TOWN SQUARES AND GATHERING PLACES
 #
