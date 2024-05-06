@@ -1,6 +1,7 @@
 blueprint:
   name: "AWTRIX Weather ⛈️ + Forecast + \U0001F315️ (Service Calls)"
-  description: "This is somewhat of a mega-weather blueprint with moon phase support.
+  description:
+    "This is somewhat of a mega-weather blueprint with moon phase support.
     However for it work correctly you will need a variety of different things setup.
     It was initially designed to use in partnership with a personal weather station
     however it seems to work fine with OpenWeather as well or any other provider that
@@ -33,30 +34,32 @@ blueprint:
   input:
     awtrix:
       name: AWTRIX Device
-      description: Select the Awtrix light
+      description: Select the Awtrix 3
       selector:
         device:
           integration: mqtt
           manufacturer: Blueforcer
-          model: AWTRIX Light
+          model: AWTRIX 3
           multiple: true
     forecast_var:
       name: Hourly Forecast
-      description: "Select a sensor that provides an Hourly forecast (not a daily
+      description:
+        "Select a sensor that provides an Hourly forecast (not a daily
         one)\nThis integration has been tested with:\n\n  - HACS [Weatherflow](https://github.com/briis/hass-weatherflow)
         integration \n  \n  - HomeAssistant [Openweather](https://www.home-assistant.io/integrations/openweathermap/)\n"
       selector:
         entity:
           filter:
-          - domain:
-            - weather
+            - domain:
+                - weather
           multiple: false
     hours_to_show:
       name: Forecast Hours to Show
-      description: 'How many hours of forecast do you wish to show along the bottom
+      description:
+        "How many hours of forecast do you wish to show along the bottom
         of the display
 
-        '
+        "
       selector:
         number:
           max: 24.0
@@ -67,11 +70,12 @@ blueprint:
       default: 12
     temp_digits:
       name: Temp Digits
-      description: 'By default we will round the temp to the nearest whole-number.
+      description:
+        "By default we will round the temp to the nearest whole-number.
         If you want percisions you can change this to 1 or 2 in order to see more
         decimalm places.
 
-        '
+        "
       selector:
         number:
           min: 0.0
@@ -82,42 +86,45 @@ blueprint:
       default: 0
     temp_suffix:
       name: Temperature suffix
-      description: "How do you want to display the temperature\nIf you live in a country
+      description:
+        "How do you want to display the temperature\nIf you live in a country
         with the following flags:\n\U0001F1FA\U0001F1F8️\U0001F1F5\U0001F1F7️\U0001F1F5\U0001F1FC️\U0001F1E7\U0001F1FF️\U0001F1F0\U0001F1FE️\U0001F1EB\U0001F1F2️\U0001F1F2\U0001F1ED️\U0001F1FB\U0001F1EE️\U0001F1EC\U0001F1FA️\nYou
         probbaly use Farenheit.\nEverybody else in the \U0001F5FA️ seems to rock the
         Metric System"
       selector:
         select:
           options:
-          - label: None
-            value: ''
-          - label: °
-            value: °
-          - label: °F
-            value: °F
-          - label: °C
-            value: °C
-          - label: F
-            value: F
-          - label: C
-            value: C
+            - label: None
+              value: ""
+            - label: °
+              value: °
+            - label: °F
+              value: °F
+            - label: °C
+              value: °C
+            - label: F
+              value: F
+            - label: C
+              value: C
           custom_value: false
           sort: false
           multiple: false
       default: °
     current_temp_var:
       name: The current outside temperature
-      description: "Select a sensor either from a PWS or a forecast that provides
+      description:
+        "Select a sensor either from a PWS or a forecast that provides
         the current outside temperature you wish to display:\n\n  -  `sensor.openweathermap_feels_like_temperature`\n"
       selector:
         entity:
           domain:
-          - sensor
+            - sensor
           multiple: false
       default: sensor.weatherflow_air_temperature
     color_matrix_json:
       name: Color Matrix
-      description: "The `Color Matrix` will control colors map to temperature ranges
+      description:
+        "The `Color Matrix` will control colors map to temperature ranges
         on the display. The format of this map is **JSON** \nHere you can enter a
         temperature to color mapping. \n> Please note the format is *JSON*,\n        \n\nSome
         possible mappings are:\n#### USA: Farenheit 0-100 (Based on NOAA scale from
@@ -132,23 +139,26 @@ blueprint:
         text:
           multiline: true
           multiple: false
-      default: "{\n  \"0\": \"#FEC4FF\",\n  \"10\": \"#D977DF\",\n  \"20\": \"#9545BC\",\n
+      default:
+        "{\n  \"0\": \"#FEC4FF\",\n  \"10\": \"#D977DF\",\n  \"20\": \"#9545BC\",\n
         \ \"30\": \"#4B379C\",\n  \"40\": \"#31B8DB\",\n  \"50\": \"#31DB8B\",\n  \"60\":
         \"#6ED228\",\n  \"70\": \"#FFFF28\",\n  \"80\": \"#F87E27\",\n  \"90\": \"#CF3927\",\n
         \ \"100\": \"#A12527\"\n}\n"
     moon:
       name: Moon Phase Sensor
-      description: "\U0001F311️\U0001F312️\U0001F313️\U0001F314️\U0001F316️\U0001F317️\U0001F318️\nTo
+      description:
+        "\U0001F311️\U0001F312️\U0001F313️\U0001F314️\U0001F316️\U0001F317️\U0001F318️\nTo
         setup a moon sensor see here: https://www.home-assistant.io/integrations/moon/\nor
         just [clicking here](https://my.home-assistant.io/redirect/config_flow_start?domain=moon)\n"
       selector:
         entity:
           multiple: false
           filter:
-          - integration: moon
+            - integration: moon
     moon_rise_set:
       name: Moon Riese/Set Sensor
-      description: "As Home Assistant doesn't provide moon rise/set times you will
+      description:
+        "As Home Assistant doesn't provide moon rise/set times you will
         need to get this from some api. In my personal setup I use [ipgeolocation](https://app.ipgeolocation.io)
         as my api.\nYou can create a custom REST sensor as follows:\n``` sensor: -
         platform: rest\n  resource: https://api.ipgeolocation.io/astronomy?lat=<LAT>&long=-<LON>&apiKey=<API_KEY>\n
@@ -158,10 +168,11 @@ blueprint:
         entity:
           multiple: false
           filter:
-          - integration: rest
+            - integration: rest
     when_show_moon:
       name: When should the moon be displayed
-      description: "Some people are really into the moon \U0001F43A️ and they are
+      description:
+        "Some people are really into the moon \U0001F43A️ and they are
         called Wearwolves or maybe Astronomers. \n\nPlease select how and when you
         want the moon displayed\n\nBy selecting `Always show moon` the moon will always
         be drawn to the right of the display. Otherwise the moon will only be drawn
@@ -170,21 +181,21 @@ blueprint:
       selector:
         select:
           options:
-          - label: Never show moon
-            value: never
-          - label: Always show moon
-            value: always
-          - label: Only show moon if its risen
-            value: risen
-          - label: Only show moon if risen + night
-            value: night
+            - label: Never show moon
+              value: never
+            - label: Always show moon
+              value: always
+            - label: Only show moon if its risen
+              value: risen
+            - label: Only show moon if risen + night
+              value: night
           custom_value: false
           sort: false
           multiple: false
       default: night
     use_moon_clear_night:
       name: Swap Clear Night for Moon
-      description: '
+      description: "
 
         The default case is for the moon to be drawn to the right-side of the clock,
         however, you have the option if this is selected to repalce the `clear_night`
@@ -216,13 +227,14 @@ blueprint:
         - `waxing_gibbous`
 
         If you wish to use a different icon please enter its text in the box to the
-        right'
+        right"
       selector:
         boolean: {}
       default: true
     use_moon_sunny_night:
       name: Swap Sunny + Night for the Moon
-      description: Some weather integrations may not correctly implement the `clear-night`
+      description:
+        Some weather integrations may not correctly implement the `clear-night`
         weather state. In that case you can use this option to automatically swap
         out the moon for if you have night + sunny
       selector:
@@ -230,7 +242,8 @@ blueprint:
       default: true
     show_sun_rise_set:
       name: ☀️ Show Sunrise/Sunset
-      description: "Prior to both sunrise and sunset times offer a message about pending
+      description:
+        "Prior to both sunrise and sunset times offer a message about pending
         sun transitional state.\n\n               :\n      `.       ;        .'\n
         \       `.  .-'''-.   .'\n          ;'  __   _;'\n         /   '_    _`\\
         \      TURN ME ON!\n        |  _( a (  a  |\n    ''''| (_)    >    |``````\n
@@ -242,7 +255,8 @@ blueprint:
       default: true
     sun_event_minute_threshold:
       name: "Sun Time Prior \U0001F570️"
-      description: "This value controls when to show sunrise/set notifications. \n\nIf
+      description:
+        "This value controls when to show sunrise/set notifications. \n\nIf
         the sunrise will occur in `50` minutes and this value is set to `60` it will
         show, however if this value is only `30` it won't show."
       selector:
@@ -255,21 +269,23 @@ blueprint:
       default: 30
     sun_time_type:
       name: Sun Time Type
-      description: "When showing a notification about sun rise/set it can offer 3
+      description:
+        "When showing a notification about sun rise/set it can offer 3
         different time formats:\n\n  - Relative Time:  `12 min`\n  - Actual Time:
         \ `8:31 pm` or `22:31`\n"
       selector:
         select:
           options:
-          - Relative
-          - Actual
+            - Relative
+            - Actual
           custom_value: false
           sort: false
           multiple: false
       default: Actual
     sun_time_format:
       name: Actual Time Format
-      description: "If you are using actual time you can enter a STRFTIME format string
+      description:
+        "If you are using actual time you can enter a STRFTIME format string
         here for the time. Some options would be:\n\n  - `%H%M` which would render
         `0529`\n  \n  - `%-I%M%p` which woudl render `529AM`\n  - `%-I%:M%p` which
         woudl render `5:29AM`\n\n\n\n  For details see https://strftime.org/\n"
@@ -278,10 +294,11 @@ blueprint:
           type: text
           multiline: false
           multiple: false
-      default: '%-I%M%p'
+      default: "%-I%M%p"
     message_duration_forecast:
       name: Forecast Duration ⏱️
-      description: How long should the forecast message remain on the screen(in seconds).  *If
+      description:
+        How long should the forecast message remain on the screen(in seconds).  *If
         you select `0` it will use the Global App Time*
       selector:
         number:
@@ -293,7 +310,8 @@ blueprint:
       default: 30
     message_duration_riseset:
       name: Sun Rise/Set Duration ⏱️
-      description: How long should the sunrise sunset message remain on the screen(in
+      description:
+        How long should the sunrise sunset message remain on the screen(in
         seconds).  *If you select `0` it will use the Global App Time*
       selector:
         number:
@@ -305,167 +323,178 @@ blueprint:
       default: 30
     icon_clear_night:
       name: Icon for clear-night
-      description: "\nThe default clear_night icon is: \n\n  ![](https://developer.lametric.com/content/apps/icon_thumbs/53383_icon_thumb.gif?v=2)
+      description:
+        "\nThe default clear_night icon is: \n\n  ![](https://developer.lametric.com/content/apps/icon_thumbs/53383_icon_thumb.gif?v=2)
         - `53383`\n"
       selector:
         text: {}
       default: w-clear-night
     icon_cloudy:
       name: Icon for cloudy
-      description: 'This is the icon ID which maps to the weather state: `cloudy`
+      description:
+        "This is the icon ID which maps to the weather state: `cloudy`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/53384_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-cloudy
     icon_exceptional:
       name: Icon for exceptional
-      description: 'This is the icon ID which maps to the weather state: `exceptional`
+      description:
+        "This is the icon ID which maps to the weather state: `exceptional`
 
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/36637_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-exceptional
     icon_fog:
       name: Icon for fog
-      description: 'This is the icon ID which maps to the weather state: `fog`
+      description: "This is the icon ID which maps to the weather state: `fog`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/17055_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-fog
     icon_hail:
       name: Icon for hail
-      description: 'This is the icon ID which maps to the weather state: `hail` (IF
+      description:
+        "This is the icon ID which maps to the weather state: `hail` (IF
         YOU HAVE A BETTER ONE PLEASE LET ME KNOW)
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/53385_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-hail
     icon_lightning:
       name: Icon for lightning
-      description: 'This is the icon ID which maps to the weather state: `lightning`
+      description:
+        "This is the icon ID which maps to the weather state: `lightning`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/29839_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-lightning
     icon_lightning_rainy:
       name: Icon for lightning-rainy
-      description: 'This is the icon ID which maps to the weather state: `lightning-rainy`
+      description:
+        "This is the icon ID which maps to the weather state: `lightning-rainy`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/49299_icon_thumb.gif?v=4)
 
-        '
+        "
       selector:
         text: {}
       default: w-lightning-rainy
     icon_partlycloudy:
       name: Icon for partlycloudy
-      description: "This is the icon ID which maps to the weather state: `partlycloudy`\n
+      description:
+        "This is the icon ID which maps to the weather state: `partlycloudy`\n
         \n![](https://developer.lametric.com/content/apps/icon_thumbs/2286_icon_thumb.gif?v=1)\n"
       selector:
         text: {}
       default: w-partlycloudy
     icon_pouring:
       name: Icon for pouring
-      description: 'This is the default icon which maps to the weather state: `pouring`
+      description:
+        "This is the default icon which maps to the weather state: `pouring`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/49300_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-pouring
     icon_rainy:
       name: Icon for rainy
-      description: 'This is the default icon which maps to the weather state: `rainy`
+      description:
+        "This is the default icon which maps to the weather state: `rainy`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/2720_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-rainy
     icon_snowy:
       name: Icon for snowy
-      description: 'This is the icon ID which maps to the weather state: `snowy`
+      description: "This is the icon ID which maps to the weather state: `snowy`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/2289_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-snowy
     icon_snowy_rainy:
       name: Icon for snowy-rainy
-      description: 'This is the icon ID which maps to the weather state: `snowy-rainy`
+      description:
+        "This is the icon ID which maps to the weather state: `snowy-rainy`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/49301_icon_thumb.gif?v=2)
 
-        '
+        "
       selector:
         text: {}
       default: w-snowy-rainy
     icon_sunny:
       name: Icon for sunny
-      description: 'This is the icon ID which maps to the weather state: `sunny`
+      description: "This is the icon ID which maps to the weather state: `sunny`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/53386_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-sunny
     icon_windy:
       name: Icon for windy
-      description: 'This is the icon ID which maps to the weather state: `windy`
+      description: "This is the icon ID which maps to the weather state: `windy`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/3363_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-windy
     icon_windy_variant:
       name: Icon for windy-variant
-      description: 'This is the icon ID which maps to the weather state: `windy-variant`
+      description:
+        "This is the icon ID which maps to the weather state: `windy-variant`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/3363_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-windy-variant
     icon_sunrise:
       name: Icon for sunrise
-      description: 'This is the icon ID which maps to the `sunrise`
+      description: "This is the icon ID which maps to the `sunrise`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/53418_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-sunrise
     icon_sunset:
       name: Icon for sunset
-      description: 'This is the icon ID which maps to the `sunset`
+      description: "This is the icon ID which maps to the `sunset`
 
         ![](https://developer.lametric.com/content/apps/icon_thumbs/53417_icon_thumb.gif?v=1)
 
-        '
+        "
       selector:
         text: {}
       default: w-sunset
@@ -474,40 +503,43 @@ mode: restart
 variables:
   device_ids: !input awtrix
   app_topic: jeef_weather
-  topics: "{%- macro get_device_topic(device_id) %} {{ states((device_entities(device_id)
+  topics:
+    "{%- macro get_device_topic(device_id) %} {{ states((device_entities(device_id)
     | select('search','device_topic') | list)[0]) }} {%- endmacro %}\n{%- set ns =
     namespace(devices=[]) %} {%- for device_id in device_ids %}\n  {%- set device=get_device_topic(device_id)|replace('
     ','') %}\n  {% set ns.devices = ns.devices + [ device ~ '/custom/' ~ app_topic]
     %}\n{%- endfor %} {{ ns.devices | reject('match','unavailable') | list}}"
   forecast_var: !input forecast_var
-  current_condition: '{{states(forecast_var)}}'
-  current_temp: '{{state_attr(forecast_var,''temperature'')}}'
+  current_condition: "{{states(forecast_var)}}"
+  current_temp: "{{state_attr(forecast_var,'temperature')}}"
   hours_to_show: !input hours_to_show
   moon: !input moon
-  moon_phase: '{{states(moon)}}'
+  moon_phase: "{{states(moon)}}"
   moon_times: !input moon_rise_set
-  moon_rise: '{{state_attr(moon_times,''moonrise'')}}'
-  moon_set: '{{state_attr(moon_times,''moonset'')}}'
-  moon_alt: '{{state_attr(moon_times,''moon_altitude'')}}'
-  moon_risen: '{{moon_alt > 0}}'
+  moon_rise: "{{state_attr(moon_times,'moonrise')}}"
+  moon_set: "{{state_attr(moon_times,'moonset')}}"
+  moon_alt: "{{state_attr(moon_times,'moon_altitude')}}"
+  moon_risen: "{{moon_alt > 0}}"
   when_show_moon: !input when_show_moon
-  show_moon: '{%- if when_show_moon == ''always'' %} True {%- elif when_show_moon
-    == ''never'' %} False {%- elif when_show_moon == ''risen'' %} {{moon_risen}} {%-
-    else %} {{state_attr(''sun.sun'', ''elevation'') < 0 and moon_risen}} {%- endif
-    %}'
+  show_moon: "{%- if when_show_moon == 'always' %} True {%- elif when_show_moon
+    == 'never' %} False {%- elif when_show_moon == 'risen' %} {{moon_risen}} {%-
+    else %} {{state_attr('sun.sun', 'elevation') < 0 and moon_risen}} {%- endif
+    %}"
   message_duration: !input message_duration_forecast
   message_duration_riseset: !input message_duration_riseset
   current_temp_var: !input current_temp_var
   temp_digits: !input temp_digits
   temp_suffix: !input temp_suffix
-  temp_text: "{%- macro round_and_set_temp(temp_var, temp_suffix, digits=0) -%} {%-
+  temp_text:
+    "{%- macro round_and_set_temp(temp_var, temp_suffix, digits=0) -%} {%-
     if has_value(temp_var) -%}\n  {{ states(temp_var) | round(digits) ~ temp_suffix}}
     \n{%- else -%} {{current_temp ~ temp_suffix}} {%- endif -%} {%- endmacro -%} {{
     round_and_set_temp(current_temp_var, temp_suffix, temp_digits)}}"
-  text_available_width: '{%- if show_moon %}16{%- else %}24{%- endif %}
+  text_available_width: "{%- if show_moon %}16{%- else %}24{%- endif %}
 
-    '
-  text_len: "{%- macro get_text_len(string) %} {%- set length = namespace(value=0)
+    "
+  text_len:
+    "{%- macro get_text_len(string) %} {%- set length = namespace(value=0)
     %} {%- for char in string %}\n  {%- if char.isdigit() %}\n    {%- set length.value
     = length.value + 3 %}\n  {%- elif char == '°' %}\n    {%- set length.value = length.value
     + 2 %}\n  {%- elif char == '.' %}\n    {%- set length.value = length.value + 1
@@ -515,23 +547,24 @@ variables:
     + 3 %}\n  {%- else %}\n    {%- set length.value = length.value + 1 %}\n  {%- endif
     %}\n  {%- if not loop.last %}\n    {%- set length.value = length.value + 1 %}{%-
     endif -%}\n{%- endfor -%} {{ length.value }} {%- endmacro %}\n{{get_text_len(temp_text)}}"
-  text_x: '{{8 + ((text_available_width - text_len)/2)}}'
+  text_x: "{{8 + ((text_available_width - text_len)/2)}}"
   sun_event_minute_threshold: !input sun_event_minute_threshold
   sun_time_type: !input sun_time_type
   sun_time_format: !input sun_time_format
   icon_sunrise: !input icon_sunrise
   icon_sunset: !input icon_sunset
   show_sun_rise_set: !input show_sun_rise_set
-  sun_next_event: '{%- set rise = state_attr(''sun.sun'',''next_rising'') %} {%- set
-    set = state_attr(''sun.sun'',''next_setting'') %} {%- set ts_rise = rise |as_timestamp
-    %} {%- set ts_set = set |as_timestamp %} {{ iif(ts_set < ts_rise,''sunset'',''sunrise'')
-    }}'
-  sun_min_until_next_event: '{%- set rise = state_attr(''sun.sun'',''next_rising'')
-    %} {%- set set = state_attr(''sun.sun'',''next_setting'') %} {%- set ts_rise =
+  sun_next_event: "{%- set rise = state_attr('sun.sun','next_rising') %} {%- set
+    set = state_attr('sun.sun','next_setting') %} {%- set ts_rise = rise |as_timestamp
+    %} {%- set ts_set = set |as_timestamp %} {{ iif(ts_set < ts_rise,'sunset','sunrise')
+    }}"
+  sun_min_until_next_event: "{%- set rise = state_attr('sun.sun','next_rising')
+    %} {%- set set = state_attr('sun.sun','next_setting') %} {%- set ts_rise =
     rise |as_timestamp %} {%- set ts_set = set |as_timestamp %} {{ iif(sun_next_event
-    == ''sunrise'',(ts_rise - utcnow()|as_timestamp) / 60,(ts_set - utcnow()|as_timestamp)
-    / 60) | round(0) }}'
-  sun_next_str: "{%- set rise = state_attr('sun.sun','next_rising') %} {%- set set
+    == 'sunrise',(ts_rise - utcnow()|as_timestamp) / 60,(ts_set - utcnow()|as_timestamp)
+    / 60) | round(0) }}"
+  sun_next_str:
+    "{%- set rise = state_attr('sun.sun','next_rising') %} {%- set set
     = state_attr('sun.sun','next_setting') %} {%- set ts_rise = rise |as_timestamp
     %} {%- set ts_set = set |as_timestamp %} {%- if sun_time_type == 'Actual' %}\n
     \ {{ iif(sun_next_event == 'sunrise',(ts_rise | as_datetime | as_local).strftime(sun_time_format),
@@ -542,11 +575,14 @@ variables:
     \"c\":\"#ffffff\"},\n        {\"t\":\"h\", \"c\":\"#9c9d97\"},\n        {\"t\":\"{{remaining_minutes}}\",
     \"c\":\"#ffffff\"},\n        {\"t\":\"m\", \"c\":\"#9c9d97\"}\n    ]\n  {% endif
     %}\n  \n{%- endif %}"
-  sun_event_icon: '{{ iif(sun_next_event == ''sunrise'', icon_sunrise, icon_sunset)
-    }}'
-  sun_event_payload: '{"icon":"{{sun_event_icon}}", "text":"{{sun_next_str}}", "duration":
+  sun_event_icon:
+    "{{ iif(sun_next_event == 'sunrise', icon_sunrise, icon_sunset)
+    }}"
+  sun_event_payload:
+    '{"icon":"{{sun_event_icon}}", "text":"{{sun_next_str}}", "duration":
     {{message_duration_riseset}}}'
-  sun_payload: '{%- if show_sun_rise_set %} {{ iif(sun_event_minute_threshold >= sun_min_until_next_event,
+  sun_payload:
+    '{%- if show_sun_rise_set %} {{ iif(sun_event_minute_threshold >= sun_min_until_next_event,
     sun_event_payload, "{}") }} {%- else %} {} {%- endif %}'
   icon_clear_night: !input icon_clear_night
   use_moon_clear_night: !input use_moon_clear_night
@@ -565,25 +601,29 @@ variables:
   icon_sunny: !input icon_sunny
   icon_windy: !input icon_windy
   icon_windy_variant: !input icon_windy_variant
-  clear_night_dict: "{{ dict({\n  'full_moon': '2314',\n  'waning_gibbous': '2315',\n
+  clear_night_dict:
+    "{{ dict({\n  'full_moon': '2314',\n  'waning_gibbous': '2315',\n
     \ 'last_quarter': '2316',\n  'waning_crescent': '2317',\n  'new_moon': '2318',\n
     \ 'waxing_crescent': '2319',\n  'first_quarter': '2320',\n  'waxing_gibbous':
     '2321'}) }}"
   color_matrix_json: !input color_matrix_json
-  color_dict: "{% set b = color_matrix_json | from_json %}     {%- set ns = namespace(tuples=[])
+  color_dict:
+    "{% set b = color_matrix_json | from_json %}     {%- set ns = namespace(tuples=[])
     %} {%- for k,v in b | items -%}\n  {%- set key = k|float -%}\n  {%- set ns.tuples
     = ns.tuples + [(key,v)] %}      \n{% endfor %} {{ dict.from_keys(ns.tuples) }}"
-  icon_dict: '{{ dict({''clear-night'': icon_clear_night, ''cloudy'': icon_cloudy,
-    ''exceptional'': icon_exceptional, ''fog'': icon_fog, ''hail'': icon_hail, ''lightning'':
-    icon_lightning, ''lightning-rainy'': icon_lightning_rainy, ''partlycloudy'': icon_partlycloudy,
-    ''pouring'': icon_pouring, ''rainy'': icon_rainy, ''snowy'': icon_snowy, ''snowy-rainy'':
-    icon_snowy_rainy, ''sunny'': icon_sunny, ''windy'': icon_windy,  ''windy-variant'':
-    icon_windy_variant})}}'
-  icon: "{%- if ((current_condition == 'clear_night') and use_moon_clear_night) %}\n
+  icon_dict: "{{ dict({'clear-night': icon_clear_night, 'cloudy': icon_cloudy,
+    'exceptional': icon_exceptional, 'fog': icon_fog, 'hail': icon_hail, 'lightning':
+    icon_lightning, 'lightning-rainy': icon_lightning_rainy, 'partlycloudy': icon_partlycloudy,
+    'pouring': icon_pouring, 'rainy': icon_rainy, 'snowy': icon_snowy, 'snowy-rainy':
+    icon_snowy_rainy, 'sunny': icon_sunny, 'windy': icon_windy,  'windy-variant':
+    icon_windy_variant})}}"
+  icon:
+    "{%- if ((current_condition == 'clear_night') and use_moon_clear_night) %}\n
     \ {{clear_night_dict[moon_phase]}}\n{%- elif (sun_next_event == 'sunrise') and
     use_moon_sunny_night and (current_condition == 'sunny') -%}\n  \n{%- else %}\n
     \ {{ icon_dict[current_condition] }}\n{%- endif %}\n"
-  moon_data: "{%- macro draw_moon(phase,x=22,y=0) %}\n  {%- if phase == 'first_quarter'
+  moon_data:
+    "{%- macro draw_moon(phase,x=22,y=0) %}\n  {%- if phase == 'first_quarter'
     \ %}\n    {\"db\":[{{x}},{{y}},8,8,[0,0,3355443,3355443,14079702,14079702,0,0,0,3355443,3355443,3355443,15790320,14079702,14079702,0,3355443,3355443,3355443,3355443,13355979,13355979,14079702,14079702,3355443,3355443,1644825,3355443,13355979,15790320,15790320,14079702,3355443,3355443,1644825,3355443,15790320,15790320,15790320,14079702,3355443,3355443,3355443,3355443,15790320,13355979,14079702,14079702,0,3355443,3355443,3355443,15790320,14079702,14079702,0,0,0,3355443,3355443,14079702,14079702,0,0]]}\n
     \ {%- endif  %}\n  {%- if phase == 'full_moon'  %}\n    {\"db\":[{{x}},{{y}},8,8,[0,0,14079702,14079702,14079702,14079702,0,0,0,14079702,14079702,15790320,15790320,14079702,14079702,0,14079702,14079702,15790320,15790320,11974326,11974326,14079702,14079702,14079702,15790320,11974326,15790320,11974326,15790320,15790320,14079702,14079702,15790320,11974326,15790320,15790320,15790320,15790320,14079702,14079702,14079702,15790320,15790320,15790320,11974326,14079702,14079702,0,14079702,14079702,11974326,15790320,14079702,14079702,0,0,0,14079702,14079702,14079702,14079702,0,0]]}\n
     \ {%- endif  %}\n  {%- if phase == 'last_quarter'  %}\n    {\"db\":[{{x}},{{y}},8,8,[0,0,14079702,14079702,3487029,3487029,0,0,0,14079702,14079702,15790320,3487029,3487029,3487029,0,14079702,14079702,15790320,15790320,1907997,1907997,3487029,3487029,14079702,15790320,13553358,15790320,1907997,3487029,3487029,3487029,14079702,15790320,13553358,15790320,3487029,3487029,3487029,3487029,14079702,14079702,15790320,15790320,3487029,1907997,3487029,3487029,0,14079702,14079702,13553358,3487029,3487029,3487029,0,0,0,14079702,14079702,3487029,3487029,0,0]]}\n
@@ -598,75 +638,76 @@ variables:
     {{draw_moon(moon_phase,0,0)}} {%- else -%} {{draw_moon(moon_phase,23,0)}} {%-
     endif -%}\n"
 trigger:
-- platform: time_pattern
-  seconds: /5
-- platform: state
-  entity_id: !input forecast_var
-  id: Changes
-  enabled: true
+  - platform: time_pattern
+    seconds: /5
+  - platform: state
+    entity_id: !input forecast_var
+    id: Changes
+    enabled: true
 condition: []
 action:
-- service: weather.get_forecasts
-  target:
-    entity_id: '{{forecast_var}}'
-  data:
-    type: hourly
-  response_variable: forecast_response
-- repeat:
-    for_each: '{{ topics }}'
-    sequence:
-    - service: mqtt.publish
-      data:
-        topic: '{{repeat.item}}'
-        payload: "{%- set forecast = forecast_response[forecast_var]['forecast'] -%}
-          {%- macro interpolate(dictionary, x) -%} {%- set sorted_keys = dictionary|dictsort
-          -%} {%- set above = sorted_keys|selectattr('0', 'gt', x)|map(attribute='0')|list|first
-          -%} {%- set below = sorted_keys|selectattr('0', 'lt', x)|map(attribute='0')|list|last
-          -%}\n{#- Key matches x exactly -#} {%- if above is defined and dictionary[above]
-          == x -%}\n  {%- set value = dictionary[above] -%}\n  {{ value }}\n{%- elif
-          below is defined and dictionary[below] == x -%}\n  {%- set value = dictionary[below]
-          -%}\n  {{ value }}\n{#- Interpolation between two values -#} {%- elif below
-          is defined and above is defined -%}\n  {%- set lower_value = dictionary[below]
-          -%}\n  {%- set upper_value = dictionary[above] -%}\n  {%- set lower_rgb
-          = lower_value[1:] -%}\n  {%- set upper_rgb = upper_value[1:] -%}\n\n  {%-
-          set lower_r = lower_rgb[0:2]|int(base=16) -%}\n  {%- set lower_g = lower_rgb[2:4]|int(base=16)
-          -%}\n  {%- set lower_b = lower_rgb[4:6]|int(base=16) -%}\n\n  {%- set upper_r
-          = upper_rgb[0:2]|int(base=16) -%}\n  {%- set upper_g = upper_rgb[2:4]|int(base=16)
-          -%}\n  {%- set upper_b = upper_rgb[4:6]|int(base=16) -%}\n\n  {%- set interpolation_factor
-          = (x - below) / (above - below) -%}\n  {%- set interpolated_r = ((1 - interpolation_factor)
-          * lower_r + interpolation_factor * upper_r)|int -%}\n  {%- set interpolated_g
-          = ((1 - interpolation_factor) * lower_g + interpolation_factor * upper_g)|int
-          -%}\n  {%- set interpolated_b = ((1 - interpolation_factor) * lower_b +
-          interpolation_factor * upper_b)|int -%}\n\n  {%- set interpolated_hex =
-          '#' ~ '%02X' % interpolated_r ~ '%02X' % interpolated_g ~ '%02X' % interpolated_b
-          -%}\n  {{ interpolated_hex }}\n{#- Only below key available -#} {%- elif
-          below is defined -%}\n  {%- set value = dictionary[below] -%}\n  {{ value
-          }}\n{#- Only above key available -#} {%- elif above is defined -%}\n  {%-
-          set value = dictionary[above] -%}\n  {{ value }}\n{#- No matching keys available
-          -#} {%- else -%}\n  No matching key found.\n{%- endif -%} {%- endmacro -%}\n{#-
-          Define macro to get length of the forecast -#} {%- macro str_len(stringo)
-          %} {%- if '.' in stringo %} {%- set char_count = (stringo | length) -1 %}{{char_count
-          * 3 + 1 + char_count}} {%- else %} {%- set char_count = (stringo | length)
-          %}{{char_count * 3 + (char_count - 1)}} {%- endif %} {%- endmacro %}\n{#-
-          Define a macro to draw out the forecast lines#}\n  {%- macro draw_forecast_lines(x,hours,height)
-          %}\n    {%- for hour in range(hours) %}\n      {%- if height == 0 %}\n        {\"dp\":
-          [{{x+hour}},7,\"{{interpolate(color_dict, forecast[hour]['temperature'])
-          }}\"]}\n      {%- else %}\n        {\"dl\": [{{x+hour}},7,{{x+hour}},{{7
-          - height}},\"{{interpolate(color_dict, forecast[hour]['temperature']) }}\"]}\n
-          \     {%- endif %}\n      {%- if hour+1 != hours %},{%endif%}\n    {%- endfor
-          %}\n  {%- endmacro %}\n\n  {\n    \"draw\": [\n      {%- if hours_to_show
-          > 0 %}\n      {{draw_forecast_lines(8,hours_to_show,0)}}\n    {%- endif
-          %}\n    {%- if current_temp != 'unavailable' -%}\n    ,{\"dt\":[{{text_x}},1,\"{{temp_text}}\",\"{{interpolate(color_dict,
-          current_temp | float)}}\"]}\n    {%- else -%}\n    {\"dt\":\"err\"}\n    {%-
-          endif -%}\n\n    {% if show_moon %}\n    ,{{moon_data}}\n    {% endif %}\n
-          \   ],\n    \"icon\": \"{{icon}}\",\n    \"duration\": {{message_duration}},\n
-          \   \"pushIcon\": 2,\n    \"lifetime\": 120,\n    \"lifetimeMode\":1,\n
-          \   \"weather\": \"{{current_condition}}\"\n    }"
-    - service: mqtt.publish
-      data:
-        qos: 0
-        retain: false
-        topic: '{{ repeat.item ~ ''_sun''}} '
-        payload: '{{sun_payload}}
+  - service: weather.get_forecasts
+    target:
+      entity_id: "{{forecast_var}}"
+    data:
+      type: hourly
+    response_variable: forecast_response
+  - repeat:
+      for_each: "{{ topics }}"
+      sequence:
+        - service: mqtt.publish
+          data:
+            topic: "{{repeat.item}}"
+            payload:
+              "{%- set forecast = forecast_response[forecast_var]['forecast'] -%}
+              {%- macro interpolate(dictionary, x) -%} {%- set sorted_keys = dictionary|dictsort
+              -%} {%- set above = sorted_keys|selectattr('0', 'gt', x)|map(attribute='0')|list|first
+              -%} {%- set below = sorted_keys|selectattr('0', 'lt', x)|map(attribute='0')|list|last
+              -%}\n{#- Key matches x exactly -#} {%- if above is defined and dictionary[above]
+              == x -%}\n  {%- set value = dictionary[above] -%}\n  {{ value }}\n{%- elif
+              below is defined and dictionary[below] == x -%}\n  {%- set value = dictionary[below]
+              -%}\n  {{ value }}\n{#- Interpolation between two values -#} {%- elif below
+              is defined and above is defined -%}\n  {%- set lower_value = dictionary[below]
+              -%}\n  {%- set upper_value = dictionary[above] -%}\n  {%- set lower_rgb
+              = lower_value[1:] -%}\n  {%- set upper_rgb = upper_value[1:] -%}\n\n  {%-
+              set lower_r = lower_rgb[0:2]|int(base=16) -%}\n  {%- set lower_g = lower_rgb[2:4]|int(base=16)
+              -%}\n  {%- set lower_b = lower_rgb[4:6]|int(base=16) -%}\n\n  {%- set upper_r
+              = upper_rgb[0:2]|int(base=16) -%}\n  {%- set upper_g = upper_rgb[2:4]|int(base=16)
+              -%}\n  {%- set upper_b = upper_rgb[4:6]|int(base=16) -%}\n\n  {%- set interpolation_factor
+              = (x - below) / (above - below) -%}\n  {%- set interpolated_r = ((1 - interpolation_factor)
+              * lower_r + interpolation_factor * upper_r)|int -%}\n  {%- set interpolated_g
+              = ((1 - interpolation_factor) * lower_g + interpolation_factor * upper_g)|int
+              -%}\n  {%- set interpolated_b = ((1 - interpolation_factor) * lower_b +
+              interpolation_factor * upper_b)|int -%}\n\n  {%- set interpolated_hex =
+              '#' ~ '%02X' % interpolated_r ~ '%02X' % interpolated_g ~ '%02X' % interpolated_b
+              -%}\n  {{ interpolated_hex }}\n{#- Only below key available -#} {%- elif
+              below is defined -%}\n  {%- set value = dictionary[below] -%}\n  {{ value
+              }}\n{#- Only above key available -#} {%- elif above is defined -%}\n  {%-
+              set value = dictionary[above] -%}\n  {{ value }}\n{#- No matching keys available
+              -#} {%- else -%}\n  No matching key found.\n{%- endif -%} {%- endmacro -%}\n{#-
+              Define macro to get length of the forecast -#} {%- macro str_len(stringo)
+              %} {%- if '.' in stringo %} {%- set char_count = (stringo | length) -1 %}{{char_count
+              * 3 + 1 + char_count}} {%- else %} {%- set char_count = (stringo | length)
+              %}{{char_count * 3 + (char_count - 1)}} {%- endif %} {%- endmacro %}\n{#-
+              Define a macro to draw out the forecast lines#}\n  {%- macro draw_forecast_lines(x,hours,height)
+              %}\n    {%- for hour in range(hours) %}\n      {%- if height == 0 %}\n        {\"dp\":
+              [{{x+hour}},7,\"{{interpolate(color_dict, forecast[hour]['temperature'])
+              }}\"]}\n      {%- else %}\n        {\"dl\": [{{x+hour}},7,{{x+hour}},{{7
+              - height}},\"{{interpolate(color_dict, forecast[hour]['temperature']) }}\"]}\n
+              \     {%- endif %}\n      {%- if hour+1 != hours %},{%endif%}\n    {%- endfor
+              %}\n  {%- endmacro %}\n\n  {\n    \"draw\": [\n      {%- if hours_to_show
+              > 0 %}\n      {{draw_forecast_lines(8,hours_to_show,0)}}\n    {%- endif
+              %}\n    {%- if current_temp != 'unavailable' -%}\n    ,{\"dt\":[{{text_x}},1,\"{{temp_text}}\",\"{{interpolate(color_dict,
+              current_temp | float)}}\"]}\n    {%- else -%}\n    {\"dt\":\"err\"}\n    {%-
+              endif -%}\n\n    {% if show_moon %}\n    ,{{moon_data}}\n    {% endif %}\n
+              \   ],\n    \"icon\": \"{{icon}}\",\n    \"duration\": {{message_duration}},\n
+              \   \"pushIcon\": 2,\n    \"lifetime\": 120,\n    \"lifetimeMode\":1,\n
+              \   \"weather\": \"{{current_condition}}\"\n    }"
+        - service: mqtt.publish
+          data:
+            qos: 0
+            retain: false
+            topic: "{{ repeat.item ~ '_sun'}} "
+            payload: "{{sun_payload}}
 
-          '
+              "
