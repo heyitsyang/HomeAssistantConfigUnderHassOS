@@ -209,11 +209,6 @@ scr_common_extended_absence_on:
     - service: homeassistant.turn_off
       target:
         entity_id: group.all_lighting_xabove_cabinet
-    - service: switch.turn_off
-      target:
-        entity_id:
-          - switch.photoframe_lg_power
-          - switch.photoframe_sm_power
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
@@ -243,8 +238,6 @@ scr_common_extended_absence_off:
         entity_id:
           - switch.lg_garage_opener_power
           - switch.sm_garage_opener_power
-          - switch.photoframe_lg_power
-          - switch.photoframe_sm_power
     - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
