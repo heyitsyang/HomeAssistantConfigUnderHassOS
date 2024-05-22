@@ -1326,11 +1326,11 @@
   trigger: # trigger on each indiv in case one is already home
     - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'sensor.home_yang_distance') | float(default=99)) <= 0.2)
+        {{ ((states( 'sensor.home_yang_distance') | float(default=99)) <= 0.3)
         and (states('sensor.home_yang_direction_of_travel') == 'towards')}}
     - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'sensor.home_karen_distance') | float(default=99)) <= 0.2)
+        {{ ((states( 'sensor.home_karen_distance') | float(default=99)) <= 0.3)
         and (states('sensor.home_karen_direction_of_travel') == 'towards')}}
   action:
     - service: script.scr_front_door_lights_on
@@ -1479,9 +1479,6 @@
     - platform: template
       value_template: >-
         {{ (is_state('binary_sensor.doorbell_zone_person_occupancy', 'on')) and (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
-    # - platform: template
-    #   value_template: >-
-    #     {{ (is_state('binary_sensor.frontporch_zone_person_occupancy', 'on')) and (is_state('binary_sensor.front_ent_soffit_uwave', 'on')) }}
     - platform: template
       value_template: >-
         {{ (is_state('binary_sensor.frontporch_motion', 'on')) and (is_state('binary_sensor.doorbell_zone_person_occupancy', 'on')) }}
