@@ -1326,11 +1326,11 @@
   trigger: # trigger on each indiv in case one is already home
     - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'sensor.home_yang_distance') | float(default=99)) <= 0.3)
+        {{ ((states( 'sensor.home_yang_distance') | float(default=99)) <= 0.2)
         and (states('sensor.home_yang_direction_of_travel') == 'towards')}}
     - platform: template # default=99 if proximity is non-numeric
       value_template: >-
-        {{ ((states( 'sensor.home_karen_distance') | float(default=99)) <= 0.3)
+        {{ ((states( 'sensor.home_karen_distance') | float(default=99)) <= 0.2)
         and (states('sensor.home_karen_direction_of_travel') == 'towards')}}
   action:
     - service: script.scr_front_door_lights_on
