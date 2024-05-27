@@ -1,0 +1,31 @@
+esphome:
+  name: office-voice-assistant
+  friendly_name: office-voice-assistant
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "2/Yyby1/qToSSreyyviWr7JZg6yDpe2e9561WC4XLGI="
+
+ota:
+  password: "d34edf58ec189bf2aa16f34bd66ef38b"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Office-Voice-Assistant"
+    password: "Epx9HzLv7Ys6"
+
+captive_portal:
+    

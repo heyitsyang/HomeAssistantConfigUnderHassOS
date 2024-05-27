@@ -1,0 +1,18 @@
+substitutions:
+  name: voice-assistant-office
+  friendly_name: voice-assistant-office
+packages:
+  esphome.voice-assistant: github://esphome/firmware/wake-word-voice-assistant/esp32-s3-box-3.yaml@main
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
+api:
+  encryption:
+    key: f4cetejoMt0wriDa+9W5lD5kbAkLM9Gm/jEUNAkNoMk=
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  domain: ".shencentral.net"
