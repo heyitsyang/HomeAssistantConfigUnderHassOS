@@ -15,23 +15,23 @@ sensor:
     unit_of_measurement: "%"
     qos: 0
 
-  - unique_name: drybox_report_timestamp
+  - unique_id: drybox_report_timestamp
     name: "Drybox Last Report Time"
     state_topic: "drybox/time_stamp"
     qos: 0
 
-  - unique_name: drybox_humidity
+  - unique_id: drybox_humidity
     name: "Drybox Humidity"
     state_topic: "drybox/humidity"
     device_class: humidity
-    unit_of_measure: "%"
+    unit_of_measurement: "%"
     qos: 0
 
-  - unique_name: drybox_temperture
+  - unique_id: drybox_temperture
     name: "Drybox Temperature"
     state_topic: "drybox/temperature"
     device_class: temperature
-    unit_of_measure: "°F"
+    unit_of_measurement: "°F"
     qos: 0
 
   # irrigation leak sensors
