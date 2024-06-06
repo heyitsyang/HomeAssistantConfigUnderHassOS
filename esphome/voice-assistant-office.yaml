@@ -7,6 +7,11 @@ esphome:
   name: ${name}
   name_add_mac_suffix: false
   friendly_name: ${friendly_name}
+esp32:
+  framework:
+    type: esp-idf
+    version: 4.4.6
+
 api:
   encryption:
     key: q/YOne/HM0xJFxQo02lKidZ5fCQ5FdXmEQSTW4SQ5Ww=
