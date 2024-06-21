@@ -38,7 +38,8 @@ api:
     key: "sOo2TcX3/kdZRzPGxt7KZw9nfxfglTKIE+g3dl3238g="
 
 ota:
-  password: "ce50277556e728e4fe5f68f177998432"
+  - platform: esphome
+    password: "ce50277556e728e4fe5f68f177998432"
 
 wifi:
   ssid: !secret wifi_ssid
