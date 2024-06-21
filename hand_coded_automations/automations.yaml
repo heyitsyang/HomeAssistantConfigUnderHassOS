@@ -2177,6 +2177,26 @@
             Your current version is {{states("sensor.current_version")}}.
             See https://github.com/home-assistant/home-assistant/releases
 
+- id: aut_new_hacs_updates
+  alias: New HACS Updates (Persistent Notification)"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.hacs
+  condition:
+    - condition: template
+      value_template: '{{ states("sensor.hacs") | int != 0 }}'
+  action:
+    - service: persistent_notification.create
+      data:
+        message: >
+          New HACS Updates:{{ "\n\n" }} {%- for rep in state_attr('sensor.hacs',
+          'repositories') -%} - {{rep.display_name }}
+              {{ "&nbsp;&nbsp;&nbsp;&nbsp;" }}Current: {{rep.installed_version }}
+              {{ "&nbsp;&nbsp;&nbsp;&nbsp;" }}Latest: {{rep.available_version }}
+          {%- endfor -%}
+
 #####################################
 #    Security & House Modes         #
 #####################################
