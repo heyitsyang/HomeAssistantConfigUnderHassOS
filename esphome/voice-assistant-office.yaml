@@ -1,23 +1,64 @@
+#------------------------------------------------------------------------------------#
+#     PIN Schematics for ESP32-S3-BOX-3                                              #
+#                                                                                    #
+#       GPIO-00 MCU-BOOT                                                             #
+#       GPIO-01 Speaker Mute-Status                                                  #
+#       GPIO-02 I2S MCLK                                                             #
+#       GPIO-03 Touch-Screen TT21100 Interrupt Pin                                   #
+#       GPIO-04 ILI92xxx Display DC-Pin (SPI: CLK-Pin)                               #
+#       GPIO-05 ILI92xxx Display CS-Pin (SPI: MOSI-Pin)                              #
+#       GPIO-06 ILI92xxx Display SDA                                                 #
+#       GPIO-07 ILI92xxx Display SCK                                                 #
+#       GPIO-17 I2S_SCLK                                                             #
+#       GPIO-40 I2C_SCL (Temp & Hum) -- SENSOR v1.1 [AHT30]                          #
+#       GPIO-41 I2C_SDA (Temp & Hum) -- SENSOR v1.1 [AHT30]                          #
+#------------------------------------------------------------------------------------#
+
 substitutions:
   name: voice-assistant-office
   friendly_name: voice-assistant-office
 packages:
   esphome.voice-assistant: github://esphome/firmware/wake-word-voice-assistant/esp32-s3-box-3.yaml@main
+
+esp32:
+  framework:
+    type: esp-idf
+    version: 4.4.6 # workaround for https://github.com/esphome/issues/issues/5791
+
 esphome:
   name: ${name}
   name_add_mac_suffix: false
   friendly_name: ${friendly_name}
-esp32:
-  framework:
-    type: esp-idf
-    version: 4.4.6
+  on_boot:
+    then:
+      - lambda: |-
+          auto volume_component = id(speaker_volume);
+          volume_component->set_volume(0.9);
+
+external_components:
+  - source: github://sammcj/esphome-esp-s3-box-3-volume@main
+    components: [esp_box_volume]
+    refresh: always
+  - source: github://pr#5230
+    components: esp_adf
 
 api:
   encryption:
     key: q/YOne/HM0xJFxQo02lKidZ5fCQ5FdXmEQSTW4SQ5Ww=
 
-
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   domain: ".shencentral.net"
+
+voice_assistant:
+  volume_multiplier: 4
+  microphone: box_mic
+  speaker: box_speaker
+  use_wake_word: true
+  noise_suppression_level: 2
+  auto_gain: 31dBFS
+  vad_threshold: 3
+
+esp_box_volume:
+  id: speaker_volume
