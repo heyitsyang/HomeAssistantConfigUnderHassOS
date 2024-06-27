@@ -23,7 +23,6 @@ packages:
 esp32:
   framework:
     type: esp-idf
-    version: 4.4.6 # workaround for https://github.com/esphome/issues/issues/5791
 
 esphome:
   name: ${name}
@@ -62,3 +61,22 @@ voice_assistant:
 
 esp_box_volume:
   id: speaker_volume
+
+switch:
+  - platform: template
+    name: "Set Volume to 80%"
+    optimistic: true
+    on_turn_on:
+      - lambda: id(speaker_volume).set_volume(0.80);
+
+  - platform: template
+    name: "Set Volume to 85%"
+    optimistic: true
+    on_turn_on:
+      - lambda: id(speaker_volume).set_volume(0.85);
+
+  - platform: template
+    name: "Set Volume to 90%"
+    optimistic: true
+    on_turn_on:
+      - lambda: id(speaker_volume).set_volume(0.90);
