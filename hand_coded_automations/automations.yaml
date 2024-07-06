@@ -679,6 +679,104 @@
     - service: hassio.host_shutdown
 
 #
+# IRRIGATION LEAKS
+#
+- id: irrig_leak_while_valves_off
+  alias: "irrig leak while valves off"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.irrig_report_avg_gpm_zone_0
+      above: 0
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Irrig leak detected while all valves off: {{ states('sensor.irrig_report_avg_gpm_zone_0') }} GPM"
+        message: "Irrig leak detected while all valves off: {{ states('sensor.irrig_report_avg_gpm_zone_0') }} GPM"
+        data:
+          car_ui: true
+    - service: notify.gmail_to_yang
+      data:
+        title: "Irrig leak detected while valves all off: {{ states('sensor.irrig_report_avg_gpm_zone_0') }} GPM"
+        message: "Irrig leak detected while valves all off: {{ states('sensor.irrig_report_avg_gpm_zone_0') }} GPM"
+
+- id: irrig_leak_zone_1_front
+  alias: "irrig leak zone 1 front"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.irrig_report_avg_gpm_zone_1
+      above: input_number.irrig_z1_front_yd_gpm_limit
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Irrig leak detected in zone 1 (front): {{ states('sensor.irrig_report_avg_gpm_zone_1') }} GPM"
+        message: "Irrig leak detected in zone 1 (front): {{ states('sensor.irrig_report_avg_gpm_zone_1') }} GPM"
+        data:
+          car_ui: true
+    - service: notify.gmail_to_yang
+      data:
+        title: "Irrig leak detected in zone 1 (front): {{ states('sensor.irrig_report_avg_gpm_zone_1') }} GPM"
+        message: "Irrig leak detected in zone 1 (front): {{ states('sensor.irrig_report_avg_gpm_zone_1') }} GPM"
+
+- id: irrig_leak_zone_2_drip
+  alias: "irrig leak zone 2 drip"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.irrig_report_avg_gpm_zone_2
+      above: input_number.irrig_z2_drip_gpm_limit
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Irrig leak detected in zone 2 (drip): {{ states('sensor.irrig_report_avg_gpm_zone_2') }} GPM"
+        message: "Irrig leak detected in zone 2 (drip): {{ states('sensor.irrig_report_avg_gpm_zone_2') }} GPM"
+        data:
+          car_ui: true
+    - service: notify.gmail_to_yang
+      data:
+        title: "Irrig leak detected in zone 2 (drip): {{ states('sensor.irrig_report_avg_gpm_zone_2') }} GPM"
+        message: "Irrig leak detected in zone 2 (drip): {{ states('sensor.irrig_report_avg_gpm_zone_2') }} GPM"
+
+- id: irrig_leak_zone_3_right
+  alias: "irrig leak zone 3 right"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.irrig_report_avg_gpm_zone_3
+      above: input_number.irrig_z3_right_yd_gpm_limit
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Irrig leak detected in zone 3 (right): {{ states('sensor.irrig_report_avg_gpm_zone_3') }} GPM"
+        message: "Irrig leak detected in zone 3 (right): {{ states('sensor.irrig_report_avg_gpm_zone_3') }} GPM"
+        data:
+          car_ui: true
+    - service: notify.gmail_to_yang
+      data:
+        title: "Irrig leak detected in zone 3 (right): {{ states('sensor.irrig_report_avg_gpm_zone_3') }} GPM"
+        message: "Irrig leak detected in zone 3 (right): {{ states('sensor.irrig_report_avg_gpm_zone_3') }} GPM"
+
+- id: irrig_leak_zone_4_left
+  alias: "irrig leak zone 4 left"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.irrig_report_avg_gpm_zone_4
+      above: input_number.irrig_z4_left_yd_gpm_limit
+  action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "Irrig leak detected in zone 4 (left): {{ states('sensor.irrig_report_avg_gpm_zone_4') }} GPM"
+        message: "Irrig leak detected in zone 4 (left): {{ states('sensor.irrig_report_avg_gpm_zone_4') }} GPM"
+        data:
+          car_ui: true
+    - service: notify.gmail_to_yang
+      data:
+        title: "Irrig leak detected in zone 4 (left): {{ states('sensor.irrig_report_avg_gpm_zone_4') }} GPM"
+        message: "Irrig leak detected in zone 4 (left): {{ states('sensor.irrig_report_avg_gpm_zone_4') }} GPM"
+
+#
 # WATER EXPANSION TANK FAULT
 #
 - id: aut_expansion_tank_fault
