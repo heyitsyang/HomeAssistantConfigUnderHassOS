@@ -15,14 +15,10 @@
 #------------------------------------------------------------------------------------#
 
 substitutions:
-  name: voice-assistant-office
+  name: "voice-assistant-office"
   friendly_name: voice-assistant-office
 packages:
   esphome.voice-assistant: github://esphome/firmware/wake-word-voice-assistant/esp32-s3-box-3.yaml@main
-
-esp32:
-  framework:
-    type: esp-idf
 
 esphome:
   name: ${name}
