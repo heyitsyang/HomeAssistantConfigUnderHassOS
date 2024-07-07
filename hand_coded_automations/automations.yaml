@@ -685,9 +685,9 @@
   alias: "irrig leak while valves off"
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.irrig_report_avg_gpm_zone_0
-      above: 0
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.irrig_report_avg_gpm_zone_0') | float(default=0)) > 0 }}
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -704,9 +704,9 @@
   alias: "irrig leak zone 1 front"
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.irrig_report_avg_gpm_zone_1
-      above: "{{ states('input_number.irrig_z1_front_yd_gpm_limit') | float(default=7) }}"
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.irrig_report_avg_gpm_zone_1') | float(default=0)) > states('input_number.irrig_z1_front_yd_gpm_limit') | float(default=7) }}
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -723,9 +723,9 @@
   alias: "irrig leak zone 2 drip"
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.irrig_report_avg_gpm_zone_2
-      above: "{{ states('input_number.irrig_z2_drip_gpm_limit') | float(default=5) }}"
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.irrig_report_avg_gpm_zone_2') | float(default=0)) > states('input_number.irrig_z2_drip_gpm_limit') | float(default=5) }}
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -742,9 +742,9 @@
   alias: "irrig leak zone 3 right"
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.irrig_report_avg_gpm_zone_3
-      above: "{{ states('input_number.irrig_z3_right_yd_gpm_limit') | float(default=10) }}"
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.irrig_report_avg_gpm_zone_3') | float(default=0)) > states('input_number.irrig_z3_right_yd_gpm_limit') | float(default=10) }}
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -761,9 +761,9 @@
   alias: "irrig leak zone 4 left"
   initial_state: true
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.irrig_report_avg_gpm_zone_4
-      above: "{{ states('input_number.irrig_z4_left_yd_gpm_limit') | float(default=13) }}"
+    - platform: template
+      value_template: >-
+        {{ (states('sensor.irrig_report_avg_gpm_zone_4') | float(default=0)) > states('input_number.irrig_z4_left_yd_gpm_limit') | float(default=13) }}
   action:
     - service: notify.mobile_app_yskt_cell
       data:
