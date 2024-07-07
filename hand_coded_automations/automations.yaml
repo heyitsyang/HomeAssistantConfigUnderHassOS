@@ -706,7 +706,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.irrig_report_avg_gpm_zone_1
-      above: "{{ states('input_number.irrig_z1_front_yd_gpm_limit') | int(default=7) }}"
+      above: "{{ states('input_number.irrig_z1_front_yd_gpm_limit') | float(default=7) }}"
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -725,7 +725,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.irrig_report_avg_gpm_zone_2
-      above: "{{ states('input_number.irrig_z2_drip_gpm_limit') | int(default=5) }}"
+      above: "{{ states('input_number.irrig_z2_drip_gpm_limit') | float(default=5) }}"
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -744,7 +744,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.irrig_report_avg_gpm_zone_3
-      above: "{{ states('input_number.irrig_z3_right_yd_gpm_limit') | int(default=10) }}"
+      above: "{{ states('input_number.irrig_z3_right_yd_gpm_limit') | float(default=10) }}"
   action:
     - service: notify.mobile_app_yskt_cell
       data:
@@ -763,7 +763,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.irrig_report_avg_gpm_zone_4
-      above: "{{ states('input_number.irrig_z4_left_yd_gpm_limit') | int(default=13) }}"
+      above: "{{ states('input_number.irrig_z4_left_yd_gpm_limit') | float(default=13) }}"
   action:
     - service: notify.mobile_app_yskt_cell
       data:
