@@ -173,9 +173,9 @@ sensor.master_bedroom_temperature:
   friendly_name: Master Bedroom Temperature
   icon: mdi:thermometer
   device_class: temperature
-sensor.10m_avg_master_bedroom_temperature:
-  icon: mdi:format-align-middle
-  unit_of_measurement: ºF
+# sensor.10m_avg_master_bedroom_temperature:
+#   icon: mdi:format-align-middle
+#   unit_of_measurement: ºF
 sensor.garage_temperature:
   friendly_name: Garage Temperature
   icon: mdi:thermometer

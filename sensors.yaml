@@ -37,12 +37,12 @@
   max_age:
     hours: 24
 
-- platform: statistics
-  name: "10m Avg Master Bedroom Temperature"
-  entity_id: sensor.espresense_masterbdrm_ds18b20_temperature
-  state_characteristic: mean
-  sampling_size: 600 # default state value is the running average of this many samples
-  precision: 1 # number of decimal places
+# - platform: statistics
+#   name: "10m Avg Master Bedroom Temperature"
+#   entity_id: sensor.espresense_masterbdrm_ds18b20_temperature
+#   state_characteristic: mean
+#   sampling_size: 600 # default state value is the running average of this many samples
+#   precision: 2 # number of decimal places
 
 - platform: filter
   name: "Filtered Living Rm Visible Light"

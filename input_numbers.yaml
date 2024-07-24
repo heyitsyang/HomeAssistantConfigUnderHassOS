@@ -155,7 +155,7 @@ inp_num_spt_duration:
 inp_num_masterbdrmfan_on_temp:
   name: "MstBdrm Fan ON"
   mode: box
-  step: 1
+  step: .5
   min: 65
   max: 85
   icon: mdi:fan
@@ -164,7 +164,7 @@ inp_num_masterbdrmfan_on_temp:
 inp_num_masterbdrmfan_off_temp:
   name: "MstBdrm Fan OFF"
   mode: box
-  step: 1
+  step: .5
   min: 65
   max: 85
   icon: mdi:fan-off
