@@ -767,7 +767,7 @@ scr_say_phrase:
             - service: media_player.volume_set
               data:
                 entity_id: media_player.garage_speakers
-                volume_level: "{{ '%0.2f' | format(states('input_number.garage_announce_vol') | float(default=0)  + 0.25) }}}" # set high priority speaking volume
+                volume_level: "{{ '%0.2f' | format(states('input_number.garage_announce_vol') | float(default=0)  + 0.25) }}" # set high priority speaking volume
             - choose:
                 - conditions:
                     - condition: state
