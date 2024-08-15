@@ -142,7 +142,7 @@ scr_spt_start:
     - service: mqtt.publish
       data:
         topic: watermain/cmd/sptDuration
-        payload_template: "{{ states('input_number.inp_num_spt_duration') }}"
+        payload: "{{ states('input_number.inp_num_spt_duration') }}"
     - service: mqtt.publish
       data:
         topic: watermain/cmd/sptStart
