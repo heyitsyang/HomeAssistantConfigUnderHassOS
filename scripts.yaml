@@ -587,10 +587,10 @@ scr_turn_on_kitchen_leds_upper:
       then:
         - service: light.turn_on
           target:
-            entity_id: light.kitchen_leds_upper_master
+            entity_id: light.kitchen_leds_upper
         - service: light.turn_on
           target:
-            entity_id: light.kitchen_leds_upper
+            entity_id: light.kitchen_leds_upper_master
         - service: select.select_option
           target:
             entity_id: select.kitchen_leds_upper_preset
