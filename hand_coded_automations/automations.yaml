@@ -857,7 +857,7 @@
           Leaky irrigation valve detected: {{ states('sensor.irrig_report_valve_leak_gallons') }} gallons
           were measured between watering cycles or when the valves should have been off.
 
-# HOUSE WATER
+# WHOLE HOUSE WATER
 - id: aut_spt_leak_notify
   alias: "aut spt leak notify"
   initial_state: true
@@ -881,6 +881,14 @@
   #        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) <
   #           (-0.028125 * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
   action:
+    - service: notify.mobile_app_yskt_cell
+      data:
+        title: "SPT water leak detected"
+        message: |
+          Leak detected during Static Pressure Test!
+          Test ended: {{ states('sensor.last_static_pressure_test') }}
+          Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') | float(default=0) }}
+          Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}
     - service: notify.gmail_to_yang
       data:
         title: "SPT water leak detected"
