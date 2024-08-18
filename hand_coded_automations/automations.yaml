@@ -165,14 +165,14 @@
         message: "SPT consecutive aborts: {{ state_attr('sensor.spt_data_status', 'consec_aborts') }}"
 
 #
-# START VACUUM
+# START VACUUM (ROSIE)
 #
 - id: aut_start_vacuum
   alias: "aut start vacuum"
   initial_state: true
   trigger:
     - platform: time
-      at: "09:35:00"
+      at: "08:05:00"
   condition:
     - condition: time
       weekday:
