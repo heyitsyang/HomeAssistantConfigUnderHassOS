@@ -2,6 +2,8 @@
 
 This repository contains my Home Assistant configuration files.
 
+Note my hand written yaml automations are in the file *config/hand_coded_automations/automations.yaml*.  Any automations created using the UI are in the normal *config/automations.yaml* file.  I do this because the UI code generator removes comments and reorders the code to its liking and I didn't want that to happen to my extensive (pre-UI) hands-written yaml code.
+
 ## My partial list of devices integrated with Home Assistant
 
 **Connected via Zooz 700 Series Z-Wave Dongle**
@@ -32,10 +34,9 @@ This repository contains my Home Assistant configuration files.
 - OPNSense Router
 - Sonos WiFi/Ethernet Speakers
 - Ambient Weather WS-0900-IP Weather Station
-- Misc ONVIF/RTSP capable network cameras
+- Misc ONVIF/RTSP capable network cameras via Frigate
 - ESPresense Bluetooth Presence Detection
 - Flux LED strip controllers
 - LG washer & dryer
 - Xiaomi/Aquara zigbee buttons
 - Weber iGrill
-- Xiaomi Miscale2 body Composition Scale
