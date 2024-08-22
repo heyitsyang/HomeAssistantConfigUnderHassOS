@@ -69,6 +69,7 @@ include:
     - sensor.irrig_*
 
   entities:
+    - input_number.loss_per_minute_alarm_threshold
     - binary_sensor.dishwasher_on_or_off
     - binary_sensor.water_heater
     - binary_sensor.air_handler
@@ -81,5 +82,7 @@ include:
     - sensor.statistical_mean_living_rm_visible_light
     - sensor.filtered_living_rm_visible_light
     - sensor.raw_living_rm_visible_light
-    - input_number.loss_per_minute_alarm_threshold
+    - sensor.drybox_temperature
+    - sensor.drybox_humidity
+
 # EVERYTHING ELSE IS IMPLICITLY EXCLUDED
