@@ -229,7 +229,7 @@
 
 - sensor:
     - name: weather_hourly_next_8
-      unique_id: weather_hourly_next_8
+      unique_id: weather_hourly_next_8 # updates whenever sensor.openweathermap_forcast_hourly changes
       state: >-
         {%- for i in state_attr('sensor.openweathermap_forecast_hourly', 'forecast') -%}
           {%- if(loop.index <= 8) -%}
