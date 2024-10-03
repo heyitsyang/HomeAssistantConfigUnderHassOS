@@ -55,6 +55,7 @@ sensor:
   - unique_id: irrig_idle_water_pressure
     name: "Irrig Idle Water Pressure"
     state_topic: "irrig_leak/idle/water_pressure"
+    state_class: measurement
     unit_of_measurement: "psi"
     device_class: pressure
     qos: 0
@@ -62,6 +63,7 @@ sensor:
   - unique_id: irrig_idle_water_temperature
     name: "Irrig Idle Water Temperature"
     state_topic: "irrig_leak/idle/water_temperature"
+    state_class: measurement
     device_class: temperature
     unit_of_measurement: "°F"
     qos: 0
@@ -74,6 +76,7 @@ sensor:
   - unique_id: irrig_report_tot_gallons_all_zones
     name: "Irrig Report Total Gallons All Zones"
     state_topic: "irrig_leak/report/tot_gals_all_zones"
+    state_class: total
     device_class: water
     unit_of_measurement: "gal"
     qos: 0
@@ -81,6 +84,7 @@ sensor:
   - unique_id: irrig_report_valve_leak_gallons
     name: "Irrig Report Valve Leak Gallons"
     state_topic: "irrig_leak/report/valve_leak"
+    state_class: measurement
     device_class: water
     unit_of_measurement: "gal"
     qos: 0
@@ -123,6 +127,7 @@ sensor:
   - unique_id: irrig_report_avg_psi_zone_0
     name: "Irrig Report Avg PSI Zone 0"
     state_topic: "irrig_leak/report/avg_psi_zone_0"
+    state_class: measurement
     unit_of_measurement: "psi"
     device_class: pressure
     qos: 0
@@ -131,6 +136,7 @@ sensor:
   - unique_id: irrig_report_avg_psi_zone_1
     name: "Irrig Report Avg PSI Zone 1"
     state_topic: "irrig_leak/report/avg_psi_zone_1"
+    state_class: measurement
     unit_of_measurement: "psi"
     device_class: pressure
     qos: 0
@@ -139,6 +145,7 @@ sensor:
   - unique_id: irrig_report_avg_psi_zone_2
     name: "Irrig Report Avg PSI Zone 2"
     state_topic: "irrig_leak/report/avg_psi_zone_2"
+    state_class: measurement
     unit_of_measurement: "psi"
     device_class: pressure
     qos: 0
@@ -147,6 +154,7 @@ sensor:
   - unique_id: irrig_report_avg_psi_zone_3
     name: "Irrig Report Avg PSI Zone 3"
     state_topic: "irrig_leak/report/avg_psi_zone_3"
+    state_class: measurement
     unit_of_measurement: "psi"
     device_class: pressure
     qos: 0
@@ -155,6 +163,7 @@ sensor:
   - unique_id: irrig_report_avg_psi_zone_4
     name: "Irrig Report Avg PSI Zone 4"
     state_topic: "irrig_leak/report/avg_psi_zone_4"
+    state_class: measurement
     unit_of_measurement: "psi"
     device_class: pressure
     qos: 0
