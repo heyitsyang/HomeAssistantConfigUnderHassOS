@@ -203,8 +203,8 @@ sensor:
     unit_of_measurement: "psi"
 
   # misc individual sensors
-  - unique_id: raw_living_rm_visible_light
-    name: "Raw Living Rm Visible Light"
+  - unique_id: raw_living_rm_visible_light # this is also sensor.espresense_greatrm_tsl2561_lux added by MQTT discovery
+    name: "Raw Living Rm Visible Light" # the code uses this entity name not the one from MQTT discovery
     device_class: illuminance
     state_class: measurement
     state_topic: "espresense/rooms/greatrm/tsl2561_lux"
