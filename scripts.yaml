@@ -11,10 +11,10 @@
 scr_ha_startup:
   sequence:
     - delay: "00:00:15" # short delay to be sure entities are initialized before use
-    - service: input_boolean.turn_off # initialize announcements as off
+    - action: input_boolean.turn_off # initialize announcements as off
       target:
         entity_id: input_boolean.inp_bool_announcements
-    - service: input_boolean.turn_off # initialize sleeping as ON
+    - action: input_boolean.turn_off # initialize sleeping as ON
       target:
         entity_id: input_boolean.inp_bool_sleeping
     - if:
@@ -23,7 +23,7 @@ scr_ha_startup:
             {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.announcements_enable') ) )  and 
               ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.announcements_disable') ) ) }}
       then:
-        - service: input_boolean.turn_on
+        - action: input_boolean.turn_on
           target:
             entity_id: input_boolean.inp_bool_announcements
     - if:
@@ -32,7 +32,7 @@ scr_ha_startup:
             {{ ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') > (states('input_datetime.assume_awake') ) )  and 
               ( as_timestamp(now(), '')| timestamp_custom('%H:%M:%S', true, '') < (states('input_datetime.assume_asleep') ) ) }}
       then:
-        - service: input_boolean.turn_off
+        - action: input_boolean.turn_off
           target:
             entity_id: input_boolean.inp_bool_sleeping
 
@@ -44,20 +44,20 @@ scr_goodmorning:
   mode: single
   max_exceeded: silent
   sequence:
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.semaphore_good_morning_was_used
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_sleeping
-    - service: cover.set_cover_position
+    - action: cover.set_cover_position
       target:
         entity_id: cover.master_bedroom_blackout_shades
       data:
         position: 30
     - delay:
         minutes: 15
-    - service: cover.open_cover
+    - action: cover.open_cover
       target:
         entity_id: cover.master_bedroom_blackout_shades
 
@@ -70,13 +70,13 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
   mode: single
   max_exceeded: silent
   sequence:
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.party_mode
-    - service: lock.lock
+    - action: lock.lock
       target:
         entity_id: lock.front_door_lock, lock.back_door_lock
-    - service: cover.close_cover
+    - action: cover.close_cover
       entity_id: cover.master_bedroom_shades
     - if:
         - or:
@@ -87,10 +87,10 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
               entity_id: cover.small_garage_door
               state: "open"
       then:
-        - service: script.scr_say_phrase
+        - action: script.scr_say_phrase
           data:
             message: "A garage door is still open"
-        - service: notify.alexa_yellow_ring
+        - action: notify.alexa_yellow_ring
           data:
             message: "A garage door is still open"
     - if:
@@ -102,17 +102,17 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
             entity_id: sensor.ys_cell_ble_room
             state: "office"
       then:
-        - service: light.turn_off
+        - action: light.turn_off
           target:
             entity_id:
               - light.office_lights
               - light.office_cabinet_leds_master
               - light.office_monitor_leds
               - light.guest_room_lights
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_sleeping
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_announcements
 
@@ -121,16 +121,16 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
 #
 scr_nobody_home:
   sequence:
-    # - service: script.scr_say_phrase
+    # - action: script.scr_say_phrase
     #   data:
     #     message: "I feel so empty inside when my people are away"
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute remainder unless Overnight Guest is OFF
       state: "off"
-    - service: lock.lock
+    - action: lock.lock
       target:
         entity_id: lock.front_door_lock, lock.back_door_lock
-    - service: homeassistant.turn_off
+    - action: homeassistant.turn_off
       target:
         entity_id: group.all_lighting_xabove_cabinet
 
@@ -139,11 +139,11 @@ scr_nobody_home:
 #
 scr_spt_start:
   sequence:
-    - service: mqtt.publish
+    - action: mqtt.publish
       data:
         topic: watermain/cmd/sptDuration
         payload: "{{ states('input_number.inp_num_spt_duration') }}"
-    - service: mqtt.publish
+    - action: mqtt.publish
       data:
         topic: watermain/cmd/sptStart
 
@@ -153,13 +153,13 @@ scr_spt_start:
 scr_arrival_announcement:
   mode: queued
   sequence:
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       data:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
     - condition: state # continue if not inhibited
       entity_id: input_boolean.inhibit_presence_announcements
       state: "off"
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: >
           {% if person == "karen" %}
@@ -181,17 +181,17 @@ scr_arrival_announcement:
 scr_occupied_sim:
   sequence:
     - delay: "00:{{ (range(1, 20)|random|int(default=0)) }}:00"
-    - service: light.turn_on
+    - action: light.turn_on
       data:
         entity_id: light.living_room_lights
         brightness_pct: 30
     - delay: "02:{{ (range(1, 59)|random|int(default=0)) }}:00"
-    - service: light.turn_on
+    - action: light.turn_on
       data:
         entity_id: light.master_bedroom_lights
         brightness_pct: 50
     - delay: "00:{{ (range(1, 59)|random|int(default=0)) }}:00"
-    - service: homeassistant.turn_off
+    - action: homeassistant.turn_off
       target:
         entity_id: group.indoor_lights
 
@@ -201,15 +201,15 @@ scr_occupied_sim:
 scr_common_extended_absence_on:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
-    - service: script.scr_check_sunrm_windows
-    - service: script.scr_close_sunrm_shades
-    - service: lock.lock
+    - action: script.scr_check_sunrm_windows
+    - action: script.scr_close_sunrm_shades
+    - action: lock.lock
       target:
         entity_id: lock.front_door_lock,lock.back_door_lock
-    - service: homeassistant.turn_off
+    - action: homeassistant.turn_off
       target:
         entity_id: group.all_lighting_xabove_cabinet
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
     - if:
@@ -217,11 +217,11 @@ scr_common_extended_absence_on:
           entity_id: input_boolean.leave_water_valve_on
           state: "off"
       then:
-        - service: switch.turn_off
+        - action: switch.turn_off
           target:
             entity_id: switch.water_valve
     - delay: "00:20:00"
-    - service: switch.turn_off
+    - action: switch.turn_off
       target:
         entity_id:
           - switch.lg_garage_opener_power
@@ -230,15 +230,15 @@ scr_common_extended_absence_on:
 scr_common_extended_absence_off:
   mode: restart # start new script run after stopping previous to prevent confusion due to delay
   sequence:
-    - service: switch.turn_on
+    - action: switch.turn_on
       target:
         entity_id: switch.water_valve
-    - service: switch.turn_on
+    - action: switch.turn_on
       target:
         entity_id:
           - switch.lg_garage_opener_power
           - switch.sm_garage_opener_power
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
 
@@ -248,29 +248,29 @@ scr_common_extended_absence_off:
 scr_common_guest_mode_on:
   mode: restart
   sequence:
-    - service: input_boolean.turn_on # leave water valve ON if absent & with guest
+    - action: input_boolean.turn_on # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inhibit_office_mood_lighting
 
 scr_common_guest_mode_off:
   mode: restart
   sequence:
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.inp_bool_guest_in_sunroom
-    - service: input_boolean.turn_off # leave water valve ON if absent & with guest
+    - action: input_boolean.turn_off # leave water valve ON if absent & with guest
       target:
         entity_id: input_boolean.leave_water_valve_on
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_vacuum_every_sunday
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.inhibit_office_mood_lighting
 
@@ -299,10 +299,10 @@ scr_check_sunrm_windows:
         - condition: state
           entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "on"
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: "You have a window open in the sun room.  The shades will not be automatically closed"
-    - service: notify.alexa_yellow_ring
+    - action: notify.alexa_yellow_ring
       data:
         message: "You have a window open in the sun room.  The shades will not be automatically closed"
 
@@ -334,7 +334,7 @@ scr_close_sunrm_shades:
         - condition: state
           entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "off"
-    - service: cover.close_cover
+    - action: cover.close_cover
       target:
         entity_id: cover.sun_room_shades
 
@@ -343,14 +343,14 @@ scr_close_sunrm_shades:
 #
 scr_partial_close_masterbdrm_filtering_shades:
   sequence:
-    - service: cover.set_cover_position
+    - action: cover.set_cover_position
       data:
         entity_id: cover.master_bedroom_filtering_shades
         position: "{{ position }}"
 
 scr_partially_close_masterbdrm_filtering_shades:
   sequence:
-    - service: script.scr_partial_close_sunrm_shades
+    - action: script.scr_partial_close_sunrm_shades
       data:
         position: "30" # drop shades to X% open
 #
@@ -381,15 +381,15 @@ scr_partial_close_sunrm_shades:
         - condition: state
           entity_id: binary_sensor.sun_room_window_6_window_door_is_open
           state: "off"
-    - service: cover.set_cover_position
+    - action: cover.set_cover_position
       data:
         entity_id: cover.sun_room_shades
         position: "{{ position }}"
 
 scr_partially_close_sunrm_shades:
   sequence:
-    - service: script.scr_check_sunrm_windows # be sure no windows are open
-    - service: script.scr_partial_close_sunrm_shades
+    - action: script.scr_check_sunrm_windows # be sure no windows are open
+    - action: script.scr_partial_close_sunrm_shades
       data:
         position: "40" # drop shades to X% open
 
@@ -399,7 +399,7 @@ scr_partially_close_sunrm_shades:
 keymaster_front_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -409,7 +409,7 @@ keymaster_front_door_manual_notify:
 keymaster_back_door_manual_notify:
   mode: parallel
   sequence:
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         title: "{{ title }}"
         message: "{{ message }}"
@@ -437,7 +437,7 @@ scr_check_if_suspicious:
             - condition: state
               entity_id: person.karen
               state: "home"
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         title: "SUSPICIOUS ACTIVITY at Norcoose"
         message: "PRESS to investigate"
@@ -453,10 +453,10 @@ scr_check_if_suspicious:
           ttl: 0
           data:
             car_ui: true
-    - service: notify.gmail_to_yang
+    - action: notify.gmail_to_yang
       data:
         message: "SUSPICIOUS ACTIVITY detected in Norcoose home"
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         message: "TTS"
         data:
@@ -478,7 +478,7 @@ scr_check_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         message: "TTS"
         data:
@@ -488,7 +488,7 @@ scr_check_garage_open:
           ttl: 0
           data:
             car_ui: true
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         title: "GARAGE DOOR LEFT OPEN"
         message: "Did you forget to close it?  PRESS to see."
@@ -501,7 +501,7 @@ scr_check_garage_open:
 
 scr_repeat_say_garage_open:
   sequence:
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: "A garage door has been left open"
     - delay: "00:10:00"
@@ -513,7 +513,7 @@ scr_repeat_say_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: "A garage door is still open"
     - delay: "00:10:00"
@@ -525,7 +525,7 @@ scr_repeat_say_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: "A garage door is still open"
     - delay: "00:10:00"
@@ -537,7 +537,7 @@ scr_repeat_say_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: "A garage door is still open"
     - delay: "00:10:00"
@@ -549,10 +549,10 @@ scr_repeat_say_garage_open:
         - condition: state
           entity_id: cover.small_garage_door
           state: "open"
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: "A garage door is still open.  This is your last reminder"
-    - service: notify.alexa_yellow_ring
+    - action: notify.alexa_yellow_ring
       data:
         message: "A garage door is still open"
 
@@ -569,13 +569,13 @@ scr_mood_lighting_on:
           entity_id: input_boolean.inp_bool_guest_in_sunroom
           state: "off"
       then:
-        - service: scene.turn_on
+        - action: scene.turn_on
           target:
             entity_id: scene.sun_room_uplights_20
-    - service: homeassistant.turn_on
+    - action: homeassistant.turn_on
       target:
         entity_id: group.mood_lights
-    - service: script.scr_turn_on_kitchen_leds_upper
+    - action: script.scr_turn_on_kitchen_leds_upper
 
 scr_turn_on_kitchen_leds_upper:
   sequence:
@@ -585,26 +585,26 @@ scr_turn_on_kitchen_leds_upper:
             - mon # night before trash day
             - thu # night before trash day
       then:
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.kitchen_leds_upper
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.kitchen_leds_upper_master
-        - service: select.select_option
+        - action: select.select_option
           target:
             entity_id: select.kitchen_leds_upper_preset
           data:
             option: "Trash Night"
       else:
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.kitchen_leds_upper_master
-        - service: script.scr_reset_mood_lights_to_default
+        - action: script.scr_reset_mood_lights_to_default
 
 scr_reset_mood_lights_to_default:
   sequence:
-    - service: select.select_option
+    - action: select.select_option
       target:
         entity_id: select.kitchen_leds_upper_preset
       data:
@@ -623,7 +623,7 @@ scr_motion_lighting_on:
         - condition: state
           entity_id: input_boolean.inp_bool_theater_mode # avoid changing brightness if theater mode
           state: "off"
-    - service: light.turn_on
+    - action: light.turn_on
       data:
         entity_id: light.living_room_lights
         brightness_pct: "{{ states('sensor.lv_rm_suggested_brightness') | int(default=0)}}"
@@ -636,18 +636,18 @@ scr_pathway_motion_lighting_on:
     - condition: state
       entity_id: binary_sensor.lum_mood_lights_f_solar_trig
       state: "on"
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.kitchen_leds_upper_master
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.kitchen_leds_upper
-    - service: select.select_option
+    - action: select.select_option
       target:
         entity_id: select.kitchen_leds_upper_preset
       data:
         option: "Spots Warm Wht 20%"
-    - service: homeassistant.turn_on
+    - action: homeassistant.turn_on
       target:
         entity_id: group.pathway_lights
 
@@ -660,7 +660,7 @@ scr_pathway_motion_lighting_off:
     - condition: state
       entity_id: group.pathway_lights
       state: "on"
-    - service: homeassistant.turn_off
+    - action: homeassistant.turn_off
       target:
         entity_id: group.pathway_lights
 
@@ -672,7 +672,7 @@ scr_great_room_motion_lighting_off:
     - condition: state
       entity_id: group.great_room_lights
       state: "on"
-    - service: homeassistant.turn_off
+    - action: homeassistant.turn_off
       target:
         entity_id: group.great_room_lights
 
@@ -681,12 +681,12 @@ scr_great_room_motion_lighting_off:
 #
 scr_frontporch_activity:
   sequence:
-    - service: script.turn_on # use this method to de-serialize the speech so cameras are not delayed
+    - action: script.turn_on # use this method to de-serialize the speech so cameras are not delayed
       entity_id: script.scr_say_phrase
       data:
         variables:
           message: "You have a visitor at the front door"
-    - service: camera.snapshot
+    - action: camera.snapshot
       data:
         entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
@@ -698,19 +698,19 @@ scr_frontporch_activity:
         - condition: state
           entity_id: person.karen
           state: "home"
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
-    - service: notify.alexa_yellow_ring
+    - action: notify.alexa_yellow_ring
       data:
         message: "While you where away, there was a visitor at the front door"
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         title: Front door activity
         message: "Front door activity detected"
         data:
           clickAction: "lovelace/last-snaps"
-    - service: notify.mobile_app_yskt_cell
+    - action: notify.mobile_app_yskt_cell
       data:
         title: Front door activity
         message: TTS
@@ -724,7 +724,10 @@ scr_front_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - service: light.turn_on
+    - condition: state
+      entity_id: timer.pause_auto_front_door_lights
+      state: "idle"
+    - action: light.turn_on
       target:
         entity_id: light.front_door_lights # light is auto switched off after door locked and/or delay
 
@@ -733,7 +736,7 @@ scr_back_door_lights_on:
     - condition: state
       entity_id: binary_sensor.lum_outdoor_lights_solar_trig
       state: "on"
-    - service: light.turn_on
+    - action: light.turn_on
       target:
         entity_id: light.back_door_lights # light is auto switched off door locked and/or delay
 
@@ -746,7 +749,7 @@ scr_back_door_lights_on:
 scr_say_phrase:
   mode: queued
   sequence:
-    - service: sonos.snapshot
+    - action: sonos.snapshot
       data:
         entity_id:
           - all
@@ -756,15 +759,15 @@ scr_say_phrase:
             - condition: template
               value_template: "{{ priority == 'high' }}"
           sequence:
-            - service: media_player.volume_set
+            - action: media_player.volume_set
               data:
                 entity_id: media_player.office_speakers
                 volume_level: "{{ '%0.2f' | format(states('input_number.office_announce_vol') | float(default=0)  + 0.25) }}" # set high priority speaking volume
-            - service: media_player.volume_set
+            - action: media_player.volume_set
               data:
                 entity_id: media_player.greatroom_speakers
                 volume_level: "{{ '%0.2f' | format(states('input_number.greatrm_announce_vol') | float(default=0)  + 0.25) }}" # set high priority speaking volume
-            - service: media_player.volume_set
+            - action: media_player.volume_set
               data:
                 entity_id: media_player.garage_speakers
                 volume_level: "{{ '%0.2f' | format(states('input_number.garage_announce_vol') | float(default=0)  + 0.25) }}" # set high priority speaking volume
@@ -774,7 +777,7 @@ scr_say_phrase:
                       entity_id: input_boolean.inp_bool_guest_mode
                       state: "on"
                   sequence:
-                    - service: media_player.play_media
+                    - action: media_player.play_media
                       data:
                         announce: false
                         entity_id:
@@ -783,7 +786,7 @@ scr_say_phrase:
                         media_content_id: media-source://tts/tts.piper?message="This is a high priority message. {{ message | replace(' Yang', ' Yainng')  | regex_replace('.$', '') }}"
                         media_content_type: music
               default:
-                - service: media_player.play_media
+                - action: media_player.play_media
                   data:
                     announce: false
                     entity_id:
@@ -796,15 +799,15 @@ scr_say_phrase:
         - condition: state
           entity_id: input_boolean.inp_bool_announcements # do not execute remaining unless announce is ON
           state: "on"
-        - service: media_player.volume_set
+        - action: media_player.volume_set
           data:
             entity_id: media_player.office_speakers
             volume_level: "{{ states('input_number.office_announce_vol') }}" # set normal speaking volume
-        - service: media_player.volume_set
+        - action: media_player.volume_set
           data:
             entity_id: media_player.greatroom_speakers
             volume_level: "{{ states('input_number.greatrm_announce_vol') }}" # set normal speaking volume
-        - service: media_player.volume_set
+        - action: media_player.volume_set
           data:
             entity_id: media_player.garage_speakers
             volume_level: "{{ states('input_number.garage_announce_vol') }}" # set high priority speaking volume
@@ -814,7 +817,7 @@ scr_say_phrase:
                   entity_id: input_boolean.inp_bool_guest_mode
                   state: "on"
               sequence:
-                - service: media_player.play_media
+                - action: media_player.play_media
                   data:
                     announce: false
                     entity_id:
@@ -823,7 +826,7 @@ scr_say_phrase:
                     media_content_id: media-source://tts/tts.piper?message="{{ message | regex_replace('.$', '') }}"
                     media_content_type: music
           default:
-            - service: media_player.play_media
+            - action: media_player.play_media
               data:
                 announce: false
                 entity_id:
@@ -836,13 +839,13 @@ scr_say_phrase:
     - wait_template: "{{ states('media_player.greatroom_speakers')}}" # wait for a state change
       timeout:
         seconds: 1
-    - service: logbook.log
+    - action: logbook.log
       data_template:
         name: "say_phrase: "
         message: "{{ message + '(' ~ state_attr('media_player.greatroom_speakers', 'media_duration') + 's)' }}" # tilde converts to string in jinja
     - delay:
         seconds: "{{ state_attr('media_player.greatroom_speakers', 'media_duration') | int(default=5) }}" # wait for announce duration
-    - service: sonos.restore # premature restore will cut off speech before it has started or during play
+    - action: sonos.restore # premature restore will cut off speech before it has started or during play
       data:
         entity_id:
           - all
@@ -855,7 +858,7 @@ scr_say_phrase:
 # PAUSE ALARM
 scr_pause_leak_alarm:
   sequence:
-    - service: input_boolean.turn_on
+    - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_pause_leak_alarm
 
@@ -863,7 +866,7 @@ scr_pause_leak_alarm:
 scr_manual_say_time:
   mode: queued
   sequence:
-    - service: script.scr_say_phrase
+    - action: script.scr_say_phrase
       data:
         message: >-
           'The time is {{ now().time().strftime("%-I:%M")  | replace(":00", " o'clock") 
@@ -875,24 +878,24 @@ scr_vacuum_start_custom_cleaning:
     - condition: state
       entity_id: vacuum.rosie # do not execute unless docked (not already cleaning)
       state: "docked"
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       target:
         entity_id: vacuum.rosie
 
 scr_vacuum_pause:
   sequence:
-    - service: vacuum.pause
+    - action: vacuum.pause
       target:
         entity_id: vacuum.rosie
 
 scr_vacuum_stop:
   sequence:
-    - service: vacuum.stop
+    - action: vacuum.stop
       target:
         entity_id: vacuum.rosie
 
 scr_vacuum_return_to_base:
   sequence:
-    - service: vacuum.return_to_base
+    - action: vacuum.return_to_base
       target:
         entity_id: vacuum.rosie
