@@ -974,8 +974,8 @@
             entity_id: switch.water_valve
             state: "off"
           - condition: state
-            entity_id: input_boolean.pause_leak_alarm
-            state: "off"
+            entity_id: timer.pause_leak_alarm
+            state: "idle"
         sequence:
           - service: script.scr_say_phrase
             data:
@@ -2308,25 +2308,6 @@
 #####################################
 #    Security & House Modes         #
 #####################################
-
-#
-# ALARM RELATED
-#
-
-# Reset paused alarm
-- id: aut_reset_paused_leak_alarm
-  alias: "aut reset paused leak alarm"
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: input_boolean.inp_bool_pause_leak_alarm
-      from: "off"
-      to: "on"
-  action:
-    - delay: 00:30:00
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.inp_bool_pause_leak_alarm
 
 #
 #  GUEST MODE

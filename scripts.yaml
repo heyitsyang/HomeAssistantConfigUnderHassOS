@@ -855,13 +855,6 @@ scr_say_phrase:
 #  MANUAL UI REQUESTS
 #
 
-# PAUSE ALARM
-scr_pause_leak_alarm:
-  sequence:
-    - action: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.inp_bool_pause_leak_alarm
-
 # SPEAK TIME
 scr_manual_say_time:
   mode: queued
