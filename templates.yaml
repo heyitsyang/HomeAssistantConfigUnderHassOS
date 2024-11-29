@@ -211,10 +211,12 @@
 #
 
 - trigger:
-    - platform: time_pattern
+    - trigger: time_pattern
       hours: /1
+    - trigger: homeassistant
+      event: start
   action:
-    - service: weather.get_forecasts
+    - action: weather.get_forecasts
       data:
         type: hourly
       target:
