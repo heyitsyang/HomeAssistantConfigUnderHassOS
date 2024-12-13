@@ -49,7 +49,7 @@
   action:
     - service: cover.set_cover_position
       target:
-        entity_id: cover.master_bedroom_filtering_shades
+        entity_id: cover.master_bedroom_outer_shades
       data:
         position: 29
 
@@ -1264,10 +1264,10 @@
     - service: script.scr_pathway_motion_lighting_off
 
 #
-# CLOSE MASTER BEDROOM FILTERING SHADES WHEN SOLAR NOON REACHED
+# CLOSE MASTER BEDROOM OUTER SHADES WHEN SOLAR NOON REACHED
 #
-- id: aut_masterbdrm_filtering_shades_down_solar_noon
-  alias: "aut masterbdrm filtering shades down solar noon"
+- id: aut_masterbdrm_outer_shades_down_solar_noon
+  alias: "aut masterbdrm outer shades down solar noon"
   initial_state: true
   trigger:
     - platform: template
@@ -1275,7 +1275,7 @@
   action:
     - service: cover.close_cover
       target:
-        entity_id: cover.master_bedroom_filtering_shades
+        entity_id: cover.master_bedroom_outer_shades
 
 #
 # CLOSE SUN RM SHADES BASED ON SUN ANGLE, & AZMUTH IN THE AFTERNOON IF WINDOWS CLOSED & DARK ENOUGH, ETC.

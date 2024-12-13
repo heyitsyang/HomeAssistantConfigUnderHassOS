@@ -52,14 +52,14 @@ scr_goodmorning:
         entity_id: input_boolean.inp_bool_sleeping
     - action: cover.set_cover_position
       target:
-        entity_id: cover.master_bedroom_blackout_shades
+        entity_id: cover.master_bedroom_inner_shades
       data:
         position: 30
     - delay:
         minutes: 15
     - action: cover.open_cover
       target:
-        entity_id: cover.master_bedroom_blackout_shades
+        entity_id: cover.master_bedroom_inner_shades
 
 #
 # GOOD NIGHT SCRIPT
@@ -341,16 +341,16 @@ scr_close_sunrm_shades:
 #
 # PARTIALLY CLOSE SUN ROOM SHADES
 #
-scr_partial_close_masterbdrm_filtering_shades:
+scr_partial_close_masterbdrm_outer_shades:
   sequence:
     - action: cover.set_cover_position
       data:
-        entity_id: cover.master_bedroom_filtering_shades
+        entity_id: cover.master_bedroom_outer_shades
         position: "{{ position }}"
 
-scr_partially_close_masterbdrm_filtering_shades:
+scr_partially_close_masterbdrm_outer_shades:
   sequence:
-    - action: script.scr_partial_close_sunrm_shades
+    - action: script.scr_partial_close_master_bedroom_outer_shades
       data:
         position: "30" # drop shades to X% open
 #

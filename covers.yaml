@@ -24,27 +24,27 @@
 - platform: group
   name: "Master Bedroom Shades"
   entities:
-    - cover.master_bedroom_shade_1_a
-    - cover.master_bedroom_shade_2_a
-    - cover.master_bedroom_shade_3_a
-    - cover.master_bedroom_shade_4_a
-    - cover.master_bedroom_shade_1_b
-    - cover.master_bedroom_shade_2_b
-    - cover.master_bedroom_shade_3_b
-    - cover.master_bedroom_shade_4_b
+    - cover.master_bedroom_shade_1_outer
+    - cover.master_bedroom_shade_2_outer
+    - cover.master_bedroom_shade_3_outer
+    - cover.master_bedroom_shade_4_outer
+    - cover.master_bedroom_shade_1_inner
+    - cover.master_bedroom_shade_2_inner
+    - cover.master_bedroom_shade_3_inner
+    - cover.master_bedroom_shade_4_inner
 
 - platform: group
-  name: "Master Bedroom Filtering Shades"
+  name: "Master Bedroom Outer Shades"
   entities:
-    - cover.master_bedroom_shade_1_a
-    - cover.master_bedroom_shade_2_a
-    - cover.master_bedroom_shade_3_a
-    - cover.master_bedroom_shade_4_a
+    - cover.master_bedroom_shade_1_outer
+    - cover.master_bedroom_shade_2_outer
+    - cover.master_bedroom_shade_3_outer
+    - cover.master_bedroom_shade_4_outer
 
 - platform: group
-  name: "Master Bedroom Blackout Shades"
+  name: "Master Bedroom Inner Shades"
   entities:
-    - cover.master_bedroom_shade_1_b
-    - cover.master_bedroom_shade_2_b
-    - cover.master_bedroom_shade_3_b
-    - cover.master_bedroom_shade_4_b
+    - cover.master_bedroom_shade_1_inner
+    - cover.master_bedroom_shade_2_inner
+    - cover.master_bedroom_shade_3_inner
+    - cover.master_bedroom_shade_4_inner
