@@ -2259,6 +2259,30 @@
       entity_id: sensor.sun_room_remote_4_battery_level
       below: 10 # lower threshhold since battery affected by outside temp
       for: "00:30:00"
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_1_inner_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_1_outer_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_2_inner_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_2_outer_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_3_inner_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_3_outer_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_4_inner_battery
+      below: 20
+    - platform: numeric_state
+      entity_id: sensor.master_bedroom_shade_4_outer_battery
+      below: 20
   action:
     - service: notify.gmail_to_yang
       data:
