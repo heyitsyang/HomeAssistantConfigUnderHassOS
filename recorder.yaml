@@ -54,6 +54,7 @@ include:
     - device_tracker.opnsense_ys_cell_shencentral_net
     - device_tracker.opnsense_kt_cell_shencentral_net
     - vacuum.rosie
+    - sensor.irrig_battery_percent
 
 exclude:
   domains:

@@ -2152,6 +2152,9 @@
   initial_state: true
   trigger:
     - platform: numeric_state
+      entity_id: sensor.irrig_battery_percent
+      below: 30
+    - platform: numeric_state
       entity_id: sensor.govee_display_battery
       below: 30
       for: "00:30:00"
