@@ -555,6 +555,19 @@
 #
 # SHOPPING CENTERS
 #
+
+- name: Walmart Wedgewood Ln
+  latitude: 28.92978
+  longitude: -82.03122
+  radius: 135 # meters
+  icon: mdi:blank
+
+- name: Walmart Market
+  latitude: 28.86290
+  longitude: -82.9557
+  radius: 37 # meters
+  icon: mdi:blank
+
 - name: La Plaza Grande
   latitude: 28.938403
   longitude: -81.945410
