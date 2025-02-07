@@ -259,7 +259,7 @@
     - name: last_static_pressure_test
       unique_id: last_static_pressure_test
       state: >-
-        {{ as_timestamp( state_attr('sensor.unvalidated_water_static_pressure_test_result', 'test_end'), '' ) 
+        {{ as_timestamp( states.sensor.unvalidated_water_static_pressure_test_result.last_changed, '' ) 
         | timestamp_custom ('%m/%d %H:%M', true, 'unknown') }}
 
 - sensor:
