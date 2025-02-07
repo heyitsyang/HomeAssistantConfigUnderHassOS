@@ -145,7 +145,8 @@ scr_spt_start:
         payload: "{{ states('input_number.inp_num_spt_duration') }}"
     - action: mqtt.publish
       data:
-        topic: watermain/cmd/sptStart
+        topic: watermain/cmd/sptStart # sptStart topic itself is used as a semaphore by firmware
+        payload: on # payload content is not reqd by firmware but reqd here to pass HA syntax checking
 
 #
 # PERFORM INDIV. HOME ARRIVAL ACTIONS
