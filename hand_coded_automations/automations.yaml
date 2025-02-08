@@ -36,7 +36,7 @@
   trigger:
     - platform: time
       at: "10:00:00"
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.semaphore_good_morning_was_used
       state: "on"
@@ -69,7 +69,7 @@
         and (state_attr(" script.scr_spt_start","last_triggered") != none) }}
       for:
         minutes: 15
-  condition:
+  conditions:
     # don't execute if Overnight Guest is ON
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode
@@ -111,12 +111,14 @@
 - id: delayed_spt_leak_test
   alias: "aut delayed spt leak test"
   initial_state: on
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: state
       entity_id: sensor.spt_data_status
       from: "in_process"
       to: "aborted"
-  condition:
+  conditions:
     # don't execute if Overnight Guest is ON
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode
@@ -173,7 +175,7 @@
   trigger:
     - platform: time
       at: "07:35:00"
-  condition:
+  conditions:
     - condition: time
       weekday:
         - sun
@@ -383,7 +385,7 @@
   trigger:
     - platform: time
       at: input_datetime.party_mode_start
-  condition:
+  conditions:
     - condition: state # only bother if currently OFF
       entity_id: input_boolean.party_mode
       state: "off"
@@ -398,7 +400,7 @@
   trigger:
     - platform: time
       at: input_datetime.party_mode_end
-  condition:
+  conditions:
     - condition: state # only bother if currently ON
       entity_id: input_boolean.party_mode
       state: "on"
@@ -417,7 +419,7 @@
     - platform: state
       entity_id: sensor.lv_rm_suggested_brightness # this triggers with any state change
       to: ~
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.party_mode
       state: "off"
@@ -535,7 +537,7 @@
     - platform: template
       value_template: >-
         {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.ys_desktop_lastactive'), '')| float(default=0)) ) | int(default=0) ) < 15 }}
-  condition:
+  conditions:
     - condition: state # don't repetitively turn on
       entity_id: group.office_mood_lights
       state: "off"
@@ -653,7 +655,7 @@
     - platform: template
       value_template: >-
         {{ (states('sensor.rackups_input_voltage') | float(default=0)) >= (states('sensor.rackups_high_voltage_transfer') | float(default=0)) }}
-  condition:
+  conditions:
     condition: template # prevent false trigger from disconnected UPS comms
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   actions:
@@ -670,7 +672,7 @@
       value_template: >-
         {{ ((states('sensor.rackups_input_voltage') | float(default=0)) > (states('sensor.rackups_low_voltage_transfer') | float(default=0)))
           and ((states('sensor.rackups_input_voltage') | float(default=0)) < (states('sensor.rackups_high_voltage_transfer') | float(default=0))) }}
-  condition:
+  conditions:
     condition: template # prevent false trigger from disconnected UPS comms
     value_template: "{{ states('sensor.rackups_status') != 'unavailable' }}"
   actions:
@@ -894,12 +896,13 @@
 - id: aut_spt_leak_notify
   alias: "aut spt leak notify"
   initial_state: true
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.spt_data_status
       from: "in_process"
       to: "valid"
-  condition:
+      for: "00:00:10" # required delay to data to arrive/settle
+  conditions:
     # don't notify if no pressure drop
     - condition: template
       value_template: >
@@ -910,16 +913,13 @@
         {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) < 
           ((states('input_number.loss_per_minute_alarm_threshold') | float(default=0)) 
             * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
-  #      value_template: >
-  #        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) <
-  #           (-0.028125 * (states('input_number.inp_num_spt_duration') | float(default=0))) }}
   actions:
     - action: notify.mobile_app_yskt_cell
       data:
         title: "SPT water leak detected"
         message: |
           Leak detected during Static Pressure Test!
-          Test ended: {{ states('sensor.last_static_pressure_test') }}
+          Test ended: {{ as_timestamp(states.sensor.spt_data_status.last_changed) | timestamp_custom('%d-%b-%Y, %I:%M:%S %p') }}
           Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') | float(default=0) }}
           Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}
     - action: notify.gmail_to_yang
@@ -927,7 +927,15 @@
         title: "SPT water leak detected"
         message: |
           Leak detected during Static Pressure Test!
-          Test ended: {{ states('sensor.last_static_pressure_test') }}
+          Test ended: {{ as_timestamp(states.sensor.spt_data_status.last_changed) | timestamp_custom('%d-%b-%Y, %I:%M:%S %p') }}
+          Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') | float(default=0) }}
+          Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}
+    - action: notify.persistent_notification
+      data:
+        title: "SPT water leak detected"
+        message: |
+          Leak detected during Static Pressure Test!
+          Test ended: {{ as_timestamp(states.sensor.spt_data_status.last_changed) | timestamp_custom('%d-%b-%Y, %I:%M:%S %p') }}
           Total pressure drop: {{ states('sensor.validated_water_static_pressure_test_result') | float(default=0) }}
           Drop per minute: {{ states('sensor.water_static_pressure_loss_per_minute') }}
 
@@ -1218,7 +1226,7 @@
       above: 0
       for: # in motion activated lighting
         minutes: "{{ states('input_number.inp_num_lvrm_lights_on_delay') | int(default=0) }}"
-  condition:
+  conditions:
     - condition: and
       conditions:
         - condition: template # lvrm sensor can be zero & not broken
@@ -1271,7 +1279,7 @@
       to: "off"
       for:
         minutes: 30
-  condition:
+  conditions:
     - condition: state
       entity_id: media_player.tv_livingrm
       state: "off"
@@ -1325,7 +1333,7 @@
       above: 14.1 # house behind blocks sun
       #    below: 58.0  # sun reaches back of sunroom couch
       below: 32.5 # sun reaches laminate flooring creating glare
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: state
@@ -1368,7 +1376,7 @@
       value_template: "{{ state_attr('sun.sun', 'azimuth') }}"
       above: 204 # estimate of when sun direction penetrates
       below: 267 # the house through the sun room most
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: state
@@ -1402,7 +1410,7 @@
       to: "off"
       for:
         minutes: "{{ states('input_number.inp_num_sunrm_shades_close_low_lux_trig_delay') | int(default=0) }}"
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.inp_bool_inhibit_shades # do not execute if manuall inhibited
       state: "off"
@@ -1438,7 +1446,7 @@
       to: "on"
       for:
         minutes: "{{ states('input_number.inp_num_sunrm_shades_open_delay') | int(default=0) }}"
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: state
@@ -1623,7 +1631,7 @@
     - platform: template
       value_template: >-
         {{ (is_state('binary_sensor.frontporch_motion', 'on')) and (is_state('binary_sensor.doorbell_zone_person_occupancy', 'on')) }}
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.front_door_window_door_is_open
       state: "off"
@@ -1741,7 +1749,7 @@
       to: "on"
       for:
         minutes: 10
-  condition:
+  conditions:
     - condition: or
       conditions:
         - condition: template
@@ -1802,7 +1810,7 @@
     - platform: state
       entity_id: device_tracker.kt_cell_ble
       from: "garage"
-  condition:
+  conditions:
     condition: or
     conditions:
       - condition: state
@@ -1835,7 +1843,7 @@
       to: "unlocked"
       for:
         minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_delay') | int(default=0)) + 30 }}"
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.party_mode
       state: "off"
@@ -1872,7 +1880,7 @@
       to: "unlocked"
       for:
         minutes: "{{ (states('input_number.inp_num_auto_front_door_lock_trig_party_delay') | int(default=0)) + 30 }}"
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.party_mode
       state: "on"
@@ -1909,7 +1917,7 @@
       to: "unlocked"
       for:
         minutes: "{{ (states('input_number.inp_num_auto_back_door_lock_trig_delay') | int(default=0)) + 30 }}"
-  condition:
+  conditions:
     - condition: state
       entity_id: lock.back_door_lock
       state: "unlocked" # may not be unlocked if using first trigger
@@ -1993,7 +2001,7 @@
       above: input_number.inp_num_masterbdrmfan_on_temp
       for:
         minutes: 10
-  condition:
+  conditions:
     condition: state
     entity_id: fan.master_bedroom_fan
     state: "off"
@@ -2013,7 +2021,7 @@
       below: input_number.inp_num_masterbdrmfan_off_temp
       for:
         minutes: 10
-  condition:
+  conditions:
     condition: state
     entity_id: fan.master_bedroom_fan
     state: "on"
@@ -2102,7 +2110,7 @@
       entity_id: person.karen
       from: home
       for: "00:01:00"
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.inhibit_presence_announcements
       state: "off"
@@ -2355,7 +2363,7 @@
 #     - platform: state
 #       entity_id:
 #         - update.hacs_update
-#   condition:
+#   conditions:
 #     - condition: template
 #       value_template: '{{ states("update.hacs_update") | int != 0 }}'
 #   actions:
@@ -2403,7 +2411,7 @@
   trigger:
     - platform: time
       at: input_datetime.guest_arrives
-  condition:
+  conditions:
     - condition: state # only bother if currently OFF
       entity_id: input_boolean.inp_bool_guest_mode
       state: "off"
@@ -2419,7 +2427,7 @@
   trigger:
     - platform: time
       at: input_datetime.guest_departs
-  condition:
+  conditions:
     - condition: state # only bother if currently ON
       entity_id: input_boolean.inp_bool_guest_mode
       state: "on"
@@ -2442,7 +2450,7 @@
       entity_id: input_boolean.inp_bool_extended_absence_mode
       from: "off"
       to: "on"
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.inp_bool_guest_mode # do not execute unless Overnight Guest is OFF
       state: "off" # in case we have a guest while we are gone
@@ -2496,7 +2504,7 @@
         {{ (states('sensor.home_yang_distance') | float(default=0) > 100) and
         (states('sensor.home_karen_distance') | float(default=0) > 100) }}
       for: "00:30:00"
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: state # only bother if currently OFF
@@ -2532,7 +2540,7 @@
     - platform: state
       entity_id: group.whereis_ys
       to: "home"
-  condition:
+  conditions:
     - condition: state # only bother if currently ON
       entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "on"
@@ -2547,7 +2555,7 @@
   trigger:
     - platform: time
       at: input_datetime.extended_absence_start
-  condition:
+  conditions:
     - condition: state # only bother if currently OFF
       entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "off"
@@ -2562,7 +2570,7 @@
   trigger:
     - platform: time
       at: input_datetime.extended_absence_end
-  condition:
+  conditions:
     - condition: state # only bother if currently ON
       entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "on"
@@ -2580,7 +2588,7 @@
   trigger:
     - platform: sun
       event: sunset
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.inp_bool_extended_absence_mode
       state: "on"
@@ -2726,7 +2734,7 @@
     - platform: template
       value_template: >
         {{ (states('sensor.home_yang_distance') | float(default=0) > 0.5) }}
-  condition:
+  conditions:
     - condition: state # only notify if test switch is ON
       entity_id: input_boolean.inp_bool_half_mi_trig_test
       state: "on"
