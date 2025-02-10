@@ -901,7 +901,7 @@
       entity_id: sensor.spt_data_status
       from: "in_process"
       to: "valid"
-      for: "00:00:10" # required delay to data to arrive/settle
+      for: "00:00:10" # 2nd condition below requires a delay to test correctly
   conditions:
     # don't notify if no pressure drop
     - condition: template
