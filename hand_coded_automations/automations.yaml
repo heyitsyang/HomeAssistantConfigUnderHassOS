@@ -280,7 +280,9 @@
       target:
         entity_id:
           - light.sun_room_uplights
-          - group.mood_lights
+          - switch.candles
+          - light.kitchen_leds_upper_master
+          - switch.christmas_tree
 
 #
 # TURN OFF GOOD MORNING USED SEMAPHORE
@@ -1779,7 +1781,9 @@
       target:
         entity_id:
           - light.sun_room_uplights
-          - group.mood_lights
+          - switch.candles
+          - light.kitchen_leds_upper_master
+          - switch.christmas_tree
 
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
