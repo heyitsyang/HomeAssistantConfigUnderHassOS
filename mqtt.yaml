@@ -2,6 +2,7 @@
 # MQTT SENSORS
 #
 
+sensor:
   # filament dry box sensors
   - unique_id: drybox_battery_volts
     name: "Drybox Battery Voltage"
