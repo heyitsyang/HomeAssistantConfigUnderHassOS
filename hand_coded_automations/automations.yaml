@@ -579,28 +579,6 @@
 #
 # DEVICE TRACKER UPDATE EVENTS
 #
-- id: auto_update_ys1_a1ad
-  alias: Update ys1_a1ad location
-  mode: single
-  description: Update Meshtastic node ys1_a1ad when corresponding MQTT messages are seen.
-  trigger:
-    - platform: mqtt
-      topic: "mtastic/neighborssoft/LongFast/!909e8f34"
-      payload: "on"
-      value_template: |-
-        {% if value_json.from == 1078501805 and
-              value_json.payload.latitude_i is defined and 
-              value_json.payload.longitude_i is defined %}on{% endif %}
-  condition: []
-  actions:
-    - action: device_tracker.see
-      metadata: {}
-      data:
-        dev_id: ys1_a1ad
-        gps:
-          - "{{ (trigger.payload | from_json).payload.latitude_i | int * 1e-7 }}"
-          - "{{ (trigger.payload | from_json).payload.longitude_i | int * 1e-7 }}"
-        battery: "{{ states('sensor.ys1_a1ad_battery_percent')|float(0) }}"
 
 - id: aut_update_ys_cell_ble_tracker
   alias: "aut update ys cell ble tracker"
