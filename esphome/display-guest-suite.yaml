@@ -117,12 +117,12 @@ sensor:
 
   - platform: homeassistant
     id: todays_forecast_high
-    entity_id: sensor.openweathermap_forecast_temperature
+    entity_id: sensor.openweathermap_today_high
     internal: true
   
   - platform: homeassistant
     id: todays_forecast_low
-    entity_id: sensor.openweathermap_forecast_temperature_low
+    entity_id: sensor.openweathermap_today_low
     internal: true
   
 text_sensor:

@@ -298,7 +298,43 @@
           99
         {% endif %}
 
-    # CLIMATE #
+#
+# CLIMATE
+#
+
+# GET FORECASTED HI/LOW TEMPERATURES WEATHER
+- trigger:
+    - trigger: time_pattern
+      hours: /1
+    - trigger: homeassistant
+      event: start
+    - trigger: event
+      event_type: event_template_reloaded
+  action:
+    - action: weather.get_forecasts
+      data:
+        type: daily
+      target:
+        entity_id: weather.openweathermap
+      response_variable: wx_data
+  sensor:
+    - name: "Openweathermap Daily Forecast"
+      unique_id: openweathermap_daily_forecast
+      state: "{{ now().isoformat() }}"
+      attributes:
+        forecast: "{{ wx_data['weather.openweathermap'].forecast }}"
+    - name: "Openweathermap Today High"
+      unique_id: openweathermap_today_high
+      device_class: temperature
+      unit_of_measurement: °F
+      icon: mdi:thermometer-high
+      state: "{{ wx_data['weather.openweathermap'].forecast[0].temperature }}"
+    - name: "Openweathermap Today Low"
+      unique_id: openweathermap_today_low
+      device_class: temperature
+      unit_of_measurement: °F
+      icon: mdi:thermometer-low
+      state: "{{ wx_data['weather.openweathermap'].forecast[0].templow }}"
 
 - sensor:
     - name: ecobee_avg_indoor_temperature # ecobee current temp is the average
