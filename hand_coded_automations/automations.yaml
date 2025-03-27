@@ -1766,23 +1766,23 @@
 #
 # GARAGE DOOR LEFT OPEN WHILE HOME
 #
-- id: auto_garage_left_open_while_home
+- id: aut_garage_left_open_while_home
   alias: "aut garage door left open while home"
   initial_state: true
   trigger:
     - platform: event
-      event_type: timer_finished
+      event_type: timer.finished
       event_data:
         entity_id: timer.timer_lg_garage_door
     - platform: event
-      event_type: timer_finished
+      event_type: timer.finished
       event_data:
         entity_id: timer.timer_sm_garage_door
   actions:
     - action: script.scr_repeat_say_garage_open
 
 # Reset timer if moving in/out of garage
-- id: auto_reset_garage_timers
+- id: aut_reset_garage_timers
   alias: "aut reset garage timers"
   initial_state: true
   trigger:
