@@ -1,6 +1,8 @@
 #
 #  This program in in deep sleep most of the time
-#  and must be installed via serial cable
+#  and must be installed via serial cable or by
+#  pressing the RHS button on the pineapple then immediately
+#  updating via OTA
 #
 
 esphome:
