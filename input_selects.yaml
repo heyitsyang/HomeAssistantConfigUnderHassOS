@@ -1,15 +1,14 @@
 ##  Horizontal spaces are required
 ##  for yaml interpretation - do not delete them
- 
-###################### 
+
+######################
 ### INPUT NUMBERS  ###
-###################### 
+######################
 
 ## The input_numbers component allows for input sliders and entry ##
 ## of numeric values which can be controlled from the frontend     ##
 
-
-# 
+#
 # HVAC CONTROLS
 #
 # inp_sel_saved_ecobee_hvac:
@@ -22,12 +21,11 @@
 #     - 'off'
 
 inp_sel_saved_sunroom_hvac:
-  name: 'Sun Room HVAC last saved state'
+  name: "Sun Room HVAC last saved state"
   options:
-    - auto
+    - "off"
+    - heat_cool
     - cool
-    - dry
-    - fan_only
     - heat
-    - 'off'
-
+    - fan_only
+    - dry

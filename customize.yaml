@@ -146,7 +146,7 @@ sensor.ecobee_avg_indoor_temperature:
 sensor.guest_suite_display_battery_percent:
   icon: mdi:battery-unknown
   device_class: battery
-sensor.sensibo_sunroom_temperature:
+sensor.mrcool_sunroom_temperature:
   icon: mdi:thermometer
   device_class: temperature
 sensor.norcoose_outdoor_temperature:
