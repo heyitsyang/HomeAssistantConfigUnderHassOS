@@ -223,7 +223,7 @@
         {{ ( states('sensor.time') == (state_attr('input_datetime.assume_asleep', 'timestamp') | int(default=0) | timestamp_custom('%H:%M', false, '')) ) }}
   actions:
     - action: input_boolean.turn_on
-      data:
+      target:
         entity_id: input_boolean.inp_bool_sleeping
 
 - id: aut_datetime_announcements_on
@@ -644,7 +644,7 @@
         title: "HA UPS on battery power"
         message: "HA UPS on battery mode: {{ states('sensor.rackups_status') }}"
 
-- id: aut_ups_on_ac_mode          # mains power restored
+- id: aut_ups_on_ac_mode # mains power restored
   alias: "aut ups on ac mode"
   initial_state: true
   trigger:
@@ -660,8 +660,9 @@
       data:
         title: "HA grid power restored"
         message: "HA UPS on AC mode: {{ states('sensor.rackups_status') }}"
-    - action: homeassistant.turn_on   # ceiling fans all go off during power faillure
-      entity: group.ceiling_fans      # so we turn them back on
+    - action: homeassistant.turn_on # ceiling fans all go off during power faillure
+      target:
+        entity_id: group.ceiling_fans # so we turn them back on
 
 - id: aut_ups_emergency_shutdown
   alias: "auto ups emergency shutdown"
@@ -2588,7 +2589,8 @@
       to: "on"
   actions:
     - action: scene.turn_on
-      entity_id: scene.living_room_theater_mode
+      target:
+        entity_id: scene.living_room_theater_mode
 
 - id: aut_theater_mode_off
   alias: "aut theater mode off"
