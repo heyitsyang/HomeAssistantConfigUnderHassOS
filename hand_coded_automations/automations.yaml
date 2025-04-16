@@ -644,7 +644,7 @@
         title: "HA UPS on battery power"
         message: "HA UPS on battery mode: {{ states('sensor.rackups_status') }}"
 
-- id: aut_ups_on_ac_mode
+- id: aut_ups_on_ac_mode          # mains power restored
   alias: "aut ups on ac mode"
   initial_state: true
   trigger:
@@ -660,6 +660,8 @@
       data:
         title: "HA grid power restored"
         message: "HA UPS on AC mode: {{ states('sensor.rackups_status') }}"
+    - action: homeassistant.turn_on   # ceiling fans all go off during power faillure
+      entity: group.ceiling_fans      # so we turn them back on
 
 - id: aut_ups_emergency_shutdown
   alias: "auto ups emergency shutdown"
