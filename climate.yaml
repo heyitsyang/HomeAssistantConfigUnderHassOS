@@ -6,3 +6,4 @@
 # configuration.yaml as its own platform
 
 # MrCool is integrated using the Midea dongle integration via ESPHome
+# see https://esphome.io/components/climate/midea.html
