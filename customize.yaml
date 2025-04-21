@@ -54,6 +54,10 @@ climate.sunrm_ac:
   friendly_name: Sunroom
 climate.local_ecobee:
   friendly_name: Main House
+cover.garage_doors:
+  friendly_name: Garage doors
+  device_class: garage_door
+  icon: mdi:garage
 cover.large_garage_door:
   friendly_name: Large Garage Door
   device_class: garage_door
