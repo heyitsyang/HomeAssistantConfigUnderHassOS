@@ -3,8 +3,6 @@
 
 ### COVERS  ###
 
-# Note some covers are interfaced via Vera
-# and are not configured here also
 # MQTT covers are configured in mqtt.yaml
 
 - platform: group

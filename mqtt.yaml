@@ -213,12 +213,6 @@ sensor:
     qos: 0
     unit_of_measurement: "lx"
 
-  - unique_id: garage_temperature
-    name: "Garage Temperature"
-    state_topic: "garage/DS18b20/Temperature"
-    qos: 0
-    unit_of_measurement: "°F"
-
   - unique_id: attic_temperature
     name: "Attic Temperature"
     state_topic: "attic/DS18b20/Temperature"
@@ -299,28 +293,7 @@ binary_sensor:
 #
 # MQTT COVERS
 #
-cover:
-  ## Large Garage Door ##
-  - name: "Large Garage Door"
-    unique_id: large_garage_door
-    state_topic: "garage/LgGarDoor/zeroisclosed"
-    state_open: "1"
-    state_closed: "0"
-    command_topic: "garage/cmd"
-    payload_open: "pulse,4,1,500"
-    payload_close: "pulse,4,1,500"
-    qos: 0
 
-  ## Small Garage Door ##
-  - name: "Small Garage Door"
-    unique_id: small_garage_door
-    state_topic: "garage/SmGarDoor/zeroisclosed"
-    state_open: "1"
-    state_closed: "0"
-    command_topic: "garage/cmd"
-    payload_open: "pulse,5,1,500"
-    payload_close: "pulse,5,1,500"
-    qos: 0
 
 #
 # MQTT SWITCHES
