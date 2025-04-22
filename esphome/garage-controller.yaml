@@ -39,8 +39,8 @@ binary_sensor:
     id: lg_garage_is_closed
     device_class: garage_door
     pin:
-      number: GPIO27
-#      inverted: true
+      number: GPIO27             # blue wire
+      inverted: true
       mode:
         input: true
         pullup: true
@@ -49,8 +49,8 @@ binary_sensor:
     id: lg_garage_is_open
     device_class: garage_door
     pin:
-      number: GPIO25
-#      inverted: true
+      number: GPIO25             # brown wire
+      inverted: true
       mode:
         input: true
         pullup: true
@@ -59,8 +59,8 @@ binary_sensor:
     id: sm_garage_is_closed
     device_class: garage_door
     pin:
-      number: GPIO32
-#      inverted: true
+      number: GPIO32              # violet wire
+      inverted: true
       mode:
         input: true
         pullup: true
@@ -69,8 +69,8 @@ binary_sensor:
     id: sm_garage_is_open
     device_class: garage_door
     pin:
-      number: GPIO12
-#      inverted: true
+      number: GPIO12               # yellow wire
+      inverted: true
       mode:
         input: true
         pullup: true
@@ -80,15 +80,15 @@ switch:
   name: "Lg Garage Trigger"
   id: lg_garage_trigger
   pin:
-    number: GPIO04
+    number: GPIO16                  # orange wire
 - platform: gpio
   name: "Sm Garage Trigger"
   id: sm_garage_trigger
   pin:
-    number: GPIO00
+    number: GPIO17
 
 one_wire:
-  - platform: gpio
+  - platform: gpio                  # green wire
     pin: GPIO13
 
 #
@@ -118,12 +118,12 @@ cover:
 
     open_action:
       - switch.turn_on: lg_garage_trigger
-    open_duration: 15s
+    open_duration: 16.5s
     open_endstop: lg_garage_is_open
 
     close_action:
       - switch.turn_on: lg_garage_trigger
-    close_duration: 15s
+    close_duration: 16.5s
     close_endstop: lg_garage_is_closed
 
     stop_action:
