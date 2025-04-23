@@ -80,12 +80,16 @@ scr_goodnight: # called by Alexa as PART of Goodnight Routine
       entity_id: cover.master_bedroom_shades
     - if:
         - or:
-            - condition: state
-              entity_id: cover.large_garage_door
-              state: "open"
-            - condition: state
-              entity_id: cover.small_garage_door
-              state: "open"
+            # - condition: state
+            #   entity_id: cover.large_garage_door
+            #   state: "open"
+            - condition: template
+              value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
+            # - condition: state
+            #   entity_id: cover.small_garage_door
+            #   state: "open"
+            - condition: template
+              value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
       then:
         - action: script.scr_say_phrase
           data:
@@ -473,12 +477,16 @@ scr_check_garage_open:
   sequence:
     - condition: or
       conditions:
-        - condition: state
-          entity_id: cover.large_garage_door
-          state: "open"
-        - condition: state
-          entity_id: cover.small_garage_door
-          state: "open"
+        # - condition: state
+        #   entity_id: cover.large_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
+        # - condition: state
+        #   entity_id: cover.small_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
     - action: notify.mobile_app_yskt_cell
       data:
         message: "TTS"
@@ -508,48 +516,64 @@ scr_repeat_say_garage_open:
     - delay: "00:10:00"
     - condition: or
       conditions:
-        - condition: state
-          entity_id: cover.large_garage_door
-          state: "open"
-        - condition: state
-          entity_id: cover.small_garage_door
-          state: "open"
+        # - condition: state
+        #   entity_id: cover.large_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
+        # - condition: state
+        #   entity_id: cover.small_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
     - action: script.scr_say_phrase
       data:
         message: "A garage door is still open"
     - delay: "00:10:00"
     - condition: or
       conditions:
-        - condition: state
-          entity_id: cover.large_garage_door
-          state: "open"
-        - condition: state
-          entity_id: cover.small_garage_door
-          state: "open"
+        # - condition: state
+        #   entity_id: cover.large_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
+        # - condition: state
+        #   entity_id: cover.small_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
     - action: script.scr_say_phrase
       data:
         message: "A garage door is still open"
     - delay: "00:10:00"
     - condition: or
       conditions:
-        - condition: state
-          entity_id: cover.large_garage_door
-          state: "open"
-        - condition: state
-          entity_id: cover.small_garage_door
-          state: "open"
+        # - condition: state
+        #   entity_id: cover.large_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
+        # - condition: state
+        #   entity_id: cover.small_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
     - action: script.scr_say_phrase
       data:
         message: "A garage door is still open"
     - delay: "00:10:00"
     - condition: or
       conditions:
-        - condition: state
-          entity_id: cover.large_garage_door
-          state: "open"
-        - condition: state
-          entity_id: cover.small_garage_door
-          state: "open"
+        # - condition: state
+        #   entity_id: cover.large_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
+        # - condition: state
+        #   entity_id: cover.small_garage_door
+        #   state: "open"
+        - condition: template
+          value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
     - action: script.scr_say_phrase
       data:
         message: "A garage door is still open.  This is your last reminder"
