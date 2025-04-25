@@ -1482,6 +1482,11 @@
       # to: "open"
       entity_id: binary_sensor.garage_controller_lg_garage_is_closed
       to: "off"
+  conditions: # this prevents immediate triggering after home assistant startup
+    - condition: template
+      value_template: >-
+        {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')
+            | float(default=0)) ) | int(default=0) ) > 10 }}
   actions:
     - action: script.scr_say_phrase
       data:
@@ -1501,6 +1506,11 @@
       # to: "open"
       entity_id: binary_sensor.garage_controller_sm_garage_is_closed
       to: "off"
+  conditions: # this prevents immediate triggering after home assistant startup
+    - condition: template
+      value_template: >-
+        {{ ( ( as_timestamp(now(), '') - (as_timestamp(states('sensor.uptime'), '')
+            | float(default=0)) ) | int(default=0) ) > 10 }}
   actions:
     - action: script.scr_say_phrase
       data:
