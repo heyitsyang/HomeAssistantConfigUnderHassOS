@@ -24,7 +24,6 @@ wifi:
   password: !secret wifi_password
   domain: ".shencentral.net"
 
-  
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap: {}
 
@@ -34,10 +33,13 @@ captive_portal:
 # DEFINE GPIOs
 #
 binary_sensor:
+  - platform: status
+    name: "Garage Controller Status"
+
   - platform: gpio
     name: "Lg Garage is Closed"
     id: lg_garage_is_closed
-    device_class: garage_door
+    # device_class: garage_door
     pin:
       number: GPIO27             # blue wire
       inverted: true
@@ -45,12 +47,12 @@ binary_sensor:
         input: true
         pullup: true
     filters:
-      - delayed_on_off: 100ms
+      - delayed_on_off: 500ms
       
   - platform: gpio
     name: "Lg Garage is Open"
     id: lg_garage_is_open
-    device_class: garage_door
+    # device_class: garage_door
     pin:
       number: GPIO25             # brown wire
       inverted: true
@@ -58,12 +60,12 @@ binary_sensor:
         input: true
         pullup: true
     filters:
-      - delayed_on_off: 100ms
+      - delayed_on_off: 500ms
 
   - platform: gpio
     name: "Sm Garage is Closed"
     id: sm_garage_is_closed
-    device_class: garage_door
+    # device_class: garage_door
     pin:
       number: GPIO32              # violet wire
       inverted: true
@@ -71,12 +73,12 @@ binary_sensor:
         input: true
         pullup: true
     filters:
-      - delayed_on_off: 100ms
+      - delayed_on_off: 500ms
 
   - platform: gpio
     name: "Sm Garage is Open"
     id: sm_garage_is_open
-    device_class: garage_door
+    # device_class: garage_door
     pin:
       number: GPIO12               # yellow wire
       inverted: true
@@ -84,26 +86,33 @@ binary_sensor:
         input: true
         pullup: true
     filters:
-      - delayed_on_off: 100ms
+      - delayed_on_off: 500ms
 
-switch:
+
+output:
 - platform: gpio
-  name: "Lg Garage Trigger"
-  id: lg_garage_trigger
+  id: lg_garage_output
   pin:
     number: GPIO16                  # orange wire
-  on_turn_on:
-    - delay: 500ms
-    - switch.turn_off: lg_garage_trigger
 
 - platform: gpio
-  name: "Sm Garage Trigger"
-  id: sm_garage_trigger
+  id: sm_garage_output
   pin:
     number: GPIO17                  # green wire
-  on_turn_on:
-    - delay: 500ms
-    - switch.turn_off: sm_garage_trigger
+
+
+button:
+  - platform: output
+    name: "Lg Garage Trigger"
+    id: lg_garage_trigger
+    output: lg_garage_output
+    duration: 500ms
+
+  - platform: output
+    name: "Sm Garage Trigger"
+    id: sm_garage_trigger
+    output: sm_garage_output
+    duration: 500ms
 
 one_wire:
   - platform: gpio
@@ -123,43 +132,78 @@ sensor:
   - platform: dallas_temp
     name: "Garage Controller Temperature"
     id: garage_controller_temperature
-    update_interval: 60s
+    update_interval: 120s
     unit_of_measurement: "°C"
     device_class: "temperature"
     state_class: "measurement"
     accuracy_decimals: 1
 
+#
+# Garage door behavior:
+# - There is only one input for up, down, and stop.
+# - Door stops on a open/close/stop buttom activation and on a subsequent button activation travels opposite of the original direction
+# - Door reverses completely to fully open position if threshold sensors are tripped or a obstacle is encountered
+#
+# Desired garage door logic:  (only the first item has been implemented)
+# - if sensors confirm closed or open then return the confirmed state
+# - if state is closed when switch is triggered, then return "opening" until open sensor is activated
+#   - if open sensor is not activated within the timeout period, then "fault" is returned
+# - if state is open when switch is triggered, then return "closing" until close sensor is triggered 
+#   - if closed sensor is not activated within the timeout period, then "fault"" is returned
+#
 
 cover:
-  - platform: feedback
+  - platform: template
     name: "Large Garage"
-
+    lambda: |-
+      if (id(lg_garage_is_closed).state == 1)
+        return COVER_CLOSED;
+      else
+        return COVER_OPEN;
     open_action:
-      - switch.turn_on: lg_garage_trigger
-    open_duration: 13s
-    open_endstop: lg_garage_is_open
-
+      - if:
+          condition:
+            lambda: 'return (id(lg_garage_is_closed).state == 1);'
+          then:
+            - button.press: lg_garage_trigger
+          else:
+            - logger.log: "CMD NOT SENT - Large garage door already open"
     close_action:
-      - switch.turn_on: lg_garage_trigger
-    close_duration: 11s
-    close_endstop: lg_garage_is_closed
-
+      - if:
+          condition:
+            lambda: 'return (id(lg_garage_is_open).state == 1);'
+          then:
+            - button.press: lg_garage_trigger
+          else:
+            - logger.log: "CMD NOT SENT - Large garage door already closed"
     stop_action:
-      - switch.turn_off: lg_garage_trigger
-      - switch.turn_off: lg_garage_trigger
+      - button.press: lg_garage_trigger
 
-  - platform: feedback
+
+  - platform: template
     name: "Small Garage"
+    lambda: |-
+      if (id(sm_garage_is_closed).state == 1)
+        return COVER_CLOSED;
+      else
+        return COVER_OPEN;
     open_action:
-      - switch.turn_on: sm_garage_trigger
-    open_duration: 15s
-    open_endstop: sm_garage_is_open
-
+      - if:
+          condition:
+            lambda: 'return (id(sm_garage_is_closed).state == 1);'
+          then:
+            - button.press: sm_garage_trigger
+          else:
+            - logger.log: "CMD NOT SENT - Small garage door already open"
     close_action:
-      - switch.turn_on: sm_garage_trigger
-    close_duration: 15s
-    close_endstop: sm_garage_is_closed
-
+      - if:
+          condition:
+            lambda: 'return (id(sm_garage_is_open).state == 1);'
+          then:
+            - button.press: sm_garage_trigger
+          else:
+          - logger.log: "CMD NOT SENT - Small garage door already closed"
     stop_action:
-      - switch.turn_off: sm_garage_trigger
-      - switch.turn_off: sm_garage_trigger
+      - button.press: sm_garage_trigger
+
+    
