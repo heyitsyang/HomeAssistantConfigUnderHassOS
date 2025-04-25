@@ -1519,7 +1519,7 @@
       # entity_id: cover.large_garage_door
       # to: "closed"
       entity_id: binary_sensor.garage_controller_lg_garage_is_closed
-      to: "off"
+      to: "on"
   actions:
     - action: timer.cancel
       target:
@@ -1533,7 +1533,7 @@
       # entity_id: cover.small_garage_door
       # to: "closed"
       entity_id: binary_sensor.garage_controller_sm_garage_is_closed
-      to: "off"
+      to: "on"
   actions:
     - action: timer.cancel
       target:
