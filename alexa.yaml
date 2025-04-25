@@ -39,7 +39,7 @@ smart_home:
       - script.scr_reset_mood_lights_to_default
       - script.scr_partially_close_sunrm_shades
       - script.scr_partially_close_masterbdrm_outer_shades
-      - sensor.garage_temperature
+      - sensor.garage_controller_temperature
       - sensor.ecobee_avg_indoor_temperature
       - switch.hamstation
       - switch.lan2_power
@@ -166,7 +166,7 @@ smart_home:
     sensor.attic_temperature:
       name: "Attic"
       display_categories: TEMPERATURE_SENSOR
-    sensor.garage_temperature:
+    sensor.garage_controller_temperature:
       name: "Garage"
       display_categories: TEMPERATURE_SENSOR
     sensor.ecobee_avg_indoor_temperature:
