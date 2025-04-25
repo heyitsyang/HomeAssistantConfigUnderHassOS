@@ -4,7 +4,7 @@ esphome:
 esp32:
   board: mhetesp32minikit
   framework:
-    type: arduino
+    type: esp-idf
 
 # Enable logging
 logger:
@@ -32,9 +32,29 @@ i2s_audio:
   i2s_lrclk_pin: GPIO33
   i2s_bclk_pin: GPIO19
 
-media_player:
+speaker:
   - platform: i2s_audio
-    name: Garage Speakers
-    dac_type: external
+    id: output_speaker
     i2s_dout_pin: GPIO22
-    mode: mono
+    dac_type: external    
+    bits_per_sample: 32bit
+    channel: mono
+    buffer_duration: 60ms
+
+media_player:
+  - platform: speaker
+    name: "Garage Speakers"
+    id: media_out
+    announcement_pipeline:
+      speaker: output_speaker
+      format: WAV
+    codec_support_enabled: false
+    buffer_size: 6000
+    on_pause:
+      - logger.log: "Playback paused!"
+    on_idle:
+      - logger.log: "Playback finished!"    
+
+button:
+  - platform: restart
+    name: "Garage Speakers Restart"
