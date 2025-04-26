@@ -1336,7 +1336,7 @@
         below: 280 # the house through the sun room most
   actions:
     - action: script.scr_check_sunrm_windows # be sure no windows are open
-    - action: script.scr_partially_close_sunrm_shades
+    - action: script.scr_partial_close_sunrm_shades
       data:
         position: "40" # drop shades to X% open
 
@@ -1997,8 +1997,10 @@
         message: "Windows are all closed. Climate control is restored"
 
 #
-# MASTER BEDROOM FAN AUTOMATION
+# BEDROOM/OFFICE FAN AUTOMATION
 #
+
+# Master bedroom fan on/off
 - id: aut_master_bedroom_fan_trig_on
   alias: "aut master bedroom fan trig on"
   initial_state: true
@@ -2036,6 +2038,70 @@
     action: fan.turn_off
     target:
       entity_id: fan.master_bedroom_fan
+
+# Office fan changes speed
+- id: aut_office_fan_trig_25pct
+  alias: "aut office fan trig 25pct"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.espresense_office_ds18b20_temperature
+      above: input_number.inp_num_officefan_25pct_temp
+      for:
+        minutes: 10
+    - platform: numeric_state
+      entity_id: sensor.espresense_office_ds18b20_temperature
+      below: input_number.inp_num_officefan_50pct_temp
+      for:
+        minutes: 10
+  conditions:
+    condition: state
+    entity_id: input_boolean.inp_bool_guest_mode
+    state: "off"
+  actions:
+    action: fan.set_percentage
+    target:
+      entity_id: fan.office_fan
+    data:
+      percentage: 25
+
+- id: aut_office_fan_trig_50pct
+  alias: "aut office fan trig 50pct"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.espresense_office_ds18b20_temperature
+      above: input_number.inp_num_officefan_50pct_temp
+      for:
+        minutes: 10
+  conditions:
+    condition: state
+    entity_id: input_boolean.inp_bool_guest_mode
+    state: "off"
+  actions:
+    action: fan.set_percentage
+    target:
+      entity_id: fan.office_fan
+    data:
+      percentage: 50
+
+- id: aut_office_fan_trig_off
+  alias: "aut office fan trig off"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.espresense_office_ds18b20_temperature
+      below: input_number.inp_num_officefan_off_temp
+      for:
+        minutes: 10
+  conditions:
+    condition: state
+    entity_id: input_boolean.inp_bool_guest_mode
+    state: "off"
+  actions:
+    action: fan.turn_off
+    target:
+      entity_id: fan.office_fan
 
 #
 # HOME DEPARTURE SECURITY/GARAGE CHECK

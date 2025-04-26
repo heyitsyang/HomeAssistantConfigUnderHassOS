@@ -152,6 +152,8 @@ inp_num_spt_duration:
 #
 
 # TEMPERATURE RELATED
+
+# fans
 inp_num_masterbdrmfan_on_temp:
   name: "MstBdrm Fan ON"
   mode: box
@@ -170,6 +172,34 @@ inp_num_masterbdrmfan_off_temp:
   icon: mdi:fan-off
   unit_of_measurement: "ºF"
 
+inp_num_officefan_25pct_temp:
+  name: "Office Fan LOW"
+  mode: box
+  step: .5
+  min: 71
+  max: 75
+  icon: mdi:fan
+  unit_of_measurement: "ºF"
+
+inp_num_officefan_50pct_temp:
+  name: "Office Fan MED"
+  mode: box
+  step: .5
+  min: 76
+  max: 82
+  icon: mdi:fan-off
+  unit_of_measurement: "ºF"
+
+inp_num_officefan_off_temp:
+  name: "Office Fan OFF"
+  mode: box
+  step: .5
+  min: 65
+  max: 70
+  icon: mdi:fan-off
+  unit_of_measurement: "ºF"
+
+# lights
 inp_num_outdoor_lights_on_solar_trig: # solartube original value = 75
   name: "Outdoors ON solar"
   mode: box
