@@ -33,12 +33,28 @@ smart_home:
       - input_boolean.inp_bool_extended_absence_mode
       - lock.front_door_lock
       - lock.back_door_lock
+      - script.scr_open_garage_doors
+      - script.scr_close_garage_doors
+      - script.scr_open_large_garage_door
+      - script.scr_close_large_garage_door
+      - script.scr_open_small_garage_door
+      - script.scr_close_small_garage_door
+      - script.scr_open_all_sunrm_shades
+      - script.scr_close_all_sunrm_shades
+      - script.scr_close_sunrm_shades_to_40_percent
+      - script.scr_open_sunrm_shade_1
+      - script.scr_close_sunrm_shade_1
+      - script.scr_open_sunrm_shade_2
+      - script.scr_close_sunrm_shade_2
+      - script.scr_open_sunrm_shade_3
+      - script.scr_close_sunrm_shade_3
+      - script.scr_open_sunrm_shade_4
+      - script.scr_close_sunrm_shade_4
+      - script.scr_partially_close_masterbdrm_outer_shades
       - script.scr_goodnight
       - script.scr_goodmorning
       - script.scr_vacuum_start_custom_cleaning
       - script.scr_reset_mood_lights_to_default
-      - script.scr_partially_close_sunrm_shades
-      - script.scr_partially_close_masterbdrm_outer_shades
       - sensor.garage_controller_temperature
       - sensor.ecobee_avg_indoor_temperature
       - switch.hamstation
@@ -100,15 +116,15 @@ smart_home:
       display_categories: "VACUUM_CLEANER"
     input_boolean.inp_bool_announcements:
       name: "Announcements"
-    cover.large_garage_door:
-      name: "Large Garage Door"
-      display_categories: GARAGE_DOOR
-    cover.small_garage_door:
-      name: "Small Garage Door"
-      display_categories: GARAGE_DOOR
-    cover.garage_doors:
-      name: "Garage doors"
-      display_categories: GARAGE_DOOR
+    # cover.large_garage_door:
+    #   name: "Large Garage Door"
+    #   display_categories: GARAGE_DOOR
+    # cover.small_garage_door:
+    #   name: "Small Garage Door"
+    #   display_categories: GARAGE_DOOR
+    # cover.garage_doors:
+    #   name: "Garage doors"
+    #   display_categories: GARAGE_DOOR
     cover.master_bedroom_shades:
       name: "All master bedroom shades"
       display_categories: INTERIOR_BLIND
@@ -145,22 +161,22 @@ smart_home:
     script.scr_partially_close_masterbdrm_outer_shades:
       name: "Partial master bedroom shades"
       display_categories: INTERIOR_BLIND
-    cover.sun_room_shade_1:
-      name: "Sun room shade 1"
-      display_categories: INTERIOR_BLIND
-    cover.sun_room_shade_2:
-      name: "Sun room shade 2"
-      display_categories: INTERIOR_BLIND
-    cover.sun_room_shade_3:
-      name: "Sun room shade 3"
-      display_categories: INTERIOR_BLIND
-    cover.sun_room_shade_4:
-      name: "Sun room shade 4"
-      display_categories: INTERIOR_BLIND
-    cover.sun_room_shades:
-      name: "All sun room shades"
-      display_categories: INTERIOR_BLIND
-    script.scr_partially_close_sunrm_shades:
+    # cover.sun_room_shade_1:
+    #   name: "Sun room shade 1"
+    #   display_categories: INTERIOR_BLIND
+    # cover.sun_room_shade_2:
+    #   name: "Sun room shade 2"
+    #   display_categories: INTERIOR_BLIND
+    # cover.sun_room_shade_3:
+    #   name: "Sun room shade 3"
+    #   display_categories: INTERIOR_BLIND
+    # cover.sun_room_shade_4:
+    #   name: "Sun room shade 4"
+    #   display_categories: INTERIOR_BLIND
+    # cover.sun_room_shades:
+    #   name: "All sun room shades"
+    #   display_categories: INTERIOR_BLIND
+    script.scr_close_sunrm_shades_to_40_percent:
       name: "Partial sun room shades"
       display_categories: INTERIOR_BLIND
     sensor.attic_temperature:
@@ -192,16 +208,3 @@ smart_home:
     light.front_door_lights:
       name: "Front porch light"
       display_categories: LIGHT
-#    group.indoor_lights:
-#      name: "Indoor lights"
-#      display_categories: LIGHT
-#    group.kitchen_lights:
-#      name: "Kitchen lights"
-#      display_categories: LIGHT
-#    group.living_area_lights:
-#      name: "Living area lights"
-#      display_categories: LIGHT
-#    group.fans:
-#      name: "Ceiling fans"
-#    group.sunroom_fans:
-#      name: "Sunroom fans"

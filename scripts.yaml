@@ -62,6 +62,138 @@ scr_goodmorning:
         entity_id: cover.master_bedroom_inner_shades
 
 #
+# COVER SCRIPTS
+#  These scripts are to avoid having to use ON and OFF for covers (shades, garage doors, etc.)
+#
+scr_open_garage_doors:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.garage_doors
+
+scr_close_garage_doors:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.garage_doors
+
+scr_open_large_garage_door:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.large_garage_door
+
+scr_close_large_garage_door:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.large_garage_door
+
+scr_open_small_garage_door:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.small_garage_door
+
+scr_close_small_garage_door:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.small_garage_door
+
+scr_open_all_sunrm_shades:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.sun_room_shades
+
+scr_close_all_sunrm_shades:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.sun_room_shades
+
+scr_open_sunrm_shade_1:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.sun_room_shade_1
+
+scr_close_sunrm_shade_1:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.sun_room_shade_1
+
+scr_open_sunrm_shade_2:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.sun_room_shade_2
+
+scr_close_sunrm_shade_2:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.sun_room_shade_2
+
+scr_open_sunrm_shade_3:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.sun_room_shade_3
+
+scr_close_sunrm_shade_3:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.sun_room_shade_3
+
+scr_open_sunrm_shade_4:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.sun_room_shade_4
+
+scr_close_sunrm_shade_4:
+  mode: single
+  max_exceeded: silent
+  sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.sun_room_shade_4
+
+#
 # GOOD NIGHT SCRIPT
 #   All lights except guest suite are turned off in an Alexa routine before
 #   running this script, so only guest suite lights a handled here
@@ -354,6 +486,7 @@ scr_partial_close_masterbdrm_outer_shades:
         position: "{{ position }}"
 
 scr_partially_close_masterbdrm_outer_shades:
+  mode: single
   sequence:
     - action: script.scr_partial_close_master_bedroom_outer_shades
       data:
@@ -391,7 +524,8 @@ scr_partial_close_sunrm_shades:
         entity_id: cover.sun_room_shades
         position: "{{ position }}"
 
-scr_partially_close_sunrm_shades:
+scr_close_sunrm_shades_to_40_percent:
+  mode: single
   sequence:
     - action: script.scr_check_sunrm_windows # be sure no windows are open
     - action: script.scr_partial_close_sunrm_shades
