@@ -2073,7 +2073,7 @@
       entity_id: sensor.espresense_office_ds18b20_temperature
       above: input_number.inp_num_officefan_50pct_temp
       for:
-        minutes: 10
+        minutes: 5
   conditions:
     condition: state
     entity_id: input_boolean.inp_bool_guest_mode
