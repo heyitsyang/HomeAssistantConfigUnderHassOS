@@ -2004,6 +2004,8 @@
 - id: aut_master_bedroom_fan_trig_on
   alias: "aut master bedroom fan trig on"
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.espresense_masterbdrm_ds18b20_temperature
@@ -2024,6 +2026,8 @@
 - id: aut_master_bedroom_fan_trig_off
   alias: "aut master bedroom fan trig off"
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.espresense_masterbdrm_ds18b20_temperature
@@ -2043,6 +2047,8 @@
 - id: aut_office_fan_trig_25pct
   alias: "aut office fan trig 25pct"
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.espresense_office_ds18b20_temperature
@@ -2068,6 +2074,8 @@
 - id: aut_office_fan_trig_50pct
   alias: "aut office fan trig 50pct"
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.espresense_office_ds18b20_temperature
@@ -2088,6 +2096,8 @@
 - id: aut_office_fan_trig_off
   alias: "aut office fan trig off"
   initial_state: true
+  mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.espresense_office_ds18b20_temperature
