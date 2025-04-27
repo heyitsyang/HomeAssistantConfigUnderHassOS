@@ -841,7 +841,7 @@ scr_great_room_motion_lighting_off:
 scr_frontporch_activity:
   sequence:
     - action: script.turn_on # use this method to de-serialize the speech so cameras are not delayed
-      entity_id: script.scr_say_phrase
+      entity_id: script.scr_say_phrase # script doesn't announce if not during announcement hours
       data:
         variables:
           message: "You have a visitor at the front door"
@@ -849,37 +849,39 @@ scr_frontporch_activity:
       data:
         entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
-    - condition: not # testing for not_home else doesn't work if in a known zone
-      conditions:
-        - condition: state
-          entity_id: person.yang
-          state: "home"
-        - condition: state
-          entity_id: person.karen
-          state: "home"
-    - condition: state
-      entity_id: input_boolean.inp_bool_sleeping
-      state: "off"
-    - action: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.inp_bool_visitor_while_out_flag
-    - action: notify.alexa_yellow_ring
-      data:
-        message: "While you out, there was a visitor at the front door"
-    - action: notify.mobile_app_yskt_cell
-      data:
-        title: Front door activity
-        message: "Front door activity detected"
-        data:
-          clickAction: "lovelace/last-snaps"
-    - action: notify.mobile_app_yskt_cell
-      data:
-        title: Front door activity
-        message: TTS
-        data:
-          tts_text: "Front door activity detected"
+    - if:
+        - condition: not # testing for "not_home" else doesn't work if in a known zone so use !home logic
+          conditions:
+            - condition: state
+              entity_id: person.yang
+              state: "home"
+            - condition: state
+              entity_id: person.karen
+              state: "home"
+        - condition: state # notify if sleeping
+          entity_id: input_boolean.inp_bool_sleeping
+          state: "off"
+      then:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inp_bool_visitor_while_out_flag
+        - action: notify.alexa_yellow_ring
           data:
-            car_ui: true
+            message: "While you out, there was a visitor at the front door"
+        - action: notify.mobile_app_yskt_cell
+          data:
+            title: Front door activity
+            message: "Front door activity detected"
+            data:
+              clickAction: "lovelace/last-snaps"
+        - action: notify.mobile_app_yskt_cell
+          data:
+            title: Front door activity
+            message: TTS
+            data:
+              tts_text: "Front door activity detected"
+              data:
+                car_ui: true
 
 scr_front_door_lights_on:
   sequence:
