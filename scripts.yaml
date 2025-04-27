@@ -857,12 +857,15 @@ scr_frontporch_activity:
         - condition: state
           entity_id: person.karen
           state: "home"
+    - condition: state
+      entity_id: input_boolean.inp_bool_sleeping
+      state: "off"
     - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.inp_bool_visitor_while_out_flag
     - action: notify.alexa_yellow_ring
       data:
-        message: "While you where away, there was a visitor at the front door"
+        message: "While you out, there was a visitor at the front door"
     - action: notify.mobile_app_yskt_cell
       data:
         title: Front door activity
