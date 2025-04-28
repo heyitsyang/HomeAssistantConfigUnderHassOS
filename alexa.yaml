@@ -27,7 +27,6 @@ smart_home:
       - group.mood_lights
       - input_boolean.party_mode
       - input_boolean.inp_bool_theater_mode
-      - input_boolean.inp_bool_pause_leak_alarm
       - input_boolean.inp_bool_guest_mode
       - input_boolean.inp_bool_sleeping
       - input_boolean.inp_bool_extended_absence_mode
@@ -96,8 +95,6 @@ smart_home:
       display_categories: LIGHT
     switch.hamstation: # avoid Alexa confusion with radio "stations"
       name: "Ham radio"
-    input_boolean.inp_bool_pause_leak_alarm:
-      name: "Pause leak alarm"
     input_boolean.inp_bool_sleeping:
       name: "Sleep mode"
     input_boolean.inp_bool_guest_mode:

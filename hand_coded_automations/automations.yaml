@@ -924,6 +924,7 @@
 
 - id: aut_leak_detected
   alias: "aut leak detected"
+  mode: single
   initial_state: true
   trigger:
     - platform: state
@@ -997,9 +998,6 @@
           - condition: state
             entity_id: switch.water_valve
             state: "off"
-          - condition: state
-            entity_id: timer.pause_leak_alarm
-            state: "idle"
         sequence:
           - action: script.scr_say_phrase
             data:
