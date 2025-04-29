@@ -151,6 +151,15 @@ inp_num_spt_duration:
 # TRIGGERS
 #
 
+# HUMIDITY RELATED
+inp_num_drybox_humidity_theshold:
+  name: "Drybox Humidity Threshold"
+  mode: box
+  min: 20
+  max: 35
+  icon: mdi:water-percent-alert
+  unit_of_measurement: "%"
+
 # TEMPERATURE RELATED
 
 # fans

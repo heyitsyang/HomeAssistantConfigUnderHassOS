@@ -790,6 +790,28 @@
         message: "Irrig leak detected in zone 4 (left): {{ states('sensor.irrig_report_avg_gpm_zone_4') }} GPM"
 
 #
+# DRYBOX HUMIDITY TOO HIGH
+#
+- id: aut_drybox_humidity_above_tolerance
+  alias: "aut drybox humidity above tolerance"
+  initial_state: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.drybox_humidity
+      above: "{{ states('input_number.inp_num_drybox_humidity_theshold')}}"
+      for:
+        hours: 12
+  actions:
+    - action: notify.persistent_notification
+      data:
+        title: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
+        message: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
+    - action: notify.gmail_to_yang
+      data:
+        title: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
+        message: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
+
+#
 # WATER EXPANSION TANK FAULT
 #
 - id: aut_expansion_tank_fault
