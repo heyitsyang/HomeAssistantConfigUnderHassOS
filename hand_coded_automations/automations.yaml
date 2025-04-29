@@ -798,7 +798,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.drybox_humidity
-      above: "{{ states('input_number.inp_num_drybox_humidity_theshold')}}"
+      above: input_number.inp_num_drybox_humidity_theshold
       for:
         hours: 12
   actions:
