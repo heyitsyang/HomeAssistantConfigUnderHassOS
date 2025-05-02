@@ -1498,10 +1498,8 @@
   initial_state: true
   trigger:
     - platform: state
-      # entity_id: cover.large_garage_door
-      # to: "open"
-      entity_id: binary_sensor.garage_controller_lg_garage_is_closed
-      to: "off"
+      entity_id: cover.large_garage_door
+      to: "open"
   conditions: # this prevents immediate triggering after home assistant startup
     - condition: template
       value_template: >-
@@ -1522,10 +1520,8 @@
   initial_state: true
   trigger:
     - platform: state
-      # entity_id: cover.small_garage_door
-      # to: "open"
-      entity_id: binary_sensor.garage_controller_sm_garage_is_closed
-      to: "off"
+      entity_id: cover.small_garage_door
+      to: "open"
   conditions: # this prevents immediate triggering after home assistant startup
     - condition: template
       value_template: >-
@@ -1546,10 +1542,8 @@
   initial_state: true
   trigger:
     - platform: state
-      # entity_id: cover.large_garage_door
-      # to: "closed"
-      entity_id: binary_sensor.garage_controller_lg_garage_is_closed
-      to: "on"
+      entity_id: cover.large_garage_door
+      to: "closed"
   actions:
     - action: timer.cancel
       target:
@@ -1560,10 +1554,8 @@
   initial_state: true
   trigger:
     - platform: state
-      # entity_id: cover.small_garage_door
-      # to: "closed"
-      entity_id: binary_sensor.garage_controller_sm_garage_is_closed
-      to: "on"
+      entity_id: cover.small_garage_door
+      to: "closed"
   actions:
     - action: timer.cancel
       target:
@@ -1689,17 +1681,13 @@
       for:
         minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
-      # entity_id: cover.large_garage_door
-      # to: "closed"
-      entity_id: binary_sensor.garage_controller_lg_garage_is_closed
-      to: "on"
+      entity_id: cover.large_garage_door
+      to: "closed"
       for:
         minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
-      # entity_id: cover.small_garage_door
-      # to: "closed"
-      entity_id: binary_sensor.garage_controller_sm_garage_is_closed
-      to: "on"
+      entity_id: cover.small_garage_door
+      to: "closed"
       for:
         minutes: "{{ states('input_number.inp_num_front_door_lights_off_delay') | int(default=0) }}"
     - platform: state
@@ -1840,16 +1828,12 @@
   conditions:
     condition: or
     conditions:
-      # - condition: state
-      #   entity_id: cover.large_garage_door
-      #   state: "open"
-      - condition: template
-        value_template: "states('binary_sensor.garage_controller_lg_garage_is_closed,) != 'on' "
-      # - condition: state
-      #   entity_id: cover.small_garage_door
-      #   state: "open"
-      - condition: template
-        value_template: "states('binary_sensor.garage_controller_sm_garage_is_closed,) != 'on' "
+      - condition: state
+        entity_id: cover.large_garage_door
+        state: "open"
+      - condition: state
+        entity_id: cover.small_garage_door
+        state: "open"
   actions:
     - action: timer.start # timer.start is the same as a timer reset/restart
       target:
@@ -2303,7 +2287,7 @@
       below: 30
     - platform: numeric_state
       entity_id: sensor.govee_display_battery
-      below: 30
+      below: 25
       for: "00:30:00"
     - platform: numeric_state
       entity_id: sensor.freezer_sensor_battery
