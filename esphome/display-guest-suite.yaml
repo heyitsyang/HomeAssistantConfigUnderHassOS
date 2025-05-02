@@ -64,7 +64,7 @@ deep_sleep:
     inverted: true               # active LOW
   run_duration:
     default: 40s                 # stay awake for this long if awakened by timer
-    gpio_wakeup_reason: 360s     # stay awake for this long if by GPIO (for possible OTA update)
+    gpio_wakeup_reason: 600s     # stay awake for this long if by GPIO (for possible OTA update)
   sleep_duration: 3585s
 
 switch:
