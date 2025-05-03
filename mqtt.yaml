@@ -21,11 +21,17 @@ sensor:
     state_topic: "drybox/time_stamp"
     qos: 0
 
-  - unique_id: drybox_humidity
-    name: "Drybox Humidity"
-    state_topic: "drybox/humidity"
+  - unique_id: drybox_relative_humidity
+    name: "Drybox Relative Humidity"
+    state_topic: "drybox/relative_humidity"
     device_class: humidity
     unit_of_measurement: "%"
+    qos: 0
+
+  - unique_id: drybox_absolute_humidity
+    name: "Drybox Absolute Humidity"
+    state_topic: "drybox/absolute_humidity"
+    unit_of_measurement: "g/m³"
     qos: 0
 
   - unique_id: drybox_temperture
@@ -293,7 +299,6 @@ binary_sensor:
 #
 # MQTT COVERS
 #
-
 
 #
 # MQTT SWITCHES

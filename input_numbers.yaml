@@ -152,8 +152,8 @@ inp_num_spt_duration:
 #
 
 # HUMIDITY RELATED
-inp_num_drybox_humidity_theshold:
-  name: "Drybox Humidity Threshold"
+inp_num_drybox_relative_humidity_theshold:
+  name: "Drybox Relative Humidity Threshold"
   mode: box
   min: 20
   max: 35
