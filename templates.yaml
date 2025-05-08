@@ -3,6 +3,59 @@
 #######################
 
 #
+# IRRIGATION LEAK
+#
+- sensor:
+    - name: "irrig_zone_0_gals" # leakaage while all vbalves off = zone zero
+      unique_id: irrig_zone_0_gals
+      device_class: "volume"
+      unit_of_measurement: "gal"
+      icon: mdi:waves-arrow-right
+      state: >-
+        {{ state_attr('sensor.irrig_report_avg_gpm_zone_0', 'preMeasureGallons') | int +
+            state_attr('sensor.irrig_report_avg_gpm_zone_0', 'measuredZoneGallons') | int}}
+
+- sensor:
+    - name: "irrig_zone_1_gals"
+      unique_id: irrig_zone_1_gals
+      device_class: "volume"
+      unit_of_measurement: "gal"
+      icon: mdi:waves-arrow-right
+      state: >-
+        {{ state_attr('sensor.irrig_report_avg_gpm_zone_1', 'preMeasureGallons') | int +
+            state_attr('sensor.irrig_report_avg_gpm_zone_1', 'measuredZoneGallons') | int}}
+
+- sensor:
+    - name: "irrig_zone_2_gals"
+      unique_id: irrig_zone_2_gals
+      device_class: "volume"
+      unit_of_measurement: "gal"
+      icon: mdi:waves-arrow-right
+      state: >-
+        {{ state_attr('sensor.irrig_report_avg_gpm_zone_2', 'preMeasureGallons') | int  +
+            state_attr('sensor.irrig_report_avg_gpm_zone_2', 'measuredZoneGallons') | int}}
+
+- sensor:
+    - name: "irrig_zone_3_gals"
+      unique_id: irrig_zone_3_gals
+      device_class: "volume"
+      unit_of_measurement: "gal"
+      icon: mdi:waves-arrow-right
+      state: >-
+        {{ state_attr('sensor.irrig_report_avg_gpm_zone_3', 'preMeasureGallons') | int +
+            state_attr('sensor.irrig_report_avg_gpm_zone_3', 'measuredZoneGallons') | int }}
+
+- sensor:
+    - name: "irrig_zone_4_gals"
+      unique_id: irrig_zone_4_gals
+      device_class: "volume"
+      unit_of_measurement: "gal"
+      icon: mdi:waves-arrow-right
+      state: >-
+        {{ state_attr('sensor.irrig_report_avg_gpm_zone_4', 'preMeasureGallons') | int  +
+            state_attr('sensor.irrig_report_avg_gpm_zone_4', 'measuredZoneGallons') | int}}
+
+#
 # HVAC FAULT
 #
 - binary_sensor:
