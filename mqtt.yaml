@@ -59,6 +59,12 @@ sensor:
     state_topic: "irrig_leak/idle/time_stamp"
     qos: 0
 
+  - unique_id: irrig_wifi_dbm
+    name: "Irrig WiFi Signal Strength"
+    state_topic: "irrig_leak/wifi_dbm"
+    unit_of_measurement: "dBm"
+    qos: 0
+
   - unique_id: irrig_idle_water_pressure
     name: "Irrig Idle Water Pressure"
     state_topic: "irrig_leak/idle/water_pressure"
