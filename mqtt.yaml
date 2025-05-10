@@ -183,10 +183,6 @@ sensor:
     json_attributes_topic: "irrig_leak/report/avg_psi_zone_4/attributes"
 
   # SPT (watermain) sensors
-  - unique_id: SPT_sensor_online_status
-    name: "SPT Sensor Online Status"
-    state_topic: "watermain/status/LWT"
-    qos: 0
 
   - unique_id: water_spt_data_status
     name: "SPT Data Status"
@@ -240,6 +236,14 @@ sensor:
 # MQTT BINARY SENSORS
 #
 binary_sensor:
+  - unique_id: spt_sensor_online_status
+    name: "SPT Sensor Online Status"
+    state_topic: "watermain/status/LWT"
+    device_class: connectivity
+    payload_on: "Connected"
+    payload_off: "Connection Lost"
+    qos: 0
+
   - unique_id: utilitycloset_airhandler
     name: "Air Handler"
     state_topic: "utilitycloset/airhandler/State"

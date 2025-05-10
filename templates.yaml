@@ -293,65 +293,6 @@
         {%- endfor -%}
 
 #
-# MISC SENSORS
-#
-
-- sensor:
-    - name: ys_cell_gps_accuracy
-      unique_id: ys_cell_gps_accuracy
-      unit_of_measurement: "m"
-      state: "{{ state_attr('device_tracker.ys_cell_gps', 'gps_accuracy') }}"
-
-- sensor:
-    - name: kt_cell_gps_accuracy
-      unique_id: kt_cell_gps_accuracy
-      unit_of_measurement: "m"
-      state: "{{ state_attr('device_tracker.kt_cell_gps', 'gps_accuracy') }}"
-
-- sensor:
-    - name: validated_water_static_pressure_test_result
-      unique_id: validated_static_pressure_test_result
-      unit_of_measurement: "psi"
-      state: >-
-        {% if (is_state('sensor.spt_data_status', 'valid')) %}
-          {{ states('sensor.unvalidated_water_static_pressure_test_result') | float(default=0) }}
-        {% else %}
-          0
-        {% endif %}
-
-- sensor:
-    - name: water_static_pressure_loss_per_minute
-      unique_id: water_static_pressure_loss_per_minute
-      unit_of_measurement: "psi"
-      state: >
-        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) / 
-          (states('input_number.inp_num_spt_duration') | float(default=0)) }}
-
-- sensor:
-    - name: lv_rm_suggested_brightness
-      unique_id: lv_rm_suggested_brightness
-      unit_of_measurement: "%"
-      # lvrm lux sensor is embedded in espresence_greatrm
-      # - remember suggested brightness goes up as lux goes down
-      # - return fixed value if sun below horizon to prevent TV & other interaction with sensor
-      state: >-
-        {% if ( is_state('binary_sensor.espresense_greatrm', 'off')  or is_state('sun.sun', 'below_horizon') ) %} 
-          30
-        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_off_threshold') | float(default=0)) ) ) %}
-          0
-        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_off_threshold') | float(default=0)) ) and
-              ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_low_threshold') | float(default=0)) ) ) %}
-          12
-        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
-              ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
-          20
-        {% elif ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_med_threshold') | float(default=0)) ) %}
-          30
-        {% else %}
-          99
-        {% endif %}
-
-#
 # CLIMATE
 #
 
@@ -475,3 +416,62 @@
       unique_id: sun_room_remote_4_battery
       state: "{{ state_attr('sensor.sun_room_remote_4','battery_level') | int(default=0) }}"
       unit_of_measurement: "%"
+
+#
+# MISC SENSORS
+#
+
+- sensor:
+    - name: ys_cell_gps_accuracy
+      unique_id: ys_cell_gps_accuracy
+      unit_of_measurement: "m"
+      state: "{{ state_attr('device_tracker.ys_cell_gps', 'gps_accuracy') }}"
+
+- sensor:
+    - name: kt_cell_gps_accuracy
+      unique_id: kt_cell_gps_accuracy
+      unit_of_measurement: "m"
+      state: "{{ state_attr('device_tracker.kt_cell_gps', 'gps_accuracy') }}"
+
+- sensor:
+    - name: validated_water_static_pressure_test_result
+      unique_id: validated_static_pressure_test_result
+      unit_of_measurement: "psi"
+      state: >-
+        {% if (is_state('sensor.spt_data_status', 'valid')) %}
+          {{ states('sensor.unvalidated_water_static_pressure_test_result') | float(default=0) }}
+        {% else %}
+          0
+        {% endif %}
+
+- sensor:
+    - name: water_static_pressure_loss_per_minute
+      unique_id: water_static_pressure_loss_per_minute
+      unit_of_measurement: "psi"
+      state: >
+        {{ (states('sensor.validated_water_static_pressure_test_result') | float(default=0)) / 
+          (states('input_number.inp_num_spt_duration') | float(default=0)) }}
+
+- sensor:
+    - name: lv_rm_suggested_brightness
+      unique_id: lv_rm_suggested_brightness
+      unit_of_measurement: "%"
+      # lvrm lux sensor is embedded in espresence_greatrm
+      # - remember suggested brightness goes up as lux goes down
+      # - return fixed value if sun below horizon to prevent TV & other interaction with sensor
+      state: >-
+        {% if ( is_state('binary_sensor.espresense_greatrm', 'off')  or is_state('sun.sun', 'below_horizon') ) %} 
+          30
+        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_off_threshold') | float(default=0)) ) ) %}
+          0
+        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_off_threshold') | float(default=0)) ) and
+              ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_low_threshold') | float(default=0)) ) ) %}
+          12
+        {% elif ( ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_low_threshold') | float(default=0)) ) and
+              ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) > (states('input_number.inp_num_med_threshold') | float(default=0)) ) ) %}
+          20
+        {% elif ( (states('sensor.filtered_living_rm_visible_light') | float(default=0)) <= (states('input_number.inp_num_med_threshold') | float(default=0)) ) %}
+          30
+        {% else %}
+          99
+        {% endif %}
