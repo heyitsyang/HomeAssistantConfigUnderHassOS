@@ -7,12 +7,14 @@ sensor:
   - unique_id: drybox_battery_volts
     name: "Drybox Battery Voltage"
     state_topic: "drybox/battery_volts"
+    device_class: voltage
     unit_of_measurement: "V"
     qos: 0
 
   - unique_id: drybox_battery_percent
     name: "Drybox Battery Percent"
     state_topic: "drybox/battery_percent"
+    device_class: battery
     unit_of_measurement: "%"
     qos: 0
 
@@ -44,12 +46,14 @@ sensor:
   # irrigation leak sensors
   - unique_id: irrig_battery_voltage
     name: "Irrig Battery Voltage"
+    device_class: voltage
     state_topic: "irrig_leak/battery_volts"
     unit_of_measurement: "V"
     qos: 0
 
   - unique_id: irrig_battery_percent
     name: "Irrig Battery Percent"
+    device_class: battery
     state_topic: "irrig_leak/battery_percent"
     unit_of_measurement: "%"
     qos: 0

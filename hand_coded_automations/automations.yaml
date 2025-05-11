@@ -797,19 +797,19 @@
   initial_state: true
   trigger:
     - platform: numeric_state
-      entity_id: sensor.drybox_humidity
-      above: input_number.inp_num_drybox_humidity_theshold
+      entity_id: sensor.drybox_relative_humidity
+      above: input_number.inp_num_drybox_humidity_threshold
       for:
         hours: 12
   actions:
     - action: notify.persistent_notification
       data:
-        title: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
-        message: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
+        title: "Drybox humidity out of tolerance: {{ states('sensor.drybox_relative_humidity') }} percent"
+        message: "Drybox humidity out of tolerance: {{ states('sensor.drybox_relative_humidity') }} percent"
     - action: notify.gmail_to_yang
       data:
-        title: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
-        message: "Drybox humidity out of tolerance: {{ states('sensor.drybox_humidity') }} percent"
+        title: "Drybox humidity out of tolerance: {{ states('sensor.drybox_relative_humidity') }} percent"
+        message: "Drybox humidity out of tolerance: {{ states('sensor.drybox_relative_humidity') }} percent"
 
 #
 # WATER EXPANSION TANK FAULT
