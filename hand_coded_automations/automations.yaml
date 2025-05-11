@@ -198,7 +198,7 @@
 #
 # SET SLEEPING & ANNOUNCEMENT HOURS AUTOMATICALLY
 #
-# *** These times should match those in startup in scripts.yaml  ***
+# *** input_datetime_assume_asleep is also used in startup actions in scripts.yaml  ***
 #
 # Note spleeping hours and announcement hours are not the same
 #
