@@ -798,7 +798,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.drybox_relative_humidity
-      above: input_number.inp_num_drybox_humidity_threshold
+      above: input_number.inp_num_drybox_relative_humidity_threshold
       for:
         hours: 12
   actions:
