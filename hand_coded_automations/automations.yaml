@@ -1589,7 +1589,7 @@
 #
 # DRIVEWAY CAMERA ZONE ACTIVITY TRIGGERS
 #
-- id: aut_driveway_camera_zone_actvity
+- id: aut_driveway_camera_zone_activity
   alias: "aut driveway camera zone activity"
   mode: single
   max_exceeded: silent
