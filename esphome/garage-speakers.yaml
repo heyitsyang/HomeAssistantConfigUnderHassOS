@@ -5,9 +5,12 @@ esp32:
   board: mhetesp32minikit
   framework:
     type: esp-idf
+    # version: 4.4.8
+    # platform_version: 5.4.0
 
-# Enable logging
+# Enable logging if desired
 logger:
+  # level: DEBUG
 
 # Enable Home Assistant API
 api:

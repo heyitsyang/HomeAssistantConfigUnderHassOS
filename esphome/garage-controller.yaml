@@ -114,6 +114,9 @@ button:
     output: sm_garage_output
     duration: 500ms
 
+  - platform: restart
+    name: "Restart Garage Controller"
+
 one_wire:
   - platform: gpio
     pin: GPIO13
@@ -205,5 +208,3 @@ cover:
           - logger.log: "CMD NOT SENT - Small garage door already closed"
     stop_action:
       - button.press: sm_garage_trigger
-
-    

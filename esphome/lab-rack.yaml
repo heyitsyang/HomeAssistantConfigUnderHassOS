@@ -9,13 +9,13 @@ preferences:
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
 
-# Enable logging
+#Enable logging
 logger:
-  level: DEBUG
-  logs: 
-    dht: WARN
+#   level: DEBUG
+#   logs: 
+#     dht: WARN
 
 # Enable Home Assistant API
 api:
@@ -170,13 +170,11 @@ sensor:
     unit_of_measurement: '°F'
     lambda: return ( (id(lab_rack_dht2_temperature_c).state * 9/5) + 32 );
     
-
-
-# switch:
-#   # Expose an ESP32 restart button to HA
-#   - platform: restart
-#     name: Lab Rack ESP32 Restart
-#     id: lab_rack_fan_restart
+button:
+  # Expose an ESP32 restart button
+  - platform: restart
+    name: Lab Rack ESP32 Restart
+    id: lab_rack_fan_restart
 
 # # Restart every day at 12:30am. 
 # # I've had some memory issues lockup 
@@ -189,4 +187,4 @@ sensor:
 #       minutes: 30
 #       hours: 0
 #       then:
-#       - switch.turn_on: lab_rack_fan_restart
+#       - button.press: lab_rack_fan_restart
