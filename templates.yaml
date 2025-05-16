@@ -87,11 +87,11 @@
       unique_id: sunroom_hvac_fault
       icon: mdi:alert-circle
       state: >-
-        {% if (is_state('climate.sunroom_ac_air_conditioner', 'cool')) %}
-          {{ ( (states('sensor.mrcool_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac_air_conditioner', 'temperature') 
+        {% if (is_state('climate.sunroom_ac', 'cool')) %}
+          {{ ( (states('sensor.actual_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
                 | float(default=state_attr('climate.ecobee', 'temperature')) | abs | round(2)) > 4 ) }}
-        {% elif (is_state('climate.sunroom_ac_air_conditioner', 'heat')) %}
-          {{ ( (states('sensor.mrcool_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac_air_conditioner', 'temperature') 
+        {% elif (is_state('climate.sunroom_ac', 'heat')) %}
+          {{ ( (states('sensor.actual_sunroom_temperature') | float(default=0) - state_attr('climate.sunroom_ac', 'temperature') 
                 | float(default=state_attr('climate.ecobee', 'temperature')) | abs | round(2)) > 4 ) }}
         {% endif %}
 
@@ -337,9 +337,9 @@
       unit_of_measurement: "°F"
 
 - sensor:
-    - name: mrcool_sunroom_temperature
-      unique_id: mrcool_sunroom_temperature
-      state: "{{ state_attr('climate.sunroom_ac_air_conditioner','current_temperature') }}"
+    - name: actual_sunroom_temperature # room temperature as measured by mrcool ac unit
+      unique_id: actual_sunroom_temperature
+      state: "{{ state_attr('climate.sunroom_ac','current_temperature') }}"
       unit_of_measurement: "°F"
 
 - sensor:

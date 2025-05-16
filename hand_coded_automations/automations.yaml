@@ -1971,10 +1971,10 @@
     - action: input_select.select_option
       entity_id: input_select.inp_sel_saved_sunroom_hvac
       data:
-        option: "{{ states('climate.sunroom_ac_air_conditioner') }}"
+        option: "{{ states('climate.sunroom_ac') }}"
     - action: climate.turn_off
       target:
-        entity_id: climate.sunroom_ac_air_conditioner
+        entity_id: climate.sunroom_ac
     - action: script.scr_say_phrase
       data:
         message: "A window is open. Climate control is now turned off"
@@ -1993,7 +1993,7 @@
       target:
         entity_id: climate.ecobee
     - action: climate.set_hvac_mode
-      entity_id: climate.sunroom_ac_air_conditioner
+      entity_id: climate.sunroom_ac
       data:
         hvac_mode: "{{ states('input_select.inp_sel_saved_sunroom_hvac') }}"
     - action: script.scr_say_phrase
@@ -2233,7 +2233,7 @@
     - action: notify.alexa_yellow_ring
       data:
         message: >-
-          "{{ (trigger.entity_id) | replace('climate.sunroom_ac_air_conditioner', 'sun room') 
+          "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
               | replace('binary_sensor.main_hvac_fault', 'main house')
               | replace('binary_sensor.sunroom_hvac_fault', 'sun room')
               }} temperature is outside of tolerance!"
@@ -2241,7 +2241,7 @@
       data:
         title: "HVAC system fault detected"
         message: >-
-          "{{ (trigger.entity_id) | replace('climate.sunroom_ac_air_conditioner', 'sun room') 
+          "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
               | replace('binary_sensor.main_hvac_fault', 'main house')
               | replace('binary_sensor.sunroom_hvac_fault', 'sun room')
               }} temperature is outside of tolerance!"
@@ -2250,7 +2250,7 @@
     - action: script.scr_say_phrase
       data:
         message: >-
-          "{{ (trigger.entity_id) | replace('climate.sunroom_ac_air_conditioner', 'sun room') 
+          "{{ (trigger.entity_id) | replace('climate.sunroom_ac', 'sun room') 
               | replace('binary_sensor.main_hvac_fault', 'main house')
               | replace('binary_sensor.sunroom_hvac_fault', 'sun room')
               }} temperature is outside of tolerance!"
