@@ -6,7 +6,7 @@ substitutions:
   # Additional substitutions could be added here to make it really easy for the user to override defaults.
   # I am adding a some for example purposes.
   # wifi_ap_ssid: "AC-wifi"
-  wifi_ap_password: "slwf01pro"
+  # wifi_ap_password: "slwf01pro"
   visual_min_temperature: "17 °C"
   visual_max_temperature: "30 °C"
   visual_temperature_step: "0.5 °C"
