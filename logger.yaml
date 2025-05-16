@@ -28,7 +28,7 @@ logs: # ignore events less than levels defined below
 
 filters:
   aioambient:
-    - "Server sent 257 packet data None, aborting" # ambient weather API offline?
+    - "Server sent * packet data None, aborting" # ambient weather API offline?
   homeassistant.helpers.service:
     - "Unable to find referenced entities switch.christmas_tree" # connected only at christmas
     - "Referenced entities switch.christmas_tree are missing or not currently available" # connected only at christmas
