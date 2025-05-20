@@ -45,12 +45,12 @@ captive_portal:
 # Enable logging
 logger:
   level: INFO
-  baud_rate: 0  # 0 disables loggin via UART
+  baud_rate: 0  # 0 disables logging via UART
 
 # Enable Home Assistant API
 api:
-  # encryption:
-  #   key: "kccOJ/goN3YKAmlhxiWLtqjUSPu57JVG18PoYyYKEKk="
+
+
   services:
     - service: follow_me
       variables:
@@ -61,7 +61,7 @@ api:
           beeper: false
 ota:
   - platform: esphome
-    # password: "e022a2a87595a8679dd95119222cf847"
+
 
 uart:
   tx_pin: 12
@@ -86,6 +86,7 @@ button:
     icon: mdi:tailwind
     on_press:
       midea_ac.swing_step:
+# "Dongle reboot" button
   - platform: restart
     name: ${friendly_name} Dongle Reboot
 
