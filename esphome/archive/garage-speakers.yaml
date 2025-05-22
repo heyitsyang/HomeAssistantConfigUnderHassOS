@@ -49,7 +49,7 @@ media_player:
       speaker: output_speaker
       format: WAV
     codec_support_enabled: false
-    buffer_size: 8000
+    buffer_size: 6000
     on_pause:
       - logger.log: "Playback paused!"
     on_idle:
