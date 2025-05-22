@@ -2085,7 +2085,7 @@
       entity_id: sensor.espresense_office_ds18b20_temperature
       above: input_number.inp_num_officefan_50pct_temp
       for:
-        minutes: 5 # sroom heats up fast so shorter delay
+        minutes: 5 # room heats up fast so shorter delay
   conditions:
     condition: state
     entity_id: input_boolean.inp_bool_guest_mode
