@@ -42,15 +42,11 @@ wifi:
 # Enable fallback hotspot (captive portal) in case wifi connection fails
 captive_portal:
 
-# Enable logging
-logger:
-  level: INFO
-  baud_rate: 0  # 0 disables logging via UART
+ota:
+  - platform: esphome
 
 # Enable Home Assistant API
 api:
-
-
   services:
     - service: follow_me
       variables:
@@ -59,9 +55,11 @@ api:
         midea_ac.follow_me:
           temperature: !lambda "return temperature;"
           beeper: false
-ota:
-  - platform: esphome
 
+# Enable logging
+logger:
+  level: INFO
+  baud_rate: 0  # 0 disables logging via UART
 
 uart:
   tx_pin: 12
