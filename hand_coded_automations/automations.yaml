@@ -1967,7 +1967,7 @@
   actions:
     - action: climate.turn_off
       target:
-        entity_id: climate.ecobee
+        entity_id: climate.local_ecobee
     - action: input_select.select_option
       entity_id: input_select.inp_sel_saved_sunroom_hvac
       data:
@@ -1991,7 +1991,7 @@
   actions:
     - action: climate.turn_on
       target:
-        entity_id: climate.ecobee
+        entity_id: climate.local_ecobee
     - action: climate.set_hvac_mode
       entity_id: climate.sunroom_ac
       data:
