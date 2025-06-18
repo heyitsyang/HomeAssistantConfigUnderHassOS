@@ -48,6 +48,7 @@ filters:
     - "Did not receive auth message within 10 seconds"
   py.warnings:
     - "InsecureRequestWarning: Unverified HTTPS request is being made to host '10.27.0.1'"
+    - "Protobuf gencode version 5.28.2 is exactly one major version older than the runtime version 6.31.1"  # Meshtastic
   homeassistant.components.mqtt.mixins:
     #  - "zigbee2mqtt/bridge/state"
     - "espresense_"
@@ -60,3 +61,4 @@ filters:
     - "Subscription to 10.27.0.70 failed, attempting to poll directly"
     - "Subscription to 10.27.0.71 failed, attempting to poll directly"
     - "Subscription to 10.27.0.72 failed, attempting to poll directly"
+
