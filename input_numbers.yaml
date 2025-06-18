@@ -181,30 +181,30 @@ inp_num_masterbdrmfan_off_temp:
   icon: mdi:fan-off
   unit_of_measurement: "ºF"
 
-inp_num_officefan_25pct_temp:
-  name: "Office Fan LOW"
-  mode: box
-  step: .5
-  min: 71
-  max: 75
-  icon: mdi:fan
-  unit_of_measurement: "ºF"
-
 inp_num_officefan_50pct_temp:
   name: "Office Fan MED"
   mode: box
   step: .5
-  min: 76
   max: 82
+  min: 77
   icon: mdi:fan-off
+  unit_of_measurement: "ºF"
+
+inp_num_officefan_25pct_temp:
+  name: "Office Fan LOW"
+  mode: box
+  step: .5
+  max: 76
+  min: 71
+  icon: mdi:fan
   unit_of_measurement: "ºF"
 
 inp_num_officefan_off_temp:
   name: "Office Fan OFF"
   mode: box
   step: .5
-  min: 65
   max: 70
+  min: 65
   icon: mdi:fan-off
   unit_of_measurement: "ºF"
 
