@@ -84,7 +84,7 @@ sensor:
     id: guest_suite_display_battery_voltage
     name: "Guest Suite Display Battery Voltage"
     accuracy_decimals: 2
-    attenuation: 11dB
+    attenuation: 12dB
     filters:
       - multiply: 2.0  # The voltage divider requires us to multiply by 2
     update_interval: 10s
