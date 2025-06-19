@@ -144,8 +144,8 @@ sensor:
 #
 # Garage door behavior:
 # - There is only one input for up, down, and stop.
-# - Door stops on a open/close/stop buttom activation and on a subsequent button activation travels opposite of the original direction
-# - Door reverses completely to fully open position if threshold sensors are tripped or a obstacle is encountered
+# - The door stops on a open/close/stop buttom activation and on a subsequent button activation travels opposite of the original direction
+# - The door reverses completely to fully open position if threshold sensors are tripped or a obstacle is encountered
 #
 # Desired garage door logic:  (only the first item has been implemented)
 # - if sensors confirm closed or open then return the confirmed state
