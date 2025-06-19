@@ -2048,33 +2048,6 @@
       entity_id: fan.master_bedroom_fan
 
 # Office fan changes speed
-- id: aut_office_fan_trig_25pct
-  alias: "aut office fan trig 25pct"
-  initial_state: true
-  mode: single
-  max_exceeded: silent
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.espresense_office_ds18b20_temperature
-      above: input_number.inp_num_officefan_25pct_temp
-      for:
-        minutes: 10
-    - platform: numeric_state
-      entity_id: sensor.espresense_office_ds18b20_temperature
-      below: input_number.inp_num_officefan_50pct_temp
-      for:
-        minutes: 10
-  conditions:
-    condition: state
-    entity_id: input_boolean.inp_bool_guest_mode
-    state: "off"
-  actions:
-    action: fan.set_percentage
-    target:
-      entity_id: fan.office_fan
-    data:
-      percentage: 25
-
 - id: aut_office_fan_trig_50pct
   alias: "aut office fan trig 50pct"
   initial_state: true
@@ -2085,7 +2058,7 @@
       entity_id: sensor.espresense_office_ds18b20_temperature
       above: input_number.inp_num_officefan_50pct_temp
       for:
-        minutes: 5 # room heats up fast so shorter delay
+        minutes: 5
   conditions:
     condition: state
     entity_id: input_boolean.inp_bool_guest_mode
@@ -2097,6 +2070,33 @@
     data:
       percentage: 50
 
+- id: aut_office_fan_trig_25pct
+  alias: "aut office fan trig 25pct"
+  initial_state: true
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.espresense_office_ds18b20_temperature
+      above: input_number.inp_num_officefan_25pct_temp
+      for:
+        minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.espresense_office_ds18b20_temperature
+      below: input_number.inp_num_officefan_50pct_temp
+      for:
+        minutes: 5
+  conditions:
+    condition: state
+    entity_id: input_boolean.inp_bool_guest_mode
+    state: "off"
+  actions:
+    action: fan.set_percentage
+    target:
+      entity_id: fan.office_fan
+    data:
+      percentage: 25
+
 - id: aut_office_fan_trig_off
   alias: "aut office fan trig off"
   initial_state: true
@@ -2107,7 +2107,7 @@
       entity_id: sensor.espresense_office_ds18b20_temperature
       below: input_number.inp_num_officefan_off_temp
       for:
-        minutes: 10
+        minutes: 5
   conditions:
     condition: state
     entity_id: input_boolean.inp_bool_guest_mode
