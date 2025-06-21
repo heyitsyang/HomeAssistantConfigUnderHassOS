@@ -580,7 +580,7 @@
   radius: 152 # meters
   icon: mdi:blank
 
-- name: Pinellis Plaza
+- name: Pinellas Plaza
   latitude: 28.863955
   longitude: -82.017336
   radius: 280 # meters
