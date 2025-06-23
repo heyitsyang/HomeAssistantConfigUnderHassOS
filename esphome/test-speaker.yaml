@@ -1,5 +1,5 @@
 substitutions:
-  name: test-output_speaker
+  name: test-speaker
   friendly_name: "test-speaker"
 
 esphome:
@@ -28,7 +28,7 @@ ota:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  domain: ".shencentral.net"
+  domain: !secret domain   # remove this line if you don't use domain names
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap: {}
@@ -56,7 +56,7 @@ media_player:
       speaker: output_speaker
       format: WAV
     codec_support_enabled: false
-    buffer_size: 6000
+    buffer_size: 8000
     on_pause:
       - logger.log: "Playback paused!"
     on_idle:
