@@ -311,3 +311,23 @@ sensor.bacman_system_fan_status:
   icon: mdi:tailwind
 vacuum.rosie:
   friendly_name: Rosie status
+sensor.dishwasher_sonoff_energy_today:
+  device_class: energy
+sensor.dishwasher_sonoff_energy_yesterday:
+  device_class: energy
+sensor.dishwasher_sonoff_energy_total:
+  device_class: energy
+sensor.dishwasher_sonoff_energy_reactivepower:
+  device_class: reactive_power
+sensor.dishwasher_sonoff_energy_apparentpower:
+  device_class: apparent_power
+sensor.hamstation_energy_today:
+  device_class: energy
+sensor.hamstation_energy_yesterday:
+  device_class: energy
+sensor.hamstation_energy_total:
+  device_class: energy
+sensor.hamstation_energy_reactivepower:
+  device_class: reactive_power
+sensor.hamstation_energy_apparentpower:
+  device_class: apparent_power
