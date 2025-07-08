@@ -139,7 +139,7 @@ automation:
   - alias: keymaster_front_door Reset Code Slot
     id: keymaster_front_door Reset Code Slot
     trigger:
-      entity_id: input_boolean.reset_codeslot_front_door_1,input_boolean.reset_codeslot_front_door_2,input_boolean.reset_codeslot_front_door_3,input_boolean.reset_codeslot_front_door_4
+      entity_id: input_boolean.reset_codeslot_front_door_1,input_boolean.reset_codeslot_front_door_2,input_boolean.reset_codeslot_front_door_3,input_boolean.reset_codeslot_front_door_4,input_boolean.reset_codeslot_front_door_5,input_boolean.reset_codeslot_front_door_6,input_boolean.reset_codeslot_front_door_7,input_boolean.reset_codeslot_front_door_8,input_boolean.reset_codeslot_front_door_9,input_boolean.reset_codeslot_front_door_10
       platform: state
       to: "on"
     action:
@@ -205,7 +205,7 @@ automation:
   - alias: keymaster_front_door Changed Code
     id: keymaster_front_door Changed Code
     trigger:
-      entity_id: input_text.front_door_pin_1,input_text.front_door_pin_2,input_text.front_door_pin_3,input_text.front_door_pin_4
+      entity_id: input_text.front_door_pin_1,input_text.front_door_pin_2,input_text.front_door_pin_3,input_text.front_door_pin_4,input_text.front_door_pin_5,input_text.front_door_pin_6,input_text.front_door_pin_7,input_text.front_door_pin_8,input_text.front_door_pin_9,input_text.front_door_pin_10
       platform: state
     condition:
       - condition: template
@@ -428,6 +428,7 @@ timer:
 lock:
   - platform: template
     name: boltchecked_front_door
+    unique_id: "lock.boltchecked_front_door"
     value_template: "{{ is_state('lock.front_door_lock', 'locked') }}"
     lock:
       service: "{{ 'script.boltchecked_retry_front_door' if (is_state('binary_sensor.front_door_window_door_is_open', 'on')) else 'script.boltchecked_lock_front_door' }}"
