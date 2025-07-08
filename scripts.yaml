@@ -816,8 +816,8 @@ scr_great_room_motion_lighting_off:
 #
 scr_frontporch_activity:
   sequence:
-    - action: script.turn_on # use this method to de-serialize the speech so cameras are not delayed
-      entity_id: script.scr_say_phrase # script doesn't announce if not during announcement hours
+    - action: script.turn_on # use this method to de-serialize the speech so camera snapshots are not delayed by scr_say_phrase
+      entity_id: script.scr_say_phrase # scr_say_phrase doesn't announce if not during announcement hours
       data:
         variables:
           message: "You have a visitor at the front door"
@@ -826,17 +826,18 @@ scr_frontporch_activity:
         entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
     - if:
-        - condition: not # testing for "not_home" else doesn't work if in a known zone so use !home logic
-          conditions:
-            - condition: state
-              entity_id: person.yang
-              state: "home"
-            - condition: state
-              entity_id: person.karen
-              state: "home"
-        - condition: state # notify if sleeping
-          entity_id: input_boolean.inp_bool_sleeping
-          state: "off"
+        or:
+          - condition: not # testing for "not_home" else doesn't work if in a known zone so use !home logic
+            conditions:
+              - condition: state
+                entity_id: person.yang
+                state: "home"
+              - condition: state
+                entity_id: person.karen
+                state: "home"
+          - condition: state # notify if sleeping
+            entity_id: input_boolean.inp_bool_sleeping
+            state: "on"
       then:
         - action: input_boolean.turn_on
           target:
