@@ -119,8 +119,7 @@ sensor:
     temperature:
       name: "Mid Rack Temperature C"
       id: lab_rack_dht1_temperature_c
-      accuracy_decimals: 3
-
+      accuracy_decimals: 0
       # If you don't smooth the temperature readings 
       # the PID controller over reacts to small changes.
       filters:
@@ -130,7 +129,7 @@ sensor:
     humidity:
       name: "Mid Rack Humidity"
       id: lab_rack_dht1_humidity
-
+      accuracy_decimals: 0
       # the DHT22 can only be read every 1s. Use 1.3s to be safe.
       # update_interval: 1.3s
 
@@ -140,8 +139,7 @@ sensor:
     temperature:
       name: "Upper Rack Temperature C"
       id: lab_rack_dht2_temperature_c
-      accuracy_decimals: 3
-
+      accuracy_decimals: 0
       # If you don't smooth the temperature readings 
       # the PID controller over reacts to small changes.
       filters:
@@ -151,6 +149,7 @@ sensor:
     humidity:
       name: "Upper Rack Humidity"
       id: lab_rack_dht2_humidity
+      accuracy_decimals: 0
       # the DHT22 can only be read every 1s. Use 1.3s to be safe.
       # update_interval: 1.3s
 
@@ -160,6 +159,7 @@ sensor:
     id: mid_rack_temperature_f
     update_interval: 60s
     unit_of_measurement: '°F'
+    accuracy_decimals: 0
     lambda: return ( (id(lab_rack_dht1_temperature_c).state * 9/5) + 32 );
 
 
@@ -168,6 +168,7 @@ sensor:
     id: upper_rack_temperature_f
     update_interval: 60s
     unit_of_measurement: '°F'
+    accuracy_decimals: 0
     lambda: return ( (id(lab_rack_dht2_temperature_c).state * 9/5) + 32 );
     
 button:
