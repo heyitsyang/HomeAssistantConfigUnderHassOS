@@ -64,19 +64,19 @@
       icon: mdi:alert-circle
       state: >-
         {% if (is_state('climate.local_ecobee', 'cool')) %}
-          {{ ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
+          {{ ( (states('sensor.local_ecobee_current_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
               | float | round(2)) > 3 ) }}
         {% elif (is_state('climate.local_ecobee', 'heat')) %}
-          {{ ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
+          {{ ( (states('sensor.local_ecobee_current_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'temperature') 
               | float | round(2)) < -3 ) }}
         {% elif (is_state('climate.local_ecobee', 'heat_cool')) %}
           {{
               (
-                ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'target_temp_high')
+                ( (states('sensor.local_ecobee_current_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'target_temp_high')
                   | float | round(2)) > 3 ) 
               ) or
               (
-                ( (states('sensor.ecobee_avg_indoor_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'target_temp_low')
+                ( (states('sensor.sensor.local_ecobee_current_temperature') | float(default=0) - state_attr('climate.local_ecobee', 'target_temp_low')
                   | float | round(2)) < -3 ) 
               )
           }}
