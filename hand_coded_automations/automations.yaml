@@ -2161,25 +2161,24 @@
         - platform: state
           entity_id: sensor.kt_cell_ble_room
           to: "kitchen"
-          for: 00:00:10
+          for: 00:00:05
         - platform: state
           entity_id: sensor.kt_cell_ble_room
           to: "greatrm"
-          for: 00:00:10
+          for: 00:00:05
         - platform: state
           entity_id: sensor.ys_cell_ble_room
           to: "kitchen"
-          for: 00:00:10
+          for: 00:00:05
         - platform: state
           entity_id: sensor.ys_cell_ble_room
           to: "greatrm"
-          for: 00:00:10
+          for: 00:00:05
       timeout:
-        seconds: 90
+        seconds: 60
     - action: script.scr_arrival_announcement
       data:
         person: "{{ trigger.id }}"
-#        person: "{{ trigger.entity_id | replace('person.', '') | capitalize }}"
 
 #
 # HOME DEPARTURE ANNOUNCEMENT

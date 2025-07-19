@@ -292,23 +292,28 @@ scr_arrival_announcement:
     - condition: state # continue if not inhibited
       entity_id: input_boolean.inhibit_presence_announcements
       state: "off"
-    - action: script.scr_say_phrase
+    - action: google_generative_ai_conversation.generate_content
       data:
+        prompt: In one sentence, welcome a person back home in a warm way. Do not use special characters.
+      response_variable: ai_response
+    - action: script.scr_say_phrase
+      data: # ai_response['text'] gets the value of the text key from the response
         message: >
           {% if person == "karen" %}
             {% if is_state('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
               "Hello Mistress Karen, welcome home.  While you were away, there was a visitor at the front door"
             {% else %}
-              "Hello Mistress Karen, welcome home"
+              "Hello Mistress Karen. {{ ai_response['text'] }}" 
             {% endif %}
           {% else %}
             {% if is_state('input_boolean.inp_bool_visitor_while_out_flag', 'on') %}
               "Hello Master Yang, welcome home.  While you were away, there was a visitor at the front door"
             {% else %}
-              "Hello Master Yang, welcome home"
+              "Hello Master Yang. {{ ai_response['text'] }}"
             {% endif %}
           {% endif %}
 
+#
 # SIMULATE AN OCCUPIED HOME
 #
 scr_occupied_sim:
