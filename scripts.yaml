@@ -284,7 +284,7 @@ scr_spt_start:
 # PERFORM INDIV. HOME ARRIVAL ACTIONS
 #
 scr_arrival_announcement:
-  mode: queued
+  mode: parallel     # start another run even if another hasn't completed
   sequence:
     - action: input_boolean.turn_off
       data:
@@ -294,7 +294,7 @@ scr_arrival_announcement:
       state: "off"
     - action: google_generative_ai_conversation.generate_content
       data:
-        prompt: In one sentence, welcome a person back home in a warm way. Do not use special characters.
+        prompt: In one sentence, welcome a person back home in a warm way as a singular entity. Do not use special characters.
       response_variable: ai_response
     - action: script.scr_say_phrase
       data: # ai_response['text'] gets the value of the text key from the response
