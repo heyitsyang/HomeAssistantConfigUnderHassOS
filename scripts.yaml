@@ -34,7 +34,9 @@ scr_ha_startup:
       then:
         - action: input_boolean.turn_off
           target:
-            entity_id: input_boolean.inp_bool_sleeping
+            entity_id: 
+              - input_boolean.inp_bool_sleeping
+              - input_boolean.inp_bool_visitor_while_sleeping_flag
 
 #
 # GOOD MORNING SCRIPT
@@ -47,9 +49,26 @@ scr_goodmorning:
     - action: input_boolean.turn_on
       target:
         entity_id: input_boolean.semaphore_good_morning_was_used
+    - if:
+        - condition: state
+          entity_id: input_boolean.inp_bool_visitor_while_sleeping_flag
+          state: "on"
+      then:
+        - action:  notify.send_message
+          data:
+            message: >
+              While you were asleep, there was a visitor at the front door.  
+              I'll turn on the yellow ring as a reminder to check for packages.
+          target: 
+            entity_id: notify.echo_masterbdrm_speak
+    - action: notify.alexa_yellow_ring
+      data:
+        message: "While you asleep, there was a visitor at the front door"
     - action: input_boolean.turn_off
       target:
-        entity_id: input_boolean.inp_bool_sleeping
+        entity_id: 
+          - input_boolean.inp_bool_sleeping
+          - input_boolean.inp_bool_visitor_while_sleeping_flag
     - action: cover.set_cover_position
       target:
         entity_id: cover.master_bedroom_inner_shades
@@ -60,6 +79,8 @@ scr_goodmorning:
     - action: cover.open_cover
       target:
         entity_id: cover.master_bedroom_inner_shades
+
+
 
 #
 # COVER SCRIPTS
@@ -831,18 +852,14 @@ scr_frontporch_activity:
         entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
     - if:
-        or:
-          - condition: not # testing for "not_home" else doesn't work if in a known zone so use !home logic
-            conditions:
-              - condition: state
-                entity_id: person.yang
-                state: "home"
-              - condition: state
-                entity_id: person.karen
-                state: "home"
-          - condition: state # notify if sleeping
-            entity_id: input_boolean.inp_bool_sleeping
-            state: "on"
+        - condition: not    # testing for "not_home" else doesn't work if in a known zone so use !home logic
+          conditions:
+            - condition: state
+              entity_id: person.yang
+              state: "home"
+            - condition: state
+              entity_id: person.karen
+              state: "home"
       then:
         - action: input_boolean.turn_on
           target:
@@ -864,6 +881,21 @@ scr_frontporch_activity:
               tts_text: "Front door activity detected"
               data:
                 car_ui: true
+    - if:
+        - condition: state         # notify quietly if sleeping
+          entity_id: input_boolean.inp_bool_sleeping
+          state: "on"
+      then:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inp_bool_visitor_while_sleeping_flag
+        - action: notify.mobile_app_yskt_cell
+          data:
+            title: Front door activity
+            message: "Front door activity detected while asleep"
+            data:
+              clickAction: "lovelace/last-snaps"
+
 
 scr_front_door_lights_on:
   sequence:

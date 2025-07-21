@@ -212,7 +212,9 @@
   actions:
     - action: input_boolean.turn_off
       data:
-        entity_id: input_boolean.inp_bool_sleeping
+        entity_id: 
+          - input_boolean.inp_bool_sleeping
+          - input_boolean.inp_bool_visitor_while_sleeping_flag
 
 - id: aut_assume_asleep # sleeping also set by sensors - see aut_sleeping_mode_on
   alias: "aut assume asleep"

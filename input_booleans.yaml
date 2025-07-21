@@ -46,6 +46,10 @@ inp_bool_visitor_while_out_flag:
   name: "Visitor while out"
   icon: mdi:doorbell-video
 
+inp_bool_visitor_while_sleeping_flag:
+  name: "Visitor while sleeping"
+  icon: mdi:doorbell-video
+
 inp_bool_sleeping:
   name: "Sleeping"
   icon: mdi:power-sleep
