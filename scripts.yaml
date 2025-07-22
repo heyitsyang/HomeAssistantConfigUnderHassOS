@@ -34,7 +34,7 @@ scr_ha_startup:
       then:
         - action: input_boolean.turn_off
           target:
-            entity_id: 
+            entity_id:
               - input_boolean.inp_bool_sleeping
               - input_boolean.inp_bool_visitor_while_sleeping_flag
 
@@ -54,21 +54,23 @@ scr_goodmorning:
           entity_id: input_boolean.inp_bool_visitor_while_sleeping_flag
           state: "on"
       then:
-        - action:  notify.send_message
+        - action: notify.send_message
           data:
             message: >
               While you were asleep, there was a visitor at the front door.  
               I'll turn on the yellow ring as a reminder to check for packages.
-          target: 
+          target:
             entity_id: notify.echo_masterbdrm_speak
-    - action: notify.alexa_yellow_ring
-      data:
-        message: "While you asleep, there was a visitor at the front door"
-    - action: input_boolean.turn_off
-      target:
-        entity_id: 
-          - input_boolean.inp_bool_sleeping
-          - input_boolean.inp_bool_visitor_while_sleeping_flag
+        - action: notify.alexa_yellow_ring
+          data:
+            message: >
+              While you asleep, there was a visitor at the front door.
+              You might want to check for packages.
+        - action: input_boolean.turn_off
+          target:
+            entity_id:
+              - input_boolean.inp_bool_sleeping
+              - input_boolean.inp_bool_visitor_while_sleeping_flag
     - action: cover.set_cover_position
       target:
         entity_id: cover.master_bedroom_inner_shades
@@ -79,8 +81,6 @@ scr_goodmorning:
     - action: cover.open_cover
       target:
         entity_id: cover.master_bedroom_inner_shades
-
-
 
 #
 # COVER SCRIPTS
@@ -305,7 +305,7 @@ scr_spt_start:
 # PERFORM INDIV. HOME ARRIVAL ACTIONS
 #
 scr_arrival_announcement:
-  mode: parallel     # start another run even if another hasn't completed
+  mode: parallel # start another run even if another hasn't completed
   sequence:
     - action: input_boolean.turn_off
       data:
@@ -852,7 +852,7 @@ scr_frontporch_activity:
         entity_id: camera.frontporch
         filename: /config/www/camera_stills/frontporch.jpg
     - if:
-        - condition: not    # testing for "not_home" else doesn't work if in a known zone so use !home logic
+        - condition: not # testing for "not_home" else doesn't work if in a known zone so use !home logic
           conditions:
             - condition: state
               entity_id: person.yang
@@ -882,7 +882,7 @@ scr_frontporch_activity:
               data:
                 car_ui: true
     - if:
-        - condition: state         # notify quietly if sleeping
+        - condition: state # notify quietly if sleeping
           entity_id: input_boolean.inp_bool_sleeping
           state: "on"
       then:
@@ -895,7 +895,6 @@ scr_frontporch_activity:
             message: "Front door activity detected while asleep"
             data:
               clickAction: "lovelace/last-snaps"
-
 
 scr_front_door_lights_on:
   sequence:
