@@ -1,6 +1,6 @@
 substitutions:
-  name: test-speaker
-  friendly_name: "test-speaker"
+  name: office-speakers
+  friendly_name: "office-speakers"
 
 esphome:
   name: "${name}"
