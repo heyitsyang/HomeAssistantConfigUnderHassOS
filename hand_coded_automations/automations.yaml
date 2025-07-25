@@ -2064,7 +2064,7 @@
   conditions:
     condition: state
     entity_id: input_boolean.inp_bool_guest_mode
-    state: "off"
+    state: "on"
   actions:
     action: fan.set_percentage
     target:
@@ -2091,7 +2091,7 @@
   conditions:
     condition: state
     entity_id: input_boolean.inp_bool_guest_mode
-    state: "off"
+    state: "on"
   actions:
     action: fan.set_percentage
     target:
