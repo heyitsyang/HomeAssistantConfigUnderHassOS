@@ -66,13 +66,13 @@ scr_goodmorning:
             message: >
               While you asleep, there was a visitor at the front door.
               You might want to check for packages.
-            delay:
-              seconds: 12    // give speech time to finish before shades motor noise
-        - action: input_boolean.turn_off
-          target:
-            entity_id:
-              - input_boolean.inp_bool_sleeping
-              - input_boolean.inp_bool_visitor_while_sleeping_flag
+        - delay:
+            seconds: 3    // delay to reduce noise cometition from shades
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.inp_bool_sleeping
+          - input_boolean.inp_bool_visitor_while_sleeping_flag
     - action: cover.set_cover_position
       target:
         entity_id: cover.master_bedroom_inner_shades
