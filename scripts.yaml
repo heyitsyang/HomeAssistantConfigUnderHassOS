@@ -67,7 +67,7 @@ scr_goodmorning:
               While you asleep, there was a visitor at the front door.
               You might want to check for packages.
         - delay:
-            seconds: 3    // delay to reduce noise cometition from shades
+            seconds: 3    # delay to reduce noise cometition from shades
     - action: input_boolean.turn_off
       target:
         entity_id:
