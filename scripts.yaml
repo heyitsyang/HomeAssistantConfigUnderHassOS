@@ -67,7 +67,7 @@ scr_goodmorning:
               While you asleep, there was a visitor at the front door.
               You might want to check for packages.
         - delay:
-            seconds: 3    # delay to reduce noise cometition from shades
+            seconds: 3 # delay to reduce noise cometition from shades
     - action: input_boolean.turn_off
       target:
         entity_id:
@@ -555,29 +555,6 @@ scr_close_sunrm_shades_to_40_percent:
     - action: script.scr_partial_close_sunrm_shades
       data:
         position: "40" # drop shades to X% open
-
-#
-# DOOR LOCK / KEYMASTER
-#
-keymaster_front_door_manual_notify:
-  mode: parallel
-  sequence:
-    - action: notify.mobile_app_yskt_cell
-      data:
-        title: "{{ title }}"
-        message: "{{ message }}"
-        data:
-          car_ui: true
-
-keymaster_back_door_manual_notify:
-  mode: parallel
-  sequence:
-    - action: notify.mobile_app_yskt_cell
-      data:
-        title: "{{ title }}"
-        message: "{{ message }}"
-        data:
-          car_ui: true
 
 #
 # SUSPICIOUS ACTIVITY IF NOBODY HOME
