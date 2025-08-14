@@ -13,8 +13,9 @@ lock:
 notify:
   - name: "Lock Notify Group"
     platform: group
-    actions:
-      - action: mobile_app_yskt_cell
+    services:
+      - service: mobile_app_ys_cell
+      - service: mobile_app_kt_cell
 
 ###############################
 ##  NO CHANGES BELOW NEEDED  ##
@@ -75,7 +76,7 @@ automation:
                   (trigger.entity_id | replace('.','z') | list | sort | first | int)
                   ~ "_state" %}
 
-                  {{is_state(mysensor,'on')}} 
+                  {{is_state(mysensor,'on')}}
             sequence:
               - action: zwave_js.set_lock_usercode
                 data:
@@ -158,7 +159,7 @@ input_boolean:
     icon: mdi:lock-check
   lock_code_slot_1_notify:
     name: Lock Code Slot 1 Notify
-    icon: mdi:alarm-bell 
+    icon: mdi:alarm-bell
   lock_code_slot_2_state:
     name: Lock Code Slot 2 State
     icon: mdi:lock-check
@@ -176,7 +177,7 @@ input_boolean:
     icon: mdi:lock-check
   lock_code_slot_4_notify:
     name: Lock Code Slot 4 Notify
-    icon: mdi:alarm-bell 
+    icon: mdi:alarm-bell
   lock_code_slot_5_state:
     name: Lock Code Slot 5 State
     icon: mdi:lock-check
@@ -200,7 +201,7 @@ input_boolean:
     icon: mdi:lock-check
   lock_code_slot_8_notify:
     name: Lock Code Slot 8 Notify
-    icon: mdi:alarm-bell     
+    icon: mdi:alarm-bell
 
 input_text:
   last_lock_unlock_code_slot:
@@ -213,7 +214,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_1_name:
     name: Lock Code Slot 1 Name
     icon: mdi:account
@@ -222,7 +223,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_2_name:
     name: Lock Code Slot 2 Name
     icon: mdi:account
@@ -231,7 +232,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_3_name:
     name: Lock Code Slot 3 Name
     icon: mdi:account
@@ -240,7 +241,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_4_name:
     name: Lock Code Slot 4 Name
     icon: mdi:account
@@ -249,7 +250,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_5_name:
     name: Lock Code Slot 5 Name
     icon: mdi:account
@@ -258,7 +259,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_6_name:
     name: Lock Code Slot 6 Name
     icon: mdi:account
@@ -267,7 +268,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_7_name:
     name: Lock Code Slot 7 Name
     icon: mdi:account
@@ -276,7 +277,7 @@ input_text:
     min: 4
     max: 10
     pattern: "[0-9]*"
-    icon: mdi:form-textbox-password 
+    icon: mdi:form-textbox-password
   lock_code_slot_8_name:
     name: Lock Code Slot 8 Name
     icon: mdi:account

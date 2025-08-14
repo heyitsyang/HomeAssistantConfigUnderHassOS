@@ -61,3 +61,6 @@ filters:
     - "Subscription to 10.27.0.70 failed, attempting to poll directly"
     - "Subscription to 10.27.0.71 failed, attempting to poll directly"
     - "Subscription to 10.27.0.72 failed, attempting to poll directly"
+  aioamazondevices:
+    - "Unknown device type 'AWZZ5CVHX2CD'"
+    - "Sensors data not available [/api/phoenix error 'Miscellaneous Persistent Warning'], skipping"
