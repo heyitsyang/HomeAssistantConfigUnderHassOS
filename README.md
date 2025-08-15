@@ -1,7 +1,7 @@
 
 **THIS IS AN OLD RESPOSITORY AND IS NO LONGER UPDATED**
 
-For my curent Home Assistant files please see the repository Home-Assistant-Config-Files
+For my current Home Assistant files please see the repository Home-Assistant-Config-Files
 
 
 # Yang's Home Assistant configuration files
