@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "alexa_auth",
+  "data": {
+    "access_token": "Atza|IwEBIMn2UNMdJTGEWROnpYgQExG_rxUGKnZO6jU67vYz46Wef4S-tucrEmjVUGE2GbrHGWdet02c0PMCDJcO7g5Sxr0CJVZcAnPxLrglOz8Xj7htHZcDOjH9sydBBlgzs8Feof9okFzpkbQtIEecjoV0zjOPdH08LTZ-MQqkzwMWVFekcrevZpAxxD6wlnDkk1p_eYkzRIaMjXWZmG3YZvpIeg3b5IrwCUerqJdMIvKvjJXcPkAZkmK3Ugng3P8QnvfZ0LmD3Dm1nYcqvtmB01Q7iGMH5ybJwmx-_WXJn2EzrBNtMg",
+    "expire_time": "2025-08-15T15:16:25.204071+00:00",
+    "refresh_token": "Atzr|IwEBIGNpdQmoYw5BwQY9Hhao5ElD0XymaEUMvlRqc-VstU2ngGM8q5DINP4bD74wAD0AmAZ65J7yVDo3h8-nrXs1aQsnkp5lBWme_VkVc7AZSEBrCallr4VtFdQRxgdzJmTElwn6ATdcqdlbezTY5zaEj3J7cNPRJCuQZQi8Gy2cCuPDgpzIijwvzcZUHR5pcozScB4QEi7M8OtPn8441LCfuWFVo83QJPWFGXm5fS8Gs_QPgWoMIQidcN4a4bIadZ2GzcSxNdb9x5l9T9R6dZ7RnXSA"
+  }
+}

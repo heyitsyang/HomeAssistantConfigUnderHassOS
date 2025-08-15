@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "awnet_local_data_dc4f2220547f",
+  "data": {
+    "known_sensors": [
+      "lastRain",
+      "tempf",
+      "winddir_card",
+      "windspeedmph",
+      "dateutc",
+      "monthlyrainin",
+      "dewPoint",
+      "feelsLike",
+      "baromrelin",
+      "dailyrainin",
+      "weeklyrainin",
+      "uv",
+      "eventrainin",
+      "solarradiation_lx",
+      "humidity",
+      "tempinf",
+      "windgustmph",
+      "batt_co2",
+      "baromabsin",
+      "solarradiation",
+      "dewPointin",
+      "totalrainin",
+      "humidityin",
+      "winddir",
+      "maxdailygust",
+      "hourlyrainin",
+      "feelsLikein"
+    ],
+    "lightning_data": {}
+  }
+}

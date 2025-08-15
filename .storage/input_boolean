@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "input_boolean",
+  "data": {
+    "items": [
+      {
+        "id": "inhibit_office_mood_lighting",
+        "name": "Inhibit office mood lights",
+        "icon": "mdi:cancel"
+      },
+      {
+        "name": "Leave water valve ON",
+        "icon": "mdi:water-pump",
+        "id": "leave_water_valve_on"
+      },
+      {
+        "id": "party_mode",
+        "name": "Party mode",
+        "icon": "mdi:party-popper"
+      },
+      {
+        "id": "good_morning_was_used_semaphore",
+        "name": "Semaphore - Good Morning was used"
+      },
+      {
+        "id": "awtrix_current_weather",
+        "name": "awtrix current weather",
+        "icon": "mdi:cloud-sync-outline"
+      },
+      {
+        "id": "awtrix_rain_forecast",
+        "name": "awtrix rain forecast",
+        "icon": "mdi:cloud-question-outline"
+      },
+      {
+        "id": "inhibit_presence_announcements",
+        "name": "Inhibit presence announcements",
+        "icon": "mdi:cancel"
+      }
+    ]
+  }
+}

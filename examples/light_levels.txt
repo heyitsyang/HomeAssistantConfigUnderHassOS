@@ -1,0 +1,33 @@
+Define sensor like this:
+
+  light_level:
+    friendly_name: 'Light level'
+    value_template: >-
+        {%- if now().hour >= 20 and now().hour < 23 %}
+            Evening
+        {%- if now().hour >= 23 and now().hour < 24 %}
+            Nightfall
+        {%  elif now().hour >= 0 and now().hour < 6 %}
+            Night
+        {%  elif now().hour >= 6 and now().hour < 8 %}
+            Cockcrow
+        {% else %}
+            Day
+        {%- endif %}
+
+Then rules like this:
+
+ action:
+    service: light.turn_on
+    entity_id: light.fibaro_system_fgd211_universal_dimmer_500w_level_6_0
+    data_template:
+      brightness: >
+        {%- if is_state("sensor.day_night", "Evening") %}
+        255
+        {%- if is_state("sensor.day_night", "Nightfall") %}
+        120
+        {%- elif is_state("sensor.day_night", "Night") %}
+        60
+        {%- else %}
+        255
+        {% endif %}

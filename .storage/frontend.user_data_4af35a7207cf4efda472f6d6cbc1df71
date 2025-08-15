@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "frontend.user_data_4af35a7207cf4efda472f6d6cbc1df71",
+  "data": {
+    "sidebar": {
+      "panelOrder": [
+        "lovelace",
+        "specialized-apps",
+        "todo",
+        "calendar",
+        "map",
+        "media-browser",
+        "ccab4aaf_frigate"
+      ],
+      "hiddenPanels": [
+        "dashboard-meshtastic",
+        "developer-tools",
+        "core_configurator",
+        "a0d7b954_grafana",
+        "5c53de3b_esphome",
+        "45df7312_zigbee2mqtt",
+        "a0d7b954_zwavejs2mqtt",
+        "a0d7b954_vscode",
+        "history",
+        "logbook",
+        "hacs",
+        "energy",
+        "meshtastic",
+        "a0d7b954_ssh"
+      ]
+    }
+  }
+}

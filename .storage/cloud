@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "minor_version": 4,
+  "key": "cloud",
+  "data": {
+    "alexa_enabled": true,
+    "alexa_entity_configs": {},
+    "cloud_user": "07233f04538c418b9d4b8b8c647c5b33",
+    "cloudhooks": {},
+    "google_enabled": true,
+    "google_entity_configs": {},
+    "google_local_webhook_id": "6e790aad59260a260db632f5e0da0b93abc913165fec8a83fca035b6418cd054",
+    "google_secure_devices_pin": null,
+    "remote_enabled": false,
+    "alexa_settings_version": 1,
+    "google_settings_version": 1,
+    "instance_id": "f9aa8ea5089b4719a16fe70d464d25ee",
+    "google_connected": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "key": "image",
+    "data": {
+        "items": [
+            {
+                "id": "59cee0e6798378847ee2fa0e1d4fc004",
+                "filesize": 150324,
+                "content_type": "image/jpeg",
+                "name": "ys.jpg",
+                "uploaded_at": "2021-05-22T23:40:18.275941+00:00"
+            },
+            {
+                "id": "8c04232981e6315298fcba064244a9a0",
+                "filesize": 192551,
+                "content_type": "image/jpeg",
+                "name": "kt.jpg",
+                "uploaded_at": "2021-05-22T23:40:41.846895+00:00"
+            }
+        ]
+    }
+}

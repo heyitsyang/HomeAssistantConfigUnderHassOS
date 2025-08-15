@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "frontend.user_data_176f2d5e50fe4f65add5af12a6c9dec2",
+  "data": {
+    "core": {
+      "showAdvanced": true,
+      "showEntityIdPicker": true
+    },
+    "language": {
+      "language": "en",
+      "number_format": "language",
+      "time_format": "language",
+      "date_format": "language",
+      "time_zone": "local",
+      "first_weekday": "language"
+    },
+    "sidebar": {
+      "panelOrder": [
+        "lovelace",
+        "specialized-apps",
+        "ccab4aaf_frigate",
+        "dashboard-meshtastic",
+        "meshtastic",
+        "todo",
+        "media-browser",
+        "logbook",
+        "map",
+        "history",
+        "a0d7b954_grafana",
+        "hacs",
+        "a0d7b954_ssh",
+        "5c53de3b_esphome",
+        "a0d7b954_vscode",
+        "a0d7b954_zwavejs2mqtt",
+        "45df7312_zigbee2mqtt",
+        "developer-tools"
+      ],
+      "hiddenPanels": [
+        "core_configurator",
+        "energy",
+        "calendar"
+      ]
+    }
+  }
+}

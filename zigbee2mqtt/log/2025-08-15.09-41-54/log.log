@@ -1,0 +1,25 @@
+[2025-08-15 09:41:54] info: 	z2m: Logging to console, file (filename: log.log)
+[2025-08-15 09:41:54] info: 	z2m: Starting Zigbee2MQTT version 2.6.0 (commit #unknown)
+[2025-08-15 09:41:54] info: 	z2m: Starting zigbee-herdsman (5.0.4)
+[2025-08-15 09:41:54] warning: 	zh:ezsp: 'ezsp' driver is deprecated and will only remain to provide support for older firmware (pre 7.4.x). Migration to 'ember' is recommended. If using Zigbee2MQTT see https://github.com/Koenkk/zigbee2mqtt/discussions/21462
+[2025-08-15 09:42:01] error: 	zh:ezsp:uart: --> Error: Error: {"sequence":1} after 4000ms
+[2025-08-15 09:42:01] error: 	zh:ezsp:uart: -!- break waiting (1)
+[2025-08-15 09:42:01] error: 	zh:ezsp:uart: Can't send DATA frame (0,1,0): 1800012800
+[2025-08-15 09:42:06] error: 	zh:ezsp:uart: --> Error: Error: {"sequence":1} after 4000ms
+[2025-08-15 09:42:06] error: 	zh:ezsp:uart: -!- break rewaiting (1)
+[2025-08-15 09:42:06] error: 	zh:ezsp:uart: Can't resend DATA frame (0,1,1): 1800012800
+[2025-08-15 09:42:06] error: 	z2m: Error while starting zigbee-herdsman
+[2025-08-15 09:42:06] error: 	z2m: Failed to start zigbee-herdsman
+[2025-08-15 09:42:06] error: 	z2m: Check https://www.zigbee2mqtt.io/guide/installation/20_zigbee2mqtt-fails-to-start_crashes-runtime.html for possible solutions
+[2025-08-15 09:42:06] error: 	z2m: Exiting...
+[2025-08-15 09:42:06] error: 	z2m: Error: Failure send getNetworkParameters:{"type":"Buffer","data":[24,0,1,40,0]}
+    at /app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/ezsp.ts:681:23
+    at Queue.execute (/app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/utils/queue.ts:36:20)
+    at Ezsp.execCommand (/app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/ezsp.ts:668:16)
+    at Driver.needsToBeInitialised (/app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/driver.ts:321:27)
+    at Driver.startup (/app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/adapter/ezsp/driver/driver.ts:249:13)
+    at EZSPAdapter.start (/app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/adapter/ezsp/adapter/ezspAdapter.ts:146:16)
+    at Controller.start (/app/node_modules/.pnpm/zigbee-herdsman@5.0.4/node_modules/zigbee-herdsman/src/controller/controller.ts:134:29)
+    at Zigbee.start (/app/lib/zigbee.ts:67:27)
+    at Controller.start (/app/lib/controller.ts:101:13)
+    at start (/app/index.js:149:5)

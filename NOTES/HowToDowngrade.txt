@@ -1,0 +1,4 @@
+From commnad line:
+
+ha core update --version=0.XXX.x
+

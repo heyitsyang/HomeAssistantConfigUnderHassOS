@@ -1,0 +1,9 @@
+[CHANGE] Migrated settings to version 3
+
+[SPECIAL] Property 'homeassistant' is now always an object.
+
+[SPECIAL] Property 'frontend' is now always an object.
+
+[SPECIAL] Property 'availability' is now always an object.
+
+For more details, see https://github.com/Koenkk/zigbee2mqtt/discussions/24198

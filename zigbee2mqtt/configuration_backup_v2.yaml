@@ -1,0 +1,89 @@
+homeassistant: {}
+mqtt:
+  server: mqtt://core-mosquitto:1883
+  user: zigbee2mqtt
+  password: zigbee2mqtt
+  client_id: zigbee2mqtt
+  keepalive: 60
+  reject_unauthorized: true
+  version: 4
+serial:
+  port: >-
+    /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220811152332-if00
+  adapter: ezsp
+frontend:
+  enabled: true
+  port: 8099
+advanced:
+  log_syslog:
+    app_name: Zigbee2MQTT
+    eol: /n
+    host: localhost
+    localhost: localhost
+    path: /dev/log
+    pid: process.pid
+    port: 123
+    protocol: tcp4
+    type: '5424'
+  channel: 15
+  log_level: info
+device_options: {}
+devices:
+  '0x00124b00226a6adf':
+    friendly_name: candles
+  '0xbc33acfffefc6f23':
+    friendly_name: Leak_Washer
+  '0xec1bbdfffe8a47da':
+    friendly_name: Leak_Guest_Sink
+  '0xec1bbdfffe8a47cf':
+    friendly_name: Leak_Guest_Toilet
+  '0x00158d0006fb00f1':
+    friendly_name: Leak_Kitchen_Sink
+  '0x5c0272fffee17181':
+    friendly_name: Leak_Master_Toilet
+  '0xec1bbdfffe87e58f':
+    friendly_name: Leak_Karens_Sink
+  '0xec1bbdfffe8a4803':
+    friendly_name: Leak_Yangs_Sink
+  '0x1c34f1fffec07b62':
+    friendly_name: Master Closet Lights
+  '0x847127fffe37534c':
+    friendly_name: Island Barstool Outlet
+  '0xa4c138cd74d4e1ba':
+    friendly_name: Leak Kitchen Sink
+  '0xa4c13884847e8b7b':
+    friendly_name: Leak_Laundry_Sink
+  '0x187a3efffe3908dd':
+    friendly_name: Master Bedroom Shade 1 A
+    description: 1A
+  '0xb43a31fffed4e97c':
+    friendly_name: Master Bedroom Shade 1 B
+    description: 1B
+  '0xf4b3b1fffee0ce90':
+    friendly_name: Master Bedroom Shade 2 A
+    description: 2A
+  '0x187a3efffe392346':
+    friendly_name: Master Bedroom Shade 2 B
+    description: 2B
+  '0x187a3efffe390622':
+    friendly_name: Master Bedroom Shade 3 A
+    description: 3A
+  '0x187a3efffe39122b':
+    friendly_name: Master Bedroom Shade 3 B
+    description: 3B
+  '0xf4b3b1fffee0d993':
+    friendly_name: Master Bedroom Shade 4 A
+    description: 4A
+  '0x187a3efffe38fe93':
+    friendly_name: Master Bedroom Shade 4 B
+    description: 4B
+  '0x00124b00226a8e56':
+    friendly_name: kitchen_wled_reset
+    description: located above kitchen cabinets & is a strategically located repeater
+  '0x00124b0023b7bed9':
+    friendly_name: HVAC Closet Lights
+  '0xec1bbdfffefae43a':
+    friendly_name: Crane Lamp
+    description: Master bedroom Crane Lamp
+availability: false
+version: 2

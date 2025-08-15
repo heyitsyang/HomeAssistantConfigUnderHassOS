@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.a953ae736ef75147f793c256a4bb81ab",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "lab-rack",
+      "friendly_name": "",
+      "mac_address": "94:3C:C6:33:E0:F0",
+      "compilation_time": "Aug  5 2025, 19:41:14",
+      "model": "esp32dev",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.7.5",
+      "project_name": "",
+      "project_version": "",
+      "webserver_port": 0,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": "",
+      "api_encryption_supported": true,
+      "devices": [],
+      "areas": [],
+      "area": {
+        "area_id": 0,
+        "name": ""
+      }
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "button": [
+      {
+        "object_id": "lab_rack_esp32_restart",
+        "key": 4015224010,
+        "name": "Lab Rack ESP32 Restart",
+        "disabled_by_default": false,
+        "icon": "mdi:restart",
+        "entity_category": 1,
+        "device_id": 0,
+        "device_class": "restart"
+      }
+    ],
+    "binary_sensor": [
+      {
+        "object_id": "lab_rack_status",
+        "key": 2651490073,
+        "name": "Lab Rack Status",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": "connectivity",
+        "is_status_binary_sensor": true
+      }
+    ],
+    "update": [],
+    "sensor": [
+      {
+        "object_id": "lab_rack_wifi_strength",
+        "key": 1040305348,
+        "name": "Lab Rack WiFi Strength",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": "signal_strength",
+        "unit_of_measurement": "dBm",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "lab_rack_uptime",
+        "key": 634640079,
+        "name": "Lab Rack Uptime",
+        "disabled_by_default": false,
+        "icon": "mdi:timer-outline",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": "duration",
+        "unit_of_measurement": "s",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 2,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "lab_rack_fan1_speed",
+        "key": 968091427,
+        "name": "Lab Rack Fan1 Speed",
+        "disabled_by_default": false,
+        "icon": "mdi:pulse",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "unit_of_measurement": "RPM",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "lab_rack_fan2_speed",
+        "key": 10085300,
+        "name": "Lab Rack Fan2 Speed",
+        "disabled_by_default": false,
+        "icon": "mdi:pulse",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "unit_of_measurement": "RPM",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "mid_rack_temperature_c",
+        "key": 3872589316,
+        "name": "Mid Rack Temperature C",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "temperature",
+        "unit_of_measurement": "°C",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "mid_rack_humidity",
+        "key": 3673100447,
+        "name": "Mid Rack Humidity",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "humidity",
+        "unit_of_measurement": "%",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "upper_rack_temperature_c",
+        "key": 2278142478,
+        "name": "Upper Rack Temperature C",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "temperature",
+        "unit_of_measurement": "°C",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "upper_rack_humidity",
+        "key": 3632918957,
+        "name": "Upper Rack Humidity",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "humidity",
+        "unit_of_measurement": "%",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "mid_rack_temperature_f",
+        "key": 3872589313,
+        "name": "Mid Rack Temperature F",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "unit_of_measurement": "°F",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 0,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "upper_rack_temperature_f",
+        "key": 2278142475,
+        "name": "Upper Rack Temperature F",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "unit_of_measurement": "°F",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 0,
+        "legacy_last_reset_type": 0
+      }
+    ],
+    "text_sensor": [
+      {
+        "object_id": "lab_rack_ip_address",
+        "key": 2563194473,
+        "name": "Lab Rack IP Address",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": ""
+      },
+      {
+        "object_id": "lab_rack_uptime_human",
+        "key": 2931896605,
+        "name": "Lab Rack Uptime Human",
+        "disabled_by_default": false,
+        "icon": "mdi:clock-start",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": ""
+      }
+    ]
+  }
+}

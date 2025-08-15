@@ -1,0 +1,324 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "menu_options": {
+          "manual_tcp": "TCP/IP",
+          "manual_bluetooth": "Bluetooth",
+          "manual_serial": "Serial"
+        }
+      },
+      "manual_tcp": {
+        "description": "Connect via TCP/IP",
+        "data": {
+          "tcp_host": "Host",
+          "tcp_port": "Port"
+        },
+        "data_description": {
+          "tcp_host": "IP Address or Hostname"
+        }
+      },
+      "discovery_zeroconf_confirm": {
+        "description": "Connect via TCP/IP",
+        "data": {
+          "tcp_host": "Host",
+          "tcp_port": "Port"
+        }
+      },
+      "manual_bluetooth": {
+        "description": "Connect Device via Bluetooth.\n**IMPORTANT**: PIN is not supported, please remove it first.\n\nPlease be patient, initial setup takes a while when device has a large node db",
+        "data": {
+          "bluetooth_address": "Bluetooth Address"
+        },
+        "data_description": {
+          "bluetooth_address": "Device address in form of 00:11:22:33:FF:EE"
+        }
+      },
+      "discovery_bluetooth_confirm": {
+        "description": "Connect Device via Bluetooth.\n**IMPORTANT**: PIN is not supported, please remove it first.\n\nPlease be patient, initial setup takes a while when device has a large node db",
+        "data": {
+          "bluetooth_address": "Bluetooth Address"
+        }
+      },
+      "manual_serial": {
+        "description": "Connect via Serial",
+        "data": {
+          "serial_port": "Serial Port"
+        },
+        "data_description": {
+          "serial_port": "Path to serial port, e.g. /dev/ttyUSB0"
+        }
+      },
+      "discovery_usb_confirm": {
+        "description": "Connect via Serial",
+        "data": {
+          "serial_port": "Serial Port"
+        },
+        "data_description": {
+          "serial_port": "Path to serial port, e.g. /dev/ttyUSB0"
+        }
+      },
+      "reconfigure": {
+      },
+      "node": {
+        "description": "Configure which nodes should be imported",
+        "data": {
+          "node": "Add Node",
+          "add_another_node": "Add another Node"
+        }
+      },
+      "notify_platform": {
+        "description": "Home Assistant Notification is the recommended way to send messages to Meshtastic mesh. Configure which parts of the mesh network should be represented in Home Assistant in order to facilitate sending messages.",
+        "data": {
+          "channels": "Create Notification Targets for all Channels",
+          "nodes": "Create Direct Messages Notification Targets for"
+        },
+        "data_description": {
+          "channels": "Create a target / entity for each channel",
+          "nodes": "Note that selecting all nodes can create tens or hundreds of entities in Home Assistant depending on the Meshtastic network size"
+        }
+      },
+      "web_client": {
+        "description": "Experimental: You can enable meshtasic web client if you like to interact with your gateway manually as well. Note that meshtastic devices only allow one single connection, so this integration will pose as a meshtasic device and the web client will connect to home assistant rather directly to the device. Connecting directly to the meshtastic device will interrupt the home assistant connection. You can open the web client from the meshtastic sidebar.",
+        "data": {
+          "enable": "Enable Web Client"
+        }
+      },
+      "tcp_proxy": {
+        "description": "Experimental: You can enable meshtastic tcp proxy if you like to interact with your gateway manually as well. Note that meshtastic devices only allow one single connection, so this integration will pose as a meshtastic device and the tcp client will connect to home assistant rather directly to the device. Connecting directly to the meshtastic device will interrupt the home assistant connection. Using python cli, use 'meshtastic --host homeassistant:port'",
+        "data": {
+          "enable": "Enable TCP Proxy",
+          "port": "TCP Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the device.",
+      "unknown": "Unknown error occurred.",
+      "not_meshtastic_device": "Not a Meshtastic device",
+      "invalid_node": "Invalid node",
+      "invalid_connection_type": "Invalid connection type",
+      "reconfigure_not_possible": "Reconfiguration currently not possible",
+      "port_in_use": "Port already in use"
+    },
+    "abort": {
+      "already_configured": "Meshtastic device is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "description": "Configure which nodes should be imported",
+        "data": {
+          "nodes": "Selected Nodes",
+          "node": "Add Node",
+          "add_another_node": "Add another Node"
+        },
+        "sections": {
+          "notify_platform": {
+            "name": "Notification Platform",
+            "description": "Home Assistant Notification is the recommended way to send messages to Meshtastic mesh. Configure which parts of the mesh network should be represented in Home Assistant in order to facilitate sending messages.",
+            "data": {
+              "channels": "Create Notification Targets for all Channels",
+              "nodes": "Create Direct Messages Notification Targets for"
+            },
+            "data_description": {
+              "channels": "Create a target / entity for each channel",
+              "nodes": "Note that selecting all nodes can create tens or hundreds of entities in Home Assistant depending on the Meshtastic network size"
+            }
+          },
+          "web_client": {
+            "name": "Meshtastic Web Client",
+            "description": "Experimental: You can enable meshtastic web client if you like to interact with your gateway manually as well. IMPORTANT SECURITY CONSIDERATION: Meshtastic protocol is unauthenticated, enabling this option gives everybody control over your gateway that can reach your Home Assistant installation. Note that meshtastic devices only allow one single connection, so this integration will pose as a meshtastic device and the web client will connect to home assistant rather directly to the device. Connecting directly to the meshtastic device will interrupt the home assistant connection. You can open the web client from the meshtastic sidebar.",
+            "data": {
+              "enable": "Enable Web Client"
+            }
+          },
+          "tcp_proxy": {
+            "name": "Meshtastic TCP Proxy",
+            "description": "Experimental: You can enable meshtastic tcp proxy if you like to interact with your gateway manually as well.  IMPORTANT SECURITY CONSIDERATION: Meshtastic protocol is unauthenticated, enabling this option gives everybody control over your gateway that can reach your Home Assistant installation. Note that meshtastic devices only allow one single connection, so this integration will pose as a meshtastic device and the tcp client will connect to home assistant rather directly to the device. Connecting directly to the meshtastic device will interrupt the home assistant connection. Using python cli, use 'meshtastic --host homeassistant:port'",
+            "data": {
+              "enable": "Enable TCP Proxy",
+              "port": "TCP Port"
+            }
+          }
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the device.",
+      "connection": "Unable to connect to the device.",
+      "unknown": "Unknown error occurred.",
+      "option_invalid": "Option configuration invalid",
+      "port_in_use": "Port already in use"
+    }
+  },
+  "services": {
+    "send_text": {
+      "name": "Send Text",
+      "description": "Advanced use only! Consider using Actions \"Send Direct Message\" or \"Broadcast Channel Message\" instead.",
+      "fields": {
+        "text": {
+          "name": "Text Message",
+          "description": "Message to send (max 200 bytes)"
+        },
+        "from": {
+          "name": "From",
+          "description": "Select the gateway node to send the message from. If not provided, the best gateway node is chosen automatically. Can be a home assistant device, meshtastic node number or meshtastic user id."
+        },
+        "to": {
+          "name": "To",
+          "description": "Can be a home assistant device, meshtastic node number or meshtastic user id"
+        },
+        "channel": {
+          "name": "Channel",
+          "description": "Can be a home assistant channel entity or meshtastic channel index. IMPORTANT: channel index is node specific, consider setting From in case channel index differ between your gateway nodes."
+        },
+        "ack": {
+          "name": "Acknowledgement",
+          "description": "Request an acknowledgement"
+        }
+      }
+    },
+    "send_direct_message": {
+      "name": "Send Direct Message",
+      "description": "Send a direct message to a meshtastic device. If you have not configured your desired node, you can use \"Notifications: Send a notification message\" action instead.",
+      "fields": {
+        "message": {
+          "name": "Text Message",
+          "description": "Message to send (max 200 bytes)"
+        },
+        "to": {
+          "name": "Device",
+          "description": ""
+        },
+        "ack": {
+          "name": "Acknowledgement",
+          "description": "Request an acknowledgement"
+        }
+      }
+    },
+    "broadcast_channel_message": {
+      "name": "Broadcast Channel Message",
+      "description": "Broadcast message to a channel",
+      "fields": {
+        "message": {
+          "name": "Text Message",
+          "description": "Message to send (max 200 bytes)"
+        },
+        "channel": {
+          "name": "Channel",
+          "description": ""
+        },
+        "ack": {
+          "name": "Acknowledgement",
+          "description": "Request an acknowledgement"
+        }
+      }
+    },
+    "request_telemetry": {
+      "name": "Request Telemetry",
+      "description": "",
+      "fields": {
+        "from": {
+          "name": "From",
+          "description": "Gateway. If not provided, the best gateway node is chosen automatically."
+        },
+        "to": {
+          "name": "Device",
+          "description": ""
+        },
+        "type": {
+          "name": "Telemetry Type",
+          "description": ""
+        }
+      }
+    },
+    "request_position": {
+      "name": "Request Position",
+      "description": "",
+      "fields": {
+        "from": {
+          "name": "From",
+          "description": "Gateway. If not provided, the best gateway node is chosen automatically."
+        },
+        "to": {
+          "name": "Device",
+          "description": ""
+        }
+      }
+    },
+    "request_traceroute": {
+      "name": "Request Traceroute",
+      "description": "NOTE: Traceroute is rate limited by meshtastic firmware, only send at most once every minute. In case you are rate limited, you will get no feedback.",
+      "fields": {
+        "from": {
+          "name": "From",
+          "description": "Gateway. If not provided, the best gateway node is chosen automatically."
+        },
+        "to": {
+          "name": "Device",
+          "description": ""
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery_level": {
+        "name": "Battery Level"
+      }
+    },
+    "meshtastic": {
+      "channel": {
+        "name": "Channel",
+        "state": {
+          "logging": "Logging",
+          "logbook_missing": "Logbook missing"
+        }
+      },
+      "direct_messages": {
+        "name": "Direct Messages",
+        "state": {
+          "logging": "Logging",
+          "logbook_missing": "Logbook missing"
+        }
+      }
+    }
+  },
+  "selector": {
+    "telemetry_type_selector": {
+      "options": {
+        "device_metrics": "Device Metrics",
+        "environment_metrics": "Environment Metrics",
+        "power_metrics": "Power Metrics",
+        "air_quality_metrics": "Air Quality Metrics"
+      }
+    },
+    "option_notify_platform_node_selector": {
+      "options": {
+        "none": "None of the Nodes",
+        "all": "All known and newly discovered Nodes",
+        "selected": "Only the selected Nodes"
+      }
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "message.received": "Receives Message",
+      "direct_message.received": "Receives Message on {entity_name}",
+      "channel_message.received": "Receives Message on {entity_name}",
+      "message.sent": "Sent Message",
+      "direct_message.sent": "Sent Message to {entity_name}",
+      "channel_message.sent": "Sent Message to {entity_name}"
+    },
+    "action_type": {
+      "send_message": "Send Direct Message",
+      "request_telemetry": "Request Telemetry",
+      "request_position": "Request Position"
+    }
+  },
+  "common": {
+    "service_attr_from_description": "Gateway. If not provided, the best gateway node is chosen automatically."
+  }
+}

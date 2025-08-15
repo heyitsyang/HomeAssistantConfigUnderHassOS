@@ -1,0 +1,378 @@
+close_notice:
+  fields:
+    id:
+      required: true
+      example: "all"
+      default: "all"
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+start_service:
+  fields:
+    service_id:
+      required: false
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+stop_service:
+  fields:
+    service_id:
+      required: false
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+restart_service:
+  fields:
+    service_id:
+      required: false
+      selector:
+        text:
+    only_if_running:
+      required: true
+      example: false
+      default: false
+      selector:
+        boolean:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+system_halt:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          multiple: false
+          filter:
+            - integration: opnsense
+          entity:
+            - domain: sensor
+    entity_id:
+      example: "sensor.opnsense_interface_lan_status"
+      required: false
+      selector:
+        entity:
+          multiple: false
+          filter:
+            - integration: opnsense
+              domain: sensor
+
+system_reboot:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          multiple: false
+          filter:
+            - integration: opnsense
+          entity:
+            - domain: sensor
+    entity_id:
+      example: "sensor.opnsense_interface_lan_status"
+      required: false
+      selector:
+        entity:
+          multiple: false
+          filter:
+            - integration: opnsense
+              domain: sensor
+
+send_wol:
+  fields:
+    interface:
+      required: true
+      selector:
+        text:
+    mac:
+      required: true
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+reload_interface:
+  fields:
+    interface:
+      required: true
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+generate_vouchers:
+  fields:
+    validity:
+      required: true
+      default: "14400"
+      selector:
+        select:
+          multiple: false
+          custom_value: true
+          mode: dropdown
+          translation_key: "validity"
+          options:
+            - "14400"
+            - "28800"
+            - "86400"
+            - "172800"
+            - "259200"
+            - "345600"
+            - "432000"
+            - "518400"
+            - "604800"
+            - "1209600"
+    expirytime:
+      required: true
+      default: "0"
+      selector:
+        select:
+          multiple: false
+          custom_value: true
+          mode: dropdown
+          translation_key: "expirytime"
+          options:
+            - "0"
+            - "21600"
+            - "43200"
+            - "86400"
+            - "172800"
+            - "259200"
+            - "345600"
+            - "432000"
+            - "518400"
+            - "604800"
+            - "1209600"
+            - "1814400"
+            - "2419200"
+            - "4838400"
+            - "7257600"
+    count:
+      required: true
+      default: 1
+      selector:
+        number:
+          min: 1
+          step: 1
+          mode: box
+    vouchergroup:
+      required: true
+      default: "Home Assistant"
+      selector:
+        text:
+    voucher_server:
+      required: false
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+kill_states:
+  fields:
+    ip_addr:
+      required: true
+      example: "192.168.0.100"
+      selector:
+        text:
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor
+
+toggle_alias:
+  fields:
+    alias:
+      required: true
+      example: "iphones"
+      selector:
+        text:
+    toggle_on_off:
+      required: true
+      default: "toggle"
+      selector:
+        select:
+          multiple: false
+          custom_value: false
+          mode: list
+          translation_key: "toggle_on_off"
+          options:
+            - "toggle"
+            - "on"
+            - "off"
+    multiple_opnsense:
+      collapsed: true
+      fields:
+        device_id:
+          required: false
+          selector:
+            device:
+              multiple: false
+              filter:
+                - integration: opnsense
+              entity:
+                - domain: sensor
+        entity_id:
+          example: "sensor.opnsense_interface_lan_status"
+          required: false
+          selector:
+            entity:
+              multiple: false
+              filter:
+                - integration: opnsense
+                  domain: sensor

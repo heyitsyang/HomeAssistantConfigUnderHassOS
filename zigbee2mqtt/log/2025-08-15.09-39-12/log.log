@@ -1,0 +1,64 @@
+[2025-08-15 09:39:12] info: 	z2m: Logging to console, file (filename: log.log)
+[2025-08-15 09:39:13] info: 	z2m: Starting Zigbee2MQTT version 2.6.0 (commit #unknown)
+[2025-08-15 09:39:13] info: 	z2m: Starting zigbee-herdsman (5.0.4)
+[2025-08-15 09:39:13] warning: 	zh:ezsp: 'ezsp' driver is deprecated and will only remain to provide support for older firmware (pre 7.4.x). Migration to 'ember' is recommended. If using Zigbee2MQTT see https://github.com/Koenkk/zigbee2mqtt/discussions/21462
+[2025-08-15 09:39:17] info: 	z2m: zigbee-herdsman started (resumed)
+[2025-08-15 09:39:17] info: 	z2m: Coordinator firmware version: '{"meta":{"maintrel":"3 ","majorrel":"6","minorrel":"10","product":8,"revision":"6.10.3.0 build 297"},"type":"EZSP v8"}'
+[2025-08-15 09:39:17] info: 	z2m: candles (0x00124b00226a6adf): S31ZB - SONOFF Zigbee smart plug (US version) (Router)
+[2025-08-15 09:39:17] info: 	z2m: kitchen_wled_reset (0x00124b00226a8e56): S31ZB - SONOFF Zigbee smart plug (US version) (Router)
+[2025-08-15 09:39:17] info: 	z2m: Master Closet Lights (0x1c34f1fffec07b62): 43076 - Enbrighten Zigbee in-wall smart switch (Router)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Washer (0xbc33acfffefc6f23): SNTZ007 - Tuya Rechargeable Zigbee contact sensor (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Guest_Sink (0xec1bbdfffe8a47da): TS0207_water_leak_detector - Tuya Water leak detector (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Guest_Toilet (0xec1bbdfffe8a47cf): TS0207_water_leak_detector - Tuya Water leak detector (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak Kitchen Sink (0xa4c138cd74d4e1ba): ZSS-QY-WL-C-MS - Moes Zigbee water leak sensor (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Laundry_Sink (0xa4c13884847e8b7b): ZSS-QY-WL-C-MS - Moes Zigbee water leak sensor (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Master_Toilet (0x5c0272fffee17181): TS0207_water_leak_detector_3 - Tuya Zigbee water leak sensor (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Karens_Sink (0xec1bbdfffe87e58f): TS0207_water_leak_detector - Tuya Water leak detector (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Leak_Yangs_Sink (0xec1bbdfffe8a4803): TS0207_water_leak_detector - Tuya Water leak detector (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Island Barstool Outlet (0x847127fffe37534c): 43102 - Enbrighten Zigbee in-wall tamper-resistant smart outlet (Router)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 1 A (0x187a3efffe3908dd): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 1 B (0xb43a31fffed4e97c): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 2 A (0xf4b3b1fffee0ce90): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 2 B (0x187a3efffe392346): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 3 A (0x187a3efffe390622): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 3 B (0x187a3efffe39122b): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 4 A (0xf4b3b1fffee0d993): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: Master Bedroom Shade 4 B (0x187a3efffe38fe93): D10110 - Yookee Smart blind controller (EndDevice)
+[2025-08-15 09:39:17] info: 	z2m: HVAC Closet Lights (0x00124b0023b7bed9): SA-003-Zigbee - eWeLink Zigbee smart plug (Router)
+[2025-08-15 09:39:17] info: 	z2m: Crane Lamp (0xec1bbdfffefae43a): 43096 - Enbrighten Zigbee plug-in smart dimmer with dual outlets on one control (Router)
+[2025-08-15 09:39:17] info: 	z2m: Currently 22 devices are joined.
+[2025-08-15 09:39:17] info: 	z2m: Connecting to MQTT server at mqtt://core-mosquitto:1883
+[2025-08-15 09:39:17] info: 	z2m: Connected to MQTT server
+[2025-08-15 09:39:17] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload '{"state":"online"}'
+[2025-08-15 09:39:18] info: 	z2m: Started frontend on port 8099
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/candles', payload '{"linkquality":116,"state":"OFF"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/kitchen_wled_reset', payload '{"linkquality":184,"state":"ON"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Closet Lights', payload '{"identify":null,"linkquality":184,"state":"OFF"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Washer', payload '{"battery":56,"battery_low":false,"contact":true,"linkquality":96,"tamper":false,"voltage":2700}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Guest_Sink', payload '{"battery":27,"battery_low":false,"linkquality":108,"tamper":false,"voltage":2600,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Guest_Toilet', payload '{"battery":27,"battery_low":false,"linkquality":112,"tamper":false,"voltage":2600,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak Kitchen Sink', payload '{"battery":56,"battery_low":false,"linkquality":176,"tamper":false,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Laundry_Sink', payload '{"battery":53,"battery_low":false,"linkquality":168,"tamper":false,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Master_Toilet', payload '{"battery":35,"battery_low":false,"linkquality":176,"tamper":false,"voltage":2600,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Karens_Sink', payload '{"battery":31,"battery_low":false,"linkquality":192,"tamper":false,"voltage":2600,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Leak_Yangs_Sink', payload '{"battery":31,"battery_low":false,"linkquality":212,"tamper":false,"voltage":2600,"water_leak":false}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Island Barstool Outlet', payload '{"identify":null,"linkquality":168,"state":"ON"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 1 A', payload '{"battery":100,"linkquality":164,"position":0,"state":"CLOSE"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 1 B', payload '{"battery":92,"linkquality":172,"position":100,"state":"OPEN"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 2 A', payload '{"battery":41,"linkquality":180,"position":0,"state":"CLOSE"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 2 B', payload '{"battery":39,"linkquality":168,"position":100,"state":"OPEN"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 3 A', payload '{"battery":100,"linkquality":112,"position":0,"state":"CLOSE"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 3 B', payload '{"battery":67,"linkquality":176,"position":100,"state":"OPEN"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 4 A', payload '{"battery":100,"linkquality":180,"position":0,"state":"CLOSE"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Master Bedroom Shade 4 B', payload '{"battery":100,"linkquality":180,"position":100,"state":"OPEN"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/HVAC Closet Lights', payload '{"linkquality":172,"state":"OFF"}'
+[2025-08-15 09:39:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Crane Lamp', payload '{"brightness":254,"identify":null,"linkquality":160,"state":"OFF"}'
+[2025-08-15 09:39:18] info: 	z2m: Zigbee2MQTT started!
+[2025-08-15 09:39:23] info: 	z2m:mqtt: MQTT publish: topic 'homeassistant/binary_sensor/1221051039810110150109113116116_0x60a423fffe1dbdb7/connection_state/config', payload '{"device":{"hw_version":"EZSP v8 6.10.3.0 build 297","identifiers":["zigbee2mqtt_bridge_0x60a423fffe1dbdb7"],"manufacturer":"Zigbee2MQTT","model":"Bridge","name":"Zigbee2MQTT Bridge","sw_version":"2.6.0"},"device_class":"connectivity","entity_category":"diagnostic","name":"Connection state","object_id":"zigbee2mqtt_bridge_connection_state","origin":{"name":"Zigbee2MQTT","sw":"2.6.0","url":"https://www.zigbee2mqtt.io"},"payload_off":"offline","payload_on":"online","state_topic":"zigbee2mqtt/bridge/state","unique_id":"bridge_0x60a423fffe1dbdb7_connection_state_zigbee2mqtt","value_template":"{{ value_json.state }}"}'
+[2025-08-15 09:39:30] error: 	zh:ezsp:uart: --> Error: Error: {"sequence":1} after 4000ms
+[2025-08-15 09:39:30] error: 	zh:ezsp:uart: -!- break waiting (1)
+[2025-08-15 09:39:30] error: 	zh:ezsp:uart: Can't send DATA frame (0,1,0): 1800012800
+[2025-08-15 09:40:05] error: 	zh:ezsp:ezsp: Connection attempt 1 error: Error: Error: No such file or directory, cannot open /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220811152332-if00
+[2025-08-15 09:40:28] error: 	zh:ezsp:ezsp: Connection attempt 1 error: Error: Error: No such file or directory, cannot open /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220811152332-if00
+[2025-08-15 09:40:33] error: 	zh:ezsp:ezsp: Connection attempt 2 error: Error: Error: No such file or directory, cannot open /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220811152332-if00
+[2025-08-15 09:40:43] error: 	zh:ezsp:ezsp: Connection attempt 3 error: Error: Error: No such file or directory, cannot open /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220811152332-if00

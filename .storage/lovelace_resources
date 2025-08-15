@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js?hacstag=142051833101",
+        "type": "module",
+        "id": "367d109ec8f3408dbbbf703c70b7dda3"
+      },
+      {
+        "url": "/hacsfiles/circle-sensor-card/circle-sensor-card.js?hacstag=141952963122",
+        "type": "module",
+        "id": "4d58ed72cded462f82ada706692bf492"
+      },
+      {
+        "url": "/hacsfiles/text-element/text-element.js?hacstag=141897999002",
+        "type": "module",
+        "id": "d9fb7f77d5794dd09257692c4a60ad8b"
+      },
+      {
+        "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js?hacstag=1677445841161",
+        "type": "module",
+        "id": "f4844387a6824e8da22aedc7bbdcfa2e"
+      },
+      {
+        "url": "/hacsfiles/lovelace-card-tools/card-tools.js?hacstag=16140332811",
+        "type": "module",
+        "id": "ae090f1ce72f469f8556e5cf89b1c4e8"
+      },
+      {
+        "url": "/hacsfiles/lovelace-fold-entity-row/fold-entity-row.js?hacstag=150781994232",
+        "type": "module",
+        "id": "ebc7f631d17240c8b0be55c450169535"
+      },
+      {
+        "url": "/hacsfiles/numberbox-card/numberbox-card.js?hacstag=304967918417",
+        "type": "module",
+        "id": "21159baf9267496e868d37378cbb4f96"
+      },
+      {
+        "url": "/hacsfiles/entity-attributes-card/entity-attributes-card.js?hacstag=187245461012",
+        "type": "module",
+        "id": "3548f8e880ea4613afb6fbf9f70ab491"
+      },
+      {
+        "id": "c76dae9619a74b8a90c25593700a80a8",
+        "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js?hacstag=178921037451",
+        "type": "module"
+      },
+      {
+        "id": "b7262bc2417c4618888b3534569af567",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375450",
+        "type": "module"
+      },
+      {
+        "id": "ba343eff3334485cb603525761bbd58b",
+        "url": "/webrtc/webrtc-camera.js?v=v3.5.2",
+        "type": "module"
+      },
+      {
+        "id": "b810ada32e6143ebbac73bf8cf886111",
+        "url": "/hacsfiles/lovelace-hourly-weather/hourly-weather.js?hacstag=499270202671",
+        "type": "module"
+      },
+      {
+        "id": "34ee4c1fed2f4d4781c0c504be68ffa5",
+        "url": "/hacsfiles/advanced-camera-card/advanced-camera-card.js?hacstag=3940825527143",
+        "type": "module"
+      },
+      {
+        "id": "d2993911b69449b7b150efcc20cbd828",
+        "url": "/hacsfiles/lovelace-template-entity-row/template-entity-row.js?hacstag=231674882141",
+        "type": "module"
+      }
+    ]
+  }
+}

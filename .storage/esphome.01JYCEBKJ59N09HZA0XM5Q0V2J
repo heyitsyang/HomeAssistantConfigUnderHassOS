@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01JYCEBKJ59N09HZA0XM5Q0V2J",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "office-speakers",
+      "friendly_name": "office-speakers",
+      "mac_address": "A4:CF:12:6D:CC:38",
+      "compilation_time": "Jul 28 2025, 08:43:15",
+      "model": "mhetesp32minikit",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.7.4",
+      "project_name": "",
+      "project_version": "",
+      "webserver_port": 0,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": "",
+      "api_encryption_supported": false,
+      "devices": [],
+      "areas": [],
+      "area": {
+        "area_id": 0,
+        "name": ""
+      }
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "button": [
+      {
+        "object_id": "office-speakers_speakers_restart",
+        "key": 1908957037,
+        "name": "office-speakers Speakers Restart",
+        "disabled_by_default": false,
+        "icon": "mdi:restart",
+        "entity_category": 1,
+        "device_id": 0,
+        "device_class": "restart"
+      }
+    ],
+    "update": [],
+    "media_player": [
+      {
+        "object_id": "office-speakers",
+        "key": 149938304,
+        "name": "office-speakers",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "supports_pause": false,
+        "supported_formats": [
+          {
+            "format": "wav",
+            "sample_rate": 16000,
+            "num_channels": 1,
+            "purpose": 1,
+            "sample_bytes": 2
+          },
+          {
+            "format": "wav",
+            "sample_rate": 16000,
+            "num_channels": 1,
+            "purpose": 0,
+            "sample_bytes": 2
+          }
+        ],
+        "feature_flags": 0
+      }
+    ]
+  }
+}

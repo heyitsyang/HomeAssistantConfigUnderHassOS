@@ -1,0 +1,15 @@
+ys_cell_ble:
+  name: ys_cell_ble
+  mac:
+  icon: mdi:bluetooth-connect
+  picture:
+  track: true
+  consider_home: 180
+
+kt_cell_ble:
+  name: kt_cell_ble
+  mac:
+  icon: mdi:bluetooth-connect
+  picture:
+  track: true
+  consider_home: 180

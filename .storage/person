@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "device_trackers": [
+          "device_tracker.ys_cell_ble",
+          "device_tracker.ys_cell_gps",
+          "device_tracker.opnsense_ys_cell_shencentral_net"
+        ],
+        "id": "yang",
+        "name": "Yang",
+        "user_id": "7d98acc18cea43e482c2ce43cfc714f3",
+        "picture": "/api/image/serve/59cee0e6798378847ee2fa0e1d4fc004/512x512"
+      },
+      {
+        "device_trackers": [
+          "device_tracker.kt_cell_ble",
+          "device_tracker.kt_cell_gps",
+          "device_tracker.opnsense_kt_cell_shencentral_net"
+        ],
+        "id": "karen",
+        "name": "Karen",
+        "user_id": "c00541cc152f489ba54673ec5614edc4",
+        "picture": "/api/image/serve/8c04232981e6315298fcba064244a9a0/512x512"
+      }
+    ]
+  }
+}

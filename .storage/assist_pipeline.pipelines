@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "minor_version": 2,
+  "key": "assist_pipeline.pipelines",
+  "data": {
+    "items": [
+      {
+        "conversation_engine": "conversation.home_assistant",
+        "conversation_language": "en",
+        "id": "01h00xmydrbmp5tj095v9g4qkn",
+        "language": "en",
+        "name": "Home Assistant",
+        "stt_engine": "stt.faster_whisper",
+        "stt_language": "en",
+        "tts_engine": "tts.piper",
+        "tts_language": "en_US",
+        "tts_voice": "en_US-danny-low",
+        "wake_word_entity": "wake_word.openwakeword",
+        "wake_word_id": "ok_nabu_v0.1"
+      }
+    ],
+    "preferred_item": "01h00xmydrbmp5tj095v9g4qkn"
+  }
+}

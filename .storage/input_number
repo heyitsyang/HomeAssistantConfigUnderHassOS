@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "input_number",
+  "data": {
+    "items": [
+      {
+        "id": "inp_num_0_threshold",
+        "icon": "mdi:label-percent-outline",
+        "max": 40.0,
+        "min": 20.0,
+        "mode": "box",
+        "name": "0 brightness if >",
+        "step": 1.0,
+        "unit_of_measurement": "lux"
+      },
+      {
+        "id": "inp_num_low_threshold",
+        "icon": "mdi:label-percent-outline",
+        "max": 35.0,
+        "min": 5.0,
+        "mode": "box",
+        "name": "Low brightness if >",
+        "step": 1.0,
+        "unit_of_measurement": "lux"
+      },
+      {
+        "id": "inp_num_med_threshold",
+        "icon": "mdi:label-percent-outline",
+        "max": 35.0,
+        "min": 5.0,
+        "mode": "box",
+        "name": "Med brightness if >",
+        "step": 1.0,
+        "unit_of_measurement": "lux"
+      },
+      {
+        "id": "garage_announce_vol",
+        "min": 0.5,
+        "max": 1.0,
+        "name": "Garage announce vol",
+        "step": 0.1,
+        "mode": "box",
+        "icon": "mdi:speaker-message"
+      },
+      {
+        "id": "office_announce_vol",
+        "min": 0.3,
+        "max": 1.0,
+        "mode": "box",
+        "name": "Office announce vol",
+        "step": 0.1,
+        "icon": "mdi:speaker-message"
+      },
+      {
+        "id": "greatrm_announce_vol",
+        "min": 0.15,
+        "max": 0.32,
+        "mode": "box",
+        "name": "Greatrm announce vol",
+        "step": 0.1,
+        "icon": "mdi:speaker-message"
+      },
+      {
+        "id": "loss_per_minute_alarm_threshold",
+        "min": -0.09,
+        "max": 0.0,
+        "mode": "box",
+        "name": "Loss per minute alarm threshold",
+        "icon": "mdi:alert-decagram-outline",
+        "step": 0.01,
+        "unit_of_measurement": "psi"
+      },
+      {
+        "id": "irrig_z1_front_yd_gpm_limit",
+        "min": 5.0,
+        "max": 10.0,
+        "name": "Irrig Z1 (Front Yd) GPM Limit",
+        "icon": "mdi:pipe-leak",
+        "step": 0.1,
+        "unit_of_measurement": "GPM",
+        "mode": "box"
+      },
+      {
+        "id": "irrig_z2_drip_gpm_limit",
+        "min": 3.0,
+        "max": 7.0,
+        "name": "Irrig Z2 (Drip) GPM Limit",
+        "icon": "mdi:pipe-leak",
+        "step": 0.1,
+        "unit_of_measurement": "GPM",
+        "mode": "box"
+      },
+      {
+        "id": "irrig_z3_left_yd_gpm_limit",
+        "min": 7.0,
+        "max": 14.0,
+        "name": "Irrig Z3 (Right Yd) GPM Limit",
+        "icon": "mdi:pipe-leak",
+        "step": 0.1,
+        "unit_of_measurement": "GPM",
+        "mode": "box"
+      },
+      {
+        "id": "irrig_z4_right_yd_gpm_limit",
+        "min": 9.0,
+        "max": 18.0,
+        "name": "Irrig Z4 (Left Yd) GPM Limit",
+        "icon": "mdi:pipe-leak",
+        "step": 0.1,
+        "unit_of_measurement": "GPM",
+        "mode": "box"
+      }
+    ]
+  }
+}

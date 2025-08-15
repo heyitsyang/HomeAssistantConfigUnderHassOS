@@ -1,0 +1,11 @@
+
+
+
+
+
+
+If google TTS stops working, check to be sure the base_url in configuration.yaml is reachable
+
+For errors like AttributeError: 'NoneType' object has no attribute 'something_or_another'
+look for  an automation / condition / value template with any sort of comparison. There is a chance the comparison
+fails because the value is not yet populated. If so add  | int  or  | float  after the value so that it returns 0 instead of none.

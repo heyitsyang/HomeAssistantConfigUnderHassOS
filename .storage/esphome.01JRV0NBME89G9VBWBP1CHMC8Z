@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01JRV0NBME89G9VBWBP1CHMC8Z",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "sunroom-ac",
+      "friendly_name": "sunroom-ac",
+      "mac_address": "40:91:51:7C:C4:16",
+      "compilation_time": "Jul 28 2025, 08:48:22",
+      "model": "esp12e",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.7.4",
+      "project_name": "SMLIGHT.SLWF-01Pro",
+      "project_version": "2.1",
+      "webserver_port": 0,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": "",
+      "api_encryption_supported": false,
+      "devices": [],
+      "areas": [],
+      "area": {
+        "area_id": 0,
+        "name": ""
+      }
+    },
+    "services": [
+      {
+        "name": "follow_me",
+        "key": 1664936315,
+        "args": [
+          {
+            "name": "temperature",
+            "type": 2
+          }
+        ]
+      }
+    ],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "button": [
+      {
+        "object_id": "factory_reset",
+        "key": 3740619177,
+        "name": "Factory reset",
+        "disabled_by_default": false,
+        "icon": "mdi:restart-alert",
+        "entity_category": 1,
+        "device_id": 0,
+        "device_class": "restart"
+      },
+      {
+        "object_id": "sunroom-ac_display_toggle",
+        "key": 3909865265,
+        "name": "sunroom-ac Display Toggle",
+        "disabled_by_default": false,
+        "icon": "mdi:theme-light-dark",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": ""
+      },
+      {
+        "object_id": "sunroom-ac_swing_step",
+        "key": 2819475407,
+        "name": "sunroom-ac Swing Step",
+        "disabled_by_default": false,
+        "icon": "mdi:tailwind",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": ""
+      },
+      {
+        "object_id": "sunroom-ac_dongle_reboot",
+        "key": 2307396165,
+        "name": "sunroom-ac Dongle Reboot",
+        "disabled_by_default": false,
+        "icon": "mdi:restart",
+        "entity_category": 1,
+        "device_id": 0,
+        "device_class": "restart"
+      }
+    ],
+    "switch": [
+      {
+        "object_id": "sunroom-ac_beeper",
+        "key": 1561299181,
+        "name": "sunroom-ac Beeper",
+        "disabled_by_default": false,
+        "icon": "mdi:volume-source",
+        "entity_category": 0,
+        "device_id": 0,
+        "assumed_state": false,
+        "device_class": ""
+      }
+    ],
+    "update": [],
+    "sensor": [
+      {
+        "object_id": "sunroom-ac_wi-fi_signal",
+        "key": 385773473,
+        "name": "sunroom-ac Wi-Fi Signal",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": "signal_strength",
+        "unit_of_measurement": "dBm",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "sunroom-ac_uptime_days",
+        "key": 1529544662,
+        "name": "sunroom-ac Uptime Days",
+        "disabled_by_default": false,
+        "icon": "mdi:clock-start",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "unit_of_measurement": "days",
+        "accuracy_decimals": 1,
+        "force_update": false,
+        "state_class": 0,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "sunroom-ac_outdoor_temperature",
+        "key": 371019639,
+        "name": "sunroom-ac Outdoor Temperature",
+        "disabled_by_default": false,
+        "icon": "mdi:thermometer",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "temperature",
+        "unit_of_measurement": "°C",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "sunroom-ac_power_usage",
+        "key": 2384537563,
+        "name": "sunroom-ac Power Usage",
+        "disabled_by_default": false,
+        "icon": "mdi:power",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "power",
+        "unit_of_measurement": "W",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "sunroom-ac_indoor_humidity",
+        "key": 1162722443,
+        "name": "sunroom-ac Indoor Humidity",
+        "disabled_by_default": false,
+        "icon": "mdi:water-percent",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "humidity",
+        "unit_of_measurement": "%",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      }
+    ],
+    "text_sensor": [],
+    "climate": [
+      {
+        "object_id": "sunroom-ac",
+        "key": 2723916513,
+        "name": "sunroom-ac",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "supports_current_temperature": true,
+        "supports_two_point_target_temperature": false,
+        "supported_modes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "visual_min_temperature": 17.0,
+        "visual_max_temperature": 30.0,
+        "visual_target_temperature_step": 0.5,
+        "visual_current_temperature_step": 0.5,
+        "legacy_supports_away": false,
+        "supports_action": false,
+        "supported_fan_modes": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "supported_swing_modes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "supported_custom_fan_modes": [
+          "silent",
+          "turbo"
+        ],
+        "supported_presets": [
+          0,
+          3,
+          5,
+          6
+        ],
+        "supported_custom_presets": [
+          "freeze protection"
+        ],
+        "supports_current_humidity": false,
+        "supports_target_humidity": false,
+        "visual_min_humidity": 30.0,
+        "visual_max_humidity": 99.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01JYCEAB6EFD4B8JB0NJJ2SHW3",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "garage-speakers",
+      "friendly_name": "garage-speakers",
+      "mac_address": "3C:61:05:64:51:64",
+      "compilation_time": "Jul 28 2025, 08:34:34",
+      "model": "mhetesp32minikit",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.7.4",
+      "project_name": "",
+      "project_version": "",
+      "webserver_port": 0,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": "",
+      "api_encryption_supported": false,
+      "devices": [],
+      "areas": [],
+      "area": {
+        "area_id": 0,
+        "name": ""
+      }
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "button": [
+      {
+        "object_id": "garage-speakers_speakers_restart",
+        "key": 3176981434,
+        "name": "garage-speakers Speakers Restart",
+        "disabled_by_default": false,
+        "icon": "mdi:restart",
+        "entity_category": 1,
+        "device_id": 0,
+        "device_class": "restart"
+      }
+    ],
+    "update": [],
+    "media_player": [
+      {
+        "object_id": "garage-speakers",
+        "key": 2223030193,
+        "name": "garage-speakers",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "supports_pause": false,
+        "supported_formats": [
+          {
+            "format": "wav",
+            "sample_rate": 16000,
+            "num_channels": 1,
+            "purpose": 1,
+            "sample_bytes": 2
+          },
+          {
+            "format": "wav",
+            "sample_rate": 16000,
+            "num_channels": 1,
+            "purpose": 0,
+            "sample_bytes": 2
+          }
+        ],
+        "feature_flags": 0
+      }
+    ]
+  }
+}

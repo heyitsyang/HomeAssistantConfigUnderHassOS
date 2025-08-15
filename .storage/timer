@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "timer",
+  "data": {
+    "items": [
+      {
+        "id": "timer_lg_garag_door",
+        "name": "Timer Lg Garage Door",
+        "duration": "2:00:00",
+        "icon": "mdi:timer-sand",
+        "restore": true
+      },
+      {
+        "name": "Timer Sm Garage Door",
+        "duration": "2:00:00",
+        "id": "timer_sm_garage_door",
+        "icon": "mdi:timer-sand",
+        "restore": true
+      },
+      {
+        "id": "pause_auto_front_door_lights",
+        "name": "Pause auto front door lights",
+        "icon": "mdi:pause",
+        "duration": "12:00:00",
+        "restore": true
+      }
+    ]
+  }
+}

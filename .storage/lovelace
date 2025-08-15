@@ -1,0 +1,2099 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace",
+  "data": {
+    "config": {
+      "title": "Home",
+      "background": "var(--background-image)",
+      "views": [
+        {
+          "icon": "mdi:home",
+          "path": "default_view",
+          "title": "Overview",
+          "visible": [
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            },
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [
+            {
+              "entity": "sensor.ecobee_avg_indoor_temperature"
+            },
+            {
+              "entity": "sensor.local_ecobee_current_humidity"
+            },
+            {
+              "type": "entity",
+              "show_name": false,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "sensor.actual_sunroom_temperature",
+              "name": "MrCool Sunroom Temperature"
+            },
+            {
+              "entity": "sensor.kflwildw56_local_temperature"
+            },
+            {
+              "entity": "sensor.kflwildw56_local_humidity"
+            },
+            {
+              "entity": "person.yang"
+            },
+            {
+              "entity": "person.karen"
+            }
+          ],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.inp_bool_extended_absence_mode"
+                },
+                {
+                  "entity": "input_boolean.leave_water_valve_on",
+                  "name": "Leave water valve ON during absence"
+                },
+                {
+                  "entity": "input_datetime.extended_absence_start"
+                },
+                {
+                  "entity": "input_datetime.extended_absence_end"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Extended Absence",
+              "type": "entities"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_boolean.inp_bool_guest_mode"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_guest_in_sunroom"
+                },
+                {
+                  "entity": "input_datetime.guest_arrives"
+                },
+                {
+                  "entity": "input_datetime.guest_departs"
+                }
+              ],
+              "title": "Guest",
+              "show_header_toggle": false
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.doorbell",
+                  "live_provider": "auto",
+                  "frigate": {
+                    "url": "haha.shencentral.net"
+                  },
+                  "title": "Doorbell"
+                },
+                {
+                  "camera_entity": "camera.frontporch",
+                  "live_provider": "auto",
+                  "title": "Front Porch"
+                },
+                {
+                  "camera_entity": "camera.driveway",
+                  "live_provider": "auto",
+                  "title": "Driveway"
+                }
+              ],
+              "menu": {
+                "style": "hidden",
+                "buttons": {
+                  "media_player": {
+                    "enabled": false
+                  },
+                  "camera_ui": {
+                    "enabled": false
+                  },
+                  "download": {
+                    "enabled": false
+                  },
+                  "cameras": {
+                    "enabled": false
+                  },
+                  "timeline": {
+                    "enabled": false
+                  }
+                }
+              },
+              "view": {
+                "camera_select": "live",
+                "interaction_seconds": 300
+              }
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_boolean.party_mode",
+                  "icon": "mdi:party-popper"
+                },
+                {
+                  "entity": "input_datetime.party_mode_start",
+                  "icon": "mdi:party-popper"
+                },
+                {
+                  "entity": "input_datetime.party_mode_end",
+                  "icon": "mdi:party-popper"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_theater_mode"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_vacuum_every_sunday"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_announcements",
+                  "icon": "mdi:speaker-message"
+                },
+                {
+                  "entity": "timer.pause_auto_front_door_lights",
+                  "icon": "mdi:pause"
+                }
+              ],
+              "title": "Convenience",
+              "show_header_toggle": false
+            }
+          ]
+        },
+        {
+          "icon": "mdi:shield-home",
+          "path": "security",
+          "title": "Security",
+          "visible": [
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            },
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "lock.front_door_lock",
+              "name": "Front Door"
+            },
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "lock.back_door_lock",
+              "name": "Back Door"
+            }
+          ],
+          "cards": [
+            {
+              "square": false,
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:advanced-camera-card",
+                  "cameras": [
+                    {
+                      "camera_entity": "camera.garage",
+                      "live_provider": "auto",
+                      "title": "Garage"
+                    },
+                    {
+                      "camera_entity": "camera.greatroom",
+                      "live_provider": "auto",
+                      "title": "Great Room"
+                    },
+                    {
+                      "camera_entity": "camera.sunroom",
+                      "live_provider": "auto",
+                      "title": "Sun Room"
+                    }
+                  ],
+                  "view": {
+                    "interaction_seconds": 300
+                  },
+                  "menu": {
+                    "buttons": {
+                      "timeline": {
+                        "enabled": false
+                      },
+                      "media_player": {
+                        "enabled": false
+                      },
+                      "microphone": {
+                        "type": "momentary"
+                      },
+                      "camera_ui": {
+                        "enabled": false
+                      },
+                      "download": {
+                        "enabled": false
+                      },
+                      "cameras": {
+                        "enabled": false
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "cover.large_garage_door",
+                      "secondary_info": "position"
+                    },
+                    {
+                      "entity": "cover.small_garage_door",
+                      "secondary_info": "position"
+                    },
+                    {
+                      "entity": "switch.lg_garage_opener_power"
+                    },
+                    {
+                      "entity": "switch.sm_garage_opener_power"
+                    }
+                  ]
+                }
+              ],
+              "title": "Garage",
+              "columns": 1
+            },
+            {
+              "square": false,
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "entity-filter",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.leak_kitchen_sink"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_kitchen_sink_rear",
+                      "name": "Leak Kitchen Sink Rear"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_dishwasher"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_refrigerator"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_washer_contact"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_laundry"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_water_heater"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_karens_sink_water_leak",
+                      "name": "Leak Karens Sink"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_yangs_sink_water_leak",
+                      "name": "Leak Yangs Sink"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_guest_sink_water_leak",
+                      "name": "Leak Guest Sink"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_guest_toilet_water_leak",
+                      "name": "Leak Guest Toilet"
+                    },
+                    {
+                      "entity": "binary_sensor.leak_master_toilet_water_leak",
+                      "name": "Leak Master Toilet"
+                    }
+                  ],
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "state_not": "off"
+                    }
+                  ],
+                  "card": {
+                    "type": "entities"
+                  }
+                },
+                {
+                  "type": "entity-filter",
+                  "entities": [
+                    "lock.front_door_lock",
+                    "lock.back_door_lock"
+                  ],
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "state_not": "locked"
+                    }
+                  ],
+                  "card": {
+                    "type": "entities"
+                  }
+                },
+                {
+                  "type": "entity-filter",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.front_door_window_door_is_open",
+                      "name": "Front Door"
+                    },
+                    {
+                      "entity": "binary_sensor.back_door_window_door_is_open",
+                      "name": "Back Door"
+                    },
+                    {
+                      "entity": "binary_sensor.garagehouse_door_window_door_is_open",
+                      "name": "Garage-House Door"
+                    }
+                  ],
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "state_not": "off"
+                    }
+                  ],
+                  "card": {
+                    "type": "entities"
+                  }
+                },
+                {
+                  "type": "entity-filter",
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.sun_room_window_1_window_door_is_open",
+                      "name": "Sun Room WIndow 1"
+                    },
+                    {
+                      "entity": "binary_sensor.sun_room_window_2_window_door_is_open",
+                      "name": "Sun Room Window 2"
+                    },
+                    {
+                      "entity": "binary_sensor.sun_room_window_3_window_door_is_open",
+                      "name": "Sun Room WIndow 3"
+                    },
+                    {
+                      "entity": "binary_sensor.sun_room_window_4_window_door_is_open",
+                      "name": "Sun Room Window 4"
+                    },
+                    {
+                      "entity": "binary_sensor.sun_room_window_5_window_door_is_open",
+                      "name": "Sun Room Window 5"
+                    },
+                    {
+                      "entity": "binary_sensor.sun_room_window_6_window_door_is_open",
+                      "name": "Sun Room Window 6"
+                    }
+                  ],
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "state_not": "off"
+                    }
+                  ],
+                  "card": {
+                    "type": "entities"
+                  }
+                }
+              ],
+              "columns": 1,
+              "title": "Critical Sensors"
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "title": "Last Snaps",
+          "path": "last-snaps",
+          "icon": "mdi:camera-outline",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.doorbell",
+                  "dependencies": {
+                    "all_cameras": false
+                  }
+                }
+              ],
+              "event_gallery": {
+                "controls": {
+                  "thumbnails": {
+                    "size": 100
+                  }
+                }
+              },
+              "view": {
+                "default": "snapshot",
+                "camera_select": "live",
+                "triggers": {},
+                "default_cycle_camera": false
+              }
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.driveway"
+                }
+              ],
+              "view": {
+                "default": "snapshot"
+              }
+            },
+            {
+              "type": "custom:advanced-camera-card",
+              "cameras": [
+                {
+                  "camera_entity": "camera.frontporch"
+                }
+              ],
+              "view": {
+                "default": "live"
+              }
+            }
+          ]
+        },
+        {
+          "icon": "mdi:light-switch",
+          "path": "controls",
+          "title": "Lights-Fans-Shades",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            },
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "light.front_door_lights"
+                },
+                {
+                  "entity": "light.back_door_lights"
+                },
+                {
+                  "entity": "light.living_room_lights"
+                },
+                {
+                  "entity": "light.track_lights"
+                },
+                {
+                  "entity": "switch.candles"
+                },
+                {
+                  "entity": "light.island_lights"
+                },
+                {
+                  "entity": "switch.island_barstool_outlet"
+                },
+                {
+                  "entity": "light.kitchen_cabinet_lights",
+                  "name": "Kitchen Cabinet Lights"
+                },
+                {
+                  "entity": "light.kitchen_leds_lower"
+                },
+                {
+                  "entity": "light.kitchen_leds_upper_master"
+                },
+                {
+                  "entity": "light.kitchen_leds_upper"
+                },
+                {
+                  "entity": "switch.kitchen_wled_reset",
+                  "name": "Kitchen WLED power (for reset)",
+                  "icon": "mdi:timer-10"
+                },
+                {
+                  "entity": "light.eating_area_lights"
+                },
+                {
+                  "entity": "light.sun_room_lights"
+                },
+                {
+                  "entity": "light.sun_room_uplights"
+                },
+                {
+                  "entity": "light.guest_room_lights"
+                },
+                {
+                  "entity": "light.master_bedroom_lights"
+                },
+                {
+                  "entity": "light.crane_lamp"
+                },
+                {
+                  "entity": "switch.master_closet_lights"
+                },
+                {
+                  "entity": "switch.hvac_closet_lights"
+                },
+                {
+                  "entity": "light.office_lights"
+                },
+                {
+                  "entity": "light.office_cabinet_leds_master"
+                },
+                {
+                  "entity": "light.office_cabinet_leds_segment_3"
+                },
+                {
+                  "entity": "group.upper_office_cabinet_leds"
+                },
+                {
+                  "entity": "light.office_monitor_leds"
+                },
+                {
+                  "entity": "select.office_cabinet_leds_preset"
+                },
+                {
+                  "entity": "switch.hamstation",
+                  "icon": "mdi:radio"
+                },
+                {
+                  "entity": "switch.attic_peak"
+                },
+                {
+                  "entity": "switch.lan2_power"
+                }
+              ],
+              "show_header_toggle": true,
+              "title": "All Lighting/Outlets",
+              "type": "entities",
+              "state_color": true
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_boolean.inhibit_office_mood_lighting"
+                }
+              ],
+              "title": "Office Mood Lighting"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "fan.living_room_fan"
+                },
+                {
+                  "entity": "fan.master_bedroom_fan"
+                },
+                {
+                  "entity": "fan.office_fan"
+                },
+                {
+                  "entity": "fan.guest_room_fan",
+                  "name": "Guest Room Fan"
+                },
+                {
+                  "entity": "fan.sun_room_fan_1"
+                },
+                {
+                  "entity": "fan.sun_room_fan_2"
+                }
+              ],
+              "show_header_toggle": true,
+              "title": "Fans",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                "cover.sun_room_shades",
+                "cover.sun_room_shade_1",
+                "cover.sun_room_shade_2",
+                "cover.sun_room_shade_3",
+                "cover.sun_room_shade_4"
+              ],
+              "show_header_toggle": false,
+              "title": "Sun Room Shades",
+              "type": "entities"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "cover.master_bedroom_outer_shades",
+                  "name": "All Light Filtering Outer Shades"
+                },
+                {
+                  "entity": "cover.master_bedroom_inner_shades",
+                  "name": "All Blackout Inner Shades"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_2_outer",
+                  "name": "Master Bedroom Shade 1 Outer"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_1_inner",
+                  "name": "Master Bedroom Shade 1 Inner"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_2_outer",
+                  "name": "Master Bedroom Shade 2 Outer"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_2_inner",
+                  "name": "Master Bedroom Shade 2 Inner"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_3_outer",
+                  "name": "Master Bedroom Shade 3 Outer"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_3_inner",
+                  "name": "Master Bedroom Shade 3 Inner"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_4_outer",
+                  "name": "Master Bedroom Shade 4 Outer"
+                },
+                {
+                  "entity": "cover.master_bedroom_shade_4_inner",
+                  "name": "Master Bedroom Shade 4 Inner"
+                }
+              ],
+              "title": "Master Bedroom Shades",
+              "show_header_toggle": false
+            }
+          ]
+        },
+        {
+          "icon": "mdi:music",
+          "path": "media_players",
+          "title": "Media Players",
+          "visible": [
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            },
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "entity": "media_player.tv_livingrm",
+              "type": "media-control"
+            },
+            {
+              "entity": "media_player.greatroom_speakers",
+              "type": "media-control"
+            },
+            {
+              "entity": "media_player.office_speakers",
+              "type": "media-control"
+            }
+          ]
+        },
+        {
+          "icon": "mdi:weather-partly-cloudy",
+          "path": "weather",
+          "title": "Weather",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            },
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.openweathermap_temperature",
+                  "name": "Temperature"
+                },
+                {
+                  "entity": "sensor.openweathermap_feels_like_temperature",
+                  "name": "Feels like temperature"
+                },
+                {
+                  "entity": "sensor.openweathermap_humidity",
+                  "name": "Humidity"
+                },
+                {
+                  "entity": "sensor.openweathermap_condition",
+                  "name": "Condition"
+                },
+                {
+                  "entity": "sensor.openweathermap_dew_point",
+                  "name": "Dew Point"
+                },
+                {
+                  "entity": "sensor.openweathermap_cloud_coverage"
+                },
+                {
+                  "entity": "sensor.openweathermap_precipitation_kind",
+                  "name": "Precipitation kind"
+                },
+                {
+                  "entity": "sensor.openweathermap_pressure",
+                  "name": "Pressure"
+                },
+                {
+                  "entity": "sensor.openweathermap_rain",
+                  "name": "Rain"
+                },
+                {
+                  "entity": "sensor.openweathermap_uv_index",
+                  "name": "UV Index"
+                },
+                {
+                  "entity": "sensor.openweathermap_visibility",
+                  "name": "Visibility"
+                },
+                {
+                  "entity": "sensor.openweathermap_weather",
+                  "name": "Weather"
+                },
+                {
+                  "entity": "sensor.openweathermap_weather_code",
+                  "name": "Weather Code"
+                },
+                {
+                  "entity": "sensor.openweathermap_wind_bearing",
+                  "name": "Wind bearing"
+                },
+                {
+                  "entity": "sensor.openweathermap_wind_speed",
+                  "name": "Wind speed"
+                }
+              ],
+              "title": "OpenWeatherMap"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.kflwildw56_local_temperature",
+                  "name": "Temperature"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_feels_like",
+                  "name": "Feels Like Temperature"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_humidity",
+                  "name": "Humidity"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_last_rain",
+                  "name": "Last Rain"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_event_rain",
+                  "name": "Event Rain"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_hourly_rain_rate",
+                  "name": "Hourly Rain Rate"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_daily_rain",
+                  "name": "Daily Rain"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_weekly_rain",
+                  "name": "Weekly Rain"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_monthly_rain",
+                  "name": "Monthly Rain"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_wind_dir",
+                  "name": "Wind Direction"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_wind_speed",
+                  "name": "Wind Speed"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_wind_gust",
+                  "name": "Wind Gust"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_max_gust",
+                  "name": "Max Wind Gust"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_dew_point",
+                  "name": "Dew Point"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_rel_pressure",
+                  "name": "Relative Pressure"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_abs_pressure",
+                  "name": "Absolute Pressure"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_inside_temperature",
+                  "name": "Temperature Indoors"
+                },
+                {
+                  "entity": "sensor.kflwildw56_local_humidity_in",
+                  "name": "Humidity Indoors"
+                }
+              ],
+              "title": "Station KFLWILDW56 Local"
+            },
+            {
+              "type": "custom:hourly-weather",
+              "entity": "weather.openweathermap",
+              "name": "The Villages Hourly Weather",
+              "show_wind": "true",
+              "show_date": "boundary"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.openweathermap_uv_index"
+                },
+                {
+                  "entity": "sensor.soil_probe_ds18b20_temperature",
+                  "name": "Norcoose Soil Temperature"
+                },
+                {
+                  "entity": "sensor.7_day_avg_soil_temperature"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Other Environmental",
+              "type": "entities"
+            },
+            {
+              "type": "markdown",
+              "content": "**Warm Season Grasses: Bermuda, Zoysia, Centipede, St. Augustine**\n**120°F** Shoot growth ceases. 110°F Root growth ceases.\n**80-90°F** Optimum shoot growth. \n**75-85°F** Optimum root growth.\n**74°F** Optimum time to overseed bermudagrass with ryegrass in the fall. Time to plant grasses in the spring.\n**64°F** Expected spring root decline is triggered and roots turn brown and die within 1 or 2 days.\n**50°F** Root growth begins to slow below this temperature.  Initiation of dormancy occurs resulting in discoloration.\n**Weed Control**\n**60-65°F** Germination of spurge and goosegrass is expected, therefore, apply preemergent material when soil temperatures approach this level.\n**53-58°F** Germination of crabgrass is expected, therefore, apply preemergent material when soil temperatures approach this level.\n",
+              "title": "Soil Temperature Notes"
+            },
+            {
+              "type": "iframe",
+              "url": "https://embed.windy.com/embed2.html?lat=28.844&lon=-82.008&detailLat=28.844&detailLon=-82.008&width=650&height=450&zoom=7&level=surface&overlay=radar&product=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1\" frameborder=\"0\"></iframe>",
+              "aspect_ratio": "100%",
+              "title": "Radar"
+            }
+          ]
+        },
+        {
+          "icon": "mdi:chart-line",
+          "path": "graphs",
+          "title": "Graphs",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "sensor.freezer_sensor_temperature"
+                }
+              ],
+              "title": "Kitchen Freezer",
+              "hours_to_show": 12
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "binary_sensor.air_handler"
+                },
+                {
+                  "entity": "sensor.upper_rack_temperature_f"
+                },
+                {
+                  "entity": "sensor.mid_rack_temperature_f"
+                },
+                {
+                  "entity": "sensor.espresense_office_ds18b20_temperature"
+                },
+                {
+                  "entity": "sensor.ecobee_avg_indoor_temperature"
+                },
+                {
+                  "entity": "sensor.junior_temperature"
+                },
+                {
+                  "entity": "sensor.bacman_temperature"
+                },
+                {
+                  "entity": "sensor.system_monitor_processor_temperature"
+                }
+              ],
+              "title": "Rack",
+              "hours_to_show": 24
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "binary_sensor.water_heater"
+                },
+                {
+                  "entity": "sensor.water_pressure"
+                },
+                {
+                  "entity": "sensor.24hr_avg_water_pressure"
+                },
+                {
+                  "entity": "sensor.24hr_max_water_pressure"
+                },
+                {
+                  "entity": "sensor.24hr_min_water_pressure"
+                }
+              ],
+              "hours_to_show": 24,
+              "refresh_interval": 0,
+              "title": "Water Pressure"
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "binary_sensor.air_handler"
+                },
+                {
+                  "entity": "sensor.attic_temperature"
+                },
+                {
+                  "entity": "sensor.garage_temperature"
+                }
+              ],
+              "hours_to_show": 24,
+              "refresh_interval": 0,
+              "title": "Hot Areas Temperature"
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "sensor.sensibo_sunroom_temperature"
+                },
+                {
+                  "entity": "sensor.ecobee_avg_indoor_temperature"
+                },
+                {
+                  "entity": "binary_sensor.air_handler"
+                }
+              ],
+              "title": "Indoor Temperature"
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "sensor.espresense_adjusted_sunroom_temperature"
+                },
+                {
+                  "entity": "sensor.sensibo_sunroom_temperature"
+                },
+                {
+                  "entity": "sensor.espresense_sunrm_temperature"
+                }
+              ],
+              "title": "Sunroom Comparison"
+            }
+          ]
+        },
+        {
+          "theme": "Backend-selected",
+          "icon": "mdi:monitor-eye",
+          "path": "performance",
+          "title": "System Performance Info",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "subview": false,
+          "badges": [
+            {
+              "entity": "sensor.ecobee_avg_indoor_temperature"
+            },
+            {
+              "entity": "sensor.igrill_70918f19e8d1_propane_level"
+            }
+          ],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.cert_expiry_timestamp_shencentral_duckdns_org"
+                },
+                {
+                  "entity": "sensor.hahashen_duckdns_org_cert_expiry"
+                },
+                {
+                  "entity": "sensor.hahashen_ddnsfree_com_cert_expiry"
+                },
+                {
+                  "entity": "sensor.shencentral_ddnsfree_com_cert_expiry"
+                },
+                {
+                  "entity": "sensor.pixshen_ddnsfree_com_cert_expiry"
+                }
+              ],
+              "title": "Certificates",
+              "show_header_toggle": false,
+              "state_color": false
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.system_monitor_last_boot"
+                },
+                {
+                  "entity": "sensor.uptime"
+                },
+                {
+                  "entity": "sensor.system_monitor_processor_temperature"
+                },
+                {
+                  "entity": "sensor.system_monitor_load_5m"
+                },
+                {
+                  "entity": "sensor.system_monitor_processor_use"
+                },
+                {
+                  "entity": "sensor.system_monitor_disk_use_percent"
+                },
+                {
+                  "entity": "sensor.system_monitor_disk_free"
+                },
+                {
+                  "entity": "sensor.system_monitor_memory_use_percent"
+                },
+                {
+                  "entity": "sensor.system_monitor_memory_free"
+                },
+                {
+                  "entity": "sensor.mariadb_size"
+                },
+                {
+                  "entity": "sensor.influxdb_db_size"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "System Status",
+              "type": "entities"
+            },
+            {
+              "type": "entity-filter",
+              "entities": [
+                {
+                  "entity": "binary_sensor.espresense_greatrm"
+                },
+                {
+                  "entity": "binary_sensor.espresense_kitchen"
+                },
+                {
+                  "entity": "binary_sensor.espresense_office"
+                },
+                {
+                  "entity": "binary_sensor.espresense_guestbdrm"
+                },
+                {
+                  "entity": "binary_sensor.espresense_masterbdrm"
+                },
+                {
+                  "entity": "binary_sensor.espresense_sunrm"
+                },
+                {
+                  "entity": "binary_sensor.espresense_garage"
+                },
+                {
+                  "entity": "binary_sensor.garage_controller_garage_controller_status"
+                },
+                {
+                  "entity": "binary_sensor.lab_rack_status"
+                },
+                {
+                  "entity": "binary_sensor.spt_sensor_online_status"
+                }
+              ],
+              "conditions": [
+                {
+                  "condition": "state",
+                  "state_not": "on"
+                }
+              ],
+              "card": {
+                "type": "entities",
+                "title": "Offline Devices",
+                "state_color": true
+              }
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entity-filter",
+                  "entities": [
+                    {
+                      "entity": "sensor.irrig_battery_percent"
+                    },
+                    {
+                      "entity": "sensor.guest_suite_display_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_1_outer_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_1_inner_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_2_outer_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_2_inner_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_3_outer_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_3_inner_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_4_outer_battery"
+                    },
+                    {
+                      "entity": "sensor.master_bedroom_shade_4_inner_battery"
+                    },
+                    {
+                      "entity": "sensor.igrill_70918f19e8d1_battery_level"
+                    },
+                    {
+                      "entity": "sensor.front_door_lock_battery_level"
+                    },
+                    {
+                      "entity": "sensor.back_door_lock_battery_level"
+                    },
+                    {
+                      "entity": "sensor.front_door_battery_level"
+                    },
+                    {
+                      "entity": "sensor.back_door_battery_level"
+                    },
+                    {
+                      "entity": "sensor.garagehouse_door_battery_level",
+                      "name": "Garage-House Door Battery Level"
+                    },
+                    {
+                      "entity": "sensor.living_area_motion_battery_level",
+                      "icon": "mdi:battery-unknown"
+                    },
+                    {
+                      "entity": "sensor.sun_room_remote_1_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_remote_2_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_remote_3_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_remote_4_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_window_1_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_window_2_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_window_3_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_window_4_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_window_5_battery_level"
+                    },
+                    {
+                      "entity": "sensor.sun_room_window_6_battery_level"
+                    },
+                    {
+                      "entity": "sensor.leak_guest_sink_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_karens_sink_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_yangs_sink_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_master_toilet_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_guest_toilet_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_kitchen_sink_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_laundry_sink_battery"
+                    },
+                    {
+                      "entity": "sensor.leak_washer_battery"
+                    },
+                    {
+                      "entity": "sensor.local_ecobee_guest_suite_battery"
+                    },
+                    {
+                      "entity": "sensor.local_ecobee_master_bedrm_battery"
+                    },
+                    {
+                      "entity": "sensor.govee_display_battery"
+                    },
+                    {
+                      "entity": "sensor.freezer_sensor_battery"
+                    },
+                    {
+                      "entity": "sensor.drybox_battery_percent"
+                    }
+                  ],
+                  "state_filter": [
+                    {
+                      "operator": "<",
+                      "value": 20
+                    }
+                  ],
+                  "card": {
+                    "title": "Critical Batteries",
+                    "type": "entities",
+                    "state_color": true
+                  }
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "type": "custom:fold-entity-row",
+                      "head": {
+                        "type": "section",
+                        "label": "Rechargeable"
+                      },
+                      "entities": [
+                        {
+                          "entity": "sensor.drybox_battery_percent",
+                          "icon": "mdi:battery"
+                        },
+                        {
+                          "entity": "sensor.irrig_battery_percent"
+                        },
+                        {
+                          "entity": "sensor.guest_suite_display_battery_percent",
+                          "name": "Guest Suite Display Battery",
+                          "icon": ""
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_1_outer_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_1_inner_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_2_outer_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_2_inner_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_3_outer_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_3_inner_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_4_outer_battery"
+                        },
+                        {
+                          "entity": "sensor.master_bedroom_shade_4_inner_battery"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "custom:fold-entity-row",
+                      "head": {
+                        "type": "section",
+                        "label": "Disposable"
+                      },
+                      "entities": [
+                        {
+                          "entity": "sensor.igrill_70918f19e8d1_battery_level"
+                        },
+                        {
+                          "entity": "sensor.front_door_lock_battery_level"
+                        },
+                        {
+                          "entity": "sensor.back_door_lock_battery_level"
+                        },
+                        {
+                          "entity": "sensor.front_door_battery_level"
+                        },
+                        {
+                          "entity": "sensor.back_door_battery_level"
+                        },
+                        {
+                          "entity": "sensor.garagehouse_door_battery_level",
+                          "name": "Garage-House Door Battery Level"
+                        },
+                        {
+                          "entity": "sensor.living_area_motion_battery_level",
+                          "icon": "mdi:battery-unknown"
+                        },
+                        {
+                          "entity": "sensor.sun_room_remote_1_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_remote_2_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_remote_3_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_remote_4_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_window_1_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_window_2_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_window_3_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_window_4_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_window_5_battery_level"
+                        },
+                        {
+                          "entity": "sensor.sun_room_window_6_battery_level"
+                        },
+                        {
+                          "entity": "sensor.leak_guest_sink_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_karens_sink_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_yangs_sink_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_master_toilet_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_guest_toilet_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_kitchen_sink_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_laundry_sink_battery"
+                        },
+                        {
+                          "entity": "sensor.leak_washer_battery"
+                        },
+                        {
+                          "entity": "sensor.local_ecobee_guest_suite_battery"
+                        },
+                        {
+                          "entity": "sensor.local_ecobee_master_bedrm_battery"
+                        },
+                        {
+                          "entity": "sensor.govee_display_battery"
+                        },
+                        {
+                          "entity": "sensor.freezer_sensor_battery"
+                        }
+                      ]
+                    }
+                  ],
+                  "title": "Batteries",
+                  "state_color": true
+                }
+              ]
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.lab_rack_fan1_speed",
+                  "name": "Rack Fan1 Speed"
+                },
+                {
+                  "entity": "sensor.lab_rack_fan2_speed",
+                  "name": "Rack Fan2 Speed"
+                },
+                {
+                  "type": "custom:template-entity-row",
+                  "name": "Upper Rack Temperature",
+                  "icon": "mdi:thermometer",
+                  "state": "{{ states('sensor.upper_rack_temperature_f') | round(0) }} °F",
+                  "secondary": "Upper Rack Humidity: {{ states('sensor.upper_rack_humidity') | round(0) }}%"
+                },
+                {
+                  "type": "custom:template-entity-row",
+                  "name": "Mid Rack Temperature",
+                  "icon": "mdi:thermometer",
+                  "state": "{{ states('sensor.mid_rack_temperature_f') | round(0) }} °F",
+                  "secondary": "Mid Rack Humidity: {{ states('sensor.mid_rack_humidity') | round(0) }}%"
+                },
+                {
+                  "entity": "sensor.rackups_status_data",
+                  "name": "Rack UPS Status Data",
+                  "icon": "mdi:list-status"
+                },
+                {
+                  "type": "custom:template-entity-row",
+                  "name": "Rack UPS Battery Charge",
+                  "icon": "mdi:thermometer",
+                  "state": "{{ states('sensor.rackups_battery_charge') }} %",
+                  "secondary": "Battery Runtime: {{ ((states('sensor.rackups_battery_runtime')|int)/60) | round(0) }}m"
+                },
+                {
+                  "entity": "sensor.junior_temperature"
+                },
+                {
+                  "entity": "sensor.junior_system_fan_status"
+                },
+                {
+                  "entity": "sensor.junior_cpu_fan_status"
+                },
+                {
+                  "entity": "sensor.bacman_temperature"
+                },
+                {
+                  "entity": "sensor.bacman_system_fan_status",
+                  "icon": "mdi:tailwind"
+                },
+                {
+                  "entity": "sensor.bacman_cpu_fan_status",
+                  "icon": "mdi:memory"
+                }
+              ],
+              "title": "Rack Equipment",
+              "show_header_toggle": false
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_datetime.last_dessicant_recharge_manual",
+                  "name": "Last Recharge",
+                  "icon": "mdi:waves-arrow-up"
+                },
+                {
+                  "entity": "sensor.drybox_last_report_time",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "input_number.inp_num_drybox_relative_humidity_threshold",
+                  "name": "Drybox %RH Threshold"
+                },
+                {
+                  "entity": "sensor.drybox_relative_humidity"
+                },
+                {
+                  "entity": "sensor.drybox_absolute_humidity",
+                  "icon": "mdi:water-percent"
+                },
+                {
+                  "entity": "sensor.drybox_temperature"
+                },
+                {
+                  "type": "custom:template-entity-row",
+                  "name": "Irrig Battery Percent",
+                  "icon": "mdi:battery-50",
+                  "state": "{{ states('sensor.drybox_battery_percent') }}%",
+                  "secondary": "{{ states('sensor.drybox_battery_voltage') }}V"
+                }
+              ],
+              "title": "Dry Box",
+              "show_header_toggle": false,
+              "footer": {
+                "type": "graph",
+                "entity": "sensor.drybox_relative_humidity"
+              }
+            }
+          ]
+        },
+        {
+          "icon": "mdi:cog",
+          "path": "settings",
+          "title": "Settings",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "sensor.kflwildw56_local_solar_rad_lx",
+                  "name": "Weather Station Raw Solar Local Lx (r_lx)"
+                },
+                {
+                  "entity": "sensor.filtered_kflwildw56_bu_local_rad_lx",
+                  "icon": "mdi:sunglasses",
+                  "name": "Filtered Weather Station BU Local Lx (f_lx)"
+                },
+                {
+                  "entity": "sensor.raw_living_rm_visible_light",
+                  "name": "Raw Living Rm Visible Light (r_lx)"
+                },
+                {
+                  "entity": "sensor.filtered_living_rm_visible_light",
+                  "icon": "mdi:sunglasses",
+                  "name": "Filtered Living Rm Visible Light (f_lx)"
+                },
+                {
+                  "entity": "binary_sensor.lum_outdoor_lights_solar_trig"
+                },
+                {
+                  "entity": "binary_sensor.lum_mood_lights_f_solar_trig"
+                },
+                {
+                  "entity": "binary_sensor.lum_sunrm_shades_trig"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Luminosity Sensor Status",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_number.inp_num_outdoor_lights_on_solar_trig",
+                  "name": "Outdoors ON if <  (r_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_outdoor_lights_off_solar_trig",
+                  "name": "Outdoors OFF if > (r_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_mood_lights_on_f_solar_trig",
+                  "name": "Mood ON if < (f_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_mood_lights_off_f_solar_trig",
+                  "name": "Mood OFF if > (f_lx)"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Lighting Luminosity Thresholds",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_number.inp_num_front_door_lights_off_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_back_door_lights_off_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_auto_front_door_lock_trig_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_auto_front_door_lock_trig_party_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_auto_back_door_lock_trig_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_lvrm_lights_on_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_lvrm_lights_off_delay"
+                },
+                {
+                  "entity": "input_number.inp_num_sunrm_shades_open_delay",
+                  "name": "Shades OPEN Delay"
+                },
+                {
+                  "entity": "input_number.inp_num_sunrm_shades_close_low_lux_trig_delay",
+                  "name": "Shades CLOSE Delay"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Timeouts",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "light.living_room_lights"
+                },
+                {
+                  "entity": "sensor.raw_living_rm_visible_light"
+                },
+                {
+                  "entity": "sensor.filtered_living_rm_visible_light",
+                  "name": "Filtered Living Rm Visible Light",
+                  "icon": "mdi:sunglasses"
+                },
+                {
+                  "entity": "sensor.lv_rm_suggested_brightness"
+                },
+                {
+                  "entity": "input_number.inp_num_off_threshold",
+                  "name": "Off if > (f_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_low_threshold",
+                  "name": "Low bright if > (f_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_med_threshold",
+                  "name": "Med bright if > (f_lx)"
+                }
+              ],
+              "title": "Suggested Brightness",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.espresense_masterbdrm_ds18b20_temperature"
+                },
+                {
+                  "entity": "input_number.inp_num_masterbdrmfan_on_temp"
+                },
+                {
+                  "entity": "input_number.inp_num_masterbdrmfan_off_temp"
+                },
+                {
+                  "entity": "sensor.espresense_office_ds18b20_temperature"
+                },
+                {
+                  "entity": "input_number.inp_num_officefan_50pct_temp",
+                  "icon": "mdi:fan-speed-2"
+                },
+                {
+                  "entity": "input_number.inp_num_officefan_25pct_temp",
+                  "name": "Office Fan LOW",
+                  "icon": "mdi:fan-speed-1"
+                },
+                {
+                  "entity": "input_number.inp_num_officefan_off_temp"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Temperature Thresholds",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_number.inp_num_sunrm_shades_close_low_lux_trig",
+                  "name": "Shades CLOSE if < (r_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_sunrm_shades_open_trig",
+                  "name": "Shades re-open if > (r_lx)"
+                },
+                {
+                  "entity": "input_number.inp_num_sunrm_shades_part_close_min_reqd_trig_lux",
+                  "name": " Part close only if > (r_lx)"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Sun Room Shades Luminosity Thresholds",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_datetime.announcements_enable"
+                },
+                {
+                  "entity": "input_datetime.announcements_disable"
+                },
+                {
+                  "entity": "input_datetime.assume_awake"
+                },
+                {
+                  "entity": "input_datetime.assume_asleep"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Time Based Settings",
+              "type": "entities"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "script.scr_manual_say_time"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_announcements"
+                },
+                {
+                  "entity": "input_boolean.inhibit_presence_announcements"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_inhibit_shades",
+                  "name": "Inhibit Auto Shades"
+                },
+                {
+                  "entity": "input_boolean.inhibit_office_mood_lighting",
+                  "icon": "mdi:cancel"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_visitor_while_out_flag"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_visitor_while_sleeping_flag"
+                }
+              ],
+              "title": "Misc Service & Test",
+              "show_header_toggle": false
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_number.greatrm_announce_vol"
+                },
+                {
+                  "entity": "input_number.office_announce_vol"
+                },
+                {
+                  "entity": "input_number.garage_announce_vol"
+                }
+              ],
+              "title": "Announcement Volume"
+            }
+          ]
+        },
+        {
+          "title": "Proximity Tracking",
+          "path": "proximity-tracking",
+          "icon": "mdi:map-marker-distance",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "person.yang"
+                },
+                {
+                  "entity": "person.karen"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Persons",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "device_tracker.ys_cell_gps",
+                  "name": "YS Cell GPS Tracker"
+                },
+                {
+                  "entity": "device_tracker.opnsense_ys_cell_shencentral_net",
+                  "icon": "mdi:wifi-marker",
+                  "name": "YS Cell WiFi Tracker"
+                },
+                {
+                  "entity": "device_tracker.ys_cell_ble",
+                  "name": "YS Cell BLE Tracker",
+                  "icon": "mdi:bluetooth"
+                },
+                {
+                  "entity": "sensor.ys_cell_ble_room",
+                  "icon": "mdi:home-map-marker",
+                  "name": "YS Cell BLE Room"
+                },
+                {
+                  "entity": "device_tracker.kt_cell_gps",
+                  "name": "KT Cell GPS Tracker"
+                },
+                {
+                  "entity": "device_tracker.opnsense_kt_cell_shencentral_net",
+                  "icon": "mdi:wifi-marker",
+                  "name": "KT Cell WiFi Tracker"
+                },
+                {
+                  "entity": "device_tracker.kt_cell_ble",
+                  "name": "KT Cell BLE Tracker",
+                  "icon": "mdi:bluetooth"
+                },
+                {
+                  "entity": "sensor.kt_cell_ble_room",
+                  "icon": "mdi:home-map-marker",
+                  "name": "KT Cell BLE Room"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Trackers",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "sensor.home_ys_cell_gps_distance"
+                },
+                {
+                  "entity": "sensor.home_kt_cell_gps_distance"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Proximity Measurements",
+              "type": "entities"
+            },
+            {
+              "default_zoom": 13,
+              "entities": [
+                {
+                  "entity": "device_tracker.kt_cell_gps"
+                },
+                {
+                  "entity": "device_tracker.ys_cell_gps"
+                }
+              ],
+              "geo_location_sources": [],
+              "hours_to_show": 24,
+              "title": "24hr Travel History",
+              "type": "map"
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "sensor.home_ys_cell_gps_distance"
+                },
+                {
+                  "entity": "sensor.home_kt_cell_gps_distance"
+                },
+                {
+                  "entity": "sensor.ys_cell_gps_accuracy"
+                },
+                {
+                  "entity": "sensor.kt_cell_gps_accuracy"
+                },
+                {
+                  "entity": "binary_sensor.ys_cell_high_accuracy_mode"
+                },
+                {
+                  "entity": "binary_sensor.kt_cell_high_accuracy_mode"
+                }
+              ],
+              "refresh_interval": 0,
+              "title": "GPS Accuracy",
+              "hours_to_show": 24,
+              "logarithmic_scale": false
+            }
+          ]
+        },
+        {
+          "icon": "mdi:test-tube",
+          "path": "developmental",
+          "title": "Developmental",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                "script.scr_manual_say_time",
+                "input_boolean.inp_bool_half_mi_trig_test",
+                "script.scr_occupied_sim"
+              ],
+              "show_header_toggle": false,
+              "title": "Test Controls",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.inp_bool_announcements"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_sleeping"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_visitor_while_out_flag"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_visitor_while_sleeping_flag"
+                },
+                {
+                  "entity": "input_select.inp_sel_saved_sunroom_hvac"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_lum_outdoor_lights_solar_trig"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_lum_lvrm_lights_indoor_trig"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_lum_mood_lights_f_solar_trig"
+                },
+                {
+                  "entity": "input_boolean.inp_bool_lum_sunrm_shades_trig"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "States saved by SW",
+              "type": "entities"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "binary_sensor.water_heater"
+                },
+                {
+                  "entity": "binary_sensor.air_handler"
+                },
+                {
+                  "entity": "switch.hamstation"
+                },
+                {
+                  "entity": "sensor.hamstation_energy_current",
+                  "icon": "hass:flash"
+                },
+                {
+                  "entity": "sensor.hamstation_energy_power"
+                },
+                {
+                  "entity": "switch.dishwasher_sonoff",
+                  "name": "Dishwasher"
+                },
+                {
+                  "entity": "binary_sensor.dishwasher_on_or_off"
+                },
+                {
+                  "entity": "sensor.dishwasher_sonoff_energy_current"
+                },
+                {
+                  "entity": "sensor.dishwasher_sonoff_energy_power"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Appliances/General",
+              "type": "entities"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.garage_controller_garage_controller_status",
+                  "name": "Garage Controller Status"
+                },
+                {
+                  "type": "custom:fold-entity-row",
+                  "head": {
+                    "entity": "cover.large_garage_door",
+                    "icon": "mdi:garage-variant"
+                  },
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.garage_controller_lg_garage_is_open",
+                      "name": "Lg Garage Open Sensor",
+                      "icon": "mdi:garage-open-variant"
+                    },
+                    {
+                      "entity": "binary_sensor.garage_controller_lg_garage_is_closed",
+                      "name": "Lg Garage Closed Sensor",
+                      "icon": "mdi:garage-variant"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:fold-entity-row",
+                  "head": {
+                    "entity": "cover.small_garage_door",
+                    "icon": "mdi:garage"
+                  },
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.garage_controller_sm_garage_is_open",
+                      "name": "Sm Garage Open Sensor",
+                      "icon": "mdi:garage-open"
+                    },
+                    {
+                      "entity": "binary_sensor.garage_controller_sm_garage_is_closed",
+                      "name": "Sm Garage Closed Sensor",
+                      "icon": "mdi:garage"
+                    }
+                  ]
+                },
+                {
+                  "entity": "sensor.garage_controller_temperature",
+                  "name": "Garage Temperature"
+                },
+                {
+                  "entity": "sensor.garage_controller_wifi_strength",
+                  "name": "Garager Controller WiFi"
+                }
+              ],
+              "title": "Garage Status"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.ys_desktop_availability",
+                  "name": "YS Desktop Status",
+                  "secondary_info": "last-changed"
+                }
+              ],
+              "title": "YS Desktop",
+              "show_header_toggle": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

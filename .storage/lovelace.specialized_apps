@@ -1,0 +1,1102 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.specialized_apps",
+  "data": {
+    "config": {
+      "title": "Home",
+      "background": "var(--background-image)",
+      "views": [
+        {
+          "icon": "mdi:home-thermometer",
+          "path": "hvac",
+          "title": "Climate Control",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            },
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "entities": [
+                {
+                  "entity": "sensor.local_ecobee_current_temperature"
+                },
+                {
+                  "entity": "sensor.local_ecobee_current_humidity"
+                },
+                {
+                  "entity": "sensor.local_ecobee_master_bedrm_temperature"
+                },
+                {
+                  "entity": "sensor.local_ecobee_guest_suite_temperature"
+                },
+                {
+                  "entity": "sensor.espresense_guestbdrm_ds18b20_temperature",
+                  "name": "ESPresense GuestBdrm Temperature"
+                },
+                {
+                  "entity": "sensor.espresense_office_ds18b20_temperature"
+                },
+                {
+                  "entity": "sensor.actual_sunroom_temperature",
+                  "name": "MrCool Sunroom Temperature"
+                },
+                {
+                  "entity": "sensor.espresense_adjusted_sunroom_temperature",
+                  "icon": "mdi:thermometer"
+                },
+                {
+                  "entity": "sensor.espresense_sunrm_humidity"
+                },
+                {
+                  "entity": "sensor.garage_controller_temperature",
+                  "name": "Garage Temperature"
+                },
+                {
+                  "entity": "sensor.attic_temperature"
+                },
+                {
+                  "entity": "sensor.freezer_sensor_temperature"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Indoor Climate Sensors",
+              "type": "entities"
+            },
+            {
+              "square": false,
+              "type": "grid",
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "thermostat",
+                  "entity": "climate.local_ecobee",
+                  "features": [
+                    {
+                      "type": "climate-hvac-modes"
+                    }
+                  ],
+                  "name": "Main"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "climate.local_ecobee",
+                      "secondary_info": "last-updated"
+                    }
+                  ],
+                  "title": "Main",
+                  "state_color": true
+                }
+              ]
+            },
+            {
+              "square": false,
+              "type": "grid",
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "thermostat",
+                  "entity": "climate.sunroom_ac",
+                  "features": [
+                    {
+                      "type": "climate-hvac-modes"
+                    }
+                  ],
+                  "name": "Sunroom"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "climate.sunroom_ac",
+                      "secondary_info": "last-updated",
+                      "name": "Sunroom AC"
+                    }
+                  ],
+                  "title": "Sunroom",
+                  "state_color": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "BBQ",
+          "path": "bbq",
+          "icon": "mdi:grill",
+          "panel": false,
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "title": "Weber iGrill",
+              "cards": [
+                {
+                  "type": "gauge",
+                  "title": "Battery Level",
+                  "entity": "sensor.igrill_70918f19e8d1_battery_level",
+                  "min": 0,
+                  "max": 100,
+                  "severity": {
+                    "red": 20,
+                    "green": 65,
+                    "amber": 50
+                  }
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.igrill_70918f19e8d1_propane_level",
+                      "name": "Propane Level"
+                    }
+                  ]
+                },
+                {
+                  "type": "entity-filter",
+                  "color_state": true,
+                  "entities": [
+                    {
+                      "entity": "binary_sensor.igrill_70918f19e8d1_sensor",
+                      "name": "ESP32 iGrill BLE Client",
+                      "state_color": true
+                    },
+                    {
+                      "entity": "binary_sensor.igrill_70918f19e8d1_connectivity",
+                      "name": "iGrill Status",
+                      "state_color": true
+                    }
+                  ],
+                  "state_filter": [
+                    "off",
+                    "on"
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.igrill_70918f19e8d1_probe_1",
+                          "state_not": "unavailable"
+                        }
+                      ],
+                      "card": {
+                        "type": "gauge",
+                        "title": "Probe 1",
+                        "entity": "sensor.igrill_70918f19e8d1_probe_1",
+                        "min": 60,
+                        "max": 250,
+                        "severity": {
+                          "red": 190,
+                          "green": 65,
+                          "amber": 0
+                        }
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.igrill_70918f19e8d1_probe_2",
+                          "state_not": "unavailable"
+                        }
+                      ],
+                      "card": {
+                        "type": "gauge",
+                        "title": "Probe 2",
+                        "entity": "sensor.igrill_70918f19e8d1_probe_2",
+                        "min": 60,
+                        "max": 250,
+                        "severity": {
+                          "red": 190,
+                          "green": 65,
+                          "amber": 0
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.igrill_70918f19e8d1_probe_3",
+                          "state_not": "unavailable"
+                        }
+                      ],
+                      "card": {
+                        "type": "gauge",
+                        "title": "Probe 3",
+                        "entity": "sensor.igrill_70918f19e8d1_probe_3",
+                        "min": 60,
+                        "max": 300,
+                        "severity": {
+                          "red": 260,
+                          "green": 65,
+                          "amber": 200
+                        }
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "sensor.igrill_70918f19e8d1_probe_4",
+                          "state_not": "unavailable"
+                        }
+                      ],
+                      "card": {
+                        "type": "gauge",
+                        "title": "Probe 4",
+                        "entity": "sensor.igrill_70918f19e8d1_probe_4",
+                        "min": 60,
+                        "max": 300,
+                        "severity": {
+                          "red": 260,
+                          "green": 65,
+                          "amber": 200
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entities",
+                  "title": "Grill Target Temperatures",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_number.igrill_alert_low",
+                      "name": "Low"
+                    },
+                    {
+                      "entity": "input_number.igrill_alert_high",
+                      "name": "High"
+                    }
+                  ],
+                  "show_name": true,
+                  "show_icon": true,
+                  "show_state": true
+                },
+                {
+                  "type": "entities",
+                  "title": "Probe Temp Targets",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_number.igrill_probe_1_target",
+                      "name": "Probe 1"
+                    },
+                    {
+                      "entity": "input_number.igrill_probe_2_target",
+                      "name": "Probe 2"
+                    },
+                    {
+                      "entity": "input_number.igrill_probe_3_target",
+                      "name": "Probe 3"
+                    },
+                    {
+                      "entity": "input_number.igrill_probe_4_target",
+                      "name": "Probe 4"
+                    }
+                  ],
+                  "show_name": true,
+                  "show_icon": true,
+                  "show_state": true
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "input_number.igrill_probe_1_target",
+                      "name": "Probe 1"
+                    },
+                    {
+                      "entity": "input_number.igrill_probe_2_target",
+                      "name": "Probe 2"
+                    },
+                    {
+                      "entity": "input_number.igrill_probe_3_target",
+                      "name": "Probe 3"
+                    },
+                    {
+                      "entity": "input_number.igrill_probe_4_target",
+                      "name": "Probe 4"
+                    }
+                  ],
+                  "show_name": true,
+                  "show_icon": false
+                },
+                {
+                  "type": "glance",
+                  "entities": [
+                    {
+                      "entity": "sensor.target_alert_temp_probe_1",
+                      "name": "Probe 1 State"
+                    },
+                    {
+                      "entity": "sensor.target_alert_temp_probe_2",
+                      "name": "Probe 2 State"
+                    },
+                    {
+                      "entity": "sensor.target_alert_temp_probe_3",
+                      "name": "Probe 3 State"
+                    },
+                    {
+                      "entity": "sensor.target_alert_temp_probe_4",
+                      "name": "Probe 4 State"
+                    }
+                  ],
+                  "show_name": false,
+                  "show_icon": false
+                }
+              ]
+            },
+            {
+              "type": "history-graph",
+              "title": "History",
+              "entities": [
+                "sensor.igrill_70918f19e8d1_probe_1",
+                "sensor.igrill_70918f19e8d1_probe_2",
+                "sensor.igrill_70918f19e8d1_probe_3",
+                "sensor.igrill_70918f19e8d1_probe_4"
+              ],
+              "hours_to_show": 14,
+              "refresh_interval": 0
+            },
+            {
+              "type": "markdown",
+              "content": "|             | **Med-Rare** | **Med** | **Med-Well** | **Well** |\n|:-------------:|:--------------:|:---------:|:--------------:|:--------:|\n| **Beef**    |      135     |   145   |      155     |    165   |\n| **Pork**    |       -      |   150   |      155     |    165   |\n| **Poultry** |       -      |   165   |       -      |     -    |\n| **Fish**    |       -      |   140   |       -      |     -    |\n\n",
+              "title": "Doneness Guide"
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "entities",
+                      "title": "Temperature Alerting",
+                      "entities": [
+                        {
+                          "entity": "automation.probe_1_target_temp",
+                          "name": "Monitor Probe 1 Temp",
+                          "icon": "mdi:thermometer-alert"
+                        },
+                        {
+                          "entity": "automation.probe_2_target_temp",
+                          "name": "Monitor Probe 2 Temp",
+                          "icon": "mdi:thermometer-alert"
+                        },
+                        {
+                          "entity": "automation.probe_3_target_temp",
+                          "name": "Monitor Probe 3 Temp",
+                          "icon": "mdi:thermometer-alert"
+                        },
+                        {
+                          "entity": "automation.probe_4_target_temp",
+                          "name": "Monitor Probe 4 Temp",
+                          "icon": "mdi:thermometer-alert"
+                        },
+                        {
+                          "entity": "automation.monitor_igrill_device_connectivity",
+                          "icon": "mdi:access-point"
+                        }
+                      ],
+                      "show_header_toggle": false,
+                      "state_color": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "icon": "mdi:robot-vacuum-variant",
+          "path": "appliances",
+          "title": "Appliances",
+          "visible": [
+            {
+              "user": "176f2d5e50fe4f65add5af12a6c9dec2"
+            },
+            {
+              "user": "4af35a7207cf4efda472f6d6cbc1df71"
+            }
+          ],
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.top_load_washer_run_completed",
+                  "name": "Washer completed"
+                },
+                {
+                  "entity": "sensor.top_load_washer_run_state",
+                  "name": "Washer run state"
+                },
+                {
+                  "entity": "sensor.top_load_washer_current_course"
+                },
+                {
+                  "entity": "binary_sensor.dryer_run_completed"
+                },
+                {
+                  "entity": "sensor.dryer_run_state",
+                  "name": "Dryer run state"
+                },
+                {
+                  "entity": "sensor.dryer_current_course"
+                }
+              ],
+              "title": "Laundry"
+            },
+            {
+              "entities": [
+                {
+                  "entity": "input_boolean.inp_bool_vacuum_every_sunday"
+                },
+                {
+                  "entity": "script.scr_vacuum_start_custom_cleaning"
+                },
+                {
+                  "entity": "script.scr_vacuum_pause"
+                },
+                {
+                  "entity": "script.scr_vacuum_stop"
+                },
+                {
+                  "entity": "script.scr_vacuum_return_to_base"
+                },
+                {
+                  "entity": "vacuum.rosie",
+                  "secondary_info": "last-updated"
+                }
+              ],
+              "show_header_toggle": false,
+              "title": "Rosie the Vacuum",
+              "type": "entities"
+            },
+            {
+              "entity": "camera.rosie_cleaning_map",
+              "type": "picture-entity"
+            }
+          ],
+          "type": "masonry"
+        },
+        {
+          "type": "masonry",
+          "title": "Leak",
+          "path": "leak",
+          "icon": "mdi:pipe-leak",
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.leak_kitchen_sink"
+                },
+                {
+                  "entity": "binary_sensor.leak_kitchen_sink_rear",
+                  "name": "Leak Kitchen Sink Rear"
+                },
+                {
+                  "entity": "binary_sensor.leak_dishwasher"
+                },
+                {
+                  "entity": "binary_sensor.leak_refrigerator"
+                },
+                {
+                  "entity": "binary_sensor.leak_washer_contact"
+                },
+                {
+                  "entity": "binary_sensor.leak_laundry"
+                },
+                {
+                  "entity": "binary_sensor.leak_water_heater"
+                },
+                {
+                  "entity": "binary_sensor.leak_karens_sink_water_leak",
+                  "name": "Leak Karens Sink"
+                },
+                {
+                  "entity": "binary_sensor.leak_yangs_sink_water_leak",
+                  "name": "Leak Yangs Sink"
+                },
+                {
+                  "entity": "binary_sensor.leak_guest_sink_water_leak",
+                  "name": "Leak Guest Sink"
+                },
+                {
+                  "entity": "binary_sensor.leak_guest_toilet_water_leak",
+                  "name": "Leak Guest Toilet"
+                },
+                {
+                  "entity": "binary_sensor.leak_master_toilet_water_leak",
+                  "name": "Leak Master Toilet"
+                }
+              ],
+              "title": "Leak Sensors"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "binary_sensor.spt_sensor_online_status"
+                },
+                {
+                  "entity": "valve.water_valve"
+                },
+                {
+                  "entity": "sensor.water_temperature"
+                },
+                {
+                  "entity": "sensor.water_pressure"
+                },
+                {
+                  "entity": "binary_sensor.water_heater"
+                },
+                {
+                  "entity": "sensor.spt_data_status",
+                  "icon": "mdi:check-circle-outline",
+                  "secondary_info": "last-changed"
+                },
+                {
+                  "entity": "sensor.validated_water_static_pressure_test_result",
+                  "name": "SPT Result",
+                  "icon": "mdi:pipe",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "sensor.water_static_pressure_loss_per_minute",
+                  "icon": "mdi:pipe-leak",
+                  "name": "Loss per minute (-0.028125 24hr avg)"
+                },
+                {
+                  "entity": "input_number.loss_per_minute_alarm_threshold",
+                  "name": "Loss/min alarm threshold"
+                },
+                {
+                  "entity": "script.scr_spt_start",
+                  "name": "Manual SPT",
+                  "icon": "mdi:play-box-outline"
+                },
+                {
+                  "entity": "input_datetime.daily_start_spt",
+                  "name": "Daily auto SPT start time"
+                },
+                {
+                  "entity": "input_number.inp_num_spt_duration"
+                }
+              ],
+              "title": "Whole House Water",
+              "show_header_toggle": false,
+              "state_color": false
+            }
+          ]
+        },
+        {
+          "title": "Irrigation System",
+          "path": "irrigation-system",
+          "icon": "mdi:sprinkler-variant",
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "switch.rainmachine_front_lawn_red",
+                  "icon": "mdi:sprinkler"
+                },
+                {
+                  "entity": "sensor.rainmachine_front_lawn_red_run_completion_time",
+                  "name": "Front lawn (Red) Run Completion Time"
+                },
+                {
+                  "entity": "switch.rainmachine_drip_irrig_all_gravel_areas_orange",
+                  "icon": "mdi:sprinkler"
+                },
+                {
+                  "entity": "sensor.rainmachine_drip_irrig_all_gravel_areas_orange_run_completion_time",
+                  "name": "Drip irrig. all gravel areas (Orange) Run Completion Time"
+                },
+                {
+                  "entity": "switch.rainmachine_right_side_lawn_right_rear_corner_green",
+                  "icon": "mdi:sprinkler"
+                },
+                {
+                  "entity": "sensor.rainmachine_right_side_lawn_right_rear_corner_green_run_completion_time",
+                  "name": "Right side lawn & right rear corner (Green) Run Completion Time"
+                },
+                {
+                  "entity": "switch.rainmachine_left_side_lawn_most_of_rear_blue",
+                  "icon": "mdi:sprinkler"
+                },
+                {
+                  "entity": "sensor.rainmachine_left_side_lawn_most_of_rear_blue_run_completion_time",
+                  "name": "Left side lawn & most of rear (Blue) Run Completion Time"
+                }
+              ],
+              "title": "Irrigation",
+              "show_header_toggle": false
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "input_number.irrig_z1_front_yd_gpm_limit",
+                  "name": "Zone 1 (Front) GPM Limit"
+                },
+                {
+                  "entity": "input_number.irrig_z2_drip_gpm_limit",
+                  "name": "Zone 2 (Drip) GPM Limit"
+                },
+                {
+                  "entity": "input_number.irrig_z3_right_yd_gpm_limit",
+                  "name": "Zone 3 (Right) GPM Limit"
+                },
+                {
+                  "entity": "input_number.irrig_z4_left_yd_gpm_limit",
+                  "name": "Zone 4 (Left) GPM Limit"
+                },
+                {
+                  "entity": "sensor.irrig_wifi_signal_strength"
+                },
+                {
+                  "entity": "sensor.irrig_last_report_time",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "sensor.irrig_last_idle_heartbeat",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "sensor.irrig_report_valve_leak_gallons",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "type": "custom:template-entity-row",
+                  "name": "Irrig Battery Percent",
+                  "icon": "mdi:battery-50",
+                  "state": "{{ states('sensor.irrig_battery_percent') }}%",
+                  "secondary": "{{ states('sensor.irrig_battery_voltage') }}V"
+                },
+                {
+                  "entity": "sensor.irrig_idle_water_temperature"
+                },
+                {
+                  "type": "custom:fold-entity-row",
+                  "head": {
+                    "entity": "sensor.irrig_idle_water_pressure"
+                  },
+                  "entities": [
+                    {
+                      "entity": "sensor.irrig_report_avg_psi_zone_0",
+                      "name": "Zone 0 (Valve Leak) Avg PSI when active"
+                    },
+                    {
+                      "entity": "sensor.irrig_report_avg_psi_zone_1",
+                      "name": "Zone 1 (Front) Avg PSI when active"
+                    },
+                    {
+                      "entity": "sensor.irrig_report_avg_psi_zone_2",
+                      "name": "Zone 2 (Drip) Avg PSI when active"
+                    },
+                    {
+                      "entity": "sensor.irrig_report_avg_psi_zone_3",
+                      "name": "Zone 3 (Right) Avg PSI when active"
+                    },
+                    {
+                      "entity": "sensor.irrig_report_avg_psi_zone_4",
+                      "name": "Zone 4 (Left) Avg PSI when active"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:fold-entity-row",
+                  "head": {
+                    "entity": "sensor.irrig_report_total_gallons_all_zones"
+                  },
+                  "entities": [
+                    {
+                      "entity": "sensor.irrig_zone_0_gals",
+                      "name": "Zone 0 (Valve Leak) Gals"
+                    },
+                    {
+                      "entity": "sensor.irrig_zone_1_gals",
+                      "name": "Zone 1 (Front) Gals"
+                    },
+                    {
+                      "entity": "sensor.irrig_zone_2_gals",
+                      "name": "Zone 2 (Drip) Gals"
+                    },
+                    {
+                      "entity": "sensor.irrig_zone_3_gals",
+                      "name": "Zone 3 (Right} Gals"
+                    },
+                    {
+                      "entity": "sensor.irrig_zone_4_gals",
+                      "name": "Zone 4 (Left) Gals"
+                    }
+                  ]
+                },
+                {
+                  "entity": "sensor.irrig_report_avg_gpm_zone_0",
+                  "secondary_info": "last-updated"
+                },
+                {
+                  "entity": "sensor.irrig_report_avg_gpm_zone_1",
+                  "secondary_info": "last-updated",
+                  "name": "Irrig Report Avg GPM Zone 1 (Front)"
+                },
+                {
+                  "entity": "sensor.irrig_report_avg_gpm_zone_2",
+                  "secondary_info": "last-updated",
+                  "name": "Irrig Report Avg GPM Zone 2 (Drip)"
+                },
+                {
+                  "entity": "sensor.irrig_report_avg_gpm_zone_3",
+                  "secondary_info": "last-updated",
+                  "name": "Irrig Report Avg GPM Zone 3 (Right)"
+                },
+                {
+                  "entity": "sensor.irrig_report_avg_gpm_zone_4",
+                  "secondary_info": "last-updated",
+                  "name": "Irrig Report Avg GPM Zone 4 (Left)"
+                }
+              ],
+              "title": "Irrigation Leak Detection"
+            }
+          ]
+        },
+        {
+          "title": "Keymaster",
+          "theme": "Backend-selected",
+          "path": "keymaster",
+          "badges": [
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "lock.front_door_lock",
+              "name": "Front"
+            },
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "lock.back_door_lock",
+              "name": "Back"
+            }
+          ],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 1\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_1_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_1_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_1_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_1_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 2\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_2_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_2_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_2_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_2_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 3\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_3_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_3_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_3_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_3_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 4\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_4_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_4_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_4_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_4_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 5\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_5_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_5_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_5_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_5_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 6\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_6_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_6_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_6_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_6_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 7\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_7_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_7_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_7_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_7_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "content": "## Code 8\n",
+                  "type": "markdown"
+                },
+                {
+                  "type": "entities",
+                  "show_header_toggle": false,
+                  "entities": [
+                    {
+                      "entity": "input_text.lock_code_slot_8_name",
+                      "secondary_info": "none",
+                      "name": "Name"
+                    },
+                    {
+                      "entity": "input_text.lock_code_slot_8_pin",
+                      "name": "Code"
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_8_state",
+                      "name": "Enabled"
+                    },
+                    {
+                      "entity": "input_boolean.lock_code_slot_8_notify",
+                      "name": "Notify"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "type": "masonry",
+          "icon": "mdi:lock-smart"
+        }
+      ]
+    }
+  }
+}

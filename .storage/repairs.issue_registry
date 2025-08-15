@@ -1,0 +1,478 @@
+{
+  "version": 1,
+  "minor_version": 2,
+  "key": "repairs.issue_registry",
+  "data": {
+    "issues": [
+      {
+        "created": "2022-08-09T14:17:54.190911+00:00",
+        "dismissed_version": "2022.8.2",
+        "domain": "homeassistant_alerts",
+        "is_persistent": false,
+        "issue_id": "neato.markdown_neato"
+      },
+      {
+        "created": "2022-09-13T00:30:41.885294+00:00",
+        "dismissed_version": null,
+        "domain": "pushover",
+        "is_persistent": false,
+        "issue_id": "deprecated_yaml"
+      },
+      {
+        "created": "2022-10-12T16:07:13.763364+00:00",
+        "dismissed_version": null,
+        "domain": "uptime",
+        "is_persistent": false,
+        "issue_id": "removed_yaml"
+      },
+      {
+        "created": "2022-10-21T14:35:56.490550+00:00",
+        "dismissed_version": "2022.10.5",
+        "domain": "tasmota",
+        "is_persistent": false,
+        "issue_id": "topic_no_prefix_40F52025C64C"
+      },
+      {
+        "created": "2023-06-09T20:54:06.099506+00:00",
+        "dismissed_version": null,
+        "domain": "command_line",
+        "is_persistent": false,
+        "issue_id": "deprecated_yaml_sensor"
+      },
+      {
+        "created": "2024-01-04T20:20:58.362739+00:00",
+        "dismissed_version": null,
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "deprecated_yaml_systemmonitor"
+      },
+      {
+        "created": "2024-01-17T14:25:46.499322+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.default_view"
+      },
+      {
+        "created": "2024-01-17T14:25:46.499916+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.weather"
+      },
+      {
+        "created": "2024-01-17T14:25:46.500048+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.graphs"
+      },
+      {
+        "created": "2024-01-17T14:25:46.500171+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.indoor_climate_sensors"
+      },
+      {
+        "created": "2024-01-17T14:25:46.500266+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.vacuum_rosie"
+      },
+      {
+        "created": "2024-01-17T14:25:46.500514+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.luminosity"
+      },
+      {
+        "created": "2024-01-17T14:25:46.500616+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_group.norcoose_sensors"
+      },
+      {
+        "created": "2024-01-17T14:25:46.526164+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "automation_unknown_entity_references_automation.monitor_grill_temp_alert"
+      },
+      {
+        "created": "2024-01-17T14:25:46.526308+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "automation_unknown_entity_references_automation.monitor_grill_temp_normal"
+      },
+      {
+        "created": "2024-01-17T14:25:46.526487+00:00",
+        "dismissed_version": "2024.1.3",
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "automation_unknown_entity_references_automation.monitor_igrill_device_connectivity"
+      },
+      {
+        "created": "2024-01-17T14:25:46.527685+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "automation_unknown_entity_references_automation.aut_reset_paused_alarm"
+      },
+      {
+        "created": "2024-01-17T14:25:46.551340+00:00",
+        "dismissed_version": "2024.1.3",
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "lovelace_unknown_entity_references_lovelace"
+      },
+      {
+        "created": "2024-01-17T14:25:46.551858+00:00",
+        "dismissed_version": "2024.1.3",
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "lovelace_unknown_entity_references_specialized-apps"
+      },
+      {
+        "created": "2024-02-01T20:42:01.001659+00:00",
+        "dismissed_version": "2024.1.6",
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "config_entry_only_opnsense"
+      },
+      {
+        "created": "2024-02-09T12:58:39.698021+00:00",
+        "dismissed_version": null,
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "deprecated_yaml_proximity"
+      },
+      {
+        "created": "2024-06-06T01:31:51.865258+00:00",
+        "dismissed_version": "2024.6.0",
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "-0x1574ba9d99e49779"
+      },
+      {
+        "created": "2024-06-06T01:31:51.866380+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "0x749f309c2caae0e1"
+      },
+      {
+        "created": "2024-06-06T01:38:29.627623+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "-0x4c99ce99ad7c13ff"
+      },
+      {
+        "created": "2024-07-07T14:42:48.138616+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.irrig_leak_zone_1_front_validation_failed_triggers"
+      },
+      {
+        "created": "2024-07-07T14:42:48.138905+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.irrig_leak_zone_2_drip_validation_failed_triggers"
+      },
+      {
+        "created": "2024-07-07T14:42:48.139106+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.irrig_leak_zone_3_right_validation_failed_triggers"
+      },
+      {
+        "created": "2024-07-07T14:42:48.139323+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.irrig_leak_zone_4_left_validation_failed_triggers"
+      },
+      {
+        "created": "2024-08-14T06:00:00.373639+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "payload_template_deprecation_watermain/cmd/sptDuration"
+      },
+      {
+        "created": "2024-09-16T20:32:00.151342+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.2.1"
+      },
+      {
+        "created": "2024-09-23T01:34:33.707266+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.3.1"
+      },
+      {
+        "created": "2024-09-30T00:03:24.196084+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.3.2"
+      },
+      {
+        "created": "2024-10-06T14:32:25.343409+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_250022973_tags/v0.40.0"
+      },
+      {
+        "created": "2024-10-12T19:33:33.401717+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "automation_unknown_entity_references_automation.new_hacs_updates_persistent_notification"
+      },
+      {
+        "created": "2024-11-08T13:47:54.219696+00:00",
+        "dismissed_version": null,
+        "domain": "homeassistant",
+        "is_persistent": false,
+        "issue_id": "deprecated_yaml_local_file"
+      },
+      {
+        "created": "2024-11-11T13:32:00.799764+00:00",
+        "dismissed_version": null,
+        "domain": "hassio",
+        "is_persistent": false,
+        "issue_id": "unhealthy_system_supervisor"
+      },
+      {
+        "created": "2024-11-28T14:16:17.002490+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_311536795_tags/v5.5.1"
+      },
+      {
+        "created": "2024-12-02T03:30:10.342568+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.3.11"
+      },
+      {
+        "created": "2024-12-08T20:36:31.700379+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.3.12"
+      },
+      {
+        "created": "2024-12-13T15:31:15.300689+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_cover.master_bedroom_filtering_shades"
+      },
+      {
+        "created": "2024-12-13T15:33:50.289154+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "group_unknown_members_cover.master_bedroom_blackout_shades"
+      },
+      {
+        "created": "2024-12-13T15:54:07.939246+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "automation_unknown_entity_references_automation.aut_masterbdrm_filtering_shades_down_solar_noon"
+      },
+      {
+        "created": "2024-12-13T15:54:07.984984+00:00",
+        "dismissed_version": null,
+        "domain": "spook",
+        "is_persistent": false,
+        "issue_id": "script_unknown_entity_references_script.scr_partial_close_masterbdrm_filtering_shades"
+      },
+      {
+        "created": "2025-01-01T02:32:51.830533+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.3.13"
+      },
+      {
+        "created": "2025-01-05T13:34:52.846661+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_172733314_tags/2.0.2"
+      },
+      {
+        "created": "2025-01-05T13:37:12.241854+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_318359434_tags/v0.0.99"
+      },
+      {
+        "created": "2025-01-05T21:00:02.588044+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_250022973_tags/v0.41.0"
+      },
+      {
+        "created": "2025-01-05T21:00:34.669843+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_250022973_tags/v0.41.1"
+      },
+      {
+        "created": "2025-01-14T15:47:30.279480+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_172733314_tags/2.0.3"
+      },
+      {
+        "created": "2025-01-23T02:57:02.980563+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.3.15"
+      },
+      {
+        "created": "2025-01-26T15:13:42.956845+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_761792106_tags/0.2.1"
+      },
+      {
+        "created": "2025-02-12T20:04:06.959437+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_311536795_tags/v5.8.0"
+      },
+      {
+        "created": "2025-03-27T01:53:09.942345+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_886016477_tags/v0.6.0"
+      },
+      {
+        "created": "2025-04-16T13:38:43.134117+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.aut_ups_on_ac_mode_validation_failed_schema"
+      },
+      {
+        "created": "2025-04-26T15:07:30.098854+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.aut_office_fan_trig_25pct_validation_failed_schema"
+      },
+      {
+        "created": "2025-04-26T15:07:30.100523+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.aut_office_fan_trig_50pct_validation_failed_schema"
+      },
+      {
+        "created": "2025-04-29T00:11:06.766342+00:00",
+        "dismissed_version": null,
+        "domain": "automation",
+        "is_persistent": false,
+        "issue_id": "automation.aut_drybox_humidity_above_tolerance_validation_failed_triggers"
+      },
+      {
+        "created": "2025-05-01T00:50:32.761381+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_886016477_tags/v0.6.1"
+      },
+      {
+        "created": "2025-05-02T00:23:04.891321+00:00",
+        "dismissed_version": null,
+        "domain": "script",
+        "is_persistent": false,
+        "issue_id": "script.scr_check_garage_open_validation_failed_schema"
+      },
+      {
+        "created": "2025-05-02T16:04:43.827105+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "sensor.drybox_absolute_humidity"
+      },
+      {
+        "created": "2025-05-10T14:21:05.966874+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "0x79b923ad19c915df"
+      },
+      {
+        "created": "2025-05-10T14:38:28.588687+00:00",
+        "dismissed_version": null,
+        "domain": "mqtt",
+        "is_persistent": false,
+        "issue_id": "-0x6302ba39824a098d"
+      },
+      {
+        "created": "2025-06-26T23:49:14.621995+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.4.1"
+      },
+      {
+        "created": "2025-07-18T20:57:59.819955+00:00",
+        "dismissed_version": null,
+        "domain": "script",
+        "is_persistent": false,
+        "issue_id": "script.scr_arrival_announcement_validation_failed_schema"
+      },
+      {
+        "created": "2025-08-05T14:57:33.321238+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_427706888_tags/v0.4.6"
+      },
+      {
+        "created": "2025-08-11T13:51:11.648370+00:00",
+        "dismissed_version": null,
+        "domain": "script",
+        "is_persistent": false,
+        "issue_id": "script.scr_goodmorning_validation_failed_schema"
+      },
+      {
+        "created": "2025-08-13T21:16:04.011049+00:00",
+        "dismissed_version": null,
+        "domain": "hacs",
+        "is_persistent": false,
+        "issue_id": "restart_required_356778495_tags/v3.6.1"
+      }
+    ]
+  }
+}

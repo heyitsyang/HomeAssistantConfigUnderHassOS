@@ -1,0 +1,88 @@
+#
+# TRACKED
+#
+
+- cal_id: yshengoogle@shencentral.net
+  entities:
+  - device_id: shen_bdays_annivs_gatherings
+    name: Shen Bdays, Annivs, & Gatherings
+    track: true
+
+- cal_id: en.usa#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: usholidays
+    name: usholidays
+    track: true
+
+- cal_id: yangmin.shen@gmail.com
+  entities:
+  - device_id: yangminshengmailcom
+    name: yangmin.shen@gmail.com
+    track: true
+
+- cal_id: oulj32hctnktl52t17ej44b4qk@group.calendar.google.com
+  entities:
+  - device_id: optional_activities
+    name: Optional activities
+    track: true
+
+- cal_id: 4pvq4v230ev4mvsr3ood95msp8@group.calendar.google.com
+  entities:
+  - device_id: yskt_events
+    name: YS+KT Events
+    track: true
+
+- cal_id: karen.pcsmom.shen@gmail.com
+  entities:
+  - device_id: karenpcsmomshengmailcom
+    name: karen.pcsmom.shen@gmail.com
+    track: true
+
+#
+# NOT TRACKED
+#
+- cal_id: duryue@gmail.com
+  entities:
+  - device_id: greg_shen
+    name: Greg Shen
+    track: false
+
+- cal_id: generalpanic@gmail.com
+  entities:
+  - device_id: jeffrey_shen
+    name: Jeffrey Shen
+    track: false
+
+- cal_id: smtp.shencentral@gmail.com
+  entities:
+  - device_id: smtpshencentralgmailcom
+    name: smtp.shencentral@gmail.com
+    track: false
+
+- cal_id: '#contacts@group.v.calendar.google.com'
+  entities:
+  - device_id: contacts
+    name: Contacts
+    track: false
+
+
+- cal_id: family03362467678222740283@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: false
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: true
+
+- cal_id: hanorcoose@gmail.com
+  entities:
+  - device_id: hanorcoose_gmail_com
+    ignore_availability: true
+    name: hanorcoose@gmail.com
+    track: true

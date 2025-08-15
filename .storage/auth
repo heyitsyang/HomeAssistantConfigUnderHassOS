@@ -1,0 +1,1095 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "auth",
+  "data": {
+    "users": [
+      {
+        "id": "d8b828047a7146818fb8b0fc26cb1455",
+        "group_ids": [
+          "system-admin"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Supervisor",
+        "system_generated": true,
+        "local_only": false
+      },
+      {
+        "id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "group_ids": [
+          "system-admin"
+        ],
+        "is_owner": true,
+        "is_active": true,
+        "name": "Yangmin Shen",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "4af35a7207cf4efda472f6d6cbc1df71",
+        "group_ids": [
+          "system-admin"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Karen Shen",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "28815b7af5f14318b8dbde947b102516",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Dev",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "7be7d9efe78740aaac6fad929835c577",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Attic",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "78d713411f1d4c7889d7db75a44a59eb",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "LabRack",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "18c707154c204132a6756a53ab0e3eea",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "MasterBdrmFan",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "e48f8288b6f3408d966570a7adc5a134",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "HamStation",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "74cf1815bcef4b228bf6a1e2420996eb",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "ZHAbridge",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "54459c1ec60e4ae482ad5d9fb64d32aa",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "LivingRmFan",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "be6f1713e6f24be28f3f85f1cd8ebef9",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "UtilityCloset",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "5b8b295d11f44210b64d3d79ee69d40c",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "WaterMain",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "1b9588f31f744e898d42888218f61f1a",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "FrontEntrance",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "837a6fb6b0b54d88888c14d98d5c62ce",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "AntennaSW",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "15df0e57908c447486256b2000c9615a",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "RefrigeratorLeak",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "b4ae982ebdb347ce9caf914d47b8e920",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "KitchenIslandLeak",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "95d29fefa47445b89cb1f36b41b507de",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "LaundryRoomLeak",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "9ee13724d159469587821282c63ed906",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Dishwasher-sonoff",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "43ef3d4381434c75bce0fa11cf358579",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-Garage",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "16951580c09043bd8f1fc849c5d990df",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-Kitchen",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "8186fe62b6584405a3b90cc152d0ece2",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-Office",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "6afa135fcb204523ac426ed962db4418",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-MasterBdrm",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "304be53f5e7448678dd2f105b30a3037",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-GuestBdrm",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "9c37a9edfdfb42cca4bbc25c167a4282",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-GreatRm",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "d16cc2437e06493189e820cba1c03f7f",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Presence-SunRm",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "f99df95c8e37499d994361a74b431917",
+        "group_ids": [
+          "system-read-only"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Home Assistant Content",
+        "system_generated": true,
+        "local_only": false
+      },
+      {
+        "id": "56266c97aee44ed087dd31b9cc4d66fe",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Frigate",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "d7a997519e2d44bf91caba872b5904ca",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Soil Probe",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "6b86f73890414c129aeefc1c4983ab59",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Home Assistant",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "45358e156b9c45958b51abe783b6e6e3",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Zigbee2MQTT",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "94a1e38aa70244d488c3aebddadb8a46",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "iGrillClient",
+        "system_generated": false,
+        "local_only": false
+      },
+      {
+        "id": "1217fae64635471bac5d00265c609072",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Awtrix Clock",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "ef16b964b29d4c60910fc4610179b994",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Irrig-Leak",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "ab61159cc43c473eb3f6c55114428dd8",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Marquee-Scroller",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "073ad06658244f46b155611a8bdc1292",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Lan2 Power",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "23945ca60ff14097b1767b2adab33908",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "PhotoFrame Lg Power",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "5bf5639e9f5d48188d5f9999ab0ff295",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "HASS Agent for Windows",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "ba91619273cd4e5381a64d4cc0581554",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "Attic-peak",
+        "system_generated": false,
+        "local_only": true
+      },
+      {
+        "id": "ecaba7601cc345eda40b8785c2328647",
+        "group_ids": [
+          "system-users"
+        ],
+        "is_owner": false,
+        "is_active": true,
+        "name": "DryBox",
+        "system_generated": false,
+        "local_only": true
+      }
+    ],
+    "groups": [
+      {
+        "id": "system-admin",
+        "name": "Administrators"
+      },
+      {
+        "id": "system-users",
+        "name": "Users"
+      },
+      {
+        "id": "system-read-only",
+        "name": "Read Only"
+      }
+    ],
+    "credentials": [
+      {
+        "id": "5df032878115418f831e95e80fec7b05",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "yang"
+        }
+      },
+      {
+        "id": "bb5dbd3956774a609c4f19d7362a0c8b",
+        "user_id": "4af35a7207cf4efda472f6d6cbc1df71",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "karen"
+        }
+      },
+      {
+        "id": "4bae4d25355a466eb4fa26d54cbef42e",
+        "user_id": "28815b7af5f14318b8dbde947b102516",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "dev"
+        }
+      },
+      {
+        "id": "4029ef21d50d401fbe4120f08e4e5ac1",
+        "user_id": "7be7d9efe78740aaac6fad929835c577",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "attic"
+        }
+      },
+      {
+        "id": "ddeb066a4f6443ff9190721901dcf23d",
+        "user_id": "78d713411f1d4c7889d7db75a44a59eb",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "labrack"
+        }
+      },
+      {
+        "id": "01e05dfd18e645f2930593ab385643fb",
+        "user_id": "18c707154c204132a6756a53ab0e3eea",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "masterbdrmfan"
+        }
+      },
+      {
+        "id": "ff1d60c934534b04a15222156ff19354",
+        "user_id": "e48f8288b6f3408d966570a7adc5a134",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "hamstation"
+        }
+      },
+      {
+        "id": "a2bba7e80d524917aafe559ccf715dac",
+        "user_id": "74cf1815bcef4b228bf6a1e2420996eb",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "zhabridge"
+        }
+      },
+      {
+        "id": "96deb11d39354c94926c2ca72ae39091",
+        "user_id": "54459c1ec60e4ae482ad5d9fb64d32aa",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "livingrmfan"
+        }
+      },
+      {
+        "id": "512d0ca2118e4cba81efca779a5e388c",
+        "user_id": "be6f1713e6f24be28f3f85f1cd8ebef9",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "utilitycloset"
+        }
+      },
+      {
+        "id": "97b079f8c7674e69a2f4aa2c546e1dc1",
+        "user_id": "5b8b295d11f44210b64d3d79ee69d40c",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "watermain"
+        }
+      },
+      {
+        "id": "1b6ef48445d74f41b9dd354c804f9392",
+        "user_id": "1b9588f31f744e898d42888218f61f1a",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "frontentrance"
+        }
+      },
+      {
+        "id": "3d98bddf424a4b14927a9b604bce0fea",
+        "user_id": "837a6fb6b0b54d88888c14d98d5c62ce",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "antennasw"
+        }
+      },
+      {
+        "id": "050bf432addd4ae888e0621762df300e",
+        "user_id": "15df0e57908c447486256b2000c9615a",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "refrigeratorleak"
+        }
+      },
+      {
+        "id": "abe0ff6f9335468488baf18fd0e1e810",
+        "user_id": "b4ae982ebdb347ce9caf914d47b8e920",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "kitchenislandleak"
+        }
+      },
+      {
+        "id": "1e3dce891358465e8ed0fb90d133050b",
+        "user_id": "95d29fefa47445b89cb1f36b41b507de",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "laundryroomleak"
+        }
+      },
+      {
+        "id": "1319e8050abb4fc6a2f8c7e906615c81",
+        "user_id": "9ee13724d159469587821282c63ed906",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "dishwasher-sonoff"
+        }
+      },
+      {
+        "id": "e7e791a736cf43ebbd54c5c424e409bf",
+        "user_id": "43ef3d4381434c75bce0fa11cf358579",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-garage"
+        }
+      },
+      {
+        "id": "17a31bf329d24bf0a1ce594ff2fbbe4b",
+        "user_id": "16951580c09043bd8f1fc849c5d990df",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-kitchen"
+        }
+      },
+      {
+        "id": "7f2c9e30234b4f8fa7749bfb442c9cf1",
+        "user_id": "8186fe62b6584405a3b90cc152d0ece2",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-office"
+        }
+      },
+      {
+        "id": "3e03200cd21644b797d31ded0c61d0a9",
+        "user_id": "6afa135fcb204523ac426ed962db4418",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-masterbdrm"
+        }
+      },
+      {
+        "id": "c75ee023532d434c83d40d1ffc8f155d",
+        "user_id": "304be53f5e7448678dd2f105b30a3037",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-guestbdrm"
+        }
+      },
+      {
+        "id": "0d58e0470f624e68bbe85eca9c93b76a",
+        "user_id": "9c37a9edfdfb42cca4bbc25c167a4282",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-greatrm"
+        }
+      },
+      {
+        "id": "e910240400f945329379edded95c7ef6",
+        "user_id": "d16cc2437e06493189e820cba1c03f7f",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "presence-sunrm"
+        }
+      },
+      {
+        "id": "b5c5ff5984144ca6867f7199af9b4efe",
+        "user_id": "56266c97aee44ed087dd31b9cc4d66fe",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "frigate"
+        }
+      },
+      {
+        "id": "afeb3c8f6ecf4d09902ae4fda9c63d66",
+        "user_id": "d7a997519e2d44bf91caba872b5904ca",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "soil-probe"
+        }
+      },
+      {
+        "id": "588fff0808f0432da1d19c8fe915b44f",
+        "user_id": "6b86f73890414c129aeefc1c4983ab59",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "ha-connect"
+        }
+      },
+      {
+        "id": "71a554719c6c479b9cb07e7a93753d99",
+        "user_id": "45358e156b9c45958b51abe783b6e6e3",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "zigbee2mqtt"
+        }
+      },
+      {
+        "id": "78016a85dca6407a86526ddafd17b8e9",
+        "user_id": "94a1e38aa70244d488c3aebddadb8a46",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "igrillclient"
+        }
+      },
+      {
+        "id": "1b476ccb94834c3da8b0f56b87dcb822",
+        "user_id": "1217fae64635471bac5d00265c609072",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "awtrix-clock"
+        }
+      },
+      {
+        "id": "dcd812625fcd4937a1c66734363c5af8",
+        "user_id": "ef16b964b29d4c60910fc4610179b994",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "irrig-leak"
+        }
+      },
+      {
+        "id": "e6856fee2d584f3aa48d60ee6f077272",
+        "user_id": "ab61159cc43c473eb3f6c55114428dd8",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "marquee-scroller"
+        }
+      },
+      {
+        "id": "43a8c661526540578de46850655ddffb",
+        "user_id": "073ad06658244f46b155611a8bdc1292",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "lan2-power"
+        }
+      },
+      {
+        "id": "0f36f2a596a3479b8dc13b87e736baa1",
+        "user_id": "23945ca60ff14097b1767b2adab33908",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "photoframe-lg-power"
+        }
+      },
+      {
+        "id": "c60e7404d2c3413b84aca3d6a78a7dac",
+        "user_id": "5bf5639e9f5d48188d5f9999ab0ff295",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "hassagent"
+        }
+      },
+      {
+        "id": "d40e4f0785eb4910b1ef98580ca2ec66",
+        "user_id": "ba91619273cd4e5381a64d4cc0581554",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "attic-peak"
+        }
+      },
+      {
+        "id": "897cbacce8d34a2d90a1302de406a1ee",
+        "user_id": "ecaba7601cc345eda40b8785c2328647",
+        "auth_provider_type": "homeassistant",
+        "auth_provider_id": null,
+        "data": {
+          "username": "drybox"
+        }
+      }
+    ],
+    "refresh_tokens": [
+      {
+        "id": "d319280bad7944dabc36d8d85489a12e",
+        "user_id": "d8b828047a7146818fb8b0fc26cb1455",
+        "client_id": null,
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "system",
+        "created_at": "2020-11-03T20:28:35.662077+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "dc7a178a2c1572f126838c571f07a5d27797431854758bbef68259bc2adc8493756c4bf7d532b194c7d2e69073c98d70f8a4acf23a87762a809344f50cfd4279",
+        "jwt_key": "dbe8148842fff868d2d4de9ddda922f21423c1787660adcf971c552a845a66c07cb78206524acc93c6cdd97cc0ee53bf6b054581303efc778d1988bca3200bdd",
+        "last_used_at": "2025-08-15T14:24:10.816931+00:00",
+        "last_used_ip": "172.30.32.2",
+        "expire_at": null,
+        "credential_id": null,
+        "version": null
+      },
+      {
+        "id": "8131f9bb699c40b0a05cccafde5e6d8d",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://home-assistant.io/android",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2023-04-24T02:29:29.855609+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "8ce7a9bbf4d7257dfa3637e6cad769a2cf3d9db7fe562f56d2c7bfccc469a0da77220223bf76cb78039fc88bb7b7e09aaf8390a0af50a7f75c55c530d0c0fbfd",
+        "jwt_key": "635f5ad66ec071cca0392eeb40f5416274e21f0fdca1b6319e371b8d7db9cbbdc4e06926f3c149abfac265e2639060498d775ade650f4836c79fba5b469f49b0",
+        "last_used_at": "2025-08-06T22:40:46.092317+00:00",
+        "last_used_ip": "10.27.1.17",
+        "expire_at": 1762296046.092317,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2023.4.6"
+      },
+      {
+        "id": "82992b596d2c437cb72b1d241fe73cda",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "http://haha.shencentral.net:8123/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2023-05-06T19:19:37.801292+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "91d5c5deb86306d5d78867ad976ae929a7351311c003c9cde4047c321d188acbcfd5e7b171ab89a83ccaffea4d40eb7bbe784e742e7856b7552f5d50927b4d4d",
+        "jwt_key": "9b8ec8db6bb113aa3b9b8547367919f4c647572c0970d1ee40df67d468006989a6e2d20439d717d7a2c9f622554d4615c24b0ed50922b909c215845cfb68da6d",
+        "last_used_at": "2025-08-15T14:30:01.920108+00:00",
+        "last_used_ip": "10.27.1.40",
+        "expire_at": 1763044201.920108,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2023.4.6"
+      },
+      {
+        "id": "d78345071d3045168b80d4260400efa8",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://pitangui.amazon.com/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2023-12-05T12:50:48.071317+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "736c9f90addf29fb95740c5bd79975d902626c0cf419ceaaa27adbc6ed0fa5a244fda262e36d8673f254dcd5379eda00e4348a123c04b299ae838fc358d85da8",
+        "jwt_key": "d7c2320eea6daab8450f81d2f95b6da05d23b70e8a1141ad470c2e1b9a0f17f2ac2d42711b789d3f847734238d979216ca1be422354a0a0da54c44fa5fe6c671",
+        "last_used_at": "2025-08-15T12:13:03.300205+00:00",
+        "last_used_ip": "72.21.217.87",
+        "expire_at": 1763035983.300205,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2023.11.3"
+      },
+      {
+        "id": "019797c228514f39b0e6555f873b8969",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://home-assistant.io/android",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2024-02-27T00:19:56.299226+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "fca7abf55716624d4cd9b9112e9cd1fd6c711d94955214027072cc92c4360be3318a65c87d9957fa4096852ede8b7cb39f9ecce6438adeb261c0049fa2f29960",
+        "jwt_key": "5047fabb6acf7bc21647458b32fcd6ce1e79199aa6be43c27e246eb6deb8443a65f5c5dd5dc17df304f7e756054811d88c7f133d7efc4476fdd51bfdcbf964ba",
+        "last_used_at": "2025-08-15T13:58:17.909249+00:00",
+        "last_used_ip": "10.27.0.150",
+        "expire_at": 1763042297.909249,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2024.2.3"
+      },
+      {
+        "id": "17204ac2970045a48deecb7ab340fcbe",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": null,
+        "client_name": "Hass.Agent for windows",
+        "client_icon": null,
+        "token_type": "long_lived_access_token",
+        "created_at": "2024-05-07T17:10:23.852107+00:00",
+        "access_token_expiration": 315360000.0,
+        "token": "ce8febee162b799b48480762e252931e504543f2645987016de62ff6a1845cbb0924737eb22c94fab5b206f3ca3f6f876896bd94a216f789592a9696ff064164",
+        "jwt_key": "6804342ba4ea12a8ffd1100d42bf965f34ee9eb7009ca6f8c889cf31d94391b863e3aa7f8529557e8f270a53c0598e95f320a0f1331ff7485e1216084b21e05f",
+        "last_used_at": "2024-05-07T17:10:23.852289+00:00",
+        "last_used_ip": null,
+        "expire_at": null,
+        "credential_id": null,
+        "version": "2024.5.2"
+      },
+      {
+        "id": "7c90aefc6540496996f621258c792ec8",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "http://haha.shencentral.net:8123/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-04-21T00:46:45.716096+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "ad43a9a9ee12eea99002788be66001aa17a0e2e64432a29a1ddc728f6a7de7f22a54023387c81d74538cfbf586799506336d0de96053824a592dbca2268d0869",
+        "jwt_key": "5dcc8fb97c63804521a3bb49b9bb21893a8ad2ae54d7015c3656e3c2d15f32bd8633110af597d83a11642a2943b290202171db41ff6c557f4a1627c448b524fa",
+        "last_used_at": "2025-05-21T14:57:47.303440+00:00",
+        "last_used_ip": "10.27.1.23",
+        "expire_at": 1755615467.30344,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.4.3"
+      },
+      {
+        "id": "ddffb209f2774c2f941fa8d9f115d5f8",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "http://haha.shencentral.net:8123/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-05-16T12:35:09.243862+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "5fe35e3465f2b033cf6138fb28197a27ed3744c7bdb42e9a1ba6e96d6fdf75229432a6e20045fc03c66435d8f0c4a364bb0ac628f7c71bed9a6705e17bf0ae49",
+        "jwt_key": "1be795eb12954d11d6274a4d511414af5b5ed0abcb8548ce91b585ce7dfce873b8462da9acaf7e8fbeb134529454709cfe516c3c901a31cbb245f75a4ced6cea",
+        "last_used_at": "2025-08-14T20:02:15.383558+00:00",
+        "last_used_ip": "10.27.1.40",
+        "expire_at": 1762977735.383558,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.1"
+      },
+      {
+        "id": "824cf3e579c246199fd855eb11ba63e4",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://hahashen.ddnsfree.com/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-05-27T18:40:48.320565+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "fc1e90e95b9b01c6a908df9abcb087bd26aa8bae57c1c07fe94dc68038350315488cde852e3b45cb17ed585b38edd352c6856a809d705726d62cc05193707d4a",
+        "jwt_key": "a3502b00d738d295940dee1d8ad149bee9066156ee4dfd8749b4a82cad015da13cf960cb8074960888ddb9a7a7fc1fae1103bd57fc8407385c2416dc55255665",
+        "last_used_at": "2025-05-27T18:40:48.320678+00:00",
+        "last_used_ip": "208.100.200.164",
+        "expire_at": 1756147248.320678,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.3"
+      },
+      {
+        "id": "e5011244d38f437e9a8ef370beb1ecc4",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://hahashen.ddnsfree.com/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-05-27T18:42:13.462549+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "b6ef4f83940b65e0d46fd341f3ab4b3a685184f13e0c82a2403fbd242fb12ea1d8d49272cd6f035313bd6fa157623fb7e5c94e93d3020d445bbf5fa341e3591b",
+        "jwt_key": "91339c2ea086aa2557f16554bff8c6b6171fbf946044f204d3d9431c72adc67a07bb24c4572e5b8ee80d4bda84dab72b3673a0e9143131ea53f145acd60fb707",
+        "last_used_at": "2025-05-27T18:42:13.462750+00:00",
+        "last_used_ip": "208.100.200.164",
+        "expire_at": 1756147333.46275,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.3"
+      },
+      {
+        "id": "66c860c73cb24443a403ef56e7ba0413",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://hahashen.ddnsfree.com/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-05-27T19:11:17.660254+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "5fb3ec6a620c055fafa01678f7ad6bb80c582908f074ec68b7a9b29f56d33f8526fa489984d700367adc1073bb662ab87aae8f5fbe0451e97b103db646d921d6",
+        "jwt_key": "46bbf09701c834344573cc5c07d638161a1af035cd7895085255966fa463c12b5791aba4e0516796d231dde503a9b52d05955f11e5fbb7d4de419089a32c89d6",
+        "last_used_at": "2025-05-27T19:58:50.943585+00:00",
+        "last_used_ip": "208.100.200.164",
+        "expire_at": 1756151930.943585,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.3"
+      },
+      {
+        "id": "0841dcb41de145a8ac9ad3b9b9b9aef9",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "http://haha.shencentral.net:8123/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-06-01T20:54:33.921178+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "f7fb29483672c1817886a6e58dc340063a9f6ba505b757725c21e92db2496050a86b0d707172b2cc43261bf7c923da11be1335fff36b67bb12314ce0b9225a87",
+        "jwt_key": "5fd8edc38434482f06a529c6487fe395e71469a41c95c185dfd0687c1ec151b4cc42d5466c9bf3d6e6ab653f0ccf55c44d14dc79bd798f1088b668fdf0b73d58",
+        "last_used_at": "2025-06-01T20:54:33.921339+00:00",
+        "last_used_ip": "10.33.40.2",
+        "expire_at": 1756587273.921339,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.3"
+      },
+      {
+        "id": "caa9dba2204f422f82afcacccbf50a67",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://hahashen.ddnsfree.com/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-06-02T16:07:27.352420+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "ca484e924ede1d6cdf7d4c1d78d786d7268309eb66fcc93f506b83c729c04828da4d6cba38837a587c0343f3ad3e9acb14805d5b43364a227fc353d532f8f935",
+        "jwt_key": "1c79a68a28b0c60f7cef579f184ad92d0ffe120d95cd1084f2221f4929c5a4cfea37c6e043e63fe27d7e3fe463607fc2740cad40364ba30dd8078d0123c03027",
+        "last_used_at": "2025-06-02T16:07:27.352574+00:00",
+        "last_used_ip": "208.100.200.164",
+        "expire_at": 1756656447.352574,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.3"
+      },
+      {
+        "id": "7d9dc70126b4452ebf07f43a06515f61",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://hahashen.ddnsfree.com/",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-06-10T17:07:37.602264+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "8727316c72fb366deb113d4a4b79d9807328d576a9ac625e8700c0c0ff2a778c55a8d5a988b7b51533b96ad4489b3cf66cffb67bf4dd1f88e83a074e7fc13ed0",
+        "jwt_key": "9865e3c6f2b8148abef4869c21a584b8ec52e09c7421ca87d50efa29c9a6e9eb3963c9275e7c1e1af2a028d64a6bb977a82809c1431272f51a233329cc01ae76",
+        "last_used_at": "2025-06-12T21:25:58.235319+00:00",
+        "last_used_ip": "10.27.0.1",
+        "expire_at": 1757539558.235319,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.5.3"
+      },
+      {
+        "id": "fb0df1a06c7c4b7abcdac29958231688",
+        "user_id": "176f2d5e50fe4f65add5af12a6c9dec2",
+        "client_id": "https://home-assistant.io/android",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-08-12T00:33:51.520950+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "308cead0202f69539223b5f83e94be054ca061eab3741cffb998e39e87cfec606b95cb9e5c36d2cd2a127d281c92fe015e1d7e925170bcf25e0fe4192af35b18",
+        "jwt_key": "b37c00345a68d7e3bce69533d474b979e5567af8e35a8920a515fe92f7ea30f9ca88b88905cbc4dd75a48d64f285705f72e898f6f5451456a2b467c2ed40e2d9",
+        "last_used_at": "2025-08-15T13:23:59.369733+00:00",
+        "last_used_ip": "10.27.0.1",
+        "expire_at": 1763040239.369733,
+        "credential_id": "5df032878115418f831e95e80fec7b05",
+        "version": "2025.7.4"
+      },
+      {
+        "id": "f663ba22840b4161b61c58ac22dfb199",
+        "user_id": "4af35a7207cf4efda472f6d6cbc1df71",
+        "client_id": "https://home-assistant.io/android",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2022-01-04T20:28:33.521281+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "f2ca2fe8ce39ccfd25b489805751fcb4e2e2367853cfcc974c5bb09f22080fa90bc52c8d0b709a7352466b41f16dbd5b94187383e5f642aea74f9005df9bb0d0",
+        "jwt_key": "b5fabac6fd9a163131dfac7c4b54bf54d69a6927606e531060519f71d9ba081c07051b8fd8ccb6919fe9609ff182207a5e6c3bfb1e4f7074cd548f366cae7dce",
+        "last_used_at": "2025-06-16T12:24:03.521945+00:00",
+        "last_used_ip": "10.27.0.151",
+        "expire_at": 1757852643.521945,
+        "credential_id": "bb5dbd3956774a609c4f19d7362a0c8b",
+        "version": "2021.12.7"
+      },
+      {
+        "id": "159a75d3a38e4ff3b0dda92ebff44e8f",
+        "user_id": "4af35a7207cf4efda472f6d6cbc1df71",
+        "client_id": "https://home-assistant.io/android",
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "normal",
+        "created_at": "2025-06-16T12:19:26.199224+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "e79be4b559dd9cb7510e888a3698868862b1fa4eabfad33138408a2282d6fc20d0110026bee5c120c1a50ac634c1e3e72c8280f74af87f257732362db9ba9319",
+        "jwt_key": "633fee5c2434c64cca92fa47b506f3f1701c98bd529cee9250b341d80ea5d4f40450adc9522575c267917c3d1a109a941d862cfcb754f22625a451ec98445ed8",
+        "last_used_at": "2025-08-15T13:23:57.289693+00:00",
+        "last_used_ip": "10.27.0.151",
+        "expire_at": 1763040237.289693,
+        "credential_id": "bb5dbd3956774a609c4f19d7362a0c8b",
+        "version": "2025.6.1"
+      },
+      {
+        "id": "93fa199551694080910113f840ff03e6",
+        "user_id": "f99df95c8e37499d994361a74b431917",
+        "client_id": null,
+        "client_name": null,
+        "client_icon": null,
+        "token_type": "system",
+        "created_at": "2022-02-05T18:37:07.492715+00:00",
+        "access_token_expiration": 1800.0,
+        "token": "cf528aa7d1625c82f79134819ad3b85ab54dacf413816e1bc78fea3c46144b9049bfe2a779407f7b3a6523a913b18c0ccccc1ca63832383bae6021f1a27625a7",
+        "jwt_key": "afbd74ae7615534cd3020d7760135e7f241efad9f1bcda477401ae0fbae1fe2dc097b38627bfc3623aa9d14e9a7f3d8a42d8d61ff4f59cb6fe63bb5beb3649b0",
+        "last_used_at": null,
+        "last_used_ip": null,
+        "expire_at": null,
+        "credential_id": null,
+        "version": "2022.2.2"
+      }
+    ]
+  }
+}

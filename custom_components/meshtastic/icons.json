@@ -1,0 +1,22 @@
+{
+  "services": {
+    "send_text": {
+      "service": "mdi:message"
+    },
+    "send_direct_message": {
+      "service": "mdi:message-lock"
+    },
+    "broadcast_channel_message": {
+      "service": "mdi:message-text"
+    },
+    "request_telemetry": {
+      "service": "mdi:message-question"
+    },
+    "request_position": {
+      "service": "mdi:message-question"
+    },
+    "request_traceroute": {
+      "service": "mdi:message-question"
+    }
+  }
+}

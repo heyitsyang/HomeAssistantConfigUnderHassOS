@@ -1,0 +1,134 @@
+send_text:
+  fields:
+    from:
+      selector:
+        device:
+          filter:
+            integration: meshtastic
+          entity:
+            domain: meshtastic
+            device_class:
+              - gateway
+    text:
+      required: true
+      selector:
+        text:
+          multiline: true
+    to:
+      required: false
+      selector:
+        device:
+          integration: meshtastic
+    channel:
+      required: false
+      selector:
+        entity:
+          domain: meshtastic
+          device_class:
+            - channel
+    ack:
+      required: true
+      selector:
+        boolean: {}
+
+
+send_direct_message:
+  fields:
+    to:
+      required: true
+      selector:
+        device:
+          integration: meshtastic
+    message:
+      required: true
+      selector:
+        text:
+          multiline: true
+    ack:
+      required: true
+      default: true
+      selector:
+        boolean: {}
+
+broadcast_channel_message:
+  fields:
+    channel:
+      required: true
+      selector:
+        entity:
+          domain: meshtastic
+          device_class:
+            - channel
+    message:
+      required: true
+      selector:
+        text:
+          multiline: true
+    ack:
+      required: true
+      default: true
+      selector:
+        boolean: {}
+
+
+request_telemetry:
+  fields:
+    from:
+      selector:
+        device:
+          filter:
+            integration: meshtastic
+          entity:
+            domain: meshtastic
+            device_class:
+              - gateway
+    type:
+      required: true
+      default: power_metrics
+      selector:
+        select:
+          translation_key: telemetry_type_selector
+          options:
+            - "device_metrics"
+            - "environment_metrics"
+            - "power_metrics"
+            - "air_quality_metrics"
+    to:
+      required: true
+      selector:
+        device:
+          integration: meshtastic
+
+request_position:
+  fields:
+    from:
+      selector:
+        device:
+          filter:
+            integration: meshtastic
+          entity:
+            domain: meshtastic
+            device_class:
+              - gateway
+    to:
+      required: true
+      selector:
+        device:
+          integration: meshtastic
+
+request_traceroute:
+  fields:
+    from:
+      selector:
+        device:
+          filter:
+            integration: meshtastic
+          entity:
+            domain: meshtastic
+            device_class:
+              - gateway
+    to:
+      required: true
+      selector:
+        device:
+          integration: meshtastic

@@ -1,0 +1,137 @@
+{
+    "0x00124b00226a6adf": {
+        "state": "OFF",
+        "linkquality": 116
+    },
+    "0x1c34f1fffec07b62": {
+        "state": "OFF",
+        "linkquality": 184
+    },
+    "0xec1bbdfffe8a4803": {
+        "battery": 31,
+        "voltage": 2600,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false,
+        "linkquality": 212
+    },
+    "0xbc33acfffefc6f23": {
+        "contact": true,
+        "tamper": false,
+        "battery_low": false,
+        "battery": 56,
+        "voltage": 2700,
+        "linkquality": 96
+    },
+    "0xec1bbdfffe8a47cf": {
+        "battery": 27,
+        "voltage": 2600,
+        "linkquality": 112,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false
+    },
+    "0xec1bbdfffe87e58f": {
+        "battery": 31,
+        "voltage": 2600,
+        "linkquality": 192,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false
+    },
+    "0x847127fffe37534c": {
+        "linkquality": 168,
+        "state": "ON"
+    },
+    "0x5c0272fffee17181": {
+        "battery": 35,
+        "voltage": 2600,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false,
+        "linkquality": 176
+    },
+    "0xa4c138cd74d4e1ba": {
+        "battery": 56,
+        "linkquality": 176,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false
+    },
+    "0xa4c13884847e8b7b": {
+        "battery": 53,
+        "linkquality": 168,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false
+    },
+    "0xec1bbdfffe8a47da": {
+        "battery": 27,
+        "voltage": 2600,
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false,
+        "linkquality": 108
+    },
+    "0x187a3efffe3908dd": {
+        "battery": 100,
+        "position": 29,
+        "state": "OPEN",
+        "linkquality": 164
+    },
+    "0xb43a31fffed4e97c": {
+        "battery": 93,
+        "position": 100,
+        "state": "OPEN",
+        "linkquality": 172
+    },
+    "0xf4b3b1fffee0ce90": {
+        "battery": 41,
+        "position": 29,
+        "state": "OPEN",
+        "linkquality": 180
+    },
+    "0x187a3efffe392346": {
+        "battery": 39,
+        "position": 100,
+        "state": "OPEN",
+        "linkquality": 168
+    },
+    "0x187a3efffe390622": {
+        "battery": 100,
+        "position": 29,
+        "state": "OPEN",
+        "linkquality": 112
+    },
+    "0x187a3efffe39122b": {
+        "battery": 67,
+        "position": 100,
+        "state": "OPEN",
+        "linkquality": 176
+    },
+    "0xf4b3b1fffee0d993": {
+        "battery": 100,
+        "position": 29,
+        "state": "OPEN",
+        "linkquality": 180
+    },
+    "0x187a3efffe38fe93": {
+        "battery": 100,
+        "position": 100,
+        "state": "OPEN",
+        "linkquality": 180
+    },
+    "0x00124b00226a8e56": {
+        "state": "ON",
+        "linkquality": 184
+    },
+    "0x00124b0023b7bed9": {
+        "state": "OFF",
+        "linkquality": 172
+    },
+    "0xec1bbdfffefae43a": {
+        "state": "OFF",
+        "brightness": 254,
+        "linkquality": 160
+    }
+}

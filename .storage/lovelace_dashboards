@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_dashboards",
+  "data": {
+    "items": [
+      {
+        "show_in_sidebar": true,
+        "icon": "mdi:home-account",
+        "title": "Household",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "specialized-apps",
+        "id": "specialized_apps"
+      },
+      {
+        "id": "map",
+        "icon": "mdi:map",
+        "title": "Map",
+        "url_path": "map",
+        "mode": "storage",
+        "show_in_sidebar": true,
+        "require_admin": false
+      },
+      {
+        "id": "dashboard_meshtastic",
+        "show_in_sidebar": true,
+        "icon": "mdi:dots-hexagon",
+        "title": "Mesh Status",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "dashboard-meshtastic"
+      }
+    ]
+  }
+}

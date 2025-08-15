@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "auth_provider.homeassistant",
+  "data": {
+    "users": [
+      {
+        "password": "JDJiJDEyJGZnSHIzR1NqZVVUVjB2VGhzdHp5RWVEU0dVZEdNRE1XY01tMHV3N0c1TEJLQy5Pai5Rd2dh",
+        "username": "yang"
+      },
+      {
+        "username": "karen",
+        "password": "JDJiJDEyJGpEQjBmWXFnWUFCSm85RHdGbzJlcGVSS2V1QXFZa2RmenNHOXdCUU4xRlVsdHBxNUxjMEth"
+      },
+      {
+        "username": "dev",
+        "password": "JDJiJDEyJHUxdklPaEhLeVlmY09FN1ljL0h5Li5KTzgzbzlaVmdrWjl6TDU4OTNUb0J3R2tTaFV0d1Mu"
+      },
+      {
+        "username": "attic",
+        "password": "JDJiJDEyJGkxVi9kQUpGR3IySks5V1RVSzBiUmU4MDdKN1pYLnlLVUEuUnl4WmVSZDk2LnBZc0tBNlVX"
+      },
+      {
+        "username": "labrack",
+        "password": "JDJiJDEyJEpERVExTjJTOE1XeWxCY0RPZFhseC5wOUVjdDF4R2s4R3Z3V2pWWW5aTUd5RmxWcDlZSXdL"
+      },
+      {
+        "username": "masterbdrmfan",
+        "password": "JDJiJDEyJFF1OFRRWTBXejhXV3NRMkpNRHZ4YXVVbjl5MUtBU0hlZkIzY2ZtcDNvQldRU1ZuYVpOZTdH"
+      },
+      {
+        "username": "hamstation",
+        "password": "JDJiJDEyJHZ3RG5MdHAwSFFYTC5aQ1FRQ3FwdE83QWtFRWE5YTNvY1kuLk4zNkZTa2Z1a2QudFpYS2Jt"
+      },
+      {
+        "username": "zhabridge",
+        "password": "JDJiJDEyJFBwaE5xLjJJYU5YT1FWamw4Q25MT3UzNTIxUVc0ejMwTmVXRWxHQU9mQWFlRkVicjVRZk5H"
+      },
+      {
+        "username": "livingrmfan",
+        "password": "JDJiJDEyJEdacUd5NWxkS0pId2xQd2JDQnh6bi42algxTGJKQnB4RXkweGJ5bU1vSG4vTlUuYVdieWV5"
+      },
+      {
+        "username": "utilitycloset",
+        "password": "JDJiJDEyJE8udDVjVVFpaXVBVGxsZEdTMUlqL2VGdzc2QnhORUQzNjVaNWtoSlRrSUNsUUhDblR5LjBH"
+      },
+      {
+        "username": "watermain",
+        "password": "JDJiJDEyJDFoY0ZWTlIzT2JTSVF6bGtJRXg0Zy50Q2o5MFBnZDVXZU9uUTJDL2dTZ0dHTktKeU5ZZE1L"
+      },
+      {
+        "username": "frontentrance",
+        "password": "JDJiJDEyJFpOMEl1LlJsM1lKdm5SSmlzeTVTSHVqL2VmTU4ybnJWUjVUaFllNjRrV29CNk5ZRFR0VFZD"
+      },
+      {
+        "username": "antennasw",
+        "password": "JDJiJDEyJFhadUdvUENoR2taTDkyRTM4c1JXbHVwRXJlMS9UaWpKSVIwNzkuaUt2U0ZjVk9NWDlMQkJX"
+      },
+      {
+        "username": "refrigeratorleak",
+        "password": "JDJiJDEyJE9Dc3pQWHhoY2VvTzk4ZUU1aldKYi56TFlTdHE0RHFLMDdjOUxiYkNUWXpjV1ptZDFzeDhl"
+      },
+      {
+        "username": "kitchenislandleak",
+        "password": "JDJiJDEyJFgvYkNqS09hSkkwT1ZwTmVkQVF6Y3VHNU5MTk5HMHpub2kxOGNwbVE4MEhDaU1lc2g0eTF1"
+      },
+      {
+        "username": "laundryroomleak",
+        "password": "JDJiJDEyJE4vMEdCYmVhdmdlQk9LWDdMeDVaSHVtTjhhSmJxeGVTMU9GYXRNRHo1OFRSZS9YWDB2ek1t"
+      },
+      {
+        "username": "dishwasher-sonoff",
+        "password": "JDJiJDEyJFpnOExsT0lZRmVyeEpOVTVKaW41cE91Y1pkOUMyRFpObW9ZdUp1RGZzaENsbFlGU1Jtay9P"
+      },
+      {
+        "username": "presence-garage",
+        "password": "JDJiJDEyJHgvdm9EOUNOcXN0c2NiTjV6cmgxNk9CLk5CWWxiZy5DWGxxdzBkUXh2OC5aMlIuSi9GekZX"
+      },
+      {
+        "username": "presence-kitchen",
+        "password": "JDJiJDEyJGUwQmFiTS9yYXI3YTVTb0xpZTgzVk9tT1lGYmdleElmWTVQMnJQWVlmai9tOEZqdXl5Qy5H"
+      },
+      {
+        "username": "presence-office",
+        "password": "JDJiJDEyJEVCQVR3Lk1ZT2k2bW1mODI1dTBHay4uMVBlWnNsL3lzY05UaWRjM2dDVUFaUEFQL3JlaTRp"
+      },
+      {
+        "username": "presence-masterbdrm",
+        "password": "JDJiJDEyJHZWSjQxVDRpdHFQT2hqL2hTdi5Edi5ObDl2SmtmZlN0NHhqcmFWbHQ1SEVNZ0FoalU1NmMy"
+      },
+      {
+        "username": "presence-guestbdrm",
+        "password": "JDJiJDEyJE5aV2p3OTJlNElUbXJUbVZKcmNtVS4xUVBEV3c0aVd6Q3o4blJmejFmbXA0RmpUQWg0MFBH"
+      },
+      {
+        "username": "presence-greatrm",
+        "password": "JDJiJDEyJHVCNERMaWUzMnE3ZUc5NnFqU1pnRU9ocVZENFVFcXhzakduN1EyRWZaeUZpdHZRY3BWeWw2"
+      },
+      {
+        "username": "presence-sunrm",
+        "password": "JDJiJDEyJFJjWUlNNU9mV2NUcUh1ZUhkNTJtSnVqV3ROMDZuaFJwL3Y0c2tKRko0VE5LMmZQVXNRVGlp"
+      },
+      {
+        "username": "frigate",
+        "password": "JDJiJDEyJDg0STVWeFYvS25EaHZra1dYbzF6bC41NHJaeVBnRFp0OFZhWjBaTW5tcVRMeFBYUFZXZlVh"
+      },
+      {
+        "username": "soil-probe",
+        "password": "JDJiJDEyJFFsa0MwTld5OGZuazZyRGc1VHowVnVjZEc2OW1wNHBTQVFJZi5saVdJN0FXWDZ3YllObGtP"
+      },
+      {
+        "username": "ha-connect",
+        "password": "JDJiJDEyJGkvTkNwSllQZmpKZW9CRndPQXNMNnVqMi9QcThnTnphbEM0cm85d1VEd0hGQk51cENhc0VD"
+      },
+      {
+        "username": "zigbee2mqtt",
+        "password": "JDJiJDEyJGk2RzVpWktpR0dwaWFQNU4uTVF2QU9QTHdHQUprS3p1TVBDZTNDRi80cmVsRUhGNy44ZmY2"
+      },
+      {
+        "username": "igrillclient",
+        "password": "JDJiJDEyJHR2YzNJQS5KNHhnNlJGaHdRVWtLSE9Ob01NYlJuNjdDODdZZFFOY29VR3dnaExvWmEvR21t"
+      },
+      {
+        "username": "awtrix-clock",
+        "password": "JDJiJDEyJGxJWUczT2FucDQySUE5cnZrNzVKMHUyeTVSR2d5WWRNZ0RCRURleXMuOFY4ZXNZcVZkd2Rl"
+      },
+      {
+        "username": "irrig-leak",
+        "password": "JDJiJDEyJGRGd1NuWnBPczdxSExiUWg5S3ROMk9kdFlPREFFNExUQ0tSdUlIem5sZTlXWkIvUk9KaHF1"
+      },
+      {
+        "username": "marquee-scroller",
+        "password": "JDJiJDEyJEVRclh3Rm1Xb0hvUXQxeUR6aFhzZC5GL3phM0hPei9lSnZCYVliZ1dQZklnbmZ1VXQuVEJ1"
+      },
+      {
+        "username": "lan2-power",
+        "password": "JDJiJDEyJHZxOXF5TjlEM0xDVS9lVnNIVXVtaC5meTIuSExyckczUGM1eEl2NHZoR0tCV1BDZkhyZm9P"
+      },
+      {
+        "username": "photoframe-lg-power",
+        "password": "JDJiJDEyJDNOcEk1Y2d2d3YxUE5Fa2xkd21HWHVXaXR0dGdjOVJSVlFhYjJRaVM1dVVUeWV2T0FUdDh1"
+      },
+      {
+        "username": "hassagent",
+        "password": "JDJiJDEyJGxOWnlia3FMeElKTWc5MTMyVUtzcE9PUGRWSlJWZGdJSGJaY25Dc0oxV3A0c3kzWjA2YWNp"
+      },
+      {
+        "username": "attic-peak",
+        "password": "JDJiJDEyJDdHQXB6anBJM1FWbVFoVWRYOTFiMXVSTHliUTF4WmlUOVUvT3hZaDVYYWJBb3YwS0J3dFNP"
+      },
+      {
+        "username": "drybox",
+        "password": "JDJiJDEyJFIvNlloSWI0UU0uRjFqZ3FzOXNDeXV6bHA1SDBPMDVNWnp0ZkZBMzNvb0NhdTlObVJEYlh1"
+      }
+    ]
+  }
+}

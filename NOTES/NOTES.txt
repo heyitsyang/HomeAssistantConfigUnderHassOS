@@ -1,0 +1,12 @@
+GENERAL:
+1.  Check home-assitant.log for errors, but be sure the system has started 
+    cleanly to begin with before debugging
+2.  Check developer panel for existence of Services and Entities before
+    debugging automations.  Non-existent Service/Entity indicates config issue
+
+MOSQUITTO MQTT
+- Add Mosquitto user/passwords as regular users
+
+OTHER PASSWORDS
+see secrets.yaml
+

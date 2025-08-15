@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_meshtastic",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Status",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.meshtastic_ys0_1218617136_device_battery_level",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "sensor.meshtastic_ys0_1594801232_device_battery_level",
+                      "secondary_info": "last-updated"
+                    },
+                    {
+                      "entity": "sensor.meshtastic_ys0_2610934133_device_battery_level",
+                      "secondary_info": "last-updated"
+                    }
+                  ],
+                  "title": "Batteries",
+                  "show_header_toggle": false
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "type": "custom:template-entity-row",
+                      "name": "{{state_attr('sensor.meshtastic_ys0_1218617136_device_uptime','friendly_name')}}",
+                      "icon": "mdi:progress-clock",
+                      "state": "{{ (((states('sensor.meshtastic_ys0_1218617136_device_uptime')| int)/3600)/24) | round(1) }} d",
+                      "secondary": "Last heard: {{ ( ( as_timestamp(now()) - as_timestamp(states('sensor.meshtastic_ys0_1218617136_node_last_heard')) )/60 ) | round(0)}} min ago"
+                    },
+                    {
+                      "type": "custom:template-entity-row",
+                      "name": "{{state_attr('sensor.meshtastic_ys0_1594801232_device_uptime','friendly_name')}}",
+                      "icon": "mdi:progress-clock",
+                      "state": "{{ (((states('sensor.meshtastic_ys0_1594801232_device_uptime')| int)/3600)/24) | round(1) }} d",
+                      "secondary": "Last heard: {{ ( ( as_timestamp(now()) - as_timestamp(states('sensor.meshtastic_ys0_1594801232_node_last_heard')) )/60 ) | round(0)}} min ago"
+                    },
+                    {
+                      "type": "custom:template-entity-row",
+                      "name": "{{state_attr('sensor.meshtastic_ys0_2610934133_device_uptime','friendly_name')}}",
+                      "icon": "mdi:progress-clock",
+                      "state": "{{ (((states('sensor.meshtastic_ys0_2610934133_device_uptime')| int)/3600)/24) | round(1) }} d",
+                      "secondary": "Last heard: {{ ( ( as_timestamp(now()) - as_timestamp(states('sensor.meshtastic_ys0_2610934133_node_last_heard')) )/60 ) | round(0)}} min ago"
+                    },
+                    {
+                      "type": "custom:template-entity-row",
+                      "name": "{{state_attr('sensor.meshtastic_ys0_3663968580_device_uptime','friendly_name')}}",
+                      "icon": "mdi:progress-clock",
+                      "state": "{{ (((states('sensor.meshtastic_ys0_3663968580_device_uptime')| int)/3600)/24) | round(1) }} d",
+                      "secondary": "Last heard: {{ ( as_timestamp(now()) - as_timestamp(states('sensor.meshtastic_ys0_3663968580_node_last_heard')) )/60) | round(0) }} min ago"
+                    }
+                  ],
+                  "title": "Uptime",
+                  "show_header_toggle": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

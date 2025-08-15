@@ -1,0 +1,8 @@
+Use the following to set a proper cookies file:
+
+get-maps-cookies -e EMAIL -p PASSWORD -c COOKIES_FILE
+
+cut & paste below:
+get-maps-cookies -e hanorcoose@gmail.com -p 3096928712 -c .google_maps_location_sharing.cookies
+
+

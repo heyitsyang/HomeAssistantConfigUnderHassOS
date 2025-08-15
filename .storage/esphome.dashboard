@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.dashboard",
+  "data": {
+    "info": {
+      "addon_slug": "5c53de3b_esphome",
+      "host": "127.0.0.1",
+      "port": 62124
+    }
+  }
+}

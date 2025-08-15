@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "esphome.01JSD1K1060Q1VSGE74XMXCP9Y",
+  "data": {
+    "device_info": {
+      "uses_password": false,
+      "name": "garage-controller",
+      "friendly_name": "garage-controller",
+      "mac_address": "24:0A:C4:9D:81:10",
+      "compilation_time": "Aug  5 2025, 13:58:51",
+      "model": "mhetesp32minikit",
+      "manufacturer": "Espressif",
+      "has_deep_sleep": false,
+      "esphome_version": "2025.7.5",
+      "project_name": "",
+      "project_version": "",
+      "webserver_port": 0,
+      "legacy_voice_assistant_version": 0,
+      "voice_assistant_feature_flags": 0,
+      "legacy_bluetooth_proxy_version": 0,
+      "bluetooth_proxy_feature_flags": 0,
+      "suggested_area": "",
+      "bluetooth_mac_address": "",
+      "api_encryption_supported": false,
+      "devices": [],
+      "areas": [],
+      "area": {
+        "area_id": 0,
+        "name": ""
+      }
+    },
+    "services": [],
+    "api_version": {
+      "major": 1,
+      "minor": 10
+    },
+    "button": [
+      {
+        "object_id": "lg_garage_trigger",
+        "key": 3772151867,
+        "name": "Lg Garage Trigger",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": ""
+      },
+      {
+        "object_id": "sm_garage_trigger",
+        "key": 1300696886,
+        "name": "Sm Garage Trigger",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": ""
+      },
+      {
+        "object_id": "restart_garage_controller",
+        "key": 2782862133,
+        "name": "Restart Garage Controller",
+        "disabled_by_default": false,
+        "icon": "mdi:restart",
+        "entity_category": 1,
+        "device_id": 0,
+        "device_class": "restart"
+      }
+    ],
+    "cover": [
+      {
+        "object_id": "large_garage",
+        "key": 4131408430,
+        "name": "Large Garage",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "assumed_state": false,
+        "supports_stop": true,
+        "supports_position": false,
+        "supports_tilt": false,
+        "device_class": ""
+      },
+      {
+        "object_id": "small_garage",
+        "key": 1749378,
+        "name": "Small Garage",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "assumed_state": false,
+        "supports_stop": true,
+        "supports_position": false,
+        "supports_tilt": false,
+        "device_class": ""
+      }
+    ],
+    "update": [],
+    "sensor": [
+      {
+        "object_id": "garage_controller_wifi_strength",
+        "key": 86434137,
+        "name": "Garage Controller WiFi Strength",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": "signal_strength",
+        "unit_of_measurement": "dBm",
+        "accuracy_decimals": 0,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      },
+      {
+        "object_id": "garage_controller_temperature",
+        "key": 1766010906,
+        "name": "Garage Controller Temperature",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "temperature",
+        "unit_of_measurement": "°C",
+        "accuracy_decimals": 1,
+        "force_update": false,
+        "state_class": 1,
+        "legacy_last_reset_type": 0
+      }
+    ],
+    "text_sensor": [],
+    "binary_sensor": [
+      {
+        "object_id": "garage_controller_status",
+        "key": 832169818,
+        "name": "Garage Controller Status",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 2,
+        "device_id": 0,
+        "device_class": "connectivity",
+        "is_status_binary_sensor": true
+      },
+      {
+        "object_id": "lg_garage_is_closed",
+        "key": 114876524,
+        "name": "Lg Garage is Closed",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "is_status_binary_sensor": false
+      },
+      {
+        "object_id": "lg_garage_is_open",
+        "key": 3043383196,
+        "name": "Lg Garage is Open",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "is_status_binary_sensor": false
+      },
+      {
+        "object_id": "sm_garage_is_closed",
+        "key": 742946149,
+        "name": "Sm Garage is Closed",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "is_status_binary_sensor": false
+      },
+      {
+        "object_id": "sm_garage_is_open",
+        "key": 1887902013,
+        "name": "Sm Garage is Open",
+        "disabled_by_default": false,
+        "icon": "",
+        "entity_category": 0,
+        "device_id": 0,
+        "device_class": "",
+        "is_status_binary_sensor": false
+      }
+    ]
+  }
+}
